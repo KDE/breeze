@@ -25,6 +25,9 @@
 #include <KConfigGroup>
 #include <KWindowInfo>
 
+#include <QApplication>
+#include <QPainter>
+
 #if BREEZE_USE_KDE4
 KWIN_DECORATION(Breeze::Factory)
 #else
@@ -93,12 +96,15 @@ namespace Breeze
     {
 
         /*
-        always reload helper
-        this is needed to properly handle
-        color contrast settings changed
+         * always reload helper
+         * this is needed to properly handle
+         * color contrast settings changed
         */
         _config->reparseConfiguration(); // could be skipped on startup
         _helper.loadConfig();
+
+        // reset shadow tiles
+        _shadowTiles = TileSet();
 
         // initialize default configuration and read
         if( !_defaultConfiguration ) _defaultConfiguration = ConfigurationPtr(new Configuration());
@@ -157,5 +163,52 @@ namespace Breeze
     //____________________________________________________________________
     Factory::ConfigurationPtr Factory::configuration( void )
     { return _defaultConfiguration; }
+
+    //_______________________________________________________
+    TileSet Factory::shadowTiles( void )
+    {
+        if( !_shadowTiles.isValid() )
+        {
+
+            const QPalette palette( QApplication::palette() );
+            const QColor shadowColor( palette.color( QPalette::Shadow ) );
+
+            // pixmap
+            QPixmap pixmap = _helper.highDpiPixmap( Metrics::Shadow_Size*2 );
+            pixmap.fill( Qt::transparent );
+
+            // gradient
+            auto gradientStopColor = [](QColor color, qreal alpha) {
+                color.setAlphaF(alpha);
+                return color;
+            };
+
+            QRadialGradient radialGradient( QPointF(0,0), Metrics::Shadow_Size);
+            radialGradient.setColorAt(0.0,  gradientStopColor( shadowColor, 0.35 ) );
+            radialGradient.setColorAt(0.25, gradientStopColor( shadowColor, 0.25 ) );
+            radialGradient.setColorAt(0.5,  gradientStopColor( shadowColor, 0.13 ) );
+            radialGradient.setColorAt(0.75, gradientStopColor( shadowColor, 0.04 ) );
+            radialGradient.setColorAt(1.0,  gradientStopColor( shadowColor, 0.0 ) );
+
+            // render
+            QPainter painter( &pixmap );
+            painter.setRenderHint( QPainter::Antialiasing );
+            painter.setCompositionMode(QPainter::CompositionMode_Source);
+            painter.setPen( Qt::NoPen );
+
+            const QRectF rect( QPoint( 0, 0 ), pixmap.size()/_helper.devicePixelRatio( pixmap ) );
+            painter.translate( rect.center() );
+            painter.fillRect( rect.translated( -rect.center() ), radialGradient );
+
+            painter.end();
+
+            // create tiles from pixmap
+            _shadowTiles = TileSet( pixmap, Metrics::Shadow_Size, Metrics::Shadow_Size, 1, 1 );
+
+        }
+
+        return _shadowTiles;
+
+    }
 
 }

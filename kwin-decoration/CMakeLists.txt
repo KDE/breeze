@@ -62,10 +62,12 @@ configure_file(config-breeze.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-breeze.h
 set(kwin_breeze_SRCS
      breezeanimation.cpp
      breezebutton.cpp
+     breezeclient.cpp
      breezeclientgroupitemdata.cpp
      breezefactory.cpp
      breezehelper.cpp
      breezesizegrip.cpp
+     breezetileset.cpp
 )
 
 if(BREEZE_USE_KDE4)

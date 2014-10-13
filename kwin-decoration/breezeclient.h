@@ -51,7 +51,7 @@ namespace Breeze
         Q_OBJECT
 
         //* declare active state opacity
-        Q_PROPERTY( qreal opacity READ opacity WRITE opacity )
+        Q_PROPERTY( qreal opacity READ opacity WRITE setOpacity )
 
         public:
 
@@ -145,9 +145,6 @@ namespace Breeze
         //* get title bounding rect
         virtual QRect titleBoundingRect( const QFont&, QRect, const QString& ) const;
 
-        //* background
-        QColor backgroundColor( const QWidget*, QPalette, bool active ) const;
-
         //@}
 
         //* title alignment
@@ -173,6 +170,17 @@ namespace Breeze
 
         //* triggered when window shade is changed
         virtual void captionChange();
+
+        //@}
+
+        //*@name colors
+        //@{
+
+        QColor foregroundColor( void ) const;
+        QColor backgroundColor( void ) const;
+
+        QColor foregroundColor( bool active ) const;
+        QColor backgroundColor( bool active ) const;
 
         //@}
 
@@ -273,12 +281,6 @@ namespace Breeze
 
         //* calculate mask
         QRegion calcMask( void ) const;
-
-        //* text color
-        QColor titlebarTextColor(const QPalette&) const;
-
-        //* text color
-        QColor titlebarTextColor(const QPalette& palette, bool windowActive, bool itemActive ) const;
 
         //*@name size grip
         //@{

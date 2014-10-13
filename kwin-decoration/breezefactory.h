@@ -23,6 +23,7 @@
 #include "breeze.h"
 #include "breezeconfiguration.h"
 #include "breezehelper.h"
+#include "breezetileset.h"
 
 #include "config-breeze.h"
 
@@ -87,6 +88,10 @@ namespace Breeze
         //* get configuration for a give client
         virtual ConfigurationPtr configuration( void );
 
+        //* shadow tiles
+        /** is public because it is also needed for mdi windows */
+        TileSet shadowTiles( void );
+
         protected:
 
         //* read configuration from KConfig
@@ -106,6 +111,9 @@ namespace Breeze
 
         //* helper
         Helper _helper;
+
+        //* tileset
+        TileSet _shadowTiles;
 
         //* default configuration
         ConfigurationPtr _defaultConfiguration;

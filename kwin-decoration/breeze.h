@@ -88,14 +88,19 @@ namespace Breeze
     enum Metrics
     {
 
+        //* corner radius
+        Frame_FrameRadius = 3,
+
         //* top title bar edge
         TitleBar_TopMargin = 5,
         TitleBar_BottomMargin = 5,
+        TitleBar_SideMargin = 5,
+        TitleBar_ButtonSpacing = 3,
 
-        /** the extra edge
-        needed to outline active window title
-        */
-        TitleBar_OutlineMargin = 4
+        // shadow dimensions
+        Shadow_Size = 10,
+        Shadow_Offset = 5,
+        Shadow_Overlap = 2
 
     };
 
@@ -111,9 +116,26 @@ namespace Breeze
 
     Q_DECLARE_FLAGS(AnimationTypes, AnimationType)
 
+    //* corners
+    enum Corner
+    {
+        CornerTopLeft = 0x1,
+        CornerTopRight = 0x2,
+        CornerBottomLeft = 0x4,
+        CornerBottomRight = 0x8,
+        CornersTop = CornerTopLeft|CornerTopRight,
+        CornersBottom = CornerBottomLeft|CornerBottomRight,
+        CornersLeft = CornerTopLeft|CornerBottomLeft,
+        CornersRight = CornerTopRight|CornerBottomRight,
+        AllCorners = CornerTopLeft|CornerTopRight|CornerBottomLeft|CornerBottomRight
+    };
+
+    Q_DECLARE_FLAGS( Corners, Corner );
+
 }
 
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Breeze::AnimationTypes)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Breeze::Corners);
 
 #endif

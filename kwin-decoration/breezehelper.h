@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  *************************************************************************/
 
-
+#include "breeze.h"
 #include "config-breeze.h"
 
 #include <KColorScheme>
@@ -30,6 +30,7 @@
 #include <KComponentData>
 #endif
 
+#include <QBitmap>
 #include <QPainterPath>
 #include <QWidget>
 
@@ -86,6 +87,16 @@ namespace Breeze
 
         //* debug frame
         void renderDebugFrame( QPainter*, const QRect& ) const;
+
+        //* returns a region matching given rect, with rounded corners, based on the multipliers
+        /** setting any of the multipliers to zero will result in no corners shown on the corresponding side */
+        virtual QRegion roundedMask( const QRect&, int left = 1, int right = 1, int top = 1, int bottom = 1 ) const;
+
+        //* returns a region matching given rect, with rounded corners
+        virtual QBitmap roundedMask( const QSize&, Corners corners = AllCorners, qreal radius = Metrics::Frame_FrameRadius ) const;
+
+        //* return rounded path in a given rect, with only selected corners rounded, and for a given radius
+        QPainterPath roundedPath( const QRect&, Corners = AllCorners, qreal = 4 ) const;
 
         //@}
 
