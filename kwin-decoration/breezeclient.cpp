@@ -717,13 +717,16 @@ namespace Breeze
 
             // window background
             QRect bottomRect( rect );
-            if( !hideTitleBar() ) bottomRect.setTop( topRect.bottom() + 1 );
-            painter->setClipRegion( clipRegion );
-            painter->setClipRect( bottomRect, Qt::IntersectClip );
+            if( !hideTitleBar() )
+            {
+                bottomRect.setTop( topRect.bottom() + 1 );
+                painter->setClipRegion( clipRegion );
+                painter->setClipRect( bottomRect, Qt::IntersectClip );
+            }
+
             painter->setPen( Qt::NoPen );
             painter->setBrush( palette.color( QPalette::Window ) );
             painter->drawPath( path );
-
 
         }
 
