@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE kcfg SYSTEM "http://www.kde.org/standards/kcfg/1.0/kcfg.dtd">
+<kcfg>
+  <kcfgfile name="breezerc"/>
+
+  <group name="Windeco">
+
+    <entry name="TitleAlignment" type="Enum">
+      <choices>
+          <choice name="AlignLeft" />
+          <choice name="AlignCenter" />
+          <choice name="AlignCenterFullWidth" />
+          <choice name="AlignRight" />
+      </choices>
+      <default>AlignCenterFullWidth</default>
+    </entry>
+
+    <entry name="ButtonSize" type="Enum">
+      <choices>
+          <choice name="ButtonSmall" />
+          <choice name="ButtonDefault" />
+          <choice name="ButtonLarge" />
+          <choice name="ButtonVeryLarge" />
+          <choice name="ButtonHuge" />
+      </choices>
+      <default>ButtonDefault</default>
+    </entry>
+
+    <entry name="FrameBorder" type = "Enum">
+      <choices>
+          <choice name="BorderNone" />
+          <choice name="BorderNoSide" />
+          <choice name="BorderTiny" />
+          <choice name="BorderDefault" />
+          <choice name="BorderLarge" />
+          <choice name="BorderVeryLarge" />
+          <choice name="BorderHuge" />
+          <choice name="BorderVeryHuge" />
+          <choice name="BorderOversized" />
+      </choices>
+      <default>BorderTiny</default>
+    </entry>
+
+    <entry name="DrawSizeGrip" type = "Bool">
+      <default>true</default>
+    </entry>
+
+    <entry name="HideTitleBar" type = "Bool">
+       <default>false</default>
+    </entry>
+
+    <entry name="CloseWindowFromMenuButton" type = "Bool">
+       <default>false</default>
+    </entry>
+
+    <!-- maximized windows -->
+    <entry name="DrawBorderOnMaximizedWindows" type = "Bool">
+       <default>false</default>
+    </entry>
+
+    <!-- animations -->
+    <entry name="AnimationsEnabled" type = "Bool">
+       <default>true</default>
+    </entry>
+
+    <entry name="AnimationsDuration" type = "Int">
+       <default>150</default>
+    </entry>
+
+  </group>
+</kcfg>
