@@ -689,17 +689,21 @@ namespace Breeze
 
             // title bar background
             QRect topRect( rect );
-            topRect.setHeight( this->titleRect().height() + layoutMetric( LM_TitleEdgeTop ) + 1 );
-
-            painter->setClipRect( topRect, Qt::IntersectClip );
-            painter->setBrush( background );
-            painter->drawPath( path );
-
-            if( outline.isValid() )
+            if( !hideTitleBar() )
             {
-                painter->setBrush( Qt::NoBrush );
-                painter->setPen( outline );
-                painter->drawLine( QPointF( -0.5 + topRect.left(), 0.5 + topRect.bottom() ), QPointF( 0.5 + topRect.right(), 0.5 + topRect.bottom() ) );
+                topRect.setHeight( this->titleRect().height() + layoutMetric( LM_TitleEdgeTop ) + 1 );
+
+                painter->setClipRect( topRect, Qt::IntersectClip );
+                painter->setBrush( background );
+                painter->drawPath( path );
+
+                if( outline.isValid() )
+                {
+                    painter->setBrush( Qt::NoBrush );
+                    painter->setPen( outline );
+                    painter->drawLine( QPointF( -0.5 + topRect.left(), 0.5 + topRect.bottom() ), QPointF( 0.5 + topRect.right(), 0.5 + topRect.bottom() ) );
+                }
+
             }
 
             // palette
@@ -713,7 +717,7 @@ namespace Breeze
 
             // window background
             QRect bottomRect( rect );
-            bottomRect.setTop( topRect.bottom() + 1 );
+            if( !hideTitleBar() ) bottomRect.setTop( topRect.bottom() + 1 );
             painter->setClipRegion( clipRegion );
             painter->setClipRect( bottomRect, Qt::IntersectClip );
             painter->setPen( Qt::NoPen );
