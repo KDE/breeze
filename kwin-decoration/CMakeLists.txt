@@ -79,6 +79,8 @@ add_definitions(-DTRANSLATION_DOMAIN=\"breeze_kwin_deco\")
 ################# configuration #################
 configure_file(config-breeze.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-breeze.h )
 
+add_subdirectory(config)
+
 ########### next target ###############
 set(kwin_breeze_SRCS
      breezeanimation.cpp

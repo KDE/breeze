@@ -678,7 +678,8 @@ namespace Breeze
 
             // path
             QPainterPath path;
-            if( _configuration->frameBorder() == Configuration::BorderNone ) path = helper().roundedPath( rect, CornerTopLeft|CornerTopRight );
+            if( isMaximized() ) path = helper().roundedPath( rect, NoCorners );
+            else if( _configuration->frameBorder() == Configuration::BorderNone ) path = helper().roundedPath( rect, CornerTopLeft|CornerTopRight );
             else path = helper().roundedPath( rect );
 
             path = helper().roundedPath( rect );

@@ -1,12 +1,8 @@
-#ifndef breezeexceptionlist_h
-#define breezeexceptionlist_h
-
 //////////////////////////////////////////////////////////////////////////////
-// breezeexceptionlist.h
-// window decoration exceptions
+// itemmodel.cpp
 // -------------------
 //
-// Copyright (c) 2009 Hugo Pereira Da Costa <hugo.pereira@free.fr>
+// Copyright (c) 2009-2010 Hugo Pereira Da Costa <hugo.pereira@free.fr>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to
@@ -27,53 +23,48 @@
 // IN THE SOFTWARE.
 //////////////////////////////////////////////////////////////////////////////
 
-#include "breezeconfiguration.h"
-#include "breeze.h"
-
-#include <KSharedConfig>
+#include "breezeitemmodel.h"
 
 namespace Breeze
 {
 
-    //! breeze exceptions list
-    class ExceptionList
+    //_______________________________________________________________
+    ItemModel::ItemModel( QObject* parent ):
+        QAbstractItemModel( parent ),
+        _sortColumn(0),
+        _sortOrder( Qt::AscendingOrder )
+    {}
+
+    //____________________________________________________________
+    void ItemModel::sort( int column, Qt::SortOrder order )
     {
 
-        public:
+        // store column and order
+        _sortColumn = column;
+        _sortOrder = order;
 
-        //! constructor from list
-        explicit ExceptionList( const ConfigurationList& exceptions = ConfigurationList() ):
-            _exceptions( exceptions )
-        {}
+        // emit signals and call private methods
+        emit layoutAboutToBeChanged();
+        privateSort( column, order );
+        emit layoutChanged();
 
-        //! exceptions
-        const ConfigurationList& get( void ) const
-        { return _exceptions; }
+    }
 
-        //! read from KConfig
-        void readConfig( KSharedConfig::Ptr );
+    //____________________________________________________________
+    QModelIndexList ItemModel::indexes( int column, const QModelIndex& parent ) const
+    {
+        QModelIndexList out;
+        int rows( rowCount( parent ) );
+        for( int row = 0; row < rows; row++ )
+        {
+            QModelIndex index( this->index( row, column, parent ) );
+            if( !index.isValid() ) continue;
+            out.append( index );
+            out += indexes( column, index );
+        }
 
-        //! write to kconfig
-        void writeConfig( KSharedConfig::Ptr );
+        return out;
 
-        //! read configuration
-        static void readConfig( KCoreConfigSkeleton*, KConfig*, const QString& = QString() );
-
-        //! write configuration
-        static void writeConfig( KCoreConfigSkeleton*, KConfig*, const QString& = QString() );
-
-        protected:
-
-        //! generate exception group name for given exception index
-        static QString exceptionGroupName( int index );
-
-        private:
-
-        //! exceptions
-        ConfigurationList _exceptions;
-
-    };
+    }
 
 }
-
-#endif

@@ -127,6 +127,7 @@ namespace Breeze
     //* corners
     enum Corner
     {
+        NoCorners = 0,
         CornerTopLeft = 0x1,
         CornerTopRight = 0x2,
         CornerBottomLeft = 0x4,

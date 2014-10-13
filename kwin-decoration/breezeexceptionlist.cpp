@@ -98,7 +98,7 @@ namespace Breeze
     }
 
     //______________________________________________________________
-    void ExceptionList::writeConfig( KCoreConfigSkeleton* skeleton, KConfig* config, const QString& groupName ) const
+    void ExceptionList::writeConfig( KCoreConfigSkeleton* skeleton, KConfig* config, const QString& groupName )
     {
 
         // write all items
@@ -111,7 +111,7 @@ namespace Breeze
     }
 
     //______________________________________________________________
-    void ExceptionList::readConfig( KCoreConfigSkeleton* skeleton, KConfig* config, const QString& groupName ) const
+    void ExceptionList::readConfig( KCoreConfigSkeleton* skeleton, KConfig* config, const QString& groupName )
     {
 
         foreach( KConfigSkeletonItem* item, skeleton->items() )
