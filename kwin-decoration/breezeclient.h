@@ -86,7 +86,7 @@ namespace Breeze
         { return _animation->isRunning(); }
 
         //* true when decoration is forced active
-        bool isForcedActive( void ) const
+        bool isForceActive( void ) const
         { return _forceActive && tabCount() > 1; }
 
         //* true if titlebar is hidden
@@ -312,8 +312,7 @@ namespace Breeze
         void clearTargetItem( void );
 
         //* clear force active flag
-        void clearForceActive( void )
-        { if( isActive() ) setForceActive( false ); }
+        void clearForceActive( void );
 
         //* title bounding rects
         /** calculate and return title bounding rects in case of tabbed window */

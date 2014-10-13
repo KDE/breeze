@@ -163,7 +163,7 @@ namespace Breeze
         }
 
         // client active flag
-        const bool clientActive( _client.isActive() || _client.isForcedActive() );
+        const bool clientActive( _client.isActive() || _client.isForceActive() );
 
         painter.setRenderHints(QPainter::Antialiasing);
         QColor foreground = _client.foregroundColor();
@@ -177,23 +177,23 @@ namespace Breeze
 
             qSwap( foreground, background );
             const QColor negativeColor( clientActive ?
-                KColorUtils::mix( background, _helper.negativeTextColor(palette), 0.5 ):
-                _helper.alphaColor( _helper.negativeTextColor(palette), 0.5 ) );
+                KColorUtils::mix( background, _helper.negativeTextColor(palette), 0.7 ):
+                _helper.alphaColor( _helper.negativeTextColor(palette), 0.7 ) );
 
             if( isAnimated() ) background = KColorUtils::mix( background, negativeColor, opacity() );
             else if( mouseOver ) background = negativeColor;
 
         } else if( _type == ButtonItemClose ) {
 
-            const QColor negativeColor( clientActive ?
-                KColorUtils::mix( background, _helper.negativeTextColor(palette), 0.5 ):
-                _helper.alphaColor( _helper.negativeTextColor(palette), 0.5 ) );
+            const QColor negativeColor( _helper.alphaColor( _helper.negativeTextColor(palette), 0.7 ) );
 
             if( isAnimated() ) foreground = KColorUtils::mix( foreground, negativeColor, opacity() );
             else if( mouseOver ) foreground = negativeColor;
 
             // also disable background
             background = QColor();
+
+            if( _forceInactive ) foreground = _helper.alphaColor( foreground, 0.5 );
 
         } else if( isAnimated() ) {
 

@@ -491,6 +491,10 @@ namespace Breeze
     }
 
     //_________________________________________________________
+    void Client::clearForceActive( void )
+    { if( isActive() ) setForceActive( false ); }
+
+    //_________________________________________________________
     void Client::updateItemBoundingRects( bool alsoUpdate )
     {
 
@@ -577,32 +581,32 @@ namespace Breeze
     //_______________________________________________
     QColor Client::foregroundColor( void ) const
     {
-        if( isAnimated() && !isForcedActive())
+        if( isAnimated() && !isForceActive())
         {
             return KColorUtils::mix( foregroundColor( false ), foregroundColor( true ), opacity() );
 
-        } else return foregroundColor( isActive() || isForcedActive() );
+        } else return foregroundColor( isActive() || isForceActive() );
     }
 
     //_______________________________________________
     QColor Client::backgroundColor( void ) const
     {
-        if( isAnimated() && !isForcedActive())
+        if( isAnimated() && !isForceActive())
         {
             return KColorUtils::mix( backgroundColor( false ), backgroundColor( true ), opacity() );
 
-        } else return backgroundColor( isActive() || isForcedActive() );
+        } else return backgroundColor( isActive() || isForceActive() );
     }
 
     //_______________________________________________
     QColor Client::outlineColor( void ) const
     {
-        if( isAnimated() && !isForcedActive())
+        if( isAnimated() && !isForceActive())
         {
 
             return helper().alphaColor( outlineColor( true ), opacity() );
 
-        } else return outlineColor( isActive() || isForcedActive() );
+        } else return outlineColor( isActive() || isForceActive() );
     }
 
     //___________________________________________________
@@ -655,6 +659,7 @@ namespace Breeze
     void Client::renderBackground( QPainter* painter, const QRect& rect, bool isShade ) const
     {
         painter->save();
+
 
         const QColor background( backgroundColor() );
         const QColor outline( outlineColor() );
@@ -1116,7 +1121,7 @@ namespace Breeze
 
                 geometry.adjust(
                     buttonsLeftWidth() + layoutMetric( LM_TitleEdgeLeft ) , 0,
-                    -( buttonsRightWidth() + layoutMetric( LM_TitleEdgeRight )), 0 );
+                    -( buttonsRightWidth() + layoutMetric( LM_TitleEdgeRight ) ), 0 );
 
             }
 
@@ -1129,7 +1134,8 @@ namespace Breeze
             { geometry.adjust( -layoutMetric( LM_OuterPaddingLeft ), -layoutMetric( LM_OuterPaddingTop ), layoutMetric( LM_OuterPaddingRight ), layoutMetric( LM_OuterPaddingBottom ) ); }
 
             // compute pixmap and assign
-            drag->setPixmap( itemDragPixmap( clickedIndex, geometry, drawShadow ) );
+            QPixmap pixmap( itemDragPixmap( clickedIndex, geometry, drawShadow ) );
+            drag->setPixmap( pixmap );
 
             // note: the pixmap is moved just above the pointer on purpose
             // because overlapping pixmap and pointer slows down the pixmap a lot.
