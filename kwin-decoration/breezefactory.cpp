@@ -32,7 +32,7 @@
 #if BREEZE_USE_KDE4
 KWIN_DECORATION(Breeze::Factory)
 #else
-KWIN_DECORATION(BreezePluginFactory, "breezeclient.json", Oxygen::Factory)
+KWIN_DECORATION(BreezePluginFactory, "breezeclient.json", Breeze::Factory)
 #endif
 
 #if !BREEZE_USE_KDE4
