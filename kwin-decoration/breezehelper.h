@@ -96,7 +96,7 @@ namespace Breeze
         virtual QBitmap roundedMask( const QSize&, Corners corners = AllCorners, qreal radius = Metrics::Frame_FrameRadius ) const;
 
         //* return rounded path in a given rect, with only selected corners rounded, and for a given radius
-        QPainterPath roundedPath( const QRect&, Corners = AllCorners, qreal radius = Metrics::Frame_FrameRadius ) const;
+        QPainterPath roundedPath( const QRectF&, Corners = AllCorners, qreal radius = Metrics::Frame_FrameRadius ) const;
 
         //@}
 
