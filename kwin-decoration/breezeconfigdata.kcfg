@@ -38,7 +38,7 @@
           <choice name="BorderVeryHuge" />
           <choice name="BorderOversized" />
       </choices>
-      <default>BorderTiny</default>
+      <default>BorderNoSide</default>
     </entry>
 
     <entry name="DrawSizeGrip" type = "Bool">

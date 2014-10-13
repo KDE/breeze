@@ -247,12 +247,12 @@ namespace Breeze
 
             if( hideTitleBar() ) mask = QRegion();
             else if( compositingActive() ) mask = QRegion();
-            else mask = helper().roundedMask( frame, CornerTopLeft|CornerTopRight );
+            else mask = QRegion( helper().roundedMask( frame.size(), CornerTopLeft|CornerTopRight ) ).translated( frame.topLeft() );
 
         } else {
 
             if( compositingActive() ) mask = QRegion();
-            else mask = helper().roundedMask( frame, AllCorners );
+            else mask = QRegion( helper().roundedMask( frame.size(), AllCorners ) ).translated( frame.topLeft() );
 
         }
 
@@ -594,6 +594,17 @@ namespace Breeze
         } else return backgroundColor( isActive() || isForcedActive() );
     }
 
+    //_______________________________________________
+    QColor Client::outlineColor( void ) const
+    {
+        if( isAnimated() && !isForcedActive())
+        {
+
+            return helper().alphaColor( outlineColor( true ), opacity() );
+
+        } else return outlineColor( isActive() || isForcedActive() );
+    }
+
     //___________________________________________________
     QColor Client::foregroundColor( bool active ) const
     { return options()->color( KDecorationDefines::ColorFont, active ); }
@@ -602,203 +613,23 @@ namespace Breeze
     QColor Client::backgroundColor( bool active ) const
     { return options()->color( KDecorationDefines::ColorTitleBar, active ); }
 
-//     //_________________________________________________________
-//     void Client::renderWindowBackground( QPainter* painter, const QRect& rect, const QWidget* widget, const QPalette& palette ) const
-//     {
-//
-//         // window background
-//         if( helper().hasBackgroundGradient( windowId() ) )
-//         {
-//
-//             int offset = layoutMetric( LM_OuterPaddingTop );
-//
-//             // radial gradient positionning
-//             const int height = hideTitleBar() ? 0:layoutMetric(LM_TitleHeight);
-//             if( isMaximized() ) offset -= 3;
-//
-//             const QWidget* window( isPreview() ? this->widget() : widget->window() );
-//             helper().renderWindowBackground(painter, rect, widget, window, palette, offset, height );
-//
-//         } else {
-//
-//             painter->fillRect( rect, palette.color( QPalette::Window ) );
-//
-//         }
-//
-//         // background pixmap
-//         if( isPreview() || helper().hasBackgroundPixmap( windowId() ) )
-//         {
-//             int offset = layoutMetric( LM_OuterPaddingTop );
-//
-//             // radial gradient positionning
-//             const int height = hideTitleBar() ? 0:layoutMetric(LM_TitleHeight);
-//             if( isMaximized() ) offset -= 3;
-//
-//             // background pixmap
-//             QPoint backgroundPixmapOffset( layoutMetric( LM_OuterPaddingLeft ) + layoutMetric( LM_BorderLeft ), 0 );
-//             helper().setBackgroundPixmapOffset( backgroundPixmapOffset );
-//
-//             const QWidget* window( isPreview() ? this->widget() : widget->window() );
-//             helper().renderBackgroundPixmap(painter, rect, widget, window, offset, height );
-//
-//         }
-//
-//     }
-//
-//     //_________________________________________________________
-//     void Client::renderWindowBorder( QPainter* painter, const QRect& clipRect, const QWidget* widget, const QPalette& palette ) const
-//     {
-//
-//         // get coordinates relative to the client area
-//         // this is annoying. One could use mapTo if this was taking const QWidget* and not
-//         // const QWidget* as argument.
-//         const QWidget* window = (isPreview()) ? this->widget() : widget->window();
-//         const QWidget* w = widget;
-//         QPoint position( 0, 0 );
-//         while (  w != window && !w->isWindow() && w != w->parentWidget() )
-//         {
-//             position += w->geometry().topLeft();
-//             w = w->parentWidget();
-//         }
-//
-//         // save painter
-//         if( clipRect.isValid() )
-//         {
-//             painter->save();
-//             painter->setClipRegion(clipRect,Qt::IntersectClip);
-//         }
-//
-//         QRect r = (isPreview()) ? this->widget()->rect():window->rect();
-//         r.adjust( layoutMetric( LM_OuterPaddingLeft ), layoutMetric( LM_OuterPaddingTop ), -layoutMetric( LM_OuterPaddingRight ), -layoutMetric( LM_OuterPaddingBottom ) );
-//         r.adjust(0,0, 1, 1);
-//
-//         // base color
-//         QColor color( palette.color( QPalette::Window ) );
-//
-//         // add alpha channel
-//         if( _itemData.count() == 1 && glowIsAnimated() )
-//         { color = helper().alphaColor( color, glowIntensity() ); }
-//
-//         // title height
-//         const int titleHeight( layoutMetric( LM_TitleEdgeTop ) + layoutMetric( LM_TitleEdgeBottom ) + layoutMetric( LM_TitleHeight ) );
-//
-//         // make titlebar background darker for tabbed, non-outline window
-//         if( ( tabCount() >= 2 || _itemData.isAnimated() ) && !(_configuration->drawTitleOutline() && isActive() ) )
-//         {
-//
-//             const QPoint topLeft( r.topLeft()-position );
-//             const QRect rect( topLeft, QSize( r.width(), titleHeight ) );
-//
-//             QLinearGradient lg( rect.topLeft(), rect.bottomLeft() );
-//             lg.setColorAt( 0, helper().alphaColor( Qt::black, 0.05 ) );
-//             lg.setColorAt( 1, helper().alphaColor( Qt::black, 0.10 ) );
-//             painter->setBrush( lg );
-//             painter->setPen( Qt::NoPen );
-//             painter->drawRect( rect );
-//
-//         }
-//
-//         // horizontal line
-//         {
-//             const int shadowSize = 7;
-//             const int height = shadowSize-3;
-//
-//             const QPoint topLeft( r.topLeft()+QPoint(0,titleHeight-height)-position );
-//             QRect rect( topLeft, QSize( r.width(), height ) );
-//
-//             // adjustements to cope with shadow size and outline border.
-//             rect.adjust( -shadowSize, 0, shadowSize-1, 0 );
-//             if( _configuration->drawTitleOutline() && ( isActive() || glowIsAnimated() ) && !isMaximized() )
-//             {
-//                 if( _configuration->frameBorder() == Configuration::BorderTiny ) rect.adjust( 1, 0, -1, 0 );
-//                 else if( _configuration->frameBorder() > Configuration::BorderTiny ) rect.adjust( Metrics::TitleBar_OutlineMargin-1, 0, -Metrics::TitleBar_OutlineMargin+1, 0 );
-//             }
-//
-//             if( rect.isValid() )
-//             { helper().slab( color, 0, shadowSize )->render( rect, painter, TileSet::Top ); }
-//
-//         }
-//
-//         if( _configuration->drawTitleOutline() && ( isActive() || glowIsAnimated() ) )
-//         {
-//
-//             // save old hints and turn off anti-aliasing
-//             const QPainter::RenderHints hints( painter->renderHints() );
-//             painter->setRenderHint( QPainter::Antialiasing, false );
-//
-//             // save mask and frame to where
-//             // grey window background is to be rendered
-//             QRegion mask;
-//             QRect frame;
-//
-//             // bottom line
-//             const int leftOffset = qMin( layoutMetric( LM_BorderLeft ), int(Metrics::TitleBar_OutlineMargin) );
-//             const int rightOffset = qMin( layoutMetric( LM_BorderRight ), int(Metrics::TitleBar_OutlineMargin) );
-//             if( _configuration->frameBorder() > Configuration::BorderNone )
-//             {
-//
-//                 const int height = qMax( 0, layoutMetric( LM_BorderBottom ) - Metrics::TitleBar_OutlineMargin );
-//                 const int width = r.width() - leftOffset - rightOffset - 1;
-//
-//                 const QRect rect( r.bottomLeft()-position + QPoint( leftOffset, -layoutMetric( LM_BorderBottom ) ), QSize( width, height ) );
-//                 if( height > 0 ) { mask += rect; frame |= rect; }
-//
-//                 const QColor shadow( helper().calcDarkColor( color ) );
-//                 painter->setPen( shadow );
-//                 painter->drawLine( rect.bottomLeft()+QPoint(-1,1), rect.bottomRight()+QPoint(1,1) );
-//
-//             }
-//
-//             // left and right
-//             const int topOffset = titleHeight;
-//             const int bottomOffset = qMin( layoutMetric( LM_BorderBottom ), int(Metrics::TitleBar_OutlineMargin) );
-//             const int height = r.height() - topOffset - bottomOffset - 1;
-//
-//             if( _configuration->frameBorder() >= Configuration::BorderTiny )
-//             {
-//
-//                 const QColor shadow( helper().calcLightColor( color ) );
-//                 painter->setPen( shadow );
-//
-//                 // left
-//                 int width = qMax( 0, layoutMetric( LM_BorderLeft ) - Metrics::TitleBar_OutlineMargin );
-//                 QRect rect( r.topLeft()-position + QPoint( layoutMetric( LM_BorderLeft ) - width, topOffset ), QSize( width, height ) );
-//                 if( width > 0 ) { mask += rect; frame |= rect; }
-//
-//                 painter->drawLine( rect.topLeft()-QPoint(1,0), rect.bottomLeft()-QPoint(1, 0) );
-//
-//                 // right
-//                 width = qMax( 0, layoutMetric( LM_BorderRight ) - Metrics::TitleBar_OutlineMargin );
-//                 rect = QRect(r.topRight()-position + QPoint( -layoutMetric( LM_BorderRight ), topOffset ), QSize( width, height ));
-//                 if( width > 0 ) { mask += rect; frame |= rect; }
-//
-//                 painter->drawLine( rect.topRight()+QPoint(1,0), rect.bottomRight()+QPoint(1, 0) );
-//             }
-//
-//             // restore old hints
-//             painter->setRenderHints( hints );
-//
-//             // in preview mode also adds center square
-//             if( isPreview() )
-//             {
-//                 const QRect rect( r.topLeft()-position + QPoint( layoutMetric( LM_BorderLeft ), topOffset ), QSize(r.width()-layoutMetric( LM_BorderLeft )-layoutMetric( LM_BorderRight ),height) );
-//                 mask += rect; frame |= rect;
-//             }
-//
-//             // paint
-//             if( !mask.isEmpty() )
-//             {
-//                 painter->setClipRegion( mask, Qt::IntersectClip);
-//                 renderWindowBackground(painter, frame, widget, palette );
-//             }
-//
-//         }
-//
-//         // restore painter
-//         if( clipRect.isValid() )
-//         { painter->restore(); }
-//
-//     }
+    //___________________________________________________
+    QColor Client::outlineColor( bool active ) const
+    {
+        if( !active ) return QColor();
+        else {
+
+            // palette
+            #if BREEZE_USE_KDE4
+            const QPalette palette = widget()->palette();
+            #else
+            const QPalette palette = ParentDecorationClass::palette();
+            #endif
+
+            return helper().focusColor( palette );
+        }
+
+    }
 
     //_________________________________________________________
     void Client::renderTitleText( QPainter* painter, const QRect& rect, const QColor& color, const QColor& contrast ) const
@@ -852,10 +683,72 @@ namespace Breeze
 
     }
 
-//     //_______________________________________________________________________
-//     void Client::renderItem( QPainter* painter, int index, const QPalette& palette )
-//     {
-//
+    //_______________________________________________________________________
+    void Client::renderShadow( QPainter* painter, const QRect& rect ) const
+    { _factory->shadowTiles().render( rect, painter ); }
+
+    //_______________________________________________________________________
+    void Client::renderBackground( QPainter* painter, const QRect& rect ) const
+    {
+        painter->save();
+
+        // palette
+        #if BREEZE_USE_KDE4
+        const QPalette palette = widget()->palette();
+        #else
+        const QPalette palette = ParentDecorationClass::palette();
+        #endif
+
+        const QColor base( palette.color( QPalette::Window ) );
+        const QColor background( backgroundColor() );
+        const QColor outline( outlineColor() );
+
+        painter->setPen( Qt::NoPen );
+
+        // window background
+        if( isShade() )
+        {
+
+        } else {
+
+            // path
+            QPainterPath path;
+            if( _configuration->frameBorder() == Configuration::BorderNone && !isShade() ) path = helper().roundedPath( rect, CornerTopLeft|CornerTopRight );
+            else path = helper().roundedPath( rect );
+
+            // window background
+            painter->setBrush( palette.color( QPalette::Window ) );
+            painter->drawPath( path );
+
+            // title bar background
+            QRect titleRect( rect );
+            titleRect.setHeight( this->titleRect().height() + layoutMetric( LM_TitleEdgeTop ) + 1 );
+
+            painter->setClipRect( titleRect, Qt::IntersectClip );
+            painter->setBrush( background );
+            painter->drawPath( path );
+
+            if( outline.isValid() )
+            {
+                painter->setBrush( Qt::NoBrush );
+                painter->setPen( outline );
+                painter->drawLine( QPointF( -0.5 + titleRect.left(), 0.5 + titleRect.bottom() ), QPointF( 0.5 + titleRect.right(), 0.5 + titleRect.bottom() ) );
+            }
+
+        }
+
+        painter->restore();
+    }
+
+    //_______________________________________________________________________
+    void Client::renderItem( QPainter* painter, int index, const QPalette& palette )
+    {
+
+        Q_UNUSED( painter );
+        Q_UNUSED( index );
+        Q_UNUSED( palette );
+        return;
+
 //         const ClientGroupItemData& item( _itemData[index] );
 //
 //         // see if tag is active
@@ -945,8 +838,8 @@ namespace Breeze
 //
 //         }
 //
-//     }
-//
+    }
+
     //_______________________________________________________________________
     void Client::renderTargetRect( QPainter* p, const QPalette& palette )
     {
@@ -1005,6 +898,15 @@ namespace Breeze
 
         ParentDecorationClass::captionChange();
         _itemData.setDirty( true );
+
+    }
+
+    //________________________________________________________________
+    void Client::updateWindowShape()
+    {
+
+        if(isMaximized()) clearMask();
+        else setMask( calcMask() );
 
     }
 
@@ -1081,13 +983,6 @@ namespace Breeze
         ParentDecorationClass::resizeEvent( event );
     }
 
-//     //_________________________________________________________
-//     void Client::paintBackground( QPainter& painter ) const
-//     {
-//         if( !compositingActive() )
-//         { painter.drawPixmap( QPoint(), _pixmap ); }
-//     }
-//
     //_________________________________________________________
     QRegion Client::region( KDecorationDefines::Region r )
     {
@@ -1131,159 +1026,58 @@ namespace Breeze
 
     }
 
-//
-//     //_________________________________________________________
-//     void Client::paintEvent( QPaintEvent* event )
-//     {
-//
-//         // factory
-//         if(!( _initialized && _factory->initialized() ) ) return;
-//
-//         if( compositingActive() )
-//         {
-//
-//             QPainter painter(widget());
-//             painter.setRenderHint(QPainter::Antialiasing);
-//             painter.setClipRegion( event->region() );
-//             paint( painter );
-//
-//             // update buttons
-//             QList<Button*> buttons( widget()->findChildren<Button*>() );
-//             foreach( Button* button, buttons )
-//             {
-//                 if( ( button->isVisible() || isPreview() ) && event->rect().intersects( button->geometry() ) )
-//                 {
-//
-//                     painter.save();
-//                     painter.setViewport( button->geometry() );
-//                     painter.setWindow( button->rect() );
-//                     button->paint( painter );
-//                     painter.restore();
-//
-//                 }
-//             }
-//
-//
-//         } else {
-//
-//             {
-//                 // update backing store pixmap
-//                 QPainter painter( &_pixmap );
-//                 painter.setRenderHint(QPainter::Antialiasing);
-//                 painter.setClipRegion( event->region() );
-//                 paint( painter );
-//             }
-//
-//             QPainter painter( widget() );
-//             painter.setClipRegion( event->region() );
-//             painter.drawPixmap( QPoint(), _pixmap );
-//
-//         }
-//
-//
-//
-//     }
-//
-//     //_________________________________________________________
-//     void Client::paint( QPainter& painter )
-//     {
-//
-//         // palette
-//         #if BREEZE_USE_KDE4
-//         QPalette palette = widget()->palette();
-//         #else
-//         QPalette palette = ParentDecorationClass::palette();
-//         #endif
-//
-//         palette.setCurrentColorGroup( (isActive() ) ? QPalette::Active : QPalette::Inactive );
-//
-//         // define frame
-//         QRect frame = widget()->rect();
-//
-//         // base color
-//         QColor color = palette.color( QPalette::Window );
-//
-//         // draw shadows
-//         if( compositingActive() && shadowCache().shadowSize() > 0 && !isMaximized() )
-//         {
-//
-//             TileSet *tileSet( 0 );
-//             const ShadowCache::Key key( this->key() );
-//             if( shadowCache().isEnabled( QPalette::Active ) && glowIsAnimated() && !isForcedActive() )
-//             {
-//
-//                 tileSet = shadowCache().tileSet( key, glowIntensity() );
-//
-//             } else {
-//
-//                 tileSet = shadowCache().tileSet( key );
-//
-//             }
-//
-//             tileSet->render( frame, &painter, TileSet::Ring);
-//
-//         }
-//
-//         // adjust frame
-//         frame.adjust(
-//             layoutMetric(LM_OuterPaddingLeft),
-//             layoutMetric(LM_OuterPaddingTop),
-//             -layoutMetric(LM_OuterPaddingRight),
-//             -layoutMetric(LM_OuterPaddingBottom) );
-//
-//         //  adjust mask
-//         if( compositingActive() || isPreview() )
-//         {
-//
-//             if( isMaximized() ) {
-//
-//                 painter.setClipRect( frame, Qt::IntersectClip );
-//
-//             } else {
-//
-//                 // multipliers
-//                 const int left = 1;
-//                 const int right = 1;
-//                 const int top = 1;
-//                 int bottom = 1;
-//
-//                 if( _configuration->frameBorder() == Configuration::BorderNone && !isShade() ) bottom = 0;
-//                 QRegion mask( helper().roundedMask( frame, left, right, top, bottom ) );
-//
-//                 renderCorners( &painter, frame, palette );
-//                 painter.setClipRegion( mask, Qt::IntersectClip );
-//
-//             }
-//
-//         }
-//
-//         // make sure ItemData and tabList are synchronized
-//         /*
-//         this needs to be done before calling RenderWindowBorder
-//         since some painting in there depend on the clientGroups state
-//         */
-//         if(  _itemData.isDirty() || _itemData.count() != tabCount() )
-//         { updateItemBoundingRects( false ); }
-//
-//         // window background
-//         renderWindowBackground( &painter, frame, widget(), backgroundPalette( widget(), palette ) );
-//
-//         // window border (for title outline)
-//         if( hasTitleOutline() ) renderWindowBorder( &painter, frame, widget(), palette );
-//
-//         // clipping
-//         if( compositingActive() )
-//         {
-//             painter.setClipping(false);
-//             frame.adjust(-1,-1, 1, 1);
-//         }
-//
-//         // float frame
-//         renderFloatFrame( &painter, frame, palette );
-//
-//         // resize handles
-//         renderDots( &painter, frame, backgroundColor( widget(), palette ) );
-//
+
+    //_________________________________________________________
+    void Client::paintEvent( QPaintEvent* event )
+    {
+
+        // factory
+        if(!( _initialized && _factory->initialized() ) ) return;
+
+        QPainter painter(widget());
+        painter.setRenderHint(QPainter::Antialiasing);
+        painter.setClipRegion( event->region() );
+        paint( painter );
+
+    }
+
+    //_________________________________________________________
+    void Client::paint( QPainter& painter )
+    {
+
+        // palette
+        #if BREEZE_USE_KDE4
+        QPalette palette = widget()->palette();
+        #else
+        QPalette palette = ParentDecorationClass::palette();
+        #endif
+
+        palette.setCurrentColorGroup( (isActive() ) ? QPalette::Active : QPalette::Inactive );
+
+        // define frame
+        QRect frame = widget()->rect();
+
+        // draw shadows
+        if( compositingActive() && !isMaximized() ) renderShadow( &painter, frame );
+
+        // adjust frame
+        frame.adjust(
+            layoutMetric(LM_OuterPaddingLeft),
+            layoutMetric(LM_OuterPaddingTop),
+            -layoutMetric(LM_OuterPaddingRight),
+            -layoutMetric(LM_OuterPaddingBottom) );
+
+        // make sure ItemData and tabList are synchronized
+        /*
+        this needs to be done before calling RenderWindowBorder
+        since some painting in there depend on the clientGroups state
+        */
+        if(  _itemData.isDirty() || _itemData.count() != tabCount() )
+        { updateItemBoundingRects( false ); }
+
+        // render background
+        renderBackground( &painter, frame );
+
 //         if( !hideTitleBar() )
 //         {
 //
@@ -1302,9 +1096,9 @@ namespace Breeze
 //             { renderSeparator(&painter, frame, widget(), color ); }
 //
 //         }
-//
-//     }
-//
+
+    }
+
     //_____________________________________________________________
     bool Client::mousePressEvent( QMouseEvent* event )
     {
@@ -1360,15 +1154,15 @@ namespace Breeze
 
     }
 
-//     //_____________________________________________________________
-//     bool Client::mouseMoveEvent( QMouseEvent* event )
-//     {
-//
-//         // check button and distance to drag point
-//         if( hideTitleBar() || _mouseButton == Qt::NoButton  || ( event->pos() - _dragPoint ).manhattanLength() <= QApplication::startDragDistance() )
-//         { return false; }
-//
-//         bool accepted( false );
+    //_____________________________________________________________
+    bool Client::mouseMoveEvent( QMouseEvent* event )
+    {
+
+        // check button and distance to drag point
+        if( hideTitleBar() || _mouseButton == Qt::NoButton  || ( event->pos() - _dragPoint ).manhattanLength() <= QApplication::startDragDistance() )
+        { return false; }
+
+        bool accepted( false );
 //         if( buttonToWindowOperation( _mouseButton ) == TabDragOp )
 //         {
 //
@@ -1448,9 +1242,9 @@ namespace Breeze
 //
 //         }
 //
-//         return accepted;
-//
-//     }
+        return accepted;
+
+    }
 
     //_____________________________________________________________
     bool Client::dragEnterEvent( QDragEnterEvent* event )

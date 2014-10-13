@@ -72,6 +72,10 @@ namespace Breeze
         //* add alpha channel multiplier to color
         QColor alphaColor( QColor color, qreal alpha ) const;
 
+        //* focus color
+        QColor focusColor( const QPalette& palette ) const
+        { return _viewFocusBrush.brush( palette ).color(); }
+
         //* negative text color (used for close button)
         QColor negativeTextColor( const QPalette& palette ) const
         { return _viewNegativeTextBrush.brush( palette ).color(); }
@@ -88,15 +92,11 @@ namespace Breeze
         //* debug frame
         void renderDebugFrame( QPainter*, const QRect& ) const;
 
-        //* returns a region matching given rect, with rounded corners, based on the multipliers
-        /** setting any of the multipliers to zero will result in no corners shown on the corresponding side */
-        virtual QRegion roundedMask( const QRect&, int left = 1, int right = 1, int top = 1, int bottom = 1 ) const;
-
         //* returns a region matching given rect, with rounded corners
         virtual QBitmap roundedMask( const QSize&, Corners corners = AllCorners, qreal radius = Metrics::Frame_FrameRadius ) const;
 
         //* return rounded path in a given rect, with only selected corners rounded, and for a given radius
-        QPainterPath roundedPath( const QRect&, Corners = AllCorners, qreal = 4 ) const;
+        QPainterPath roundedPath( const QRect&, Corners = AllCorners, qreal radius = Metrics::Frame_FrameRadius ) const;
 
         //@}
 
@@ -162,6 +162,7 @@ namespace Breeze
 
         //*@name brushes
         //@{
+        KStatefulBrush _viewFocusBrush;
         KStatefulBrush _viewNegativeTextBrush;
         //@}
 

@@ -53,6 +53,7 @@ namespace Breeze
     //____________________________________________________________________
     void Helper::loadConfig()
     {
+        _viewFocusBrush = KStatefulBrush( KColorScheme::View, KColorScheme::FocusColor, _config );
         _viewNegativeTextBrush = KStatefulBrush( KColorScheme::View, KColorScheme::NegativeText, _config );
     }
 

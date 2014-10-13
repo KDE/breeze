@@ -136,7 +136,7 @@ namespace Breeze
     {
 
         // get relevant colors
-        QColor base( _client->backgroundColor( this, palette(), _client->isActive() ) );
+        QColor base( _client->backgroundColor( _client->isActive() ) );
 
         // create and configure painter
         QPainter painter(this);

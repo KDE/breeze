@@ -257,7 +257,7 @@ namespace Breeze
     {
 
         painter->save();
-        painter->setWindow( 0, 0, 18, 18 );
+        painter->setWindow( -1, -1, 20, 20 );
         painter->setRenderHints( QPainter::Antialiasing );
 
         // outside circle

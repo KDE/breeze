@@ -178,9 +178,11 @@ namespace Breeze
 
         QColor foregroundColor( void ) const;
         QColor backgroundColor( void ) const;
+        QColor outlineColor( void ) const;
 
         QColor foregroundColor( bool active ) const;
         QColor backgroundColor( bool active ) const;
+        QColor outlineColor( bool active ) const;
 
         //@}
 
@@ -247,8 +249,11 @@ namespace Breeze
         //*@name rendering methods (called in paintEvent)
         //@{
 
+        //* shadow
+        virtual void renderShadow( QPainter*, const QRect& ) const;
+
         //* window background
-        virtual void renderWindowBackground( QPainter*, const QRect&, const QWidget*, const QPalette& ) const;
+        virtual void renderBackground( QPainter*, const QRect& ) const;
 
         //* title text
         /** second color, if valid, is for contrast pixel */
