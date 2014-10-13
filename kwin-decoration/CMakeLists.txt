@@ -40,6 +40,13 @@ else()
 
   find_package(Qt5 REQUIRED CONFIG COMPONENTS Widgets)
 
+  find_package(KF5 REQUIRED COMPONENTS
+      GuiAddons
+      I18n
+      ConfigWidgets
+      Service
+      FrameworkIntegration )
+
   find_package(XCB COMPONENTS XCB)
   set_package_properties(XCB PROPERTIES
       DESCRIPTION "X protocol C-language Binding"
@@ -47,6 +54,12 @@ else()
       TYPE OPTIONAL
       PURPOSE "Required to pass style properties to native Windows on X11 Platform"
   )
+
+  find_package(KDecorations CONFIG)
+  set_package_properties(
+    KDecorations PROPERTIES
+    TYPE REQUIRED
+ )
 
   if(NOT APPLE)
 
@@ -103,12 +116,20 @@ else()
 
   add_library(kwin3_breeze MODULE ${kwin_breeze_SRCS})
   target_link_libraries(kwin3_breeze Qt5::Widgets)
+  target_link_libraries(kwin3_breeze
+     KF5::GuiAddons
+     KF5::I18n
+     KF5::Style
+     KF5::Service
+     KF5::ConfigWidgets
+  )
+
   target_link_libraries(kwin3_breeze kdecorations)
 
   kservice_desktop_to_json(kwin3_breeze breezeclient.desktop)
 
   if(BREEZE_HAVE_X11)
-    target_link_libraries(kwin3_breeze XCB::XCB)
+    target_link_libraries(kwin3_breeze XCB::XCB Qt5::X11Extras)
   endif()
 
   install(TARGETS kwin3_breeze  DESTINATION ${PLUGIN_INSTALL_DIR}/kwin/kdecorations)
