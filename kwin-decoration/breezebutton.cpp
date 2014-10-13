@@ -70,38 +70,6 @@ namespace Breeze
     Button::~Button()
     {}
 
-    //_______________________________________________
-    QColor Button::foregroundColor( void ) const
-    {
-        if( _client.isAnimated() && !_forceInactive && !_client.isForcedActive())
-        {
-            return KColorUtils::mix( foregroundColor( false ), foregroundColor( true ), _client.opacity() );
-
-        } else return foregroundColor( isActive() || _client.isForcedActive() );
-    }
-
-    //_______________________________________________
-    QColor Button::backgroundColor( void ) const
-    {
-        if( _client.isAnimated() && !_forceInactive && !_client.isForcedActive())
-        {
-            return KColorUtils::mix( backgroundColor( false ), backgroundColor( true ), _client.opacity() );
-
-        } else return backgroundColor( isActive() || _client.isForcedActive() );
-    }
-
-    //___________________________________________________
-    QColor Button::foregroundColor( bool active ) const
-    { return _client.options()->color( KDecorationDefines::ColorFont, active ); }
-
-    //___________________________________________________
-    QColor Button::backgroundColor( bool active ) const
-    { return _client.options()->color( KDecorationDefines::ColorTitleBar, active ); }
-
-    //___________________________________________________
-    bool Button::isActive( void ) const
-    { return (!_forceInactive) && _client.isActive(); }
-
     //___________________________________________________
     bool Button::animationsEnabled( void ) const
     { return _client.configuration()->animationsEnabled(); }
@@ -184,26 +152,48 @@ namespace Breeze
 
         // create painter
         QPainter painter( this );
-        painter.setRenderHints(QPainter::Antialiasing);
         painter.setClipRegion( event->region() );
 
-        QColor foreground = foregroundColor();
-        QColor background = backgroundColor();
+        // render background in non compositing mode
+        if( !_client.compositingActive() )
+        {
+            painter.setPen( Qt::NoPen );
+            painter.setBrush( _client.backgroundColor() );
+            painter.drawRect( rect() );
+        }
+
+        // client active flag
+        const bool clientActive( _client.isActive() || _client.isForcedActive() );
+
+        painter.setRenderHints(QPainter::Antialiasing);
+        QColor foreground = _client.foregroundColor();
+        QColor background = _client.backgroundColor();
 
         const QPalette palette( this->palette() );
         const bool mouseOver( _status&Hovered );
 
-        if( _type == ButtonItemClose || _type == ButtonClose )
+        if( _type == ButtonClose )
         {
 
             qSwap( foreground, background );
-            const QColor negativeColor(
-                isActive() || _client.isForcedActive() ?
+            const QColor negativeColor( clientActive ?
                 KColorUtils::mix( background, _helper.negativeTextColor(palette), 0.5 ):
                 _helper.alphaColor( _helper.negativeTextColor(palette), 0.5 ) );
 
             if( isAnimated() ) background = KColorUtils::mix( background, negativeColor, opacity() );
             else if( mouseOver ) background = negativeColor;
+
+        } else if( _type == ButtonItemClose ) {
+
+            const QColor negativeColor( clientActive ?
+                KColorUtils::mix( background, _helper.negativeTextColor(palette), 0.5 ):
+                _helper.alphaColor( _helper.negativeTextColor(palette), 0.5 ) );
+
+            if( isAnimated() ) foreground = KColorUtils::mix( foreground, negativeColor, opacity() );
+            else if( mouseOver ) foreground = negativeColor;
+
+            // also disable background
+            background = QColor();
 
         } else if( isAnimated() ) {
 
@@ -211,14 +201,14 @@ namespace Breeze
             background = KColorUtils::mix( background, foreground, opacity() );
             foreground = KColorUtils::mix( foreground, copy, opacity() );
 
-            if( isActive() || _client.isForcedActive() )
+            if( clientActive )
             { background = _helper.alphaColor( background, 0.5 ); }
 
         } else if( mouseOver ) {
 
             qSwap( foreground, background );
 
-            if( isActive() || _client.isForcedActive() )
+            if( clientActive )
             { background = _helper.alphaColor( background, 0.5 ); }
 
         }

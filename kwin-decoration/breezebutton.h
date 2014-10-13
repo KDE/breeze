@@ -95,23 +95,9 @@ namespace Breeze
         //* draw icon
         void drawIcon( QPainter*, QColor foreground, QColor background );
 
-        //*@name colors
-        //@{
-
-        QColor foregroundColor( void ) const;
-        QColor backgroundColor( void ) const;
-
-        QColor foregroundColor( bool active ) const;
-        QColor backgroundColor( bool active ) const;
-
-        //@}
-
         //* true if animation is in progress
         bool isAnimated( void ) const
         { return _animation->isRunning(); }
-
-        //* true if button is active
-        bool isActive( void ) const;
 
         //* true if buttons hover are animated
         bool animationsEnabled( void ) const;

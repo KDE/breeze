@@ -72,6 +72,7 @@ set(kwin_breeze_SRCS
      breezebutton.cpp
      breezeclient.cpp
      breezeclientgroupitemdata.cpp
+     breezeexceptionlist.cpp
      breezefactory.cpp
      breezehelper.cpp
      breezesizegrip.cpp

@@ -217,9 +217,6 @@ namespace Breeze
         //* paint
         virtual void paintEvent( QPaintEvent* );
 
-        //* render full decoration to provided painter
-        virtual void paint( QPainter& );
-
         //* mouse press event
         virtual bool mousePressEvent( QMouseEvent* );
 
@@ -253,24 +250,24 @@ namespace Breeze
         virtual void renderShadow( QPainter*, const QRect& ) const;
 
         //* window background
-        virtual void renderBackground( QPainter*, const QRect& ) const;
+        virtual void renderBackground( QPainter*, const QRect&, bool isShade ) const;
 
         //* title text
         /** second color, if valid, is for contrast pixel */
-        virtual void renderTitleText( QPainter*, const QRect&, const QColor&, const QColor& = QColor() ) const;
+        virtual void renderTitleText( QPainter*, const QRect&, const QColor& ) const;
 
         //* title text
         /** second color, if valid, is for contrast pixel */
-        virtual void renderTitleText( QPainter*, const QRect&, const QString&, const QColor&, const QColor& = QColor(), bool elide = true ) const;
+        virtual void renderTitleText( QPainter*, const QRect&, const QString&, const QColor&, bool elide = true ) const;
 
-        //* title text
-        virtual QPixmap renderTitleText( const QRect&, const QString&, const QColor&, bool elide = true ) const;
+//         //* title text
+//         virtual QPixmap renderTitleText( const QRect&, const QString&, const QColor&, bool elide = true ) const;
 
         //* GroupItem
-        virtual void renderItem( QPainter*, int, const QPalette& );
+        virtual void renderItem( QPainter*, int );
 
         //* tabbing target rect
-        virtual void renderTargetRect( QPainter*, const QPalette& );
+        virtual void renderTargetRect( QPainter* );
 
         //@}
 
@@ -282,7 +279,7 @@ namespace Breeze
         { return _itemData.itemAt( position , between ); }
 
         //* return pixmap corresponding to a given tab, for dragging
-        QPixmap itemDragPixmap( int, QRect, bool = false );
+        QPixmap itemDragPixmap( int, QRect, bool drawShadow = false );
 
         //* calculate mask
         QRegion calcMask( void ) const;

@@ -20,6 +20,7 @@
 #include "breezefactory.h"
 
 #include "breezeclient.h"
+#include "breezeexceptionlist.h"
 
 #include <KSharedConfig>
 #include <KConfigGroup>
@@ -116,6 +117,11 @@ namespace Breeze
         _defaultConfiguration->load();
         #endif
 
+        // clear exceptions and read
+        ExceptionList exceptions;
+        exceptions.readConfig( _config );
+        _exceptions = exceptions.get();
+
     }
 
     //_________________________________________________________________
@@ -158,11 +164,61 @@ namespace Breeze
         };
     }
 
-
-
     //____________________________________________________________________
-    Factory::ConfigurationPtr Factory::configuration( void )
-    { return _defaultConfiguration; }
+    Factory::ConfigurationPtr Factory::configuration( const Client& client )
+    {
+
+        QString windowTitle;
+        QString className;
+        foreach( const ConfigurationPtr& configuration, _exceptions )
+        {
+
+            // discard disabled exceptions
+            if( !configuration->enabled() ) continue;
+
+            // discard exceptions with empty exception pattern
+            if( configuration->exceptionPattern().isEmpty() ) continue;
+
+            /*
+            decide which value is to be compared
+            to the regular expression, based on exception type
+            */
+            QString value;
+            switch( configuration->exceptionType() )
+            {
+                case Configuration::ExceptionWindowTitle:
+                {
+                    value = windowTitle.isEmpty() ? (windowTitle = client.caption()):windowTitle;
+                    break;
+                }
+
+                default:
+                case Configuration::ExceptionWindowClassName:
+                {
+                    if( className.isEmpty() )
+                    {
+                        // retrieve class name
+                        KWindowInfo info( client.windowId(), 0, NET::WM2WindowClass );
+                        QString window_className( QString::fromUtf8(info.windowClassName()) );
+                        QString window_class( QString::fromUtf8(info.windowClassClass()) );
+                        className = window_className + QStringLiteral(" ") + window_class;
+                    }
+
+                    value = className;
+                    break;
+                }
+
+            }
+
+            // check matching
+            if( QRegExp( configuration->exceptionPattern() ).indexIn( value ) >= 0 )
+            { return configuration; }
+
+        }
+
+        return _defaultConfiguration;
+
+    }
 
     //_______________________________________________________
     TileSet Factory::shadowTiles( void )

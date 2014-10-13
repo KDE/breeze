@@ -86,7 +86,7 @@ namespace Breeze
         typedef QSharedPointer<Configuration> ConfigurationPtr;
 
         //* get configuration for a give client
-        virtual ConfigurationPtr configuration( void );
+        virtual ConfigurationPtr configuration( const Client& );
 
         //* shadow tiles
         /** is public because it is also needed for mdi windows */
@@ -100,6 +100,14 @@ namespace Breeze
         //* initialization
         void setInitialized( bool value )
         { _initialized = value; }
+
+        //* exception group name
+        QString exceptionGroupName( int index ) const
+        {
+            QString out;
+            QTextStream( &out ) << "Windeco Exception " << index;
+            return out;
+        }
 
         private:
 
@@ -117,6 +125,9 @@ namespace Breeze
 
         //* default configuration
         ConfigurationPtr _defaultConfiguration;
+
+        //* list of exceptiosn
+        QList<ConfigurationPtr> _exceptions;
 
     };
 

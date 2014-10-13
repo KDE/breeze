@@ -84,6 +84,14 @@ namespace Breeze
 
     Q_DECLARE_FLAGS(ButtonState, ButtonStatus)
 
+    //* exception
+    enum ExceptionMask
+    {
+        None = 0,
+        TitleAlignment = 1<<0,
+        FrameBorder = 1<<4
+    };
+
     //* metrics
     enum Metrics
     {
@@ -92,7 +100,7 @@ namespace Breeze
         Frame_FrameRadius = 3,
 
         //* top title bar edge
-        TitleBar_TopMargin = 5,
+        TitleBar_TopMargin = 4,
         TitleBar_BottomMargin = 5,
         TitleBar_SideMargin = 5,
         TitleBar_ButtonSpacing = 3,
