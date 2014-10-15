@@ -289,6 +289,16 @@ namespace Breeze
                 painter->drawLine( 13 - penWidth, 5 + penWidth, 5 + penWidth, 13 - penWidth );
                 break;
 
+                case ButtonSticky:
+                {
+                    painter->setPen( Qt::NoPen );
+                    painter->setBrush( foreground );
+                    painter->drawRoundedRect( QRectF( 6, 2, 6, 9 ), 1.5, 1.5 );
+                    painter->drawRect( QRectF( 4, 10, 10, 2 ) );
+                    painter->drawRoundRect( QRectF( 8, 12, 2, 4 ) );
+                    break;
+                }
+
                 case ButtonMax:
                 switch(_client.maximizeMode())
                 {
