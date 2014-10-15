@@ -45,7 +45,9 @@ else()
       I18n
       ConfigWidgets
       Service
-      FrameworkIntegration )
+      FrameworkIntegration
+      Completion
+  )
 
   find_package(XCB COMPONENTS XCB)
   set_package_properties(XCB PROPERTIES
