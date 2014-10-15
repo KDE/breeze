@@ -166,6 +166,9 @@ namespace Breeze
         const bool clientActive( _client.isActive() );
 
         painter.setRenderHints(QPainter::Antialiasing);
+
+        if( _client.isMaximized() ) painter.translate( 0, 1 );
+
         QColor foreground = _client.foregroundColor();
         QColor background = _client.backgroundColor();
 
