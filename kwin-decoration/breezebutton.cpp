@@ -178,11 +178,11 @@ namespace Breeze
         if( _type == ButtonClose )
         {
 
-            qSwap( foreground, background );
-            const QColor negativeColor( clientActive ?
-                KColorUtils::mix( background, _helper.negativeTextColor(palette), 0.7 ):
-                _helper.alphaColor( _helper.negativeTextColor(palette), 0.7 ) );
+            const QColor negativeColor(
+                _client.isActive() ? KColorUtils::mix( foreground, _helper.negativeTextColor(palette), 0.4 ):
+                KColorUtils::mix( background, _helper.negativeTextColor(palette), 0.4 ) );
 
+            qSwap( foreground, background );
             if( isAnimated() ) background = KColorUtils::mix( background, negativeColor, opacity() );
             else if( mouseOver ) background = negativeColor;
 
@@ -290,14 +290,26 @@ namespace Breeze
                 break;
 
                 case ButtonSticky:
+                if( _client.isOnAllDesktops() )
                 {
+                    painter->setPen( Qt::NoPen );
+                    painter->setBrush( foreground );
+                    painter->drawEllipse( QRectF( 3, 3, 12, 12 ) );
+
+                    painter->setBrush( background );
+                    painter->drawEllipse( QRectF( 8, 8, 2, 2 ) );
+
+                } else {
+
                     painter->setPen( Qt::NoPen );
                     painter->setBrush( foreground );
                     painter->drawRoundedRect( QRectF( 6, 2, 6, 9 ), 1.5, 1.5 );
                     painter->drawRect( QRectF( 4, 10, 10, 2 ) );
                     painter->drawRoundRect( QRectF( 8, 12, 2, 4 ) );
-                    break;
+
                 }
+
+                break;
 
                 case ButtonMax:
                 switch(_client.maximizeMode())
@@ -334,6 +346,52 @@ namespace Breeze
                     << QPointF( 9, 12.5 - penWidth )
                     << QPointF( 14.5 - penWidth, 6.5 + penWidth ) );
 
+                break;
+
+                case ButtonAbove:
+                painter->drawPolyline( QPolygonF()
+                    << QPointF( 3.5 + penWidth, 9.5 - penWidth )
+                    << QPointF( 9, 3.5 + penWidth )
+                    << QPointF( 14.5 - penWidth, 9.5 - penWidth ) );
+
+                painter->drawPolyline( QPolygonF()
+                    << QPointF( 3.5 + penWidth, 13.5 - penWidth )
+                    << QPointF( 9, 7.5 + penWidth )
+                    << QPointF( 14.5 - penWidth, 13.5 - penWidth ) );
+                break;
+
+                case ButtonBelow:
+                painter->drawPolyline( QPolygonF()
+                    << QPointF( 3.5 + penWidth, 4.5 + penWidth )
+                    << QPointF( 9, 10.5 - penWidth )
+                    << QPointF( 14.5 - penWidth, 4.5 + penWidth ) );
+
+                painter->drawPolyline( QPolygonF()
+                    << QPointF( 3.5 + penWidth, 8.5 + penWidth )
+                    << QPointF( 9, 14.5 - penWidth )
+                    << QPointF( 14.5 - penWidth, 8.5 + penWidth ) );
+                break;
+
+                case ButtonShade:
+                if( _client.isShade() )
+                {
+
+                    painter->drawLine( 3 + penWidth, 5.5 + penWidth, 15 - penWidth, 5.5+penWidth );
+                    painter->drawPolyline( QPolygonF()
+                        << QPointF( 3.5 + penWidth, 8.5 + penWidth )
+                        << QPointF( 9, 14.5 - penWidth )
+                        << QPointF( 14.5 - penWidth, 8.5 + penWidth ) );
+
+
+                } else {
+
+                    painter->drawLine( 3 + penWidth, 5.5 + penWidth, 15 - penWidth, 5.5+penWidth );
+                    painter->drawPolyline( QPolygonF()
+                        << QPointF( 3.5 + penWidth, 14.5 - penWidth )
+                        << QPointF( 9, 8.5 + penWidth )
+                        << QPointF( 14.5 - penWidth, 14.5 - penWidth ) );
+
+                }
                 break;
 
                 default: break;
