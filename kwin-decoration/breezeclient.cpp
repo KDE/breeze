@@ -677,8 +677,6 @@ namespace Breeze
             else if( _configuration->frameBorder() == Configuration::BorderNone ) path = helper().roundedPath( rect, CornerTopLeft|CornerTopRight );
             else path = helper().roundedPath( rect );
 
-            path = helper().roundedPath( rect );
-
             // store old clip region
             QRegion clipRegion( painter->clipRegion() );
 
