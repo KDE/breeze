@@ -163,7 +163,7 @@ namespace Breeze
         }
 
         // client active flag
-        const bool clientActive( _client.isActive() || _client.isForceActive() );
+        const bool clientActive( _client.isActive() );
 
         painter.setRenderHints(QPainter::Antialiasing);
         QColor foreground = _client.foregroundColor();

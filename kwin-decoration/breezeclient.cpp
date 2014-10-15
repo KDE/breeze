@@ -49,10 +49,10 @@ namespace Breeze
         _animation( new Animation( 200, this ) ),
         _opacity(0),
         _initialized( false ),
-        _forceActive( false ),
         _mouseButton( Qt::NoButton ),
         _itemData( this ),
         _sourceItem( -1 ),
+        _lastTabId( -1 ),
         _shadowAtom( 0 )
     {
         #if !BREEZE_USE_KDE4
@@ -93,7 +93,6 @@ namespace Breeze
         _animation->setTargetObject( this );
         _animation->setPropertyName( "opacity" );
         _animation->setEasingCurve( QEasingCurve::InOutQuad );
-        connect( _animation, SIGNAL(finished()), this, SLOT(clearForceActive()) );
 
         // lists
         connect( _itemData.animation().data(), SIGNAL(finished()), this, SLOT(clearTargetItem()) );
@@ -491,10 +490,6 @@ namespace Breeze
     }
 
     //_________________________________________________________
-    void Client::clearForceActive( void )
-    { if( isActive() ) setForceActive( false ); }
-
-    //_________________________________________________________
     void Client::updateItemBoundingRects( bool alsoUpdate )
     {
 
@@ -581,32 +576,32 @@ namespace Breeze
     //_______________________________________________
     QColor Client::foregroundColor( void ) const
     {
-        if( isAnimated() && !isForceActive())
+        if( isAnimated() )
         {
             return KColorUtils::mix( foregroundColor( false ), foregroundColor( true ), opacity() );
 
-        } else return foregroundColor( isActive() || isForceActive() );
+        } else return foregroundColor( isActive() );
     }
 
     //_______________________________________________
     QColor Client::backgroundColor( void ) const
     {
-        if( isAnimated() && !isForceActive())
+        if( isAnimated() )
         {
             return KColorUtils::mix( backgroundColor( false ), backgroundColor( true ), opacity() );
 
-        } else return backgroundColor( isActive() || isForceActive() );
+        } else return backgroundColor( isActive() );
     }
 
     //_______________________________________________
     QColor Client::outlineColor( void ) const
     {
-        if( isAnimated() && !isForceActive())
+        if( isAnimated() )
         {
 
             return helper().alphaColor( outlineColor( true ), opacity() );
 
-        } else return outlineColor( isActive() || isForceActive() );
+        } else return outlineColor( isActive() );
     }
 
     //___________________________________________________
@@ -812,9 +807,14 @@ namespace Breeze
         ParentDecorationClass::activeChange();
         _itemData.setDirty( true );
 
-        // reset animation
-        if( animationsEnabled() )
+        // tab id
+        const bool tabChanged( tabCount() > 1 &&  _lastTabId != currentTabId() );
+        if( tabChanged ) _lastTabId = currentTabId();
+
+        // do not trigger animations on tab change because it triggers false positive
+        if( animationsEnabled() && !tabChanged )
         {
+            // reset animation
             _animation->setDirection( isActive() ? Animation::Forward : Animation::Backward );
             if(!isAnimated()) { _animation->start(); }
         }
@@ -1083,7 +1083,6 @@ namespace Breeze
             if( clickedIndex >= 0 && visibleItem != tabId(clickedIndex) )
             {
                 setCurrentTab( tabId(clickedIndex) );
-                setForceActive( true );
                 accepted = true;
             }
 
@@ -1266,8 +1265,6 @@ namespace Breeze
         if( !groupData->hasFormat( tabDragMimeType() ) ) return false;
 
         _itemData.setDirty( true );
-
-        if( widget() != event->source() ) setForceActive( true );
 
         const long source = QString::fromUtf8( groupData->data( tabDragMimeType() ) ).toLong();
         const int clickedIndex( tabIndexAt( point, true ) );

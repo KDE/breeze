@@ -85,10 +85,6 @@ namespace Breeze
         bool isAnimated( void ) const
         { return _animation->isRunning(); }
 
-        //* true when decoration is forced active
-        bool isForceActive( void ) const
-        { return _forceActive && tabCount() > 1; }
-
         //* true if titlebar is hidden
         bool hideTitleBar( void ) const
         {
@@ -207,10 +203,6 @@ namespace Breeze
 
         protected:
 
-        //* true when decoration is forced active
-        void setForceActive( bool value )
-        { _forceActive = value; }
-
         //*@name event filters
         //@{
 
@@ -311,9 +303,6 @@ namespace Breeze
         //* set target item to -1
         void clearTargetItem( void );
 
-        //* clear force active flag
-        void clearForceActive( void );
-
         //* title bounding rects
         /** calculate and return title bounding rects in case of tabbed window */
         void updateItemBoundingRects( bool alsoUpdate = true );
@@ -349,9 +338,6 @@ namespace Breeze
         //* true when initialized
         bool _initialized;
 
-        //* true when decoration is forced active
-        bool _forceActive;
-
         //* mouse button
         Qt::MouseButton _mouseButton;
 
@@ -360,6 +346,14 @@ namespace Breeze
 
         //* index of tab being dragged if any, -1 otherwise
         int _sourceItem;
+
+        //* last index before active changed
+        /**
+         * this is used to detect when activity changed corresponds
+         * in fact to active tab change, in which case animations are
+         * disabled
+         */
+        int _lastTabId;
 
         //* drag start point
         QPoint _dragPoint;
