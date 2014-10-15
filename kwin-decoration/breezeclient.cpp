@@ -398,7 +398,7 @@ namespace Breeze
     QRect Client::defaultTitleRect( bool active ) const
     {
 
-        QRect titleRect( this->titleRect().adjusted( 0, -layoutMetric( LM_TitleEdgeTop ), 0, layoutMetric( LM_TitleEdgeBottom ) ) );
+        QRect titleRect( this->titleRect().adjusted( 0, -layoutMetric( LM_TitleEdgeTop ), 0, 1 ) );
 
         // when drawing title outline, shrink the rect so that it matches the actual caption size
         if( active && isActive() )
@@ -521,7 +521,7 @@ namespace Breeze
             { delete _itemData.front()._closeButton.data(); }
 
             // set active rect
-            _itemData.front()._activeRect = titleRect.adjusted( 0, -layoutMetric( LM_TitleEdgeTop ), 0, layoutMetric( LM_TitleEdgeBottom ) );
+            _itemData.front()._activeRect = titleRect.adjusted( 0, -layoutMetric( LM_TitleEdgeTop ), 0, 1 );
 
         } else {
 
@@ -542,7 +542,7 @@ namespace Breeze
 
                 // set active rect
                 QRect local(  QPoint( left, titleRect.top() ), QSize( width, titleRect.height() ) );
-                local.adjust( 0, -layoutMetric( LM_TitleEdgeTop ), 0, layoutMetric( LM_TitleEdgeBottom ) );
+                local.adjust( 0, -layoutMetric( LM_TitleEdgeTop ), 0, 1 );
                 item._activeRect = local;
                 left += width;
 
@@ -741,7 +741,7 @@ namespace Breeze
         if( !item._boundingRect.isValid() ) return;
 
         // create rect in which text is to be drawn
-        QRect textRect( item._boundingRect.adjusted( 0, layoutMetric( LM_TitleEdgeTop )-1, 0, -layoutMetric( LM_TitleEdgeBottom )-1 ) );
+        QRect textRect( item._boundingRect.adjusted( 0, layoutMetric( LM_TitleEdgeTop ), 0, -1 ) );
 
         // add extra space needed for title outline
         if( itemCount > 1 || _itemData.isAnimated() )
@@ -1339,7 +1339,7 @@ namespace Breeze
 
         // render title text
         painter.setFont( options()->font(isActive(), false) );
-        QRect textRect( geometry.adjusted( 0, layoutMetric( LM_TitleEdgeTop )-1, 0, -layoutMetric( LM_TitleEdgeBottom )-1 ) );
+        QRect textRect( geometry.adjusted( 0, layoutMetric( LM_TitleEdgeTop ), 0, -1 ) );
 
         if( itemValid )
         { textRect.adjust( layoutMetric( LM_TitleBorderLeft ), 0, -layoutMetric(LM_TitleBorderRight), 0 ); }
