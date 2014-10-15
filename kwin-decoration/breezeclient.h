@@ -132,7 +132,7 @@ namespace Breeze
         virtual int layoutMetric(LayoutMetric lm, bool respectWindowState = true, const KCommonDecorationButton * = 0) const;
 
         //* get title rect for untabbed window
-        virtual QRect defaultTitleRect( bool active = true ) const;
+        virtual QRect defaultTitleRect( void ) const;
 
         //* get title bounding rect
         virtual QRect titleBoundingRect( const QFont& font, const QString& caption ) const

@@ -395,33 +395,14 @@ namespace Breeze
     }
 
     //_________________________________________________________
-    QRect Client::defaultTitleRect( bool active ) const
+    QRect Client::defaultTitleRect( void ) const
     {
 
         QRect titleRect( this->titleRect().adjusted( 0, -layoutMetric( LM_TitleEdgeTop ), 0, 1 ) );
 
-        // when drawing title outline, shrink the rect so that it matches the actual caption size
-        if( active && isActive() )
-        {
-
-
-            if( _configuration->titleAlignment() == Configuration::AlignCenterFullWidth )
-            {
-                titleRect.setLeft( widget()->rect().left() + layoutMetric( LM_OuterPaddingLeft ) );
-                titleRect.setRight( widget()->rect().right() - layoutMetric( LM_OuterPaddingRight ) );
-            }
-
-            const QRect textRect( titleBoundingRect( options()->font( true, false ),  titleRect, caption() ) );
-            titleRect.setLeft( textRect.left() - layoutMetric( LM_TitleBorderLeft ) );
-            titleRect.setRight( textRect.right() + layoutMetric( LM_TitleBorderRight ) );
-
-        } else {
-
-            // buttons are properly accounted for in titleBoundingRect method
-            titleRect.setLeft( widget()->rect().left() + layoutMetric( LM_OuterPaddingLeft ) );
-            titleRect.setRight( widget()->rect().right() - layoutMetric( LM_OuterPaddingRight ) );
-
-        }
+        // buttons are properly accounted for in titleBoundingRect method
+        titleRect.setLeft( widget()->rect().left() + layoutMetric( LM_OuterPaddingLeft ) );
+        titleRect.setRight( widget()->rect().right() - layoutMetric( LM_OuterPaddingRight ) );
 
         return titleRect;
 
@@ -1122,7 +1103,7 @@ namespace Breeze
 
                 geometry.adjust( 0, 0,  - buttonSize() - layoutMetric(LM_TitleEdgeRight), 0 );
 
-            } else if( !isActive() ) {
+            } else {
 
                 geometry.adjust(
                     buttonsLeftWidth() + layoutMetric( LM_TitleEdgeLeft ) , 0,

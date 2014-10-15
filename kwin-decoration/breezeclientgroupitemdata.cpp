@@ -226,7 +226,7 @@ namespace Breeze
                         if( count() <= 2 )
                         {
 
-                            item._endBoundingRect = _client.defaultTitleRect( _client.tabId(index) == _client.currentTabId() );
+                            item._endBoundingRect = _client.defaultTitleRect();
 
                         } else {
 
