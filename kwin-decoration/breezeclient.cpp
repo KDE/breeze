@@ -636,7 +636,6 @@ namespace Breeze
     {
         painter->save();
 
-
         const QColor background( backgroundColor() );
         const QColor outline( outlineColor() );
 
@@ -671,13 +670,6 @@ namespace Breeze
                 painter->setBrush( background );
                 painter->drawPath( path );
 
-                if( outline.isValid() )
-                {
-                    painter->setBrush( Qt::NoBrush );
-                    painter->setPen( outline );
-                    painter->drawLine( QPointF( -0.5 + topRect.left(), 0.5 + topRect.bottom() ), QPointF( 0.5 + topRect.right(), 0.5 + topRect.bottom() ) );
-                }
-
             }
 
             // palette
@@ -705,6 +697,29 @@ namespace Breeze
         }
 
         painter->restore();
+    }
+
+
+    //_______________________________________________________________________
+    void Client::renderOutline( QPainter* painter, const QRect& rect, bool isShade ) const
+    {
+
+        // get outline color, check configuration
+        QColor outline;
+        if( hideTitleBar() || isShade || !( outline = outlineColor() ).isValid() ) return;
+
+        painter->save();
+
+        // title bar background
+        QRect topRect( rect );
+        topRect.setHeight( this->titleRect().height() + layoutMetric( LM_TitleEdgeTop ) + 1 );
+
+        painter->setBrush( Qt::NoBrush );
+        painter->setPen( outline );
+        painter->drawLine( QPointF( -0.5 + topRect.left(), 0.5 + topRect.bottom() ), QPointF( 0.5 + topRect.right(), 0.5 + topRect.bottom() ) );
+
+        painter->restore();
+
     }
 
     //_______________________________________________________________________
@@ -992,6 +1007,9 @@ namespace Breeze
 
         if( !hideTitleBar() )
         {
+
+            // outline
+            renderOutline( &painter, frame, isShade() );
 
             // title bounding rect
             painter.setFont( options()->font(isActive(), false) );

@@ -244,6 +244,9 @@ namespace Breeze
         //* window background
         virtual void renderBackground( QPainter*, const QRect&, bool isShade ) const;
 
+        //* window outline
+        virtual void renderOutline( QPainter*, const QRect&, bool isShade ) const;
+
         //* title text
         /** second color, if valid, is for contrast pixel */
         virtual void renderTitleText( QPainter*, const QRect&, const QColor& ) const;
