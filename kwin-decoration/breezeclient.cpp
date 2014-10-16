@@ -596,7 +596,7 @@ namespace Breeze
     //___________________________________________________
     QColor Client::outlineColor( bool active ) const
     {
-        if( !active ) return QColor();
+        if( isShade() || !active ) return QColor();
         else {
 
             // palette
@@ -637,8 +637,6 @@ namespace Breeze
         painter->save();
 
         const QColor background( backgroundColor() );
-        const QColor outline( outlineColor() );
-
         painter->setPen( Qt::NoPen );
 
         // window background
@@ -701,22 +699,35 @@ namespace Breeze
 
 
     //_______________________________________________________________________
-    void Client::renderOutline( QPainter* painter, const QRect& rect, bool isShade ) const
+    void Client::renderOutline( QPainter* painter, const QRect& rect ) const
     {
 
-        // get outline color, check configuration
-        QColor outline;
-        if( hideTitleBar() || isShade || !( outline = outlineColor() ).isValid() ) return;
+        // get outline color, check validity
+        const QColor outline( outlineColor() );
+        if( !outline.isValid() ) return;
 
         painter->save();
-
-        // title bar background
-        QRect topRect( rect );
-        topRect.setHeight( this->titleRect().height() + layoutMetric( LM_TitleEdgeTop ) + 1 );
-
         painter->setBrush( Qt::NoBrush );
         painter->setPen( outline );
-        painter->drawLine( QPointF( -0.5 + topRect.left(), 0.5 + topRect.bottom() ), QPointF( 0.5 + topRect.right(), 0.5 + topRect.bottom() ) );
+
+        // remove space used for buttons
+        if( _itemData.count() > 1  )
+        {
+            for( int index = 0; index < _itemData.count(); index++ )
+            {
+                if( tabId( index ) != currentTabId() ) continue;
+                const QRect topRect = _itemData[index]._boundingRect;
+                painter->drawLine( QPointF( 0.5 + topRect.left(), 0.5 + topRect.bottom() ), QPointF( 0.5 + topRect.right(), 0.5 + topRect.bottom() ) );
+            }
+
+        } else {
+
+            // title rect
+            QRect topRect( rect );
+            topRect.setHeight( this->titleRect().height() + layoutMetric( LM_TitleEdgeTop ) + 1 );
+            painter->drawLine( QPointF( 0.5 + topRect.left(), 0.5 + topRect.bottom() ), QPointF( 0.5 + topRect.right(), 0.5 + topRect.bottom() ) );
+
+        }
 
         painter->restore();
 
@@ -1009,7 +1020,7 @@ namespace Breeze
         {
 
             // outline
-            renderOutline( &painter, frame, isShade() );
+            renderOutline( &painter, frame );
 
             // title bounding rect
             painter.setFont( options()->font(isActive(), false) );
