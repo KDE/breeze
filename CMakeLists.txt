@@ -29,7 +29,7 @@ else()
   set_package_properties(
     KDecorations PROPERTIES
     TYPE OPTIONAL
-    PURPOSE "Required to oxygen window decoration for kwin"
+    PURPOSE "Required to breeze window decoration for kwin"
   )
 
   if(KDecorations_FOUND)

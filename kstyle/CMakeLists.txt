@@ -56,7 +56,6 @@ else()
       PURPOSE "Required for breeze-settings5 application to build"
   )
 
-
   find_package(XCB COMPONENTS XCB)
   set_package_properties(XCB PROPERTIES
       DESCRIPTION "X protocol C-language Binding"
