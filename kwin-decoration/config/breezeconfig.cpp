@@ -42,15 +42,19 @@
 #include <KPluginFactory>
 
 //_______________________________________________________________________
-// plugin definition
-#if BREEZE_USE_KDE4
+//* plugin definition
+/**
+ * this is the old style/KDE4 plugin declaration.
+ * it is used in oxygen-settings for both KDE4 and KF5
+ */
 extern "C"
 {
-    KDE_EXPORT QObject* allocate_config( KConfig*, QWidget* parent )
+    Q_DECL_EXPORT QObject* allocate_config( KConfig*, QWidget* parent )
     { return ( new Breeze::Config( parent ) ); }
 }
 
-#else
+#if !BREEZE_USE_KDE4
+/** this is the new style/KF5 plugin declaration, used internally by KWin */
 K_PLUGIN_FACTORY_WITH_JSON(
     BreezeConfigPlugin,
     "config.json",
