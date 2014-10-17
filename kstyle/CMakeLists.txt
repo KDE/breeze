@@ -27,6 +27,7 @@ if(BREEZE_USE_KDE4)
   find_package(PkgConfig REQUIRED)
   pkg_check_modules(XCB xcb x11-xcb)
   set(BREEZE_HAVE_X11 ${XCB_FOUND})
+  set(BREEZE_HAVE_KSTYLE FALSE)
 
 else()
 
@@ -34,10 +35,27 @@ else()
   find_package(KF5 REQUIRED COMPONENTS
       I18n
       Config
-      Completion
-      FrameworkIntegration
-      Service
+      ConfigWidgets
       WindowSystem)
+
+  find_package( KF5FrameworkIntegration CONFIG )
+  set_package_properties(KF5FrameworkIntegration PROPERTIES
+      DESCRIPTION "KF4 FrameworkIntegration framework"
+      URL "http://xcb.freedesktop.org"
+      TYPE OPTIONAL
+      PURPOSE "Required to use KStyle convenience functionalities in style"
+  )
+
+  set(BREEZE_HAVE_KSTYLE ${KF5FrameworkIntegration_FOUND})
+
+  find_package( KF5Service CONFIG )
+  set_package_properties(KF5Service PROPERTIES
+      DESCRIPTION "KF5 Service Framework"
+      URL "https://projects.kde.org/projects/frameworks/kservice"
+      TYPE OPTIONAL
+      PURPOSE "Required for breeze-settings5 application to build"
+  )
+
 
   find_package(XCB COMPONENTS XCB)
   set_package_properties(XCB PROPERTIES
@@ -124,7 +142,11 @@ else()
   kconfig_add_kcfg_files(breeze_PART_SRCS breezestyleconfigdata.kcfgc)
   add_library(breeze MODULE ${breeze_PART_SRCS})
   target_link_libraries(breeze Qt5::Core Qt5::Gui Qt5::Widgets Qt5::DBus)
-  target_link_libraries(breeze KF5::ConfigCore KF5::ConfigWidgets KF5::GuiAddons KF5::Style KF5::WindowSystem)
+  target_link_libraries(breeze KF5::ConfigCore KF5::ConfigWidgets KF5::GuiAddons KF5::WindowSystem)
+
+  if( KF5FrameworkIntegration_FOUND )
+  target_link_libraries(breeze KF5::Style)
+  endif()
 
   if (WIN32)
     # As stated in http://msdn.microsoft.com/en-us/library/4hwaceh6.aspx M_PI only gets defined

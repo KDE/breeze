@@ -46,6 +46,7 @@ if(BREEZE_USE_KDE4)
 
 else()
 
+if( KF5Service_FOUND )
   ki18n_wrap_ui(breeze_settings_FORMS_HEADERS ${breeze_settings_FORMS})
 
   add_executable(breeze-settings5
@@ -58,5 +59,6 @@ else()
 
   install(TARGETS breeze-settings5 ${INSTALL_TARGETS_DEFAULT_ARGS})
 
+endif()
 endif()
 
