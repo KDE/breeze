@@ -36,6 +36,7 @@ else()
       Config
       Completion
       FrameworkIntegration
+      Service
       WindowSystem)
 
   find_package(XCB COMPONENTS XCB)
