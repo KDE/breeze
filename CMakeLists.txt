@@ -20,11 +20,21 @@ else()
   add_subdirectory(icons)
   add_subdirectory(icons-dark)
   add_subdirectory(kstyle)
-  add_subdirectory(kwin-decoration)
   add_subdirectory(misc)
   add_subdirectory(qtquickcontrols)
   add_subdirectory(wallpapers)
   add_subdirectory(windec)
+
+  find_package(KDecorations CONFIG)
+  set_package_properties(
+    KDecorations PROPERTIES
+    TYPE OPTIONAL
+    PURPOSE "Required to oxygen window decoration for kwin"
+  )
+
+  if(KDecorations_FOUND)
+    add_subdirectory(kwin-decoration)
+  endif()
 
   INSTALL(FILES colors/Breeze.colors DESTINATION ${DATA_INSTALL_DIR}/color-schemes/)
   INSTALL(FILES colors/BreezeDark.colors DESTINATION ${DATA_INSTALL_DIR}/color-schemes/)
