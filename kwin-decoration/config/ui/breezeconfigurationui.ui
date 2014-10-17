@@ -101,7 +101,7 @@
         </widget>
        </item>
        <item row="1" column="2">
-        <widget class="KComboBox" name="titleAlignment">
+        <widget class="QComboBox" name="titleAlignment">
          <item>
           <property name="text">
            <string>Left</string>
@@ -148,7 +148,7 @@
         </widget>
        </item>
        <item row="0" column="2">
-        <widget class="KComboBox" name="frameBorder">
+        <widget class="QComboBox" name="frameBorder">
          <item>
           <property name="text">
            <string comment="@item:inlistbox Border size:">No Border</string>
@@ -197,7 +197,7 @@
         </widget>
        </item>
        <item row="2" column="2">
-        <widget class="KComboBox" name="buttonSize">
+        <widget class="QComboBox" name="buttonSize">
          <item>
           <property name="text">
            <string comment="@item:inlistbox Button size:">Small</string>
@@ -260,17 +260,22 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
-  <customwidget>
    <class>Breeze::ExceptionListWidget</class>
    <extends>QWidget</extends>
    <header>breezeexceptionlistwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>frameBorder</tabstop>
+  <tabstop>titleAlignment</tabstop>
+  <tabstop>buttonSize</tabstop>
+  <tabstop>closeFromMenuButton</tabstop>
+  <tabstop>drawBorderOnMaximizedWindows</tabstop>
+  <tabstop>animationsEnabled</tabstop>
+  <tabstop>animationsDuration</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

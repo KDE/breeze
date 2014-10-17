@@ -29,7 +29,6 @@
 #include "breezeexceptionlistwidget.h"
 #include "../breeze.h"
 
-#include <KComboBox>
 #include <QWidget>
 #include <QCheckBox>
 #include <QVector>

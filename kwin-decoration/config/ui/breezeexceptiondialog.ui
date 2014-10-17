@@ -54,14 +54,14 @@
        </widget>
       </item>
       <item row="1" column="1" colspan="2">
-       <widget class="KLineEdit" name="exceptionEditor">
+       <widget class="QLineEdit" name="exceptionEditor">
         <property name="showClearButton" stdset="0">
          <bool>true</bool>
         </property>
        </widget>
       </item>
       <item row="0" column="1" colspan="2">
-       <widget class="KComboBox" name="exceptionType">
+       <widget class="QComboBox" name="exceptionType">
         <item>
          <property name="text">
           <string>Window Class Name</string>
@@ -98,7 +98,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="KComboBox" name="frameBorderComboBox">
+       <widget class="QComboBox" name="frameBorderComboBox">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -177,18 +177,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KComboBox</class>
-   <extends>QComboBox</extends>
-   <header>kcombobox.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections>
   <connection>

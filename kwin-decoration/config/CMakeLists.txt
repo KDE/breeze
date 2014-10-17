@@ -47,8 +47,7 @@ else()
       ${kwin_breeze_config_PART_FORMS_HEADERS})
 
   target_link_libraries(kwin_breeze_config Qt5::Core Qt5::Gui Qt5::Widgets Qt5::DBus)
-  target_link_libraries(kwin_breeze_config KF5::I18n KF5::WindowSystem KF5::Completion KF5::ConfigCore KF5::ConfigWidgets)
-  target_link_libraries(kwin_breeze_config kdecorations )
+  target_link_libraries(kwin_breeze_config KF5::I18n KF5::WindowSystem KF5::ConfigCore KF5::ConfigWidgets)
 
   if(BREEZE_HAVE_X11)
     target_link_libraries(kwin_breeze_config XCB::XCB)

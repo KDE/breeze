@@ -43,10 +43,10 @@ else()
   find_package(KF5 REQUIRED COMPONENTS
       GuiAddons
       I18n
+      Config
       ConfigWidgets
       Service
       FrameworkIntegration
-      Completion
   )
 
   find_package(XCB COMPONENTS XCB)
