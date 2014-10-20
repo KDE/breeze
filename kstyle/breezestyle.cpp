@@ -1451,11 +1451,10 @@ namespace Breeze
 
             tabBarRect.setWidth( qMin( tabBarRect.width(), rect.width() - 2 ) );
             if( tabBarAlignment == Qt::AlignCenter ) tabBarRect.moveLeft( rect.left() + (rect.width() - tabBarRect.width())/2 );
-            else {
+            else tabBarRect.moveLeft( rect.left() + 1 );
 
-                tabBarRect.moveLeft( rect.left() + 1 );
-                tabBarRect = visualRect( option, tabBarRect );
-            }
+            tabBarRect = visualRect( option, tabBarRect );
+
         }
 
         // vertical positioning
