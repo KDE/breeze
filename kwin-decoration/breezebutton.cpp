@@ -179,8 +179,8 @@ namespace Breeze
         {
 
             const QColor negativeColor(
-                _client.isActive() ? KColorUtils::mix( foreground, _helper.negativeTextColor(palette), 0.4 ):
-                KColorUtils::mix( background, _helper.negativeTextColor(palette), 0.4 ) );
+                _client.isActive() ? KColorUtils::mix( foreground, _helper.negativeTextColor(palette), 0.7 ):
+                KColorUtils::mix( background, _helper.negativeTextColor(palette), 0.7 ) );
 
             qSwap( foreground, background );
             if( isAnimated() ) background = KColorUtils::mix( background, negativeColor, opacity() );
