@@ -193,8 +193,13 @@ namespace Breeze
     void ExceptionListWidget::remove( void )
     {
 
-        // should use a konfirmation dialog
-        if( QMessageBox::question( this, i18n("Question - Breeze Settings" ), i18n("Remove selected exception?") ) == QMessageBox::No ) return;
+        // confirmation dialog
+        {
+            QMessageBox messageBox( QMessageBox::Question, i18n("Question - Breeze Settings" ), i18n("Remove selected exception?"), QMessageBox::Yes | QMessageBox::Cancel );
+            messageBox.button( QMessageBox::Yes )->setText( i18n("Remove") );
+            messageBox.setDefaultButton( QMessageBox::Cancel );
+            if( messageBox.exec() == QMessageBox::Cancel ) return;
+        }
 
         // remove
         model().remove( model().get( ui.exceptionListView->selectionModel()->selectedRows() ) );
