@@ -111,6 +111,7 @@ namespace Breeze
 
 
         QPointer<ExceptionDialog> dialog = new ExceptionDialog( this );
+        dialog->setWindowTitle( i18n( "New Exception - Oxygen Settings" ) );
         ConfigurationPtr exception( new Configuration() );
 
         #if BREEZE_USE_KDE4
@@ -163,6 +164,7 @@ namespace Breeze
 
         // create dialog
         QPointer<ExceptionDialog> dialog( new ExceptionDialog( this ) );
+        dialog->setWindowTitle( i18n( "Edit Exception - Oxygen Settings" ) );
         dialog->setException( exception );
 
         // map dialog
