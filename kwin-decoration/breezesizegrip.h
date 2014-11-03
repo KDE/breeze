@@ -20,14 +20,15 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  *************************************************************************/
 
+#include "breeze.h"
+#include "breezeclient.h"
+
 #include <QWidget>
 #include <QPaintEvent>
 #include <QMouseEvent>
 
 namespace Breeze
 {
-
-    class Client;
 
     //* implements size grip for all widgets
     class SizeGrip: public QWidget
@@ -67,10 +68,6 @@ namespace Breeze
 
         //@}
 
-        //* client
-        Client& client( void ) const
-        { return *_client; }
-
         //* update position
         void updatePosition( void );
 
@@ -83,7 +80,7 @@ namespace Breeze
         };
 
         // breeze client
-        Client* _client;
+        WeakPointer<Client> _client;
 
     };
 
