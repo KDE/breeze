@@ -214,7 +214,7 @@ namespace Breeze
             if( clientActive )
             { background = _helper.alphaColor( background, 0.5 ); }
 
-        }
+        } else background = QColor();
 
         // Icon
         // for menu button the application icon is used

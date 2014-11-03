@@ -644,7 +644,10 @@ namespace Breeze
         {
             // path
             QPainterPath path( helper().roundedPath( rect ) );
-            painter->setBrush( background );
+            QLinearGradient gradient( rect.topLeft(), rect.bottomLeft() );
+            gradient.setColorAt( 0, background.lighter( isActive() ? 120:100 ) );
+            gradient.setColorAt( 0.8, background );
+            painter->setBrush( gradient );
             painter->drawPath( path );
 
         } else {
@@ -665,7 +668,12 @@ namespace Breeze
                 topRect.setHeight( this->titleRect().height() + layoutMetric( LM_TitleEdgeTop ) + 1 );
 
                 painter->setClipRect( topRect, Qt::IntersectClip );
-                painter->setBrush( background );
+
+                QLinearGradient gradient( topRect.topLeft(), topRect.bottomLeft() );
+                gradient.setColorAt( 0, background.lighter( isActive() ? 120:100 ) );
+                gradient.setColorAt( 0.8, background );
+                painter->setBrush( gradient );
+
                 painter->drawPath( path );
 
             }
