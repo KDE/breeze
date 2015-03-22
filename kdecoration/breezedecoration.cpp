@@ -278,9 +278,14 @@ namespace Breeze
         auto s = settings();
         const auto c = client().data();
         const Qt::Edges edges = c->adjacentScreenEdges();
-        int left   = isMaximizedHorizontally() || edges.testFlag(Qt::LeftEdge) ? 0 : borderSize();
-        int right  = isMaximizedHorizontally() || edges.testFlag(Qt::RightEdge) ? 0 : borderSize();
 
+        // left, right and bottom borders
+        auto testFlag = [&]( Qt::Edge edge ) { return edges.testFlag(edge) && !m_internalSettings->drawBorderOnMaximizedWindows(); };
+        const int left   = isMaximizedHorizontally() || testFlag(Qt::LeftEdge) ? 0 : borderSize();
+        const int right  = isMaximizedHorizontally() || testFlag(Qt::RightEdge) ? 0 : borderSize();
+        const int bottom = isMaximizedVertically() || c->isShaded() || testFlag(Qt::BottomEdge) ? 0 : borderSize(true);
+
+        // top border
         QFontMetrics fm(s->font());
         int top = qMax(fm.boundingRect(c->caption()).height(), buttonHeight() );
 
@@ -292,7 +297,6 @@ namespace Breeze
         // padding above
         top += baseSize*TitleBar_TopMargin;
 
-        int bottom = isMaximizedVertically() || c->isShaded() || edges.testFlag(Qt::BottomEdge) ? 0 : borderSize(true);
         setBorders(QMargins(left, top, right, bottom));
 
         // extended sizes
