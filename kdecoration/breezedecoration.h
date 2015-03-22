@@ -107,6 +107,7 @@ namespace Breeze
         void updateButtonsGeometry();
         void updateTitleBar();
         void updateAnimationState();
+        void updateSizeGripVisibility();
 
         private:
 
