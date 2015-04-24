@@ -45,8 +45,12 @@ namespace Breeze
         const int height = decoration->buttonHeight();
         setGeometry(QRect(0, 0, height, height));
 
-        // connect hover state changed
+        // connections
+        connect(decoration->client().data(), SIGNAL(iconChanged(QIcon)), this, SLOT(update()));
+        connect(decoration->settings().data(), &KDecoration2::DecorationSettings::reconfigured, this, &Button::reconfigure);
         connect( this, &KDecoration2::DecorationButton::hoveredChanged, this, &Button::updateAnimationState );
+
+        reconfigure();
 
     }
 
@@ -433,6 +437,16 @@ namespace Breeze
             return QColor();
 
         }
+
+    }
+
+    //________________________________________________________________
+    void Button::reconfigure()
+    {
+
+        // animation
+        auto d = qobject_cast<Decoration*>(decoration());
+        if( d )  m_animation->setDuration( d->internalSettings()->animationsDuration() );
 
     }
 
