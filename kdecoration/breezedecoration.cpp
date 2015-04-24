@@ -619,7 +619,7 @@ namespace Breeze
         // assign to shadow
         decorationShadow->setShadow(image);
 
-        // g_sShadow = decorationShadow;
+        g_sShadow = decorationShadow;
         setShadow(decorationShadow);
     }
 
