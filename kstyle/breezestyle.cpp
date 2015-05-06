@@ -915,6 +915,10 @@ namespace Breeze
             flags |= Qt::TextHideMnemonic;
         }
 
+        // make sure vertical alignment is defined
+        // fallback on Align::VCenter if not
+        if( !(flags&Qt::AlignVertical_Mask) ) flags |= Qt::AlignVCenter;
+
         if( _animations->widgetEnabilityEngine().enabled() )
         {
 
