@@ -20,8 +20,6 @@ else()
   include(GenerateExportHeader)
 
   add_subdirectory(cursors)
-  add_subdirectory(icons)
-  add_subdirectory(icons-dark)
   add_subdirectory(kdecoration)
   add_subdirectory(kstyle)
   add_subdirectory(misc)
