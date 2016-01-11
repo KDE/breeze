@@ -5428,7 +5428,7 @@ namespace Breeze
             const QTabWidget *tabWidget = ( widget && widget->parentWidget() ) ? qobject_cast<const QTabWidget *>( widget->parentWidget() ) : nullptr;
             documentMode |= ( tabWidget ? tabWidget->documentMode() : true );
 
-            color = documentMode ? palette.color( QPalette::Window ) : _helper->frameBackgroundColor( palette );
+            color = (documentMode&&!hasAlteredBackground(widget)) ? palette.color( QPalette::Window ) : _helper->frameBackgroundColor( palette );
 
         } else {
 
