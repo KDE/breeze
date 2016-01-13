@@ -26,6 +26,7 @@ else()
   add_subdirectory(misc)
   add_subdirectory(qtquickcontrols)
   add_subdirectory(wallpapers)
+  add_subdirectory(plymouth)
 
   INSTALL(FILES colors/Breeze.colors DESTINATION ${DATA_INSTALL_DIR}/color-schemes/)
   INSTALL(FILES colors/BreezeDark.colors DESTINATION ${DATA_INSTALL_DIR}/color-schemes/)

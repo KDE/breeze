@@ -1,0 +1,18 @@
+== 16 color ==
+Sometimes framebuffers offer no more than 4 bits per pixel, for these cases we
+have a special 16 color version of images. Those images should not contain
+alpha channels and use solid color throughout (no gradients etc.).
+
+In the script itself we use a solid color background, the images should use
+matching colors when needing to avoid alpha.
+
+Usually the workflow is to take the regular version and replace the alpha,
+then possibly also overly colorful elements, save it and convert to 16 colors.
+Most of the time you can use drop shadows, but all in all no more than 16
+colors can be used, so you will have to make sure the clipped version's drop
+is still appearing as expected.
+
+To convert to <= 16 color version use (< when fewer colors found)
+  for foo in *; do pngtopnm $foo | pnmquant 16 | pnmtopng > 16.png; mv 16.png $foo; done
+
+You may want to check that the output makes sense.
