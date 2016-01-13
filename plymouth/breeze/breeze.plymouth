@@ -4,5 +4,5 @@ Description=A theme that features a blank background with a logo.
 ModuleName=script
 
 [script]
-ImageDir=/lib/plymouth/themes/breeze-logo
-ScriptFile=/lib/plymouth/themes/breeze-logo/breeze-logo.script
+ImageDir=/lib/plymouth/themes/breeze
+ScriptFile=/lib/plymouth/themes/breeze/breeze.script
