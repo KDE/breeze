@@ -4565,8 +4565,8 @@ namespace Breeze
 
             } else {
 
-                if( useStrongFocus && selected ) iconMode = QIcon::Active;
-                else if( useStrongFocus && sunken ) iconMode = QIcon::Selected;
+                if( useStrongFocus && sunken ) iconMode = QIcon::Selected;
+                else if( useStrongFocus && selected ) iconMode = QIcon::Active;
                 else iconMode = QIcon::Normal;
 
                 iconState = sunken ? QIcon::On : QIcon::Off;
