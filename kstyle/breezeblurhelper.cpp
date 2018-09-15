@@ -33,8 +33,57 @@
 
 #include <KWindowEffects>
 
+#include <QApplication>
 #include <QEvent>
 #include <QVector>
+
+namespace
+{
+
+QRegion roundedRegion(const QRect &rect, int radius)
+{
+    QRegion region(rect, QRegion::Rectangle);
+
+    // Round top-left corner.
+    const QRegion topLeftCorner(rect.x(), rect.y(), radius, radius, QRegion::Rectangle);
+    const QRegion topLeftRounded(rect.x(), rect.y(), 2 * radius, 2 * radius, QRegion::Ellipse);
+    const QRegion topLeftEar = topLeftCorner - topLeftRounded;
+    region -= topLeftEar;
+
+    // Round top-right corner.
+    const QRegion topRightCorner(
+        rect.x() + rect.width() - radius, rect.y(),
+        radius, radius, QRegion::Rectangle);
+    const QRegion topRightRounded(
+        rect.x() + rect.width() - 2 * radius, rect.y(),
+        2 * radius, 2 * radius, QRegion::Ellipse);
+    const QRegion topRightEar = topRightCorner - topRightRounded;
+    region -= topRightEar;
+
+    // Round bottom-right corner.
+    const QRegion bottomRightCorner(
+        rect.x() + rect.width() - radius, rect.y() + rect.height() - radius,
+        radius, radius, QRegion::Rectangle);
+    const QRegion bottomRightRounded(
+        rect.x() + rect.width() - 2 * radius, rect.y() + rect.height() - 2 * radius,
+        2 * radius, 2 * radius, QRegion::Ellipse);
+    const QRegion bottomRightEar = bottomRightCorner - bottomRightRounded;
+    region -= bottomRightEar;
+
+    // Round bottom-left corner.
+    const QRegion bottomLeftCorner(
+        rect.x(), rect.y() + rect.height() - radius,
+        radius, radius, QRegion::Rectangle);
+    const QRegion bottomLeftRounded(
+        rect.x(), rect.y() + rect.height() - 2 * radius,
+        2 * radius, 2 * radius, QRegion::Ellipse);
+    const QRegion bottomLeftEar = bottomLeftCorner - bottomLeftRounded;
+    region -= bottomLeftEar;
+
+    return region;
+}
+
+}
 
 namespace Breeze
 {
@@ -97,7 +146,18 @@ namespace Breeze
         if (!(widget->testAttribute(Qt::WA_WState_Created) || widget->internalWinId()))
             return;
 
-        KWindowEffects::enableBlurBehind(widget->winId(), true);
+        #if QT_VERSION >= 0x050300
+        const qreal dpr = qApp->devicePixelRatio();
+        #else
+        const qreal dpr = 1.0;
+        #endif
+
+        const QRect rect = widget->rect();
+        const QRect scaledRect = QRect(rect.topLeft() * dpr, rect.size() * dpr);
+        const int scaledRadius = qRound(Metrics::Frame_FrameRadius * dpr);
+
+        const QRegion blurRegion = roundedRegion(scaledRect, scaledRadius);
+        KWindowEffects::enableBlurBehind(widget->winId(), true, blurRegion);
 
         // force update
         if (widget->isVisible()) {
