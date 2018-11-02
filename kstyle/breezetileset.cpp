@@ -19,7 +19,15 @@
 
 #include "breezetileset.h"
 
+#include "config-breeze.h"
+
 #include <QPainter>
+
+#if BREEZE_USE_KDE4
+#include <QtCore/qmath.h>
+#else
+#include <QtMath>
+#endif
 
 namespace Breeze
 {
@@ -102,8 +110,10 @@ namespace Breeze
         _pixmaps.reserve(9);
         if( source.isNull() ) return;
 
-        _w3 = source.width()/devicePixelRatio( source ) - (w1 + w2);
-        _h3 = source.height()/devicePixelRatio( source ) - (h1 + h2);
+        const qreal dpr = devicePixelRatio(source);
+
+        _w3 = qRound(source.width() / dpr) - (w1 + w2);
+        _h3 = qRound(source.height() / dpr) - (h1 + h2);
         int w = w2;
         int h = h2;
 
