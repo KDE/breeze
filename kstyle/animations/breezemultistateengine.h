@@ -1,5 +1,5 @@
-#ifndef breezeheaderviewengine_h
-#define breezeheaderviewengine_h
+#ifndef breezemultistateengine_h
+#define breezemultistateengine_h
 
 /*************************************************************************
  * Copyright (C) 2014 by Hugo Pereira Da Costa <hugo.pereira@free.fr>    *
@@ -20,73 +20,100 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  *************************************************************************/
 
+#include "breeze.h"
 #include "breezebaseengine.h"
 #include "breezedatamap.h"
-#include "breezeheaderviewdata.h"
+#include "breezemultistatedata.h"
 
 namespace Breeze
 {
 
-    //* stores headerview hovered action and timeLine
-    class HeaderViewEngine: public BaseEngine
+    //* used for simple widgets
+    class MultiStateEngine: public BaseEngine
     {
 
         Q_OBJECT
 
-        public:
+    public:
 
         //* constructor
-        explicit HeaderViewEngine( QObject* parent ):
+        explicit MultiStateEngine( QObject* parent ):
             BaseEngine( parent )
         {}
 
         //* destructor
-        virtual ~HeaderViewEngine()
+        virtual ~MultiStateEngine()
         {}
 
-        //* register headerview
+        //* register widget
         virtual bool registerWidget( QWidget* );
 
-        //* true if widget hover state is changed
-        virtual bool updateState( const QObject*, const QPoint&, bool );
+        //* returns registered widgets
+        virtual WidgetList registeredWidgets() const;
 
-        //* true if widget is animated
-        virtual bool isAnimated( const QObject* object, const QPoint& point ) const
+        using BaseEngine::registeredWidgets;
+
+        //* true if widget hover state is changed
+        virtual bool updateState( const QObject*, const QVariant & );
+
+        virtual QVariant state( const QObject *widget) const
         {
-            if( DataMap<HeaderViewData>::Value data = _data.find( object ) )
-            { if( Animation::Pointer animation = data.data()->animation( point ) ) return animation.data()->isRunning(); }
-            return false;
+            DataMap<MultiStateData>::Value dataPtr = data(widget);
+            if(!dataPtr.isNull()) {
+                return dataPtr.data()->state();
+            }
+            return QVariant();
         }
 
-        //* animation opacity
-        virtual qreal opacity( const QObject* object, const QPoint& point ) const
-        { return isAnimated( object, point ) ? _data.find( object ).data()->opacity( point ) : AnimationData::OpacityInvalid; }
+        virtual QVariant previousState( const QObject *widget) const
+        {
+            DataMap<MultiStateData>::Value dataPtr = data(widget);
+            if(!dataPtr.isNull()) {
+                return dataPtr.data()->previousState();
+            }
+            return QVariant();
+        }
 
-        //* enability
+        //* true if widget is animated
+        virtual bool isAnimated( const QObject* );
+
+        //* animation opacity
+        virtual qreal opacity( const QObject* object)
+        { return isAnimated( object) ? data( object).data()->opacity(): AnimationData::OpacityInvalid; }
+
+        //* duration
         virtual void setEnabled( bool value )
         {
             BaseEngine::setEnabled( value );
-            _data.setEnabled( value );
+            _state.setEnabled( value );
         }
 
         //* duration
         virtual void setDuration( int value )
         {
             BaseEngine::setDuration( value );
-            _data.setDuration( value );
+            _state.setDuration( value );
         }
 
         public Q_SLOTS:
 
         //* remove widget from map
         virtual bool unregisterWidget( QObject* object )
-        { return _data.unregisterWidget( object ); }
+        {
+            if( !object ) return false;
+            return _state.unregisterWidget( object );
+        }
 
-        private:
+        //* returns data associated to widget
+        DataMap<MultiStateData>::Value data( const QObject*) const;
 
-        //* data map
-        DataMap<HeaderViewData> _data;
+        protected:
 
+        DataMap<MultiStateData> &dataMap();
+
+    private:
+
+        DataMap<MultiStateData> _state;
     };
 
 }

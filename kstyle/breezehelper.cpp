@@ -24,6 +24,8 @@
 
 #include <KColorUtils>
 #include <KWindowSystem>
+#include <KColorSchemeManager>
+#include <QAbstractItemModel>
 
 #include <QApplication>
 #include <QPainter>
@@ -60,9 +62,9 @@ namespace Breeze
     //____________________________________________________________________
     void Helper::loadConfig()
     {
-        _viewFocusBrush = KStatefulBrush( KColorScheme::View, KColorScheme::FocusColor, _config );
-        _viewHoverBrush = KStatefulBrush( KColorScheme::View, KColorScheme::HoverColor, _config );
-        _viewNegativeTextBrush = KStatefulBrush( KColorScheme::View, KColorScheme::NegativeText, _config );
+        _viewFocusBrush = KStatefulBrush( KColorScheme::View, KColorScheme::FocusColor );
+        _viewHoverBrush = KStatefulBrush( KColorScheme::View, KColorScheme::HoverColor );
+        _viewNegativeTextBrush = KStatefulBrush( KColorScheme::View, KColorScheme::NegativeText );
 
         const QPalette palette( QApplication::palette() );
         const KConfigGroup group( _config->group( "WM" ) );
@@ -495,7 +497,7 @@ namespace Breeze
     //______________________________________________________________________________
     void Helper::renderFrame(
         QPainter* painter, const QRect& rect,
-        const QColor& color, const QColor& outline ) const
+        const QColor& color, const QColor& outline, bool circle ) const
     {
 
         painter->setRenderHint( QPainter::Antialiasing );
@@ -507,7 +509,7 @@ namespace Breeze
         if( outline.isValid() )
         {
 
-            painter->setPen( outline );
+            painter->setPen(outline);
             frameRect.adjust( 0.5, 0.5, -0.5, -0.5 );
             radius = qMax( radius - 1, qreal( 0.0 ) );
 
@@ -522,7 +524,11 @@ namespace Breeze
         else painter->setBrush( Qt::NoBrush );
 
         // render
-        painter->drawRoundedRect( frameRect, radius, radius );
+        if(!circle) {
+            painter->drawRoundedRect( frameRect, radius, radius );
+        } else {
+            painter->drawEllipse( frameRect );
+        }
 
     }
 

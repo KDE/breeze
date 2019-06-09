@@ -292,6 +292,10 @@ namespace Breeze
         bool drawIndicatorToolBarSeparatorPrimitive( const QStyleOption*, QPainter*, const QWidget* ) const;
         bool drawIndicatorBranchPrimitive( const QStyleOption*, QPainter*, const QWidget* ) const;
 
+        // FIXME (mglb): move to helper
+        // FIXME (mglb): replace isRadioButton with something better. Just put drawing in original primitive's function or something.
+        void drawChoicePrimitive(const QStyleOption *option, QPainter *painter, const QWidget* widget, bool isRadioButton) const;
+
         //@}
 
         //*@name controls specialized functions

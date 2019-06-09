@@ -58,13 +58,13 @@ namespace Breeze
         }
 
         //* find value
-        Value find( Key key )
+        Value find( Key key ) const
         {
             if( !( enabled() && key ) ) return Value();
             if( key == _lastKey ) return _lastValue;
             else {
                 Value out;
-                typename QMap<Key, Value>::iterator iter( QMap<Key, Value>::find( key ) );
+                typename QMap<Key, Value>::const_iterator iter( QMap<Key, Value>::find( key ) );
                 if( iter != QMap<Key, Value>::end() ) out = iter.value();
                 _lastKey = key;
                 _lastValue = out;
@@ -124,11 +124,11 @@ namespace Breeze
         //* enability
         bool _enabled;
 
-        //* last key
-        Key _lastKey;
+        //* cache: last used key
+        mutable Key _lastKey;
 
-        //* last value
-        Value _lastValue;
+        //* cache: last used value
+        mutable Value _lastValue;
 
     };
 

@@ -94,7 +94,7 @@ namespace Breeze
         ToolButton_InlineIndicatorWidth = 12,
 
         // checkboxes and radio buttons
-        CheckBox_Size = 20,
+        CheckBox_Size = 21,
         CheckBox_FocusMarginWidth = 2,
         CheckBox_ItemSpacing = 4,
 
@@ -224,7 +224,9 @@ namespace Breeze
     {
         RadioOff,
         RadioOn,
-        RadioAnimated
+        RadioAnimated, // TODO (mglb): remove?
+        RadioOffToOn,
+        RadioOnToOff,
     };
 
     //* arrow orientation
@@ -251,5 +253,6 @@ namespace Breeze
 Q_DECLARE_OPERATORS_FOR_FLAGS( Breeze::AnimationModes )
 Q_DECLARE_OPERATORS_FOR_FLAGS( Breeze::Corners )
 Q_DECLARE_OPERATORS_FOR_FLAGS( Breeze::Sides )
+Q_DECLARE_METATYPE( Breeze::CheckBoxState )
 
 #endif

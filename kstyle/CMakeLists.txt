@@ -119,6 +119,8 @@ set(breeze_PART_SRCS
     animations/breezetransitionwidget.cpp
     animations/breezewidgetstateengine.cpp
     animations/breezewidgetstatedata.cpp
+    animations/breezemultistateengine.cpp
+    animations/breezemultistatedata.cpp
     debug/breezewidgetexplorer.cpp
     breezeaddeventfilter.cpp
     breezeframeshadow.cpp
