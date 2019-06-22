@@ -454,7 +454,7 @@ namespace Breeze
         QColor background( color );
         background.setAlphaF(0.3);
         
-        const qreal radius( frameRadius( -1.0 ) );
+        const qreal radius( frameRadius( -5.0 ) );
 
         painter->setPen( outline );
         painter->setBrush( background );
