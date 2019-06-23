@@ -441,38 +441,25 @@ namespace Breeze
     }
 
     //______________________________________________________________________________
-    void Helper::renderFocusRect( QPainter* painter, const QRect& rect, const QColor& color, const QColor& outline, Sides sides ) const
+    void Helper::renderFocusRect( QPainter* painter, const QRect& rect, const QColor& color, const QColor& outline ) const
     {
         if( !color.isValid() ) return;
 
         painter->save();
         painter->setRenderHints( QPainter::Antialiasing );
-        painter->setBrush( color );
+//         painter->setClipRect( rect );
 
-        if( !( outline.isValid() && sides ) )
-        {
+        QRectF copy( rect );
+        copy.adjust( 0.5, 0.5, -0.5, -0.5 );
+        QColor background( color );
+        background.setAlphaF(0.3);
+        
+        const qreal radius( frameRadius( -1.0 ) );
 
-            painter->setPen( Qt::NoPen );
-            painter->drawRect( rect );
-
-        } else {
-
-            painter->setClipRect( rect );
-
-            QRectF copy( rect );
-            copy.adjust( 0.5, 0.5, -0.5, -0.5 );
-
-            const qreal radius( frameRadius( -1.0 ) );
-            if( !(sides&SideTop) ) copy.adjust( 0, -radius, 0, 0 );
-            if( !(sides&SideBottom) ) copy.adjust( 0, 0, 0, radius );
-            if( !(sides&SideLeft) ) copy.adjust( -radius, 0, 0, 0 );
-            if( !(sides&SideRight) ) copy.adjust( 0, 0, radius, 0 );
-
-            painter->setPen( outline );
-            // painter->setBrush( Qt::NoBrush );
-            painter->drawRoundedRect( copy, radius, radius );
-
-        }
+        painter->setPen( outline );
+        painter->setBrush( background );
+        // painter->setBrush( Qt::NoBrush );
+        painter->drawRoundedRect( copy, radius, radius );
 
         painter->restore();
    }
@@ -794,13 +781,10 @@ namespace Breeze
     //______________________________________________________________________________
     void Helper::renderSelection(
         QPainter* painter, const QRect& rect,
-        const QColor& color ) const
+        const QColor& color, const QColor& outline ) const
     {
 
-        painter->setRenderHint( QPainter::Antialiasing );
-        painter->setPen( Qt::NoPen );
-        painter->setBrush( color );
-        painter->drawRect( rect );
+        renderFocusRect(painter, rect, color, outline);
 
     }
 

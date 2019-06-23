@@ -3798,18 +3798,28 @@ namespace Breeze
         // render selection
         // define color
         QColor color;
+        QColor outline;
         if( hasCustomBackground && hasSolidBackground ) color = viewItemOption->backgroundBrush.color();
         else color = palette.color( colorGroup, QPalette::Highlight );
-
+        
+        outline = color;
+        
         // change color to implement mouse over
         if( mouseOver && !hasCustomBackground )
         {
-            if( !selected ) color.setAlphaF( 0.2 );
-            else color = color.lighter( 110 );
+            outline.setAlphaF(1.0);
+            
+            if( !selected ) {
+                color.setAlphaF( 0.3 );
+            } else {
+                color = color.lighter( 110 );
+            }
+        } else {
+            outline.setAlphaF(0.0);
         }
 
         // render
-        _helper->renderSelection( painter, rect, color );
+        _helper->renderSelection( painter, rect, color, outline );
 
         return true;
     }
@@ -4778,17 +4788,8 @@ namespace Breeze
 
             const auto color = _helper->focusColor( palette );
             const auto outlineColor = _helper->focusOutlineColor( palette );
-
-            Sides sides = nullptr;
-            if( !menuItemOption->menuRect.isNull() )
-            {
-                if( rect.top() <= menuItemOption->menuRect.top() ) sides |= SideTop;
-                if( rect.bottom() >= menuItemOption->menuRect.bottom() ) sides |= SideBottom;
-                if( rect.left() <= menuItemOption->menuRect.left() ) sides |= SideLeft;
-                if( rect.right() >= menuItemOption->menuRect.right() ) sides |= SideRight;
-            }
-
-            _helper->renderFocusRect( painter, rect, color, outlineColor, sides );
+            
+            _helper->renderFocusRect( painter, rect, color, outlineColor );
 
         }
 
