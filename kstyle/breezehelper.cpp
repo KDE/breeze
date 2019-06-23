@@ -447,18 +447,20 @@ namespace Breeze
 
         painter->save();
         painter->setRenderHints( QPainter::Antialiasing );
-//         painter->setClipRect( rect );
+
+        QColor background( color );
+        background.setAlphaF(0.4);
+
+        painter->setBrush( background );
+
+        painter->setClipRect( rect );
 
         QRectF copy( rect );
         copy.adjust( 0.5, 0.5, -0.5, -0.5 );
-        QColor background( color );
-        background.setAlphaF(0.3);
-        
-        const qreal radius( frameRadius( -5.0 ) );
+
+        const qreal radius( frameRadius( -1.0 ) );
 
         painter->setPen( outline );
-        painter->setBrush( background );
-        // painter->setBrush( Qt::NoBrush );
         painter->drawRoundedRect( copy, radius, radius );
 
         painter->restore();

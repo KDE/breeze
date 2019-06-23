@@ -2810,7 +2810,7 @@ namespace Breeze
                 size.setHeight( qMax( size.height(), int(Metrics::MenuButton_IndicatorWidth) ) );
                 size.setHeight( qMax( size.height(), int(Metrics::CheckBox_Size) ) );
                 size.setHeight( qMax( size.height(), iconWidth ) );
-                return expandSize( size, Metrics::MenuItem_MarginWidth, Metrics::MenuItem_MarginHeight );
+                return expandSize( size, Metrics::MenuItem_MarginWidth + MenuItem_HighlightHorizontalMargin * 2, Metrics::MenuItem_MarginHeight + MenuItem_HighlightVerticalMargin * 2 );
 
             }
 
@@ -4789,7 +4789,12 @@ namespace Breeze
             const auto color = _helper->focusColor( palette );
             const auto outlineColor = _helper->focusOutlineColor( palette );
             
-            _helper->renderFocusRect( painter, rect, color, outlineColor );
+            _helper->renderFocusRect( painter, rect.marginsRemoved(
+                QMargins(MenuItem_HighlightHorizontalMargin,
+                         MenuItem_HighlightVerticalMargin,
+                         MenuItem_HighlightHorizontalMargin,
+                         MenuItem_HighlightVerticalMargin
+                        )), color, outlineColor );
 
         }
 

@@ -67,8 +67,10 @@ namespace Breeze
 
         // menu items
         Menu_FrameWidth = 0,
-        MenuItem_MarginWidth = 5,
-        MenuItem_MarginHeight = 3,
+        MenuItem_MarginWidth = 3,
+        MenuItem_MarginHeight = 1,
+        MenuItem_HighlightHorizontalMargin = 2,
+        MenuItem_HighlightVerticalMargin = 2,
         MenuItem_ItemSpacing = 4,
         MenuItem_AcceleratorSpace = 16,
         MenuButton_IndicatorWidth = 20,
