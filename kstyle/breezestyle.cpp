@@ -3819,8 +3819,14 @@ namespace Breeze
         }
 
         // render
-        _helper->renderSelection( painter, rect, color, outline );
-
+        // On sidebar panels, render it as a tabbar-looking item
+        // otherwise use the default delegate
+        if ( widget && widget->property( PropertyNames::sidePanelView ).toBool() ) {
+            // TODO: new helper function here to draw sidebar item as taskbar
+            painter->fillRect(rect, Qt::red);
+        } else {
+            _helper->renderSelection( painter, rect, color, outline );
+        }
         return true;
     }
 
