@@ -783,13 +783,33 @@ namespace Breeze
     //______________________________________________________________________________
     void Helper::renderSelection(
         QPainter* painter, const QRect& rect,
-        const QColor& color, const QColor& outline, const bool mouseOver ) const
+        const QColor& color, const QColor& outline, Sides sides, const bool mouseOver ) const
     {
+        painter->save();
         painter->setRenderHints( QPainter::Antialiasing );
         painter->setBrush( color );
+
+        painter->setClipRect( rect );
+
+        QRectF copy( rect );
         
         const qreal radius( frameRadius( -1.0 ) );
-        QRectF copy( rect );        
+        if( !(sides&SideTop) ) {
+            copy.adjust( 0, -radius, 0, 0 );
+            
+        }
+        if( !(sides&SideBottom) ) {
+            copy.adjust( 0, 0, 0, radius );
+            
+        }
+        if( !(sides&SideLeft) ) {
+            copy.adjust( -radius, 0, 0, 0 );
+            
+        }
+        if( !(sides&SideRight) ) {
+            copy.adjust( 0, 0, radius, 0 );
+            
+        }
         
         if( mouseOver ) {
             painter->setPen( outline );
@@ -797,9 +817,10 @@ namespace Breeze
         } else {
             painter->setPen( Qt::NoPen );
         }
-
+        
         painter->drawRoundedRect( copy, radius, radius );
 
+        painter->restore();
     }
     
     //______________________________________________________________________________

@@ -3831,7 +3831,17 @@ namespace Breeze
             } else {
                 color.setAlpha(OpacityBackgroundNotSelected);
             }
-            _helper->renderSelection( painter, rect, color, outline, mouseOver);
+            
+            Sides sides = SideTop|SideBottom;
+            if( !viewItemOption->rect.isNull() )
+            {
+                if( viewItemOption->viewItemPosition == QStyleOptionViewItem::Beginning 
+                    || viewItemOption->viewItemPosition == QStyleOptionViewItem::OnlyOne ) sides |= SideLeft;
+                if( viewItemOption->viewItemPosition == QStyleOptionViewItem::End 
+                    || viewItemOption->viewItemPosition == QStyleOptionViewItem::OnlyOne ) sides |= SideRight;
+            }
+            
+            _helper->renderSelection( painter, rect, color, outline, sides, mouseOver);
         }
         return true;
     }
