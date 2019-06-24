@@ -2820,7 +2820,7 @@ namespace Breeze
                 if( menuItemOption->text.isEmpty() && menuItemOption->icon.isNull() )
                 {
 
-                    return expandSize( QSize(0,1), Metrics::MenuItem_MarginWidth, Metrics::MenuItem_MarginHeight );
+                    return expandSize( QSize(0,1), Metrics::MenuItem_MarginWidth, MenuItem_SeparatorMargin );
 
                 } else {
 
@@ -3798,34 +3798,40 @@ namespace Breeze
         // render selection
         // define color
         QColor color;
-        QColor outline;
+        QColor sideLine;
         if( hasCustomBackground && hasSolidBackground ) color = viewItemOption->backgroundBrush.color();
         else color = palette.color( colorGroup, QPalette::Highlight );
         
-        outline = color;
+        QColor outline = color;
+        sideLine = color;
+        color.setAlpha(OpacityBackgroundMain);
         
         // change color to implement mouse over
-        if( mouseOver && !hasCustomBackground )
-        {
-            outline.setAlphaF(1.0);
-            
-            if( !selected ) {
-                color.setAlphaF( 0.3 );
-            } else {
-                color = color.lighter( 110 );
-            }
-        } else {
-            outline.setAlphaF(0.0);
+        if( mouseOver && selected && !hasCustomBackground )
+        {            
+            color = color.lighter( 110 );
         }
 
         // render
         // On sidebar panels, render it as a tabbar-looking item
         // otherwise use the default delegate
         if ( widget && widget->property( PropertyNames::sidePanelView ).toBool() ) {
-            // TODO: new helper function here to draw sidebar item as taskbar
-            painter->fillRect(rect, Qt::red);
+            
+            if( selected ) {
+                sideLine.setAlpha(OpacitySideLineSelected);
+            } else {
+                sideLine.setAlpha(OpacitySideLineNotSelected);
+            }
+            
+            _helper->renderSidePanelItem( painter, rect, color, sideLine );
+            
         } else {
-            _helper->renderSelection( painter, rect, color, outline );
+            if( selected ) {
+                color.setAlpha(OpacityBackgroundSelected);
+            } else {
+                color.setAlpha(OpacityBackgroundNotSelected);
+            }
+            _helper->renderSelection( painter, rect, color, outline, mouseOver);
         }
         return true;
     }
@@ -4660,11 +4666,11 @@ namespace Breeze
         // render hover and focus
         if( useStrongFocus && ( selected || sunken ) )
         {
-
+            QColor backgroundColor = _helper->focusColor( palette );
             QColor outlineColor;
             if( sunken ) outlineColor = _helper->focusColor( palette );
             else if( selected ) outlineColor = _helper->hoverColor( palette );
-            _helper->renderFocusRect( painter, rect, outlineColor );
+            _helper->renderFocusRect( painter, rect, backgroundColor, outlineColor );
 
         }
 

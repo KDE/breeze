@@ -449,7 +449,7 @@ namespace Breeze
         painter->setRenderHints( QPainter::Antialiasing );
 
         QColor background( color );
-        background.setAlphaF(0.4);
+        background.setAlpha(OpacityBackgroundMain);
 
         painter->setBrush( background );
 
@@ -783,10 +783,37 @@ namespace Breeze
     //______________________________________________________________________________
     void Helper::renderSelection(
         QPainter* painter, const QRect& rect,
-        const QColor& color, const QColor& outline ) const
+        const QColor& color, const QColor& outline, const bool mouseOver ) const
     {
+        painter->setRenderHints( QPainter::Antialiasing );
+        painter->setBrush( color );
+        
+        const qreal radius( frameRadius( -1.0 ) );
+        QRectF copy( rect );        
+        
+        if( mouseOver ) {
+            painter->setPen( outline );
+            copy.adjust( 0.5, 0.5, -0.5, -0.5 );
+        } else {
+            painter->setPen( Qt::NoPen );
+        }
 
-        renderFocusRect(painter, rect, color, outline);
+        painter->drawRoundedRect( copy, radius, radius );
+
+    }
+    
+    //______________________________________________________________________________
+    void Helper::renderSidePanelItem(
+        QPainter* painter, const QRect& rect,
+        const QColor& color, const QColor& sideline ) const
+    {
+        QRect verticalBar( rect. right(), rect.top(), -3, rect.height() );
+        painter->setRenderHint( QPainter::Antialiasing );
+        painter->setPen( Qt::NoPen );
+        painter->setBrush( color );
+        painter->drawRect( rect );
+        painter->setBrush( sideline );
+        painter->drawRect( verticalBar );
 
     }
 

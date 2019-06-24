@@ -54,7 +54,7 @@ namespace Breeze
     {
 
         // frames
-        Frame_FrameWidth = 2,
+        Frame_FrameWidth = 1,
         Frame_FrameRadius = 3,
 
         // layout
@@ -66,11 +66,12 @@ namespace Breeze
         LineEdit_FrameWidth = 6,
 
         // menu items
-        Menu_FrameWidth = 0,
-        MenuItem_MarginWidth = 3,
-        MenuItem_MarginHeight = 1,
+        Menu_FrameWidth = 1,
+        MenuItem_MarginWidth = 8,
+        MenuItem_MarginHeight = 3,
         MenuItem_HighlightHorizontalMargin = 2,
         MenuItem_HighlightVerticalMargin = 2,
+        MenuItem_SeparatorMargin = 0,
         MenuItem_ItemSpacing = 4,
         MenuItem_AcceleratorSpace = 16,
         MenuButton_IndicatorWidth = 20,
@@ -246,6 +247,19 @@ namespace Breeze
         ButtonMaximize,
         ButtonMinimize,
         ButtonRestore
+    };
+    
+    //* paint opacity (0 to 255)
+    enum Opacity
+    {
+        OpacityBackgroundMain = 85,         //33%
+        OpacityBackgroundSelected = 102,   //40%
+        OpacityBackgroundNotSelected = 51,  //20%
+        OpacitySideLineSelected = 255,
+        OpacitySideLineNotSelected = 0,
+        OpacityOutlineHovered = 255,
+        OpacityOutlineNotHovered = 85
+        
     };
 
 }
