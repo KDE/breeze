@@ -823,7 +823,7 @@ namespace Breeze
         const QColor& color, const QColor& sideline ) const
     {
         painter->save();
-        const qreal radius( Frame_FrameRadius );
+        const qreal radius( frameRadius( -1.0 ) );
         QRect horizontalBar( rect.left(), rect.bottom()+1, rect.width(), MenuBarItem_SideLineHeight );
         painter->setRenderHint( QPainter::Antialiasing );
         painter->setPen( Qt::NoPen );
