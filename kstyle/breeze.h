@@ -104,7 +104,7 @@ namespace Breeze
         // menubar items
         MenuBarItem_MarginWidth = 10,
         MenuBarItem_MarginHeight = 6,
-        MenuBarItem_SideLineHeight = -3,    // Must be negative on right side
+        MenuBarItem_SideLineHeight = -3,    // Must be negative on bottom side
 
         // scrollbars
         ScrollBar_Extend = 20,
@@ -165,7 +165,7 @@ namespace Breeze
         ItemView_ArrowSize = 10,
         ItemView_ItemMarginWidth = 3,
         SidePanel_ItemMarginWidth = 4,
-        SidePanel_SideLineWidth = 3,
+        SidePanel_SideLineWidth = -3,   // Must be negative on right side
 
         // splitter
         Splitter_SplitterWidth = 1,
