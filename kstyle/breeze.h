@@ -104,6 +104,7 @@ namespace Breeze
         // menubar items
         MenuBarItem_MarginWidth = 10,
         MenuBarItem_MarginHeight = 6,
+        MenuBarItem_SideLineHeight = -3,    // Must be negative on right side
 
         // scrollbars
         ScrollBar_Extend = 20,
@@ -164,6 +165,7 @@ namespace Breeze
         ItemView_ArrowSize = 10,
         ItemView_ItemMarginWidth = 3,
         SidePanel_ItemMarginWidth = 4,
+        SidePanel_SideLineWidth = 3,
 
         // splitter
         Splitter_SplitterWidth = 1,
@@ -253,7 +255,7 @@ namespace Breeze
     enum Opacity
     {
         OpacityBackgroundMain = 85,         //33%
-        OpacityBackgroundSelected = 102,   //40%
+        OpacityBackgroundSelected = 102,    //40%
         OpacityBackgroundNotSelected = 51,  //20%
         OpacitySideLineSelected = 255,
         OpacitySideLineNotSelected = 0,

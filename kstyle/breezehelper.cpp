@@ -807,7 +807,7 @@ namespace Breeze
         QPainter* painter, const QRect& rect,
         const QColor& color, const QColor& sideline ) const
     {
-        QRect verticalBar( rect. right(), rect.top(), -3, rect.height() );
+        QRect verticalBar( rect.right(), rect.top(), SidePanel_SideLineWidth, rect.height() );
         painter->setRenderHint( QPainter::Antialiasing );
         painter->setPen( Qt::NoPen );
         painter->setBrush( color );
@@ -815,6 +815,23 @@ namespace Breeze
         painter->setBrush( sideline );
         painter->drawRect( verticalBar );
 
+    }
+    
+    //______________________________________________________________________________
+    void Helper::renderMenuBarItem(
+        QPainter* painter, const QRect& rect,
+        const QColor& color, const QColor& sideline ) const
+    {
+        painter->save();
+        const qreal radius( Frame_FrameRadius );
+        QRect horizontalBar( rect.left(), rect.bottom()+1, rect.width(), MenuBarItem_SideLineHeight );
+        painter->setRenderHint( QPainter::Antialiasing );
+        painter->setPen( Qt::NoPen );
+        painter->setBrush( color );
+        painter->drawRoundedRect( rect, radius, radius );
+        painter->setBrush( sideline );
+        painter->drawRect( horizontalBar );
+        painter->restore();
     }
 
     //______________________________________________________________________________

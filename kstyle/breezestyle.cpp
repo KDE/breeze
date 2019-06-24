@@ -4667,10 +4667,14 @@ namespace Breeze
         if( useStrongFocus && ( selected || sunken ) )
         {
             QColor backgroundColor = _helper->focusColor( palette );
-            QColor outlineColor;
-            if( sunken ) outlineColor = _helper->focusColor( palette );
-            else if( selected ) outlineColor = _helper->hoverColor( palette );
-            _helper->renderFocusRect( painter, rect, backgroundColor, outlineColor );
+            QColor outlineColor = backgroundColor;
+            backgroundColor.setAlpha(OpacityBackgroundMain);
+            if( sunken ) {
+                _helper->renderMenuBarItem( painter, rect, backgroundColor, outlineColor );
+            }
+            else if( selected ) {
+                _helper->renderFocusRect( painter, rect, backgroundColor, outlineColor );
+            }
 
         }
 

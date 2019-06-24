@@ -165,7 +165,7 @@ namespace Breeze
         void renderDebugFrame( QPainter*, const QRect& ) const;
 
         //* focus rect
-        void renderFocusRect( QPainter*, const QRect&, const QColor&, const QColor& outline = QColor() ) const;
+        void renderFocusRect( QPainter*, const QRect&, const QColor&, const QColor& outline ) const;
 
         //* focus line
         void renderFocusLine( QPainter*, const QRect&, const QColor& ) const;
@@ -192,10 +192,13 @@ namespace Breeze
         void renderTabWidgetFrame( QPainter*, const QRect&, const QColor& color, const QColor& outline, Corners ) const;
 
         //* selection frame
-        void renderSelection( QPainter*, const QRect&, const QColor& color, const QColor& outline = QColor(), const bool mouseOver = true ) const;
+        void renderSelection( QPainter*, const QRect&, const QColor& color, const QColor& outline, const bool mouseOver = true ) const;
         
         //* selection frame
-        void renderSidePanelItem( QPainter*, const QRect&, const QColor& color, const QColor& outline = QColor() ) const;
+        void renderSidePanelItem( QPainter*, const QRect&, const QColor& color, const QColor& sideLine ) const;
+        
+        //* selection frame
+        void renderMenuBarItem( QPainter*, const QRect&, const QColor& color, const QColor& sideLine ) const;
 
         //* separator
         void renderSeparator( QPainter*, const QRect&, const QColor&, bool vertical = false ) const;
