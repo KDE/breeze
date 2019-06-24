@@ -365,6 +365,9 @@ namespace Breeze
 
             setTranslucentBackground( widget );
 
+        } else if( widget->inherits( "KPageDialog" ) ) {
+            widget->setContentsMargins(0, 0, 0, 0);
+            widget->layout()->setContentsMargins(0, 0, 0, 0);
         }
 
         // base class polishing
@@ -403,7 +406,7 @@ namespace Breeze
             auto font( scrollArea->font() );
             font.setBold( false );
             scrollArea->setFont( font );
-
+/*
             // adjust background role
             if( !StyleConfigData::sidePanelDrawFrame() )
             {
@@ -427,7 +430,8 @@ namespace Breeze
                         treeView->setPalette(pal);
                     }
                 }
-            }
+            }*/
+            scrollArea->setContentsMargins(0, 0, 0, 0);
 
         }
 
