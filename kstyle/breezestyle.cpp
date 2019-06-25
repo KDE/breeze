@@ -3835,6 +3835,7 @@ namespace Breeze
             Sides sides = SideTop|SideBottom;
             if( !viewItemOption->rect.isNull() )
             {
+//                 qDebug() << "PLEASE WORK" << rect << viewItemOption->viewItemPosition;
                 if( viewItemOption->viewItemPosition == QStyleOptionViewItem::Beginning 
                     || viewItemOption->viewItemPosition == QStyleOptionViewItem::OnlyOne ) sides |= SideLeft;
                 if( viewItemOption->viewItemPosition == QStyleOptionViewItem::End 

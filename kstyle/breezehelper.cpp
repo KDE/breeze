@@ -264,7 +264,7 @@ namespace Breeze
             background = focusColor( palette );
 
         }
-
+        background.setAlpha(OpacityBackgroundMain); //seems wrong
         return background;
 
     }
@@ -792,8 +792,10 @@ namespace Breeze
         painter->setClipRect( rect );
 
         QRectF copy( rect );
+        // Find a way to check if in tableview
         
-        const qreal radius( frameRadius( -1.0 ) );
+        qreal radius( frameRadius( -1.0 ) );
+        
         if( !(sides&SideTop) ) {
             copy.adjust( 0, -radius, 0, 0 );
             
@@ -809,13 +811,14 @@ namespace Breeze
         if( !(sides&SideRight) ) {
             copy.adjust( 0, 0, radius, 0 );
             
-        }
+        }        
         
         if( mouseOver ) {
             painter->setPen( outline );
             copy.adjust( 0.5, 0.5, -0.5, -0.5 );
         } else {
             painter->setPen( Qt::NoPen );
+            radius = frameRadius();
         }
         
         painter->drawRoundedRect( copy, radius, radius );
@@ -828,6 +831,7 @@ namespace Breeze
         QPainter* painter, const QRect& rect,
         const QColor& color, const QColor& sideline ) const
     {
+        // TODO: Add RTL support
         QRect verticalBar( rect.right(), rect.top(), SidePanel_SideLineWidth, rect.height() );
         painter->setRenderHint( QPainter::Antialiasing );
         painter->setPen( Qt::NoPen );
@@ -844,7 +848,7 @@ namespace Breeze
         const QColor& color, const QColor& sideline ) const
     {
         painter->save();
-        const qreal radius( frameRadius( -1.0 ) );
+        const qreal radius( frameRadius() );
         QRect horizontalBar( rect.left(), rect.bottom()+1, rect.width(), MenuBarItem_SideLineHeight );
         painter->setRenderHint( QPainter::Antialiasing );
         painter->setPen( Qt::NoPen );

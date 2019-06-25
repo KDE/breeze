@@ -254,9 +254,10 @@ namespace Breeze
     //* paint opacity (0 to 255)
     enum Opacity
     {
-        OpacityBackgroundMain = 85,         //33%
-        OpacityBackgroundSelected = 102,    //40%
-        OpacityBackgroundNotSelected = 51,  //20%
+        OpacityBackgroundMain = 85, //33%
+        OpacityBackgroundSelected = 102, //40%
+        OpacityBackgroundNotSelected = 51, //20%
+        OpacityBackgroundToolButtonPressed = 153, //60%
         OpacitySideLineSelected = 255,
         OpacitySideLineNotSelected = 0,
         OpacityOutlineHovered = 255,
