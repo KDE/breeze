@@ -195,7 +195,7 @@ namespace Breeze
         void renderSelection( QPainter*, const QRect&, const QColor& color, const QColor& outline, Sides = 0, const bool mouseOver = true ) const;
         
         //* selection frame
-        void renderSidePanelItem( QPainter*, const QRect&, const QColor& color, const QColor& sideLine ) const;
+        void renderSidePanelItem( QPainter*, const QRect&, const QColor& color, const QColor& sideLine, const bool reverseLayout ) const;
         
         //* selection frame
         void renderMenuBarItem( QPainter*, const QRect&, const QColor& color, const QColor& sideLine ) const;

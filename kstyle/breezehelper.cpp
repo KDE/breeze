@@ -785,7 +785,6 @@ namespace Breeze
         QPainter* painter, const QRect& rect,
         const QColor& color, const QColor& outline, Sides sides, const bool mouseOver ) const
     {
-        painter->save();
         painter->setRenderHints( QPainter::Antialiasing );
         painter->setBrush( color );
 
@@ -822,23 +821,28 @@ namespace Breeze
         }
         
         painter->drawRoundedRect( copy, radius, radius );
-
-        painter->restore();
     }
     
     //______________________________________________________________________________
     void Helper::renderSidePanelItem(
         QPainter* painter, const QRect& rect,
-        const QColor& color, const QColor& sideline ) const
+        const QColor& color, const QColor& sideline, const bool reverseLayout ) const
     {
-        // TODO: Add RTL support
-        QRect verticalBar( rect.right(), rect.top(), SidePanel_SideLineWidth, rect.height() );
-        painter->setRenderHint( QPainter::Antialiasing );
+        painter->save();
+        
+        QRect verticalBar;
+        
+        if( reverseLayout ) verticalBar.setRect( rect.left(), rect.top(), -SidePanel_SideLineWidth, rect.height() );
+        else verticalBar.setRect( rect.right(), rect.top(), SidePanel_SideLineWidth, rect.height() );
+
+        painter->setRenderHint( QPainter::Antialiasing, false );
         painter->setPen( Qt::NoPen );
         painter->setBrush( color );
         painter->drawRect( rect );
         painter->setBrush( sideline );
         painter->drawRect( verticalBar );
+        
+        painter->restore();
 
     }
     

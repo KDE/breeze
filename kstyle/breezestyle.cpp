@@ -3815,6 +3815,8 @@ namespace Breeze
         // render
         // On sidebar panels, render it as a tabbar-looking item
         // otherwise use the default delegate
+        const bool reverseLayout( option->direction == Qt::RightToLeft );
+        
         if ( widget && widget->property( PropertyNames::sidePanelView ).toBool() ) {
             
             if( selected ) {
@@ -3823,7 +3825,7 @@ namespace Breeze
                 sideLine.setAlpha(OpacitySideLineNotSelected);
             }
             
-            _helper->renderSidePanelItem( painter, rect, color, sideLine );
+            _helper->renderSidePanelItem( painter, rect, color, sideLine, reverseLayout );
             
         } else {
             if( selected ) {
@@ -3835,7 +3837,6 @@ namespace Breeze
             Sides sides = SideTop|SideBottom;
             if( !viewItemOption->rect.isNull() )
             {
-//                 qDebug() << "PLEASE WORK" << rect << viewItemOption->viewItemPosition;
                 if( viewItemOption->viewItemPosition == QStyleOptionViewItem::Beginning 
                     || viewItemOption->viewItemPosition == QStyleOptionViewItem::OnlyOne ) sides |= SideLeft;
                 if( viewItemOption->viewItemPosition == QStyleOptionViewItem::End 
