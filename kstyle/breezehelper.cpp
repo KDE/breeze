@@ -785,6 +785,7 @@ namespace Breeze
         QPainter* painter, const QRect& rect,
         const QColor& color, const QColor& outline, Sides sides, const bool mouseOver ) const
     {
+
         painter->setRenderHints( QPainter::Antialiasing );
         painter->setBrush( color );
 
@@ -810,8 +811,8 @@ namespace Breeze
         if( !(sides&SideRight) ) {
             copy.adjust( 0, 0, radius, 0 );
             
-        }        
-        
+        }
+
         if( mouseOver ) {
             painter->setPen( outline );
             copy.adjust( 0.5, 0.5, -0.5, -0.5 );
@@ -821,6 +822,26 @@ namespace Breeze
         }
         
         painter->drawRoundedRect( copy, radius, radius );
+    }
+    
+    //______________________________________________________________________________
+    void Helper::renderTableItemSelection(
+        QPainter* painter, const QRect& rect,
+        const QColor& color, const QColor& outline, const bool mouseOver ) const
+    {
+        painter->setRenderHints( QPainter::Antialiasing, false );
+        painter->setBrush( color );
+
+        QRectF copy( rect );
+        
+        if( mouseOver ) {
+            painter->setPen( outline );
+            copy.adjust( 0.5, 0.5, -0.5, -0.5 );
+        } else {
+            painter->setPen( Qt::NoPen );
+        }
+        
+        painter->drawRect( copy );
     }
     
     //______________________________________________________________________________

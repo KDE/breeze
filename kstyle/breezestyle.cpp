@@ -53,6 +53,7 @@
 #include <QScrollBar>
 #include <QItemDelegate>
 #include <QSplitterHandle>
+#include <QTableView>
 #include <QTextEdit>
 #include <QToolBar>
 #include <QToolBox>
@@ -3828,22 +3829,32 @@ namespace Breeze
             _helper->renderSidePanelItem( painter, rect, color, sideLine, reverseLayout );
             
         } else {
+
             if( selected ) {
                 color.setAlpha(OpacityBackgroundSelected);
             } else {
                 color.setAlpha(OpacityBackgroundNotSelected);
             }
-            
-            Sides sides = SideTop|SideBottom;
-            if( !viewItemOption->rect.isNull() )
-            {
-                if( viewItemOption->viewItemPosition == QStyleOptionViewItem::Beginning 
-                    || viewItemOption->viewItemPosition == QStyleOptionViewItem::OnlyOne ) sides |= SideLeft;
-                if( viewItemOption->viewItemPosition == QStyleOptionViewItem::End 
-                    || viewItemOption->viewItemPosition == QStyleOptionViewItem::OnlyOne ) sides |= SideRight;
+
+            if (qobject_cast<const QTableView *>(widget)) {
+                
+                _helper->renderTableItemSelection(painter, rect, color, outline, mouseOver);
+                
+            } else {
+                
+                Sides sides = SideTop|SideBottom;
+                if( !viewItemOption->rect.isNull() )
+                {
+                    if( viewItemOption->viewItemPosition == QStyleOptionViewItem::Beginning 
+                        || viewItemOption->viewItemPosition == QStyleOptionViewItem::OnlyOne ) sides |= SideLeft;
+                    if( viewItemOption->viewItemPosition == QStyleOptionViewItem::End 
+                        || viewItemOption->viewItemPosition == QStyleOptionViewItem::OnlyOne ) sides |= SideRight;
+                }
+                qWarning() << "Widget:" << widget << "Shape:"<< rect << "Sides:" << sides 
+                        << "Position:" << viewItemOption->viewItemPosition << "DecorationPos:" << viewItemOption->decorationPosition;
+                _helper->renderSelection( painter, rect, color, outline, sides, mouseOver);
             }
             
-            _helper->renderSelection( painter, rect, color, outline, sides, mouseOver);
         }
         return true;
     }

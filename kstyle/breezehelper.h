@@ -192,7 +192,10 @@ namespace Breeze
         void renderTabWidgetFrame( QPainter*, const QRect&, const QColor& color, const QColor& outline, Corners ) const;
 
         //* selection frame
-        void renderSelection( QPainter*, const QRect&, const QColor& color, const QColor& outline, Sides = 0, const bool mouseOver = true ) const;
+        void renderSelection( QPainter*, const QRect&, const QColor& color, const QColor& outline, Sides = AllSides, const bool mouseOver = true ) const;
+        
+        //* selection frame
+        void renderTableItemSelection( QPainter*, const QRect&, const QColor& color, const QColor& outline, const bool mouseOver = true ) const;
         
         //* selection frame
         void renderSidePanelItem( QPainter*, const QRect&, const QColor& color, const QColor& sideLine, const bool reverseLayout ) const;
