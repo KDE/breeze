@@ -63,6 +63,7 @@
 
 #if BREEZE_HAVE_QTQUICK
 #include <QQuickWindow>
+#include <QListView>
 #endif
 
 namespace BreezePrivate
@@ -3818,7 +3819,9 @@ namespace Breeze
         // otherwise use the default delegate
         const bool reverseLayout( option->direction == Qt::RightToLeft );
         
-        if ( widget && widget->property( PropertyNames::sidePanelView ).toBool() ) {
+        if ( (widget && widget->property( PropertyNames::sidePanelView ).toBool())
+            || qobject_cast<const QListView *>(widget)
+        ) {
             
             if( selected ) {
                 sideLine.setAlpha(OpacitySideLineSelected);
