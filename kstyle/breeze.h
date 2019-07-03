@@ -251,18 +251,19 @@ namespace Breeze
         ButtonRestore
     };
     
-    //* paint opacity (0 to 255)
-    enum Opacity
+    //* paint opacity  
+    struct Opacity
     {
-        OpacityBackgroundMain = 85, //33%
-        OpacityBackgroundSelected = 102, //40%
-        OpacityBackgroundNotSelected = 51, //20%
-        OpacityBackgroundToolButtonPressed = 153, //60%
-        OpacitySideLineSelected = 255,
-        OpacitySideLineNotSelected = 0,
-        OpacityOutlineHovered = 255,
-        OpacityOutlineNotHovered = 85
-        
+        constexpr static const double OpacityBackgroundMain = 1.0/3.0;
+        constexpr static const double OpacityBackgroundSelected = 0.4;
+        constexpr static const double OpacityBackgroundNotSelected = 0.2;
+        constexpr static const double OpacityToolButtonBgPressed = 0.6;
+        constexpr static const double OpacityToolButtonBgKbFocus = OpacityBackgroundMain;
+        constexpr static const double OpacityBackgroundNone = 0.0;
+        constexpr static const double OpacitySideLineSelected = 1.0;
+        constexpr static const double OpacitySideLineNotSelected = 0.0;
+        constexpr static const double OpacityOutlineHovered = 1.0;
+        constexpr static const double OpacityOutlineNotHovered = OpacityBackgroundMain;
     };
 
 }

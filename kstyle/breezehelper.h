@@ -72,7 +72,7 @@ namespace Breeze
 
         //* add alpha channel multiplier to color
         QColor alphaColor( QColor color, qreal alpha ) const;
-
+        
         //* mouse over color
         QColor hoverColor( const QPalette& palette ) const
         { return _viewHoverBrush.brush( palette ).color(); }
@@ -114,7 +114,10 @@ namespace Breeze
 
         //* side panel outline color, using animations
         QColor sidePanelOutlineColor( const QPalette&, bool hasFocus = false, qreal opacity = AnimationData::OpacityInvalid, AnimationMode = AnimationNone ) const;
-
+        
+        //* highlight background color
+        QColor highlightBackgroundColor( const QPalette&, const double opacity = Opacity::OpacityBackgroundMain ) const;
+        
         //* frame background color
         QColor frameBackgroundColor( const QPalette& palette ) const
         { return frameBackgroundColor( palette, palette.currentColorGroup() ); }

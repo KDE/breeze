@@ -144,6 +144,16 @@ namespace Breeze
         return outline;
 
     }
+    
+    //____________________________________________________________________
+    QColor Helper::highlightBackgroundColor( const QPalette& palette, const double opacity ) const
+    { 
+        return KColorUtils::mix( 
+            palette.color( palette.currentColorGroup(), QPalette::Window ), 
+            focusColor( palette ), 
+            opacity 
+        );
+    }
 
     //____________________________________________________________________
     QColor Helper::frameBackgroundColor( const QPalette& palette, QPalette::ColorGroup group ) const
@@ -261,10 +271,10 @@ namespace Breeze
 
         } else if( hasFocus ) {
 
-            background = focusColor( palette );
+            background = highlightBackgroundColor( palette );
 
         }
-        background.setAlpha(OpacityBackgroundMain); //seems wrong
+
         return background;
 
     }
@@ -447,11 +457,7 @@ namespace Breeze
 
         painter->save();
         painter->setRenderHints( QPainter::Antialiasing );
-
-        QColor background( color );
-        background.setAlpha(OpacityBackgroundMain);
-
-        painter->setBrush( background );
+        painter->setBrush( color );
 
         painter->setClipRect( rect );
 
@@ -833,9 +839,10 @@ namespace Breeze
         painter->setBrush( color );
 
         QRectF copy( rect );
-        
+        QPen pen ( outline );
+        pen.setJoinStyle(Qt::MiterJoin);
         if( mouseOver ) {
-            painter->setPen( outline );
+            painter->setPen( pen );
             copy.adjust( 0.5, 0.5, -0.5, -0.5 );
         } else {
             painter->setPen( Qt::NoPen );
