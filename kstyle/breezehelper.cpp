@@ -63,6 +63,7 @@ namespace Breeze
         _viewFocusBrush = KStatefulBrush( KColorScheme::View, KColorScheme::FocusColor, _config );
         _viewHoverBrush = KStatefulBrush( KColorScheme::View, KColorScheme::HoverColor, _config );
         _viewNegativeTextBrush = KStatefulBrush( KColorScheme::View, KColorScheme::NegativeText, _config );
+        _selectionBackgroundBrush = KStatefulBrush( KColorScheme::Selection, KColorScheme::NormalBackground, _config );
 
         const QPalette palette( QApplication::palette() );
         const KConfigGroup group( _config->group( "WM" ) );
@@ -143,16 +144,6 @@ namespace Breeze
 
         return outline;
 
-    }
-    
-    //____________________________________________________________________
-    QColor Helper::highlightBackgroundColor( const QPalette& palette, const double opacity ) const
-    { 
-        return KColorUtils::mix( 
-            palette.color( palette.currentColorGroup(), QPalette::Window ), 
-            focusColor( palette ), 
-            opacity 
-        );
     }
 
     //____________________________________________________________________
@@ -271,7 +262,7 @@ namespace Breeze
 
         } else if( hasFocus ) {
 
-            background = highlightBackgroundColor( palette );
+            background = selectionBackgroundColor( palette );
 
         }
 
@@ -798,7 +789,6 @@ namespace Breeze
         painter->setClipRect( rect );
 
         QRectF copy( rect );
-        // Find a way to check if in tableview
         
         qreal radius( frameRadius( -1.0 ) );
         
@@ -860,8 +850,8 @@ namespace Breeze
         
         QRect verticalBar;
         
-        if( reverseLayout ) verticalBar.setRect( rect.left(), rect.top(), -SidePanel_SideLineWidth, rect.height() );
-        else verticalBar.setRect( rect.right(), rect.top(), SidePanel_SideLineWidth, rect.height() );
+        if( reverseLayout ) verticalBar.setRect( rect.left()-1, rect.top(), -SidePanel_SideLineWidth, rect.height() );
+        else verticalBar.setRect( rect.right()+1, rect.top(), SidePanel_SideLineWidth, rect.height() );
 
         painter->setRenderHint( QPainter::Antialiasing, false );
         painter->setPen( Qt::NoPen );

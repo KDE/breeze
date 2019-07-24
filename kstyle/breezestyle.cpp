@@ -3800,18 +3800,17 @@ namespace Breeze
 
         // render selection
         // define color
-        QColor color;
-        QColor sideLine;
-        if( hasCustomBackground && hasSolidBackground ) color = viewItemOption->backgroundBrush.color();
-        else color = _helper->highlightBackgroundColor( palette );
+        QColor background;
+        if( hasCustomBackground && hasSolidBackground ) background = viewItemOption->backgroundBrush.color();
+        else background = _helper->selectionBackgroundColor( palette );
         
-        QColor outline = palette.color( colorGroup, QPalette::Highlight );
-        sideLine = outline;
+        QColor outline = _helper->focusColor( palette );
+        QColor sideLine = outline;
         
         // change color to implement mouse over
         if( mouseOver && selected && !hasCustomBackground )
         {            
-            color = color.lighter( 110 );
+            background = _helper->hoverColor( palette );
         }
 
         // render
@@ -3820,32 +3819,32 @@ namespace Breeze
         const bool reverseLayout( option->direction == Qt::RightToLeft );
 //         qDebug() << "Widget:" << widget << "Shape:"<< rect //<< "Property" << widget->property()
 //                         << "Position:" << viewItemOption->viewItemPosition << "DecorationPos:" << viewItemOption->decorationPosition;
-        if ( /* DISABLES CODE */ (false) //(widget && widget->property( PropertyNames::sidePanelView ).toBool())
+        if ( widget && widget->property( PropertyNames::sidePanelView ).toBool()
             //|| qobject_cast<const QListView *>(widget)
         ) {
             
             if( selected ) {
-                sideLine.setAlphaF(Opacity::OpacitySideLineSelected);
+                sideLine = outline;
             } else {
-                sideLine.setAlphaF(Opacity::OpacitySideLineNotSelected);
+                sideLine = background;
             }
             
-            _helper->renderSidePanelItem( painter, rect, color, sideLine, reverseLayout );
+            _helper->renderSidePanelItem( painter, rect, background, sideLine, reverseLayout );
             
         } else {
 
-            if( selected ) {
-                color = _helper->highlightBackgroundColor( palette, Opacity::OpacityBackgroundSelected );
-            } else {
-                color = _helper->highlightBackgroundColor( palette, Opacity::OpacityBackgroundNotSelected );
-            }
+//             if( selected ) {
+//                 background = _helper->focusColor( palette );
+//             } else {
+//                 background = _helper->selectionBackgroundColor( palette );
+//             }
 
             if (qobject_cast<const QTableView *>(widget) 
                 || qobject_cast<const QListWidget *>(widget)
                 || qobject_cast<const QListView *>(widget)
             ) {
                 
-                _helper->renderTableItemSelection(painter, rect, color, outline, mouseOver);
+                _helper->renderTableItemSelection(painter, rect, background, outline, mouseOver);
                 
             } else {
                 
@@ -3858,7 +3857,7 @@ namespace Breeze
                         || viewItemOption->viewItemPosition == QStyleOptionViewItem::OnlyOne ) sides |= SideRight;
                 }
 //                 qDebug() << "Sides:" << sides;
-                _helper->renderSelection( painter, rect, color, outline, sides, mouseOver);
+                _helper->renderSelection( painter, rect, background, outline, sides, mouseOver);
             }
             
         }
@@ -4695,7 +4694,7 @@ namespace Breeze
         // render hover and focus
         if( useStrongFocus && ( selected || sunken ) )
         {
-            QColor backgroundColor = _helper->highlightBackgroundColor( palette );
+            QColor backgroundColor = _helper->selectionBackgroundColor( palette );
             QColor outlineColor = _helper->focusColor( palette );
             
             if( sunken ) {
@@ -4831,7 +4830,7 @@ namespace Breeze
         if( useStrongFocus && ( selected || sunken ) )
         {
 
-            const auto color = _helper->highlightBackgroundColor( palette );
+            const auto color = _helper->selectionBackgroundColor( palette );
             const auto outlineColor = _helper->focusColor( palette );
             
             _helper->renderFocusRect( painter, rect.marginsRemoved(

@@ -84,7 +84,11 @@ namespace Breeze
         //* negative text color (used for close button)
         QColor negativeText( const QPalette& palette ) const
         { return _viewNegativeTextBrush.brush( palette ).color(); }
-
+        
+        //* selection background color
+        QColor selectionBackgroundColor( const QPalette& palette ) const
+        { return _selectionBackgroundBrush.brush( palette ).color(); }
+        
         //* shadow
         QColor shadowColor( const QPalette& palette ) const
         { return alphaColor( palette.color( QPalette::Shadow ), 0.15 ); }
@@ -114,9 +118,6 @@ namespace Breeze
 
         //* side panel outline color, using animations
         QColor sidePanelOutlineColor( const QPalette&, bool hasFocus = false, qreal opacity = AnimationData::OpacityInvalid, AnimationMode = AnimationNone ) const;
-        
-        //* highlight background color
-        QColor highlightBackgroundColor( const QPalette&, const double opacity = Opacity::OpacityBackgroundMain ) const;
         
         //* frame background color
         QColor frameBackgroundColor( const QPalette& palette ) const
@@ -346,6 +347,7 @@ namespace Breeze
         KStatefulBrush _viewFocusBrush;
         KStatefulBrush _viewHoverBrush;
         KStatefulBrush _viewNegativeTextBrush;
+        KStatefulBrush _selectionBackgroundBrush;
         //@}
 
         //*@name windeco colors
