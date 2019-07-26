@@ -52,7 +52,7 @@ namespace Breeze
     //* metrics
     enum Metrics
     {
-
+        
         // frames
         Frame_FrameWidth = 2,
         Frame_FrameRadius = 3,
@@ -67,8 +67,8 @@ namespace Breeze
 
         // menu items
         Menu_FrameWidth = 1,
-        MenuItem_MarginWidth = 8,
-        MenuItem_MarginHeight = 3,
+        MenuItem_MarginWidth = 6,
+        MenuItem_MarginHeight = 2,
         MenuItem_HighlightHorizontalMargin = 2,
         MenuItem_HighlightVerticalMargin = 2,
         MenuItem_SeparatorMargin = 0,
