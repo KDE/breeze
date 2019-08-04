@@ -197,9 +197,9 @@ namespace Breeze
             QStringLiteral( "/BreezeDecoration" ),
             QStringLiteral( "org.kde.Breeze.Style" ),
             QStringLiteral( "reparseConfiguration" ), this, SLOT(configurationChanged()) );
-#if !BREEZE_USE_KDE4
+        #if !BREEZE_USE_KDE4
         connect(qApp, &QApplication::paletteChanged, this, &Style::configurationChanged);
-#endif
+        #endif
         // call the slot directly; this initial call will set up things that also
         // need to be reset when the system palette changes
         loadConfiguration();
@@ -2837,7 +2837,7 @@ namespace Breeze
                     if( !menuItemOption->text.isEmpty() )
                     {
                         size.setHeight( qMax( size.height(), textHeight ) );
-                        size.setWidth( qMax( size.width(), menuItemOption->fontMetrics.width( menuItemOption->text ) ) );
+                        size.setWidth( qMax( size.width(), menuItemOption->fontMetrics.horizontalAdvance( menuItemOption->text ) ) );
                     }
 
                     return sizeFromContents( CT_ToolButton, &toolButtonOption, size, widget );
