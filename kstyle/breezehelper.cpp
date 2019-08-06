@@ -129,8 +129,8 @@ namespace Breeze
     QColor Helper::sidePanelOutlineColor( const QPalette& palette, bool hasFocus, qreal opacity, AnimationMode mode ) const
     {
 
-        QColor outline( palette.color( QPalette::Inactive, QPalette::Highlight ) );
-        QColor focus( palette.color( QPalette::Active, QPalette::Highlight ) );
+        QColor outline( frameOutlineColor( palette ) );
+        const QColor focus( viewFocusColor( palette ) );
 
         if( mode == AnimationFocus )
         {
