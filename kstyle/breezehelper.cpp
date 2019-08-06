@@ -850,7 +850,7 @@ namespace Breeze
         
         QRect verticalBar;
         
-        if( reverseLayout ) verticalBar.setRect( rect.left()-1, rect.top(), -SidePanel_SideLineWidth, rect.height() );
+        if( reverseLayout ) verticalBar.setRect( rect.left(), rect.top(), -SidePanel_SideLineWidth, rect.height() );
         else verticalBar.setRect( rect.right()+1, rect.top(), SidePanel_SideLineWidth, rect.height() );
 
         painter->setRenderHint( QPainter::Antialiasing, false );
