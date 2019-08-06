@@ -73,16 +73,16 @@ namespace Breeze
         //* add alpha channel multiplier to color
         QColor alphaColor( QColor color, qreal alpha ) const;
         
-        //* mouse over color
-        QColor hoverColor( const QPalette& palette ) const
+        //* view mouse over color
+        QColor viewHoverColor( const QPalette& palette ) const
         { return _viewHoverBrush.brush( palette ).color(); }
 
-        //* focus color
-        QColor focusColor( const QPalette& palette ) const
+        //* view focus color
+        QColor viewFocusColor( const QPalette& palette ) const
         { return _viewFocusBrush.brush( palette ).color(); }
 
-        //* negative text color (used for close button)
-        QColor negativeText( const QPalette& palette ) const
+        //* view negative text color (used for close button)
+        QColor viewNegativeTextColor( const QPalette& palette ) const
         { return _viewNegativeTextBrush.brush( palette ).color(); }
         
         //* selection background color

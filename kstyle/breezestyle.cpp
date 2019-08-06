@@ -3413,7 +3413,7 @@ namespace Breeze
 
         } else if( mouseOver && !inToolButton ) {
 
-            color = _helper->hoverColor( palette );
+            color = _helper->viewHoverColor( palette );
 
         } else if( inToolButton ) {
 
@@ -3804,13 +3804,13 @@ namespace Breeze
         if( hasCustomBackground && hasSolidBackground ) background = viewItemOption->backgroundBrush.color();
         else background = _helper->selectionBackgroundColor( palette );
         
-        QColor outline = _helper->focusColor( palette );
+        QColor outline = _helper->viewFocusColor( palette );
         QColor sideLine = outline;
         
         // change color to implement mouse over
         if( mouseOver && selected && !hasCustomBackground )
         {            
-            background = _helper->hoverColor( palette );
+            background = _helper->viewHoverColor( palette );
         }
 
         // render
@@ -4223,7 +4223,7 @@ namespace Breeze
             else orientation = ArrowRight;
 
             // color
-            const auto arrowColor( mouseOver ? _helper->hoverColor( palette ) : _helper->arrowColor( palette, QPalette::Text ) );
+            const auto arrowColor( mouseOver ? _helper->viewHoverColor( palette ) : _helper->arrowColor( palette, QPalette::Text ) );
 
             // render
             _helper->renderArrow( painter, arrowRect, arrowColor, orientation );
@@ -4571,8 +4571,8 @@ namespace Breeze
 
             // focus color
             QColor focusColor;
-            if( isFocusAnimated ) focusColor = _helper->alphaColor( _helper->focusColor( palette ), opacity );
-            else if( hasFocus ) focusColor =  _helper->focusColor( palette );
+            if( isFocusAnimated ) focusColor = _helper->alphaColor( _helper->viewFocusColor( palette ), opacity );
+            else if( hasFocus ) focusColor =  _helper->viewFocusColor( palette );
 
             // render focus
             _helper->renderFocusLine( painter, textRect, focusColor );
@@ -4695,7 +4695,7 @@ namespace Breeze
         if( useStrongFocus && ( selected || sunken ) )
         {
             QColor backgroundColor = _helper->selectionBackgroundColor( palette );
-            QColor outlineColor = _helper->focusColor( palette );
+            QColor outlineColor = _helper->viewFocusColor( palette );
             
             if( sunken ) {
                 _helper->renderMenuBarItem( painter, rect, backgroundColor, outlineColor );
@@ -4742,8 +4742,8 @@ namespace Breeze
             {
 
                 QColor outlineColor;
-                if( sunken ) outlineColor = _helper->focusColor( palette );
-                else if( selected ) outlineColor = _helper->hoverColor( palette );
+                if( sunken ) outlineColor = _helper->viewFocusColor( palette );
+                else if( selected ) outlineColor = _helper->viewHoverColor( palette );
 
                 _helper->renderFocusLine( painter, iconRect, outlineColor );
 
@@ -4764,8 +4764,8 @@ namespace Breeze
             {
 
                 QColor outlineColor;
-                if( sunken ) outlineColor = _helper->focusColor( palette );
-                else if( selected ) outlineColor = _helper->hoverColor( palette );
+                if( sunken ) outlineColor = _helper->viewFocusColor( palette );
+                else if( selected ) outlineColor = _helper->viewHoverColor( palette );
 
                 _helper->renderFocusLine( painter, textRect, outlineColor );
 
@@ -4831,7 +4831,7 @@ namespace Breeze
         {
 
             const auto color = _helper->selectionBackgroundColor( palette );
-            const auto outlineColor = _helper->focusColor( palette );
+            const auto outlineColor = _helper->viewFocusColor( palette );
             
             _helper->renderFocusRect( painter, rect.marginsRemoved(
                 QMargins(MenuItem_HighlightHorizontalMargin,
@@ -4934,8 +4934,8 @@ namespace Breeze
             // color
             QColor arrowColor;
             if( useStrongFocus && ( selected || sunken ) ) arrowColor = palette.color( QPalette::HighlightedText );
-            else if( sunken ) arrowColor = _helper->focusColor( palette );
-            else if( selected ) arrowColor = _helper->hoverColor( palette );
+            else if( sunken ) arrowColor = _helper->viewFocusColor( palette );
+            else if( selected ) arrowColor = _helper->viewHoverColor( palette );
             else arrowColor = _helper->arrowColor( palette, QPalette::WindowText );
 
             // render
@@ -4982,8 +4982,8 @@ namespace Breeze
             {
 
                 QColor outlineColor;
-                if( sunken ) outlineColor = _helper->focusColor( palette );
-                else if( selected ) outlineColor = _helper->hoverColor( palette );
+                if( sunken ) outlineColor = _helper->viewFocusColor( palette );
+                else if( selected ) outlineColor = _helper->viewHoverColor( palette );
 
                 _helper->renderFocusLine( painter, textRect, outlineColor );
 
@@ -5112,7 +5112,7 @@ namespace Breeze
             auto contentsColor(
                 option->state.testFlag( QStyle::State_Selected ) ?
                 palette.color( QPalette::HighlightedText ) :
-                palette.color( QPalette::Highlight ) );
+                _helper->viewFocusColor( palette ) );
 
             _helper->renderProgressBarContents( painter, rect, contentsColor );
             painter->setClipRegion( oldClipRegion );
@@ -5465,8 +5465,8 @@ namespace Breeze
 
         // fill
         const auto normal( palette.color( QPalette::Button ) );
-        const auto focus( KColorUtils::mix( normal, _helper->focusColor( palette ), 0.2 ) );
-        const auto hover( KColorUtils::mix( normal, _helper->hoverColor( palette ), 0.2 ) );
+        const auto focus( KColorUtils::mix( normal, _helper->viewFocusColor( palette ), 0.2 ) );
+        const auto hover( KColorUtils::mix( normal, _helper->viewHoverColor( palette ), 0.2 ) );
 
         QColor color;
         if( sunken ) color = focus;
@@ -5630,8 +5630,8 @@ namespace Breeze
 
         // focus color
         QColor focusColor;
-        if( animated ) focusColor = _helper->alphaColor( _helper->focusColor( palette ), opacity );
-        else if( hasFocus ) focusColor =  _helper->focusColor( palette );
+        if( animated ) focusColor = _helper->alphaColor( _helper->viewFocusColor( palette ), opacity );
+        else if( hasFocus ) focusColor =  _helper->viewFocusColor( palette );
 
         // render focus line
         _helper->renderFocusLine( painter, textRect, focusColor );
@@ -5808,7 +5808,7 @@ namespace Breeze
         } else {
 
             const auto normal( _helper->alphaColor( palette.color( QPalette::Shadow ), 0.2 ) );
-            const auto hover( _helper->alphaColor( _helper->hoverColor( palette ), 0.2 ) );
+            const auto hover( _helper->alphaColor( _helper->viewHoverColor( palette ), 0.2 ) );
             if( animated ) color = KColorUtils::mix( normal, hover, opacity );
             else if( mouseOver ) color = hover;
             else color = normal;
@@ -5957,7 +5957,7 @@ namespace Breeze
 
         // color
         QColor outline;
-        if( selected ) outline = _helper->focusColor( palette );
+        if( selected ) outline = _helper->viewFocusColor( palette );
         else outline = _helper->frameOutlineColor( palette, mouseOver, false, opacity, isAnimated ? AnimationHover:AnimationNone );
 
         // render
@@ -6077,8 +6077,8 @@ namespace Breeze
 
         // focus color
         QColor focusColor;
-        if( isFocusAnimated ) focusColor = _helper->alphaColor( _helper->focusColor( palette ), opacity );
-        else if( hasFocus ) focusColor =  _helper->focusColor( palette );
+        if( isFocusAnimated ) focusColor = _helper->alphaColor( _helper->viewFocusColor( palette ), opacity );
+        else if( hasFocus ) focusColor =  _helper->viewFocusColor( palette );
 
         // render focus
         _helper->renderFocusLine( painter, textRect, focusColor );
@@ -6300,7 +6300,7 @@ namespace Breeze
 
                     // color
                     const auto normal( _helper->arrowColor( palette, QPalette::WindowText ) );
-                    const auto hover( _helper->hoverColor( palette ) );
+                    const auto hover( _helper->viewHoverColor( palette ) );
 
                     if( animated )
                     {
@@ -6805,12 +6805,12 @@ namespace Breeze
         if( animated )
         {
 
-            auto highlight = _helper->hoverColor( palette );
+            auto highlight = _helper->viewHoverColor( palette );
             color = KColorUtils::mix( color, highlight, opacity );
 
         } else if( subControlHover ) {
 
-            color = _helper->hoverColor( palette );
+            color = _helper->viewHoverColor( palette );
 
         } else if( atLimit ) {
 
@@ -6959,7 +6959,7 @@ namespace Breeze
         if( rect.intersects(  _animations->scrollBarEngine().subControlRect( widget, control ) ) )
         {
 
-            auto highlight = _helper->hoverColor( palette );
+            auto highlight = _helper->viewHoverColor( palette );
             if( animated )
             {
                 color = KColorUtils::mix( color, highlight, opacity );
@@ -7122,8 +7122,8 @@ namespace Breeze
         palette.setCurrentColorGroup( QPalette::Active );
         const auto base( palette.color( QPalette::WindowText ) );
         const auto selected( palette.color( QPalette::HighlightedText ) );
-        const auto negative( buttonType == ButtonClose ? _helper->negativeText( palette ):base );
-        const auto negativeSelected( buttonType == ButtonClose ? _helper->negativeText( palette ):selected );
+        const auto negative( buttonType == ButtonClose ? _helper->viewNegativeTextColor( palette ):base );
+        const auto negativeSelected( buttonType == ButtonClose ? _helper->viewNegativeTextColor( palette ):selected );
 
         const bool invertNormalState( isCloseButton );
 
