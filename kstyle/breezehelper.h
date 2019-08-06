@@ -85,6 +85,18 @@ namespace Breeze
         QColor viewNegativeTextColor( const QPalette& palette ) const
         { return _viewNegativeTextBrush.brush( palette ).color(); }
         
+        //* view mouse over color
+        QColor buttonHoverColor( const QPalette& palette ) const
+        { return _buttonHoverBrush.brush( palette ).color(); }
+
+        //* view focus color
+        QColor buttonFocusColor( const QPalette& palette ) const
+        { return _buttonFocusBrush.brush( palette ).color(); }
+
+        //* view negative text color (used for close button)
+        QColor buttonNegativeTextColor( const QPalette& palette ) const
+        { return _buttonNegativeTextBrush.brush( palette ).color(); }
+        
         //* selection background color
         QColor selectionBackgroundColor( const QPalette& palette ) const
         { return _selectionBackgroundBrush.brush( palette ).color(); }
@@ -105,10 +117,10 @@ namespace Breeze
         QColor frameOutlineColor( const QPalette&, bool mouseOver = false, bool hasFocus = false, qreal opacity = AnimationData::OpacityInvalid, AnimationMode = AnimationNone ) const;
 
         //* focus outline color, using animations
-        QColor focusOutlineColor( const QPalette& ) const;
+        QColor viewFocusOutlineColor( const QPalette& ) const;
 
         //* hover outline color, using animations
-        QColor hoverOutlineColor( const QPalette& ) const;
+        QColor viewHoverOutlineColor( const QPalette& ) const;
 
         //* focus outline color, using animations
         QColor buttonFocusOutlineColor( const QPalette& ) const;
@@ -347,6 +359,9 @@ namespace Breeze
         KStatefulBrush _viewFocusBrush;
         KStatefulBrush _viewHoverBrush;
         KStatefulBrush _viewNegativeTextBrush;
+        KStatefulBrush _buttonFocusBrush;
+        KStatefulBrush _buttonHoverBrush;
+        KStatefulBrush _buttonNegativeTextBrush;
         KStatefulBrush _selectionBackgroundBrush;
         //@}
 
