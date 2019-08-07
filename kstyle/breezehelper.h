@@ -93,13 +93,17 @@ namespace Breeze
         QColor buttonNegativeTextColor( const QPalette& palette ) const
         { return _buttonNegativeTextBrush.brush( palette ).color(); }
         
-        //* selection background color
-        QColor selectionBackgroundColor( const QPalette& palette ) const
-        { return _selectionBackgroundBrush.brush( palette ).color(); }
-        
         //* selection alternate background color
         QColor selectionAlternateBackgroundColor( const QPalette& palette ) const
         { return _selectionAlternateBackgroundBrush.brush( palette ).color(); }
+        
+        //* selection focus color
+        QColor selectionFocusColor( const QPalette& palette ) const
+        { return _selectionFocusBrush.brush( palette ).color(); }
+        
+        //* selection mouse over color
+        QColor selectionHoverColor( const QPalette& palette ) const
+        { return _selectionHoverBrush.brush( palette ).color(); }
         
         //* shadow
         QColor shadowColor( const QPalette& palette ) const
@@ -156,6 +160,9 @@ namespace Breeze
 
         //* tool button color
         QColor toolButtonColor( const QPalette&, bool mouseOver, bool hasFocus, bool sunken, qreal opacity = AnimationData::OpacityInvalid, AnimationMode = AnimationNone ) const;
+        
+        //* side panel item color, using animations
+        QColor sidePanelItemBackgroundColor( const QPalette&, bool mouseOver, bool hasFocus, qreal opacity = AnimationData::OpacityInvalid, AnimationMode = AnimationNone ) const;
 
         //* slider outline color, using animations
         QColor sliderOutlineColor( const QPalette&, bool mouseOver, bool hasFocus, qreal opacity = AnimationData::OpacityInvalid, AnimationMode = AnimationNone ) const;
@@ -361,8 +368,9 @@ namespace Breeze
         KStatefulBrush _buttonFocusBrush;
         KStatefulBrush _buttonHoverBrush;
         KStatefulBrush _buttonNegativeTextBrush;
-        KStatefulBrush _selectionBackgroundBrush;
         KStatefulBrush _selectionAlternateBackgroundBrush;
+        KStatefulBrush _selectionFocusBrush;
+        KStatefulBrush _selectionHoverBrush;
         //@}
 
         //*@name windeco colors

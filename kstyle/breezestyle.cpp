@@ -3071,7 +3071,7 @@ namespace Breeze
         if( !StyleConfigData::sidePanelDrawFrame() && widget && widget->property( PropertyNames::sidePanelView ).toBool() )
         {
 
-            const auto outline( _helper->sidePanelOutlineColor( palette, hasFocus, opacity, mode ) );
+            const auto outline( _helper->frameOutlineColor( palette, mouseOver, hasFocus, opacity, mode ) );
             const bool reverseLayout( option->direction == Qt::RightToLeft );
             const Side side( reverseLayout ? SideRight : SideLeft );
             _helper->renderSidePanelFrame( painter, rect, outline, side );
@@ -3797,26 +3797,30 @@ namespace Breeze
             return true;
 
         }
+        
+        // update animation state
+        // mouse over takes precedence over focus
+        _animations->widgetStateEngine().updateState( widget, AnimationHover, mouseOver );
+        _animations->widgetStateEngine().updateState( widget, AnimationFocus, selected && !mouseOver );
+
+        const AnimationMode mode( _animations->widgetStateEngine().buttonAnimationMode( widget ) );
+        const qreal opacity( _animations->widgetStateEngine().buttonOpacity( widget ) );
 
         // render selection
         // define color
         QColor background;
         if( hasCustomBackground && hasSolidBackground ) background = viewItemOption->backgroundBrush.color();
-        else background = _helper->selectionBackgroundColor( palette );
+        else background = _helper->sidePanelItemBackgroundColor( palette, mouseOver, selected, opacity, mode );
         
         QColor outline = _helper->buttonFocusColor( palette );
         QColor sideLine = outline;
-        
-        // change color to implement mouse over
-        if( mouseOver && selected && !hasCustomBackground )
-        {            
-            background = _helper->buttonHoverColor( palette );
-        }
 
         // render
         // On sidebar panels, render it as a tabbar-looking item
         // otherwise use the default delegate
+        
         const bool reverseLayout( option->direction == Qt::RightToLeft );
+        
 //         qDebug() << "Widget:" << widget << "Shape:"<< rect //<< "Property" << widget->property()
 //                         << "Position:" << viewItemOption->viewItemPosition << "DecorationPos:" << viewItemOption->decorationPosition;
         if ( widget && widget->property( PropertyNames::sidePanelView ).toBool()
@@ -3832,12 +3836,6 @@ namespace Breeze
             _helper->renderSidePanelItem( painter, rect, background, sideLine, reverseLayout );
             
         } else {
-
-//             if( selected ) {
-//                 background = _helper->focusColor( palette );
-//             } else {
-//                 background = _helper->selectionBackgroundColor( palette );
-//             }
 
             if (qobject_cast<const QTableView *>(widget) 
                 || qobject_cast<const QListWidget *>(widget)
@@ -4694,8 +4692,8 @@ namespace Breeze
         // render hover and focus
         if( useStrongFocus && ( selected || sunken ) )
         {
-            QColor backgroundColor = _helper->selectionBackgroundColor( palette );
-            QColor outlineColor = _helper->buttonFocusColor( palette );
+            QColor backgroundColor = palette.color( QPalette::Highlight );
+            QColor outlineColor = _helper->viewFocusColor( palette );
             
             if( sunken ) {
                 _helper->renderMenuBarItem( painter, rect, backgroundColor, outlineColor );
@@ -4830,7 +4828,7 @@ namespace Breeze
         if( useStrongFocus && ( selected || sunken ) )
         {
 
-            const auto color = _helper->selectionBackgroundColor( palette );
+            const auto color = palette.color( QPalette::Highlight );
             const auto outlineColor = _helper->buttonFocusColor( palette );
             
             _helper->renderFocusRect( painter, rect.marginsRemoved(

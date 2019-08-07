@@ -65,8 +65,9 @@ namespace Breeze
         _buttonFocusBrush = KStatefulBrush( KColorScheme::Button, KColorScheme::FocusColor );
         _buttonHoverBrush = KStatefulBrush( KColorScheme::Button, KColorScheme::HoverColor );
         _buttonNegativeTextBrush = KStatefulBrush( KColorScheme::Button, KColorScheme::NegativeText );
-        _selectionBackgroundBrush = KStatefulBrush( KColorScheme::Selection, KColorScheme::NormalBackground );
         _selectionAlternateBackgroundBrush = KStatefulBrush( KColorScheme::Selection, KColorScheme::AlternateBackground );
+        _selectionFocusBrush = KStatefulBrush( KColorScheme::Selection, KColorScheme::FocusColor );
+        _selectionHoverBrush = KStatefulBrush( KColorScheme::Selection, KColorScheme::HoverColor );
 
         const QPalette palette( QApplication::palette() );
         const KConfigGroup group( _config->group( "WM" ) );
@@ -80,7 +81,7 @@ namespace Breeze
     QColor Helper::frameOutlineColor( const QPalette& palette, bool mouseOver, bool hasFocus, qreal opacity, AnimationMode mode ) const
     {
 
-        QColor outline( KColorUtils::mix( palette.color( QPalette::Window ), palette.color( QPalette::WindowText ), 0.25 ) );
+        QColor outline( KColorUtils::mix( palette.color( QPalette::Window ), palette.color( QPalette::WindowText ), 0.2 ) );
         const QColor focus( viewFocusColor( palette ) );
         const QColor hover( viewHoverColor( palette ) );
 
@@ -244,8 +245,9 @@ namespace Breeze
         QColor background( sunken ?
             KColorUtils::mix( palette.color( QPalette::Button ), palette.color( QPalette::ButtonText ), 0.2 ):
             palette.color( QPalette::Button ) );
-        const QColor focus( buttonFocusColor( palette ) );
-        const QColor hover( buttonHoverColor( palette ) );
+        const QColor focus( palette.color( QPalette::Highlight ) );
+        const QColor hover( selectionHoverColor( palette ) );
+        
 
         if( mode == AnimationHover )
         {
@@ -262,7 +264,7 @@ namespace Breeze
 
         } else if( hasFocus ) {
 
-            background = selectionBackgroundColor( palette );
+            background = focus;
 
         }
 
@@ -307,6 +309,37 @@ namespace Breeze
         }
 
         return outline;
+
+    }
+    
+    QColor Helper::sidePanelItemBackgroundColor( const QPalette& palette, bool mouseOver, bool hasFocus, qreal opacity, AnimationMode mode ) const
+    {
+
+        
+        const QColor focus( palette.color( QPalette::Highlight ) );
+        const QColor hover( selectionHoverColor( palette ) );
+        QColor background( focus );
+
+        if( mode == AnimationHover )
+        {
+
+            if( hasFocus ) background = KColorUtils::mix( focus, hover, opacity );
+
+        } else if( mouseOver && hasFocus ) {
+
+            background = hover;
+
+        } else if( mode == AnimationFocus ) {
+
+            background = KColorUtils::mix( background, focus, opacity );
+
+        } else if( hasFocus ) {
+
+            background = focus;
+
+        }
+
+        return background;
 
     }
 
@@ -638,10 +671,10 @@ namespace Breeze
         if( outline.isValid() )
         {
 
-            QLinearGradient gradient( frameRect.topLeft(), frameRect.bottomLeft() );
-            gradient.setColorAt( 0, outline.lighter( hasFocus ? 103:101 ) );
-            gradient.setColorAt( 1, outline.darker( hasFocus ? 110:103 ) );
-            painter->setPen( QPen( QBrush( gradient ), 1.0 ) );
+//             QLinearGradient gradient( frameRect.topLeft(), frameRect.bottomLeft() );
+//             gradient.setColorAt( 0, outline.lighter( hasFocus ? 103:101 ) );
+//             gradient.setColorAt( 1, outline.darker( hasFocus ? 110:103 ) );
+            painter->setPen( QPen( outline ) );
 
             frameRect.adjust( 0.5, 0.5, -0.5, -0.5 );
             radius = qMax( radius - 1, qreal( 0.0 ) );
@@ -652,10 +685,10 @@ namespace Breeze
         if( color.isValid() )
         {
 
-            QLinearGradient gradient( frameRect.topLeft(), frameRect.bottomLeft() );
-            gradient.setColorAt( 0, color.lighter( hasFocus ? 103:101 ) );
-            gradient.setColorAt( 1, color.darker( hasFocus ? 110:103 ) );
-            painter->setBrush( gradient );
+//             QLinearGradient gradient( frameRect.topLeft(), frameRect.bottomLeft() );
+//             gradient.setColorAt( 0, color.lighter( hasFocus ? 103:101 ) );
+//             gradient.setColorAt( 1, color.darker( hasFocus ? 110:103 ) );
+            painter->setBrush( color );
 
         } else painter->setBrush( Qt::NoBrush );
 
