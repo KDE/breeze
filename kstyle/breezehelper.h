@@ -80,26 +80,26 @@ namespace Breeze
         //* view focus color
         QColor viewFocusColor( const QPalette& palette ) const
         { return _viewFocusBrush.brush( palette ).color(); }
-
-        //* view negative text color (used for close button)
-        QColor viewNegativeTextColor( const QPalette& palette ) const
-        { return _viewNegativeTextBrush.brush( palette ).color(); }
         
-        //* view mouse over color
+        //* button mouse over color
         QColor buttonHoverColor( const QPalette& palette ) const
         { return _buttonHoverBrush.brush( palette ).color(); }
 
-        //* view focus color
+        //* button focus color
         QColor buttonFocusColor( const QPalette& palette ) const
         { return _buttonFocusBrush.brush( palette ).color(); }
 
-        //* view negative text color (used for close button)
+        //* button negative text color (used for close button)
         QColor buttonNegativeTextColor( const QPalette& palette ) const
         { return _buttonNegativeTextBrush.brush( palette ).color(); }
         
         //* selection background color
         QColor selectionBackgroundColor( const QPalette& palette ) const
         { return _selectionBackgroundBrush.brush( palette ).color(); }
+        
+        //* selection alternate background color
+        QColor selectionAlternateBackgroundColor( const QPalette& palette ) const
+        { return _selectionAlternateBackgroundBrush.brush( palette ).color(); }
         
         //* shadow
         QColor shadowColor( const QPalette& palette ) const
@@ -358,11 +358,11 @@ namespace Breeze
         //@{
         KStatefulBrush _viewFocusBrush;
         KStatefulBrush _viewHoverBrush;
-        KStatefulBrush _viewNegativeTextBrush;
         KStatefulBrush _buttonFocusBrush;
         KStatefulBrush _buttonHoverBrush;
         KStatefulBrush _buttonNegativeTextBrush;
         KStatefulBrush _selectionBackgroundBrush;
+        KStatefulBrush _selectionAlternateBackgroundBrush;
         //@}
 
         //*@name windeco colors

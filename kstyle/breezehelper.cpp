@@ -62,11 +62,11 @@ namespace Breeze
     {
         _viewFocusBrush = KStatefulBrush( KColorScheme::View, KColorScheme::FocusColor );
         _viewHoverBrush = KStatefulBrush( KColorScheme::View, KColorScheme::HoverColor );
-        _viewNegativeTextBrush = KStatefulBrush( KColorScheme::View, KColorScheme::NegativeText );
         _buttonFocusBrush = KStatefulBrush( KColorScheme::Button, KColorScheme::FocusColor );
         _buttonHoverBrush = KStatefulBrush( KColorScheme::Button, KColorScheme::HoverColor );
         _buttonNegativeTextBrush = KStatefulBrush( KColorScheme::Button, KColorScheme::NegativeText );
         _selectionBackgroundBrush = KStatefulBrush( KColorScheme::Selection, KColorScheme::NormalBackground );
+        _selectionAlternateBackgroundBrush = KStatefulBrush( KColorScheme::Selection, KColorScheme::AlternateBackground );
 
         const QPalette palette( QApplication::palette() );
         const KConfigGroup group( _config->group( "WM" ) );
