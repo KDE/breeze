@@ -271,15 +271,48 @@ namespace Breeze
         return background;
 
     }
+    
+    //____________________________________________________________________
+    QColor Helper::toolButtonBackgroundColor( const QPalette& palette, bool mouseOver, bool hasFocus, bool sunken, qreal opacity, AnimationMode mode ) const
+    {
+
+        QColor background;
+        const QColor hoverColor( this->selectionHoverColor( palette ) );
+        const QColor focusColor( palette.color( QPalette::Highlight ) );
+
+        // hover takes precedence over focus
+        if( mode == AnimationHover )
+        {
+
+            if( hasFocus || sunken ) background = KColorUtils::mix( focusColor, hoverColor, opacity );
+            else background = alphaColor( hoverColor, opacity );
+
+        } else if( mouseOver ) {
+
+            background = hoverColor;
+
+        } else if( mode == AnimationFocus ) {
+
+            background = alphaColor( focusColor, opacity );
+
+        } else if( hasFocus || sunken ) {
+
+            background = focusColor;
+
+        }
+
+        return background;
+
+    }
 
     //____________________________________________________________________
-    QColor Helper::toolButtonColor( const QPalette& palette, bool mouseOver, bool hasFocus, bool sunken, qreal opacity, AnimationMode mode ) const
+    QColor Helper::toolButtonFrameColor( const QPalette& palette, bool mouseOver, bool hasFocus, bool sunken, qreal opacity, AnimationMode mode ) const
     {
 
         QColor outline;
         const QColor hoverColor( this->buttonHoverColor( palette ) );
         const QColor focusColor( this->buttonFocusColor( palette ) );
-        const QColor sunkenColor = alphaColor( palette.color( QPalette::WindowText ), 0.2 );
+        const QColor sunkenColor = palette.color( QPalette::Highlight );
 
         // hover takes precedence over focus
         if( mode == AnimationHover )
@@ -316,14 +349,14 @@ namespace Breeze
     {
 
         
-        const QColor focus( palette.color( QPalette::Highlight ) );
+        const QColor selection( palette.color( QPalette::Highlight ) );
         const QColor hover( selectionHoverColor( palette ) );
-        QColor background( focus );
+        QColor background( selection );
 
         if( mode == AnimationHover )
         {
 
-            if( hasFocus ) background = KColorUtils::mix( focus, hover, opacity );
+            if( hasFocus ) background = KColorUtils::mix( selection, hover, opacity );
 
         } else if( mouseOver && hasFocus ) {
 
@@ -331,11 +364,11 @@ namespace Breeze
 
         } else if( mode == AnimationFocus ) {
 
-            background = KColorUtils::mix( background, focus, opacity );
+            background = KColorUtils::mix( background, selection, opacity );
 
         } else if( hasFocus ) {
 
-            background = focus;
+            background = selection;
 
         }
 
@@ -698,41 +731,37 @@ namespace Breeze
     }
 
     //______________________________________________________________________________
-    void Helper::renderToolButtonFrame(
+    void Helper::renderToolButton(
         QPainter* painter, const QRect& rect,
-        const QColor& color, bool sunken ) const
+        const QColor& background, const QColor& outline, bool sunken ) const
     {
 
         // do nothing for invalid color
-        if( !color.isValid() ) return;
+        if( !background.isValid() || !outline.isValid() ) return;
 
         // setup painter
         painter->setRenderHints( QPainter::Antialiasing );
 
-        const QRectF baseRect( rect );
+        QRectF copyRect( rect );
+        copyRect.adjust( 1.5, 1.5, -1.5, -1.5 );
+        
+        const qreal radius( frameRadius(-0.5) );
+
+        painter->setPen( outline );
 
         if( sunken )
         {
 
-            const qreal radius( frameRadius() );
-
-            painter->setPen( Qt::NoPen );
-            painter->setBrush( color );
-
-            const QRectF contentRect( baseRect.adjusted( 1, 1, -1, -1 ) );
-            painter->drawRoundedRect( contentRect, radius, radius );
+            painter->setBrush( background );
 
         } else {
 
-            const qreal radius( frameRadius(-0.5) );
-
-            painter->setPen( color );
             painter->setBrush( Qt::NoBrush );
-            const QRectF outlineRect( baseRect.adjusted( 1.5, 1.5, -1.5, -1.5 ) );
-            painter->drawRoundedRect( outlineRect, radius, radius );
 
         }
-
+        
+        painter->drawRoundedRect( copyRect, radius, radius );
+        
     }
 
     //______________________________________________________________________________

@@ -3524,8 +3524,9 @@ namespace Breeze
 
             // define colors and render
             const auto& palette( option->palette );
-            const auto color( _helper->toolButtonColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
-            _helper->renderToolButtonFrame( painter, rect, color, sunken );
+            const auto outline( _helper->toolButtonFrameColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
+            const auto background( _helper->toolButtonBackgroundColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
+            _helper->renderToolButton( painter, rect, background, outline, sunken );
 
         } else {
 
@@ -3599,8 +3600,9 @@ namespace Breeze
 
         } else {
 
-            const auto color( _helper->toolButtonColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
-            _helper->renderToolButtonFrame( painter, rect, color, sunken );
+            const auto outline( _helper->toolButtonFrameColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
+            const auto background( _helper->toolButtonBackgroundColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
+            _helper->renderToolButton( painter, rect, background, outline, sunken );
 
         }
 
@@ -3804,7 +3806,9 @@ namespace Breeze
         _animations->widgetStateEngine().updateState( widget, AnimationFocus, selected && !mouseOver );
 
         const AnimationMode mode( _animations->widgetStateEngine().buttonAnimationMode( widget ) );
+        qDebug() << "Mode:" << mode;
         const qreal opacity( _animations->widgetStateEngine().buttonOpacity( widget ) );
+        qDebug() << "Opacity:" << opacity;
 
         // render selection
         // define color
@@ -4400,7 +4404,7 @@ namespace Breeze
         const bool mouseOver( enabled && (option->state & State_MouseOver) );
         const bool flat( state & State_AutoRaise );
 
-        // focus flag is set to match the background color in either renderButtonFrame or renderToolButtonFrame
+        // focus flag is set to match the background color in either renderButtonFrame or renderToolButton
         bool hasFocus( false );
         if( flat ) hasFocus = enabled && !mouseOver && (option->state & State_HasFocus);
         else hasFocus = enabled && !mouseOver && (option->state & (State_HasFocus|State_Sunken) );
@@ -4693,7 +4697,7 @@ namespace Breeze
         if( useStrongFocus && ( selected || sunken ) )
         {
             QColor backgroundColor = palette.color( QPalette::Highlight );
-            QColor outlineColor = _helper->viewFocusColor( palette );
+            QColor outlineColor = _helper->selectionFocusColor( palette );
             
             if( sunken ) {
                 _helper->renderMenuBarItem( painter, rect, backgroundColor, outlineColor );
@@ -6254,8 +6258,9 @@ namespace Breeze
                 if( flat ) {
 
                     // define colors and render
-                    const auto color( _helper->toolButtonColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
-                    _helper->renderToolButtonFrame( painter, rect, color, sunken );
+                    const auto outline( _helper->toolButtonFrameColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
+                    const auto background( _helper->toolButtonBackgroundColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
+                    _helper->renderToolButton( painter, rect, background, outline, sunken );
 
                 } else {
 
