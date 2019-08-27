@@ -15,6 +15,75 @@
 namespace Breeze
 {
 
+//// //// //// //// /// /// /// // // /  /   /    /
+
+class PropertyWrapperBase {
+public:
+    PropertyWrapperBase(QObject *object, QByteArray name): _object(object), _name(std::move(name)) {}
+    QByteArray name() const { return _name; }
+    QObject * object() const { return _object; }
+
+protected:
+    QObject *_object;
+    const QByteArray _name;
+};
+
+template<typename T>
+class PropertyWrapper: public PropertyWrapperBase {
+public:
+    using PropertyWrapperBase::PropertyWrapperBase;
+    PropertyWrapper(QObject *_object, QByteArray _name): PropertyWrapperBase(_object, std::move(_name))
+    {
+        QVariant value = object()->property(name());
+        if (!value.isValid()) {
+            object()->setProperty(name(), T());
+        }
+    }
+
+    explicit PropertyWrapper(const PropertyWrapper<T> &other) : PropertyWrapperBase(other._object, other._name) {}
+
+    operator T() const { return _object->property(_name).template value<T>(); }
+    PropertyWrapper<T> & operator =(const T &value) { _object->setProperty(_name, value); return *this; }
+
+private:
+    PropertyWrapper<T> & operator =(const PropertyWrapper &) { return *this; }
+};
+
+struct AbstractVariantInterpolator {
+    virtual ~AbstractVariantInterpolator() = default;
+    virtual QVariant interpolated(const QVariant &from, const QVariant &to, qreal progress) const = 0;
+};
+
+// QPropertyAnimation with support for passing custom interpolators as parameter and single
+// PropertyWrapper instead of object + property parameters.
+class CustomPropertyAnimation: public QPropertyAnimation {
+public:
+    CustomPropertyAnimation(const PropertyWrapperBase &property, QObject *parent = nullptr):
+        QPropertyAnimation(property.object(), property.name(), parent), _interpolator(nullptr) {}
+
+    CustomPropertyAnimation(const PropertyWrapperBase &property,
+                            AbstractVariantInterpolator *interpolator,
+                            QObject *parent = nullptr)
+        : QPropertyAnimation(property.object(), property.name(), parent)
+        , _interpolator(interpolator)
+    {}
+
+    ~CustomPropertyAnimation() override { delete _interpolator; }
+
+protected:
+    QVariant interpolated(const QVariant &from, const QVariant &to, qreal progress) const override {
+        if (_interpolator != nullptr) {
+            return _interpolator->interpolated(from, to, progress);
+        }
+        return QPropertyAnimation::interpolated(from, to, progress);
+    }
+
+private:
+    AbstractVariantInterpolator *_interpolator;
+};
+
+//// //// //// //// /// /// /// // // /  /   /    /
+
 //___________________________________________________________________________________
 void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, const QWidget* widget, bool isRadioButton) const
 {
@@ -140,22 +209,21 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
 
         const QPoint centerOffset = {rect.width()/2 + rect.x(), rect.height()/2 + rect.y()};
 
-        static const auto rotate = [](const QPointF &p, qreal a, const QPointF &c) {
-            const qreal x = cos(a) * (p.x() - c.x()) - sin(a) * (p.y() - c.y()) + c.x();
-            const qreal y = sin(a) * (p.x() - c.x()) + cos(a) * (p.y() - c.y()) + c.y();
-            return QPointF(x, y);
-        };
-
         static const auto makePropertyAnimation =
-            [](QObject *data, const char *property, const QVariant &start,
+            [](const PropertyWrapperBase &property, const QVariant &start,
                const QVariant &end = QVariant(), unsigned duration = 0,
-               const QEasingCurve &easing = QEasingCurve::Linear)
+               const QEasingCurve &easing = QEasingCurve::Linear,
+               AbstractVariantInterpolator *interpolator = nullptr,
+               QPropertyAnimation **outPtr = nullptr)
         {
-            QPropertyAnimation *p = new QPropertyAnimation(data, property);
+            QPropertyAnimation *p = new CustomPropertyAnimation(property, interpolator);
             p->setStartValue(start);
             p->setEndValue(end.isValid() ? end : start);
             p->setDuration(duration);
             p->setEasingCurve(easing);
+            if (outPtr != nullptr) {
+                *outPtr = p;
+            }
             return p;
         };
         static const auto makeParallelAnimationGroup = [](std::initializer_list<QAbstractAnimation *> animations)
@@ -191,7 +259,7 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
 
         static const QPointF invalidPointF(qQNaN(), qQNaN());
         // FIXME: use duratoin from the new engine after the code is moved
-        static const unsigned totalDuration = _animations->multiStateEngine().duration();
+        static const unsigned totalDuration = 1000;//_animations->multiStateEngine().duration();
 
         DataMap<MultiStateData>::Value dataPtr = _animations->multiStateEngine().data(widget);
         if (dataPtr.isNull()) {
@@ -204,176 +272,180 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
             return qAbs(b.x() - a.x()) < 0.1 && qAbs(b.y() - a.y()) < 0.1;
         };
 
-        // mark
-        if(checkBoxState == CheckOn || previousCheckBoxState == CheckOn) {
-            painter->setBrush(Qt::NoBrush);
-            painter->setPen(QPen(foreground, 2, Qt::SolidLine, Qt::FlatCap, Qt::MiterJoin));
+        ////////////////////////////////////////////////////////////////////////////////
 
-            static const char PROPERTIES[][3] = {"p0", "p1", "p2"};
+        std::array<PropertyWrapper<QPointF>, 3> pPos = {{
+            {data, "p0.pos"},
+            {data, "p1.pos"},
+            {data, "p2.pos"}
+        }};
+        std::array<PropertyWrapper<qreal>, 3> pRadius = {{
+            {data, "p0.radius"},
+            {data, "p1.radius"},
+            {data, "p2.radius"}
+        }};
+        std::array<PropertyWrapper<QPointF>, 3> lPPos = {{
+            {data, "lp0.pos"},
+            {data, "lp1.pos"},
+            {data, "lp2.pos"}
+        }};
+        PropertyWrapper<QPointF> checkPos = {data, "cp.pos"};
 
-            if (!data->anims.contains(0)) {
-                static const QPointF rotationOrigin = {-1, 3};
-                static const qreal rotationAngle = 2 * M_PI / 8; // 45°
-                // TODO: draw as polygon instead of line
-                static const QPointF BASE_POINTS[] = {
-                    rotate({-6,  3}, rotationAngle, rotationOrigin),
-                    rotate({-1,  3}, rotationAngle, rotationOrigin),
-                    rotate({-1, -6}, rotationAngle, rotationOrigin),
-                };
+        static const std::array<QPointF, 3> refLPPos    = {{{-4, 0}, {-1, 3}, {4, -2}}};
+        static const std::array<QPointF, 3> refPPos     = {{{-4, 0}, {0, 0}, {4, 0}}};
 
-                data->setProperty(PROPERTIES[0], QPointF());
-                data->setProperty(PROPERTIES[1], QPointF());
-                data->setProperty(PROPERTIES[2], QPointF());
-                auto *onAnimation = makeSequentialAnimationGroup({
-                    makeParallelAnimationGroup({
-                        makePropertyAnimation(data, PROPERTIES[0], BASE_POINTS[0], BASE_POINTS[0], 0),
-                        makePropertyAnimation(data, PROPERTIES[1], BASE_POINTS[0], BASE_POINTS[1], 0.5 * totalDuration, QEasingCurve::OutQuad),
-                        makePropertyAnimation(data, PROPERTIES[2], BASE_POINTS[0], BASE_POINTS[1], 0.5 * totalDuration, QEasingCurve::OutQuad),
-                    }),
-                    new QPauseAnimation(0.2 * totalDuration),
-                    makePropertyAnimation(data, PROPERTIES[2], BASE_POINTS[1], BASE_POINTS[2], 0.3 * totalDuration),
-                });
-                connectToWidget(onAnimation, widget);
-                onAnimation->setParent(data);
-                data->anims[0] = onAnimation;
+        static const std::array<float, 3> startRadius   = {{0, 0, 0}};
+        static const std::array<float, 3> endRadius     = {{1, 1, 1}};
 
-                auto *offAnimation = makeSequentialAnimationGroup({
-                    makePropertyAnimation(data, PROPERTIES[0], BASE_POINTS[0], BASE_POINTS[1], 0.5 * totalDuration, QEasingCurve::OutQuad),
-                    new QPauseAnimation(0.2 * totalDuration),
-                    makeParallelAnimationGroup({
-                        makePropertyAnimation(data, PROPERTIES[0], BASE_POINTS[1], BASE_POINTS[2], 0.3 * totalDuration),
-                        makePropertyAnimation(data, PROPERTIES[1], BASE_POINTS[1], BASE_POINTS[2], 0.3 * totalDuration),
-                    }),
-                });
-                connectToWidget(offAnimation, widget);
-                offAnimation->setParent(data);
-                data->anims[1] = offAnimation;
-            }
-            if (checkBoxState == CheckOn && startAnim) {
-                data->anims[0]->start();
-            }
-            if (previousCheckBoxState == CheckOn && startAnim) {
-                data->anims[1]->start();
-            }
+        enum AnimationId {
+            OffToOn,
+            OnToOff,
 
-            QPainterPath pp;
+            OffToPartial,
+            PartialToOff,
 
-            const QPointF p[] = {
-                data->property(PROPERTIES[0]).toPointF(),
-                data->property(PROPERTIES[1]).toPointF(),
-                data->property(PROPERTIES[2]).toPointF(),
-            };
+            PartialToOn,
+            OnToPartial,
+        };
 
-            pp.moveTo(p[0]);
-            if (!comparePointF(p[0], p[1])) {
-                pp.lineTo(p[1]);
-            }
-            if (!comparePointF(p[1], p[2])) {
-                pp.lineTo(p[2]);
-            }
-            pp.translate(centerOffset);
+        if (!data->anims.contains(OffToOn)) { // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+            auto *onAnimation = makeSequentialAnimationGroup({
+                makePropertyAnimation(lPPos[0], refLPPos[0]),
+                makePropertyAnimation(lPPos[2], refLPPos[0]),
+                makePropertyAnimation(lPPos[1], refLPPos[0], refLPPos[1], 0.4 * totalDuration, QEasingCurve::InOutCubic),
+                new QPauseAnimation(0.1 * totalDuration),
+                makePropertyAnimation(lPPos[2], refLPPos[1], refLPPos[2], 0.5 * totalDuration, QEasingCurve::InOutCubic)
+            });
+            connectToWidget(onAnimation, widget);
+            onAnimation->setParent(data);
+            data->anims[OffToOn] = onAnimation;
 
-            painter->drawPath(pp);
+            auto *offAnimation = makeSequentialAnimationGroup({
+                makePropertyAnimation(lPPos[0], refLPPos[0], refLPPos[1], 0.5 * totalDuration, QEasingCurve::InOutCubic),
+                new QPauseAnimation(0.1 * totalDuration),
+                makeParallelAnimationGroup({
+                    makePropertyAnimation(lPPos[0], refLPPos[1], refLPPos[2], 0.4 * totalDuration, QEasingCurve::InOutCubic),
+                    makePropertyAnimation(lPPos[1], refLPPos[1], refLPPos[2], 0.4 * totalDuration, QEasingCurve::InOutCubic),
+                })
+            });
+            connectToWidget(offAnimation, widget);
+            offAnimation->setParent(data);
+            data->anims[OnToOff] = offAnimation;
         }
-        if(checkBoxState == CheckPartial || previousCheckBoxState == CheckPartial) {
-            static const QPointF pointsCenter = {-1, 3};
-            static const qreal pointsAngle = 2 * M_PI / 8; // 45°
-            static const QPointF points[] = {
-                rotate({-5, 3}, pointsAngle, pointsCenter),
-                rotate({-1, 3}, pointsAngle, pointsCenter),
-                rotate({-1, -1}, pointsAngle, pointsCenter),
-                rotate({-1, -5}, pointsAngle, pointsCenter),
-            };
-
-            static const char PROP_NAMES[][3] = {"r0", "r1", "r2", "r3", "a0", "a1", "a2", "a3"};
-            static const QVariant PROP_INIT_VALUES_ON[] = {0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0};
-            static const QVariant PROP_INIT_VALUES_OFF[] = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
-
-            if (!data->anims.contains(2)) {
-                auto *onAnimation = makeParallelAnimationGroup({
-                    makePropertyAnimation(data, PROP_NAMES[0], 0.0, 1.0, 0.4 * totalDuration, QEasingCurve::OutBack),
+        if (!data->anims.contains(OffToPartial)) { // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+            auto *onAnimation = makeSequentialAnimationGroup({
+                makePropertyAnimation(pPos[0], refPPos[0]),
+                makePropertyAnimation(pPos[1], refPPos[1]),
+                makePropertyAnimation(pPos[2], refPPos[2]),
+                makeParallelAnimationGroup({
+                    makePropertyAnimation(pRadius[0], startRadius[0], endRadius[0], 0.6 * totalDuration, QEasingCurve::OutCubic),
                     makeSequentialAnimationGroup({
                         new QPauseAnimation(0.2 * totalDuration),
-                        makePropertyAnimation(data, PROP_NAMES[1], 0.0, 1.0, 0.4 * totalDuration, QEasingCurve::OutBack),
+                        makePropertyAnimation(pRadius[1], startRadius[1], endRadius[1], 0.6 * totalDuration, QEasingCurve::OutCubic),
                     }),
                     makeSequentialAnimationGroup({
                         new QPauseAnimation(0.4 * totalDuration),
-                        makePropertyAnimation(data, PROP_NAMES[2], 0.0, 1.0, 0.4 * totalDuration, QEasingCurve::OutBack),
+                        makePropertyAnimation(pRadius[2], startRadius[2], endRadius[2], 0.6 * totalDuration, QEasingCurve::OutCubic),
                     }),
-                    makeSequentialAnimationGroup({
-                        new QPauseAnimation(0.6 * totalDuration),
-                        makePropertyAnimation(data, PROP_NAMES[3], 0.0, 1.0, 0.4 * totalDuration, QEasingCurve::OutBack),
-                    }),
-                });
-                connectToWidget(onAnimation, widget);
-                onAnimation->setParent(data);
-                data->anims[2] = onAnimation;
+                }),
+            });
+            connectToWidget(onAnimation, widget);
+            onAnimation->setParent(data);
+            data->anims[OffToPartial] = onAnimation;
 
-                auto *offAnimation = makeParallelAnimationGroup({
-                    makeParallelAnimationGroup({
-                        makePropertyAnimation(data, PROP_NAMES[0], 1.0, 4.0, 0.4 * totalDuration, QEasingCurve::OutCubic),
-                        makePropertyAnimation(data, PROP_NAMES[4], 1.0, 0.0, 0.4 * totalDuration, QEasingCurve::OutCubic),
-                    }),
-                    makeSequentialAnimationGroup({
-                        new QPauseAnimation(0.2 * totalDuration),
-                        makeParallelAnimationGroup({
-                            makePropertyAnimation(data, PROP_NAMES[1], 1.0, 4.0, 0.4 * totalDuration, QEasingCurve::OutCubic),
-                            makePropertyAnimation(data, PROP_NAMES[5], 1.0, 0.0, 0.4 * totalDuration, QEasingCurve::OutCubic),
-                        }),
-                    }),
-                    makeSequentialAnimationGroup({
-                        new QPauseAnimation(0.4 * totalDuration),
-                        makeParallelAnimationGroup({
-                            makePropertyAnimation(data, PROP_NAMES[2], 1.0, 4.0, 0.4 * totalDuration, QEasingCurve::OutCubic),
-                            makePropertyAnimation(data, PROP_NAMES[6], 1.0, 0.0, 0.4 * totalDuration, QEasingCurve::OutCubic),
-                        }),
-                    }),
-                    makeSequentialAnimationGroup({
-                        new QPauseAnimation(0.6 * totalDuration),
-                        makeParallelAnimationGroup({
-                            makePropertyAnimation(data, PROP_NAMES[3], 1.0, 4.0, 0.4 * totalDuration, QEasingCurve::OutCubic),
-                            makePropertyAnimation(data, PROP_NAMES[7], 1.0, 0.0, 0.4 * totalDuration, QEasingCurve::OutCubic),
-                        }),
-                    }),
-                });
-                connectToWidget(offAnimation, widget);
-                offAnimation->setParent(data);
-                data->anims[3] = offAnimation;
-            }
-            if (checkBoxState == CheckPartial && startAnim) {
-                for (int i = 0; i < sizeof(PROP_NAMES)/sizeof(*PROP_NAMES); ++i) {
-                    data->setProperty(PROP_NAMES[i], PROP_INIT_VALUES_ON[i]);
-                }
-                data->anims[2]->start();
-            }
-            if (previousCheckBoxState == CheckPartial && startAnim) {
-                for (int i = 0; i < sizeof(PROP_NAMES)/sizeof(*PROP_NAMES); ++i) {
-                    data->setProperty(PROP_NAMES[i], PROP_INIT_VALUES_OFF[i]);
-                }
-                data->anims[3]->start();
-            }
+            auto *offAnimation = makeParallelAnimationGroup({
+                makePropertyAnimation(pRadius[0], endRadius[0], startRadius[0], 0.6 * totalDuration, QEasingCurve::OutCubic),
+                makeSequentialAnimationGroup({
+                    new QPauseAnimation(0.2 * totalDuration),
+                    makePropertyAnimation(pRadius[1], endRadius[1], startRadius[1], 0.6 * totalDuration, QEasingCurve::OutCubic),
+                }),
+                makeSequentialAnimationGroup({
+                    new QPauseAnimation(0.4 * totalDuration),
+                    makePropertyAnimation(pRadius[2], endRadius[2], startRadius[2], 0.6 * totalDuration, QEasingCurve::OutCubic),
+                }),
+            });
+            connectToWidget(offAnimation, widget);
+            offAnimation->setParent(data);
+            data->anims[PartialToOff] = offAnimation;
+        }
+        if (!data->anims.contains(PartialToOn)) { // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+            auto *onAnimation = makeSequentialAnimationGroup({
+                makePropertyAnimation(lPPos[0], refLPPos[0]),
+                makePropertyAnimation(lPPos[2], refLPPos[0]),
+                makePropertyAnimation(pPos[0], refPPos[0]),
+                makePropertyAnimation(pPos[1], refPPos[1]),
+                makePropertyAnimation(pPos[2], refPPos[2]),
 
-            painter->setPen(Qt::NoPen);
+                makeParallelAnimationGroup({
+                    makePropertyAnimation(lPPos[1], refLPPos[0], refLPPos[1], 0.4 * totalDuration, QEasingCurve::InOutCubic),
+                    makePropertyAnimation(pPos[1],  refPPos[1],  refLPPos[1], 0.5 * totalDuration, QEasingCurve::InOutCubic),
+                    makePropertyAnimation(pPos[2],  refPPos[2],  refLPPos[1], 0.5 * totalDuration, QEasingCurve::InOutCubic),
+                    makePropertyAnimation(pRadius[1], endRadius[1], endRadius[1] * sqrt(2), 0.5 * totalDuration, QEasingCurve::InOutCubic),
+                    makePropertyAnimation(pRadius[2], endRadius[2], endRadius[2] * sqrt(2), 0.5 * totalDuration, QEasingCurve::InOutCubic),
+                }),
+                makeParallelAnimationGroup({
+                    makePropertyAnimation(lPPos[2], refLPPos[1], refLPPos[2], 0.5 * totalDuration, QEasingCurve::InOutCubic),
+                    makePropertyAnimation(pRadius[1], endRadius[1] * sqrt(2), endRadius[1], 0.5 * totalDuration, QEasingCurve::InOutCubic),
+                    makePropertyAnimation(pRadius[2], endRadius[2] * sqrt(2), endRadius[2], 0.5 * totalDuration, QEasingCurve::InOutCubic),
+                    makePropertyAnimation(pPos[2], refLPPos[1],  refLPPos[2], 0.5 * totalDuration, QEasingCurve::InOutCubic),
+                }),
 
-            qreal r[] = {
-                data->property(PROP_NAMES[0]).toReal(),
-                data->property(PROP_NAMES[1]).toReal(),
-                data->property(PROP_NAMES[2]).toReal(),
-                data->property(PROP_NAMES[3]).toReal(),
-            };
-            qreal a[] = {
-                data->property(PROP_NAMES[4]).toReal(),
-                data->property(PROP_NAMES[5]).toReal(),
-                data->property(PROP_NAMES[6]).toReal(),
-                data->property(PROP_NAMES[7]).toReal(),
-            };
+                makePropertyAnimation(pRadius[0], 0),
+                makePropertyAnimation(pRadius[1], 0),
+                makePropertyAnimation(pRadius[2], 0),
+            });
+            connectToWidget(onAnimation, widget);
+            onAnimation->setParent(data);
+            data->anims[PartialToOn] = onAnimation;
 
-            for (int i = 0; i < sizeof(points)/sizeof(*points); ++i) {
-                QColor brush = foreground;
-                brush.setAlphaF(a[i]);
-                painter->setBrush(brush);
-                painter->drawEllipse(points[i] + centerOffset, r[i], r[i]);
-            }
+            auto *offAnimation = makeSequentialAnimationGroup({
+                makePropertyAnimation(pRadius[0], 0),
+                makePropertyAnimation(pRadius[2], 0),
+                makeParallelAnimationGroup({
+                    makePropertyAnimation(lPPos[0], refLPPos[0], refLPPos[1], 0.4 * totalDuration, QEasingCurve::InOutCubic),
+                    makePropertyAnimation(lPPos[2], refLPPos[2], refLPPos[1], 0.4 * totalDuration, QEasingCurve::InOutCubic),
+
+                    makePropertyAnimation(checkPos, QPointF{0,0}, refPPos[1] - refLPPos[1], 0.4 * totalDuration, QEasingCurve::InOutCubic),
+                    makePropertyAnimation(pPos[1], refLPPos[1], refPPos[1], 0.4 * totalDuration, QEasingCurve::InOutCubic),
+                    makePropertyAnimation(pRadius[1], startRadius[1], endRadius[1] * sqrt(3), 0.4 * totalDuration, QEasingCurve::InOutCubic),
+                }),
+                new QPauseAnimation(0.1 * totalDuration),
+                makeParallelAnimationGroup({
+                    makePropertyAnimation(pRadius[0], endRadius[0] * sqrt(3), endRadius[0], 0.5 * totalDuration, QEasingCurve::InOutCubic),
+                    makePropertyAnimation(pRadius[1], endRadius[1] * sqrt(3), endRadius[0], 0.5 * totalDuration, QEasingCurve::InOutCubic),
+                    makePropertyAnimation(pRadius[2], endRadius[2] * sqrt(3), endRadius[0], 0.5 * totalDuration, QEasingCurve::InOutCubic),
+                    makePropertyAnimation(pPos[0], refPPos[1], refPPos[0], 0.5 * totalDuration, QEasingCurve::InOutCubic),
+                    makePropertyAnimation(pPos[2], refPPos[1], refPPos[2], 0.5 * totalDuration, QEasingCurve::InOutCubic),
+                }),
+                makePropertyAnimation(checkPos, QPointF{0,0}),
+            });
+            connectToWidget(offAnimation, widget);
+            offAnimation->setParent(data);
+            data->anims[OnToPartial] = offAnimation;
+        }
+
+        if (startAnim) {
+            if (previousCheckBoxState == CheckOff       && checkBoxState == CheckOn)        { data->anims[OffToOn]->start(); }
+            if (previousCheckBoxState == CheckOn        && checkBoxState == CheckOff)       { data->anims[OnToOff]->start(); }
+            if (previousCheckBoxState == CheckOff       && checkBoxState == CheckPartial)   { data->anims[OffToPartial]->start(); }
+            if (previousCheckBoxState == CheckPartial   && checkBoxState == CheckOff)       { data->anims[PartialToOff]->start(); }
+            if (previousCheckBoxState == CheckPartial   && checkBoxState == CheckOn)        { data->anims[PartialToOn]->start(); }
+            if (previousCheckBoxState == CheckOn        && checkBoxState == CheckPartial)   { data->anims[OnToPartial]->start(); }
+        }
+
+        painter->setBrush(Qt::NoBrush);
+        painter->setPen(QPen(foreground, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+        QPainterPath pp;
+        pp.moveTo(lPPos[0] + centerOffset);
+        if (!comparePointF(lPPos[1], lPPos[0])) { pp.lineTo(lPPos[1] + centerOffset); }
+        if (!comparePointF(lPPos[2], lPPos[0])) { pp.lineTo(lPPos[2] + centerOffset); }
+        pp.translate(checkPos);
+        painter->drawPath(pp);
+
+        painter->setPen(Qt::NoPen);
+        for (int i = 0; i < 3; ++i) {
+            painter->setBrush(foreground);
+            painter->drawEllipse(pPos[i] + centerOffset, pRadius[i], pRadius[i]);
         }
     }
 }
