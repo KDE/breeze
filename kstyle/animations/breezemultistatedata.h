@@ -25,6 +25,75 @@
 namespace Breeze
 {
 
+//// //// //// //// /// /// /// // // /  /   /    /
+
+class PropertyWrapperBase {
+public:
+    PropertyWrapperBase(QObject *object, QByteArray name): _object(object), _name(std::move(name)) {}
+    QByteArray name() const { return _name; }
+    QObject * object() const { return _object; }
+
+protected:
+    QObject *_object;
+    const QByteArray _name;
+};
+
+template<typename T>
+class PropertyWrapper: public PropertyWrapperBase {
+public:
+    using PropertyWrapperBase::PropertyWrapperBase;
+    PropertyWrapper(QObject *_object, QByteArray _name): PropertyWrapperBase(_object, std::move(_name))
+    {
+        QVariant value = object()->property(name());
+        if (!value.isValid()) {
+            object()->setProperty(name(), T());
+        }
+    }
+
+    explicit PropertyWrapper(const PropertyWrapper<T> &other) : PropertyWrapperBase(other._object, other._name) {}
+
+    operator T() const { return _object->property(_name).template value<T>(); }
+    PropertyWrapper<T> & operator =(const T &value) { _object->setProperty(_name, value); return *this; }
+
+private:
+    PropertyWrapper<T> & operator =(const PropertyWrapper &) { return *this; }
+};
+
+struct AbstractVariantInterpolator {
+    virtual ~AbstractVariantInterpolator() = default;
+    virtual QVariant interpolated(const QVariant &from, const QVariant &to, qreal progress) const = 0;
+};
+
+// QPropertyAnimation with support for passing custom interpolators as parameter and single
+// PropertyWrapper instead of object + property parameters.
+class CustomPropertyAnimation: public QPropertyAnimation {
+public:
+    CustomPropertyAnimation(const PropertyWrapperBase &property, QObject *parent = nullptr):
+        QPropertyAnimation(property.object(), property.name(), parent), _interpolator(nullptr) {}
+
+    CustomPropertyAnimation(const PropertyWrapperBase &property,
+                            AbstractVariantInterpolator *interpolator,
+                            QObject *parent = nullptr)
+        : QPropertyAnimation(property.object(), property.name(), parent)
+        , _interpolator(interpolator)
+    {}
+
+    ~CustomPropertyAnimation() override { delete _interpolator; }
+
+protected:
+    QVariant interpolated(const QVariant &from, const QVariant &to, qreal progress) const override {
+        if (_interpolator != nullptr) {
+            return _interpolator->interpolated(from, to, progress);
+        }
+        return QPropertyAnimation::interpolated(from, to, progress);
+    }
+
+private:
+    AbstractVariantInterpolator *_interpolator;
+};
+
+//// //// //// //// /// /// /// // // /  /   /    /
+
 #if 0
     class ValueAnimator: public QAbstractAnimation
     {
