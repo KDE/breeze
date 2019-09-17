@@ -121,24 +121,30 @@ private:
     };
 
 #endif
-
-#if 0
     class AnimationTimeline: public QAbstractAnimation
     {
         Q_OBJECT
 
     public:
-        struct Transition {
-            Transition(QByteArray property, QVariant from, QVariant to = QVariant(),
-                       qreal normalizedDuration = 0.0,
-                       QEasingCurve easingCurve = QEasingCurve::Linear)
-                : property(std::move(property))
+        struct Entry {
+            Entry(qreal normalizedStartTime, QByteArray property, QVariant from, QVariant to, qreal normalizedDuration, QEasingCurve easingCurve = QEasingCurve::Linear)
+                : normalizedStartTime(normalizedStartTime)
+                , property(std::move(property))
                 , from(std::move(from))
                 , to(std::move(to))
                 , normalizedDuration(normalizedDuration)
                 , easingCurve(std::move(easingCurve))
             {}
+            Entry(qreal normalizedStartTime, QByteArray property, QVariant to, qreal normalizedDuration = 0.0, QEasingCurve easingCurve = QEasingCurve::Linear)
+                : normalizedStartTime(normalizedStartTime)
+                , property(std::move(property))
+                , from(QVariant())
+                , to(std::move(to))
+                , normalizedDuration(normalizedDuration)
+                , easingCurve(std::move(easingCurve))
+            {}
 
+            qreal normalizedStartTime;
             QByteArray property;
             QVariant from;
             QVariant to;
@@ -146,69 +152,118 @@ private:
             QEasingCurve easingCurve;
         };
 
-        struct Entry {
-            qreal normalizedStartTime;
-            Transition transition;
-        };
-
-        AnimationTimeline(QObject *parent, QList<Entry> entries = {})
+        AnimationTimeline(QObject *parent, int duration = 0, const QList<Entry> &entries = {})
             : QAbstractAnimation(parent)
-            , _entries(std::move(entries))
+            , _entries(entries)
             , _firstNotStartedIndex(0)
-            , _durationMs(0)
+            , _durationMs(duration)
         {
-            static const auto compareEntry = [](const Entry &a, const Entry &b) {
-                return a.normalizedStartTime < b.normalizedStartTime;
-            };
-            std::sort(_entries.begin(), _entries.end(), compareEntry);
+            for(int i = 0; i < _entries.count(); ++i) {
+                auto animation = animationFromEntry(_entries[i]);
+                updateAnimationDuration(animation, _entries[i]);
+                _animations.append(animation);
+            }
         }
 
-        void setDuration(int durationMs) { _durationMs = durationMs; /* TODO: recalculate animations */ }
+        void setDuration(int durationMs)
+        {
+            _durationMs = durationMs;
+            for(int i = 0; i < _entries.count(); ++i) {
+                updateAnimationDuration(_animations[i], _entries[i]);
+            }
+        }
         int duration() const override { return _durationMs; }
-        // auto *onAnimation = new Timeline(data, {
-        //     {.0, {dots[0], 0.0, 1.0, 0.4, QEasingCurve::OutBack}},
-        //     {.2, {dots[1], 0.0, 1.0, 0.4, QEasingCurve::OutBack}},
-        //     {.4, {dots[2], 0.0, 1.0, 0.4, QEasingCurve::OutBack}},
-        //     {.6, {dots[3], 0.0, 1.0, 0.4, QEasingCurve::OutBack}},
-        // });
 
+        void *loggedobj() {
+            static void *_loggedobj = this;
+            return _loggedobj;
+        }
+
+#define dbg(...) if(this == loggedobj()) { qDebug(__VA_ARGS__); } else {}
     protected:
         void updateCurrentTime(int currentTime) override {
+            dbg("time: %4d: ", currentTime);
             for(int i = _firstNotStartedIndex; i < _entries.length(); ++i) {
                 int startTime = _durationMs * _entries[i].normalizedStartTime;
-                int duration = _durationMs * _entries[i].animator.normalizedDuration();
+                int duration = _durationMs * _entries[i].normalizedDuration;
                 int endTime = startTime + duration;
 
                 int startDelay = currentTime - startTime; // < 0 ? OK : started, set current time to diff
-                int endDiff = currentTime - endTime; // < 0 ? OK : already ended!!
+                int remaining = endTime - currentTime; // > 0 ? OK : already ended!!
+
+                dbg("  i=%2d; start=%4d; duration=%4d; end=%4d; delay=% 4d; remaining=% 4d",
+                    i, startTime, duration, endTime, startDelay, remaining);
 
                 if (startDelay < 0) {
+                    // Too early for this and all following entries
                     break;
                 }
 
-                // Should be started
-
-                // _entries[i].animator.setTime(startDelay);
-                // _entries[i].animator.start();
-                // _firstNotStartedIndex = i+1;
-
-                if (endDiff < 0) {
-                    continue;
+                if (remaining > 0) {
+                    _animations[i]->setCurrentTime(startDelay);
+                    _animations[i]->start();
+                    dbg("        start now");
+                } else {
+                    // missed animation or durationless entry, just apply final state
+                    parent()->setProperty(_entries[i].property, _entries[i].to);
+                    dbg("        set final value");
                 }
+                _firstNotStartedIndex = i + 1;
+            }
+        }
 
-                // Already ended
+        void updateState(QAbstractAnimation::State newState, QAbstractAnimation::State oldState) override
+        {
+            Q_UNUSED(oldState);
+            dbg("updateState: %d", newState);
 
-                // _entries[i].animator.applyFinalState();
+            switch(newState) {
+            case Running:
+                for (int i = 0; i < _entries.length(); ++i) {
+                    if (!_entries[i].from.isValid() && !qFuzzyIsNull(_entries[i].normalizedDuration)) {
+                        _animations[i]->setStartValue(parent()->property(_entries[i].property));
+                    }
+                }
+                _firstNotStartedIndex = 0;
+                break;
+            case Stopped:
+                for (int i = 0; i < _entries.length(); ++i) {
+                    if (_animations[i] != nullptr) {
+                        _animations[i]->stop();
+                    }
+                }
+                break;
+            default: break;
             }
         }
 
     private:
+        inline QPropertyAnimation *animationFromEntry(const Entry &entry) {
+            if(qFuzzyIsNull(entry.normalizedDuration)) {
+                // this is just a setter TODO: handle in updateCurrentTime
+                return nullptr;
+            }
+            auto animation = new QPropertyAnimation(parent(), entry.property, this);
+            animation->setStartValue(entry.from);
+            animation->setEndValue(entry.to);
+            animation->setEasingCurve(entry.easingCurve);
+            return animation;
+        }
+
+        void updateAnimationDuration(QPropertyAnimation *animation, const Entry &entry) {
+            if(animation == nullptr) {
+                return;
+            }
+            animation->setDuration(_durationMs * entry.normalizedDuration);
+        }
+
         QList<Entry> _entries;
+        QList<QPropertyAnimation *> _animations;
         int _firstNotStartedIndex;
 
         int _durationMs;
     };
-#endif
+
 
     //* Tracks arbitrary states (e.g. tri-state checkbox check state)
     class MultiStateData: public GenericData
