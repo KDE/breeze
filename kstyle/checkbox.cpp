@@ -241,13 +241,16 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
         };
 
         if (!data->anims.contains(OffToOn)) { // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-            auto *onAnimation = makeSequentialAnimationGroup({
-                makePropertyAnimation(lPPos[0], refLPPos[0]),
-                makePropertyAnimation(lPPos[2], refLPPos[0]),
-                makePropertyAnimation(lPPos[1], refLPPos[0], refLPPos[1], 0.4 * totalDuration, QEasingCurve::InOutCubic),
-                new QPauseAnimation(0.1 * totalDuration),
-                makePropertyAnimation(lPPos[2], refLPPos[1], refLPPos[2], 0.5 * totalDuration, QEasingCurve::InOutCubic)
-            });
+            const QList<AnimationTimeline::Entry> onAnimationEntries = {
+                {0.0,   lPPos[0].name(), refLPPos[0]},
+                {0.0,   lPPos[2].name(), refLPPos[0]},
+                {0.0,   lPPos[1].name(), refLPPos[0], refLPPos[1], 0.4, QEasingCurve::InOutCubic},
+                {0.5,   lPPos[2].name(), refLPPos[1], refLPPos[2], 0.5, QEasingCurve::InOutCubic}
+            };
+            auto *onAnimation = new AnimationTimeline(data, 1000, onAnimationEntries);
+//            data->anims[1000] = a;
+
+
             connectToWidget(onAnimation, widget);
             onAnimation->setParent(data);
             data->anims[OffToOn] = onAnimation;
