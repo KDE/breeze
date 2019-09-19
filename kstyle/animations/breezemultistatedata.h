@@ -30,33 +30,53 @@ namespace Breeze
 class PropertyWrapperBase {
 public:
     PropertyWrapperBase(QObject *object, QByteArray name): _object(object), _name(std::move(name)) {}
-    QByteArray name() const { return _name; }
+    PropertyWrapperBase(const PropertyWrapperBase &other) { *this = other; }
+    PropertyWrapperBase & operator =(const PropertyWrapperBase &other) = default;
+    virtual ~PropertyWrapperBase() = default;
+
+    const QByteArray & name() const { return _name; }
     QObject * object() const { return _object; }
+
+    operator QVariant() const { return _object->property(_name); }
+    virtual PropertyWrapperBase & operator =(const QVariant &value)
+    {
+        const QVariant oldValue = _object->property(_name);
+        if (oldValue.isValid() && oldValue.type() != value.type()) {
+            qDebug("property \"%s\": new value type does not match previous value type (new: %s, old: %s) - trying to cast to original type.",
+                   qPrintable(_name), value.typeName(), _object->property(_name).typeName());
+
+            QVariant converted = value;
+            bool ok = converted.convert(oldValue.type());
+            Q_ASSERT(ok);
+            _object->setProperty(_name, converted);
+        } else {
+            _object->setProperty(_name, value);
+        }
+        return *this;
+    }
 
 protected:
     QObject *_object;
-    const QByteArray _name;
+    QByteArray _name;
 };
 
 template<typename T>
 class PropertyWrapper: public PropertyWrapperBase {
 public:
-    using PropertyWrapperBase::PropertyWrapperBase;
-    PropertyWrapper(QObject *_object, QByteArray _name): PropertyWrapperBase(_object, std::move(_name))
+    PropertyWrapper(QObject *object_, const QByteArray &name_): PropertyWrapperBase(object_, name_)
     {
         QVariant value = object()->property(name());
         if (!value.isValid()) {
             object()->setProperty(name(), T());
         }
     }
-
     explicit PropertyWrapper(const PropertyWrapper<T> &other) : PropertyWrapperBase(other._object, other._name) {}
+    PropertyWrapper<T> & operator =(const PropertyWrapper<T> &) = delete;
+    PropertyWrapperBase & operator =(const PropertyWrapperBase &other) = delete;
 
     operator T() const { return _object->property(_name).template value<T>(); }
     PropertyWrapper<T> & operator =(const T &value) { _object->setProperty(_name, value); return *this; }
-
-private:
-    PropertyWrapper<T> & operator =(const PropertyWrapper &) { return *this; }
+    PropertyWrapper<T> & operator =(const QVariant &value) override { *this = value.value<T>(); return *this; }
 };
 
 struct AbstractVariantInterpolator {
