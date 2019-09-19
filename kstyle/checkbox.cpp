@@ -235,122 +235,81 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
         };
 
         if (!data->anims.contains(OffToOn)) { // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-            const QList<AnimationTimeline::Entry> onAnimationEntries = {
-                {0.0,   lPPos[0].name(), refLPPos[0]},
-                {0.0,   lPPos[2].name(), refLPPos[0]},
-                {0.0,   lPPos[1].name(), refLPPos[0], refLPPos[1], 0.4, QEasingCurve::InOutCubic},
-                {0.5,   lPPos[2].name(), refLPPos[1], refLPPos[2], 0.5, QEasingCurve::InOutCubic}
-            };
-            auto *onAnimation = new AnimationTimeline(data, 1000, onAnimationEntries);
-//            data->anims[1000] = a;
-
-
-            connectToWidget(onAnimation, widget);
-            onAnimation->setParent(data);
-            data->anims[OffToOn] = onAnimation;
-
-            auto *offAnimation = makeSequentialAnimationGroup({
-                makePropertyAnimation(lPPos[0], refLPPos[0], refLPPos[1], 0.5 * totalDuration, QEasingCurve::InOutCubic),
-                new QPauseAnimation(0.1 * totalDuration),
-                makeParallelAnimationGroup({
-                    makePropertyAnimation(lPPos[0], refLPPos[1], refLPPos[2], 0.4 * totalDuration, QEasingCurve::InOutCubic),
-                    makePropertyAnimation(lPPos[1], refLPPos[1], refLPPos[2], 0.4 * totalDuration, QEasingCurve::InOutCubic),
-                })
+            data->anims[OnToOff] = new AnimationTimeline(data, totalDuration, {
+                {0.0, lPPos[0], refLPPos[0], refLPPos[1], 0.5, QEasingCurve::InOutCubic},
+                {0.6, lPPos[0], refLPPos[1], refLPPos[2], 0.4, QEasingCurve::InOutCubic},
+                {0.6, lPPos[1], refLPPos[1], refLPPos[2], 0.4, QEasingCurve::InOutCubic},
             });
-            connectToWidget(offAnimation, widget);
-            offAnimation->setParent(data);
-            data->anims[OnToOff] = offAnimation;
-        }
-        if (!data->anims.contains(OffToPartial)) { // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-            auto *onAnimation = makeSequentialAnimationGroup({
-                makePropertyAnimation(pPos[0], refPPos[0]),
-                makePropertyAnimation(pPos[1], refPPos[1]),
-                makePropertyAnimation(pPos[2], refPPos[2]),
-                makeParallelAnimationGroup({
-                    makePropertyAnimation(pRadius[0], startRadius[0], endRadius[0], 0.6 * totalDuration, QEasingCurve::OutCubic),
-                    makeSequentialAnimationGroup({
-                        new QPauseAnimation(0.2 * totalDuration),
-                        makePropertyAnimation(pRadius[1], startRadius[1], endRadius[1], 0.6 * totalDuration, QEasingCurve::OutCubic),
-                    }),
-                    makeSequentialAnimationGroup({
-                        new QPauseAnimation(0.4 * totalDuration),
-                        makePropertyAnimation(pRadius[2], startRadius[2], endRadius[2], 0.6 * totalDuration, QEasingCurve::OutCubic),
-                    }),
-                }),
+
+            data->anims[OffToOn] = new AnimationTimeline(data, totalDuration, {
+                {0.0, lPPos[0], refLPPos[0]},
+                {0.0, lPPos[2], refLPPos[0]},
+                {0.0, lPPos[1], refLPPos[0], refLPPos[1], 0.4, QEasingCurve::InOutCubic},
+                {0.5, lPPos[2], refLPPos[1], refLPPos[2], 0.5, QEasingCurve::InOutCubic},
             });
-            connectToWidget(onAnimation, widget);
-            onAnimation->setParent(data);
-            data->anims[OffToPartial] = onAnimation;
 
-            auto *offAnimation = makeParallelAnimationGroup({
-                makePropertyAnimation(pRadius[0], endRadius[0], startRadius[0], 0.6 * totalDuration, QEasingCurve::OutCubic),
-                makeSequentialAnimationGroup({
-                    new QPauseAnimation(0.2 * totalDuration),
-                    makePropertyAnimation(pRadius[1], endRadius[1], startRadius[1], 0.6 * totalDuration, QEasingCurve::OutCubic),
-                }),
-                makeSequentialAnimationGroup({
-                    new QPauseAnimation(0.4 * totalDuration),
-                    makePropertyAnimation(pRadius[2], endRadius[2], startRadius[2], 0.6 * totalDuration, QEasingCurve::OutCubic),
-                }),
+            data->anims[OffToPartial] = new AnimationTimeline(data, totalDuration, {
+                {0.0, pPos[0], refPPos[0]},
+                {0.0, pPos[1], refPPos[1]},
+                {0.0, pPos[2], refPPos[2]},
+                {0.0, pRadius[0], startRadius[0], endRadius[0], 0.6, QEasingCurve::OutCubic},
+                {0.2, pRadius[1], startRadius[1], endRadius[1], 0.6, QEasingCurve::OutCubic},
+                {0.4, pRadius[2], startRadius[2], endRadius[2], 0.6, QEasingCurve::OutCubic},
             });
-            connectToWidget(offAnimation, widget);
-            offAnimation->setParent(data);
-            data->anims[PartialToOff] = offAnimation;
-        }
-        if (!data->anims.contains(PartialToOn)) { // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-            auto *onAnimation = makeSequentialAnimationGroup({
-                makePropertyAnimation(lPPos[0], refLPPos[0]),
-                makePropertyAnimation(lPPos[2], refLPPos[0]),
-                makePropertyAnimation(pPos[0], refPPos[0]),
-                makePropertyAnimation(pPos[1], refPPos[1]),
-                makePropertyAnimation(pPos[2], refPPos[2]),
 
-                makeParallelAnimationGroup({
-                    makePropertyAnimation(lPPos[1], refLPPos[0], refLPPos[1], 0.4 * totalDuration, QEasingCurve::InOutCubic),
-                    makePropertyAnimation(pPos[1],  refPPos[1],  refLPPos[1], 0.5 * totalDuration, QEasingCurve::InOutCubic),
-                    makePropertyAnimation(pPos[2],  refPPos[2],  refLPPos[1], 0.5 * totalDuration, QEasingCurve::InOutCubic),
-                    makePropertyAnimation(pRadius[1], endRadius[1], endRadius[1] * sqrt(2), 0.5 * totalDuration, QEasingCurve::InOutCubic),
-                    makePropertyAnimation(pRadius[2], endRadius[2], endRadius[2] * sqrt(2), 0.5 * totalDuration, QEasingCurve::InOutCubic),
-                }),
-                makeParallelAnimationGroup({
-                    makePropertyAnimation(lPPos[2], refLPPos[1], refLPPos[2], 0.5 * totalDuration, QEasingCurve::InOutCubic),
-                    makePropertyAnimation(pRadius[1], endRadius[1] * sqrt(2), endRadius[1], 0.5 * totalDuration, QEasingCurve::InOutCubic),
-                    makePropertyAnimation(pRadius[2], endRadius[2] * sqrt(2), endRadius[2], 0.5 * totalDuration, QEasingCurve::InOutCubic),
-                    makePropertyAnimation(pPos[2], refLPPos[1],  refLPPos[2], 0.5 * totalDuration, QEasingCurve::InOutCubic),
-                }),
-
-                makePropertyAnimation(pRadius[0], 0),
-                makePropertyAnimation(pRadius[1], 0),
-                makePropertyAnimation(pRadius[2], 0),
+            data->anims[PartialToOff] = new AnimationTimeline(data, totalDuration, {
+                {0.0, pRadius[0], endRadius[0], startRadius[0], 0.6, QEasingCurve::OutCubic},
+                {0.2, pRadius[1], endRadius[1], startRadius[1], 0.6, QEasingCurve::OutCubic},
+                {0.4, pRadius[2], endRadius[2], startRadius[2], 0.6, QEasingCurve::OutCubic},
             });
-            connectToWidget(onAnimation, widget);
-            onAnimation->setParent(data);
-            data->anims[PartialToOn] = onAnimation;
 
-            auto *offAnimation = makeSequentialAnimationGroup({
-                makePropertyAnimation(pRadius[0], 0),
-                makePropertyAnimation(pRadius[2], 0),
-                makeParallelAnimationGroup({
-                    makePropertyAnimation(lPPos[0], refLPPos[0], refLPPos[1], 0.4 * totalDuration, QEasingCurve::InOutCubic),
-                    makePropertyAnimation(lPPos[2], refLPPos[2], refLPPos[1], 0.4 * totalDuration, QEasingCurve::InOutCubic),
+            data->anims[PartialToOn] = new AnimationTimeline(data, totalDuration, {
+                {0.0, lPPos[0],     refLPPos[0]},
+                {0.0, lPPos[2],     refLPPos[0]},
+                {0.0, pPos[0],      refPPos[0]},
+                {0.0, pPos[1],      refPPos[1]},
+                {0.0, pPos[2],      refPPos[2]},
 
-                    makePropertyAnimation(checkPos, QPointF{0,0}, refPPos[1] - refLPPos[1], 0.4 * totalDuration, QEasingCurve::InOutCubic),
-                    makePropertyAnimation(pPos[1], refLPPos[1], refPPos[1], 0.4 * totalDuration, QEasingCurve::InOutCubic),
-                    makePropertyAnimation(pRadius[1], startRadius[1], endRadius[1] * sqrt(3), 0.4 * totalDuration, QEasingCurve::InOutCubic),
-                }),
-                new QPauseAnimation(0.1 * totalDuration),
-                makeParallelAnimationGroup({
-                    makePropertyAnimation(pRadius[0], endRadius[0] * sqrt(3), endRadius[0], 0.5 * totalDuration, QEasingCurve::InOutCubic),
-                    makePropertyAnimation(pRadius[1], endRadius[1] * sqrt(3), endRadius[0], 0.5 * totalDuration, QEasingCurve::InOutCubic),
-                    makePropertyAnimation(pRadius[2], endRadius[2] * sqrt(3), endRadius[0], 0.5 * totalDuration, QEasingCurve::InOutCubic),
-                    makePropertyAnimation(pPos[0], refPPos[1], refPPos[0], 0.5 * totalDuration, QEasingCurve::InOutCubic),
-                    makePropertyAnimation(pPos[2], refPPos[1], refPPos[2], 0.5 * totalDuration, QEasingCurve::InOutCubic),
-                }),
-                makePropertyAnimation(checkPos, QPointF{0,0}),
+                {0.0, lPPos[1],     refLPPos[0],            refLPPos[1],            0.4, QEasingCurve::InOutCubic},
+                {0.0, pPos[1],      refPPos[1],             refLPPos[1],            0.5, QEasingCurve::InOutCubic},
+                {0.0, pPos[2],      refPPos[2],             refLPPos[1],            0.5, QEasingCurve::InOutCubic},
+                {0.0, pRadius[1],   endRadius[1],           endRadius[1] * sqrt(2), 0.5, QEasingCurve::InOutCubic},
+                {0.0, pRadius[2],   endRadius[2],           endRadius[2] * sqrt(2), 0.5, QEasingCurve::InOutCubic},
+
+                {0.5, lPPos[2],     refLPPos[1],            refLPPos[2],            0.5, QEasingCurve::InOutCubic},
+                {0.5, pRadius[1],   endRadius[1] * sqrt(2), endRadius[1],           0.5, QEasingCurve::InOutCubic},
+                {0.5, pRadius[2],   endRadius[2] * sqrt(2), endRadius[2],           0.5, QEasingCurve::InOutCubic},
+                {0.5, pPos[2],      refLPPos[1],            refLPPos[2],            0.5, QEasingCurve::InOutCubic},
+
+                {1.0, pRadius[0],   0.0},
+                {1.0, pRadius[1],   0.0},
+                {1.0, pRadius[2],   0.0},
             });
-            connectToWidget(offAnimation, widget);
-            offAnimation->setParent(data);
-            data->anims[OnToPartial] = offAnimation;
+
+            data->anims[OnToPartial] = new AnimationTimeline(data, totalDuration, {
+                {0.0, pRadius[0],   0.0},
+                {0.0, pRadius[2],   0.0},
+
+                {0.0, lPPos[0],     refLPPos[0],            refLPPos[1],                0.4, QEasingCurve::InOutCubic},
+                {0.0, lPPos[2],     refLPPos[2],            refLPPos[1],                0.4, QEasingCurve::InOutCubic},
+                {0.0, checkPos,     QPointF{0,0},           refPPos[1] - refLPPos[1],   0.4, QEasingCurve::InOutCubic},
+                {0.0, pPos[1],      refLPPos[1],            refPPos[1],                 0.4, QEasingCurve::InOutCubic},
+                {0.0, pRadius[1],   startRadius[1],         endRadius[1] * sqrt(3),     0.4, QEasingCurve::InOutCubic},
+
+                {0.5, pRadius[0],   endRadius[0] * sqrt(3), endRadius[0],               0.5, QEasingCurve::InOutCubic},
+                {0.5, pRadius[1],   endRadius[1] * sqrt(3), endRadius[0],               0.5, QEasingCurve::InOutCubic},
+                {0.5, pRadius[2],   endRadius[2] * sqrt(3), endRadius[0],               0.5, QEasingCurve::InOutCubic},
+                {0.5, pPos[0],      refPPos[1],             refPPos[0],                 0.5, QEasingCurve::InOutCubic},
+                {0.5, pPos[2],      refPPos[1],             refPPos[2],                 0.5, QEasingCurve::InOutCubic},
+                {1.0, checkPos,     QPointF{0,0}},
+            });
+
+            connectToWidget(data->anims[OnToOff], widget);
+            connectToWidget(data->anims[OffToOn], widget);
+            connectToWidget(data->anims[OffToPartial], widget);
+            connectToWidget(data->anims[PartialToOff], widget);
+            connectToWidget(data->anims[PartialToOn], widget);
+            connectToWidget(data->anims[OnToPartial], widget);
         }
 
         if (startAnim) {
