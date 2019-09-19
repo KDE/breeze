@@ -176,16 +176,10 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
         };
         static const auto connectToWidget = [](QAbstractAnimation *animation, const QWidget *widget)
         {
-            auto *propertyAnimation = qobject_cast<QPropertyAnimation *>(animation);
-            if(propertyAnimation != nullptr) {
-                connect(propertyAnimation, &QPropertyAnimation::valueChanged,
+            auto *timeline = qobject_cast<AnimationTimeline *>(animation);
+            if(timeline != nullptr) {
+                connect(timeline, &AnimationTimeline::valueChanged,
                         const_cast<QWidget *>(widget), QOverload<>::of(&QWidget::update));
-            } else {
-                const auto propertyAnimations = animation->findChildren<QPropertyAnimation *>();
-                for(auto *propertyAnimation: propertyAnimations) {
-                    connect(propertyAnimation, &QPropertyAnimation::valueChanged,
-                            const_cast<QWidget *>(widget), QOverload<>::of(&QWidget::update));
-                }
             }
         };
 

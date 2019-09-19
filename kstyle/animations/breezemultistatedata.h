@@ -147,32 +147,30 @@ private:
 
     public:
         struct Entry {
-            Entry(qreal normalizedStartTime, QByteArray property, QVariant from, QVariant to, qreal normalizedDuration, QEasingCurve easingCurve = QEasingCurve::Linear)
+            Entry(qreal normalizedStartTime, const PropertyWrapperBase &property, QVariant from, QVariant to = QVariant(), qreal normalizedDuration = 0.0, QEasingCurve easingCurve = QEasingCurve::Linear)
                 : normalizedStartTime(normalizedStartTime)
-                , property(std::move(property))
+                , property(property)
                 , from(std::move(from))
                 , to(std::move(to))
                 , normalizedDuration(normalizedDuration)
                 , easingCurve(std::move(easingCurve))
-            {}
-            Entry(qreal normalizedStartTime, QByteArray property, QVariant to, qreal normalizedDuration = 0.0, QEasingCurve easingCurve = QEasingCurve::Linear)
-                : normalizedStartTime(normalizedStartTime)
-                , property(std::move(property))
-                , from(QVariant())
-                , to(std::move(to))
-                , normalizedDuration(normalizedDuration)
-                , easingCurve(std::move(easingCurve))
-            {}
+            {
+                // Just to not introduce separate constructor for simple setter entry
+                if(!this->to.isValid()) {
+                    std::swap(this->from, this->to);
+                }
+            }
 
             qreal normalizedStartTime;
-            QByteArray property;
+            PropertyWrapperBase property;
             QVariant from;
             QVariant to;
             qreal normalizedDuration;
             QEasingCurve easingCurve;
         };
+        using EntryList = QList<Entry>;
 
-        AnimationTimeline(QObject *parent, int duration = 0, const QList<Entry> &entries = {})
+        AnimationTimeline(QObject *parent, int duration = 0, const EntryList &entries = {})
             : QAbstractAnimation(parent)
             , _entries(entries)
             , _firstNotStartedIndex(0)
@@ -181,6 +179,9 @@ private:
             for(int i = 0; i < _entries.count(); ++i) {
                 auto animation = animationFromEntry(_entries[i]);
                 updateAnimationDuration(animation, _entries[i]);
+                if (animation != nullptr) {
+                    connect(animation, &QPropertyAnimation::valueChanged, this, &AnimationTimeline::valueChanged);
+                }
                 _animations.append(animation);
             }
         }
@@ -194,25 +195,29 @@ private:
         }
         int duration() const override { return _durationMs; }
 
-        void *loggedobj() {
-            static void *_loggedobj = this;
-            return _loggedobj;
+        // XXX: remove
+        bool isfirst() {
+            static void *_loggedobj = parent();
+            return _loggedobj == parent();
         }
 
-#define dbg(...) if(this == loggedobj()) { qDebug(__VA_ARGS__); } else {}
+Q_SIGNALS:
+    void valueChanged();
+
+#define dbg(...) if(isfirst()) { qDebug(__VA_ARGS__); } else {}
     protected:
         void updateCurrentTime(int currentTime) override {
-            dbg("time: %4d: ", currentTime);
+            bool changed = false;
             for(int i = _firstNotStartedIndex; i < _entries.length(); ++i) {
-                int startTime = _durationMs * _entries[i].normalizedStartTime;
-                int duration = _durationMs * _entries[i].normalizedDuration;
+                auto entry = _entries[i];
+                auto animation = _animations[i];
+
+                int startTime = _durationMs * entry.normalizedStartTime;
+                int duration = _durationMs * entry.normalizedDuration;
                 int endTime = startTime + duration;
 
-                int startDelay = currentTime - startTime; // < 0 ? OK : started, set current time to diff
-                int remaining = endTime - currentTime; // > 0 ? OK : already ended!!
-
-                dbg("  i=%2d; start=%4d; duration=%4d; end=%4d; delay=% 4d; remaining=% 4d",
-                    i, startTime, duration, endTime, startDelay, remaining);
+                int startDelay = currentTime - startTime;
+                int remaining = endTime - currentTime;
 
                 if (startDelay < 0) {
                     // Too early for this and all following entries
@@ -220,15 +225,21 @@ private:
                 }
 
                 if (remaining > 0) {
-                    _animations[i]->setCurrentTime(startDelay);
-                    _animations[i]->start();
-                    dbg("        start now");
+                    animation->setCurrentTime(startDelay);
+                    animation->start();
+                    dbg("t=%4d; i=%2d; start=%4d; duration=%4d; end=%4d; delay=% 4d; remaining=% 4d  -  start",
+                        currentTime, i, startTime, duration, endTime, startDelay, remaining);
                 } else {
                     // missed animation or durationless entry, just apply final state
-                    parent()->setProperty(_entries[i].property, _entries[i].to);
-                    dbg("        set final value");
+                    entry.property = entry.to;
+                    changed = true;
+                    dbg("t=%4d; i=%2d; start=%4d; duration=%4d; end=%4d; delay=% 4d; remaining=% 4d  -  set final",
+                        currentTime, i, startTime, duration, endTime, startDelay, remaining);
                 }
                 _firstNotStartedIndex = i + 1;
+            }
+            if (changed) {
+                emit valueChanged();
             }
         }
 
@@ -241,7 +252,8 @@ private:
             case Running:
                 for (int i = 0; i < _entries.length(); ++i) {
                     if (!_entries[i].from.isValid() && !qFuzzyIsNull(_entries[i].normalizedDuration)) {
-                        _animations[i]->setStartValue(parent()->property(_entries[i].property));
+                        dbg("           set start value for %s", qPrintable(_entries[i].property.name()));
+                        _animations[i]->setStartValue(_entries[i].property);
                     }
                 }
                 _firstNotStartedIndex = 0;
@@ -263,7 +275,7 @@ private:
                 // this is just a setter TODO: handle in updateCurrentTime
                 return nullptr;
             }
-            auto animation = new QPropertyAnimation(parent(), entry.property, this);
+            auto animation = new QPropertyAnimation(parent(), entry.property.name(), this);
             animation->setStartValue(entry.from);
             animation->setEndValue(entry.to);
             animation->setEasingCurve(entry.easingCurve);
@@ -276,8 +288,8 @@ private:
             }
             animation->setDuration(_durationMs * entry.normalizedDuration);
         }
-
-        QList<Entry> _entries;
+    public: // TODO: remove
+        EntryList _entries;
         QList<QPropertyAnimation *> _animations;
         int _firstNotStartedIndex;
 
