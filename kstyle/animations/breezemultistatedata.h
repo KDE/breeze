@@ -226,6 +226,7 @@ Q_SIGNALS:
 
                 if (remaining > 0) {
                     animation->setCurrentTime(startDelay);
+                    // FIXME (mglb): run subanimations synchronously: do not use qpropertyanimation
                     animation->start();
                     dbg("t=%4d; i=%2d; start=%4d; duration=%4d; end=%4d; delay=% 4d; remaining=% 4d  -  start",
                         currentTime, i, startTime, duration, endTime, startDelay, remaining);
@@ -259,11 +260,11 @@ Q_SIGNALS:
                 _firstNotStartedIndex = 0;
                 break;
             case Stopped:
-                for (int i = 0; i < _entries.length(); ++i) {
-                    if (_animations[i] != nullptr) {
-                        _animations[i]->stop();
-                    }
-                }
+                //for (int i = 0; i < _entries.length(); ++i) {
+                //    if (_animations[i] != nullptr) {
+                //        _animations[i]->stop();
+                //    }
+                //}
                 break;
             default: break;
             }
