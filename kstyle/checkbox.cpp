@@ -234,8 +234,15 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
             OnToPartial,
         };
 
-        if (!data->anims.contains(OffToOn)) { // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        if (!data->anims.contains(OffToOn)) {
             data->anims[OnToOff] = new AnimationTimeline(data, totalDuration, {
+                {0.0, pPos[0],      QPointF{0,0}},
+                {0.0, pPos[1],      QPointF{0,0}},
+                {0.0, pPos[2],      QPointF{0,0}},
+                {0.0, pRadius[0],   0.0},
+                {0.0, pRadius[1],   0.0},
+                {0.0, pRadius[2],   0.0},
+
                 {0.0, lPPos[0], refLPPos[0], refLPPos[1], 0.5, QEasingCurve::InOutCubic},
                 {0.6, lPPos[0], refLPPos[1], refLPPos[2], 0.4, QEasingCurve::InOutCubic},
                 {0.6, lPPos[1], refLPPos[1], refLPPos[2], 0.4, QEasingCurve::InOutCubic},
@@ -258,9 +265,16 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
             });
 
             data->anims[PartialToOff] = new AnimationTimeline(data, totalDuration, {
-                {0.0, pRadius[0], endRadius[0], startRadius[0], 0.6, QEasingCurve::OutCubic},
-                {0.2, pRadius[1], endRadius[1], startRadius[1], 0.6, QEasingCurve::OutCubic},
-                {0.4, pRadius[2], endRadius[2], startRadius[2], 0.6, QEasingCurve::OutCubic},
+                {0.0, lPPos[0], QPointF{0,0}},
+                {0.0, lPPos[1], QPointF{0,0}},
+                {0.0, lPPos[2], QPointF{0,0}},
+
+                {0.0, pRadius[0], endRadius[0], startRadius[0], 0.6, QEasingCurve::InCubic},
+                {0.2, pRadius[1], endRadius[1], startRadius[1], 0.6, QEasingCurve::InCubic},
+                {0.4, pRadius[2], endRadius[2], startRadius[2], 0.6, QEasingCurve::InCubic},
+                {0.6, pPos[0],  QPointF{0,0}},
+                {0.8, pPos[1],  QPointF{0,0}},
+                {1.0, pPos[2],  QPointF{0,0}},
             });
 
             data->anims[PartialToOn] = new AnimationTimeline(data, totalDuration, {
@@ -296,10 +310,10 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
                 {0.0, pPos[1],      refLPPos[1],            refPPos[1],                 0.4, QEasingCurve::InOutCubic},
                 {0.0, pRadius[1],   startRadius[1],         endRadius[1] * sqrt(3),     0.4, QEasingCurve::InOutCubic},
 
-                {0.5, pRadius[0],   endRadius[0] * sqrt(3), endRadius[0],               0.5, QEasingCurve::InOutCubic},
                 {0.5, pRadius[1],   endRadius[1] * sqrt(3), endRadius[0],               0.5, QEasingCurve::InOutCubic},
-                {0.5, pRadius[2],   endRadius[2] * sqrt(3), endRadius[0],               0.5, QEasingCurve::InOutCubic},
+                {0.5, pRadius[0],   endRadius[0] * sqrt(3), endRadius[0],               0.5, QEasingCurve::InOutCubic},
                 {0.5, pPos[0],      refPPos[1],             refPPos[0],                 0.5, QEasingCurve::InOutCubic},
+                {0.5, pRadius[2],   endRadius[2] * sqrt(3), endRadius[0],               0.5, QEasingCurve::InOutCubic},
                 {0.5, pPos[2],      refPPos[1],             refPPos[2],                 0.5, QEasingCurve::InOutCubic},
                 {1.0, checkPos,     QPointF{0,0}},
             });
