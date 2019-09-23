@@ -42,12 +42,14 @@ public:
     {
         const QVariant oldValue = _object->property(_name);
         if (oldValue.isValid() && oldValue.type() != value.type()) {
-            qDebug("property \"%s\": new value type does not match previous value type (new: %s, old: %s) - trying to cast to original type.",
-                   qPrintable(_name), value.typeName(), _object->property(_name).typeName());
 
             QVariant converted = value;
             bool ok = converted.convert(oldValue.type());
-            Q_ASSERT(ok);
+            if(!ok) {
+                qDebug("property \"%s\": new value type does not match previous value type (new: %s, old: %s) - trying to cast to original type.",
+                       qPrintable(_name), value.typeName(), _object->property(_name).typeName());
+                Q_ASSERT(ok);
+            }
             _object->setProperty(_name, converted);
         } else {
             _object->setProperty(_name, value);
@@ -147,19 +149,28 @@ private:
 
     public:
         struct Entry {
-            Entry(qreal normalizedStartTime, const PropertyWrapperBase &property, QVariant from, QVariant to = QVariant(), qreal normalizedDuration = 0.0, QEasingCurve easingCurve = QEasingCurve::Linear)
+            Entry(qreal normalizedStartTime, const PropertyWrapperBase &property,
+                  QVariant from, QVariant to, qreal normalizedDuration,
+                  QEasingCurve easingCurve = QEasingCurve::Linear)
                 : normalizedStartTime(normalizedStartTime)
                 , property(property)
                 , from(std::move(from))
                 , to(std::move(to))
                 , normalizedDuration(normalizedDuration)
                 , easingCurve(std::move(easingCurve))
+            {}
+
+            Entry(qreal normalizedStartTime, const PropertyWrapperBase &property, QVariant value)
+                : normalizedStartTime(normalizedStartTime)
+                , property(property)
+                , from(QVariant())
+                , to(std::move(value))
+                , normalizedDuration(0)
             {
-                // Just to not introduce separate constructor for simple setter entry
-                if(!this->to.isValid()) {
-                    std::swap(this->from, this->to);
-                }
             }
+
+            inline bool isSetter() const { return qFuzzyIsNull(normalizedDuration) && !from.isValid(); }
+            inline bool isStartingFromCurrentValue() const { return !qFuzzyIsNull(normalizedDuration) && !from.isValid(); }
 
             qreal normalizedStartTime;
             PropertyWrapperBase property;
@@ -170,29 +181,14 @@ private:
         };
         using EntryList = QList<Entry>;
 
-        AnimationTimeline(QObject *parent, int duration = 0, const EntryList &entries = {})
-            : QAbstractAnimation(parent)
-            , _entries(entries)
-            , _firstNotStartedIndex(0)
-            , _durationMs(duration)
-        {
-            for(int i = 0; i < _entries.count(); ++i) {
-                auto animation = animationFromEntry(_entries[i]);
-                updateAnimationDuration(animation, _entries[i]);
-                if (animation != nullptr) {
-                    connect(animation, &QPropertyAnimation::valueChanged, this, &AnimationTimeline::valueChanged);
-                }
-                _animations.append(animation);
-            }
-        }
+        AnimationTimeline(QObject *parent, int duration = 0, EntryList entries = {})
+              : QAbstractAnimation(parent)
+              , _entries(std::move(entries))
+              , _states(QVector<EntryState>(_entries.length()))
+              , _durationMs(duration)
+        {}
 
-        void setDuration(int durationMs)
-        {
-            _durationMs = durationMs;
-            for(int i = 0; i < _entries.count(); ++i) {
-                updateAnimationDuration(_animations[i], _entries[i]);
-            }
-        }
+        void setDuration(int durationMs) { _durationMs = durationMs; }
         int duration() const override { return _durationMs; }
 
         // XXX: remove
@@ -201,44 +197,53 @@ private:
             return _loggedobj == parent();
         }
 
-Q_SIGNALS:
-    void valueChanged();
+    Q_SIGNALS:
+        void valueChanged();
 
-#define dbg(...) if(isfirst()) { qDebug(__VA_ARGS__); } else {}
     protected:
+        #define dbg(...) if(isfirst()) { qDebug(__VA_ARGS__); } else {}
         void updateCurrentTime(int currentTime) override {
             bool changed = false;
-            for(int i = _firstNotStartedIndex; i < _entries.length(); ++i) {
-                auto entry = _entries[i];
-                auto animation = _animations[i];
+
+            for(int i = 0; i < _entries.length(); ++i) {
+                auto &entry = _entries[i];
+                auto &state = _states[i];
+
+                if(state.processed) {
+                    continue;
+                }
 
                 int startTime = _durationMs * entry.normalizedStartTime;
                 int duration = _durationMs * entry.normalizedDuration;
                 int endTime = startTime + duration;
 
-                int startDelay = currentTime - startTime;
-                int remaining = endTime - currentTime;
-
-                if (startDelay < 0) {
+                if (currentTime < startTime) {
                     // Too early for this and all following entries
                     break;
                 }
 
-                if (remaining > 0) {
-                    animation->setCurrentTime(startDelay);
-                    // FIXME (mglb): run subanimations synchronously: do not use qpropertyanimation
-                    animation->start();
-                    dbg("t=%4d; i=%2d; start=%4d; duration=%4d; end=%4d; delay=% 4d; remaining=% 4d  -  start",
-                        currentTime, i, startTime, duration, endTime, startDelay, remaining);
+
+                if (currentTime < endTime) {
+                    if (entry.isStartingFromCurrentValue() && !state.from.isValid()) {
+                        state.from = entry.property;
+                    }
+
+                    // We're here only when endTime > startTime => duration > 0
+                    Q_ASSERT(duration > 0);
+                    qreal progress = qreal(currentTime - startTime) / duration;
+
+                    const QVariant &from = entry.isStartingFromCurrentValue() ? state.from : entry.from;
+                    entry.property = interpolate(from, entry.to, entry.easingCurve.valueForProgress(progress));
+
+                    dbg("t=%4d; i=%2d; start=%4d; duration=%4d; end=%4d; progress=% 4f", currentTime, i, startTime, duration, endTime, progress);
                 } else {
-                    // missed animation or durationless entry, just apply final state
                     entry.property = entry.to;
-                    changed = true;
-                    dbg("t=%4d; i=%2d; start=%4d; duration=%4d; end=%4d; delay=% 4d; remaining=% 4d  -  set final",
-                        currentTime, i, startTime, duration, endTime, startDelay, remaining);
+                    state.processed = true;
+                    dbg("t=%4d; i=%2d; start=%4d; duration=%4d; end=%4d", currentTime, i, startTime, duration, endTime);
                 }
-                _firstNotStartedIndex = i + 1;
+                changed = true;
             }
+
             if (changed) {
                 emit valueChanged();
             }
@@ -251,51 +256,71 @@ Q_SIGNALS:
 
             switch(newState) {
             case Running:
-                for (int i = 0; i < _entries.length(); ++i) {
-                    if (!_entries[i].from.isValid() && !qFuzzyIsNull(_entries[i].normalizedDuration)) {
-                        dbg("           set start value for %s", qPrintable(_entries[i].property.name()));
-                        _animations[i]->setStartValue(_entries[i].property);
+                dbg("Timings for %dms:", _durationMs);
+                for (int i = 0; i < _states.length(); ++i) {
+                    auto &entry = _entries[i];
+                    auto &state = _states[i];
+
+                    state.processed = false;
+                    if (entry.isStartingFromCurrentValue()) {
+                        state.from = QVariant();
                     }
+
+                    int startTime = _durationMs * entry.normalizedStartTime;
+                    int duration = _durationMs * entry.normalizedDuration;
+                    int endTime = startTime + duration;
+                    dbg("  * % 4d → % 4d; % 4d [%s]", startTime, endTime, duration, qPrintable(entry.property.name()));
                 }
-                _firstNotStartedIndex = 0;
-                break;
-            case Stopped:
-                //for (int i = 0; i < _entries.length(); ++i) {
-                //    if (_animations[i] != nullptr) {
-                //        _animations[i]->stop();
-                //    }
-                //}
-                break;
             default: break;
             }
         }
 
     private:
-        inline QPropertyAnimation *animationFromEntry(const Entry &entry) {
-            if(qFuzzyIsNull(entry.normalizedDuration)) {
-                // this is just a setter TODO: handle in updateCurrentTime
-                return nullptr;
-            }
-            auto animation = new QPropertyAnimation(parent(), entry.property.name(), this);
-            animation->setStartValue(entry.from);
-            animation->setEndValue(entry.to);
-            animation->setEasingCurve(entry.easingCurve);
-            return animation;
+        template <typename T>
+        static T interpolateGeneric(const QVariant &from, const QVariant &to, qreal progress) {
+            const T a = from.value<T>();
+            const T b = to.value<T>();
+            return a * (1.0 - progress) + b * progress;
         }
 
-        void updateAnimationDuration(QPropertyAnimation *animation, const Entry &entry) {
-            if(animation == nullptr) {
-                return;
+        static QVariant interpolate(const QVariant &from, const QVariant &to, qreal progress)
+        {
+            switch(QMetaType::Type(from.type())) {
+            case QMetaType::Int:
+                return interpolateGeneric<int>(from, to, progress);
+            case QMetaType::UInt:
+                return interpolateGeneric<uint>(from, to, progress);
+            case QMetaType::LongLong:
+                return interpolateGeneric<long long>(from, to, progress);
+            case QMetaType::ULongLong:
+                return interpolateGeneric<unsigned long long>(from, to, progress);
+            case QMetaType::Float:
+                return interpolateGeneric<float>(from, to, progress);
+            case QMetaType::Double:
+                return interpolateGeneric<double>(from, to, progress);
+            case QMetaType::QPoint:
+                return interpolateGeneric<QPoint>(from, to, progress);
+            case QMetaType::QPointF:
+                return interpolateGeneric<QPointF>(from, to, progress);
+            default:
+                qWarning("Interpolation not supported for type %s", from.typeName());
+                return to;
             }
-            animation->setDuration(_durationMs * entry.normalizedDuration);
         }
-    public: // TODO: remove
+
+        struct EntryState {
+            QVariant from {QVariant()};
+            bool processed {false};
+        };
+
         EntryList _entries;
-        QList<QPropertyAnimation *> _animations;
-        int _firstNotStartedIndex;
+        QVector<EntryState> _states;
 
         int _durationMs;
     };
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     //* Tracks arbitrary states (e.g. tri-state checkbox check state)
