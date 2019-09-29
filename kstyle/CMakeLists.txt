@@ -131,6 +131,7 @@ set(breeze_PART_SRCS
     breezeshadowhelper.cpp
     breezesplitterproxy.cpp
     breezestyle.cpp
+    checkbox.cpp
     breezestyleplugin.cpp
     breezetileset.cpp
     breezewindowmanager.cpp
