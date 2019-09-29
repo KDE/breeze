@@ -13,8 +13,105 @@
 #include <QPropertyAnimation>
 #include <QPauseAnimation>
 
+#include <cmath>
+
 namespace Breeze
 {
+
+    using Id = CheckMarkRenderer::DataId;
+
+    namespace {
+    const QVector<QVariant> offStateData {
+        /* Position          */ QPointF(0, 0),
+        /* LinePointPosition */ invalidPointF, invalidPointF, invalidPointF,
+        /* PointPosition     */ invalidPointF, invalidPointF, invalidPointF,
+        /* PointRadius       */ 0.0f, 0.0f, 0.0f
+    };
+    const QVector<QVariant> onStateData = {
+        /* Position          */ QPointF(-1, 3),
+        /* LinePointPosition */ QPointF(-3, -3), QPointF(0, 0), QPointF(5, -5),
+        /* PointPosition     */ invalidPointF, invalidPointF, invalidPointF,
+        /* PointRadius       */ 0.0f, 0.0f, 0.0f,
+    };
+    const QVector<QVariant> partialStateData = {
+        /* Position          */ QPointF(0, 0),
+        /* LinePointPosition */ invalidPointF, invalidPointF, invalidPointF,
+        /* PointPosition     */ QPointF(-4, 0), QPointF( 0, 0), QPointF(4,  0),
+        /* PointRadius       */ 1.0f, 1.0f, 1.0f,
+    };
+
+    const Timeline::EntryList offToOnTransition {
+        {0.0f,       &offStateData},
+        {0.0f,       Id::Position,            onStateData[Id::Position]},
+        {0.0f,       Id::LinePointPosition_0, onStateData[Id::LinePointPosition_0]},
+        {0.0f, 0.4f, Id::LinePointPosition_1, onStateData[Id::LinePointPosition_0], onStateData[Id::LinePointPosition_1], QEasingCurve::InOutCubic},
+        {0.5f, 0.5f, Id::LinePointPosition_2, onStateData[Id::LinePointPosition_1], onStateData[Id::LinePointPosition_2], QEasingCurve::InOutCubic},
+        {1.0f,       &onStateData},
+    };
+    const Timeline::EntryList onToOffTransition {
+        {0.0f,       &onStateData},
+        {0.0f, 0.5f, Id::LinePointPosition_0, onStateData[Id::LinePointPosition_0], onStateData[Id::LinePointPosition_1], QEasingCurve::InOutCubic},
+        {0.6f, 0.4f, Id::LinePointPosition_0, onStateData[Id::LinePointPosition_1], onStateData[Id::LinePointPosition_2], QEasingCurve::InOutCubic},
+        {0.6f, 0.4f, Id::LinePointPosition_1, onStateData[Id::LinePointPosition_1], onStateData[Id::LinePointPosition_2], QEasingCurve::InOutCubic},
+        {1.0f,       &offStateData},
+    };
+
+    const Timeline::EntryList offToPartialTransition {
+        {0.0f,       &offStateData},
+        {0.0f,       Id::PointPosition_0, partialStateData[Id::PointPosition_0]},
+        {0.0f,       Id::PointPosition_1, partialStateData[Id::PointPosition_1]},
+        {0.0f,       Id::PointPosition_2, partialStateData[Id::PointPosition_2]},
+        {0.0f, 0.6f, Id::PointRadius_0,   QVariant(), partialStateData[Id::PointRadius_0], QEasingCurve::OutCubic},
+        {0.2f, 0.6f, Id::PointRadius_1,   QVariant(), partialStateData[Id::PointRadius_1], QEasingCurve::OutCubic},
+        {0.4f, 0.6f, Id::PointRadius_2,   QVariant(), partialStateData[Id::PointRadius_2], QEasingCurve::OutCubic},
+        {1.0f,       &partialStateData},
+    };
+    const Timeline::EntryList partialToOffTransition {
+        {0.0f,       &partialStateData},
+        {0.0f, 0.6f, Id::PointRadius_0,   partialStateData[Id::PointRadius_0], offStateData[Id::PointRadius_0], QEasingCurve::InCubic},
+        {0.2f, 0.6f, Id::PointRadius_1,   partialStateData[Id::PointRadius_1], offStateData[Id::PointRadius_1], QEasingCurve::InCubic},
+        {0.4f, 0.6f, Id::PointRadius_2,   partialStateData[Id::PointRadius_2], offStateData[Id::PointRadius_2], QEasingCurve::InCubic},
+        {1.0f,       &offStateData},
+    };
+
+    const float partialPointRadiusSqrt2 = partialStateData[Id::PointRadius_0].toFloat() * sqrtf(2);
+    const float partialPointRadiusSqrt3 = partialStateData[Id::PointRadius_0].toFloat() * sqrtf(3);
+    const QPointF onAbsLinePointPosition_2 = onStateData[Id::LinePointPosition_2].toPointF() + onStateData[Id::Position].toPointF();
+
+    const Timeline::EntryList partialToOnTransition {
+        {0.0f,       &partialStateData},
+        {0.0f,       Id::Position,               onStateData[Id::Position]},
+        {0.0f,       Id::LinePointPosition_0,    onStateData[Id::LinePointPosition_0]},
+
+        {0.0f, 0.4f, Id::LinePointPosition_1,    onStateData[Id::LinePointPosition_0],  onStateData[Id::LinePointPosition_1],   QEasingCurve::InOutCubic},
+        {0.0f, 0.4f, Id::PointRadius_0,          QVariant(),                            onStateData[Id::PointRadius_0],         QEasingCurve::InOutCubic},
+        {0.0f, 0.5f, Id::PointPosition_1,        QVariant(),                            onStateData[Id::Position],              QEasingCurve::InOutCubic},
+        {0.0f, 0.5f, Id::PointPosition_2,        QVariant(),                            onStateData[Id::Position],              QEasingCurve::InOutCubic},
+        {0.0f, 0.5f, Id::PointRadius_1,          QVariant(),                            partialPointRadiusSqrt2,                QEasingCurve::InOutCubic},
+        {0.0f, 0.5f, Id::PointRadius_2,          QVariant(),                            partialPointRadiusSqrt2,                QEasingCurve::InOutCubic},
+
+        {0.5f, 0.5f, Id::LinePointPosition_2,    onStateData[Id::LinePointPosition_1],  onStateData[Id::LinePointPosition_2],   QEasingCurve::InOutCubic},
+        {0.5f, 0.5f, Id::PointPosition_2,        QVariant(),                            onAbsLinePointPosition_2,               QEasingCurve::InOutCubic},
+        {0.5f, 0.5f, Id::PointRadius_1,          QVariant(),                            onStateData[Id::PointRadius_1],         QEasingCurve::InOutCubic},
+        {0.5f, 0.5f, Id::PointRadius_2,          QVariant(),                            onStateData[Id::PointRadius_2],         QEasingCurve::InOutCubic},
+        {1.0f,       &onStateData},
+    };
+    const Timeline::EntryList onToPartialTransition {
+        {0.0f,       &onStateData},
+        {0.0f, 0.4f, Id::Position,               QVariant(),                            partialStateData[Id::Position],         QEasingCurve::InOutCubic},
+        {0.0f, 0.4f, Id::LinePointPosition_0,    QVariant(),                            onStateData[Id::LinePointPosition_1],   QEasingCurve::InOutCubic},
+        {0.0f, 0.4f, Id::LinePointPosition_2,    QVariant(),                            onStateData[Id::LinePointPosition_1],   QEasingCurve::InOutCubic},
+        {0.0f, 0.4f, Id::PointPosition_1,        onStateData[Id::Position],             partialStateData[Id::PointPosition_1],  QEasingCurve::InOutCubic},
+        {0.0f, 0.4f, Id::PointRadius_1,          QVariant(),                            partialPointRadiusSqrt3,                QEasingCurve::InOutCubic},
+
+        {0.5f, 0.5f, Id::PointPosition_0,        partialStateData[Id::PointPosition_1], partialStateData[Id::PointPosition_0],  QEasingCurve::InOutCubic},
+        {0.5f, 0.5f, Id::PointPosition_2,        partialStateData[Id::PointPosition_1], partialStateData[Id::PointPosition_2],  QEasingCurve::InOutCubic},
+        {0.5f, 0.5f, Id::PointRadius_0,          partialPointRadiusSqrt3,               partialStateData[Id::PointRadius_0],    QEasingCurve::InOutCubic},
+        {0.5f, 0.5f, Id::PointRadius_1,          partialPointRadiusSqrt3,               partialStateData[Id::PointRadius_1],    QEasingCurve::InOutCubic},
+        {0.5f, 0.5f, Id::PointRadius_2,          partialPointRadiusSqrt3,               partialStateData[Id::PointRadius_2],    QEasingCurve::InOutCubic},
+        {1.0f,       &partialStateData},
+    };
+    }
 
 //___________________________________________________________________________________
 void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, const QWidget* widget, bool isRadioButton) const
@@ -141,213 +238,84 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
 
         const QPoint centerOffset = {rect.width()/2 + rect.x(), rect.height()/2 + rect.y()};
 
-        static const auto makePropertyAnimation =
-            [](const PropertyWrapperBase &property, const QVariant &start,
-               const QVariant &end = QVariant(), unsigned duration = 0,
-               const QEasingCurve &easing = QEasingCurve::Linear,
-               AbstractVariantInterpolator *interpolator = nullptr,
-               QPropertyAnimation **outPtr = nullptr)
-        {
-            QPropertyAnimation *p = new CustomPropertyAnimation(property, interpolator);
-            p->setStartValue(start);
-            p->setEndValue(end.isValid() ? end : start);
-            p->setDuration(duration);
-            p->setEasingCurve(easing);
-            if (outPtr != nullptr) {
-                *outPtr = p;
-            }
-            return p;
-        };
-        static const auto makeParallelAnimationGroup = [](std::initializer_list<QAbstractAnimation *> animations)
-        {
-            auto *group = new QParallelAnimationGroup();
-            for(auto *animation: animations) {
-                group->addAnimation(animation);
-            }
-            return group;
-        };
-        static const auto makeSequentialAnimationGroup = [](std::initializer_list<QAbstractAnimation *> animations)
-        {
-            auto *group = new QSequentialAnimationGroup();
-            for(auto *animation: animations) {
-                group->addAnimation(animation);
-            }
-            return group;
-        };
-        static const auto connectToWidget = [](QAbstractAnimation *animation, const QWidget *widget)
-        {
-            auto *timeline = qobject_cast<AnimationTimeline *>(animation);
-            if(timeline != nullptr) {
-                connect(timeline, &AnimationTimeline::valueChanged,
-                        const_cast<QWidget *>(widget), QOverload<>::of(&QWidget::update));
-            }
-        };
-
-        static const QPointF invalidPointF(qQNaN(), qQNaN());
-        // FIXME: use duratoin from the new engine after the code is moved
-        static const unsigned totalDuration = 1000;//_animations->multiStateEngine().duration();
-
         DataMap<MultiStateData>::Value dataPtr = _animations->multiStateEngine().data(widget);
+
+        static const auto stateToData = [](CheckBoxState state) -> const QVector<QVariant> * {
+            switch(state) {
+            case CheckOff:      return &offStateData;
+            case CheckOn:       return &onStateData;
+            case CheckPartial:  return &partialStateData;
+            };
+            return nullptr;
+        };
+
+        const QVector<QVariant> *vars = nullptr;
         if (dataPtr.isNull()) {
-            // TODO: draw static mark when animation not supported
-            return;
-        }
-        MultiStateData *data = dataPtr.data();
-
-        static const auto comparePointF = [](const QPointF &a, const QPointF &b) {
-            return qAbs(b.x() - a.x()) < 0.1 && qAbs(b.y() - a.y()) < 0.1;
-        };
-
-        ////////////////////////////////////////////////////////////////////////////////
-
-        std::array<PropertyWrapper<QPointF>, 3> pPos = {{
-            {data, "p0.pos"},
-            {data, "p1.pos"},
-            {data, "p2.pos"}
-        }};
-        std::array<PropertyWrapper<qreal>, 3> pRadius = {{
-            {data, "p0.radius"},
-            {data, "p1.radius"},
-            {data, "p2.radius"}
-        }};
-        std::array<PropertyWrapper<QPointF>, 3> lPPos = {{
-            {data, "lp0.pos"},
-            {data, "lp1.pos"},
-            {data, "lp2.pos"}
-        }};
-        PropertyWrapper<QPointF> checkPos = {data, "cp.pos"};
-
-        static const std::array<QPointF, 3> refLPPos    = {{{-4, 0}, {-1, 3}, {4, -2}}};
-        static const std::array<QPointF, 3> refPPos     = {{{-4, 0}, {0, 0}, {4, 0}}};
-
-        static const std::array<float, 3> startRadius   = {{0, 0, 0}};
-        static const std::array<float, 3> endRadius     = {{1, 1, 1}};
-
-        enum AnimationId {
-            OffToOn,
-            OnToOff,
-
-            OffToPartial,
-            PartialToOff,
-
-            PartialToOn,
-            OnToPartial,
-        };
-
-        if (!data->anims.contains(OffToOn)) {
-            data->anims[OnToOff] = new AnimationTimeline(data, totalDuration, {
-                {0.0, pPos[0],      QPointF{0,0}},
-                {0.0, pPos[1],      QPointF{0,0}},
-                {0.0, pPos[2],      QPointF{0,0}},
-                {0.0, pRadius[0],   0.0},
-                {0.0, pRadius[1],   0.0},
-                {0.0, pRadius[2],   0.0},
-
-                {0.0, lPPos[0], refLPPos[0], refLPPos[1], 0.5, QEasingCurve::InOutCubic},
-                {0.6, lPPos[0], refLPPos[1], refLPPos[2], 0.4, QEasingCurve::InOutCubic},
-                {0.6, lPPos[1], refLPPos[1], refLPPos[2], 0.4, QEasingCurve::InOutCubic},
-            });
-
-            data->anims[OffToOn] = new AnimationTimeline(data, totalDuration, {
-                {0.0, lPPos[0], refLPPos[0]},
-                {0.0, lPPos[2], refLPPos[0]},
-                {0.0, lPPos[1], refLPPos[0], refLPPos[1], 0.4, QEasingCurve::InOutCubic},
-                {0.5, lPPos[2], refLPPos[1], refLPPos[2], 0.5, QEasingCurve::InOutCubic},
-            });
-
-            data->anims[OffToPartial] = new AnimationTimeline(data, totalDuration, {
-                {0.0, pPos[0], refPPos[0]},
-                {0.0, pPos[1], refPPos[1]},
-                {0.0, pPos[2], refPPos[2]},
-                {0.0, pRadius[0], startRadius[0], endRadius[0], 0.6, QEasingCurve::OutCubic},
-                {0.2, pRadius[1], startRadius[1], endRadius[1], 0.6, QEasingCurve::OutCubic},
-                {0.4, pRadius[2], startRadius[2], endRadius[2], 0.6, QEasingCurve::OutCubic},
-            });
-
-            data->anims[PartialToOff] = new AnimationTimeline(data, totalDuration, {
-                {0.0, lPPos[0], QPointF{0,0}},
-                {0.0, lPPos[1], QPointF{0,0}},
-                {0.0, lPPos[2], QPointF{0,0}},
-
-                {0.0, pRadius[0], endRadius[0], startRadius[0], 0.6, QEasingCurve::InCubic},
-                {0.2, pRadius[1], endRadius[1], startRadius[1], 0.6, QEasingCurve::InCubic},
-                {0.4, pRadius[2], endRadius[2], startRadius[2], 0.6, QEasingCurve::InCubic},
-                {0.6, pPos[0],  QPointF{0,0}},
-                {0.8, pPos[1],  QPointF{0,0}},
-                {1.0, pPos[2],  QPointF{0,0}},
-            });
-
-            data->anims[PartialToOn] = new AnimationTimeline(data, totalDuration, {
-                {0.0, lPPos[0],     refLPPos[0]},
-                {0.0, lPPos[2],     refLPPos[0]},
-                {0.0, pPos[0],      refPPos[0]},
-                {0.0, pPos[1],      refPPos[1]},
-                {0.0, pPos[2],      refPPos[2]},
-
-                {0.0, lPPos[1],     refLPPos[0],            refLPPos[1],            0.4, QEasingCurve::InOutCubic},
-                {0.0, pPos[1],      refPPos[1],             refLPPos[1],            0.5, QEasingCurve::InOutCubic},
-                {0.0, pPos[2],      refPPos[2],             refLPPos[1],            0.5, QEasingCurve::InOutCubic},
-                {0.0, pRadius[1],   endRadius[1],           endRadius[1] * sqrt(2), 0.5, QEasingCurve::InOutCubic},
-                {0.0, pRadius[2],   endRadius[2],           endRadius[2] * sqrt(2), 0.5, QEasingCurve::InOutCubic},
-
-                {0.5, lPPos[2],     refLPPos[1],            refLPPos[2],            0.5, QEasingCurve::InOutCubic},
-                {0.5, pRadius[1],   endRadius[1] * sqrt(2), endRadius[1],           0.5, QEasingCurve::InOutCubic},
-                {0.5, pRadius[2],   endRadius[2] * sqrt(2), endRadius[2],           0.5, QEasingCurve::InOutCubic},
-                {0.5, pPos[2],      refLPPos[1],            refLPPos[2],            0.5, QEasingCurve::InOutCubic},
-
-                {1.0, pRadius[0],   0.0},
-                {1.0, pRadius[1],   0.0},
-                {1.0, pRadius[2],   0.0},
-            });
-
-            data->anims[OnToPartial] = new AnimationTimeline(data, totalDuration, {
-                {0.0, pRadius[0],   0.0},
-                {0.0, pRadius[2],   0.0},
-
-                {0.0, lPPos[0],     refLPPos[0],            refLPPos[1],                0.4, QEasingCurve::InOutCubic},
-                {0.0, lPPos[2],     refLPPos[2],            refLPPos[1],                0.4, QEasingCurve::InOutCubic},
-                {0.0, checkPos,     QPointF{0,0},           refPPos[1] - refLPPos[1],   0.4, QEasingCurve::InOutCubic},
-                {0.0, pPos[1],      refLPPos[1],            refPPos[1],                 0.4, QEasingCurve::InOutCubic},
-                {0.0, pRadius[1],   startRadius[1],         endRadius[1] * sqrt(3),     0.4, QEasingCurve::InOutCubic},
-
-                {0.5, pRadius[1],   endRadius[1] * sqrt(3), endRadius[0],               0.5, QEasingCurve::InOutCubic},
-                {0.5, pRadius[0],   endRadius[0] * sqrt(3), endRadius[0],               0.5, QEasingCurve::InOutCubic},
-                {0.5, pPos[0],      refPPos[1],             refPPos[0],                 0.5, QEasingCurve::InOutCubic},
-                {0.5, pRadius[2],   endRadius[2] * sqrt(3), endRadius[0],               0.5, QEasingCurve::InOutCubic},
-                {0.5, pPos[2],      refPPos[1],             refPPos[2],                 0.5, QEasingCurve::InOutCubic},
-                {1.0, checkPos,     QPointF{0,0}},
-            });
-
-            connectToWidget(data->anims[OnToOff], widget);
-            connectToWidget(data->anims[OffToOn], widget);
-            connectToWidget(data->anims[OffToPartial], widget);
-            connectToWidget(data->anims[PartialToOff], widget);
-            connectToWidget(data->anims[PartialToOn], widget);
-            connectToWidget(data->anims[OnToPartial], widget);
-        }
-
-        if (startAnim) {
-            if (previousCheckBoxState == CheckOff       && checkBoxState == CheckOn)        { data->anims[OffToOn]->start(); }
-            if (previousCheckBoxState == CheckOn        && checkBoxState == CheckOff)       { data->anims[OnToOff]->start(); }
-            if (previousCheckBoxState == CheckOff       && checkBoxState == CheckPartial)   { data->anims[OffToPartial]->start(); }
-            if (previousCheckBoxState == CheckPartial   && checkBoxState == CheckOff)       { data->anims[PartialToOff]->start(); }
-            if (previousCheckBoxState == CheckPartial   && checkBoxState == CheckOn)        { data->anims[PartialToOn]->start(); }
-            if (previousCheckBoxState == CheckOn        && checkBoxState == CheckPartial)   { data->anims[OnToPartial]->start(); }
+            vars = stateToData(checkBoxState);
+            Q_CHECK_PTR(vars);
+        } else {
+            MultiStateData *data = dataPtr.data();
+            vars = &data->variables;
+            if(data->variables.isEmpty()) {
+                // First rendering. Don't animate, it is initial state.
+                data->variables = *q_check_ptr(stateToData(checkBoxState));
+            } else {
+                if (startAnim) {
+                    data->anim->stop();
+                    if (previousCheckBoxState == CheckOff       && checkBoxState == CheckOn)        { data->timeline->setTransitions(&offToOnTransition); }
+                    if (previousCheckBoxState == CheckOn        && checkBoxState == CheckOff)       { data->timeline->setTransitions(&onToOffTransition); }
+                    if (previousCheckBoxState == CheckOff       && checkBoxState == CheckPartial)   { data->timeline->setTransitions(&offToPartialTransition); }
+                    if (previousCheckBoxState == CheckPartial   && checkBoxState == CheckOff)       { data->timeline->setTransitions(&partialToOffTransition); }
+                    if (previousCheckBoxState == CheckPartial   && checkBoxState == CheckOn)        { data->timeline->setTransitions(&partialToOnTransition); }
+                    if (previousCheckBoxState == CheckOn        && checkBoxState == CheckPartial)   { data->timeline->setTransitions(&onToPartialTransition); }
+                    data->anim->start();
+                }
+            }
         }
 
         painter->setBrush(Qt::NoBrush);
         painter->setPen(QPen(foreground, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
         QPainterPath pp;
-        pp.moveTo(lPPos[0] + centerOffset);
-        if (!comparePointF(lPPos[1], lPPos[0])) { pp.lineTo(lPPos[1] + centerOffset); }
-        if (!comparePointF(lPPos[2], lPPos[0])) { pp.lineTo(lPPos[2] + centerOffset); }
-        pp.translate(checkPos);
+
+        const QPointF pos = (*vars)[Id::Position].toPointF();
+        const QPointF linePointPos[] = {
+            (*vars)[Id::LinePointPosition_0].toPointF(),
+            (*vars)[Id::LinePointPosition_1].toPointF(),
+            (*vars)[Id::LinePointPosition_2].toPointF(),
+        };
+        const QPointF pointPos[] = {
+            (*vars)[Id::PointPosition_0].toPointF(),
+            (*vars)[Id::PointPosition_1].toPointF(),
+            (*vars)[Id::PointPosition_2].toPointF(),
+        };
+        const float pointRadius[] = {
+            (*vars)[Id::PointRadius_0].toFloat(),
+            (*vars)[Id::PointRadius_1].toFloat(),
+            (*vars)[Id::PointRadius_2].toFloat(),
+        };
+
+        int i = 0;
+        for(; i < 3; ++i) {
+            if(!isInvalidPointF(linePointPos[i])) {
+                pp.moveTo(linePointPos[i]);
+                break;
+            }
+        }
+        for(; i < 3; ++i) {
+            if(!isInvalidPointF(linePointPos[i])) {
+                pp.lineTo(linePointPos[i]);
+            }
+        }
+        pp.translate(pos + centerOffset);
         painter->drawPath(pp);
 
         painter->setPen(Qt::NoPen);
         for (int i = 0; i < 3; ++i) {
+            if (isInvalidPointF(pointPos[i]) || qFuzzyIsNull(pointRadius[i])) {
+                continue;
+            }
             painter->setBrush(foreground);
-            painter->drawEllipse(pPos[i] + centerOffset, pRadius[i], pRadius[i]);
+            painter->drawEllipse(pointPos[i] + centerOffset, pointRadius[i], pointRadius[i]);
         }
     }
 }
