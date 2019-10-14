@@ -27,43 +27,6 @@ namespace Breeze
 
 //// //// //// //// /// /// /// // // /  /   /    /
 
-class PropertyWrapperBase {
-public:
-    PropertyWrapperBase(QObject *object, QByteArray name): _object(object), _name(std::move(name)) {}
-    PropertyWrapperBase(const PropertyWrapperBase &other) { *this = other; }
-    PropertyWrapperBase & operator =(const PropertyWrapperBase &other) = default;
-    virtual ~PropertyWrapperBase() = default;
-
-    const QByteArray & name() const { return _name; }
-    QObject * object() const { return _object; }
-
-    operator QVariant() const { return _object->property(_name); }
-    virtual PropertyWrapperBase & operator =(const QVariant &value)
-    {
-        const QVariant oldValue = _object->property(_name);
-        if (oldValue.isValid() && oldValue.type() != value.type()) {
-
-            QVariant converted = value;
-            bool ok = converted.convert(oldValue.type());
-            if(!ok) {
-                qDebug("property \"%s\": new value type does not match previous value type (new: %s, old: %s) - trying to cast to original type.",
-                       qPrintable(_name), value.typeName(), _object->property(_name).typeName());
-                Q_ASSERT(ok);
-            }
-            _object->setProperty(_name, converted);
-        } else {
-            _object->setProperty(_name, value);
-        }
-        return *this;
-    }
-
-protected:
-    QObject *_object;
-    QByteArray _name;
-};
-
-//// //// //// //// /// /// /// // // /  /   /    /
-
     static constexpr const qreal qrealQNaN {std::numeric_limits<qreal>::quiet_NaN()}; // TODO: remove if unused anywhere but below
     static constexpr const QPointF invalidPointF {qrealQNaN, qrealQNaN};
     static const auto isInvalidPointF = [](const QPointF &point) { return std::isnan(point.x()) && std::isnan(point.y()); };
