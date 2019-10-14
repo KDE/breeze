@@ -68,7 +68,9 @@ protected:
     static constexpr const QPointF invalidPointF {qrealQNaN, qrealQNaN};
     static const auto isInvalidPointF = [](const QPointF &point) { return std::isnan(point.x()) && std::isnan(point.y()); };
 
-    class Timeline {
+    class TimelineAnimation: public QAbstractAnimation {
+        Q_OBJECT
+
     public:
         struct Entry { /**************************************/
             Entry(float relStartTime, float relDuration, unsigned dataId, QVariant from, QVariant to, QEasingCurve easingCurve)
@@ -109,29 +111,39 @@ protected:
         }; /*******************************************************/
         using EntryList = QVector<Entry>;
 
-    public:
-        Timeline(QVector<QVariant> *data, const EntryList *transitions = nullptr)
-              : _data(q_check_ptr(data))
+        TimelineAnimation(QObject *parent, int durationMs, QVector<QVariant> *data, const EntryList *transitions = nullptr)
+              : QAbstractAnimation(parent)
+              , _durationMs(durationMs)
+              , _data(q_check_ptr(data))
         {
             setTransitions(transitions);
         }
 
+        void setDuration(int durationMs) { _durationMs = durationMs; }
+        int duration() const override { return _durationMs; }
+
         void setTransitions(const EntryList *transitions) {
+            stop();
             _transitions = transitions;
             if(transitions != nullptr) {
                 _transitionStates = QVector<TransitionState>(transitions->size());
             } else {
                 _transitionStates.clear();
             }
-            reset();
         }
 
-        bool updateProgress(qreal progress) {
+    Q_SIGNALS:
+        void valueChanged();
+
+    protected:
+        void updateCurrentTime(int currentTime) override {
             if(_transitions == nullptr) {
-                return false;
+                return;
             }
 
+            const qreal progress = qreal(currentTime)/_durationMs;
             bool changed = false;
+
             for (int i = 0; i < _transitions->size(); ++i) {
                 const Entry &transition = (*_transitions)[i];
                 TransitionState &state = _transitionStates[i];
@@ -141,7 +153,6 @@ protected:
 
                 float relEndTime = transition.relStartTime + transition.relDuration;
 
-                // State setter entry
                 if (transition.state != nullptr) {
                     if (relEndTime <= progress) {
                         *_data = *transition.state;
@@ -149,8 +160,6 @@ protected:
                     }
                     continue;
                 }
-
-                // Value setter (animated or not)
 
                 Q_ASSERT(transition.dataId < _data->size());
                 QVariant &value = (*_data)[transition.dataId];
@@ -181,16 +190,28 @@ protected:
                 }
             }
 
-            return changed;
+            if (changed) {
+                emit valueChanged();
+            }
         }
 
-        void reset() {
-            for(auto &state: _transitionStates) {
-                state = TransitionState();
+        void updateState(QAbstractAnimation::State newState, QAbstractAnimation::State oldState) override
+        {
+            Q_UNUSED(oldState);
+
+            switch(newState) {
+            case Running:
+                for(auto &state: _transitionStates) {
+                    state = TransitionState();
+                }
+                break;
+            default: break;
             }
         }
 
     private:
+        int _durationMs;
+
         template <typename ValueType>
         static ValueType interpolateGeneric(const QVariant &from, const QVariant &to, qreal progress) {
             const auto a = from.value<ValueType>();
@@ -233,52 +254,8 @@ protected:
         QVector<TransitionState> _transitionStates;
     };
 
-    class TimelineAnimation: public QAbstractAnimation {
-        Q_OBJECT
 
-    public:
-        TimelineAnimation(QObject *parent, int durationMs, Timeline *timeline)
-              : QAbstractAnimation(parent)
-              , _durationMs(durationMs)
-              , _timeline(q_check_ptr(timeline))
-        {}
 
-        void setDuration(int durationMs) { _durationMs = durationMs; }
-        int duration() const override { return _durationMs; }
-
-        inline Timeline * timeline() { return _timeline; }
-
-    Q_SIGNALS:
-        void valueChanged();
-
-    protected:
-        void updateCurrentTime(int currentTime) override {
-            Q_ASSERT(_timeline);
-
-            const bool changed = _timeline->updateProgress(qreal(currentTime)/_durationMs);
-            if (changed) {
-                emit valueChanged();
-            }
-        }
-
-        void updateState(QAbstractAnimation::State newState, QAbstractAnimation::State oldState) override
-        {
-            Q_UNUSED(oldState);
-
-            switch(newState) {
-            case Running:
-                Q_ASSERT(_timeline);
-
-                _timeline->reset();
-                break;
-            default: break;
-            }
-        }
-
-    private:
-        int _durationMs;
-        Timeline *_timeline;
-    };
 
 //    template <typename T>
 //    class FixedTypeVariant: public QVariant {
@@ -337,17 +314,15 @@ protected:
             _initialized( false ),
             _state( state ),
             _previousState( state ),
-            timeline(new Timeline(&variables)),
-            anim(new TimelineAnimation(this, 250, timeline))
+            timeline(new TimelineAnimation(this, 250, &variables))
         {
-            connect(anim, &TimelineAnimation::valueChanged, target, QOverload<>::of(&QWidget::update));
+            connect(timeline, &TimelineAnimation::valueChanged, target, QOverload<>::of(&QWidget::update));
         }
 
         //* destructor
         ~MultiStateData() override
         {
-            anim->stop();
-            delete timeline;
+            timeline->stop();
         }
 
         /**
@@ -360,8 +335,7 @@ protected:
         virtual QVariant previousState() const { return _previousState; }
 
         QVector<QVariant> variables;
-        Timeline *timeline;
-        TimelineAnimation *anim;
+        TimelineAnimation *timeline;
 
         private:
 

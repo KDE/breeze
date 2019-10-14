@@ -40,7 +40,7 @@ namespace Breeze
         /* PointRadius       */ 1.0f, 1.0f, 1.0f,
     };
 
-    const Timeline::EntryList offToOnTransition {
+    const TimelineAnimation::EntryList offToOnTransition {
         {0.0f,       &offStateData},
         {0.0f,       Id::Position,            onStateData[Id::Position]},
         {0.0f,       Id::LinePointPosition_0, onStateData[Id::LinePointPosition_0]},
@@ -48,7 +48,7 @@ namespace Breeze
         {0.5f, 0.5f, Id::LinePointPosition_2, onStateData[Id::LinePointPosition_1], onStateData[Id::LinePointPosition_2], QEasingCurve::InOutCubic},
         {1.0f,       &onStateData},
     };
-    const Timeline::EntryList onToOffTransition {
+    const TimelineAnimation::EntryList onToOffTransition {
         {0.0f,       &onStateData},
         {0.0f, 0.5f, Id::LinePointPosition_0, onStateData[Id::LinePointPosition_0], onStateData[Id::LinePointPosition_1], QEasingCurve::InOutCubic},
         {0.6f, 0.4f, Id::LinePointPosition_0, onStateData[Id::LinePointPosition_1], onStateData[Id::LinePointPosition_2], QEasingCurve::InOutCubic},
@@ -56,7 +56,7 @@ namespace Breeze
         {1.0f,       &offStateData},
     };
 
-    const Timeline::EntryList offToPartialTransition {
+    const TimelineAnimation::EntryList offToPartialTransition {
         {0.0f,       &offStateData},
         {0.0f,       Id::PointPosition_0, partialStateData[Id::PointPosition_0]},
         {0.0f,       Id::PointPosition_1, partialStateData[Id::PointPosition_1]},
@@ -66,7 +66,7 @@ namespace Breeze
         {0.4f, 0.6f, Id::PointRadius_2,   QVariant(), partialStateData[Id::PointRadius_2], QEasingCurve::OutCubic},
         {1.0f,       &partialStateData},
     };
-    const Timeline::EntryList partialToOffTransition {
+    const TimelineAnimation::EntryList partialToOffTransition {
         {0.0f,       &partialStateData},
         {0.0f, 0.6f, Id::PointRadius_0,   partialStateData[Id::PointRadius_0], offStateData[Id::PointRadius_0], QEasingCurve::InCubic},
         {0.2f, 0.6f, Id::PointRadius_1,   partialStateData[Id::PointRadius_1], offStateData[Id::PointRadius_1], QEasingCurve::InCubic},
@@ -78,7 +78,7 @@ namespace Breeze
     const float partialPointRadiusSqrt3 = partialStateData[Id::PointRadius_0].toFloat() * sqrtf(3);
     const QPointF onAbsLinePointPosition_2 = onStateData[Id::LinePointPosition_2].toPointF() + onStateData[Id::Position].toPointF();
 
-    const Timeline::EntryList partialToOnTransition {
+    const TimelineAnimation::EntryList partialToOnTransition {
         {0.0f,       &partialStateData},
         {0.0f,       Id::Position,               onStateData[Id::Position]},
         {0.0f,       Id::LinePointPosition_0,    onStateData[Id::LinePointPosition_0]},
@@ -96,7 +96,7 @@ namespace Breeze
         {0.5f, 0.5f, Id::PointRadius_2,          QVariant(),                            onStateData[Id::PointRadius_2],         QEasingCurve::InOutCubic},
         {1.0f,       &onStateData},
     };
-    const Timeline::EntryList onToPartialTransition {
+    const TimelineAnimation::EntryList onToPartialTransition {
         {0.0f,       &onStateData},
         {0.0f, 0.4f, Id::Position,               QVariant(),                            partialStateData[Id::Position],         QEasingCurve::InOutCubic},
         {0.0f, 0.4f, Id::LinePointPosition_0,    QVariant(),                            onStateData[Id::LinePointPosition_1],   QEasingCurve::InOutCubic},
@@ -261,14 +261,14 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
                 data->variables = *q_check_ptr(stateToData(checkBoxState));
             } else {
                 if (startAnim) {
-                    data->anim->stop();
+                    data->timeline->stop();
                     if (previousCheckBoxState == CheckOff       && checkBoxState == CheckOn)        { data->timeline->setTransitions(&offToOnTransition); }
                     if (previousCheckBoxState == CheckOn        && checkBoxState == CheckOff)       { data->timeline->setTransitions(&onToOffTransition); }
                     if (previousCheckBoxState == CheckOff       && checkBoxState == CheckPartial)   { data->timeline->setTransitions(&offToPartialTransition); }
                     if (previousCheckBoxState == CheckPartial   && checkBoxState == CheckOff)       { data->timeline->setTransitions(&partialToOffTransition); }
                     if (previousCheckBoxState == CheckPartial   && checkBoxState == CheckOn)        { data->timeline->setTransitions(&partialToOnTransition); }
                     if (previousCheckBoxState == CheckOn        && checkBoxState == CheckPartial)   { data->timeline->setTransitions(&onToPartialTransition); }
-                    data->anim->start();
+                    data->timeline->start();
                 }
             }
         }
