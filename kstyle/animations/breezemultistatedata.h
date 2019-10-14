@@ -218,20 +218,6 @@ namespace Breeze
     };
 
 
-
-
-//    template <typename T>
-//    class FixedTypeVariant: public QVariant {
-//    public:
-//        FixedTypeVariant(): QVariant(qMetaTypeId<T>(), nullptr) {
-//            static_assert (sizeof(FixedTypeVariant<T>) == sizeof(QVariant));
-//        }
-//        FixedTypeVariant(const T &val): QVariant(val) {}
-
-//        operator T() const { return value<T>(); }
-//        FixedTypeVariant<T> & operator =(const T &value) { setValue(value); return *this; }
-//    };
-
     class CheckMarkRenderer {
 //        Q_OBJECT
 
