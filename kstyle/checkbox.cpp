@@ -113,6 +113,55 @@ namespace Breeze
     };
     }
 
+static void renderCheckMark(QPainter *painter, const QPoint &position, const QColor &color,
+                            const QVector<QVariant> &vars)
+{
+    painter->setBrush(Qt::NoBrush);
+    painter->setPen(QPen(color, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    QPainterPath pp;
+
+    const QPointF relPosition = vars[Id::Position].toPointF();
+    const QPointF linePointPos[] = {
+        vars[Id::LinePointPosition_0].toPointF(),
+        vars[Id::LinePointPosition_1].toPointF(),
+        vars[Id::LinePointPosition_2].toPointF(),
+    };
+    const QPointF pointPos[] = {
+        vars[Id::PointPosition_0].toPointF(),
+        vars[Id::PointPosition_1].toPointF(),
+        vars[Id::PointPosition_2].toPointF(),
+    };
+    const float pointRadius[] = {
+        vars[Id::PointRadius_0].toFloat(),
+        vars[Id::PointRadius_1].toFloat(),
+        vars[Id::PointRadius_2].toFloat(),
+    };
+
+    int i = 0;
+    for(; i < 3; ++i) {
+        if(!isInvalidPointF(linePointPos[i])) {
+            pp.moveTo(linePointPos[i]);
+            break;
+        }
+    }
+    for(; i < 3; ++i) {
+        if(!isInvalidPointF(linePointPos[i])) {
+            pp.lineTo(linePointPos[i]);
+        }
+    }
+    pp.translate(relPosition + position);
+    painter->drawPath(pp);
+
+    painter->setPen(Qt::NoPen);
+    for (int i = 0; i < 3; ++i) {
+        if (isInvalidPointF(pointPos[i]) || qFuzzyIsNull(pointRadius[i])) {
+            continue;
+        }
+        painter->setBrush(color);
+        painter->drawEllipse(pointPos[i] + position, pointRadius[i], pointRadius[i]);
+    }
+}
+
 //___________________________________________________________________________________
 void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, const QWidget* widget, bool isRadioButton) const
 {
@@ -272,51 +321,7 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
                 }
             }
         }
-
-        painter->setBrush(Qt::NoBrush);
-        painter->setPen(QPen(foreground, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-        QPainterPath pp;
-
-        const QPointF pos = (*vars)[Id::Position].toPointF();
-        const QPointF linePointPos[] = {
-            (*vars)[Id::LinePointPosition_0].toPointF(),
-            (*vars)[Id::LinePointPosition_1].toPointF(),
-            (*vars)[Id::LinePointPosition_2].toPointF(),
-        };
-        const QPointF pointPos[] = {
-            (*vars)[Id::PointPosition_0].toPointF(),
-            (*vars)[Id::PointPosition_1].toPointF(),
-            (*vars)[Id::PointPosition_2].toPointF(),
-        };
-        const float pointRadius[] = {
-            (*vars)[Id::PointRadius_0].toFloat(),
-            (*vars)[Id::PointRadius_1].toFloat(),
-            (*vars)[Id::PointRadius_2].toFloat(),
-        };
-
-        int i = 0;
-        for(; i < 3; ++i) {
-            if(!isInvalidPointF(linePointPos[i])) {
-                pp.moveTo(linePointPos[i]);
-                break;
-            }
-        }
-        for(; i < 3; ++i) {
-            if(!isInvalidPointF(linePointPos[i])) {
-                pp.lineTo(linePointPos[i]);
-            }
-        }
-        pp.translate(pos + centerOffset);
-        painter->drawPath(pp);
-
-        painter->setPen(Qt::NoPen);
-        for (int i = 0; i < 3; ++i) {
-            if (isInvalidPointF(pointPos[i]) || qFuzzyIsNull(pointRadius[i])) {
-                continue;
-            }
-            painter->setBrush(foreground);
-            painter->drawEllipse(pointPos[i] + centerOffset, pointRadius[i], pointRadius[i]);
-        }
+        renderCheckMark(painter, centerOffset, foreground, *vars);
     }
 }
 
