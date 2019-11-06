@@ -213,10 +213,10 @@ namespace Breeze
     //* checkbox state
     enum CheckBoxState
     {
+        CheckUnknown,
         CheckOff,
         CheckPartial,
         CheckOn,
-        CheckAnimated
     };
 
     //* radio button state

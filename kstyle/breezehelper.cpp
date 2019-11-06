@@ -842,117 +842,6 @@ namespace Breeze
     }
 
     //______________________________________________________________________________
-    void Helper::renderCheckBoxBackground(
-        QPainter* painter, const QRect& rect,
-        const QColor& color, bool sunken ) const
-    {
-
-        // setup painter
-        painter->setRenderHint( QPainter::Antialiasing, true );
-
-        // copy rect and radius
-        QRectF frameRect( rect );
-        frameRect.adjust( 3, 3, -3, -3 );
-
-        if( sunken ) frameRect.translate(1, 1);
-
-        painter->setPen( Qt::NoPen );
-        painter->setBrush( color );
-        painter->drawRect( frameRect );
-
-    }
-
-    //______________________________________________________________________________
-    void Helper::renderCheckBox(
-        QPainter* painter, const QRect& rect,
-        const QColor& color, const QColor& shadow,
-        bool sunken, CheckBoxState state, qreal animation ) const
-    {
-
-        // setup painter
-        painter->setRenderHint( QPainter::Antialiasing, true );
-
-        // copy rect and radius
-        QRectF frameRect( rect );
-        frameRect.adjust( 2, 2, -2, -2 );
-        qreal radius( frameRadius() );
-
-        // shadow
-        if( sunken )
-        {
-
-            frameRect.translate(1, 1);
-
-        } else {
-
-            painter->setPen( QPen( shadow, 1 ) );
-            painter->setBrush( Qt::NoBrush );
-
-            const qreal shadowRadius( radius + 0.5 );
-            painter->drawRoundedRect( shadowRect( frameRect ).adjusted( -0.5, -0.5, 0.5, 0.5 ), shadowRadius, shadowRadius );
-
-        }
-
-        // content
-        {
-
-            painter->setPen( QPen( color, 1 ) );
-            painter->setBrush( Qt::NoBrush );
-
-            radius = qMax( radius-1, qreal( 0.0 ) );
-            const QRectF contentRect( frameRect.adjusted( 0.5, 0.5, -0.5, -0.5 ) );
-            painter->drawRoundedRect( contentRect, radius, radius );
-
-        }
-
-        // mark
-        if( state == CheckOn )
-        {
-
-            painter->setBrush( color );
-            painter->setPen( Qt::NoPen );
-
-            const QRectF markerRect( frameRect.adjusted( 3, 3, -3, -3 ) );
-            painter->drawRect( markerRect );
-
-        } else if( state == CheckPartial ) {
-
-            QPen pen( color, 2 );
-            pen.setJoinStyle( Qt::MiterJoin );
-            painter->setPen( pen );
-
-            const QRectF markerRect( frameRect.adjusted( 4, 4, -4, -4 ) );
-            painter->drawRect( markerRect );
-
-            painter->setPen( Qt::NoPen );
-            painter->setBrush( color );
-            painter->setRenderHint( QPainter::Antialiasing, false );
-
-            QPainterPath path;
-            path.moveTo( markerRect.topLeft() );
-            path.lineTo( markerRect.right() - 1, markerRect.top() );
-            path.lineTo( markerRect.left(), markerRect.bottom()-1 );
-            painter->drawPath( path );
-
-        } else if( state == CheckAnimated ) {
-
-            const QRectF markerRect( frameRect.adjusted( 3, 3, -3, -3 ) );
-            QPainterPath path;
-            path.moveTo( markerRect.topRight() );
-            path.lineTo( markerRect.center() + animation*( markerRect.topLeft() - markerRect.center() ) );
-            path.lineTo( markerRect.bottomLeft() );
-            path.lineTo( markerRect.center() + animation*( markerRect.bottomRight() - markerRect.center() ) );
-            path.closeSubpath();
-
-            painter->setBrush( color );
-            painter->setPen( Qt::NoPen );
-            painter->drawPath( path );
-
-        }
-
-    }
-
-    //______________________________________________________________________________
     void Helper::renderRadioButtonBackground( QPainter* painter, const QRect& rect, const QColor& color, bool sunken ) const
     {
 
@@ -976,6 +865,7 @@ namespace Breeze
         const QColor& color, const QColor& shadow,
         bool sunken, RadioButtonState state, qreal animation ) const
     {
+        // FIXME (mglb): use for drawing radio button control
 
         // setup painter
         painter->setRenderHint( QPainter::Antialiasing, true );

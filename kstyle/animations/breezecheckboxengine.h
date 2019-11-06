@@ -1,5 +1,5 @@
-#ifndef breezemultistateengine_h
-#define breezemultistateengine_h
+#ifndef breezecheckboxengine_h
+#define breezecheckboxengine_h
 
 /*************************************************************************
  * Copyright (C) 2014 by Hugo Pereira Da Costa <hugo.pereira@free.fr>    *
@@ -23,13 +23,12 @@
 #include "breeze.h"
 #include "breezebaseengine.h"
 #include "breezedatamap.h"
-#include "breezemultistatedata.h"
+#include "breezecheckboxdata.h"
 
 namespace Breeze
 {
 
-    //* used for simple widgets
-    class MultiStateEngine: public BaseEngine
+    class CheckBoxEngine: public BaseEngine
     {
 
         Q_OBJECT
@@ -37,12 +36,12 @@ namespace Breeze
     public:
 
         //* constructor
-        explicit MultiStateEngine( QObject* parent ):
+        explicit CheckBoxEngine( QObject* parent ):
             BaseEngine( parent )
         {}
 
         //* destructor
-        virtual ~MultiStateEngine()
+        virtual ~CheckBoxEngine()
         {}
 
         //* register widget
@@ -54,11 +53,11 @@ namespace Breeze
         using BaseEngine::registeredWidgets;
 
         //* true if widget hover state is changed
-        virtual bool updateState( const QObject*, const QVariant & );
+        virtual bool updateState(const QObject*, CheckBoxState );
 
         virtual QVariant state( const QObject *widget) const
         {
-            DataMap<MultiStateData>::Value dataPtr = data(widget);
+            DataMap<CheckBoxData>::Value dataPtr = data(widget);
             if(!dataPtr.isNull()) {
                 return dataPtr.data()->state();
             }
@@ -67,7 +66,7 @@ namespace Breeze
 
         virtual QVariant previousState( const QObject *widget) const
         {
-            DataMap<MultiStateData>::Value dataPtr = data(widget);
+            DataMap<CheckBoxData>::Value dataPtr = data(widget);
             if(!dataPtr.isNull()) {
                 return dataPtr.data()->previousState();
             }
@@ -75,21 +74,22 @@ namespace Breeze
         }
 
         //* true if widget is animated
-        virtual bool isAnimated( const QObject* );
+        bool isAnimated( const QObject* );
 
-        //* animation opacity
-        virtual qreal opacity( const QObject* object)
-        { return isAnimated( object) ? data( object).data()->opacity(): AnimationData::OpacityInvalid; }
+        qreal progress( const QObject* object)
+        {
+            return isAnimated(object) ? data(object).data()->opacity(): AnimationData::OpacityInvalid;
+        }
 
         //* duration
-        virtual void setEnabled( bool value )
+        void setEnabled( bool value ) override
         {
             BaseEngine::setEnabled( value );
             _state.setEnabled( value );
         }
 
         //* duration
-        virtual void setDuration( int value )
+        void setDuration( int value ) override
         {
             BaseEngine::setDuration( value );
             _state.setDuration( value );
@@ -98,22 +98,22 @@ namespace Breeze
         public Q_SLOTS:
 
         //* remove widget from map
-        virtual bool unregisterWidget( QObject* object )
+        bool unregisterWidget( QObject* object ) override
         {
             if( !object ) return false;
             return _state.unregisterWidget( object );
         }
 
         //* returns data associated to widget
-        DataMap<MultiStateData>::Value data( const QObject*) const;
+        DataMap<CheckBoxData>::Value data(const QObject*) const;
 
         protected:
 
-        DataMap<MultiStateData> &dataMap();
+        DataMap<CheckBoxData> &dataMap();
 
     private:
 
-        DataMap<MultiStateData> _state;
+        DataMap<CheckBoxData> _state;
     };
 
 }

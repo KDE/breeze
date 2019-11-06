@@ -18,17 +18,17 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  *************************************************************************/
 
-#include "breezemultistateengine.h"
+#include "breezecheckboxengine.h"
 
 namespace Breeze
 {
 
     //____________________________________________________________
-    bool MultiStateEngine::registerWidget( QWidget* widget)
+    bool CheckBoxEngine::registerWidget( QWidget* widget)
     {
 
         if( !widget ) return false;
-        if( !_state.contains( widget ) ) { _state.insert( widget, new MultiStateData( this, widget, duration() ), enabled() ); }
+        if( !_state.contains( widget ) ) { _state.insert( widget, new CheckBoxData( this, widget, duration() ), enabled() ); }
 
         // connect destruction signal
         connect( widget, SIGNAL(destroyed(QObject*)), this, SLOT(unregisterWidget(QObject*)), Qt::UniqueConnection );
@@ -38,12 +38,12 @@ namespace Breeze
     }
 
     //____________________________________________________________
-    BaseEngine::WidgetList MultiStateEngine::registeredWidgets() const
+    BaseEngine::WidgetList CheckBoxEngine::registeredWidgets() const
     {
 
         WidgetList out;
 
-        using Value = DataMap<MultiStateData>::Value;
+        using Value = DataMap<CheckBoxData>::Value;
 
         for(const Value& value: _state) {
             if( value ) out.insert( value.data()->target().data() );
@@ -54,23 +54,23 @@ namespace Breeze
     }
 
     //____________________________________________________________
-    bool MultiStateEngine::updateState( const QObject* object, const QVariant &value )
+    bool CheckBoxEngine::updateState( const QObject* object, CheckBoxState value )
     {
-        DataMap<MultiStateData>::Value data( MultiStateEngine::data( object ) );
+        DataMap<CheckBoxData>::Value data( CheckBoxEngine::data( object ) );
         return ( data && data.data()->updateState( value ) );
     }
 
     //____________________________________________________________
-    bool MultiStateEngine::isAnimated( const QObject* object)
+    bool CheckBoxEngine::isAnimated( const QObject* object)
     {
 
-        DataMap<MultiStateData>::Value data( MultiStateEngine::data( object) );
+        DataMap<CheckBoxData>::Value data( CheckBoxEngine::data( object) );
         return ( data && data.data()->animation() && data.data()->animation().data()->isRunning() );
 
     }
 
     //____________________________________________________________
-    DataMap<MultiStateData>::Value MultiStateEngine::data(const QObject* object) const
+    DataMap<CheckBoxData>::Value CheckBoxEngine::data(const QObject* object) const
     {
 
         return _state.find( object ).data();
@@ -78,7 +78,7 @@ namespace Breeze
     }
 
     //____________________________________________________________
-    DataMap<MultiStateData>& MultiStateEngine::dataMap()
+    DataMap<CheckBoxData>& CheckBoxEngine::dataMap()
     {
 
         return _state;

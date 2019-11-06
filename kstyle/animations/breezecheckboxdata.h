@@ -1,5 +1,5 @@
-#ifndef breezemultistatedata_h
-#define breezemultistatedata_h
+#ifndef breezecheckboxdata_h
+#define breezecheckboxdata_h
 
 /*************************************************************************
  * Copyright (C) 2014 by Hugo Pereira Da Costa <hugo.pereira@free.fr>    *
@@ -20,10 +20,13 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  *************************************************************************/
 
+#include <QMetaProperty>
 #include "breezegenericdata.h"
 
 namespace Breeze
 {
+
+#define declvaluetype(v) std::remove_reference<decltype(v)>::type
 
 //// //// //// //// /// /// /// // // /  /   /    /
 
@@ -31,50 +34,97 @@ namespace Breeze
     static constexpr const QPointF invalidPointF {qrealQNaN, qrealQNaN};
     static const auto isInvalidPointF = [](const QPointF &point) { return std::isnan(point.x()) && std::isnan(point.y()); };
 
+    struct CheckBoxRenderState {
+        Q_GADGET
+        Q_PROPERTY(QPointF position MEMBER position)
+        Q_PROPERTY(QPointF linePointPosition0 MEMBER linePointPosition0)
+        Q_PROPERTY(QPointF linePointPosition1 MEMBER linePointPosition1)
+        Q_PROPERTY(QPointF linePointPosition2 MEMBER linePointPosition2)
+        Q_PROPERTY(QPointF pointPosition0 MEMBER pointPosition0)
+        Q_PROPERTY(QPointF pointPosition1 MEMBER pointPosition1)
+        Q_PROPERTY(QPointF pointPosition2 MEMBER pointPosition2)
+        Q_PROPERTY(qreal pointRadius0 MEMBER pointRadius0)
+        Q_PROPERTY(qreal pointRadius1 MEMBER pointRadius1)
+        Q_PROPERTY(qreal pointRadius2 MEMBER pointRadius2)
+
+    public:
+        QPointF position;
+        QPointF linePointPosition0, linePointPosition1, linePointPosition2;
+        QPointF pointPosition0,     pointPosition1,     pointPosition2;
+        qreal   pointRadius0,       pointRadius1,       pointRadius2;
+
+        QString toString() const {
+            QString str("CheckBoxRenderState {\n");
+            static const auto pointFToString = [](const QPointF &p)->QString {
+                if (isInvalidPointF(p)) {
+                    return QStringLiteral("(InvalidPointF)");
+                }
+                return QStringLiteral("{%1, %2}").arg(p.x()).arg(p.y());
+            };
+            str.append(QStringLiteral("  position = %1,\n").arg(pointFToString(position)));
+            str.append(QStringLiteral("  linePointPosition = {%1, %2, %3},\n")
+                            .arg(pointFToString(linePointPosition0))
+                            .arg(pointFToString(linePointPosition1))
+                            .arg(pointFToString(linePointPosition2)));
+            str.append(QStringLiteral("  pointPosition = {%1, %2, %3},\n")
+                            .arg(pointFToString(pointPosition0))
+                            .arg(pointFToString(pointPosition1))
+                            .arg(pointFToString(pointPosition2)));
+            str.append(QStringLiteral("  pointRadius = {%1, %2, %3},\n")
+                            .arg(pointRadius0)
+                            .arg(pointRadius1)
+                            .arg(pointRadius2));
+            str.append("}");
+            return str;
+        }
+    };
+
     class TimelineAnimation: public QAbstractAnimation {
         Q_OBJECT
 
     public:
         struct Entry { /**************************************/
-            Entry(float relStartTime, float relDuration, unsigned dataId, QVariant from, QVariant to, QEasingCurve easingCurve)
+            using ActionFunc = void (*)(void *renderState);
+
+            Entry(float relStartTime, ActionFunc action)
                   : relStartTime(relStartTime)
-                  , state(nullptr)
-                  , dataId(dataId)
+                  , relDuration(0)
+                  , action(action)
+            {}
+
+            Entry(float relStartTime, QByteArray propertyName, QVariant to)
+                  : relStartTime(relStartTime)
+                  , relDuration(0)
+                  , action(nullptr)
+                  , propertyName(std::move(propertyName))
+                  , from(QVariant())
+                  , to(std::move(to))
+            {}
+
+            Entry(float relStartTime, float relDuration, QByteArray propertyName, QVariant from, QVariant to, QEasingCurve easingCurve)
+                  : relStartTime(relStartTime)
+                  , relDuration(relDuration)
+                  , action(nullptr)
+                  , propertyName(std::move(propertyName))
                   , from(std::move(from))
                   , to(std::move(to))
-                  , relDuration(relDuration)
                   , easingCurve(std::move(easingCurve))
             {}
 
-            Entry(float relStartTime, unsigned member, QVariant to)
-                  : relStartTime(relStartTime)
-                  , state(nullptr)
-                  , dataId(member)
-                  , from(QVariant())
-                  , to(std::move(to))
-                  , relDuration(0)
-            {}
-
-            Entry(float relStartTime, const QVector<QVariant> *state)
-                  : relStartTime(relStartTime)
-                  , state(q_check_ptr(state))
-                  , relDuration(0)
-            {}
-
             float                       relStartTime;
-            const QVector<QVariant> *   state;
-            unsigned                    dataId;
+            float                       relDuration;
+            ActionFunc                  action;
+            QByteArray                  propertyName;
             QVariant                    from;
             QVariant                    to;
-            float                       relDuration;
             QEasingCurve                easingCurve;
 
             inline bool isSetter() const { return qFuzzyIsNull(relDuration) && !from.isValid(); }
             inline bool isStartingFromPreviousValue() const { return !from.isValid() && to.isValid(); }
         }; /*******************************************************/
-        using EntryList = QVector<Entry>;
+        using EntryList = QList<Entry>;
 
-        TimelineAnimation(QObject *parent, int durationMs, QVector<QVariant> *data, const EntryList *transitions = nullptr)
+        TimelineAnimation(QObject *parent, int durationMs, CheckBoxRenderState *data, const EntryList *transitions = nullptr)
               : QAbstractAnimation(parent)
               , _durationMs(durationMs)
               , _data(q_check_ptr(data))
@@ -103,8 +153,6 @@ namespace Breeze
             if(_transitions == nullptr) {
                 return;
             }
-
-            const qreal progress = qreal(currentTime)/_durationMs;
             bool changed = false;
 
             for (int i = 0; i < _transitions->size(); ++i) {
@@ -114,37 +162,40 @@ namespace Breeze
                     continue;
                 }
 
-                float relEndTime = transition.relStartTime + transition.relDuration;
+                int absStartTime = qRound(transition.relStartTime * _durationMs);
+                int absEndTime = qRound((transition.relStartTime + transition.relDuration) * _durationMs);
 
-                if (transition.state != nullptr) {
-                    if (relEndTime <= progress) {
-                        *_data = *transition.state;
+                if (transition.action != nullptr) {
+                    if (absEndTime <= currentTime) {
+                        transition.action(_data);
                         state.processed = true;
                     }
                     continue;
                 }
 
-                Q_ASSERT(transition.dataId < _data->size());
-                QVariant &value = (*_data)[transition.dataId];
+                int propertyIndex = _data->staticMetaObject.indexOfProperty(transition.propertyName);
+                Q_ASSERT(propertyIndex >= 0);
+                auto property = _data->staticMetaObject.property(propertyIndex);
+                const QVariant value = property.readOnGadget(_data);
 
-                if (relEndTime < progress) {
+                if (absEndTime < currentTime) {
                     // Already ended
                     if (value != transition.to) {
-                        value = transition.to;
+                        property.writeOnGadget(_data, transition.to);
                         changed = true;
                     }
                     state.processed = true;
-                } else if (transition.relStartTime <= progress) {
+                } else if (absStartTime <= currentTime) {
                     // Is running
                     if (transition.isStartingFromPreviousValue() && !state.previousValue.isValid()) {
                         state.previousValue = value;
                     }
 
-                    const qreal transitionProgress = (progress - transition.relStartTime) / transition.relDuration;
+                    const qreal transitionProgress = (qreal(currentTime)/_durationMs - transition.relStartTime) / transition.relDuration;
                     const QVariant &from = transition.isStartingFromPreviousValue() ? state.previousValue : transition.from;
                     const QVariant newValue = interpolate(from, transition.to, transition.easingCurve.valueForProgress(transitionProgress));
                     if (value != newValue) {
-                        value = newValue;
+                        property.writeOnGadget(_data, newValue);
                         changed = true;
                     }
                 } else {
@@ -212,64 +263,49 @@ namespace Breeze
             bool processed {false};
         };
 
-        QVector<QVariant> *_data;
+        CheckBoxRenderState *_data;
         const EntryList *_transitions;
         QVector<TransitionState> _transitionStates;
     };
 
-
-    class CheckMarkRenderer {
-//        Q_OBJECT
-
-    public:
-        enum DataId: unsigned {
-            Position,
-            LinePointPosition_0,
-            LinePointPosition_1,
-            LinePointPosition_2,
-            PointPosition_0,
-            PointPosition_1,
-            PointPosition_2,
-            PointRadius_0,
-            PointRadius_1,
-            PointRadius_2,
-
-            DataIdCount,
-
-            LinePointPosition      = LinePointPosition_0,
-            LinePointPosition_Last = LinePointPosition_2,
-
-            PointPosition      = PointPosition_0,
-            PointPosition_Last = PointPosition_2,
-
-            PointRadius      = PointRadius_0,
-            PointRadius_Last = PointRadius_2,
-        };
-
-        void setState(CheckBoxState newState);
-        void render(QPainter &painter) {}
+    struct AbstractState {
+        virtual QVariant get(unsigned id) = 0;
+        virtual void set(unsigned id, const QVariant &value) = 0;
     };
 
-    //* Tracks arbitrary states (e.g. tri-state checkbox check state)
-    class MultiStateData: public GenericData
+    struct CheckMarkState {
+        QPointF position;
+        QPointF linePointPosition[3];
+        QPointF pointPosition[3];
+        qreal   pointRadius[3];
+
+        enum DataId: unsigned {
+            Position,
+            LinePointPosition_0, LinePointPosition_1, LinePointPosition_2,
+            PointPosition_0,     PointPosition_1,     PointPosition_2,
+            PointRadius_0,       PointRadius_1,       PointRadius_2,
+        };
+    };
+
+    class CheckBoxData: public GenericData
     {
         Q_OBJECT
 
-        public:
+    public:
 
         //* constructor
-        MultiStateData( QObject* parent, QWidget* target, int duration, QVariant state = QVariant() ):
+        CheckBoxData( QObject* parent, QWidget* target, int duration, CheckBoxState state = CheckBoxState::CheckUnknown ):
             GenericData( parent, target, duration ),
             _initialized( false ),
             _state( state ),
-            _previousState( state ),
-            timeline(new TimelineAnimation(this, 250, &variables))
+            _previousState( CheckBoxState::CheckUnknown ),
+            timeline(new TimelineAnimation(this, 250, &renderState))
         {
             connect(timeline, &TimelineAnimation::valueChanged, target, QOverload<>::of(&QWidget::update));
         }
 
         //* destructor
-        ~MultiStateData() override
+        ~CheckBoxData() override
         {
             timeline->stop();
         }
@@ -278,20 +314,33 @@ namespace Breeze
         returns true if state has changed
         and starts timer accordingly
         */
-        virtual bool updateState( const QVariant &value );
+        virtual bool updateState( CheckBoxState value );
 
-        virtual QVariant state() const { return _state; }
-        virtual QVariant previousState() const { return _previousState; }
+        virtual CheckBoxState state() const { return _state; }
+        virtual CheckBoxState previousState() const { return _previousState; }
 
-        QVector<QVariant> variables;
         TimelineAnimation *timeline;
 
-        private:
+        static const CheckBoxRenderState offState;
+        static const CheckBoxRenderState onState;
+        static const CheckBoxRenderState partialState;
+
+        static const TimelineAnimation::EntryList offToOnTransition;
+        static const TimelineAnimation::EntryList onToOffTransition;
+        static const TimelineAnimation::EntryList offToPartialTransition;
+        static const TimelineAnimation::EntryList partialToOffTransition;
+        static const TimelineAnimation::EntryList partialToOnTransition;
+        static const TimelineAnimation::EntryList onToPartialTransition;
+
+        CheckBoxRenderState renderState;
+
+    private:
+
+        static void initTransitions();
 
         bool _initialized;
-        QVariant _state;
-        QVariant _previousState;
-
+        CheckBoxState _state;
+        CheckBoxState _previousState;
     };
 
 }

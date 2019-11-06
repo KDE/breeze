@@ -57,7 +57,7 @@ namespace Breeze
         registerEngine( _stackedWidgetEngine = new StackedWidgetEngine( this ) );
         registerEngine( _tabBarEngine = new TabBarEngine( this ) );
         registerEngine( _dialEngine = new DialEngine( this ) );
-        registerEngine( _multiStateEngine = new MultiStateEngine( this ) );
+        registerEngine( _multiStateEngine = new CheckBoxEngine( this ) );
 
     }
 
