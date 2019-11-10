@@ -97,7 +97,7 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
     const AnimationMode mode( _animations->widgetStateEngine().frameAnimationMode( widget ) );
     const qreal opacity( _animations->widgetStateEngine().frameOpacity( widget ) );
 
-    QColor outline = _helper->frameOutlineColor(palette, mouseOver, hasFocus, opacity, mode, background, foreground);
+    QColor outline = _helper->frameOutlineColor(palette, mouseOver, hasFocus, opacity, mode, background);
 
     _helper->renderFrame( painter, rect.adjusted(0, 0, -0, -0), background, outline , isRadioButton);
 
