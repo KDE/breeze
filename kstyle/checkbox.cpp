@@ -65,7 +65,7 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
     // copy state
     const State& state( option->state );
     const bool enabled( state & State_Enabled );
-    // State_Selected can be enabled in list and menu items
+    // State_Selected can be active in list and menu items
     const bool mouseOver( enabled && ( state & (State_MouseOver | State_Selected) ) );
     const bool hasFocus( enabled && ( state & (State_HasFocus | State_Selected) ) );
 
@@ -153,13 +153,10 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
         const CheckBoxState checkBoxState = state & State_NoChange ? CheckPartial
                                           : state & State_On       ? CheckOn
                                                                    : CheckOff;
-        bool startAnim = (checkBoxState != _animations->multiStateEngine().state(widget).value<CheckBoxState>());
+        bool startAnim = (checkBoxState != _animations->multiStateEngine().state(widget));
         _animations->multiStateEngine().updateState(widget, checkBoxState);
 
-        const QVariant lastStateVariant = _animations->multiStateEngine().previousState(widget);
-        const CheckBoxState previousCheckBoxState = lastStateVariant.isValid()
-                                                        ? lastStateVariant.value<CheckBoxState>()
-                                                        : CheckBoxState::CheckUnknown;
+        const CheckBoxState previousCheckBoxState = _animations->multiStateEngine().previousState(widget);
 
         qreal progress = _animations->multiStateEngine().progress(widget);
         if(!_animations->multiStateEngine().isAnimated(widget)) {

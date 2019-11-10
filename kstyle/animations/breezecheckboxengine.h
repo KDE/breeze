@@ -55,22 +55,22 @@ namespace Breeze
         //* true if widget hover state is changed
         virtual bool updateState(const QObject*, CheckBoxState );
 
-        virtual QVariant state( const QObject *widget) const
+        virtual CheckBoxState state( const QObject *widget) const
         {
             DataMap<CheckBoxData>::Value dataPtr = data(widget);
             if(!dataPtr.isNull()) {
                 return dataPtr.data()->state();
             }
-            return QVariant();
+            return CheckUnknown;
         }
 
-        virtual QVariant previousState( const QObject *widget) const
+        virtual CheckBoxState previousState( const QObject *widget) const
         {
             DataMap<CheckBoxData>::Value dataPtr = data(widget);
             if(!dataPtr.isNull()) {
                 return dataPtr.data()->previousState();
             }
-            return QVariant();
+            return CheckUnknown;
         }
 
         //* true if widget is animated
