@@ -4725,34 +4725,19 @@ namespace Breeze
         }
 
         // render checkbox indicator
-        if( menuItemOption->checkType == QStyleOptionMenuItem::NonExclusive )
-        {
+        if( menuItemOption->checkType != QStyleOptionMenuItem::NotCheckable ) {
+            QStyleOption checkBoxOption;
+            checkBoxOption.rect = visualRect( option, checkBoxRect );
+            checkBoxOption.palette = option->palette;
+            checkBoxOption.state.setFlag(menuItemOption->checked ? State_On : State_Off);
+            checkBoxOption.state.setFlag(State_Enabled, enabled);
+            checkBoxOption.state.setFlag(State_Selected, state & State_Selected);
 
-            checkBoxRect = visualRect( option, checkBoxRect );
-
-            // checkbox state
-
-            if( useStrongFocus && ( selected || sunken ) )
-            { _helper->renderCheckBoxBackground( painter, checkBoxRect, palette.color( QPalette::Window ), sunken ); }
-
-            CheckBoxState state( menuItemOption->checked ? CheckOn : CheckOff );
-            const bool active( menuItemOption->checked );
-            const auto shadow( _helper->shadowColor( palette ) );
-            const auto color( _helper->checkBoxIndicatorColor( palette, false, enabled && active ) );
-            _helper->renderCheckBox( painter, checkBoxRect, color, shadow, sunken, state );
-
-        } else if( menuItemOption->checkType == QStyleOptionMenuItem::Exclusive ) {
-
-            checkBoxRect = visualRect( option, checkBoxRect );
-
-            if( useStrongFocus && ( selected || sunken ) )
-            { _helper->renderRadioButtonBackground( painter, checkBoxRect, palette.color( QPalette::Window ), sunken ); }
-
-            const bool active( menuItemOption->checked );
-            const auto shadow( _helper->shadowColor( palette ) );
-            const auto color( _helper->checkBoxIndicatorColor( palette, false, enabled && active ) );
-            _helper->renderRadioButton( painter, checkBoxRect, color, shadow, sunken, active ? RadioOn:RadioOff );
-
+            if( menuItemOption->checkType == QStyleOptionMenuItem::NonExclusive ) {
+                drawIndicatorCheckBoxPrimitive(&checkBoxOption, painter, nullptr);
+            } else if( menuItemOption->checkType == QStyleOptionMenuItem::Exclusive ) {
+                drawIndicatorRadioButtonPrimitive(&checkBoxOption, painter, nullptr);
+            }
         }
 
         // icon
