@@ -81,20 +81,20 @@ namespace Breeze
 
     const TimelineAnimation::EntryList CheckBoxData::partialToOnTransition {
         {0.0f,       [](void *renderState) { *static_cast<CheckBoxRenderState*>(renderState) = CheckBoxData::partialState; }},
-        {0.0f,       "position",               CheckBoxData::onState.position},
-        {0.0f,       "linePointPosition0",    CheckBoxData::onState.linePointPosition0},
+        {0.0f, 0.5f, "pointPosition0",      CheckBoxData::partialState.pointPosition0,  CheckBoxData::partialState.pointPosition1,  QEasingCurve::InOutCubic},
+        {0.0f, 0.5f, "pointPosition2",      CheckBoxData::partialState.pointPosition2,  CheckBoxData::partialState.pointPosition1,  QEasingCurve::InOutCubic},
+        {0.0f, 0.5f, "pointRadius0",        CheckBoxData::partialState.pointRadius0,    partialPointRadiusSqrt3,                    QEasingCurve::InOutCubic},
+        {0.0f, 0.5f, "pointRadius1",        CheckBoxData::partialState.pointRadius1,    partialPointRadiusSqrt3,                    QEasingCurve::InOutCubic},
+        {0.0f, 0.5f, "pointRadius2",        CheckBoxData::partialState.pointRadius2,    partialPointRadiusSqrt3,                    QEasingCurve::InOutCubic},
+        {0.5f,       "pointPosition0",      invalidPointF},
+        {0.5f,       "pointPosition2",      invalidPointF},
 
-        {0.0f, 0.4f, "linePointPosition1",    CheckBoxData::onState.linePointPosition0, CheckBoxData::onState.linePointPosition1,   QEasingCurve::InOutCubic},
-        {0.0f, 0.4f, "pointRadius0",          QVariant(),                               CheckBoxData::onState.pointRadius0,         QEasingCurve::InOutCubic},
-        {0.0f, 0.5f, "pointPosition1",        QVariant(),                               CheckBoxData::onState.position,             QEasingCurve::InOutCubic},
-        {0.0f, 0.5f, "pointRadius1",          QVariant(),                               partialPointRadiusSqrt2,                    QEasingCurve::InOutCubic},
-        {0.0f, 0.5f, "pointPosition2",        QVariant(),                               CheckBoxData::onState.position,             QEasingCurve::InOutCubic},
-        {0.0f, 0.5f, "pointRadius2",          QVariant(),                               partialPointRadiusSqrt2,                    QEasingCurve::InOutCubic},
-
-        {0.5f, 0.5f, "linePointPosition2",    CheckBoxData::onState.linePointPosition1, CheckBoxData::onState.linePointPosition2,   QEasingCurve::InOutCubic},
-        {0.5f, 0.5f, "pointPosition2",        QVariant(),                               onStateAbsLinePointPosition2,               QEasingCurve::InOutCubic},
-        {0.5f, 0.5f, "pointRadius1",          QVariant(),                               CheckBoxData::onState.pointRadius1,         QEasingCurve::InOutCubic},
-        {0.5f, 0.5f, "pointRadius2",          QVariant(),                               CheckBoxData::onState.pointRadius2,         QEasingCurve::InOutCubic},
+        {0.6f, 0.4f, "position",            CheckBoxData::partialState.position,        CheckBoxData::onState.position,             QEasingCurve::InOutCubic},
+        {0.6f, 0.4f, "pointPosition1",      CheckBoxData::partialState.pointPosition1,  CheckBoxData::onState.position,             QEasingCurve::InOutCubic},
+        {0.6f, 0.4f, "pointRadius1",        partialPointRadiusSqrt3,                    CheckBoxData::onState.pointRadius1,         QEasingCurve::InOutCubic},
+        {0.6f,       "linePointPosition1",  CheckBoxData::onState.linePointPosition1},
+        {0.6f, 0.4f, "linePointPosition0",  CheckBoxData::onState.linePointPosition1,   CheckBoxData::onState.linePointPosition0,   QEasingCurve::InOutCubic},
+        {0.6f, 0.4f, "linePointPosition2",  CheckBoxData::onState.linePointPosition1,   CheckBoxData::onState.linePointPosition2,   QEasingCurve::InOutCubic},
         {1.0f,       [](void *renderState) { *static_cast<CheckBoxRenderState*>(renderState) = CheckBoxData::onState; }},
     };
     const TimelineAnimation::EntryList CheckBoxData::onToPartialTransition {
