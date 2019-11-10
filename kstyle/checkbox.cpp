@@ -68,14 +68,12 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
     // State_Selected can be active in list and menu items
     const bool mouseOver( enabled && ( state & (State_MouseOver | State_Selected) ) );
     const bool hasFocus( enabled && ( state & (State_HasFocus | State_Selected) ) );
+    const bool isChecked( state & State_On );
 
     // focus takes precedence over mouse over
     _animations->widgetStateEngine().updateState( widget, AnimationFocus, hasFocus );
     _animations->widgetStateEngine().updateState( widget, AnimationHover, mouseOver );
-
-    // retrieve animation mode and opacity
-    const AnimationMode mode( _animations->widgetStateEngine().frameAnimationMode( widget ) );
-    const qreal opacity( _animations->widgetStateEngine().frameOpacity( widget ) );
+    _animations->widgetStateEngine().updateState( widget, AnimationPressed, isChecked );
 
     // Render background and frame
 
@@ -83,20 +81,23 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
 
     const auto &normalBackground = palette.color(QPalette::Base);
     const auto &normalForeground = palette.color(QPalette::Text);
-    const auto &focusBackground  = palette.color(QPalette::Highlight);
-    const auto &focusForeground  = palette.color(QPalette::HighlightedText);
+    const auto &checkedBackground  = palette.color(QPalette::Highlight);
+    const auto &checkedForeground  = palette.color(QPalette::HighlightedText);
 
-    const auto focusOpacityOrInvalid = _animations->widgetStateEngine().opacity(widget, AnimationFocus);
-    const auto focusOpacity = focusOpacityOrInvalid != AnimationData::OpacityInvalid
-                              ? focusOpacityOrInvalid
-                              : 1.0 * int(hasFocus);
+    const qreal stateOpacityOrInvalid = _animations->widgetStateEngine().opacity( widget, AnimationPressed );
+    const qreal stateOpacity = stateOpacityOrInvalid != AnimationData::OpacityInvalid
+                               ? stateOpacityOrInvalid
+                               : 1.0 * int(isChecked);
 
-    const auto background = KColorUtils::mix(normalBackground, focusBackground, focusOpacity);
-    const auto foreground = hasFocus ? focusForeground : normalForeground;
+    const auto background = KColorUtils::mix(normalBackground, checkedBackground, stateOpacity);
+    const auto foreground = KColorUtils::mix(normalForeground, checkedForeground, stateOpacity);
 
     // Frame color - hover priority
 
-    QColor outline = _helper->frameOutlineColor(palette, mouseOver, hasFocus, opacity, mode);
+    const AnimationMode mode( _animations->widgetStateEngine().frameAnimationMode( widget ) );
+    const qreal opacity( _animations->widgetStateEngine().frameOpacity( widget ) );
+
+    QColor outline = _helper->frameOutlineColor(palette, mouseOver, hasFocus, opacity, mode, background, foreground);
 
     _helper->renderFrame( painter, rect.adjusted(0, 0, -0, -0), background, outline , isRadioButton);
 
@@ -110,11 +111,9 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
     if(isRadioButton) {
         RadioButtonState radioButtonState = state & State_On ? RadioOn : RadioOff;
 
-        _animations->widgetStateEngine().updateState( widget, AnimationPressed, radioButtonState != RadioOff );
         if( _animations->widgetStateEngine().isAnimated( widget, AnimationPressed ) ) {
            radioButtonState = radioButtonState == RadioOn ? RadioOffToOn : RadioOnToOff;
         }
-        const qreal animation = _animations->widgetStateEngine().opacity( widget, AnimationPressed );
 
         if(radioButtonState == RadioOff) {
             return;
@@ -136,14 +135,14 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
             qreal radius;
             QColor color = foreground;
             if(radioButtonState == RadioOffToOn) {
-                radius = outQuadEasingCurve(animation) * fullRadius;
-                color.setAlphaF(outQuadEasingCurve(animation));
+                radius = outQuadEasingCurve(stateOpacity) * fullRadius;
+                color.setAlphaF(outQuadEasingCurve(stateOpacity));
                 painter->setBrush(color);
                 painter->setPen( Qt::NoPen );
             } else {
-                qreal penWidth = fullRadius * inQuadEasingCurve(animation);
-                radius = fullRadius / 2.0 + ((rect.width() - fullRadius) / 2 - 2) * outQuadEasingCurve(1.0-animation);
-                color.setAlphaF(inQuadEasingCurve(animation));
+                qreal penWidth = fullRadius * inQuadEasingCurve(stateOpacity);
+                radius = fullRadius / 2.0 + ((rect.width() - fullRadius) / 2 - 2) * outQuadEasingCurve(1.0-stateOpacity);
+                color.setAlphaF(inQuadEasingCurve(stateOpacity));
                 painter->setBrush(Qt::NoBrush);
                 painter->setPen(QPen(color, penWidth));
             }

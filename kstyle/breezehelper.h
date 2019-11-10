@@ -98,7 +98,7 @@ namespace Breeze
         { return active ? _activeTitleBarTextColor:_inactiveTitleBarTextColor; }
 
         //* frame outline color, using animations
-        QColor frameOutlineColor( const QPalette&, bool mouseOver = false, bool hasFocus = false, qreal opacity = AnimationData::OpacityInvalid, AnimationMode = AnimationNone ) const;
+        QColor frameOutlineColor(const QPalette &palette, bool mouseOver = false, bool hasFocus = false, qreal opacity = AnimationData::OpacityInvalid, AnimationMode = AnimationNone , const QColor &background = QColor(), const QColor &foreground = QColor()) const;
 
         //* focus outline color, using animations
         QColor focusOutlineColor( const QPalette& ) const;

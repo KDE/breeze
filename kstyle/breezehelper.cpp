@@ -75,10 +75,12 @@ namespace Breeze
     }
 
     //____________________________________________________________________
-    QColor Helper::frameOutlineColor( const QPalette& palette, bool mouseOver, bool hasFocus, qreal opacity, AnimationMode mode ) const
+    QColor Helper::frameOutlineColor( const QPalette& palette, bool mouseOver, bool hasFocus, qreal opacity, AnimationMode mode, const QColor &background, const QColor &foreground) const
     {
-
-        QColor outline( KColorUtils::mix( palette.color( QPalette::Window ), palette.color( QPalette::WindowText ), 0.25 ) );
+        QColor outline( KColorUtils::mix(
+            background.isValid() ? background : palette.color( QPalette::Window ),
+            foreground.isValid() ? foreground : palette.color( QPalette::WindowText ),
+            0.25 ) );
 
         // focus takes precedence over hover
         if( mode == AnimationFocus )
