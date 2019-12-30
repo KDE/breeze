@@ -224,7 +224,6 @@ namespace Breeze
     {
         RadioOff,
         RadioOn,
-        RadioAnimated, // TODO (mglb): remove?
         RadioOffToOn,
         RadioOnToOff,
     };

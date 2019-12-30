@@ -119,11 +119,6 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
             return;
         }
 
-        /*
-        painter->setBrush( Qt::NoBrush );
-        painter->setPen( QPen(foreground, 4, Qt::SolidLine, Qt::RoundCap) );
-        */
-
         const QPointF center = {rect.x() + rect.width() / 2.0, rect.y() + rect.height() / 2.0};
         const qreal fullRadius = 4.0;
 
@@ -132,20 +127,9 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
             painter->setPen( Qt::NoPen );
             painter->drawEllipse(center, fullRadius, fullRadius);
         } else {
-            qreal radius;
-            QColor color = foreground;
-            if(radioButtonState == RadioOffToOn) {
-                radius = outQuadEasingCurve(stateOpacity) * fullRadius;
-                color.setAlphaF(outQuadEasingCurve(stateOpacity));
-                painter->setBrush(color);
-                painter->setPen( Qt::NoPen );
-            } else {
-                qreal penWidth = fullRadius * inQuadEasingCurve(stateOpacity);
-                radius = fullRadius / 2.0 + ((rect.width() - fullRadius) / 2 - 2) * outQuadEasingCurve(1.0-stateOpacity);
-                color.setAlphaF(inQuadEasingCurve(stateOpacity));
-                painter->setBrush(Qt::NoBrush);
-                painter->setPen(QPen(color, penWidth));
-            }
+            const qreal radius = outQuadEasingCurve(stateOpacity) * fullRadius;
+            painter->setBrush(foreground);
+            painter->setPen( Qt::NoPen );
             painter->drawEllipse(center, radius, radius);
         }
     } else {
