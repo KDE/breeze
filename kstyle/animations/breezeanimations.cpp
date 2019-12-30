@@ -57,7 +57,7 @@ namespace Breeze
         registerEngine( _stackedWidgetEngine = new StackedWidgetEngine( this ) );
         registerEngine( _tabBarEngine = new TabBarEngine( this ) );
         registerEngine( _dialEngine = new DialEngine( this ) );
-        registerEngine( _multiStateEngine = new CheckBoxEngine( this ) );
+        registerEngine( _checkBoxEngine = new CheckBoxEngine( this ) );
 
     }
 
@@ -126,7 +126,7 @@ namespace Breeze
         } else if( qobject_cast<QCheckBox*>(widget) || qobject_cast<QRadioButton*>(widget) ) {
 
             _widgetStateEngine->registerWidget( widget, AnimationHover|AnimationFocus|AnimationPressed );
-            _multiStateEngine->registerWidget( widget );
+            _checkBoxEngine->registerWidget( widget );
 
         } else if( qobject_cast<QAbstractButton*>(widget) ) {
 
@@ -144,7 +144,7 @@ namespace Breeze
             if( groupBox->isCheckable() )
             {
                 _widgetStateEngine->registerWidget( widget, AnimationHover|AnimationFocus );
-                _multiStateEngine->registerWidget( widget );
+                _checkBoxEngine->registerWidget( widget );
             }
         }
 

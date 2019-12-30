@@ -136,19 +136,19 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
         const CheckBoxState checkBoxState = state & State_NoChange ? CheckPartial
                                           : state & State_On       ? CheckOn
                                                                    : CheckOff;
-        bool startAnim = (checkBoxState != _animations->multiStateEngine().state(widget));
-        _animations->multiStateEngine().updateState(widget, checkBoxState);
+        bool startAnim = (checkBoxState != _animations->checkBoxEngine().state(widget));
+        _animations->checkBoxEngine().updateState(widget, checkBoxState);
 
-        const CheckBoxState previousCheckBoxState = _animations->multiStateEngine().previousState(widget);
+        const CheckBoxState previousCheckBoxState = _animations->checkBoxEngine().previousState(widget);
 
-        qreal progress = _animations->multiStateEngine().progress(widget);
-        if(!_animations->multiStateEngine().isAnimated(widget)) {
+        qreal progress = _animations->checkBoxEngine().progress(widget);
+        if(!_animations->checkBoxEngine().isAnimated(widget)) {
             progress = 1.0;
         }
 
         const QPoint centerOffset = {rect.width()/2 + rect.x(), rect.height()/2 + rect.y()};
 
-        DataMap<CheckBoxData>::Value dataPtr = _animations->multiStateEngine().data(widget);
+        DataMap<CheckBoxData>::Value dataPtr = _animations->checkBoxEngine().data(widget);
 
         static const auto stateToData = [](CheckBoxState state) -> const CheckBoxRenderState * {
             switch(state) {

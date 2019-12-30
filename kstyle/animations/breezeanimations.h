@@ -103,8 +103,8 @@ namespace Breeze
         { return *_toolBoxEngine; }
 
         //* multi state engine
-        CheckBoxEngine& multiStateEngine() const
-        { return *_multiStateEngine; }
+        CheckBoxEngine& checkBoxEngine() const
+        { return *_checkBoxEngine; }
 
         //* setup engines
         void setupEngines();
@@ -158,7 +158,7 @@ namespace Breeze
         ToolBoxEngine* _toolBoxEngine = nullptr;
 
         //* multi state engine
-        CheckBoxEngine *_multiStateEngine = nullptr;
+        CheckBoxEngine *_checkBoxEngine = nullptr;
 
         //* keep list of existing engines
         QList< BaseEngine::Pointer > _engines;
