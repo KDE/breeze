@@ -118,9 +118,11 @@ namespace Breeze
     {
         if( !_initialized )
         {
-
             _state = value;
             _initialized = true;
+
+            renderState = *renderStateForState(_state);
+
             return false;
 
         } else if( _state == value ) {
@@ -132,11 +134,31 @@ namespace Breeze
             _previousState = _state;
             _state = value;
             animation().data()->setDirection(Animation::Forward);
+
+            timeline->stop();
+            if (_previousState == CheckOff       && _state == CheckOn)        { timeline->setTransitions(&CheckBoxData::offToOnTransition); }
+            if (_previousState == CheckOn        && _state == CheckOff)       { timeline->setTransitions(&CheckBoxData::onToOffTransition); }
+            if (_previousState == CheckOff       && _state == CheckPartial)   { timeline->setTransitions(&CheckBoxData::offToPartialTransition); }
+            if (_previousState == CheckPartial   && _state == CheckOff)       { timeline->setTransitions(&CheckBoxData::partialToOffTransition); }
+            if (_previousState == CheckPartial   && _state == CheckOn)        { timeline->setTransitions(&CheckBoxData::partialToOnTransition); }
+            if (_previousState == CheckOn        && _state == CheckPartial)   { timeline->setTransitions(&CheckBoxData::onToPartialTransition); }
+            timeline->start();
+
             if( !animation().data()->isRunning() ) animation().data()->start();
             return true;
 
         }
 
+    }
+
+    const CheckBoxRenderState * CheckBoxData::renderStateForState(CheckBoxState state)
+    {
+        switch(state) {
+        default:
+        case CheckOff:      return &offState;
+        case CheckOn:       return &onState;
+        case CheckPartial:  return &partialState;
+        };
     }
 
 }

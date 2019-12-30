@@ -138,51 +138,16 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
                                                                    : CheckOff;
         bool startAnim = (checkBoxState != _animations->checkBoxEngine().state(widget));
         _animations->checkBoxEngine().updateState(widget, checkBoxState);
-
-        const CheckBoxState previousCheckBoxState = _animations->checkBoxEngine().previousState(widget);
-
-        qreal progress = _animations->checkBoxEngine().progress(widget);
-        if(!_animations->checkBoxEngine().isAnimated(widget)) {
-            progress = 1.0;
-        }
-
-        const QPoint centerOffset = {rect.width()/2 + rect.x(), rect.height()/2 + rect.y()};
-
         DataMap<CheckBoxData>::Value dataPtr = _animations->checkBoxEngine().data(widget);
-
-        static const auto stateToData = [](CheckBoxState state) -> const CheckBoxRenderState * {
-            switch(state) {
-            case CheckUnknown:
-            case CheckOff:      return &CheckBoxData::offState;
-            case CheckOn:       return &CheckBoxData::onState;
-            case CheckPartial:  return &CheckBoxData::partialState;
-            };
-            return nullptr;
-        };
-
         const CheckBoxRenderState *state = nullptr;
         if (dataPtr.isNull()) {
-            state = stateToData(checkBoxState);
+            state = CheckBoxData::renderStateForState(checkBoxState);
             Q_CHECK_PTR(state);
         } else {
             CheckBoxData *data = dataPtr.data();
             state = &data->renderState;
-            if(previousCheckBoxState == CheckBoxState::CheckUnknown) {
-                // First rendering. Don't animate, it is initial state.
-                data->renderState = *q_check_ptr(stateToData(checkBoxState));
-            } else {
-                if (startAnim) {
-                    data->timeline->stop();
-                    if (previousCheckBoxState == CheckOff       && checkBoxState == CheckOn)        { data->timeline->setTransitions(&CheckBoxData::offToOnTransition); }
-                    if (previousCheckBoxState == CheckOn        && checkBoxState == CheckOff)       { data->timeline->setTransitions(&CheckBoxData::onToOffTransition); }
-                    if (previousCheckBoxState == CheckOff       && checkBoxState == CheckPartial)   { data->timeline->setTransitions(&CheckBoxData::offToPartialTransition); }
-                    if (previousCheckBoxState == CheckPartial   && checkBoxState == CheckOff)       { data->timeline->setTransitions(&CheckBoxData::partialToOffTransition); }
-                    if (previousCheckBoxState == CheckPartial   && checkBoxState == CheckOn)        { data->timeline->setTransitions(&CheckBoxData::partialToOnTransition); }
-                    if (previousCheckBoxState == CheckOn        && checkBoxState == CheckPartial)   { data->timeline->setTransitions(&CheckBoxData::onToPartialTransition); }
-                    data->timeline->start();
-                }
-            }
         }
+        const QPoint centerOffset = {rect.width()/2 + rect.x(), rect.height()/2 + rect.y()};
         renderCheckMark(painter, centerOffset, foreground, *state);
     }
 }

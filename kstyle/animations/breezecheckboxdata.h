@@ -325,6 +325,8 @@ namespace Breeze
         static const CheckBoxRenderState onState;
         static const CheckBoxRenderState partialState;
 
+        static const CheckBoxRenderState * renderStateForState(CheckBoxState state);
+
         static const TimelineAnimation::EntryList offToOnTransition;
         static const TimelineAnimation::EntryList onToOffTransition;
         static const TimelineAnimation::EntryList offToPartialTransition;
