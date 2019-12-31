@@ -28,7 +28,6 @@
 namespace Breeze
 {
 
-
     //* generic data
     class GenericData: public AnimationData
     {

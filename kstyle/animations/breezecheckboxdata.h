@@ -26,13 +26,9 @@
 namespace Breeze
 {
 
-#define declvaluetype(v) std::remove_reference<decltype(v)>::type
-
-//// //// //// //// /// /// /// // // /  /   /    /
-
     static constexpr const qreal qrealQNaN {std::numeric_limits<qreal>::quiet_NaN()}; // TODO: remove if unused anywhere but below
     static constexpr const QPointF invalidPointF {qrealQNaN, qrealQNaN};
-    static const auto isInvalidPointF = [](const QPointF &point) { return std::isnan(point.x()) && std::isnan(point.y()); };
+    inline static bool isInvalidPointF(const QPointF &point) { return std::isnan(point.x()) && std::isnan(point.y()); };
 
     struct CheckBoxRenderState {
         Q_GADGET
