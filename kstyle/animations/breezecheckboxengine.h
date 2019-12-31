@@ -76,11 +76,6 @@ namespace Breeze
         //* true if widget is animated
         bool isAnimated( const QObject* );
 
-        qreal progress( const QObject* object)
-        {
-            return isAnimated(object) ? data(object).data()->opacity(): AnimationData::OpacityInvalid;
-        }
-
         //* duration
         void setEnabled( bool value ) override
         {

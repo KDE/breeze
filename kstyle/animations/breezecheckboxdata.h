@@ -145,6 +145,8 @@ namespace Breeze
             }
         }
 
+    bool isRunning() const { return state() == Animation::Running; }
+
     Q_SIGNALS:
         void valueChanged();
 
@@ -287,7 +289,7 @@ namespace Breeze
         };
     };
 
-    class CheckBoxData: public GenericData
+    class CheckBoxData: public QObject
     {
         Q_OBJECT
 
@@ -295,20 +297,38 @@ namespace Breeze
 
         //* constructor
         CheckBoxData( QObject* parent, QWidget* target, int duration, CheckBoxState state = CheckBoxState::CheckUnknown ):
-            GenericData( parent, target, duration ),
+            QObject( parent ),
             _initialized( false ),
             _state( state ),
             _previousState( CheckBoxState::CheckUnknown ),
-            timeline(new TimelineAnimation(this, 250, &renderState))
+            _target(target),
+            _enabled(true),
+            timeline(new TimelineAnimation(this, duration, &renderState))
         {
             connect(timeline, &TimelineAnimation::valueChanged, target, QOverload<>::of(&QWidget::update));
         }
+
+        //* duration
+        void setDuration( int duration )
+        { timeline->setDuration( duration ); }
+
+        //* enability
+        virtual bool enabled() const
+        { return _enabled; }
+
+        //* enability
+        virtual void setEnabled( bool value )
+        { _enabled = value; }
+
 
         //* destructor
         ~CheckBoxData() override
         {
             timeline->stop();
         }
+
+        const WeakPointer<QWidget>& target() const
+        { return _target; }
 
         /**
         returns true if state has changed
@@ -318,8 +338,6 @@ namespace Breeze
 
         virtual CheckBoxState state() const { return _state; }
         virtual CheckBoxState previousState() const { return _previousState; }
-
-        TimelineAnimation *timeline;
 
         static const CheckBoxRenderState offState;
         static const CheckBoxRenderState onState;
@@ -334,6 +352,8 @@ namespace Breeze
         static const TimelineAnimation::EntryList partialToOnTransition;
         static const TimelineAnimation::EntryList onToPartialTransition;
 
+        // TODO: make an array of those two to allow detaching.
+        TimelineAnimation *timeline;
         CheckBoxRenderState renderState;
 
     private:
@@ -343,6 +363,8 @@ namespace Breeze
         bool _initialized;
         CheckBoxState _state;
         CheckBoxState _previousState;
+        WeakPointer<QWidget> _target;
+        bool _enabled;
     };
 
 }

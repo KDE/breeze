@@ -133,7 +133,6 @@ namespace Breeze
 
             _previousState = _state;
             _state = value;
-            animation().data()->setDirection(Animation::Forward);
 
             timeline->stop();
             if (_previousState == CheckOff       && _state == CheckOn)        { timeline->setTransitions(&CheckBoxData::offToOnTransition); }
@@ -144,7 +143,6 @@ namespace Breeze
             if (_previousState == CheckOn        && _state == CheckPartial)   { timeline->setTransitions(&CheckBoxData::onToPartialTransition); }
             timeline->start();
 
-            if( !animation().data()->isRunning() ) animation().data()->start();
             return true;
 
         }

@@ -65,7 +65,7 @@ namespace Breeze
     {
 
         DataMap<CheckBoxData>::Value data( CheckBoxEngine::data( object) );
-        return ( data && data.data()->animation() && data.data()->animation().data()->isRunning() );
+        return ( data && data.data()->timeline && data.data()->timeline->isRunning() );
 
     }
 
