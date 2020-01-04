@@ -69,6 +69,7 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
     const bool mouseOver( enabled && ( state & (State_MouseOver | State_Selected) ) );
     const bool hasFocus( enabled && ( state & (State_HasFocus | State_Selected) ) );
     const bool isChecked( state & State_On );
+    const bool sunken( enabled && ( state & State_Sunken ) );
 
     // focus takes precedence over mouse over
     _animations->widgetStateEngine().updateState( widget, AnimationFocus, hasFocus );
@@ -81,16 +82,19 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
 
     const auto &normalBackground = palette.color(QPalette::Base);
     const auto &normalForeground = palette.color(QPalette::Text);
-    const auto &checkedBackground  = palette.color(QPalette::Highlight);
-    const auto &checkedForeground  = palette.color(QPalette::HighlightedText);
+    const auto &checkedBackground = palette.color(QPalette::Highlight);
+    const auto &checkedForeground = palette.color(QPalette::HighlightedText);
 
-    const qreal stateOpacityOrInvalid = _animations->widgetStateEngine().opacity( widget, AnimationPressed );
-    const qreal stateOpacity = stateOpacityOrInvalid != AnimationData::OpacityInvalid
-                               ? stateOpacityOrInvalid
-                               : 1.0 * int(isChecked);
+    QColor background;
+    QColor foreground;
 
-    const auto background = KColorUtils::mix(normalBackground, checkedBackground, stateOpacity);
-    const auto foreground = KColorUtils::mix(normalForeground, checkedForeground, stateOpacity);
+    if ((!isRadioButton && sunken != isChecked) || (isRadioButton && (sunken || isChecked))) {
+        background = checkedBackground;
+        foreground = checkedForeground;
+    } else {
+        background = normalBackground;
+        foreground = normalForeground;
+    }
 
     // Frame color - hover priority
 
@@ -127,6 +131,12 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
             painter->setPen( Qt::NoPen );
             painter->drawEllipse(center, fullRadius, fullRadius);
         } else {
+
+            const qreal stateOpacityOrInvalid = _animations->widgetStateEngine().opacity( widget, AnimationPressed );
+            const qreal stateOpacity = stateOpacityOrInvalid != AnimationData::OpacityInvalid
+                                       ? stateOpacityOrInvalid
+                                       : 1.0 * int(isChecked);
+
             const qreal radius = outQuadEasingCurve(stateOpacity) * fullRadius;
             painter->setBrush(foreground);
             painter->setPen( Qt::NoPen );
