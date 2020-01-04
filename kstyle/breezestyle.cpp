@@ -4729,10 +4729,8 @@ namespace Breeze
             QStyleOption checkBoxOption;
             checkBoxOption.rect = visualRect( option, checkBoxRect );
             checkBoxOption.palette = option->palette;
+            checkBoxOption.state = state;
             checkBoxOption.state.setFlag(menuItemOption->checked ? State_On : State_Off);
-            checkBoxOption.state.setFlag(State_Enabled, enabled);
-            checkBoxOption.state.setFlag(State_Sunken, state & State_Sunken);
-            checkBoxOption.state.setFlag(State_Selected, state & State_Selected);
 
             if( menuItemOption->checkType == QStyleOptionMenuItem::NonExclusive ) {
                 drawIndicatorCheckBoxPrimitive(&checkBoxOption, painter, nullptr);

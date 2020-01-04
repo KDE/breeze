@@ -65,11 +65,16 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
     // copy state
     const State& state( option->state );
     const bool enabled( state & State_Enabled );
+    const bool active( state & State_Active );
     // State_Selected can be active in list and menu items
     const bool mouseOver( enabled && ( state & (State_MouseOver | State_Selected) ) );
     const bool hasFocus( enabled && ( state & (State_HasFocus | State_Selected) ) );
     const bool isChecked( state & State_On );
     const bool sunken( enabled && ( state & State_Sunken ) );
+
+    QPalette::ColorGroup colorGroup;
+    if( enabled ) colorGroup = active ? QPalette::Active : QPalette::Inactive;
+    else colorGroup = QPalette::Disabled;
 
     // focus takes precedence over mouse over
     _animations->widgetStateEngine().updateState( widget, AnimationFocus, hasFocus );
@@ -80,10 +85,10 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
 
     // Foreground and background color
 
-    const auto &normalBackground = palette.color(QPalette::Base);
-    const auto &normalForeground = palette.color(QPalette::Text);
-    const auto &checkedBackground = palette.color(QPalette::Highlight);
-    const auto &checkedForeground = palette.color(QPalette::HighlightedText);
+    const auto &normalBackground = palette.color(colorGroup, QPalette::Base);
+    const auto &normalForeground = palette.color(colorGroup, QPalette::Text);
+    const auto &checkedBackground = palette.color(colorGroup, QPalette::Highlight);
+    const auto &checkedForeground = palette.color(colorGroup, QPalette::HighlightedText);
 
     QColor background;
     QColor foreground;
