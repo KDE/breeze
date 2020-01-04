@@ -66,9 +66,8 @@ void Style::drawChoicePrimitive(const QStyleOption *option, QPainter *painter, c
     const State& state( option->state );
     const bool enabled( state & State_Enabled );
     const bool active( state & State_Active );
-    // State_Selected can be active in list and menu items
-    const bool mouseOver( enabled && ( state & (State_MouseOver | State_Selected) ) );
-    const bool hasFocus( enabled && ( state & (State_HasFocus | State_Selected) ) );
+    const bool mouseOver( enabled && ( state & State_MouseOver ) );
+    const bool hasFocus( enabled && ( state & State_HasFocus ) );
     const bool isChecked( state & State_On );
     const bool sunken( enabled && ( state & State_Sunken ) );
 
