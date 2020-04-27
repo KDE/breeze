@@ -44,8 +44,8 @@ namespace Breeze
     {
 
         // frames
-        Frame_FrameWidth = 2,
-        Frame_FrameRadius = 3,
+        Frame_FrameWidth = 3,
+        Frame_FrameRadius = 4,
 
         // layout
         Layout_TopLevelMarginWidth = 10,
@@ -53,35 +53,35 @@ namespace Breeze
         Layout_DefaultSpacing = 6,
 
         // line editors
-        LineEdit_FrameWidth = 6,
+        LineEdit_FrameWidth = 4,
 
         // menu items
         Menu_FrameWidth = 0,
         MenuItem_MarginWidth = 5,
         MenuItem_MarginHeight = 3,
-        MenuItem_ItemSpacing = 4,
+        MenuItem_ItemSpacing = 20,
         MenuItem_AcceleratorSpace = 16,
         MenuButton_IndicatorWidth = 20,
 
         // combobox
-        ComboBox_FrameWidth = 6,
+        ComboBox_FrameWidth = 4,
 
         // spinbox
         SpinBox_FrameWidth = LineEdit_FrameWidth,
-        SpinBox_ArrowButtonWidth = 20,
+        SpinBox_ArrowButtonWidth = 15,
 
         // groupbox title margin
         GroupBox_TitleMarginWidth = 4,
 
         // buttons
         Button_MinWidth = 80,
-        Button_MarginWidth = 6,
-        Button_ItemSpacing = 4,
+        Button_MarginWidth = 3,
+        Button_ItemSpacing = 2,
 
         // tool buttons
-        ToolButton_MarginWidth = 6,
-        ToolButton_ItemSpacing = 4,
-        ToolButton_InlineIndicatorWidth = 12,
+        ToolButton_MarginWidth = 3,
+        ToolButton_ItemSpacing = 2,
+        ToolButton_InlineIndicatorWidth = 8,
 
         // checkboxes and radio buttons
         CheckBox_Size = 20,
@@ -90,12 +90,12 @@ namespace Breeze
 
         // menubar items
         MenuBarItem_MarginWidth = 10,
-        MenuBarItem_MarginHeight = 6,
+        MenuBarItem_MarginHeight = 8,
 
         // scrollbars
         ScrollBar_Extend = 21,
         ScrollBar_SliderWidth = 6,
-        ScrollBar_MinSliderHeight = 20,
+        ScrollBar_MinSliderHeight = 15,
         ScrollBar_NoButtonHeight = (ScrollBar_Extend-ScrollBar_SliderWidth)/2,
         ScrollBar_SingleButtonHeight = ScrollBar_Extend,
         ScrollBar_DoubleButtonHeight = 2*ScrollBar_Extend,
@@ -105,7 +105,7 @@ namespace Breeze
         ToolBar_HandleExtent = 10,
         ToolBar_HandleWidth = 6,
         ToolBar_SeparatorWidth = 8,
-        ToolBar_ExtensionWidth = 20,
+        ToolBar_ExtensionWidth = 15,
         ToolBar_ItemSpacing = 0,
 
         // progressbars
@@ -120,13 +120,13 @@ namespace Breeze
         Slider_TickLength = 8,
         Slider_TickMarginWidth = 2,
         Slider_GrooveThickness = 6,
-        Slider_ControlThickness = 20,
+        Slider_ControlThickness = 15,
 
         // tabbar
         TabBar_TabMarginHeight = 4,
         TabBar_TabMarginWidth = 8,
         TabBar_TabMinWidth = 80,
-        TabBar_TabMinHeight = 28,
+        TabBar_TabMinHeight = 18,
         TabBar_TabItemSpacing = 8,
         TabBar_TabOverlap = 1,
         TabBar_BaseOverlap = 2,
@@ -145,10 +145,10 @@ namespace Breeze
         // list headers
         Header_MarginWidth = 6,
         Header_ItemSpacing = 4,
-        Header_ArrowSize = 10,
+        Header_ArrowSize = 8,
 
         // tree view
-        ItemView_ArrowSize = 10,
+        ItemView_ArrowSize = 8,
         ItemView_ItemMarginWidth = 3,
         SidePanel_ItemMarginWidth = 4,
 
