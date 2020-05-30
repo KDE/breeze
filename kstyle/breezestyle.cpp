@@ -6493,12 +6493,12 @@ namespace Breeze
             // render background
             painter->setClipRect( rect );
             const auto outline( active ? QColor():_helper->frameOutlineColor( palette, false, false ) );
-            const auto background( _helper->titleBarColor( active ) );
+            const auto background( _helper->titleBarColor( palette, active ) );
             _helper->renderTabWidgetFrame( painter, rect.adjusted( -1, -1, 1, 3 ), background, outline, CornersTop );
 
             const bool useSeparator(
                 active &&
-                _helper->titleBarColor( active ) != palette.color( QPalette::Window ) &&
+                _helper->titleBarColor( palette, active ) != palette.color( QPalette::Window ) &&
                 !( titleBarOption->titleBarState & Qt::WindowMinimized ) );
 
             if( useSeparator )
@@ -6510,7 +6510,7 @@ namespace Breeze
             }
 
             // render text
-            palette.setColor( QPalette::WindowText, _helper->titleBarTextColor( active ) );
+            palette.setColor( QPalette::WindowText, _helper->titleBarTextColor( palette, active ) );
             const auto textRect( subControlRect( CC_TitleBar, option, SC_TitleBarLabel, widget ) );
             ParentStyleClass::drawItemText( painter, textRect, Qt::AlignCenter, palette, active, titleBarOption->text, QPalette::WindowText );
 

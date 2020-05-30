@@ -55,14 +55,14 @@ namespace Breeze
     {
         _viewFocusBrush = KStatefulBrush( KColorScheme::View, KColorScheme::FocusColor );
         _viewHoverBrush = KStatefulBrush( KColorScheme::View, KColorScheme::HoverColor );
-        _viewNegativeTextBrush = KStatefulBrush( KColorScheme::View, KColorScheme::NegativeText );
+
+        _headerNormalTextBrush = KStatefulBrush( KColorScheme::Header, KColorScheme::NormalText );
+        _headerNormalBackgroundBrush = KStatefulBrush( KColorScheme::Header, KColorScheme::NormalBackground );
+        _headerInactiveTextBrush = KStatefulBrush( KColorScheme::Header, KColorScheme::InactiveText );
+        _headerAlternateBackgroundBrush = KStatefulBrush( KColorScheme::Header, KColorScheme::AlternateBackground );
+        _headerNegativeTextBrush = KStatefulBrush( KColorScheme::Header, KColorScheme::NegativeText );
 
         const QPalette palette( QApplication::palette() );
-        const KConfigGroup group( _config->group( "WM" ) );
-        _activeTitleBarColor = group.readEntry( "activeBackground", palette.color( QPalette::Active, QPalette::Highlight ) );
-        _activeTitleBarTextColor = group.readEntry( "activeForeground", palette.color( QPalette::Active, QPalette::HighlightedText ) );
-        _inactiveTitleBarColor = group.readEntry( "inactiveBackground", palette.color( QPalette::Disabled, QPalette::Highlight ) );
-        _inactiveTitleBarTextColor = group.readEntry( "inactiveForeground", palette.color( QPalette::Disabled, QPalette::HighlightedText ) );
     }
 
     //____________________________________________________________________

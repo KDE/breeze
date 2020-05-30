@@ -70,19 +70,19 @@ namespace Breeze
 
         //* negative text color (used for close button)
         QColor negativeText( const QPalette& palette ) const
-        { return _viewNegativeTextBrush.brush( palette ).color(); }
+        { return _headerNegativeTextBrush.brush( palette ).color(); }
 
         //* shadow
         QColor shadowColor( const QPalette& palette ) const
         { return alphaColor( palette.color( QPalette::Shadow ), 0.15 ); }
 
         //* titlebar color
-        const QColor& titleBarColor( bool active ) const
-        { return active ? _activeTitleBarColor:_inactiveTitleBarColor; }
+        const QColor& titleBarColor( const QPalette& palette, bool active ) const
+        { return active ? _headerNormalBackgroundBrush.brush( palette ).color() : _headerAlternateBackgroundBrush.brush( palette ).color(); }
 
         //* titlebar text color
-        const QColor& titleBarTextColor( bool active ) const
-        { return active ? _activeTitleBarTextColor:_inactiveTitleBarTextColor; }
+        const QColor& titleBarTextColor( const QPalette& palette, bool active ) const
+        { return active ? _headerNormalTextBrush.brush( palette ).color() : _headerInactiveTextBrush.brush( palette ).color(); }
 
         //* frame outline color, using animations
         QColor frameOutlineColor( const QPalette&, bool mouseOver = false, bool hasFocus = false, qreal opacity = AnimationData::OpacityInvalid, AnimationMode = AnimationNone ) const;
@@ -300,15 +300,12 @@ namespace Breeze
         //@{
         KStatefulBrush _viewFocusBrush;
         KStatefulBrush _viewHoverBrush;
-        KStatefulBrush _viewNegativeTextBrush;
-        //@}
 
-        //*@name windeco colors
-        //@{
-        QColor _activeTitleBarColor;
-        QColor _activeTitleBarTextColor;
-        QColor _inactiveTitleBarColor;
-        QColor _inactiveTitleBarTextColor;
+        KStatefulBrush _headerNormalTextBrush;
+        KStatefulBrush _headerNormalBackgroundBrush;
+        KStatefulBrush _headerInactiveTextBrush;
+        KStatefulBrush _headerAlternateBackgroundBrush;
+        KStatefulBrush _headerNegativeTextBrush;
         //@}
 
     };
