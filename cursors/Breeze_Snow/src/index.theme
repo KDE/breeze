@@ -1,5 +1,6 @@
 [Icon Theme]
 Name=Breeze Light
+Name[az]=Breeze - İşıqlı
 Name[ca]=Brisa clara
 Name[ca@valencia]=Brisa clara
 Name[cs]=Breeze Světlé
@@ -34,6 +35,7 @@ Name[x-test]=xxBreeze Lightxx
 Name[zh_CN]=亮色微风
 Name[zh_TW]=Breeze Light
 Comment=Breeze Light by the KDE VDG
+Comment[az]=Breeze -İşıqlı - KDE VDG tərəfindən
 Comment[ca]=Brisa clara, creat pel VDG del KDE
 Comment[ca@valencia]=Brisa clara per al VDG de KDE
 Comment[cs]=Breeze Light od KDE VDG
