@@ -2558,8 +2558,10 @@ namespace Breeze
         const bool horizontal( sliderOption->orientation == Qt::Horizontal );
         const bool disableTicks( !StyleConfigData::sliderDrawTickMarks() );
 
+        QSize grown( contentsSize );
+
         // do nothing if no ticks are requested
-        if( tickPosition == QSlider::NoTicks ) return contentsSize;
+        if( tickPosition == QSlider::NoTicks ) return grown;
 
         /*
          * Qt adds its own tick length directly inside QSlider.
@@ -2571,7 +2573,7 @@ namespace Breeze
 
         const int builtInTickLength( 5 );
 
-        QSize size( contentsSize );
+        QSize size( grown );
         if( horizontal )
         {
 
@@ -6201,6 +6203,16 @@ namespace Breeze
         // direction
         const bool horizontal( sliderOption->orientation == Qt::Horizontal );
 
+        // which side the ticks are on
+        Side tickSide {SideNone};
+        if (horizontal) {
+            if (sliderOption->tickPosition & QSlider::TicksAbove) tickSide = Side(int(tickSide) | SideTop);
+            if (sliderOption->tickPosition & QSlider::TicksBelow) tickSide = Side(int(tickSide) | SideBottom);
+        } else {
+            if (sliderOption->tickPosition & QSlider::TicksAbove) tickSide = Side(int(tickSide) | SideLeft);
+            if (sliderOption->tickPosition & QSlider::TicksBelow) tickSide = Side(int(tickSide) | SideRight);
+        }
+
         // tickmarks
         if( StyleConfigData::sliderDrawTickMarks() && ( sliderOption->subControls & SC_SliderTickmarks ) )
         {
@@ -6326,7 +6338,7 @@ namespace Breeze
             const auto shadow( _helper->shadowColor( palette ) );
 
             // render
-            _helper->renderSliderHandle( painter, handleRect, background, outline, shadow, sunken );
+            _helper->renderSliderHandle( painter, handleRect, background, outline, shadow, tickSide, sunken );
 
         }
 
@@ -6409,7 +6421,7 @@ namespace Breeze
             const auto shadow( _helper->shadowColor( palette ) );
 
             // render
-            _helper->renderSliderHandle( painter, handleRect, background, outline, shadow, sunken );
+            _helper->renderSliderHandle( painter, handleRect, background, outline, shadow, SideNone, sunken );
 
         }
 

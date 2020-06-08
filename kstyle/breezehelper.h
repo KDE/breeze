@@ -200,7 +200,7 @@ namespace Breeze
         void renderSliderGroove( QPainter*, const QRect&, const QColor& ) const;
 
         //* slider handle
-        void renderSliderHandle( QPainter*, const QRect&, const QColor&, const QColor& outline, const QColor& shadow, bool sunken ) const;
+        void renderSliderHandle( QPainter*, const QRect&, const QColor&, const QColor& outline, const QColor& shadow, Side side, bool sunken ) const;
 
         //* dial groove
         void renderDialGroove( QPainter*, const QRect&, const QColor&, qreal first, qreal last ) const;
@@ -245,7 +245,7 @@ namespace Breeze
         void renderRoundedRectShadow ( QPainter*, const QRectF&, const QColor&, qreal radius = Metrics::Frame_FrameRadius - 0.5 ) const;
         
         //* generic shadow for ellipses
-        void renderEllipseShadow( QPainter*, const QRectF&, const QColor& ) const;
+        void renderEllipseShadow( QPainter*, const QRectF&, const QColor&, qreal radius = -1 ) const;
         
         //@}
 

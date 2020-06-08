@@ -117,10 +117,13 @@ namespace Breeze
         TitleBar_MarginWidth = 4,
 
         // sliders
-        Slider_TickLength = 8,
+        Slider_TickLength = 6,
         Slider_TickMarginWidth = 2,
         Slider_GrooveThickness = 6,
         Slider_ControlThickness = 20,
+        Slider_Roundedness = 3,
+        Slider_Inset = 3,
+        Slider_Elognation = 2,
 
         // tabbar
         TabBar_TabMarginHeight = 4,
@@ -211,6 +214,7 @@ namespace Breeze
     //* sides
     enum Side
     {
+        SideNone = 0x0,
         SideLeft = 0x1,
         SideTop = 0x2,
         SideRight = 0x4,

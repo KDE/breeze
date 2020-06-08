@@ -1110,6 +1110,7 @@ namespace Breeze
         const QColor& color,
         const QColor& outline,
         const QColor& shadow,
+        Side side,
         bool sunken ) const
     {
 
@@ -1119,14 +1120,6 @@ namespace Breeze
         // copy rect
         QRectF frameRect( rect );
         frameRect.adjust( 1, 1, -1, -1 );
-
-        // shadow
-        if( !sunken )
-        {
-
-            renderEllipseShadow( painter, frameRect, shadow );
-
-        }
 
         // set pen
         if( outline.isValid() )
@@ -1138,12 +1131,39 @@ namespace Breeze
         } else painter->setPen( Qt::NoPen );
 
         // set brush
-        if( color.isValid() ) painter->setBrush( color );
+        if( color.isValid() ) painter->setBrush( sunken ? KColorUtils::darken(color, 0.1) : color );
         else painter->setBrush( Qt::NoBrush );
 
-        // render
-        painter->drawEllipse( frameRect );
+        QPainterPath handle;
+        if (side & SideLeft || side & SideRight || side & SideTop || side & SideBottom) {
+            if (side & SideBottom || side & SideTop) {
+                frameRect.adjust(0, Metrics::Slider_Elognation, 0, -Metrics::Slider_Elognation);
+            } else if (side & SideLeft || side & SideRight) {
+                frameRect.adjust(Metrics::Slider_Elognation, 0, -Metrics::Slider_Elognation, 0);
+            }
+            handle.addRoundedRect(frameRect, Metrics::Slider_Roundedness, Metrics::Slider_Roundedness);
+            handle.closeSubpath();
+            if (!sunken) {
+                renderEllipseShadow(painter, frameRect, shadow, Metrics::Slider_Roundedness);
+            }
+        } else {
+            handle.addEllipse(frameRect);
+            handle.closeSubpath();
+            if (!sunken) {
+                renderEllipseShadow(painter, frameRect, shadow);
+            }
+        }
 
+        painter->drawPath(handle);
+
+        painter->setBrush(Qt::NoBrush);
+        painter->setPen( KColorUtils::darken(color) );
+
+        if (side & SideBottom || side & SideTop) {
+            painter->drawLine(frameRect.center().x(), frameRect.top()+Metrics::Slider_Inset, frameRect.center().x(), frameRect.bottom()-Metrics::Slider_Inset);
+        } else if (side & SideLeft || side & SideRight) {
+            painter->drawLine(frameRect.left()+Metrics::Slider_Inset, frameRect.center().y(), frameRect.right()-Metrics::Slider_Inset, frameRect.center().y());
+        }
     }
 
     //______________________________________________________________________________
@@ -1442,7 +1462,7 @@ namespace Breeze
     }
     
     //______________________________________________________________________________
-    void Helper::renderEllipseShadow( QPainter* painter, const QRectF& rect, const QColor& color ) const
+    void Helper::renderEllipseShadow( QPainter* painter, const QRectF& rect, const QColor& color, qreal inRadius ) const
     {
         if( !color.isValid() ) return;
         
@@ -1453,15 +1473,22 @@ namespace Breeze
         qreal adjustment = 0.5 * PenWidth::Shadow; // Adjust for the pen
 
         qreal radius = rect.width() / 2 - adjustment;
+        if (inRadius != -1) {
+            radius = inRadius;
+        }
         
         /* The right side is offset by +0.5 for the visible part of the shadow.
          * The other sides are offset by +0.5 or -0.5 because of the pen.
          */
         QRectF shadowRect = rect.adjusted( adjustment, adjustment, adjustment, -adjustment );
-        
-        painter->translate( rect.center() );
-        painter->rotate( 45 );
-        painter->translate( -rect.center() );
+
+        if (inRadius == -1) {
+            painter->translate( rect.center() );
+            painter->rotate( 45 );
+            painter->translate( -rect.center() );
+        } else {
+            painter->translate(0, 1);
+        }
         painter->setPen( color );
         painter->setBrush( Qt::NoBrush );
         painter->drawRoundedRect( shadowRect, radius, radius );
