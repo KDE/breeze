@@ -25,6 +25,7 @@
 #include "breezemnemonics.h"
 #include "breezepropertynames.h"
 #include "breezeshadowhelper.h"
+#include "breezeheaderhelper.h"
 #include "breezesplitterproxy.h"
 #include "breezestyleconfigdata.h"
 #include "breezewidgetexplorer.h"
@@ -156,6 +157,7 @@ namespace Breeze
 
         _helper( new Helper( StyleConfigData::self()->sharedConfig() ) )
         , _shadowHelper( new ShadowHelper( this, *_helper ) )
+        , _headerHelper( new HeaderHelper( this ) )
         , _animations( new Animations( this ) )
         , _mnemonics( new Mnemonics( this ) )
         , _blurHelper( new BlurHelper( this ) )
@@ -299,6 +301,22 @@ namespace Breeze
                 widget->parentWidget()->parentWidget()->inherits( "Gwenview::SideBarGroup" ) )
             { widget->setProperty( PropertyNames::toolButtonAlignment, Qt::AlignLeft ); }
 
+        } else if ( auto *toolBar = qobject_cast<QToolBar*>( widget ) ) {
+            auto updateToolBar= [this, toolBar] {qWarning()<<"£££";
+                auto *mw = qobject_cast<QMainWindow *>( toolBar->window() );
+                if (mw && mw->toolBarArea(toolBar) == Qt::TopToolBarArea) {
+    qWarning()<<"AAAA"<<mw->toolBarArea(toolBar);
+                    QPalette pal = toolBar->palette();
+                    pal.setColor(QPalette::Normal, QPalette::Window, Qt::red);
+                    pal.setColor(QPalette::Normal, QPalette::WindowText, Qt::white);
+                // pal.setColor(QPalette::Inactive, QPalette::Window, Qt::yellow);
+                    toolBar->setPalette( pal );
+                } else {
+                    toolBar->setPalette( qApp->palette() );
+                }
+            };
+            connect(toolBar, &QToolBar::orientationChanged, this, updateToolBar);
+            updateToolBar();
         } else if( qobject_cast<QDockWidget*>( widget ) ) {
 
             // add event filter on dock widgets
@@ -888,7 +906,7 @@ namespace Breeze
             case CE_MenuBarEmptyArea: fcn = &Style::emptyControl; break;
             case CE_MenuBarItem: fcn = &Style::drawMenuBarItemControl; break;
             case CE_MenuItem: fcn = &Style::drawMenuItemControl; break;
-            case CE_ToolBar: fcn = &Style::emptyControl; break;
+            case CE_ToolBar: fcn = &Style::drawToolBarBackgroundPrimitive; break;
             case CE_ProgressBar: fcn = &Style::drawProgressBarControl; break;
             case CE_ProgressBarContents: fcn = &Style::drawProgressBarContentsControl; break;
             case CE_ProgressBarGroove: fcn = &Style::drawProgressBarGrooveControl; break;
@@ -3057,6 +3075,24 @@ namespace Breeze
 
         }
 
+        return true;
+
+    }
+
+    //______________________________________________________________
+    bool Style::drawToolBarBackgroundPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
+    {
+        const auto toolBarOption( qstyleoption_cast< const QStyleOptionToolBar* >( option ) );
+        if( !toolBarOption ) return true;
+
+        // copy palette and rect
+        const auto& palette( option->palette );
+        const auto& rect( option->rect );
+qWarning()<<"WWWW"<<toolBarOption->toolBarArea;
+        if (toolBarOption->toolBarArea == Qt::TopToolBarArea) {
+        }
+    //    emit const_cast<QToolBar *>(static_cast<const QToolBar *>(widget))->orientationChanged(Qt::Horizontal);
+        painter->fillRect( rect, palette.color( QPalette::Window ) );
         return true;
 
     }

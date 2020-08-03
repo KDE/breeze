@@ -57,6 +57,7 @@ namespace Breeze
     class MdiWindowShadowFactory;
     class Mnemonics;
     class ShadowHelper;
+    class HeaderHelper;
     class SplitterFactory;
     class WidgetExplorer;
     class WindowManager;
@@ -243,6 +244,7 @@ namespace Breeze
         { return true; }
 
         bool drawFramePrimitive( const QStyleOption*, QPainter*, const QWidget* ) const;
+        bool drawToolBarBackgroundPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const;
         bool drawFrameLineEditPrimitive( const QStyleOption*, QPainter*, const QWidget* ) const;
         bool drawFrameFocusRectPrimitive( const QStyleOption*, QPainter*, const QWidget* ) const;
         bool drawFrameMenuPrimitive( const QStyleOption*, QPainter*, const QWidget* ) const;
@@ -480,6 +482,9 @@ namespace Breeze
 
         //* shadow helper
         ShadowHelper* _shadowHelper = nullptr;
+
+        //* header helper
+        HeaderHelper* _headerHelper = nullptr;
 
         //* animations
         Animations* _animations = nullptr;
