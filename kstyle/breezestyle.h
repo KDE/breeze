@@ -245,6 +245,7 @@ namespace Breeze
 
         bool drawFramePrimitive( const QStyleOption*, QPainter*, const QWidget* ) const;
         bool drawToolBarBackgroundPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const;
+        bool drawMenuBarBackgroundPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const;
         bool drawFrameLineEditPrimitive( const QStyleOption*, QPainter*, const QWidget* ) const;
         bool drawFrameFocusRectPrimitive( const QStyleOption*, QPainter*, const QWidget* ) const;
         bool drawFrameMenuPrimitive( const QStyleOption*, QPainter*, const QWidget* ) const;

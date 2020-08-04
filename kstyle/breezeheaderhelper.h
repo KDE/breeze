@@ -24,8 +24,11 @@
 
 #include <QObject>
 #include <QHash>
+#include <QSet>
+#include <QPalette>
 
 class QToolBar;
+class QMenuBar;
 
 namespace Breeze
 {
@@ -48,6 +51,11 @@ namespace Breeze
         //* destructor
         ~HeaderHelper() override;
 
+        QPalette headerPalette();
+
+        void addMenuBar( QMenuBar *menuBar );
+        void removeMenuBar( QMenuBar *menuBar );
+
         void addToolBar( QToolBar *toolBar );
         void removeToolBar( QToolBar *toolBar );
 
@@ -55,6 +63,9 @@ namespace Breeze
 
         private:
             QHash<QToolBar *, Qt::ToolBarArea> _toolbarPositions;
+            QSet<QMenuBar *> _menuBars;
+            QPalette _palette;
+            bool _validPalette = false;
     };
 
 }

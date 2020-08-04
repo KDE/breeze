@@ -47,6 +47,7 @@
 #include <QMainWindow>
 #include <QMdiSubWindow>
 #include <QMenu>
+#include <QMenuBar>
 #include <QPainter>
 #include <QPushButton>
 #include <QRadioButton>
@@ -303,6 +304,8 @@ namespace Breeze
 
         } else if ( auto *toolBar = qobject_cast<QToolBar*>( widget ) ) {
             _headerHelper->addToolBar(toolBar);
+        } else if ( auto *menuBar = qobject_cast<QMenuBar*>( widget ) ) {
+            _headerHelper->addMenuBar( menuBar );
         } else if( qobject_cast<QDockWidget*>( widget ) ) {
 
             // add event filter on dock widgets
@@ -893,7 +896,7 @@ namespace Breeze
             case CE_RadioButtonLabel: fcn = &Style::drawCheckBoxLabelControl; break;
             case CE_ToolButtonLabel: fcn = &Style::drawToolButtonLabelControl; break;
             case CE_ComboBoxLabel: fcn = &Style::drawComboBoxLabelControl; break;
-            case CE_MenuBarEmptyArea: fcn = &Style::emptyControl; break;
+            case CE_MenuBarEmptyArea: fcn = &Style::drawMenuBarBackgroundPrimitive; break;
             case CE_MenuBarItem: fcn = &Style::drawMenuBarItemControl; break;
             case CE_MenuItem: fcn = &Style::drawMenuItemControl; break;
             case CE_ToolBar: fcn = &Style::drawToolBarBackgroundPrimitive; break;
@@ -3098,6 +3101,24 @@ namespace Breeze
     }
 
     //______________________________________________________________
+    bool Style::drawMenuBarBackgroundPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
+    {
+        // copy palette and rect
+        const auto& palette( option->palette );
+        const auto& rect( option->rect );
+
+        painter->fillRect( rect, palette.color( QPalette::Window ) );
+
+        if ( false ) {
+            const auto color( _helper->separatorColor( palette ) );
+            _helper->renderSeparator( painter, QRect( rect.left(), rect.bottom(), rect.width(), 1 ), color, false );
+        }
+
+        return true;
+
+    }
+
+    //______________________________________________________________
     bool Style::drawFrameLineEditPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
     {
         // copy palette and rect
@@ -4588,10 +4609,11 @@ namespace Breeze
         const bool sunken( enabled && (state & State_Sunken) );
         const bool useStrongFocus( StyleConfigData::menuItemDrawStrongFocus() );
 
+        painter->fillRect( rect, palette.color( QPalette::Window ) );
+
         // render hover and focus
         if( useStrongFocus && ( selected || sunken ) )
         {
-
             QColor outlineColor;
             if( sunken ) outlineColor = _helper->focusColor( palette );
             else if( selected ) outlineColor = _helper->hoverColor( palette );

@@ -20,6 +20,7 @@
 #include "breezeheaderhelper.h"
 
 #include <QToolBar>
+#include <QMenuBar>
 #include <QMainWindow>
 #include <QGuiApplication>
 #include <QDebug>
@@ -33,11 +34,73 @@ namespace Breeze
     HeaderHelper::HeaderHelper( QObject* parent):
         QObject( parent )
     {
+        if (qApp) {
+            connect( qApp, &QGuiApplication::paletteChanged, this, [=]() {
+                _validPalette = false;
+                for (auto i = _toolbarPositions.constBegin(); i != _toolbarPositions.constEnd(); ++i) {
+                    if (i.value() == Qt::TopToolBarArea) {
+                        i.key()->setPalette(headerPalette());
+                    }
+                }
+
+                for (auto *menuBar : _menuBars) {
+                    menuBar->setPalette(headerPalette());
+                }
+            } );
+        }
     }
 
     //_______________________________________________________
     HeaderHelper::~HeaderHelper()
     {
+    }
+
+    QPalette HeaderHelper::headerPalette()
+    {
+        if (_validPalette) {
+            return _palette;
+        }
+
+        _palette = QPalette();
+
+        KSharedConfigPtr config;
+
+        QString path;
+        if (qApp && qApp->property("KDE_COLOR_SCHEME_PATH").isValid()) {
+            path = qApp->property("KDE_COLOR_SCHEME_PATH").toString();
+            config = KSharedConfig::openConfig(path);
+        }
+
+        KColorScheme schemeWindow(QPalette::Active, KColorScheme::Header, config);
+
+        _palette.setBrush(QPalette::Active, QPalette::WindowText, schemeWindow.foreground());
+        _palette.setBrush(QPalette::Active, QPalette::Window, schemeWindow.background());
+
+        _palette.setColor(QPalette::Active, QPalette::Light, schemeWindow.shade(KColorScheme::LightShade));
+        _palette.setColor(QPalette::Active, QPalette::Midlight, schemeWindow.shade(KColorScheme::MidlightShade));
+        _palette.setColor(QPalette::Active, QPalette::Mid, schemeWindow.shade(KColorScheme::MidShade));
+        _palette.setColor(QPalette::Active, QPalette::Dark, schemeWindow.shade(KColorScheme::DarkShade));
+        _palette.setColor(QPalette::Active, QPalette::Shadow, schemeWindow.shade(KColorScheme::ShadowShade));
+
+        _validPalette = true;
+
+        return _palette;
+    }
+
+    void HeaderHelper::addMenuBar( QMenuBar *menuBar )
+    {
+        menuBar->setPalette( headerPalette() );
+        _menuBars.insert(menuBar);
+    }
+
+    void HeaderHelper::removeMenuBar( QMenuBar *menuBar )
+    {
+        if ( !_menuBars.contains( menuBar) ) {
+            return;
+        }
+
+        menuBar->setPalette( QPalette() );
+        _menuBars.remove( menuBar );
     }
 
     void HeaderHelper::addToolBar( QToolBar *toolBar )
@@ -47,24 +110,25 @@ namespace Breeze
 
     void HeaderHelper::removeToolBar( QToolBar *toolBar )
     {
-        _toolbarPositions.remove(toolBar);
+        if ( !_toolbarPositions.contains(toolBar) ) {
+            return;
+        }
+
+        toolBar->setPalette( QPalette() );
+        _toolbarPositions.remove( toolBar );
     }
 
     void HeaderHelper::notifyToolBarArea( QToolBar *toolBar, Qt::ToolBarArea area )
     {
-        if (!_toolbarPositions.contains(toolBar) || _toolbarPositions[toolBar] == area) {
+        if ( !_toolbarPositions.contains(toolBar) || _toolbarPositions[toolBar] == area ) {
             return;
         }
 
         _toolbarPositions[toolBar] = area;
         if (area == Qt::TopToolBarArea) {
-            QPalette pal = toolBar->palette();
-            KColorScheme scheme(QPalette::Normal, KColorScheme::Header);
-            pal.setColor(QPalette::Normal, QPalette::Window, scheme.background(KColorScheme::NormalBackground).color());
-            pal.setColor(QPalette::Normal, QPalette::WindowText, scheme.foreground(KColorScheme::NormalText).color());
-            toolBar->setPalette( pal );
+            toolBar->setPalette( headerPalette() );
         } else {
-            toolBar->setPalette( qApp->palette() );
+            toolBar->setPalette( QPalette() );
         }
     }
 }
