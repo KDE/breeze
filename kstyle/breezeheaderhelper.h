@@ -43,13 +43,18 @@ namespace Breeze
 
             //TODO: helper for animations?
         //* constructor
-        HeaderHelper( QObject*);
+        HeaderHelper( QObject* );
 
         //* destructor
         ~HeaderHelper() override;
 
+        void addToolBar( QToolBar *toolBar );
+        void removeToolBar( QToolBar *toolBar );
+
+        void notifyToolBarArea( QToolBar *toolBar, Qt::ToolBarArea area);
+
         private:
-            QHash<QToolBar *, Qt::ToolBarArea> m_toolbarPositions;
+            QHash<QToolBar *, Qt::ToolBarArea> _toolbarPositions;
     };
 
 }

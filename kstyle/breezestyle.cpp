@@ -302,21 +302,7 @@ namespace Breeze
             { widget->setProperty( PropertyNames::toolButtonAlignment, Qt::AlignLeft ); }
 
         } else if ( auto *toolBar = qobject_cast<QToolBar*>( widget ) ) {
-            auto updateToolBar= [this, toolBar] {qWarning()<<"£££";
-                auto *mw = qobject_cast<QMainWindow *>( toolBar->window() );
-                if (mw && mw->toolBarArea(toolBar) == Qt::TopToolBarArea) {
-    qWarning()<<"AAAA"<<mw->toolBarArea(toolBar);
-                    QPalette pal = toolBar->palette();
-                    pal.setColor(QPalette::Normal, QPalette::Window, Qt::red);
-                    pal.setColor(QPalette::Normal, QPalette::WindowText, Qt::white);
-                // pal.setColor(QPalette::Inactive, QPalette::Window, Qt::yellow);
-                    toolBar->setPalette( pal );
-                } else {
-                    toolBar->setPalette( qApp->palette() );
-                }
-            };
-            connect(toolBar, &QToolBar::orientationChanged, this, updateToolBar);
-            updateToolBar();
+            _headerHelper->addToolBar(toolBar);
         } else if( qobject_cast<QDockWidget*>( widget ) ) {
 
             // add event filter on dock widgets
@@ -460,6 +446,10 @@ namespace Breeze
         _windowManager->unregisterWidget( widget );
         _splitterFactory->unregisterWidget( widget );
         _blurHelper->unregisterWidget( widget );
+
+        if ( auto *toolBar = qobject_cast<QToolBar*>( widget ) ) {
+            _headerHelper->removeToolBar(toolBar);
+        }
 
         // remove event filter
         if( qobject_cast<QAbstractScrollArea*>( widget ) ||
@@ -3088,11 +3078,21 @@ namespace Breeze
         // copy palette and rect
         const auto& palette( option->palette );
         const auto& rect( option->rect );
-qWarning()<<"WWWW"<<toolBarOption->toolBarArea;
-        if (toolBarOption->toolBarArea == Qt::TopToolBarArea) {
+
+        auto *toolBar = qobject_cast<QToolBar *>(const_cast<QWidget *>(widget));
+        if (toolBar) {
+            _headerHelper->notifyToolBarArea(toolBar, toolBarOption->toolBarArea);
         }
-    //    emit const_cast<QToolBar *>(static_cast<const QToolBar *>(widget))->orientationChanged(Qt::Horizontal);
+
         painter->fillRect( rect, palette.color( QPalette::Window ) );
+
+        if ( toolBarOption->toolBarArea == Qt::TopToolBarArea &&
+             (toolBarOption->positionOfLine == QStyleOptionToolBar::End ||
+              toolBarOption->positionOfLine == QStyleOptionToolBar::OnlyOne ) ) {
+            const auto color( _helper->separatorColor( palette ) );
+            _helper->renderSeparator( painter, QRect( rect.left(), rect.bottom(), rect.width(), 1 ), color, false );
+        }
+
         return true;
 
     }

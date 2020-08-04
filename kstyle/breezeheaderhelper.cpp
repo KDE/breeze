@@ -20,6 +20,11 @@
 #include "breezeheaderhelper.h"
 
 #include <QToolBar>
+#include <QMainWindow>
+#include <QGuiApplication>
+#include <QDebug>
+
+#include <KColorScheme>
 
 namespace Breeze
 {
@@ -35,4 +40,31 @@ namespace Breeze
     {
     }
 
+    void HeaderHelper::addToolBar( QToolBar *toolBar )
+    {
+        _toolbarPositions[toolBar] = Qt::NoToolBarArea;
+    }
+
+    void HeaderHelper::removeToolBar( QToolBar *toolBar )
+    {
+        _toolbarPositions.remove(toolBar);
+    }
+
+    void HeaderHelper::notifyToolBarArea( QToolBar *toolBar, Qt::ToolBarArea area )
+    {
+        if (!_toolbarPositions.contains(toolBar) || _toolbarPositions[toolBar] == area) {
+            return;
+        }
+
+        _toolbarPositions[toolBar] = area;
+        if (area == Qt::TopToolBarArea) {
+            QPalette pal = toolBar->palette();
+            KColorScheme scheme(QPalette::Normal, KColorScheme::Header);
+            pal.setColor(QPalette::Normal, QPalette::Window, scheme.background(KColorScheme::NormalBackground).color());
+            pal.setColor(QPalette::Normal, QPalette::WindowText, scheme.foreground(KColorScheme::NormalText).color());
+            toolBar->setPalette( pal );
+        } else {
+            toolBar->setPalette( qApp->palette() );
+        }
+    }
 }
