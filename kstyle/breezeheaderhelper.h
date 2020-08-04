@@ -61,10 +61,15 @@ namespace Breeze
 
         void notifyToolBarArea( QToolBar *toolBar, Qt::ToolBarArea area);
 
+        bool hasTopToolBars() const;
+        bool hasMenuBars() const;
+
         private:
             QHash<QToolBar *, Qt::ToolBarArea> _toolbarPositions;
             QSet<QMenuBar *> _menuBars;
             QPalette _palette;
+            //TODO: indicize by window
+            int _topToolBars = 0;
             bool _validPalette = false;
     };
 

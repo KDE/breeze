@@ -38,6 +38,7 @@
 #include <QCheckBox>
 #include <QComboBox>
 #include <QDial>
+#include <QDialog>
 #include <QDBusConnection>
 #include <QDockWidget>
 #include <QFormLayout>
@@ -306,6 +307,8 @@ namespace Breeze
             _headerHelper->addToolBar(toolBar);
         } else if ( auto *menuBar = qobject_cast<QMenuBar*>( widget ) ) {
             _headerHelper->addMenuBar( menuBar );
+        } else if ( qobject_cast<QMainWindow*> (widget) || qobject_cast<QDialog*> (widget) ) {
+            widget->setAttribute(Qt::WA_StyledBackground);
         } else if( qobject_cast<QDockWidget*>( widget ) ) {
 
             // add event filter on dock widgets
@@ -452,6 +455,8 @@ namespace Breeze
 
         if ( auto *toolBar = qobject_cast<QToolBar*>( widget ) ) {
             _headerHelper->removeToolBar(toolBar);
+        } else if ( auto *menuBar = qobject_cast<QMenuBar*>( widget ) ) {
+            _headerHelper->removeMenuBar(menuBar);
         }
 
         // remove event filter
@@ -511,6 +516,11 @@ namespace Breeze
             case PM_LayoutRightMargin:
             case PM_LayoutBottomMargin:
             {
+                //TODO: check that we don't have menubars or toolbars
+                if ( widget && (qobject_cast<const QDialog *>(widget->parent()) || qobject_cast<const QMainWindow *>(widget->parent())) &&
+                      metric == PM_LayoutTopMargin) {
+                    return PenWidth::Frame;
+                }
                 /*
                  * use either Child margin or TopLevel margin,
                  * depending on  widget type
@@ -858,6 +868,7 @@ namespace Breeze
             case PE_FrameTabBarBase: fcn = &Style::drawFrameTabBarBasePrimitive; break;
             case PE_FrameWindow: fcn = &Style::drawFrameWindowPrimitive; break;
             case PE_FrameFocusRect: fcn = _frameFocusPrimitive; break;
+            case PE_Widget: fcn = &Style::drawWindowPrimitive; break;
 
             // fallback
             default: break;
@@ -3109,7 +3120,7 @@ namespace Breeze
 
         painter->fillRect( rect, palette.color( QPalette::Window ) );
 
-        if ( false ) {
+        if ( !_headerHelper->hasTopToolBars() ) {
             const auto color( _helper->separatorColor( palette ) );
             _helper->renderSeparator( painter, QRect( rect.left(), rect.bottom(), rect.width(), 1 ), color, false );
         }
@@ -3390,6 +3401,27 @@ namespace Breeze
 
     }
 
+    //___________________________________________________________________________________
+    bool Style::drawWindowPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
+    {
+        if ( !widget || !(qobject_cast<const QDialog *>(widget) || qobject_cast<const QMainWindow *>(widget) ) ) {
+            return true;
+        }
+
+        // copy rect and palette
+        const auto& rect( option->rect );
+        const auto& palette( option->palette );
+
+        //Todo: hasTopToolBars and hasMenuBars indicized by window
+        if (true) {//( !_headerHelper->hasTopToolBars() && !_headerHelper->hasMenuBars() ) {
+            const auto color( _helper->separatorColor( palette ) );
+            _helper->renderSeparator( painter, QRect( rect.left(), rect.top(), rect.width(), 1 ), color, false );
+        }
+
+        return true;
+
+    }
+    
     //___________________________________________________________________________________
     bool Style::drawIndicatorArrowPrimitive( ArrowOrientation orientation, const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
     {
@@ -4610,6 +4642,10 @@ namespace Breeze
         const bool useStrongFocus( StyleConfigData::menuItemDrawStrongFocus() );
 
         painter->fillRect( rect, palette.color( QPalette::Window ) );
+        if ( !_headerHelper->hasTopToolBars() ) {
+            const auto color( _helper->separatorColor( palette ) );
+            _helper->renderSeparator( painter, QRect( rect.left(), rect.bottom(), rect.width(), 1 ), color, false );
+        }
 
         // render hover and focus
         if( useStrongFocus && ( selected || sunken ) )
@@ -4618,7 +4654,6 @@ namespace Breeze
             if( sunken ) outlineColor = _helper->focusColor( palette );
             else if( selected ) outlineColor = _helper->hoverColor( palette );
             _helper->renderFocusRect( painter, rect, outlineColor );
-
         }
 
         /*

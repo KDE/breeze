@@ -253,6 +253,7 @@ namespace Breeze
         bool drawFrameTabWidgetPrimitive( const QStyleOption*, QPainter*, const QWidget* ) const;
         bool drawFrameTabBarBasePrimitive( const QStyleOption*, QPainter*, const QWidget* ) const;
         bool drawFrameWindowPrimitive( const QStyleOption*, QPainter*, const QWidget* ) const;
+        bool drawWindowPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* ) const;
 
         bool drawIndicatorArrowUpPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
         { return drawIndicatorArrowPrimitive( ArrowUp, option, painter, widget ); }

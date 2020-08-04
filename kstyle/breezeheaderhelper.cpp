@@ -114,6 +114,9 @@ namespace Breeze
             return;
         }
 
+        if ( _toolbarPositions[toolBar] == Qt::TopToolBarArea ) {
+            _topToolBars = qMin( 0, _topToolBars - 1 );
+        }
         toolBar->setPalette( QPalette() );
         _toolbarPositions.remove( toolBar );
     }
@@ -127,8 +130,31 @@ namespace Breeze
         _toolbarPositions[toolBar] = area;
         if (area == Qt::TopToolBarArea) {
             toolBar->setPalette( headerPalette() );
+            if ( _topToolBars == 0 ) {
+                for (auto *menuBar : _menuBars) {
+                    menuBar->update();
+                }
+            }
+            _topToolBars++;
+
         } else {
             toolBar->setPalette( QPalette() );
+            _topToolBars = qMin( 0, _topToolBars - 1 );
+            if ( _topToolBars == 0 ) {
+                for (auto *menuBar : _menuBars) {
+                    menuBar->update();
+                }
+            }
         }
+    }
+
+    bool HeaderHelper::hasTopToolBars() const
+    {
+        return _topToolBars > 0;
+    }
+    
+    bool HeaderHelper::hasMenuBars() const
+    {
+        return _menuBars.count() > 0;
     }
 }
