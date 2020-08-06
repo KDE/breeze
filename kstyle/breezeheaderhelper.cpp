@@ -43,7 +43,7 @@ namespace Breeze
                     }
                 }
 
-                for (auto *menuBar : _menuBars) {
+                for (auto *menuBar : _menuBarFowWindow.values()) {
                     menuBar->setPalette(headerPalette());
                 }
             } );
@@ -89,18 +89,23 @@ namespace Breeze
 
     void HeaderHelper::addMenuBar( QMenuBar *menuBar )
     {
+        if (!menuBar->window()) {
+            return;
+        }
         menuBar->setPalette( headerPalette() );
-        _menuBars.insert(menuBar);
+
+        _menuBarFowWindow.insert(menuBar->window(), menuBar);
+        _windowForMenuBar.insert(menuBar, menuBar->window());
     }
 
     void HeaderHelper::removeMenuBar( QMenuBar *menuBar )
     {
-        if ( !_menuBars.contains( menuBar) ) {
+        if ( !_menuBarFowWindow.contains( menuBar ) ) {
             return;
         }
 
-        menuBar->setPalette( QPalette() );
-        _menuBars.remove( menuBar );
+        QWidget *window = _windowForMenuBar.take( menuBar );
+        _menuBarFowWindow.remove( window );
     }
 
     void HeaderHelper::addToolBar( QToolBar *toolBar )
@@ -114,47 +119,75 @@ namespace Breeze
             return;
         }
 
+        QWidget *window = toolBar->window();
+        if ( !window ) {
+            return;
+        }
+
         if ( _toolbarPositions[toolBar] == Qt::TopToolBarArea ) {
-            _topToolBars = qMin( 0, _topToolBars - 1 );
+            _topToolBarsForWindow[window] = qMin( 0, _topToolBarsForWindow[window] - 1 );
         }
         toolBar->setPalette( QPalette() );
+
         _toolbarPositions.remove( toolBar );
+        _windowForToolBar.remove( toolBar );
     }
 
     void HeaderHelper::notifyToolBarArea( QToolBar *toolBar, Qt::ToolBarArea area )
     {
-        if ( !_toolbarPositions.contains(toolBar) || _toolbarPositions[toolBar] == area ) {
+        QWidget *window = toolBar->window();
+        QWidget *oldWindow = _windowForToolBar.value( toolBar );
+
+        const bool windowChanged = window != oldWindow;
+        const bool areaChanged = _toolbarPositions[toolBar] != area;
+
+        if ( !_toolbarPositions.contains(toolBar) || (!windowChanged && !areaChanged)) {
             return;
         }
 
-        _toolbarPositions[toolBar] = area;
-        if (area == Qt::TopToolBarArea) {
+        if (window && area == Qt::TopToolBarArea) {
             toolBar->setPalette( headerPalette() );
-            if ( _topToolBars == 0 ) {
-                for (auto *menuBar : _menuBars) {
-                    menuBar->update();
-                }
-            }
-            _topToolBars++;
+            _topToolBarsForWindow[window]++;
 
-        } else {
-            toolBar->setPalette( QPalette() );
-            _topToolBars = qMin( 0, _topToolBars - 1 );
-            if ( _topToolBars == 0 ) {
-                for (auto *menuBar : _menuBars) {
+            if ( _topToolBarsForWindow[window] == 1 ) {
+                auto *menuBar = _menuBarFowWindow.value(window);
+                if ( menuBar ) {
                     menuBar->update();
                 }
             }
         }
+
+        auto decrementTopToolBarsForWindow = [this] (QWidget *window) {
+            if ( !window ) {
+                return;
+            }
+            _topToolBarsForWindow[window] = qMin( 0, _topToolBarsForWindow[window] - 1 );
+
+            if ( _topToolBarsForWindow[window] == 0 ) {
+                auto *menuBar = _menuBarFowWindow.value(window);
+                if ( menuBar ) {
+                    menuBar->update();
+                }
+            }
+        };
+
+        if ( area != Qt::TopToolBarArea ) {
+            toolBar->setPalette( QPalette() );
+            decrementTopToolBarsForWindow( window );
+        }
+
+        if ( windowChanged ) {
+            decrementTopToolBarsForWindow( oldWindow );
+        }
     }
 
-    bool HeaderHelper::hasTopToolBars() const
+    bool HeaderHelper::windowHasTopToolBars( QWidget *window ) const
     {
-        return _topToolBars > 0;
+        return _topToolBarsForWindow.value( window ) > 0;
     }
     
-    bool HeaderHelper::hasMenuBars() const
+    bool HeaderHelper::windowHasMenuBars( QWidget *window ) const
     {
-        return _menuBars.count() > 0;
+        return _menuBarFowWindow.contains( window );
     }
 }

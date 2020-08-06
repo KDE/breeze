@@ -3120,7 +3120,7 @@ namespace Breeze
 
         painter->fillRect( rect, palette.color( QPalette::Window ) );
 
-        if ( !_headerHelper->hasTopToolBars() ) {
+        if ( widget && !_headerHelper->windowHasTopToolBars( widget->window() ) ) {
             const auto color( _helper->separatorColor( palette ) );
             _helper->renderSeparator( painter, QRect( rect.left(), rect.bottom(), rect.width(), 1 ), color, false );
         }
@@ -3412,8 +3412,7 @@ namespace Breeze
         const auto& rect( option->rect );
         const auto& palette( option->palette );
 
-        //Todo: hasTopToolBars and hasMenuBars indicized by window
-        if (true) {//( !_headerHelper->hasTopToolBars() && !_headerHelper->hasMenuBars() ) {
+        if ( widget && !_headerHelper->windowHasTopToolBars( widget->window() ) && !_headerHelper->windowHasMenuBars( widget->window() ) ) {
             const auto color( _helper->separatorColor( palette ) );
             _helper->renderSeparator( painter, QRect( rect.left(), rect.top(), rect.width(), 1 ), color, false );
         }
@@ -4642,7 +4641,7 @@ namespace Breeze
         const bool useStrongFocus( StyleConfigData::menuItemDrawStrongFocus() );
 
         painter->fillRect( rect, palette.color( QPalette::Window ) );
-        if ( !_headerHelper->hasTopToolBars() ) {
+        if ( widget && !_headerHelper->windowHasTopToolBars( widget->window() ) ) {
             const auto color( _helper->separatorColor( palette ) );
             _helper->renderSeparator( painter, QRect( rect.left(), rect.bottom(), rect.width(), 1 ), color, false );
         }
