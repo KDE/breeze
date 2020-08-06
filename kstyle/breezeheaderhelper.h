@@ -53,6 +53,8 @@ namespace Breeze
 
         QPalette headerPalette();
 
+        QColor transitionHeaderColor( const QWidget *widget, qreal progress ) const;
+
         void addMenuBar( QMenuBar *menuBar );
         void removeMenuBar( QMenuBar *menuBar );
 

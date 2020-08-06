@@ -107,6 +107,7 @@ namespace Breeze
             _focusData.setEnabled( value );
             _enableData.setEnabled( value );
             _pressedData.setEnabled( value );
+            _activeData.setEnabled( value );
         }
 
         //* duration
@@ -117,6 +118,7 @@ namespace Breeze
             _focusData.setDuration( value );
             _enableData.setDuration( value );
             _pressedData.setDuration( value/2 );
+            _activeData.setDuration( value );
         }
 
         public Q_SLOTS:
@@ -130,6 +132,7 @@ namespace Breeze
             if( _focusData.unregisterWidget( object ) ) found = true;
             if( _enableData.unregisterWidget( object ) ) found = true;
             if( _pressedData.unregisterWidget( object ) ) found = true;
+            if( _activeData.unregisterWidget( object ) ) found = true;
             return found;
         }
 
@@ -148,6 +151,7 @@ namespace Breeze
         DataMap<WidgetStateData> _focusData;
         DataMap<WidgetStateData> _enableData;
         DataMap<WidgetStateData> _pressedData;
+        DataMap<WidgetStateData> _activeData;
 
     };
 

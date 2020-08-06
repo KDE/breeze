@@ -28,12 +28,14 @@
 #include <QGroupBox>
 #include <QHeaderView>
 #include <QLineEdit>
+#include <QMenuBar>
 #include <QProgressBar>
 #include <QRadioButton>
 #include <QScrollBar>
 #include <QSpinBox>
 #include <QTextEdit>
 #include <QToolBox>
+#include <QToolBar>
 #include <QToolButton>
 
 namespace Breeze
@@ -186,6 +188,12 @@ namespace Breeze
             { _inputWidgetEngine->registerWidget( widget, AnimationHover|AnimationFocus ); }
 
         }
+
+        // toolbar
+        else if( qobject_cast<QToolBar*>( widget ) ) { _widgetStateEngine->registerWidget( widget, AnimationActive ); }
+
+        // menubar
+        else if( qobject_cast<QMenuBar*>( widget ) ) { _widgetStateEngine->registerWidget( widget, AnimationActive ); }
 
         // stacked widgets
         if( QStackedWidget* stack = qobject_cast<QStackedWidget*>( widget ) )

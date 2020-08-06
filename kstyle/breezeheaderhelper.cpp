@@ -87,6 +87,16 @@ namespace Breeze
         return _palette;
     }
 
+    QColor HeaderHelper::transitionHeaderColor( const QWidget *widget, qreal progress ) const
+    {
+        QColor color1 = !widget || widget->isEnabled() ? _palette.color( QPalette::Inactive, QPalette::Window ) : _palette.color( QPalette::Disabled, QPalette::Window );
+        QColor color2 = _palette.color( QPalette::Active, QPalette::Window );
+
+        return QColor(255 * (color1.redF() * (1-progress) + color2.redF() * progress),
+                      255 * (color1.greenF() * (1-progress) + color2.greenF() * progress),
+                      255 * (color1.blueF() * (1-progress) + color2.blueF() * progress) );
+    }
+
     void HeaderHelper::addMenuBar( QMenuBar *menuBar )
     {
         if (!menuBar->window()) {

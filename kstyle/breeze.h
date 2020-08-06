@@ -46,7 +46,8 @@ namespace Breeze
         AnimationHover = 0x1,
         AnimationFocus = 0x2,
         AnimationEnable = 0x4,
-        AnimationPressed = 0x8
+        AnimationPressed = 0x8,
+        AnimationActive = 0x16
     };
 
     Q_DECLARE_FLAGS(AnimationModes, AnimationMode)

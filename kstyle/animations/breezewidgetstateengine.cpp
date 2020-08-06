@@ -34,6 +34,7 @@ namespace Breeze
         if( mode&AnimationFocus && !_focusData.contains( widget ) ) { _focusData.insert( widget, new WidgetStateData( this, widget, duration() ), enabled() ); }
         if( mode&AnimationEnable && !_enableData.contains( widget ) ) { _enableData.insert( widget, new EnableData( this, widget, duration() ), enabled() ); }
         if( mode&AnimationPressed && !_pressedData.contains( widget ) ) { _pressedData.insert( widget, new WidgetStateData( this, widget, duration() ), enabled() ); }
+        if( mode&AnimationActive && !_activeData.contains( widget ) ) { _activeData.insert( widget, new WidgetStateData( this, widget, duration() ), enabled() ); }
 
         // connect destruction signal
         connect( widget, SIGNAL(destroyed(QObject*)), this, SLOT(unregisterWidget(QObject*)), Qt::UniqueConnection );
@@ -74,6 +75,12 @@ namespace Breeze
             { if( value ) out.insert( value.data()->target().data() ); }
         }
 
+        if( mode&AnimationActive )
+        {
+            foreach( const Value& value, _activeData )
+            { if( value ) out.insert( value.data()->target().data() ); }
+        }
+
         return out;
 
     }
@@ -104,6 +111,7 @@ namespace Breeze
             case AnimationFocus: return _focusData.find( object ).data();
             case AnimationEnable: return _enableData.find( object ).data();
             case AnimationPressed: return _pressedData.find( object ).data();
+            case AnimationActive: return _activeData.find( object ).data();
             default: return DataMap<WidgetStateData>::Value();
         }
 
@@ -120,6 +128,7 @@ namespace Breeze
             case AnimationFocus: return _focusData;
             case AnimationEnable: return _enableData;
             case AnimationPressed: return _pressedData;
+            case AnimationActive: return _activeData;
 
         }
 

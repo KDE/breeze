@@ -3093,12 +3093,18 @@ namespace Breeze
         const auto& palette( option->palette );
         const auto& rect( option->rect );
 
+        _animations->widgetStateEngine().updateState( widget, AnimationActive, option->state & QStyle::State_Active );
+
         auto *toolBar = qobject_cast<QToolBar *>(const_cast<QWidget *>(widget));
         if (toolBar) {
             _headerHelper->notifyToolBarArea(toolBar, toolBarOption->toolBarArea);
         }
 
-        painter->fillRect( rect, palette.color( QPalette::Window ) );
+        if ( _animations->widgetStateEngine().isAnimated( widget, AnimationActive ) ) {
+            painter->fillRect( rect, _headerHelper->transitionHeaderColor( widget, _animations->widgetStateEngine().opacity(widget, AnimationActive) ) );
+        } else {
+            painter->fillRect( rect, palette.color( QPalette::Window ) );
+        }
 
         if ( toolBarOption->toolBarArea == Qt::TopToolBarArea &&
              (toolBarOption->positionOfLine == QStyleOptionToolBar::End ||
@@ -3117,8 +3123,18 @@ namespace Breeze
         // copy palette and rect
         const auto& palette( option->palette );
         const auto& rect( option->rect );
+        // Option->state is wrong here
+        const bool isActive = widget->window() && widget->window()->isActiveWindow();
 
-        painter->fillRect( rect, palette.color( QPalette::Window ) );
+        if ( widget->window() ) {
+            _animations->widgetStateEngine().updateState( widget, AnimationActive, isActive );
+        }
+
+        if ( _animations->widgetStateEngine().isAnimated( widget, AnimationActive ) ) {
+            painter->fillRect( rect, _headerHelper->transitionHeaderColor( widget, _animations->widgetStateEngine().opacity(widget, AnimationActive) ) );
+        } else {
+            painter->fillRect( rect, palette.color( QPalette::Window ) );
+        }
 
         if ( widget && !_headerHelper->windowHasTopToolBars( widget->window() ) ) {
             const auto color( _helper->separatorColor( palette ) );
@@ -4640,7 +4656,12 @@ namespace Breeze
         const bool sunken( enabled && (state & State_Sunken) );
         const bool useStrongFocus( StyleConfigData::menuItemDrawStrongFocus() );
 
-        painter->fillRect( rect, palette.color( QPalette::Window ) );
+        if ( _animations->widgetStateEngine().isAnimated( widget, AnimationActive ) ) {
+            painter->fillRect( rect, _headerHelper->transitionHeaderColor( widget, _animations->widgetStateEngine().opacity(widget, AnimationActive) ) );
+        } else {
+            painter->fillRect( rect, palette.color( QPalette::Window ) );
+        }
+
         if ( widget && !_headerHelper->windowHasTopToolBars( widget->window() ) ) {
             const auto color( _helper->separatorColor( palette ) );
             _helper->renderSeparator( painter, QRect( rect.left(), rect.bottom(), rect.width(), 1 ), color, false );
