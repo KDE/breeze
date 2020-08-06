@@ -3100,7 +3100,7 @@ namespace Breeze
             _headerHelper->notifyToolBarArea(toolBar, toolBarOption->toolBarArea);
         }
 
-        if ( _animations->widgetStateEngine().isAnimated( widget, AnimationActive ) ) {
+        if ( toolBarOption->toolBarArea == Qt::TopToolBarArea && _animations->widgetStateEngine().isAnimated( widget, AnimationActive ) ) {
             painter->fillRect( rect, _headerHelper->transitionHeaderColor( widget, _animations->widgetStateEngine().opacity(widget, AnimationActive) ) );
         } else {
             painter->fillRect( rect, palette.color( QPalette::Window ) );

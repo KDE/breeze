@@ -187,6 +187,7 @@ namespace Breeze
         }
 
         if ( windowChanged ) {
+            _windowForToolBar[ toolBar ] = window;
             decrementTopToolBarsForWindow( oldWindow );
         }
     }
