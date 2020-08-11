@@ -30,6 +30,7 @@
 #include "breezewidgetexplorer.h"
 #include "breezewindowmanager.h"
 #include "breezeblurhelper.h"
+#include "breezekeyholdmanager.h"
 
 #include <KColorUtils>
 
@@ -160,6 +161,7 @@ namespace Breeze
         , _mnemonics( new Mnemonics( this ) )
         , _blurHelper( new BlurHelper( this ) )
         , _windowManager( new WindowManager( this ) )
+        , _keyHoldManager( new KeyHoldManager( this ))
         , _frameShadowFactory( new FrameShadowFactory( this ) )
         , _mdiWindowShadowFactory( new MdiWindowShadowFactory( this ) )
         , _splitterFactory( new SplitterFactory( this ) )
@@ -202,6 +204,20 @@ namespace Breeze
     {
         delete _shadowHelper;
         delete _helper;
+    }
+
+    //______________________________________________________________
+    void Style::polish( QApplication* app )
+    {
+        Q_ASSERT(app);
+        _keyHoldManager->registerApplication(app);
+    }
+
+    //______________________________________________________________
+    void Style::unpolish( QApplication* app )
+    {
+        Q_ASSERT(app);
+        _keyHoldManager->unregisterApplication(app);
     }
 
     //______________________________________________________________

@@ -61,6 +61,7 @@ namespace Breeze
     class WidgetExplorer;
     class WindowManager;
     class BlurHelper;
+    class KeyHoldManager;
 
     //* convenience typedef for base class
     #if !BREEZE_HAVE_KSTYLE
@@ -95,6 +96,10 @@ namespace Breeze
 
         //* widget unpolishing
         void unpolish( QWidget* ) override;
+
+        //* application polishing and unpolishing
+        void polish( QApplication* ) override;
+        void unpolish( QApplication* ) override;
 
         //* polish scrollarea
         void polishScrollArea( QAbstractScrollArea* );
@@ -499,6 +504,9 @@ namespace Breeze
 
         //* window manager
         WindowManager* _windowManager = nullptr;
+
+        //* key held manager
+        KeyHoldManager* _keyHoldManager = nullptr;
 
         //* frame shadows
         FrameShadowFactory* _frameShadowFactory = nullptr;
