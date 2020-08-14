@@ -59,6 +59,10 @@
 #include <QTreeView>
 #include <QWidgetAction>
 
+#include <parser.h>
+
+#undef func
+
 #if BREEZE_HAVE_QTQUICK
 #include <QQuickWindow>
 #endif
@@ -235,6 +239,61 @@ namespace Breeze
         // need to be reset when the system palette changes
         loadConfiguration();
 
+        QFile css(QDir::homePath() + "/.yeet.css");
+        if (css.open(QFile::ReadOnly)) {
+            QTextStream ts(&css);
+            string s;
+            s.append(ts.readAll());
+
+            let number = Map<qint32>(
+                [](QList<QString> in) -> qint32 {
+                    return QStringList(in).join("").toInt();
+                },
+                ParseToken([](QChar ch) { return ch.isDigit(); })->Many()
+            );
+            let hexCharacter = ParseToken([](QChar ch) { return ch.isDigit() || QList<QChar>{'a', 'b', 'c', 'd', 'e', 'f'}.contains(ch.toLower()); });
+            let hexDouble = hexCharacter->Repeated(2)->Map<quint32>([](QList<QString> in) -> quint32 {
+                return (in[0]+in[1]).toUInt(nullptr, 16);
+            });
+            let hexColor = Map<QColor>(
+                [](QString, quint32 r, quint32 g, quint32 b) -> QColor {
+                    return QColor(r, g, b);
+                },
+                ParseString("#"), hexDouble, hexDouble, hexDouble
+            );
+            let value = hexColor->Map<cssValue>([](QColor color) -> cssValue { cssValue ret; ret = (QColor)color; return ret; })
+                   ->Or(number->Map<cssValue>([](qint32 num) -> cssValue { cssValue ret; ret = (quint32)num; return ret; }));
+            let property = Map<QPair<QString,cssValue>>(
+                [](QString name, QString colon, cssValue val, QString semicolon) -> QPair<QString, cssValue> {
+                    Q_UNUSED(colon);
+                    Q_UNUSED(semicolon);
+                    return qMakePair(name, val);
+                },
+                GoIdentifier(), ParseString(":")->Between(SkipWhitespace()), value, SkipWhitespace()->Then(ParseString(";"))
+            );
+            let result = property->Many()->Parse(s);
+            let unwrap = std::get<0>(result);
+            _cssProperties = unwrap;
+            var watcher = new QFileSystemWatcher(QStringList{QDir::homePath() + "/.yeet.css"});
+            connect(watcher, &QFileSystemWatcher::fileChanged, [=](const QString &file) {
+                QFile newCss(file);
+                if (newCss.open(QFile::ReadOnly)) {
+                    QTextStream ds(&newCss);
+                    string s;
+                    s.append(ds.readAll());
+
+                    let result2 = property->Many()->Parse(s);
+                    let unwrap2 = std::get<0>(result);
+                    _cssProperties = unwrap2;
+                    for (auto window : _windows) {
+                        auto all = window->findChildren<QWidget*>();
+                        for (auto widget : all) {
+                            widget->update();
+                        }
+                    }
+                }
+            });
+        }
     }
 
     //______________________________________________________________
@@ -248,6 +307,8 @@ namespace Breeze
     void Style::polish( QWidget* widget )
     {
         if( !widget ) return;
+
+        _windows << widget->window();
 
         // register widget to animations
         _animations->registerWidget( widget );
@@ -3538,7 +3599,7 @@ namespace Breeze
             const auto background( _helper->buttonBackgroundColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
 
             // render
-            _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocus, sunken );
+            _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocus, sunken, _cssProperties );
 
         }
 
@@ -3587,7 +3648,7 @@ namespace Breeze
             }
 
             // render
-            _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocus, sunken );
+            _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocus, sunken, _cssProperties );
 
         } else {
 
@@ -3924,7 +3985,7 @@ namespace Breeze
         // render
         if ( !flat )
         {
-            _helper->renderButtonFrame( painter, frameRect, background, outline, shadow, hasFocus, sunken );
+            _helper->renderButtonFrame( painter, frameRect, background, outline, shadow, hasFocus, sunken, _cssProperties );
         }
 
         // also render separator
@@ -6180,7 +6241,7 @@ namespace Breeze
                     const auto background( _helper->buttonBackgroundColor( palette, mouseOver, hasFocus, false, opacity, mode ) );
 
                     // render
-                    _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocus, sunken );
+                    _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocus, sunken, _cssProperties );
 
                 }
 

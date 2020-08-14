@@ -616,7 +616,7 @@ namespace Breeze
     void Helper::renderButtonFrame(
         QPainter* painter, const QRect& rect,
         const QColor& color, const QColor& outline, const QColor& shadow,
-        bool hasFocus, bool sunken ) const
+        bool hasFocus, bool sunken, const QList<QPair<QString,cssValue>>& cssProperties ) const
     {
 
         // setup painter
@@ -626,6 +626,12 @@ namespace Breeze
         QRectF frameRect( rect );
         frameRect.adjust( 1, 1, -1, -1 );
         qreal radius( frameRadius( PenWidth::NoPen, -1 ) );
+
+        for (const auto &item : cssProperties) {
+            if (item.first == "border_radius") {
+                radius = std::get<1>(item.second);
+            }
+        }
 
         // shadow
         if( sunken ) {

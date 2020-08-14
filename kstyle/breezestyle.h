@@ -515,6 +515,9 @@ namespace Breeze
         //* tabbar data
         BreezePrivate::TabBarData* _tabBarData = nullptr;
 
+        QList<QPair<QString,cssValue>> _cssProperties;
+        QSet<QWidget*> _windows;
+
         //* icon hash
         using IconCache = QHash<StandardPixmap, QIcon>;
         IconCache _iconCache;

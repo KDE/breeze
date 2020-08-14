@@ -33,8 +33,11 @@
 #include <QIcon>
 #include <QWidget>
 
+#include <variant>
+
 namespace Breeze
 {
+    using cssValue = std::variant<QColor, quint32>;
 
     //* breeze style helper class.
     /** contains utility functions used at multiple places in both breeze style and breeze window decoration */
@@ -172,7 +175,7 @@ namespace Breeze
         void renderMenuFrame( QPainter*, const QRect&, const QColor& color, const QColor& outline, bool roundCorners = true ) const;
 
         //* button frame
-        void renderButtonFrame( QPainter*, const QRect&, const QColor& color, const QColor& outline, const QColor& shadow, bool focus, bool sunken ) const;
+        void renderButtonFrame( QPainter*, const QRect&, const QColor& color, const QColor& outline, const QColor& shadow, bool focus, bool sunken, const QList<QPair<QString,cssValue>>& cssProperties ) const;
 
         //* toolbutton frame
         void renderToolButtonFrame( QPainter*, const QRect&, const QColor& color, bool sunken ) const;

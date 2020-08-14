@@ -96,9 +96,13 @@ set(breeze_PART_SRCS
     breezewindowmanager.cpp
 )
 
+find_package(PkgConfig REQUIRED) 
+pkg_check_modules(Soluno REQUIRED IMPORTED_TARGET soluno)
+
 kconfig_add_kcfg_files(breeze_PART_SRCS breezestyleconfigdata.kcfgc)
 add_library(breeze MODULE ${breeze_PART_SRCS})
-target_link_libraries(breeze Qt5::Core Qt5::Gui Qt5::Widgets Qt5::DBus)
+set_property(TARGET breeze PROPERTY CXX_STANDARD 17)
+target_link_libraries(breeze Qt5::Core Qt5::Gui Qt5::Widgets Qt5::DBus PkgConfig::Soluno)
 if( BREEZE_HAVE_QTQUICK )
     target_link_libraries(breeze Qt5::Quick)
 endif()
