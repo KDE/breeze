@@ -83,6 +83,7 @@ set(breeze_PART_SRCS
     debug/breezewidgetexplorer.cpp
     breezeaddeventfilter.cpp
     breezeblurhelper.cpp
+    breezecss.cpp
     breezeframeshadow.cpp
     breezehelper.cpp
     breezemdiwindowshadow.cpp
