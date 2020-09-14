@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Flow
+Name=Shell
 Name[az]=Axın
 Name[ca]=Flow
 Name[cs]=Proud
@@ -28,6 +28,6 @@ Name[x-test]=xxFlowxx
 Name[zh_TW]=Flow
 
 X-KDE-PluginInfo-Name=Next
-X-KDE-PluginInfo-Author=Sandra Smukaste
-X-KDE-PluginInfo-Email=pewmuffin@gmail.com
+X-KDE-PluginInfo-Author=Lucas Andrade
+X-KDE-PluginInfo-Email=luwx@hotmail.com.br
 X-KDE-PluginInfo-License=CC-BY-SA-4.0
