@@ -1,31 +1,5 @@
 [Desktop Entry]
 Name=Shell
-Name[az]=Axın
-Name[ca]=Flow
-Name[cs]=Proud
-Name[da]=Flow
-Name[el]=Ροή
-Name[en_GB]=Flow
-Name[es]=Fujo
-Name[et]=Flow
-Name[eu]=Flow
-Name[fi]=Flow
-Name[fr]=Flux
-Name[it]=Flusso
-Name[ko]=흐름
-Name[lt]=Flow
-Name[nl]=Flow
-Name[nn]=Flyt
-Name[pt]=Fluxo
-Name[pt_BR]=Flow
-Name[ro]=Flux
-Name[ru]=Поток
-Name[sk]=Prúd
-Name[sl]=Tok
-Name[sv]=Flow
-Name[uk]=Потік
-Name[x-test]=xxFlowxx
-Name[zh_TW]=Flow
 
 X-KDE-PluginInfo-Name=Next
 X-KDE-PluginInfo-Author=Lucas Andrade
