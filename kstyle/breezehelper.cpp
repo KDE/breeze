@@ -602,55 +602,47 @@ namespace Breeze
     //______________________________________________________________________________
     void Helper::renderButtonFrame(
         QPainter* painter, const QRect& rect,
-        const QColor& color, const QColor& outline, const QColor& shadow,
-        bool hasFocus, bool sunken ) const
+        const QPalette& palette,
+        bool hover, bool focus, bool sunken,
+        AnimationMode mode, qreal opacity ) const
     {
 
         // setup painter
         painter->setRenderHint( QPainter::Antialiasing, true );
 
         // copy rect
-        QRectF frameRect( rect );
-        frameRect.adjust( 1, 1, -1, -1 );
-        qreal radius( frameRadius( PenWidth::NoPen, -1 ) );
+        QRect frameRect( rect );
+        frameRect.adjust(1, 1, -1, -1);
+        frameRect.adjust(Metrics::Button_FocusRingSize, Metrics::Button_FocusRingSize, -Metrics::Button_FocusRingSize, -Metrics::Button_FocusRingSize);
 
-        // shadow
-        if( sunken ) {
+        auto gradient = QLinearGradient(frameRect.topLeft(), frameRect.bottomLeft());
+        gradient.setColorAt(0.0, palette.button().color());
+        gradient.setColorAt(1.0, KColorUtils::darken(palette.button().color(), 0.1));
 
-            frameRect.translate( 1, 1 );
+        painter->setBrush( gradient );
+        painter->setPen(QColor(0, 0, 0, 51) );
 
+        if (mode != AnimationMode::AnimationNone) {
+
+        } else if (sunken) {
+
+        } else if (focus || hover) {
+            painter->setPen(palette.highlight().color());
+            if (focus) {
+                painter->save();
+
+                auto doubleRect = frameRect.adjusted( -Metrics::Button_FocusRingSize, -Metrics::Button_FocusRingSize, Metrics::Button_FocusRingSize, Metrics::Button_FocusRingSize );
+
+                painter->setBrush(palette.highlight());
+                painter->setOpacity(0.4);
+                painter->drawRoundedRect( doubleRect, 6, 6 );
+
+                painter->restore();
+            }
+            painter->drawRoundedRect( frameRect, 4, 4 );
         } else {
-
-            renderRoundedRectShadow( painter, frameRect, shadow, radius );
-
+            painter->drawRoundedRect( frameRect, 4, 4 );
         }
-
-        if( outline.isValid() )
-        {
-
-            QLinearGradient gradient( frameRect.topLeft(), frameRect.bottomLeft() );
-            gradient.setColorAt( 0, outline.lighter( hasFocus ? 103:101 ) );
-            gradient.setColorAt( 1, outline.darker( hasFocus ? 110:103 ) );
-            painter->setPen( QPen( QBrush( gradient ), 1.0 ) );
-
-            frameRect = strokedRect( frameRect );
-            radius = frameRadiusForNewPenWidth( radius, PenWidth::Frame );
-
-        } else painter->setPen( Qt::NoPen );
-
-        // content
-        if( color.isValid() )
-        {
-
-            QLinearGradient gradient( frameRect.topLeft(), frameRect.bottomLeft() );
-            gradient.setColorAt( 0, color.lighter( hasFocus ? 103:101 ) );
-            gradient.setColorAt( 1, color.darker( hasFocus ? 110:103 ) );
-            painter->setBrush( gradient );
-
-        } else painter->setBrush( Qt::NoBrush );
-
-        // render
-        painter->drawRoundedRect( frameRect, radius, radius );
 
     }
 

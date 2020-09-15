@@ -3520,12 +3520,8 @@ namespace Breeze
                 palette.setColor( QPalette::Button, KColorUtils::mix( button, base, 0.7 ) );
             }
 
-            const auto shadow( _helper->shadowColor( palette ) );
-            const QColor outline = hasHighlightNeutral( widget, option, mouseOver ) ? _helper->neutralText( palette ) : _helper->buttonOutlineColor( palette, mouseOver, hasFocus, opacity, mode );
-            const auto background( _helper->buttonBackgroundColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
-
             // render
-            _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocus, sunken );
+            _helper->renderButtonFrame( painter, rect, palette, mouseOver, hasFocus, sunken, mode, opacity );
 
         }
 
@@ -3574,7 +3570,7 @@ namespace Breeze
             }
 
             // render
-            _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocus, sunken );
+            _helper->renderButtonFrame( painter, rect, palette, mouseOver, hasFocus, sunken, mode, opacity );
 
         } else {
 
@@ -3911,7 +3907,7 @@ namespace Breeze
         // render
         if ( !flat )
         {
-            _helper->renderButtonFrame( painter, frameRect, background, outline, shadow, hasFocus, sunken );
+            _helper->renderButtonFrame( painter, rect, palette, mouseOver, hasFocus, sunken, mode, opacity );
         }
 
         // also render separator
@@ -4197,7 +4193,6 @@ namespace Breeze
 
         // contents
         auto contentsRect( rect );
-        if( sunken && !flat ) contentsRect.translate( 1, 1 );
 
         // color role
         QPalette::ColorRole textRole;
@@ -4207,8 +4202,7 @@ namespace Breeze
             if( hasFocus && sunken ) textRole = QPalette::HighlightedText;
             else textRole = QPalette::WindowText;
 
-        } else if( hasFocus ) textRole = QPalette::HighlightedText;
-        else textRole = QPalette::ButtonText;
+        } else textRole = QPalette::ButtonText;
 
         // menu arrow
         if( buttonOption->features & QStyleOptionButton::HasMenu )
@@ -6161,13 +6155,8 @@ namespace Breeze
 
                 } else {
 
-                    // define colors
-                    const auto shadow( _helper->shadowColor( palette ) );
-                    const auto outline( hasHighlightNeutral( widget, option, mouseOver, hasFocus ) ? _helper->neutralText( palette ) : _helper->buttonOutlineColor( palette, mouseOver, hasFocus, opacity, mode ) );
-                    const auto background( _helper->buttonBackgroundColor( palette, mouseOver, hasFocus, false, opacity, mode ) );
-
                     // render
-                    _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocus, sunken );
+                    _helper->renderButtonFrame( painter, rect, palette, mouseOver, hasFocus, sunken, mode, opacity );
 
                 }
 

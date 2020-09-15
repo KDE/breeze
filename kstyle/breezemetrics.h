@@ -68,6 +68,7 @@ namespace Breeze
         static constexpr int Button_MinWidth = 80;
         static constexpr int Button_MarginWidth = 6;
         static constexpr int Button_ItemSpacing = 4;
+        static constexpr int Button_FocusRingSize = 2;
 
         // tool buttons
         static constexpr int ToolButton_MarginWidth = 6;
