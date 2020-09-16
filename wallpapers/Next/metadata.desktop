@@ -1,5 +1,13 @@
 [Desktop Entry]
 Name=Shell
+Name[ca]=Shell
+Name[de]=Flow
+Name[es]=Shell
+Name[nl]=Shell
+Name[pt]=Consola
+Name[sv]=Skal
+Name[uk]=Оболонка
+Name[x-test]=xxShellxx
 
 X-KDE-PluginInfo-Name=Next
 X-KDE-PluginInfo-Author=Lucas Andrade
