@@ -5,12 +5,14 @@ Name[ca]=Shell
 Name[de]=Flow
 Name[el]=Φλοιός
 Name[es]=Shell
+Name[fr]=Interpréteur
 Name[it]=Shell
 Name[nl]=Shell
 Name[pt]=Consola
 Name[sv]=Skal
 Name[uk]=Оболонка
 Name[x-test]=xxShellxx
+Name[zh_TW]=殼層
 
 X-KDE-PluginInfo-Name=Next
 X-KDE-PluginInfo-Author=Lucas Andrade
