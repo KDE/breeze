@@ -43,4 +43,4 @@ for orientation in ('horizontal', 'vertical'):
 			else: box = None
 			resized_image = image.resize((width, height), Image.LANCZOS, box)
 			resized_image.save(base_dir / f'{width}x{height}{extension}',
-					  quality=100, subsampling=100)
+					  quality=90, optimize=True, subsampling=1)
