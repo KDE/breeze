@@ -25,6 +25,12 @@ namespace Breeze {
         friend class ToolsAreaManager;
     };
 
+    class DialogMarginEnsurer : public QObject
+    {
+        Q_OBJECT
+        bool eventFilter(QObject *on, QEvent *ev) override;
+    };
+
     class ToolsAreaManager : public QObject
     {
         Q_OBJECT
@@ -32,6 +38,7 @@ namespace Breeze {
     private:
         Helper* _helper;
         QHash<QMainWindow*,QVector<QPointer<QToolBar>>> _windows;
+        QSharedPointer<DialogMarginEnsurer> _margins;
         KSharedConfigPtr _config;
         KConfigWatcher::Ptr _watcher;
         QPalette _palette = QPalette();

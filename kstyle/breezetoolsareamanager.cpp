@@ -1,6 +1,7 @@
 #include "breezetoolsareamanager.h"
 #include "breezepropertynames.h"
 
+#include <QDialog>
 #include <QMainWindow>
 #include <QMdiArea>
 #include <QMenuBar>
@@ -14,7 +15,7 @@
 const char* colorProperty = "KDE_COLOR_SCHEME_PATH";
 
 namespace Breeze {
-    ToolsAreaManager::ToolsAreaManager(Helper *helper, QObject *parent) : QObject(parent), _helper(helper)
+    ToolsAreaManager::ToolsAreaManager(Helper *helper, QObject *parent) : QObject(parent), _helper(helper), _margins(new DialogMarginEnsurer)
     {
         if (qApp && qApp->property(colorProperty).isValid()) {
             auto path = qApp->property(colorProperty).toString();
@@ -37,6 +38,17 @@ namespace Breeze {
             }
         }
         list->append(item);
+    }
+
+    bool DialogMarginEnsurer::eventFilter(QObject *on, QEvent *ev)
+    {
+        if (ev->type() == QEvent::Resize) {
+            auto dialog = qobject_cast<QDialog*>(on);
+            auto adjustedMargins = QMargins(dialog->contentsMargins().left(), qMax(dialog->contentsMargins().top(), 1), dialog->contentsMargins().right(), dialog->contentsMargins().bottom());
+            if (dialog->contentsMargins() != adjustedMargins)
+                dialog->setContentsMargins(adjustedMargins);
+        }
+        return false;
     }
 
     void ToolsAreaManager::registerApplication(QApplication *application)
@@ -203,6 +215,9 @@ namespace Breeze {
     {
         Q_ASSERT(widget);
         auto ptr = QPointer<QWidget>(widget);
+
+        if (qobject_cast<QDialog*>(widget))
+            widget->installEventFilter(_margins.data()), widget->setContentsMargins(widget->contentsMargins().left(), qMax(widget->contentsMargins().top(), 1), widget->contentsMargins().right(), widget->contentsMargins().bottom());
 
         auto parent = ptr;
         QPointer<QMainWindow> mainWindow = nullptr;
