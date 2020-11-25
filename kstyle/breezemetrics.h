@@ -35,7 +35,7 @@ namespace Breeze
     struct Metrics
     {
         // frames
-        static constexpr int Frame_FrameWidth = 2;
+        static constexpr int Frame_FrameWidth = PenWidth::Frame;
         static constexpr int Frame_FrameRadius = 3;
 
         // layout
