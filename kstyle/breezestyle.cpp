@@ -29,6 +29,7 @@
 #include <QDial>
 #include <QDialog>
 #include <QDBusConnection>
+#include <QFontMetrics>
 #include <QFormLayout>
 #include <QGraphicsView>
 #include <QGroupBox>
@@ -5203,8 +5204,14 @@ namespace Breeze
         QRect handleRect;
         const State& state( option->state );
         const bool horizontal( state & State_Horizontal );
-        if( horizontal ) handleRect = centerRect( rect, rect.width(), Metrics::ScrollBar_SliderWidth );
-        else handleRect = centerRect( rect, Metrics::ScrollBar_SliderWidth, rect.height() );
+
+        // The slider width should be porportionate to the font DPI, with and
+        // without Hi-DPI scaling
+        QFontMetrics fm(widget->font());
+        const int sliderWidth = (fm.fontDpi() / 96) * Metrics::ScrollBar_SliderWidth;
+
+        if( horizontal ) handleRect = centerRect( rect, rect.width(), sliderWidth );
+        else handleRect = centerRect( rect, sliderWidth, rect.height() );
 
         const bool enabled( state & State_Enabled );
         const bool mouseOver( enabled && ( state & State_MouseOver ) );
