@@ -5207,8 +5207,11 @@ namespace Breeze
 
         // The slider width should be porportionate to the font DPI, with and
         // without Hi-DPI scaling
-        QFontMetrics fm(widget->font());
-        const int sliderWidth = (fm.fontDpi() / 96) * Metrics::ScrollBar_SliderWidth;
+        int sliderWidth = Metrics::ScrollBar_SliderWidth;
+        if (widget) {
+            QFontMetrics fm(widget->font());
+            sliderWidth *= fm.fontDpi() / 96;
+        }
 
         if( horizontal ) handleRect = centerRect( rect, rect.width(), sliderWidth );
         else handleRect = centerRect( rect, sliderWidth, rect.height() );
