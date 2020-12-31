@@ -14,6 +14,7 @@ find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH}  ${CMAKE_SOURCE_DIR}/cmake)
 
 include(ECMInstallIcons)
+include(CMakePackageConfigHelpers)
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
@@ -53,11 +54,11 @@ ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX BREEZE
 # create a Config.cmake and a ConfigVersion.cmake file and install them
 set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/Breeze")
 
-ecm_configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/BreezeConfig.cmake.in"
-                                  "${CMAKE_CURRENT_BINARY_DIR}/BreezeConfig.cmake"
-                                  PATH_VARS KDE_INSTALL_FULL_DATADIR
-                                  INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
-                                  )
+configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/BreezeConfig.cmake.in"
+                              "${CMAKE_CURRENT_BINARY_DIR}/BreezeConfig.cmake"
+                              PATH_VARS KDE_INSTALL_FULL_DATADIR
+                              INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
+                              )
 
 # add clang-format target for all our real source files
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
