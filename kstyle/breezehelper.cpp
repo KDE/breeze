@@ -187,31 +187,12 @@ namespace Breeze
     QColor Helper::arrowColor( const QPalette& palette, bool mouseOver, bool hasFocus, qreal opacity, AnimationMode mode ) const
     {
 
-        QColor outline( arrowColor( palette, QPalette::WindowText ) );
-        if( mode == AnimationHover )
-        {
+        Q_UNUSED(mouseOver)
+        Q_UNUSED(hasFocus)
+        Q_UNUSED(opacity)
+        Q_UNUSED(mode)
 
-            const QColor focus( focusColor( palette ) );
-            const QColor hover( hoverColor( palette ) );
-            if( hasFocus ) outline = KColorUtils::mix( focus, hover, opacity );
-            else outline = KColorUtils::mix( outline, hover, opacity );
-
-        } else if( mouseOver ) {
-
-            outline = hoverColor( palette );
-
-        } else if( mode == AnimationFocus ) {
-
-            const QColor focus( focusColor( palette ) );
-            outline = KColorUtils::mix( outline, focus, opacity );
-
-        } else if( hasFocus ) {
-
-            outline = focusColor( palette );
-
-        }
-
-        return outline;
+        return arrowColor( palette, QPalette::WindowText );
 
     }
 
@@ -291,42 +272,51 @@ namespace Breeze
     }
 
     //____________________________________________________________________
-    QColor Helper::toolButtonColor( const QPalette& palette, bool mouseOver, bool hasFocus, bool sunken, qreal opacity, AnimationMode mode ) const
+    QColor Helper::toolButtonBackgroundColor( const QPalette& palette, bool mouseOver, bool hasFocus, bool sunken, qreal opacity, AnimationMode mode ) const
     {
+
+        // TODO: make state <-> state transitions work nicer. for now, we have to remove animations to prevent visual glitches.
+        Q_UNUSED(opacity)
+        Q_UNUSED(mode)
 
         QColor outline;
         const QColor hoverColor( buttonHoverColor( palette ) );
         const QColor focusColor( buttonFocusColor( palette ) );
         const QColor sunkenColor = alphaColor( palette.color( QPalette::WindowText ), 0.2 );
 
-        // hover takes precedence over focus
-        if( mode == AnimationHover )
-        {
+        if( sunken ) {
 
-            if( hasFocus ) outline = KColorUtils::mix( focusColor, hoverColor, opacity );
-            else if( sunken ) outline = sunkenColor;
-            else outline = alphaColor( hoverColor, opacity );
+            outline = sunkenColor;
 
         } else if( mouseOver ) {
 
             outline = hoverColor;
 
-        } else if( mode == AnimationFocus ) {
-
-            if( sunken ) outline = KColorUtils::mix( sunkenColor, focusColor, opacity );
-            else outline = alphaColor( focusColor, opacity );
-
         } else if( hasFocus ) {
 
             outline = focusColor;
 
-        } else if( sunken ) {
-
-            outline = sunkenColor;
-
         }
 
         return outline;
+
+    }
+
+    //____________________________________________________________________
+    QColor Helper::toolButtonRingColor( const QPalette& palette, bool hasFocus, qreal opacity, AnimationMode mode ) const
+    {
+
+        // TODO: make state <-> state transitions work nicer. for now, we have to remove animations to prevent visual glitches.
+        Q_UNUSED(opacity)
+        Q_UNUSED(mode)
+
+        if( hasFocus ) {
+
+            return buttonFocusColor( palette );
+
+        }
+
+        return {};
 
     }
 
@@ -683,23 +673,23 @@ namespace Breeze
         if( outline.isValid() )
         {
 
-            QLinearGradient gradient( frameRect.topLeft(), frameRect.bottomLeft() );
-            gradient.setColorAt( 0, outline.lighter( hasFocus ? 103:101 ) );
-            gradient.setColorAt( 1, outline.darker( hasFocus ? 110:103 ) );
-            painter->setPen( QPen( QBrush( gradient ), 1.0 ) );
+            renderFrame(painter, rect, color, outline, hasFocus ? FrameHint::DoubleRing : FrameHint::None );
 
             frameRect = strokedRect( frameRect );
+            frameRect.adjust(1, 1, -1, -1);
             radius = frameRadiusForNewPenWidth( radius, PenWidth::Frame );
 
-        } else painter->setPen( Qt::NoPen );
+        }
+
+        painter->setPen( Qt::NoPen );
 
         // content
         if( color.isValid() )
         {
 
             QLinearGradient gradient( frameRect.topLeft(), frameRect.bottomLeft() );
-            gradient.setColorAt( 0, color.lighter( hasFocus ? 103:101 ) );
-            gradient.setColorAt( 1, color.darker( hasFocus ? 110:103 ) );
+            gradient.setColorAt( 0, color.lighter( 101 ) );
+            gradient.setColorAt( 1, color.darker( 103 ) );
             painter->setBrush( gradient );
 
         } else painter->setBrush( Qt::NoBrush );
@@ -712,16 +702,20 @@ namespace Breeze
     //______________________________________________________________________________
     void Helper::renderToolButtonFrame(
         QPainter* painter, const QRect& rect,
-        const QColor& color, bool sunken ) const
+        const QColor& bg, const QColor& fg,
+        bool sunken, FrameHints hints ) const
     {
 
-        // do nothing for invalid color
-        if( !color.isValid() ) return;
+        // do nothing for invalid bg
+        if( !bg.isValid() ) return;
 
         // setup painter
         painter->setRenderHints( QPainter::Antialiasing );
 
         const QRectF baseRect( rect.adjusted( 1, 1, -1, -1 ) );
+        const auto innerRect = baseRect.adjusted(Metrics::Button::Margin, Metrics::Button::Margin, -Metrics::Button::Margin, -Metrics::Button::Margin);
+        const QRectF innerOutline( strokedRect( innerRect ) );
+        const qreal radius( frameRadius( PenWidth::Frame ) );
 
         if( sunken )
         {
@@ -729,19 +723,34 @@ namespace Breeze
             const qreal radius( frameRadius( PenWidth::NoPen ) );
 
             painter->setPen( Qt::NoPen );
-            painter->setBrush( color );
 
-            painter->drawRoundedRect( baseRect, radius, radius );
+            QColor c = bg;
+            painter->setBrush( c );
+
+            painter->drawRoundedRect( innerRect, radius, radius );
 
         } else {
 
-            const qreal radius( frameRadius( PenWidth::Frame ) );
-
-            painter->setPen( color );
+            painter->setPen( bg );
             painter->setBrush( Qt::NoBrush );
-            const QRectF outlineRect( strokedRect( baseRect ) );
-            painter->drawRoundedRect( outlineRect, radius, radius );
+            painter->drawRoundedRect( innerOutline, radius, radius );
 
+        }
+
+        if (hints & FrameHint::DoubleRing) {
+            const QRectF outerOutline( strokedRect( baseRect, 3 ) );
+            QColor c = fg;
+            c.setAlphaF( qMax(fg.alphaF()-0.6, 0.0) );
+
+            painter->setPen( QPen(c, 3) );
+            painter->setBrush( Qt::NoBrush );
+            painter->drawRoundedRect( outerOutline, radius, radius );
+
+            painter->setPen( bg );
+            painter->setBrush( Qt::NoBrush );
+            painter->drawRoundedRect( innerOutline, radius, radius );
+
+            painter->setClipping(false);
         }
 
     }

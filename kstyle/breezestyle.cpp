@@ -525,7 +525,7 @@ namespace Breeze
 
                 } else if( elementType == QLatin1String( "combobox" ) ) {
 
-                    return Metrics::ComboBox_FrameWidth;
+                    return Metrics::Button::TotalExpansion;
                 }
 
             }
@@ -536,7 +536,7 @@ namespace Breeze
             case PM_ComboBoxFrameWidth:
             {
                 const auto comboBoxOption( qstyleoption_cast< const QStyleOptionComboBox*>( option ) );
-                return comboBoxOption && comboBoxOption->editable ? Metrics::LineEdit::TotalExpansion : Metrics::ComboBox_FrameWidth;
+                return comboBoxOption && comboBoxOption->editable ? Metrics::LineEdit::TotalExpansion : Metrics::Button::TotalExpansion-1;
             }
 
             case PM_SpinBoxFrameWidth: return Metrics::SpinBox_FrameWidth;
@@ -577,8 +577,8 @@ namespace Breeze
             case PM_ButtonMargin:
             {
                 // needs special case for kcalc buttons, to prevent the application to set too small margins
-                if( widget && widget->inherits( "KCalcButton" ) ) return Metrics::Button_MarginWidth + 4;
-                else return Metrics::Button_MarginWidth;
+                if( widget && widget->inherits( "KCalcButton" ) ) return Metrics::Button::TotalExpansion + 4;
+                else return Metrics::Button::TotalExpansion;
             }
 
             case PM_ButtonDefaultIndicator: return 0;
@@ -599,7 +599,7 @@ namespace Breeze
             case PM_ToolBarHandleExtent: return Metrics::ToolBar_HandleExtent;
             case PM_ToolBarSeparatorExtent: return Metrics::ToolBar_SeparatorWidth;
             case PM_ToolBarExtensionExtent:
-            return pixelMetric( PM_SmallIconSize, option, widget ) + 2*Metrics::ToolButton_MarginWidth;
+            return pixelMetric( PM_SmallIconSize, option, widget ) + 2*Metrics::Button::FrameWidth;
 
             case PM_ToolBarItemMargin: return 0;
             case PM_ToolBarItemSpacing: return Metrics::ToolBar_ItemSpacing;
@@ -641,7 +641,7 @@ namespace Breeze
             // return 0 here, since frame is handled directly in polish
             case PM_DockWidgetFrameWidth: return 0;
             case PM_DockWidgetTitleMargin: return Metrics::Frame_FrameWidth;
-            case PM_DockWidgetTitleBarButtonMargin: return Metrics::ToolButton_MarginWidth;
+            case PM_DockWidgetTitleBarButtonMargin: return Metrics::Button::Margin;
 
             case PM_SplitterWidth: return Metrics::Splitter_SplitterWidth;
             case PM_DockWidgetSeparatorExtent: return Metrics::Splitter_SplitterWidth;
@@ -692,6 +692,8 @@ namespace Breeze
                 }
                 return false;
             }
+
+            case SH_Button_FocusPolicy: return Qt::TabFocus;
 
             case SH_ComboBox_ListMouseTracking: return true;
             case SH_MenuBar_MouseTracking: return true;
@@ -1388,7 +1390,7 @@ namespace Breeze
             drawControl(QStyle::CE_PushButton, &option, &painter, button );
 
             // offset
-            const int margin( Metrics::Button_MarginWidth + Metrics::Frame_FrameWidth );
+            const int margin( Metrics::Button::TotalExpansion );
             QPoint offset( margin, margin );
 
             if( button->isDown() && !isFlat ) painter.translate( 1, 1 );
@@ -1411,7 +1413,7 @@ namespace Breeze
                     button->isChecked() ? QIcon::On : QIcon::Off));
                 drawItemPixmap( &painter, pixmapRect, Qt::AlignCenter, pixmap );
 
-                offset.rx() += pixmapSize.width() + Metrics::Button_ItemSpacing;
+                offset.rx() += pixmapSize.width() + Metrics::Button::ItemSpacing;
 
             }
 
@@ -2681,7 +2683,7 @@ namespace Breeze
 
         // add button width and spacing
         size.rwidth() += Metrics::MenuButton_IndicatorWidth+2;
-        size.rwidth() += Metrics::Button_ItemSpacing;
+        size.rwidth() += Metrics::Button::ItemSpacing;
 
         return size;
 
@@ -2806,7 +2808,7 @@ namespace Breeze
                 size.setHeight( qMax( size.height(), iconSize.height() ) );
                 size.rwidth() += iconSize.width();
 
-                if( hasText ) size.rwidth() += Metrics::Button_ItemSpacing;
+                if( hasText ) size.rwidth() += Metrics::Button::ItemSpacing;
             }
 
         }
@@ -2816,18 +2818,18 @@ namespace Breeze
         if( hasMenu )
         {
             size.rwidth() += Metrics::MenuButton_IndicatorWidth;
-            if( hasText||hasIcon ) size.rwidth() += Metrics::Button_ItemSpacing;
+            if( hasText||hasIcon ) size.rwidth() += Metrics::Button::ItemSpacing;
         }
 
         // expand with buttons margin
-        size = expandSize( size, Metrics::Button_MarginWidth );
+        size = expandSize( size, Metrics::Button::TotalExpansion );
 
         // make sure buttons have a minimum width
         if( hasText )
-        { size.setWidth( qMax( size.width(), int( Metrics::Button_MinWidth ) ) ); }
+        { size.setWidth( qMax( size.width(), int( Metrics::Button::MinWidth ) ) ); }
 
         // finally add frame margins
-        return expandSize( size, Metrics::Frame_FrameWidth );
+        return size;
 
     }
 
@@ -2852,7 +2854,7 @@ namespace Breeze
             size.rwidth() += Metrics::MenuButton_IndicatorWidth;
         }
 
-        const int marginWidth( autoRaise ? Metrics::ToolButton_MarginWidth : Metrics::Button_MarginWidth + Metrics::Frame_FrameWidth );
+        const int marginWidth( Metrics::Button::TotalExpansion );
 
         size = expandSize( size, marginWidth );
 
@@ -3536,10 +3538,6 @@ namespace Breeze
                 if( sunken && hasFocus && !mouseOver ) color = palette.color( QPalette::HighlightedText );
                 else color = _helper->arrowColor( palette, QPalette::WindowText );
 
-            } else if( hasFocus && !mouseOver )  {
-
-                color = palette.color( QPalette::HighlightedText );
-
             } else {
 
                 color = _helper->arrowColor( palette, QPalette::ButtonText );
@@ -3591,7 +3589,7 @@ namespace Breeze
         if( !buttonOption ) return true;
 
         // rect and palette
-        const auto& rect( option->rect );
+        auto rect( option->rect );
 
         // button state
         const State& state( option->state );
@@ -3614,8 +3612,9 @@ namespace Breeze
 
             // define colors and render
             const auto& palette( option->palette );
-            const auto color( _helper->toolButtonColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
-            _helper->renderToolButtonFrame( painter, rect, color, sunken );
+            const auto bg( _helper->toolButtonBackgroundColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
+            const auto fg( _helper->toolButtonRingColor( palette, hasFocus, opacity, mode ) );
+            _helper->renderToolButtonFrame( painter, rect, bg, fg, sunken, hasFocus ? Helper::FrameHint::DoubleRing : Helper::FrameHint::None );
 
         } else {
 
@@ -3628,9 +3627,11 @@ namespace Breeze
                 palette.setColor( QPalette::Button, KColorUtils::mix( button, base, 0.7 ) );
             }
 
+            rect.adjust(2, 2, -2, -2);
+
             const auto shadow( _helper->shadowColor( palette ) );
             const QColor outline = hasHighlightNeutral( widget, option, mouseOver ) ? _helper->neutralText( palette ) : _helper->buttonOutlineColor( palette, mouseOver, hasFocus, opacity, mode );
-            const auto background( _helper->buttonBackgroundColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
+            const auto background( _helper->buttonBackgroundColor( palette, mouseOver, false, sunken, opacity, mode == AnimationFocus ? AnimationNone : mode ) );
 
             // render
             _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocus, sunken );
@@ -3648,6 +3649,7 @@ namespace Breeze
         // copy palette and rect
         const auto& palette( option->palette );
         auto rect( option->rect );
+        rect.adjust(Metrics::Button::Margin, Metrics::Button::Margin, -Metrics::Button::Margin, -Metrics::Button::Margin);
 
         // store relevant flags
         const State& state( option->state );
@@ -3655,7 +3657,7 @@ namespace Breeze
         const bool enabled( state & State_Enabled );
         const bool sunken( state & (State_On | State_Sunken) );
         const bool mouseOver( enabled && (option->state & State_MouseOver) );
-        const bool hasFocus( enabled && (option->state & (State_HasFocus | State_Sunken)) );
+        const bool hasFocus( enabled && (option->state & State_HasFocus) );
 
         /*
          * get animation state
@@ -3671,14 +3673,12 @@ namespace Breeze
             // render as push button
             const auto shadow( _helper->shadowColor( palette ) );
             const auto outline( _helper->buttonOutlineColor( palette, mouseOver, hasFocus, opacity, mode ) );
-            const auto background( _helper->buttonBackgroundColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
+            const auto background( _helper->buttonBackgroundColor( palette, mouseOver, false, sunken, opacity, mode == AnimationFocus ? AnimationNone : mode ) );
 
             // adjust frame in case of menu
             if( menuStyle == BreezePrivate::ToolButtonMenuArrowStyle::SubControl )
             {
-                painter->setClipRect( rect );
-                rect.adjust( 0, 0, Metrics::Frame_FrameRadius + 2, 0 );
-                rect = visualRect( option, rect );
+                rect.setRight(rect.right() + subControlRect( CC_ToolButton, static_cast<const QStyleOptionComplex*>(option), SC_ToolButtonMenu, widget ).width() );
             }
 
             // render
@@ -3686,8 +3686,9 @@ namespace Breeze
 
         } else {
 
-            const auto color( _helper->toolButtonColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
-            _helper->renderToolButtonFrame( painter, rect, color, sunken );
+            const auto bg( _helper->toolButtonBackgroundColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
+            const auto fg( _helper->toolButtonRingColor( palette, hasFocus, opacity, mode ) );
+            _helper->renderToolButtonFrame( painter, rect, bg, fg, sunken, hasFocus ? Helper::FrameHint::DoubleRing : Helper::FrameHint::None );
 
         }
 
@@ -4303,7 +4304,6 @@ namespace Breeze
         const bool enabled( state & State_Enabled );
         const bool sunken( state & (State_On | State_Sunken) );
         const bool mouseOver( enabled && (option->state & State_MouseOver) );
-        const bool hasFocus( enabled && !mouseOver && (option->state & State_HasFocus) );
         const bool flat( buttonOption->features & QStyleOptionButton::Flat );
 
         // content
@@ -4319,10 +4319,9 @@ namespace Breeze
         if( flat )
         {
 
-            if( hasFocus && sunken ) textRole = QPalette::HighlightedText;
-            else textRole = QPalette::WindowText;
+            textRole = QPalette::WindowText;
 
-        } else if( hasFocus ) textRole = QPalette::HighlightedText;
+        }
         else textRole = QPalette::ButtonText;
 
         // menu arrow
@@ -4334,8 +4333,8 @@ namespace Breeze
             arrowRect.setLeft( contentsRect.right() - Metrics::MenuButton_IndicatorWidth + 1 );
             arrowRect = centerRect( arrowRect, Metrics::MenuButton_IndicatorWidth, Metrics::MenuButton_IndicatorWidth );
 
-            contentsRect.setRight( arrowRect.left() - Metrics::Button_ItemSpacing - 1  );
-            contentsRect.adjust( Metrics::Button_MarginWidth, 0, 0, 0 );
+            contentsRect.setRight( arrowRect.left() - Metrics::Button::ItemSpacing - 1  );
+            contentsRect.adjust( Metrics::Button::TotalExpansion, 0, 0, 0 );
 
             arrowRect = visualRect( option, arrowRect );
 
@@ -4369,9 +4368,9 @@ namespace Breeze
         else if( hasIcon && !hasText ) iconRect = contentsRect;
         else {
 
-            const int contentsWidth( iconSize.width() + textSize.width() + Metrics::Button_ItemSpacing );
+            const int contentsWidth( iconSize.width() + textSize.width() + Metrics::Button::ItemSpacing );
             iconRect = QRect( QPoint( contentsRect.left() + (contentsRect.width() - contentsWidth )/2, contentsRect.top() + (contentsRect.height() - iconSize.height())/2 ), iconSize );
-            textRect = QRect( QPoint( iconRect.right() + Metrics::ToolButton_ItemSpacing + 1, contentsRect.top() + (contentsRect.height() - textSize.height())/2 ), textSize );
+            textRect = QRect( QPoint( iconRect.right() + Metrics::Button::ItemSpacing + 1, contentsRect.top() + (contentsRect.height() - textSize.height())/2 ), textSize );
 
         }
 
@@ -4389,7 +4388,6 @@ namespace Breeze
             const QIcon::State iconState( sunken ? QIcon::On : QIcon::Off );
             QIcon::Mode iconMode;
             if( !enabled ) iconMode = QIcon::Disabled;
-            else if( !flat && hasFocus ) iconMode = QIcon::Selected;
             else if( mouseOver && flat ) iconMode = QIcon::Active;
             else iconMode = QIcon::Normal;
 
@@ -4426,7 +4424,6 @@ namespace Breeze
         // focus flag is set to match the background color in either renderButtonFrame or renderToolButtonFrame
         bool hasFocus( false );
         if( flat ) hasFocus = enabled && !mouseOver && (option->state & State_HasFocus);
-        else hasFocus = enabled && !mouseOver && (option->state & (State_HasFocus|State_Sunken) );
 
         const bool hasArrow( toolButtonOption->features & QStyleOptionToolButton::Arrow );
         const bool hasIcon( !( hasArrow || toolButtonOption->icon.isNull() ) );
@@ -4469,26 +4466,26 @@ namespace Breeze
 
         } else if( toolButtonOption->toolButtonStyle == Qt::ToolButtonTextUnderIcon ) {
 
-            const int contentsHeight( iconSize.height() + textSize.height() + Metrics::ToolButton_ItemSpacing );
+            const int contentsHeight( iconSize.height() + textSize.height() + Metrics::Button::ItemSpacing );
             iconRect = QRect( QPoint( contentsRect.left() + (contentsRect.width() - iconSize.width())/2, contentsRect.top() + (contentsRect.height() - contentsHeight)/2 ), iconSize );
-            textRect = QRect( QPoint( contentsRect.left() + (contentsRect.width() - textSize.width())/2, iconRect.bottom() + Metrics::ToolButton_ItemSpacing + 1 ), textSize );
+            textRect = QRect( QPoint( contentsRect.left() + (contentsRect.width() - textSize.width())/2, iconRect.bottom() + Metrics::Button::ItemSpacing + 1 ), textSize );
             textFlags |= Qt::AlignCenter;
 
         } else {
 
             const bool leftAlign( widget && widget->property( PropertyNames::toolButtonAlignment ).toInt() == Qt::AlignLeft );
             if( leftAlign ) {
-                const int marginWidth( Metrics::Button_MarginWidth + Metrics::Frame_FrameWidth + 1 );
+                const int marginWidth( Metrics::Button::TotalExpansion + Metrics::Frame_FrameWidth + 1 );
                 iconRect = QRect( QPoint( contentsRect.left() + marginWidth, contentsRect.top() + (contentsRect.height() - iconSize.height())/2 ), iconSize );
             }
             else {
 
-                const int contentsWidth( iconSize.width() + textSize.width() + Metrics::ToolButton_ItemSpacing );
+                const int contentsWidth( iconSize.width() + textSize.width() + Metrics::Button::ItemSpacing );
                 iconRect = QRect( QPoint( contentsRect.left() + (contentsRect.width() - contentsWidth )/2, contentsRect.top() + (contentsRect.height() - iconSize.height())/2 ), iconSize );
 
             }
 
-            textRect = QRect( QPoint( iconRect.right() + Metrics::ToolButton_ItemSpacing + 1, contentsRect.top() + (contentsRect.height() - textSize.height())/2 ), textSize );
+            textRect = QRect( QPoint( iconRect.right() + Metrics::Button::ItemSpacing + 1, contentsRect.top() + (contentsRect.height() - textSize.height())/2 ), textSize );
 
             // handle right to left layouts
             iconRect = visualRect( option, iconRect );
@@ -4506,6 +4503,7 @@ namespace Breeze
         {
 
             QStyleOptionToolButton copy( *toolButtonOption );
+            copy.state &= State_HasFocus;
             copy.rect = iconRect;
             switch( toolButtonOption->arrowType )
             {
@@ -4522,7 +4520,7 @@ namespace Breeze
             const QIcon::State iconState( sunken ? QIcon::On : QIcon::Off );
             QIcon::Mode iconMode;
             if( !enabled ) iconMode = QIcon::Disabled;
-            else if( (!flat && hasFocus) || (flat && (state & State_Sunken) && !mouseOver) ) iconMode = QIcon::Selected;
+            else if( (flat && (state & State_Sunken) && !mouseOver) ) iconMode = QIcon::Selected;
             else if( mouseOver && flat ) iconMode = QIcon::Active;
             else iconMode = QIcon::Normal;
 
@@ -4536,8 +4534,7 @@ namespace Breeze
         {
 
             QPalette::ColorRole textRole( QPalette::ButtonText );
-            if( flat ) textRole = ( ((hasFocus&&sunken) || (state & State_Sunken))&&!mouseOver) ? QPalette::HighlightedText: QPalette::WindowText;
-            else if( hasFocus&&!mouseOver ) textRole = QPalette::HighlightedText;
+            if( flat ) textRole = QPalette::WindowText;
 
             auto palette = option->palette;
 
@@ -4633,10 +4630,9 @@ namespace Breeze
         QPalette::ColorRole textRole;
         if( flat )  {
 
-            if( hasFocus && sunken ) textRole = QPalette::HighlightedText;
-            else textRole = QPalette::WindowText;
+            textRole = QPalette::WindowText;
 
-        } else if( hasFocus ) textRole = QPalette::HighlightedText;
+        }
         else textRole = QPalette::ButtonText;
 
         // change pen color directly
@@ -4655,7 +4651,6 @@ namespace Breeze
                 QIcon::Mode mode;
 
                 if( !enabled ) mode = QIcon::Disabled;
-                else if( !flat && hasFocus ) mode = QIcon::Selected;
                 else if( mouseOver && flat ) mode = QIcon::Active;
                 else mode = QIcon::Normal;
 
@@ -6168,7 +6163,9 @@ namespace Breeze
         const auto menuStyle = BreezePrivate::toolButtonMenuArrowStyle( option );
 
         const auto buttonRect( subControlRect( CC_ToolButton, option, SC_ToolButton, widget ) );
-        const auto menuRect( subControlRect( CC_ToolButton, option, SC_ToolButtonMenu, widget ) );
+        auto menuRect( subControlRect( CC_ToolButton, option, SC_ToolButtonMenu, widget ) );
+        menuRect.adjust(Metrics::Button::Margin, Metrics::Button::Margin, -Metrics::Button::Margin, -Metrics::Button::Margin);
+        menuRect.adjust(-Metrics::Button::Margin*2, 0, -Metrics::Button::Margin*2, 0);
 
         // frame
         if( toolButtonOption->subControls & SC_ToolButton )
@@ -6183,7 +6180,25 @@ namespace Breeze
         {
 
             copy.rect = menuRect;
-            drawPrimitive( PE_IndicatorButtonDropDown, &copy, painter, widget );
+            {
+                const AnimationMode mode( _animations->widgetStateEngine().buttonAnimationMode( widget ) );
+                const qreal opacity( _animations->widgetStateEngine().buttonOpacity( widget ) );
+                const auto flatColor( _helper->toolButtonBackgroundColor( option->palette, mouseOver, hasFocus, sunken, opacity, mode ) );
+                const auto frameColor( _helper->buttonOutlineColor( option->palette, mouseOver, hasFocus, opacity, mode ) );
+
+                auto cp = menuRect;
+                if (flat) {
+                    cp.adjust(0, 3, 0, -3);
+                    painter->setPen(flatColor);
+                } else {
+                    cp.adjust(0, 1, 0, -1);
+                    painter->setPen(frameColor);
+                }
+
+                if (!(flat && !(mouseOver || hasFocus))) {
+                    painter->drawLine(cp.bottomLeft(), cp.topLeft());
+                }
+            }
 
             if( sunken && !flat ) copy.rect.translate( 1, 1 );
             drawPrimitive( PE_IndicatorArrowDown, &copy, painter, widget );
@@ -6193,13 +6208,14 @@ namespace Breeze
         {
 
             copy.rect = menuRect;
+            copy.rect.translate(-Metrics::Button::Margin/2, -Metrics::Button::Margin-1);
             if( sunken && !flat ) copy.rect.translate( 1, 1 );
 
             if( menuStyle == BreezePrivate::ToolButtonMenuArrowStyle::InlineSmall )
             {
                 drawIndicatorArrowPrimitive( ArrowDown_Small, &copy, painter, widget );
             } else {
-                copy.rect.translate( -Metrics::Button_ItemSpacing, 0 );
+                copy.rect.translate( -Metrics::Button::ItemSpacing, 0 );
                 drawIndicatorArrowPrimitive( ArrowDown, &copy, painter, widget );
             }
 
@@ -6227,7 +6243,7 @@ namespace Breeze
 
             } else if( !inTabBar && hasInlineIndicator ) {
 
-                const int marginWidth( flat ? Metrics::ToolButton_MarginWidth : Metrics::Button_MarginWidth + Metrics::Frame_FrameWidth );
+                const int marginWidth( Metrics::Button::TotalExpansion + Metrics::Frame_FrameWidth );
                 contentsRect = insideMargin( contentsRect, marginWidth, 0 );
                 contentsRect = visualRect( option, contentsRect );
 
@@ -6252,14 +6268,15 @@ namespace Breeze
         if( !comboBoxOption ) return true;
 
         // rect and palette
-        const auto& rect( option->rect );
+        auto rect( option->rect );
+        rect.adjust(Metrics::Button::Margin, Metrics::Button::Margin, -Metrics::Button::Margin, -Metrics::Button::Margin);
         const auto& palette( option->palette );
 
         // state
         const State& state( option->state );
         const bool enabled( state & State_Enabled );
         const bool mouseOver( enabled && ( state & State_MouseOver ) );
-        const bool hasFocus( enabled && ( state & (State_HasFocus | State_Sunken ) ) );
+        const bool hasFocus( enabled && ( state & (State_HasFocus) ) );
         const bool editable( comboBoxOption->editable );
         const bool sunken( state & (State_On|State_Sunken) );
         bool flat( !comboBoxOption->frame );
@@ -6299,15 +6316,16 @@ namespace Breeze
                 if( flat ) {
 
                     // define colors and render
-                    const auto color( hasHighlightNeutral( widget, option, mouseOver, hasFocus ) ? _helper->neutralText( palette ) : _helper->toolButtonColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
-                    _helper->renderToolButtonFrame( painter, rect, color, sunken );
+                    const auto bg( _helper->toolButtonBackgroundColor( palette, mouseOver, hasFocus, sunken, opacity, mode ) );
+                    const auto fg( _helper->toolButtonRingColor( palette, hasFocus, opacity, mode ) );
+                    _helper->renderToolButtonFrame( painter, rect, bg, fg, sunken, hasFocus ? Helper::FrameHint::DoubleRing : Helper::FrameHint::None );
 
                 } else {
 
                     // define colors
                     const auto shadow( _helper->shadowColor( palette ) );
                     const auto outline( hasHighlightNeutral( widget, option, mouseOver, hasFocus ) ? _helper->neutralText( palette ) : _helper->buttonOutlineColor( palette, mouseOver, hasFocus, opacity, mode ) );
-                    const auto background( _helper->buttonBackgroundColor( palette, mouseOver, hasFocus, false, opacity, mode ) );
+                    const auto background( _helper->buttonBackgroundColor( palette, mouseOver, false, false, opacity, mode != AnimationFocus ? mode : AnimationNone ) );
 
                     // render
                     _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocus, sunken );
@@ -6364,7 +6382,6 @@ namespace Breeze
                 else arrowColor = _helper->arrowColor( palette, QPalette::WindowText );
 
             } else if( empty || !enabled ) arrowColor = _helper->arrowColor( palette, QPalette::Disabled, QPalette::ButtonText );
-            else if( hasFocus && !mouseOver ) arrowColor = palette.color( QPalette::HighlightedText );
             else arrowColor = _helper->arrowColor( palette, QPalette::ButtonText );
 
             // arrow rect

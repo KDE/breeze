@@ -61,9 +61,6 @@ namespace Breeze
         static constexpr int MenuItem_AcceleratorSpace = 16;
         static constexpr int MenuButton_IndicatorWidth = 20;
 
-        // combobox
-        static constexpr int ComboBox_FrameWidth = 6;
-
         // spinbox
         static constexpr int SpinBox_FrameWidth = LineEdit::TotalExpansion;
         static constexpr int SpinBox_ArrowButtonWidth = 20;
@@ -72,14 +69,16 @@ namespace Breeze
         static constexpr int GroupBox_TitleMarginWidth = 4;
 
         // buttons
-        static constexpr int Button_MinWidth = 80;
-        static constexpr int Button_MarginWidth = 6;
-        static constexpr int Button_ItemSpacing = 4;
+        struct Button {
+            static constexpr int FrameWidth = 7;
+            static constexpr int Margin = 2;
 
-        // tool buttons
-        static constexpr int ToolButton_MarginWidth = 6;
-        static constexpr int ToolButton_ItemSpacing = 4;
-        static constexpr int ToolButton_InlineIndicatorWidth = 12;
+            static constexpr int TotalExpansion = FrameWidth + Margin;
+
+            static constexpr int ItemSpacing = 4;
+            static constexpr int MinWidth = 80;
+            static constexpr int ToolButtonInlineIndicatorWidth = 12;
+        };
 
         // checkboxes and radio buttons
         static constexpr int CheckBox_Size = 20;

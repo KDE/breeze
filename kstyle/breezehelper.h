@@ -140,8 +140,10 @@ namespace Breeze
         //* button panel color, using animations
         QColor buttonBackgroundColor( const QPalette&, bool mouseOver, bool hasFocus, bool sunken, qreal opacity = AnimationData::OpacityInvalid, AnimationMode = AnimationNone ) const;
 
+        QColor toolButtonRingColor( const QPalette&, bool hasFocus, qreal opacity = AnimationData::OpacityInvalid, AnimationMode = AnimationNone ) const;
+
         //* tool button color
-        QColor toolButtonColor( const QPalette&, bool mouseOver, bool hasFocus, bool sunken, qreal opacity = AnimationData::OpacityInvalid, AnimationMode = AnimationNone ) const;
+        QColor toolButtonBackgroundColor( const QPalette&, bool mouseOver, bool hasFocus, bool sunken, qreal opacity = AnimationData::OpacityInvalid, AnimationMode = AnimationNone ) const;
 
         //* slider outline color, using animations
         QColor sliderOutlineColor( const QPalette&, bool mouseOver, bool hasFocus, qreal opacity = AnimationData::OpacityInvalid, AnimationMode = AnimationNone ) const;
@@ -185,7 +187,7 @@ namespace Breeze
         void renderButtonFrame( QPainter*, const QRect&, const QColor& color, const QColor& outline, const QColor& shadow, bool focus, bool sunken ) const;
 
         //* toolbutton frame
-        void renderToolButtonFrame( QPainter*, const QRect&, const QColor& color, bool sunken ) const;
+        void renderToolButtonFrame( QPainter*, const QRect&, const QColor& bg, const QColor& fg, bool sunken, FrameHints hints = FrameHint::None ) const;
 
         //* toolbutton frame
         void renderToolBoxFrame( QPainter*, const QRect&, int tabWidth, const QColor& color ) const;
