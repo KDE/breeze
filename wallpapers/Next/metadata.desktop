@@ -1,5 +1,11 @@
 [Desktop Entry]
 Name=Milky Way
+Name[ca]=Via Làctia
+Name[es]=Vía Láctea
+Name[nl]=Melkweg
+Name[sv]=Vintergatan
+Name[uk]=Чумацький Шлях
+Name[x-test]=xxMilky Wayxx
 
 X-KDE-PluginInfo-Name=Next
 X-KDE-PluginInfo-Author=Metal Bender
