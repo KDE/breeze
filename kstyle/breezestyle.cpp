@@ -49,6 +49,7 @@
 #include <QTreeView>
 #include <QWidgetAction>
 #include <QMdiArea>
+#include <qnamespace.h>
 
 #if BREEZE_HAVE_QTQUICK
 #include <QQuickWindow>
@@ -966,7 +967,19 @@ namespace Breeze
             auto color = _toolsAreaManager->palette().brush(mw->isActiveWindow() ? QPalette::Active : QPalette::Inactive, QPalette::Window);
 
             painter->setPen(Qt::transparent);
-            painter->setBrush(color);
+
+            if (mw->isActiveWindow()) {
+                QColor colour = color.color();
+
+                QLinearGradient gradient(rect.topLeft(), rect.bottomLeft());
+                gradient.setColorAt(0.0, colour);
+                gradient.setColorAt(1.0, colour.darker(106));
+
+                painter->setBrush(gradient);
+            } else {
+                painter->setBrush(color);
+            }
+
             painter->drawRect(rect);
 
             painter->setPen(_helper->separatorColor(_toolsAreaManager->palette()));
