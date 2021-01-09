@@ -45,6 +45,8 @@ namespace Breeze
         //* paint
         void paint(QPainter *painter, const QRect &repaintRegion) override;
 
+        QColor borderColor() const;
+
         //* internal settings
         InternalSettingsPtr internalSettings() const
         { return m_internalSettings; }
