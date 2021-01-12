@@ -22,6 +22,7 @@
 
 #include <KConfigGroup>
 #include <KColorUtils>
+#include <KWindowSystem>
 #include <KSharedConfig>
 #include <KPluginFactory>
 
@@ -548,6 +549,18 @@ namespace Breeze
         auto c = client().data();
         auto s = settings();
 
+        if (KWindowSystem::isPlatformX11()) {
+            auto config = KSharedConfig::openConfig(QStringLiteral("kdeglobals"));
+            auto scale = config->group("KScreen").readEntry("ScaleFactor", 1.0);
+            if (!qFuzzyCompare(scale, m_devicePixelRatio)) {
+                m_devicePixelRatio = scale;
+                QTimer::singleShot(1, [this] { updateShadow(true); });
+            }
+        } else if (!qFuzzyCompare(painter->device()->devicePixelRatioF(), m_devicePixelRatio)) {
+            m_devicePixelRatio = painter->device()->devicePixelRatioF();
+            QTimer::singleShot(1, [this] { updateShadow(true); });
+        }
+
         // paint background
         if( !c->isShaded() )
         {
@@ -733,7 +746,7 @@ namespace Breeze
     }
 
     //________________________________________________________________
-    void Decoration::updateShadow()
+    void Decoration::updateShadow(bool force)
     {
         // Animated case, no cached shadow object
         if ( (m_shadowAnimation->state() == QAbstractAnimation::Running) && (m_shadowOpacity != 0.0) && (m_shadowOpacity != 1.0) )
@@ -744,7 +757,8 @@ namespace Breeze
 
         if (g_shadowSizeEnum != m_internalSettings->shadowSize()
                 || g_shadowStrength != m_internalSettings->shadowStrength()
-                || g_shadowColor != m_internalSettings->shadowColor())
+                || g_shadowColor != m_internalSettings->shadowColor()
+                || force)
         {
             g_sShadow.clear();
             g_sShadowInactive.clear();
@@ -784,7 +798,7 @@ namespace Breeze
           BoxShadowRenderer shadowRenderer;
           shadowRenderer.setBorderRadius(Metrics::Frame_FrameRadius + 0.5);
           shadowRenderer.setBoxSize(boxSize);
-          shadowRenderer.setDevicePixelRatio(1.0); // TODO: Create HiDPI shadows?
+          shadowRenderer.setDevicePixelRatio(m_devicePixelRatio);
 
           const qreal strength = internalSettings->shadowStrength() / 255.0 * strengthScale;
           shadowRenderer.addShadow(params.shadow1.offset, params.shadow1.radius,

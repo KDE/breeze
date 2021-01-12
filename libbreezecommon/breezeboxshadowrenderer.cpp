@@ -250,7 +250,7 @@ static void renderShadow(QPainter *painter, const QRect &rect, qreal borderRadiu
     shadow.setDevicePixelRatio(dpr);
     shadow.fill(Qt::transparent);
 
-    QRect boxRect(QPoint(0, 0), rect.size());
+    QRect boxRect(QPoint(0, 0), rect.size() / dpr);
     boxRect.moveCenter(QRect(QPoint(0, 0), size).center());
 
     const qreal xRadius = 2.0 * borderRadius / boxRect.width();
