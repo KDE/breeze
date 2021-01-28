@@ -704,7 +704,11 @@ namespace Breeze
         if( QWidget::mouseGrabber() ) return;
 
         _dragInProgress = window->startSystemMove();
-
+        if (_quickTarget) {
+            const bool wasEnabled = _quickTarget->isEnabled();
+            _quickTarget->setEnabled(false);
+            _quickTarget->setEnabled(wasEnabled);
+        }
     }
 
     //____________________________________________________________
