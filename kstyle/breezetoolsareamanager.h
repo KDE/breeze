@@ -32,6 +32,8 @@ namespace Breeze {
     private:
         Helper* _helper;
         QHash<QMainWindow*,QVector<QPointer<QToolBar>>> _windows;
+        QHash<QMainWindow*,QTimer*> _outgoingTimers;
+        QHash<QMainWindow*,bool> _outgoingTimerValues;
         KSharedConfigPtr _config;
         KConfigWatcher::Ptr _watcher;
         QPalette _palette = QPalette();
@@ -56,6 +58,8 @@ namespace Breeze {
         void registerApplication(QApplication *application);
         void registerWidget(QWidget *widget);
         void unregisterWidget(QWidget *widget);
+
+        void deferredMarginSet(QMainWindow* setOn, bool hasToolsArea);
 
         QRect toolsAreaRect(const QMainWindow *window);
 

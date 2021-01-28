@@ -5,6 +5,7 @@
 #include <QMdiArea>
 #include <QMenuBar>
 #include <QObject>
+#include <QTimer>
 #include <QToolBar>
 #include <QWidget>
 #include <QWindow>
@@ -53,6 +54,36 @@ namespace Breeze {
         configUpdated();
     }
 
+    void ToolsAreaManager::deferredMarginSet(QMainWindow *setOn, bool hasToolsArea)
+    {
+        // we use a QPointer because there's the possibility the QMainWindow
+        // can implode when the timer triggers.
+        QPointer<QMainWindow> pointer(setOn);
+
+        // The classic Qt solution for wonky stuff: a 20ms timer.
+        // Unfortunately necessary here, as it is elsewhere in
+        // Qt internals.
+        auto timer = new QTimer;
+        timer->setSingleShot(true);
+        timer->setInterval(20);
+        connect(timer, &QTimer::timeout, [this, setOn, pointer] {
+            if (!pointer.isNull()) {
+                if (_outgoingTimerValues[setOn]) {
+                    pointer->setContentsMargins(0, 1, 0, 0);
+                } else {
+                    pointer->setContentsMargins(0, 0, 0, 0);
+                }
+            }
+
+            _outgoingTimers.remove(setOn);
+            _outgoingTimerValues.remove(setOn);
+        });
+
+        _outgoingTimers[setOn] = timer;
+        _outgoingTimerValues[setOn] = hasToolsArea;
+        timer->start();
+    }
+
     QRect ToolsAreaManager::toolsAreaRect(const QMainWindow *window)
     {
         Q_ASSERT(window);
@@ -64,12 +95,11 @@ namespace Breeze {
             }
         }
 
-        if (itemHeight == 0 && !(window->property(PropertyNames::noSeparator).toBool())) {
-            auto win = const_cast<QMainWindow*>(window);
-            win->setContentsMargins(0, 1, 0, 0);
+        auto win = const_cast<QMainWindow*>(window);
+        if (!_outgoingTimers.contains(win)) {
+            deferredMarginSet(win, (itemHeight == 0 && !(window->property(PropertyNames::noSeparator).toBool())));
         } else {
-            auto win = const_cast<QMainWindow*>(window);
-            win->setContentsMargins(0, 0, 0, 0);
+            _outgoingTimerValues[win] = (itemHeight == 0 && !(window->property(PropertyNames::noSeparator).toBool()));
         }
 
         return QRect(0, 0, window->width(), itemHeight);
