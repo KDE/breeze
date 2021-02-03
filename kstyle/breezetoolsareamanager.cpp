@@ -63,6 +63,9 @@ namespace Breeze {
                 itemHeight = qMax(item->mapTo(window, item->rect().bottomLeft()).y(), itemHeight);
             }
         }
+        if (itemHeight > 0) {
+            itemHeight += window->devicePixelRatio();
+        }
 
         if (itemHeight == 0 && !(window->property(PropertyNames::noSeparator).toBool()) && !window->isFullScreen()) {
             auto win = const_cast<QMainWindow*>(window);
