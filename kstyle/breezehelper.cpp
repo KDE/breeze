@@ -1655,6 +1655,9 @@ namespace Breeze
         if (!widget) {
             return false;
         }
+        if (!StyleConfigData::toolsAreaEnabled()) {
+            return false;
+        }
         static bool isAuto = false;
         static QString borderSize;
         if (!_cachedAutoValid) {

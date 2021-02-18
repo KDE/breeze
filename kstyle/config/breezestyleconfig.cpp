@@ -40,6 +40,7 @@ namespace Breeze
         connect( _menuItemDrawThinFocus, &QAbstractButton::toggled, this, &StyleConfig::updateChanged );
         connect( _sliderDrawTickMarks, &QAbstractButton::toggled, this, &StyleConfig::updateChanged );
         connect( _splitterProxyEnabled, &QAbstractButton::toggled, this, &StyleConfig::updateChanged );
+        connect( _toolsAreaEnabled, &QAbstractButton::toggled, this, &StyleConfig::updateChanged );
         connect( _mnemonicsMode, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( _scrollBarAddLineButtons, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( _scrollBarSubLineButtons, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
@@ -60,6 +61,7 @@ namespace Breeze
         StyleConfigData::setMenuItemDrawStrongFocus( !_menuItemDrawThinFocus->isChecked() );
         StyleConfigData::setSliderDrawTickMarks( _sliderDrawTickMarks->isChecked() );
         StyleConfigData::setSplitterProxyEnabled( _splitterProxyEnabled->isChecked() );
+        StyleConfigData::setToolsAreaEnabled( _toolsAreaEnabled->isChecked() );
         StyleConfigData::setMnemonicsMode( _mnemonicsMode->currentIndex() );
         StyleConfigData::setScrollBarAddLineButtons( _scrollBarAddLineButtons->currentIndex() );
         StyleConfigData::setScrollBarSubLineButtons( _scrollBarSubLineButtons->currentIndex() );
@@ -109,6 +111,7 @@ namespace Breeze
         else if( _scrollBarAddLineButtons->currentIndex() != StyleConfigData::scrollBarAddLineButtons() ) modified = true;
         else if( _scrollBarSubLineButtons->currentIndex() != StyleConfigData::scrollBarSubLineButtons() ) modified = true;
         else if( _splitterProxyEnabled->isChecked() != StyleConfigData::splitterProxyEnabled() ) modified = true;
+        else if( _toolsAreaEnabled->isChecked() != StyleConfigData::toolsAreaEnabled() ) modified = true;
         else if( _windowDragMode->currentIndex() != StyleConfigData::windowDragMode() ) modified = true;
         else if( _menuOpacity->value() != StyleConfigData::menuOpacity() ) modified = true;
 
@@ -130,6 +133,7 @@ namespace Breeze
         _sliderDrawTickMarks->setChecked( StyleConfigData::sliderDrawTickMarks() );
         _mnemonicsMode->setCurrentIndex( StyleConfigData::mnemonicsMode() );
         _splitterProxyEnabled->setChecked( StyleConfigData::splitterProxyEnabled() );
+        _toolsAreaEnabled->setChecked( StyleConfigData::toolsAreaEnabled() );
         _scrollBarAddLineButtons->setCurrentIndex( StyleConfigData::scrollBarAddLineButtons() );
         _scrollBarSubLineButtons->setCurrentIndex( StyleConfigData::scrollBarSubLineButtons() );
         _windowDragMode->setCurrentIndex( StyleConfigData::windowDragMode() );
