@@ -150,7 +150,7 @@ namespace Breeze
         if( _enabled != value )
         {
             _enabled = value;
-            if( _enabled ) clearSplitter();
+            if( !_enabled ) clearSplitter();
         }
     }
 
