@@ -352,11 +352,6 @@ namespace Breeze
         // release mouse
         if( mouseGrabber() == this ) releaseMouse();
 
-        // hide
-        parentWidget()->setUpdatesEnabled(false);
-        hide();
-        parentWidget()->setUpdatesEnabled(true);
-
         // send hover event
         if( _splitter )
         {
@@ -365,7 +360,6 @@ namespace Breeze
                 _splitter.data()->mapFromGlobal(QCursor::pos()), _hook);
             QCoreApplication::sendEvent( _splitter.data(), &hoverEvent );
             _splitter.clear();
-
         }
 
         // kill timer if any
@@ -375,6 +369,12 @@ namespace Breeze
             _timerId = 0;
         }
 
+        // hide
+        parentWidget()->setUpdatesEnabled(false);
+        // Note: This sends a synthetic mouse event to the widget below (to get focus), which might be
+        // another SplitterHandle, therefore enabling this SplitterProxy again!
+        hide();
+        parentWidget()->setUpdatesEnabled(true);
     }
 
 }
