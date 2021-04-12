@@ -108,8 +108,9 @@ namespace Breeze
         void createButtons();
         void paintTitleBar(QPainter *painter, const QRect &repaintRegion);
         void updateShadow();
-        static QSharedPointer<KDecoration2::DecorationShadow> createShadowObject(const InternalSettingsPtr& internalSettings, const float strengthScale);
-
+        QSharedPointer<KDecoration2::DecorationShadow> createShadowObject( const float strengthScale );
+        void setScaledCornerRadius();
+        
         //*@name border size
         //@{
         int borderSize(bool bottom = false) const;
@@ -141,6 +142,9 @@ namespace Breeze
         qreal m_opacity = 0;
         qreal m_shadowOpacity = 0;
 
+        
+        //*frame corner radius, scaled according to DPI
+        qreal m_scaledCornerRadius = 3;
     };
 
     bool Decoration::hasBorders() const

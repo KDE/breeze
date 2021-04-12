@@ -2,6 +2,7 @@
 * SPDX-FileCopyrightText: 2014 Martin Gräßlin <mgraesslin@kde.org>
 * SPDX-FileCopyrightText: 2014 Hugo Pereira Da Costa <hugo.pereira@free.fr>
 * SPDX-FileCopyrightText: 2018 Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+* SPDX-FileCopyrightText: 2021 Paul McAuley <kde@paulmcauley.com>
 *
 * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
@@ -223,7 +224,7 @@ namespace Breeze
     void Decoration::init()
     {
         auto c = client().data();
-
+        
         // active state change animation
         // It is important start and end value are of the same type, hence 0.0 and not just 0
         m_animation->setStartValue( 0.0 );
@@ -388,6 +389,8 @@ namespace Breeze
     {
 
         m_internalSettings = SettingsProvider::self()->internalSettings( this );
+        
+        setScaledCornerRadius();
 
         // animation
 
@@ -438,7 +441,7 @@ namespace Breeze
             top += baseSize*Metrics::TitleBar_BottomMargin + 1;
 
             // padding above
-            top += baseSize*TitleBar_TopMargin;
+            top += baseSize*Metrics::TitleBar_TopMargin;
 
         }
 
@@ -560,7 +563,7 @@ namespace Breeze
             // clip away the top part
             if( !hideTitleBar() ) painter->setClipRect(0, borderTop(), size().width(), size().height() - borderTop(), Qt::IntersectClip);
 
-            if( s->isAlphaChannelSupported() ) painter->drawRoundedRect(rect(), Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
+            if( s->isAlphaChannelSupported() ) painter->drawRoundedRect(rect(), m_scaledCornerRadius, m_scaledCornerRadius);
             else painter->drawRect( rect() );
 
             painter->restore();
@@ -618,7 +621,7 @@ namespace Breeze
 
         } else if( c->isShaded() ) {
 
-            painter->drawRoundedRect(titleRect, Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
+            painter->drawRoundedRect(titleRect, m_scaledCornerRadius, m_scaledCornerRadius);
 
         } else {
 
@@ -626,11 +629,11 @@ namespace Breeze
 
             // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
             painter->drawRoundedRect(titleRect.adjusted(
-                isLeftEdge() ? -Metrics::Frame_FrameRadius:0,
-                isTopEdge() ? -Metrics::Frame_FrameRadius:0,
-                isRightEdge() ? Metrics::Frame_FrameRadius:0,
-                Metrics::Frame_FrameRadius),
-                Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
+                isLeftEdge() ? -m_scaledCornerRadius:0,
+                isTopEdge() ? -m_scaledCornerRadius:0,
+                isRightEdge() ? m_scaledCornerRadius:0,
+                m_scaledCornerRadius),
+                m_scaledCornerRadius, m_scaledCornerRadius);
 
         }
 
@@ -735,10 +738,11 @@ namespace Breeze
     //________________________________________________________________
     void Decoration::updateShadow()
     {
+        auto s = settings();
         // Animated case, no cached shadow object
         if ( (m_shadowAnimation->state() == QAbstractAnimation::Running) && (m_shadowOpacity != 0.0) && (m_shadowOpacity != 1.0) )
         {
-            setShadow(createShadowObject(m_internalSettings, 0.5 + m_shadowOpacity * 0.5));
+            setShadow(createShadowObject(0.5 + m_shadowOpacity * 0.5));
             return;
         }
 
@@ -757,15 +761,15 @@ namespace Breeze
         auto& shadow = (c->isActive()) ? g_sShadow : g_sShadowInactive;
         if ( !shadow )
         {
-            shadow = createShadowObject(m_internalSettings, c->isActive() ? 1.0 : 0.5);
+            shadow = createShadowObject(c->isActive() ? 1.0 : 0.5);
         }
         setShadow(shadow);
     }
 
     //________________________________________________________________
-    QSharedPointer<KDecoration2::DecorationShadow> Decoration::createShadowObject(const InternalSettingsPtr& internalSettings, const float strengthScale)
+    QSharedPointer<KDecoration2::DecorationShadow> Decoration::createShadowObject( const float strengthScale )
     {
-          const CompositeShadowParams params = lookupShadowParams(internalSettings->shadowSize());
+          const CompositeShadowParams params = lookupShadowParams(m_internalSettings->shadowSize());
           if (params.isNone())
           {
               return nullptr;
@@ -782,15 +786,16 @@ namespace Breeze
               .expandedTo(BoxShadowRenderer::calculateMinimumBoxSize(params.shadow2.radius));
 
           BoxShadowRenderer shadowRenderer;
-          shadowRenderer.setBorderRadius(Metrics::Frame_FrameRadius + 0.5);
+          shadowRenderer.setBorderRadius(m_scaledCornerRadius + 0.5);
           shadowRenderer.setBoxSize(boxSize);
           shadowRenderer.setDevicePixelRatio(1.0); // TODO: Create HiDPI shadows?
 
-          const qreal strength = internalSettings->shadowStrength() / 255.0 * strengthScale;
+
+          const qreal strength = m_internalSettings->shadowStrength() / 255.0 * strengthScale;
           shadowRenderer.addShadow(params.shadow1.offset, params.shadow1.radius,
-              withOpacity(internalSettings->shadowColor(), params.shadow1.opacity * strength));
+              withOpacity(m_internalSettings->shadowColor(), params.shadow1.opacity * strength));
           shadowRenderer.addShadow(params.shadow2.offset, params.shadow2.radius,
-              withOpacity(internalSettings->shadowColor(), params.shadow2.opacity * strength));
+              withOpacity(m_internalSettings->shadowColor(), params.shadow2.opacity * strength));
 
           QImage shadowTexture = shadowRenderer.render();
 
@@ -815,17 +820,17 @@ namespace Breeze
           painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
           painter.drawRoundedRect(
               innerRect,
-              Metrics::Frame_FrameRadius + 0.5,
-              Metrics::Frame_FrameRadius + 0.5);
+              m_scaledCornerRadius + 0.5,
+              m_scaledCornerRadius + 0.5);
 
           // Draw outline.
-          painter.setPen(withOpacity(internalSettings->shadowColor(), 0.2 * strength));
+          painter.setPen(withOpacity(m_internalSettings->shadowColor(), 0.2 * strength));
           painter.setBrush(Qt::NoBrush);
           painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
           painter.drawRoundedRect(
               innerRect,
-              Metrics::Frame_FrameRadius - 0.5,
-              Metrics::Frame_FrameRadius - 0.5);
+              m_scaledCornerRadius - 0.5,
+              m_scaledCornerRadius - 0.5);
 
           painter.end();
 
@@ -870,7 +875,12 @@ namespace Breeze
             m_sizeGrip = nullptr;
         }
     }
-
+    
+    void Decoration::setScaledCornerRadius()
+    {
+        m_scaledCornerRadius = Metrics::Frame_FrameRadius*settings()->smallSpacing();
+        
+    }
 } // namespace
 
 
