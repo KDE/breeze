@@ -2428,36 +2428,50 @@ namespace Breeze
         // cast option and check
         const auto sliderOption( qstyleoption_cast<const QStyleOptionSlider*>( option ) );
         if( !sliderOption ) return ParentStyleClass::subControlRect( CC_ScrollBar, option, subControl, widget );
-
+        
+        //bools marking the extremities of slider position
+        bool sliderAtMin = ( sliderOption->sliderPosition == sliderOption->minimum );
+        bool sliderAtMax = ( sliderOption->sliderPosition == sliderOption->maximum );
+        
         // get relevant state
         const State& state( option->state );
         const bool horizontal( state & State_Horizontal );
+        const bool mouseOver( state & State_MouseOver );
 
         switch( subControl )
         {
 
             case SC_ScrollBarSubLine:
             case SC_ScrollBarAddLine:
-            return scrollBarInternalSubControlRect( option, subControl );
+                return scrollBarInternalSubControlRect( option, subControl );
 
             case SC_ScrollBarGroove:
             {
                 auto topRect = visualRect( option, scrollBarInternalSubControlRect( option, SC_ScrollBarSubLine ) );
                 auto bottomRect = visualRect( option, scrollBarInternalSubControlRect( option, SC_ScrollBarAddLine ) );
-
+                
                 QPoint topLeftCorner;
                 QPoint botRightCorner;
 
                 if( horizontal )
                 {
-
-                    topLeftCorner  = QPoint( topRect.right() + 1, topRect.top() );
-                    botRightCorner = QPoint( bottomRect.left()  - 1, topRect.bottom() );
+                    if( _addLineButtons == ScrollBarButtonType::NoButton || _addLineButtons == ScrollBarButtonType::DoubleButton ) {
+                        topLeftCorner  = QPoint( topRect.right() + 1, topRect.top() );
+                        botRightCorner = QPoint( bottomRect.left()  - 1, topRect.bottom() );
+                    } else if( _addLineButtons == ScrollBarButtonType::SingleButton ){
+                        topLeftCorner  = QPoint( topRect.right() - 5, topRect.top() );
+                        botRightCorner = QPoint( bottomRect.left()  + 5, topRect.bottom() );
+                    }
 
                 } else {
-
-                    topLeftCorner  = QPoint( topRect.left(),  topRect.bottom() + 1 );
-                    botRightCorner = QPoint( topRect.right(), bottomRect.top() - 1 );
+                    
+                    if( _addLineButtons == ScrollBarButtonType::NoButton  || _addLineButtons == ScrollBarButtonType::DoubleButton) {
+                        topLeftCorner  = QPoint( topRect.left(),  topRect.bottom() + 1 );
+                        botRightCorner = QPoint( topRect.right(), bottomRect.top() - 1 );
+                    } else if( _addLineButtons == ScrollBarButtonType::SingleButton ) {
+                        topLeftCorner  = QPoint( topRect.left(),  topRect.bottom() - 5 );
+                        botRightCorner = QPoint( topRect.right(), bottomRect.top() + 5 );
+                    }
 
                 }
 
@@ -2471,6 +2485,8 @@ namespace Breeze
 
                 // handle RTL here to unreflect things if need be
                 auto groove = visualRect( option, subControlRect( CC_ScrollBar, option, SC_ScrollBarGroove, widget ) );
+                auto topRect = visualRect( option, scrollBarInternalSubControlRect( option, SC_ScrollBarSubLine ) );
+                auto bottomRect = visualRect( option, scrollBarInternalSubControlRect( option, SC_ScrollBarAddLine ) );
 
                 if( sliderOption->minimum == sliderOption->maximum ) return groove;
 
@@ -2484,11 +2500,43 @@ namespace Breeze
 
                 space -= sliderSize;
                 if( space <= 0 ) return groove;
-
+                
+                // determines whether to enlarge the slider over the area occupied by the arrows when slider is at extremities and mouse is not over
+                bool enlargeOverSubPage = false;
+                bool enlargeOverAddPage = false;
+                if( _subLineButtons != ScrollBarButtonType::NoButton && sliderAtMin && !mouseOver && StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() )  enlargeOverSubPage = true;
+                if( _addLineButtons != ScrollBarButtonType::NoButton && sliderAtMax && !mouseOver && StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() )  enlargeOverAddPage = true;
+                
                 int pos = qRound( qreal( sliderOption->sliderPosition - sliderOption->minimum )/ ( sliderOption->maximum - sliderOption->minimum )*space );
                 if( sliderOption->upsideDown ) pos = space - pos;
-                if( horizontal ) return visualRect( option, QRect( groove.left() + pos, groove.top(), sliderSize, groove.height() ) );
-                else return visualRect( option, QRect( groove.left(), groove.top() + pos, groove.width(), sliderSize ) );
+                
+                //return the slider rect, accounting for any enlargement of slider at extremities
+                if( horizontal ) {
+                    if( enlargeOverSubPage ) {
+                        int enlargeToTopRectXPos = topRect.left();
+                        if (_subLineButtons == ScrollBarButtonType::SingleButton ) enlargeToTopRectXPos = topRect.left() + ( (topRect.right() - topRect.left()) /4 );
+                        else if (_subLineButtons == ScrollBarButtonType::DoubleButton ) enlargeToTopRectXPos = topRect.left() + ( (topRect.right() - topRect.left()) /8 );
+                        return visualRect( option, QRect( enlargeToTopRectXPos + pos, groove.top(), sliderSize + ( groove.left() - enlargeToTopRectXPos ), groove.height() ) );
+                    } else if (enlargeOverAddPage ) {
+                        int enlargeToBottomRectXBy = 4;
+                        if (_addLineButtons == ScrollBarButtonType::SingleButton ) enlargeToBottomRectXBy = ((bottomRect.right() - groove.right()) *3/4);
+                        else if (_addLineButtons == ScrollBarButtonType::DoubleButton ) enlargeToBottomRectXBy = ((bottomRect.right() - groove.right()) *7/8);
+                        return visualRect( option, QRect( groove.left() + pos, groove.top(), sliderSize + enlargeToBottomRectXBy, groove.height() ) );
+                    } else return visualRect( option, QRect( groove.left() + pos, groove.top(), sliderSize, groove.height() ) );
+                    
+                } else {
+                    if( enlargeOverSubPage ) {
+                        int enlargeToTopRectYPos = topRect.top();
+                        if (_subLineButtons == ScrollBarButtonType::SingleButton ) enlargeToTopRectYPos = topRect.top() + ( (topRect.bottom() - topRect.top()) /4 );
+                        else if (_subLineButtons == ScrollBarButtonType::DoubleButton ) enlargeToTopRectYPos = topRect.top() + ( (topRect.bottom() - topRect.top()) /8 ); 
+                        return visualRect( option, QRect( groove.left(), enlargeToTopRectYPos + pos, groove.width(), sliderSize + ( groove.top() - enlargeToTopRectYPos ) ) );
+                    } else if (enlargeOverAddPage ) {
+                        int enlargeToBottomRectYBy = 4;
+                        if (_addLineButtons == ScrollBarButtonType::SingleButton ) enlargeToBottomRectYBy = ((bottomRect.bottom() - groove.bottom()) *3/4);
+                        else if (_addLineButtons == ScrollBarButtonType::DoubleButton ) enlargeToBottomRectYBy = ((bottomRect.bottom() - groove.bottom()) *7/8);
+                        return visualRect( option, QRect( groove.left(), groove.top() + pos, groove.width(), sliderSize + enlargeToBottomRectYBy ) );
+                    } else return visualRect( option, QRect( groove.left(), groove.top() + pos, groove.width(), sliderSize ) );
+                }
             }
 
             case SC_ScrollBarSubPage:
@@ -5264,9 +5312,11 @@ namespace Breeze
             {
 
                 if( reverseLayout ) _helper->renderArrow( painter, rect, color, ArrowLeft );
-                else _helper->renderArrow( painter, rect.translated( 1, 0 ), color, ArrowRight );
+                //else _helper->renderArrow( painter, rect.translated( 1, 0 ), color, ArrowRight );
+                else _helper->renderArrow( painter, rect, color, ArrowRight );
 
-            } else _helper->renderArrow( painter, rect.translated( 0, 1 ), color, ArrowDown );
+            } //else _helper->renderArrow( painter, rect.translated( 0, 1 ), color, ArrowDown );
+            else _helper->renderArrow( painter, rect, color, ArrowDown );
 
         }
 
@@ -5345,7 +5395,8 @@ namespace Breeze
             if( horizontal )
             {
 
-                if( reverseLayout ) _helper->renderArrow( painter, rect.translated( 1, 0 ), color, ArrowRight );
+                //if( reverseLayout ) _helper->renderArrow( painter, rect.translated( 1, 0 ), color, ArrowRight );
+                if( reverseLayout ) _helper->renderArrow( painter, rect, color, ArrowRight );
                 else _helper->renderArrow( painter, rect, color, ArrowLeft );
 
             } else _helper->renderArrow( painter, rect, color, ArrowUp );
@@ -6656,7 +6707,7 @@ namespace Breeze
         _helper->renderScrollBarBorder( painter, separatorRect, _helper->alphaColor( option->palette.color( QPalette::Text ), 0.1 ));
 
         // render full groove directly, rather than using the addPage and subPage control element methods
-        if( (!StyleConfigData::animationsEnabled() || mouseOver || animated) && option->subControls & SC_ScrollBarGroove )
+        if( (!StyleConfigData::animationsEnabled() || mouseOver || animated ) && option->subControls & SC_ScrollBarGroove )
         {
             // retrieve groove rectangle
             auto grooveRect( subControlRect( CC_ScrollBar, option, SC_ScrollBarGroove, widget ) );
@@ -6955,7 +7006,7 @@ namespace Breeze
         // check enabled state
         const bool enabled( option->state & State_Enabled );
         if( !enabled ) {
-            if( StyleConfigData::animationsEnabled() ) {
+            if( StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() ) {
                 // finally, global opacity when ScrollBarShowOnMouseOver
                 const qreal globalOpacity( _animations->scrollBarEngine().opacity( widget, QStyle::SC_ScrollBarGroove ) );
                 if( globalOpacity >= 0 ) color.setAlphaF( globalOpacity );
@@ -6972,7 +7023,7 @@ namespace Breeze
 
             // manually disable arrow, to indicate that scrollbar is at limit
             color = _helper->arrowColor( palette, QPalette::Disabled, QPalette::WindowText );
-            if( StyleConfigData::animationsEnabled() ) {
+            if( StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() ) {
                 // finally, global opacity when ScrollBarShowOnMouseOver
                 const qreal globalOpacity( _animations->scrollBarEngine().opacity( widget, QStyle::SC_ScrollBarGroove ) );
                 if( globalOpacity >= 0 ) color.setAlphaF( globalOpacity );
@@ -7014,7 +7065,7 @@ namespace Breeze
 
         }
 
-        if( StyleConfigData::animationsEnabled() ) {
+        if( StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() ) {
             // finally, global opacity when ScrollBarShowOnMouseOver
             const qreal globalOpacity( _animations->scrollBarEngine().opacity( widget, QStyle::SC_ScrollBarGroove ) );
             if( globalOpacity >= 0 ) color.setAlphaF( globalOpacity );
