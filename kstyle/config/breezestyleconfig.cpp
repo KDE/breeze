@@ -40,12 +40,16 @@ namespace Breeze
         connect( _menuItemDrawThinFocus, &QAbstractButton::toggled, this, &StyleConfig::updateChanged );
         connect( _sliderDrawTickMarks, &QAbstractButton::toggled, this, &StyleConfig::updateChanged );
         connect( _splitterProxyEnabled, &QAbstractButton::toggled, this, &StyleConfig::updateChanged );
+        connect( _autoHideArrows, &QAbstractButton::toggled, this, &StyleConfig::updateChanged );
         connect( _mnemonicsMode, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( _scrollBarAddLineButtons, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( _scrollBarSubLineButtons, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( _windowDragMode, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( _menuOpacity, &QAbstractSlider::valueChanged, this, &StyleConfig::updateChanged );
-
+        
+        //only enable _autoHideArrows when an arrow button is selected to be displayed
+        connect( _scrollBarAddLineButtons, SIGNAL(currentIndexChanged(int)), SLOT(setEnabledAutoHideArrows()) );
+        connect( _scrollBarSubLineButtons, SIGNAL(currentIndexChanged(int)), SLOT(setEnabledAutoHideArrows()) );
     }
 
     //__________________________________________________________________
@@ -60,6 +64,7 @@ namespace Breeze
         StyleConfigData::setMenuItemDrawStrongFocus( !_menuItemDrawThinFocus->isChecked() );
         StyleConfigData::setSliderDrawTickMarks( _sliderDrawTickMarks->isChecked() );
         StyleConfigData::setSplitterProxyEnabled( _splitterProxyEnabled->isChecked() );
+        StyleConfigData::setScrollBarAutoHideArrows( _autoHideArrows->isChecked() );
         StyleConfigData::setMnemonicsMode( _mnemonicsMode->currentIndex() );
         StyleConfigData::setScrollBarAddLineButtons( _scrollBarAddLineButtons->currentIndex() );
         StyleConfigData::setScrollBarSubLineButtons( _scrollBarSubLineButtons->currentIndex() );
@@ -109,6 +114,7 @@ namespace Breeze
         else if( _scrollBarAddLineButtons->currentIndex() != StyleConfigData::scrollBarAddLineButtons() ) modified = true;
         else if( _scrollBarSubLineButtons->currentIndex() != StyleConfigData::scrollBarSubLineButtons() ) modified = true;
         else if( _splitterProxyEnabled->isChecked() != StyleConfigData::splitterProxyEnabled() ) modified = true;
+        else if( _autoHideArrows->isChecked() != StyleConfigData::scrollBarAutoHideArrows() ) modified =true;
         else if( _windowDragMode->currentIndex() != StyleConfigData::windowDragMode() ) modified = true;
         else if( _menuOpacity->value() != StyleConfigData::menuOpacity() ) modified = true;
 
@@ -130,11 +136,19 @@ namespace Breeze
         _sliderDrawTickMarks->setChecked( StyleConfigData::sliderDrawTickMarks() );
         _mnemonicsMode->setCurrentIndex( StyleConfigData::mnemonicsMode() );
         _splitterProxyEnabled->setChecked( StyleConfigData::splitterProxyEnabled() );
+        _autoHideArrows->setChecked( StyleConfigData::scrollBarAutoHideArrows() );
         _scrollBarAddLineButtons->setCurrentIndex( StyleConfigData::scrollBarAddLineButtons() );
         _scrollBarSubLineButtons->setCurrentIndex( StyleConfigData::scrollBarSubLineButtons() );
+        setEnabledAutoHideArrows();
         _windowDragMode->setCurrentIndex( StyleConfigData::windowDragMode() );
         _menuOpacity->setValue( StyleConfigData::menuOpacity() );
 
+    }
+    
+    //only enable _autoHideArrows when one arrow button type is not "No Buttons"
+    void StyleConfig::setEnabledAutoHideArrows()
+    {
+        _autoHideArrows->setEnabled( (_scrollBarSubLineButtons->currentIndex() != 0) || (_scrollBarAddLineButtons->currentIndex() != 0) );
     }
 
 }

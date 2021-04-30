@@ -49,6 +49,9 @@ namespace Breeze
 
         //* update modified state when option is checked/unchecked
         void updateChanged();
+        
+        //* enable/disable _autoHideArrows checkbox depending on if scrollbar arrow button type is selected
+        void setEnabledAutoHideArrows();
 
     };
 
