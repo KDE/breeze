@@ -2455,21 +2455,29 @@ namespace Breeze
 
                 if( horizontal )
                 {
-                    if( _addLineButtons == ScrollBarButtonType::NoButton || _addLineButtons == ScrollBarButtonType::DoubleButton ) {
+                    if( _subLineButtons == ScrollBarButtonType::NoButton || _subLineButtons == ScrollBarButtonType::DoubleButton ) {
                         topLeftCorner  = QPoint( topRect.right() + 1, topRect.top() );
+                    } else if( _subLineButtons == ScrollBarButtonType::SingleButton ){
+                        topLeftCorner  = QPoint( topRect.right() - 5, topRect.top() );
+                    }
+                    
+                    if( _addLineButtons == ScrollBarButtonType::NoButton || _addLineButtons == ScrollBarButtonType::DoubleButton ) {
                         botRightCorner = QPoint( bottomRect.left()  - 1, topRect.bottom() );
                     } else if( _addLineButtons == ScrollBarButtonType::SingleButton ){
-                        topLeftCorner  = QPoint( topRect.right() - 5, topRect.top() );
                         botRightCorner = QPoint( bottomRect.left()  + 5, topRect.bottom() );
                     }
 
                 } else {
                     
-                    if( _addLineButtons == ScrollBarButtonType::NoButton  || _addLineButtons == ScrollBarButtonType::DoubleButton) {
+                    if( _subLineButtons == ScrollBarButtonType::NoButton  || _subLineButtons == ScrollBarButtonType::DoubleButton) {
                         topLeftCorner  = QPoint( topRect.left(),  topRect.bottom() + 1 );
+                    } else if( _subLineButtons == ScrollBarButtonType::SingleButton ) {
+                        topLeftCorner  = QPoint( topRect.left(),  topRect.bottom() - 5 );
+                    }
+                    
+                    if( _addLineButtons == ScrollBarButtonType::NoButton  || _addLineButtons == ScrollBarButtonType::DoubleButton) {
                         botRightCorner = QPoint( topRect.right(), bottomRect.top() - 1 );
                     } else if( _addLineButtons == ScrollBarButtonType::SingleButton ) {
-                        topLeftCorner  = QPoint( topRect.left(),  topRect.bottom() - 5 );
                         botRightCorner = QPoint( topRect.right(), bottomRect.top() + 5 );
                     }
 
@@ -5310,12 +5318,9 @@ namespace Breeze
             color = scrollBarArrowColor( &copy,  SC_ScrollBarAddLine, widget );
             if( horizontal )
             {
-
                 if( reverseLayout ) _helper->renderArrow( painter, rect, color, ArrowLeft );
-                //else _helper->renderArrow( painter, rect.translated( 1, 0 ), color, ArrowRight );
                 else _helper->renderArrow( painter, rect, color, ArrowRight );
-
-            } //else _helper->renderArrow( painter, rect.translated( 0, 1 ), color, ArrowDown );
+            } 
             else _helper->renderArrow( painter, rect, color, ArrowDown );
 
         }
@@ -5394,8 +5399,6 @@ namespace Breeze
             color = scrollBarArrowColor( &copy,  SC_ScrollBarSubLine, widget );
             if( horizontal )
             {
-
-                //if( reverseLayout ) _helper->renderArrow( painter, rect.translated( 1, 0 ), color, ArrowRight );
                 if( reverseLayout ) _helper->renderArrow( painter, rect, color, ArrowRight );
                 else _helper->renderArrow( painter, rect, color, ArrowLeft );
 
