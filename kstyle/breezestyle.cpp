@@ -2455,7 +2455,7 @@ namespace Breeze
                 
                 bool enlargeOverSubPage = false;
                 bool enlargeOverAddPage = false;
-                if( StyleConfigData::scrollBarAutoHideArrows() && (sliderOption->minimum == sliderOption->maximum) ){
+                if( StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() && (sliderOption->minimum == sliderOption->maximum) ){
                     enlargeOverSubPage = true;
                     enlargeOverAddPage = true;
                 }
@@ -5282,7 +5282,7 @@ namespace Breeze
         const auto sliderOption( qstyleoption_cast<const QStyleOptionSlider*>( option ) );
         if( !sliderOption ) return true;
         
-        if( StyleConfigData::scrollBarAutoHideArrows() && (sliderOption->minimum == sliderOption->maximum) ) return true;
+        if( StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() && (sliderOption->minimum == sliderOption->maximum) ) return true;
 
         const State& state( option->state );
         const bool horizontal( state & State_Horizontal );
@@ -5365,7 +5365,7 @@ namespace Breeze
         const auto sliderOption( qstyleoption_cast<const QStyleOptionSlider*>( option ) );
         if( !sliderOption ) return true;
         
-        if( StyleConfigData::scrollBarAutoHideArrows() && (sliderOption->minimum == sliderOption->maximum) ) return true;
+        if( StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() && (sliderOption->minimum == sliderOption->maximum) ) return true;
 
         const State& state( option->state );
         const bool horizontal( state & State_Horizontal );
