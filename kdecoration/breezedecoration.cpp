@@ -590,9 +590,13 @@ namespace Breeze
     void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
     {
         const auto c = client().data();
-        const QRect titleRect(QPoint(0, 0), QSize(size().width(), borderTop()));
+        const QRect frontRect(QPoint(0, 1), QSize(size().width(), borderTop()+1));
+        const QRect backRect(QPoint(0, 0), QSize(size().width(), borderTop()));
 
-        if ( !titleRect.intersects(repaintRegion) ) return;
+        QBrush frontBrush;
+        QBrush backBrush( this->titleBarColor().lighter( 130 ) );
+
+        if ( !backRect.intersects(repaintRegion) ) return;
 
         painter->save();
         painter->setPen(Qt::NoPen);
@@ -601,13 +605,15 @@ namespace Breeze
         if( c->isActive() && m_internalSettings->drawBackgroundGradient() )
         {
 
-            const QColor titleBarColor( this->titleBarColor() );
-            QLinearGradient gradient( 0, 0, 0, titleRect.height() );
-            gradient.setColorAt(0.0, titleBarColor.lighter( 120 ) );
-            gradient.setColorAt(0.8, titleBarColor);
-            painter->setBrush(gradient);
+            QLinearGradient gradient( 0, 0, 0, frontRect.height() );
+            gradient.setColorAt(0.0, titleBarColor().lighter( 120 ) );
+            gradient.setColorAt(0.8, titleBarColor());
+
+            frontBrush = gradient;
 
         } else {
+
+            frontBrush = titleBarColor();
 
             painter->setBrush( titleBarColor() );
 
@@ -617,23 +623,39 @@ namespace Breeze
         if( isMaximized() || !s->isAlphaChannelSupported() )
         {
 
-            painter->drawRect(titleRect);
+            painter->setBrush(backBrush);
+            painter->drawRect(backRect);
+
+            painter->setBrush(frontBrush);
+            painter->drawRect(frontRect);
 
         } else if( c->isShaded() ) {
 
-            painter->drawRoundedRect(titleRect, m_scaledCornerRadius, m_scaledCornerRadius);
+            painter->setBrush(backBrush);
+            painter->drawRoundedRect(backRect, m_scaledCornerRadius, m_scaledCornerRadius);
+
+            painter->setBrush(frontBrush);
+            painter->drawRoundedRect(frontRect, m_scaledCornerRadius, m_scaledCornerRadius);
 
         } else {
 
-            painter->setClipRect(titleRect, Qt::IntersectClip);
+            painter->setClipRect(backRect, Qt::IntersectClip);
 
-            // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
-            painter->drawRoundedRect(titleRect.adjusted(
-                isLeftEdge() ? -m_scaledCornerRadius:0,
-                isTopEdge() ? -m_scaledCornerRadius:0,
-                isRightEdge() ? m_scaledCornerRadius:0,
-                m_scaledCornerRadius),
-                m_scaledCornerRadius, m_scaledCornerRadius);
+            auto drawThe = [=](const QRect& r) {
+                // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
+                painter->drawRoundedRect(r.adjusted(
+                    isLeftEdge() ? -m_scaledCornerRadius:0,
+                    isTopEdge() ? -m_scaledCornerRadius:0,
+                    isRightEdge() ? m_scaledCornerRadius:0,
+                    m_scaledCornerRadius),
+                    m_scaledCornerRadius, m_scaledCornerRadius);
+            };
+
+            painter->setBrush(backBrush);
+            drawThe(backRect);
+
+            painter->setBrush(frontBrush);
+            drawThe(frontRect);
 
         }
 
@@ -644,7 +666,7 @@ namespace Breeze
             painter->setRenderHint( QPainter::Antialiasing, false );
             painter->setBrush( Qt::NoBrush );
             painter->setPen( outlineColor );
-            painter->drawLine( titleRect.bottomLeft(), titleRect.bottomRight() );
+            painter->drawLine( backRect.bottomLeft(), backRect.bottomRight() );
         }
 
         painter->restore();
@@ -824,7 +846,7 @@ namespace Breeze
               m_scaledCornerRadius + 0.5);
 
           // Draw outline.
-          painter.setPen(withOpacity(m_internalSettings->shadowColor(), 0.2 * strength));
+          painter.setPen(withOpacity(Qt::black, 0.1));
           painter.setBrush(Qt::NoBrush);
           painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
           painter.drawRoundedRect(

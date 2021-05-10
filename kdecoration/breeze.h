@@ -24,7 +24,7 @@ namespace Breeze
     {
 
         //* corner radius, in units of small spacing
-        static constexpr qreal Frame_FrameRadius = 1.5;
+        static constexpr qreal Frame_FrameRadius = 2;
 
         //* titlebar metrics, in units of small spacing
         static constexpr int TitleBar_TopMargin = 2;
