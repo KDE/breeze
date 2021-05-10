@@ -6222,6 +6222,9 @@ namespace Breeze
             copy.rect = menuRect;
             drawPrimitive( PE_IndicatorButtonDropDown, &copy, painter, widget );
 
+            copy.state &= ~State_MouseOver;
+            copy.state &= ~State_Sunken;
+            copy.state &= ~State_On;
             if( sunken && !flat ) copy.rect.translate( 1, 1 );
             drawPrimitive( PE_IndicatorArrowDown, &copy, painter, widget );
 
@@ -6230,6 +6233,9 @@ namespace Breeze
         {
 
             copy.rect = menuRect;
+            copy.state &= ~State_MouseOver;
+            copy.state &= ~State_Sunken;
+            copy.state &= ~State_On;
             if( sunken && !flat ) copy.rect.translate( 1, 1 );
 
             if( menuStyle == BreezePrivate::ToolButtonMenuArrowStyle::InlineSmall )
