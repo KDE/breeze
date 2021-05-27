@@ -912,7 +912,7 @@ namespace Breeze
                 painter->setOpacity(hoverAnimation);
             }
 
-            painter->setPen( QPen( neutalHighlight ? neutralText(palette) : focusColor(palette), PenWidth::Frame ) );
+            painter->setPen( QPen( neutalHighlight ? neutralText(palette).lighter() : focusColor(palette), PenWidth::Frame ) );
             painter->setBrush( Qt::NoBrush );
 
             painter->drawRoundedRect( frameRect.adjusted(0.5, 0.5, -0.5, -0.5), Metrics::CheckBox_Radius, Metrics::CheckBox_Radius );
@@ -1043,7 +1043,7 @@ namespace Breeze
                 painter->setOpacity(animationHover);
             }
 
-            painter->setPen( QPen( neutralHighlight ? neutralText(palette) : focusColor(palette), PenWidth::Frame ) );
+            painter->setPen( QPen( neutralHighlight ? neutralText(palette).lighter() : focusColor(palette), PenWidth::Frame ) );
             painter->setBrush( Qt::NoBrush );
 
             const QRectF contentRect( frameRect.adjusted( 1, 1, -1, -1 ).adjusted( 0.5 , 0.5, -0.5, -0.5 ) );
