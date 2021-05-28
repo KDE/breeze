@@ -1265,6 +1265,28 @@ namespace Breeze
     //______________________________________________________________________________
     void Helper::renderScrollBarHandle(
         QPainter* painter, const QRect& rect,
+        const QColor& color, const QColor& outline ) const
+    {
+
+        // setup painter
+        painter->setRenderHint( QPainter::Antialiasing, true );
+
+        const QRectF baseRect( rect );
+        const qreal radius( 0.5 * std::min({baseRect.width(), baseRect.height(), (qreal)Metrics::ScrollBar_SliderWidth}) );
+
+        // content
+        if( color.isValid() )
+        {
+            painter->setPen( outline );
+            painter->setBrush( color );
+            painter->drawRoundedRect( baseRect.adjusted(0.5, 0.5, -0.5, -0.5), radius, radius );
+        }
+
+        
+    }
+
+    void Helper::renderScrollBarGroove(
+        QPainter* painter, const QRect& rect,
         const QColor& color ) const
     {
 

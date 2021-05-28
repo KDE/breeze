@@ -5180,12 +5180,11 @@ namespace Breeze
 
         const auto mode( _animations->scrollBarEngine().animationMode( widget, SC_ScrollBarSlider ) );
         const qreal opacity( _animations->scrollBarEngine().opacity( widget, SC_ScrollBarSlider ) );
-        auto color = _helper->scrollBarHandleColor( palette, mouseOver, hasFocus, opacity, mode );
-        if (StyleConfigData::animationsEnabled()) {
-            color.setAlphaF(color.alphaF() * (0.7 + 0.3 * grooveAnimationOpacity));
-        }
 
-        _helper->renderScrollBarHandle( painter, handleRect, color );
+        const auto &background = palette.color( QPalette::Button );
+        auto outline( _helper->sliderOutlineColor( palette, handleActive && mouseOver, hasFocus, opacity, mode ) );
+
+        _helper->renderScrollBarHandle( painter, handleRect, background, outline );
         return true;
     }
 
