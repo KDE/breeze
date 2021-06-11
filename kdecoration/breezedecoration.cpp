@@ -548,7 +548,7 @@ namespace Breeze
     void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
     {
         // TODO: optimize based on repaintRegion
-        auto c = client().data();
+        auto c = client().toStrongRef();
         auto s = settings();
 
         // paint background
@@ -589,7 +589,7 @@ namespace Breeze
     //________________________________________________________________
     void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
     {
-        const auto c = client().data();
+        const auto c = client().toStrongRef();
         const QRect frontRect(QPoint(0, 1), QSize(size().width(), borderTop()+1));
         const QRect backRect(QPoint(0, 0), QSize(size().width(), borderTop()));
 
@@ -709,7 +709,7 @@ namespace Breeze
         if( hideTitleBar() ) return qMakePair( QRect(), Qt::AlignCenter );
         else {
 
-            auto c = client().data();
+            auto c = client().toStrongRef();
             const int leftOffset = m_leftButtons->buttons().isEmpty() ?
                 Metrics::TitleBar_SideMargin*settings()->smallSpacing():
                 m_leftButtons->geometry().x() + m_leftButtons->geometry().width() + Metrics::TitleBar_SideMargin*settings()->smallSpacing();
@@ -874,15 +874,15 @@ namespace Breeze
         if( !QX11Info::isPlatformX11() ) return;
 
         // access client
-        auto c = client().data();
+        auto c = client().toStrongRef();
         if( !c ) return;
 
         if( c->windowId() != 0 )
         {
             m_sizeGrip = new SizeGrip( this );
-            connect( c, &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::updateSizeGripVisibility );
-            connect( c, &KDecoration2::DecoratedClient::shadedChanged, this, &Decoration::updateSizeGripVisibility );
-            connect( c, &KDecoration2::DecoratedClient::resizeableChanged, this, &Decoration::updateSizeGripVisibility );
+            connect( c.data(), &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::updateSizeGripVisibility );
+            connect( c.data(), &KDecoration2::DecoratedClient::shadedChanged, this, &Decoration::updateSizeGripVisibility );
+            connect( c.data(), &KDecoration2::DecoratedClient::resizeableChanged, this, &Decoration::updateSizeGripVisibility );
         }
         #endif
 
