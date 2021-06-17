@@ -19,7 +19,7 @@ install(TARGETS kstyle_breeze_config DESTINATION ${KDE_INSTALL_QTPLUGINDIR})
 install(FILES breezestyleconfig.desktop DESTINATION  ${KDE_INSTALL_KSERVICES5DIR})
 
 ########### next target ###############
-find_package(KF5KCMUtils CONFIG)
+find_package(KF5KCMUtils ${KF5_MIN_VERSION} CONFIG)
 set_package_properties(KF5KCMUtils PROPERTIES
     DESCRIPTION "KF5 KCM utils Framework"
     URL "https://projects.kde.org/projects/frameworks/kcmutils"
