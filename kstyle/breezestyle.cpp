@@ -40,6 +40,7 @@
 #include <QRadioButton>
 #include <QScrollBar>
 #include <QItemDelegate>
+#include <QSpinBox>
 #include <QSplitterHandle>
 #include <QTextEdit>
 #include <QToolBar>
@@ -418,6 +419,8 @@ namespace Breeze
             widget->setAttribute(Qt::WA_StyledBackground);
         } else if ( auto btn = qobject_cast<QPushButton*> (widget) ) {
             btn->setAutoDefault(false);
+        } else if ( auto spbx = qobject_cast<QSpinBox*> (widget) ) {
+            spbx->setAlignment(Qt::AlignCenter);
         }
 
 
