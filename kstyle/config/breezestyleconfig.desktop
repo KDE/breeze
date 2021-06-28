@@ -10,6 +10,7 @@ X-KDE-ParentApp=kcontrol
 X-KDE-Weight=50
 
 Name=Breeze Widget Style
+Name[ar]=نمط ودجات نسيم
 Name[az]=Breeze Vidjet üslubu
 Name[ca]=Estil dels ginys Brisa
 Name[ca@valencia]=Estil dels ginys («widgets») Brisa

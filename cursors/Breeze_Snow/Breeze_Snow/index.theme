@@ -1,5 +1,6 @@
 [Icon Theme]
 Name=Breeze Light
+Name[ar]=نسيم فاتح
 Name[az]=Breeze - İşıqlı
 Name[ca]=Brisa clara
 Name[ca@valencia]=Brisa clara
@@ -38,6 +39,7 @@ Name[x-test]=xxBreeze Lightxx
 Name[zh_CN]=Breeze 微风亮色
 Name[zh_TW]=Breeze Light
 Comment=Breeze Light by the KDE VDG
+Comment[ar]=نسيم فاتح من مجموعة تصميم كدي
 Comment[az]=Breeze -İşıqlı - KDE VDG tərəfindən
 Comment[ca]=Brisa clara, creat pel VDG del KDE
 Comment[ca@valencia]=Brisa clara per al VDG de KDE
