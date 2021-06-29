@@ -4887,6 +4887,8 @@ namespace Breeze
             contentsRect.setLeft( iconRect.right() + Metrics::MenuItem_ItemSpacing + 1 );
             const QSize iconSize( pixelMetric( PM_SmallIconSize, option, widget ), pixelMetric( PM_SmallIconSize, option, widget ) );
             iconRect = centerRect( iconRect, iconSize );
+        } else {
+            contentsRect.setLeft( contentsRect.left() + Metrics::MenuItem_ExtraLeftMargin );
         }
 
         if( showIcon && !menuItemOption->icon.isNull() )
