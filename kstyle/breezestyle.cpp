@@ -407,7 +407,7 @@ namespace Breeze
             addEventFilter( widget );
             setTranslucentBackground( widget );
 
-        } else if( widget->inherits( "QTipLabel" ) ) {
+        } else if( widget->inherits( "QTipLabel" ) || widget->inherits("KToolTipWidget") ) {
 
             setTranslucentBackground( widget );
 
