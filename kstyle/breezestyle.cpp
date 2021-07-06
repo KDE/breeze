@@ -2605,7 +2605,7 @@ namespace Breeze
             {
 
                 // handle RTL here to unreflect things if need be
-                auto groove = visualRect( option, subControlRect( CC_ScrollBar, option, SC_ScrollBarGroove, widget ) );
+                auto groove = subControlRect( CC_ScrollBar, option, SC_ScrollBarGroove, widget );
 
                 if( sliderOption->minimum == sliderOption->maximum ) return groove;
 
@@ -2622,7 +2622,7 @@ namespace Breeze
 
                 int pos = qRound( qreal( sliderOption->sliderPosition - sliderOption->minimum )/ ( sliderOption->maximum - sliderOption->minimum )*space );
                 if( sliderOption->upsideDown ) pos = space - pos;
-                if( horizontal ) return visualRect( option, QRect( groove.left() + pos, groove.top(), sliderSize, groove.height() ) );
+                if( horizontal ) return QRect( groove.left() + pos, groove.top(), sliderSize, groove.height() );
                 else return visualRect( option, QRect( groove.left(), groove.top() + pos, groove.width(), sliderSize ) );
             }
 
@@ -5276,8 +5276,6 @@ namespace Breeze
 
         if( option->state & State_Horizontal ) {
             rect.setTop(PenWidth::Frame);
-        } else if (option->direction == Qt::RightToLeft) {
-            rect.setRight(rect.right() - PenWidth::Frame);
         } else {
             rect.setLeft(PenWidth::Frame);
         }
@@ -5334,7 +5332,6 @@ namespace Breeze
 
         const State& state( option->state );
         const bool horizontal( state & State_Horizontal );
-        const bool reverseLayout( option->direction == Qt::RightToLeft );
 
         // adjust rect, based on number of buttons to be drawn
         auto rect( scrollBarInternalSubControlRect( sliderOption, SC_ScrollBarAddLine ) );
@@ -5342,8 +5339,6 @@ namespace Breeze
         // need to make it center due to the thin line separator
         if( option->state & State_Horizontal ) {
             rect.setTop(PenWidth::Frame);
-        } else if (option->direction == Qt::RightToLeft) {
-            rect.setRight(rect.right() - PenWidth::Frame);
         } else {
             rect.setLeft(PenWidth::Frame);
         }
@@ -5362,11 +5357,11 @@ namespace Breeze
                 const QRect rightSubButton( leftSubButton.topRight() + QPoint( 1, 0 ), halfSize );
 
                 copy.rect = leftSubButton;
-                color = scrollBarArrowColor( &copy,  reverseLayout ? SC_ScrollBarAddLine:SC_ScrollBarSubLine, widget );
+                color = scrollBarArrowColor( &copy, SC_ScrollBarSubLine, widget );
                 _helper->renderArrow( painter, leftSubButton, color, ArrowLeft );
 
                 copy.rect = rightSubButton;
-                color = scrollBarArrowColor( &copy,  reverseLayout ? SC_ScrollBarSubLine:SC_ScrollBarAddLine, widget );
+                color = scrollBarArrowColor( &copy, SC_ScrollBarAddLine, widget );
                 _helper->renderArrow( painter, rightSubButton, color, ArrowRight );
 
             } else {
@@ -5392,8 +5387,7 @@ namespace Breeze
             if( horizontal )
             {
 
-                if( reverseLayout ) _helper->renderArrow( painter, rect, color, ArrowLeft );
-                else _helper->renderArrow( painter, rect.translated( 1, 0 ), color, ArrowRight );
+                _helper->renderArrow( painter, rect.translated( 1, 0 ), color, ArrowRight );
 
             } else _helper->renderArrow( painter, rect.translated( 0, 1 ), color, ArrowDown );
 
@@ -5416,7 +5410,6 @@ namespace Breeze
 
         const State& state( option->state );
         const bool horizontal( state & State_Horizontal );
-        const bool reverseLayout( option->direction == Qt::RightToLeft );
 
         // adjust rect, based on number of buttons to be drawn
         auto rect( scrollBarInternalSubControlRect( sliderOption, SC_ScrollBarSubLine ) );
@@ -5424,8 +5417,6 @@ namespace Breeze
         // need to make it center due to the thin line separator
         if( option->state & State_Horizontal ) {
             rect.setTop(PenWidth::Frame);
-        } else if (option->direction == Qt::RightToLeft) {
-            rect.setRight(rect.right() - PenWidth::Frame);
         } else {
             rect.setLeft(PenWidth::Frame);
         }
@@ -5444,11 +5435,11 @@ namespace Breeze
                 const QRect rightSubButton( leftSubButton.topRight() + QPoint( 1, 0 ), halfSize );
 
                 copy.rect = leftSubButton;
-                color = scrollBarArrowColor( &copy,  reverseLayout ? SC_ScrollBarAddLine:SC_ScrollBarSubLine, widget );
+                color = scrollBarArrowColor( &copy, SC_ScrollBarSubLine, widget );
                 _helper->renderArrow( painter, leftSubButton, color, ArrowLeft );
 
                 copy.rect = rightSubButton;
-                color = scrollBarArrowColor( &copy,  reverseLayout ? SC_ScrollBarSubLine:SC_ScrollBarAddLine, widget );
+                color = scrollBarArrowColor( &copy, SC_ScrollBarAddLine, widget );
                 _helper->renderArrow( painter, rightSubButton, color, ArrowRight );
 
             } else {
@@ -5474,8 +5465,7 @@ namespace Breeze
             if( horizontal )
             {
 
-                if( reverseLayout ) _helper->renderArrow( painter, rect.translated( 1, 0 ), color, ArrowRight );
-                else _helper->renderArrow( painter, rect, color, ArrowLeft );
+                _helper->renderArrow( painter, rect, color, ArrowLeft );
 
             } else _helper->renderArrow( painter, rect, color, ArrowUp );
 
@@ -6915,8 +6905,6 @@ namespace Breeze
             // need to make it center due to the thin line separator
             if( option->state & State_Horizontal ) {
                 grooveRect.setTop(PenWidth::Frame);
-            } else if (option->direction == Qt::RightToLeft) {
-                grooveRect.setRight(grooveRect.right() - PenWidth::Frame);
             } else {
                 grooveRect.setLeft(PenWidth::Frame);
             }
