@@ -6959,23 +6959,8 @@ namespace Breeze
         const auto& palette( option->palette );
         auto color( _helper->arrowColor( palette, QPalette::WindowText ) );
 
-        bool widgetMouseOver( ( option->state & State_MouseOver ) );
-        if( widget ) widgetMouseOver = widget->underMouse();
-        // in case this QStyle is used by QQuickControls QStyle wrapper
-        else if( option->styleObject ) widgetMouseOver = option->styleObject->property("hover").toBool();
-
         // check enabled state
         const bool enabled( option->state & State_Enabled );
-        if( !enabled ) {
-            if( StyleConfigData::animationsEnabled() ) {
-                // finally, global opacity when ScrollBarShowOnMouseOver
-                const qreal globalOpacity( _animations->scrollBarEngine().opacity( widget, QStyle::SC_ScrollBarGroove ) );
-                if( globalOpacity >= 0 ) color.setAlphaF( globalOpacity );
-                // no mouse over and no animation in progress, don't draw arrows at all
-                else if( !widgetMouseOver ) return Qt::transparent;
-            }
-            return color;
-        }
 
         if(
             ( control == SC_ScrollBarSubLine && option->sliderValue == option->minimum ) ||
@@ -6983,15 +6968,8 @@ namespace Breeze
         {
 
             // manually disable arrow, to indicate that scrollbar is at limit
-            color = _helper->arrowColor( palette, QPalette::Disabled, QPalette::WindowText );
-            if( StyleConfigData::animationsEnabled() ) {
-                // finally, global opacity when ScrollBarShowOnMouseOver
-                const qreal globalOpacity( _animations->scrollBarEngine().opacity( widget, QStyle::SC_ScrollBarGroove ) );
-                if( globalOpacity >= 0 ) color.setAlphaF( globalOpacity );
-                // no mouse over and no animation in progress, don't draw arrows at all
-                else if( !widgetMouseOver ) return Qt::transparent;
-            }
-            return color;
+            return _helper->arrowColor( palette, QPalette::Disabled, QPalette::WindowText );
+
         }
 
         const bool mouseOver( _animations->scrollBarEngine().isHovered( widget, control ) );
@@ -7024,14 +7002,6 @@ namespace Breeze
 
             }
 
-        }
-
-        if( StyleConfigData::animationsEnabled() ) {
-            // finally, global opacity when ScrollBarShowOnMouseOver
-            const qreal globalOpacity( _animations->scrollBarEngine().opacity( widget, QStyle::SC_ScrollBarGroove ) );
-            if( globalOpacity >= 0 ) color.setAlphaF( globalOpacity );
-            // no mouse over and no animation in progress, don't draw arrows at all
-            else if( !widgetMouseOver ) return Qt::transparent;
         }
 
         return color;
