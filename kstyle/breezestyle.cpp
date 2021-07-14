@@ -7039,7 +7039,7 @@ namespace Breeze
             if( StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() ) {
                 // finally, global opacity when ScrollBarShowOnMouseOver
                 const qreal globalOpacity( _animations->scrollBarEngine().opacity( widget, QStyle::SC_ScrollBarGroove ) );
-                if( globalOpacity >= 0 ) color.setAlphaF( globalOpacity );
+                if( globalOpacity >= 0 && widgetMouseOver ) color.setAlphaF( globalOpacity );
                 // no mouse over and no animation in progress, don't draw arrows at all
                 else if( !widgetMouseOver ) return Qt::transparent;
             }
@@ -7056,7 +7056,7 @@ namespace Breeze
             if( StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() ) {
                 // finally, global opacity when ScrollBarShowOnMouseOver
                 const qreal globalOpacity( _animations->scrollBarEngine().opacity( widget, QStyle::SC_ScrollBarGroove ) );
-                if( globalOpacity >= 0 ) color.setAlphaF( globalOpacity );
+                if( globalOpacity >= 0 && widgetMouseOver ) color.setAlphaF( globalOpacity );
                 // no mouse over and no animation in progress, don't draw arrows at all
                 else if( !widgetMouseOver ) return Qt::transparent;
             }
@@ -7098,7 +7098,7 @@ namespace Breeze
         if( StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() ) {
             // finally, global opacity when ScrollBarShowOnMouseOver
             const qreal globalOpacity( _animations->scrollBarEngine().opacity( widget, QStyle::SC_ScrollBarGroove ) );
-            if( globalOpacity >= 0 ) color.setAlphaF( globalOpacity );
+            if( globalOpacity >= 0 && widgetMouseOver ) color.setAlphaF( globalOpacity );
             // no mouse over and no animation in progress, don't draw arrows at all
             else if( !widgetMouseOver ) return Qt::transparent;
         }
