@@ -202,6 +202,57 @@ namespace BreezePrivate
 
 }
 
+class GayRing : public QFocusFrame
+{
+    Q_OBJECT
+
+    bool hasFocus = false;
+
+public:
+    GayRing(QWidget* parent) : QFocusFrame(parent) { }
+
+    bool event(QEvent* e) override
+    {
+        if (hasFocus) {
+            show();
+        } else {
+            hide();
+        }
+
+        return QFocusFrame::event(e);
+    }
+
+    bool eventFilter(QObject* o, QEvent* e) override
+    {
+        if (o != widget()) {
+            return false;
+        }
+
+        switch (e->type()) {
+        case QEvent::FocusIn: {
+            auto ev = dynamic_cast<QFocusEvent*>(e);
+            if (ev->reason() != Qt::MouseFocusReason) {
+                hasFocus = true;
+                show();
+            }
+            break;
+        }
+        case QEvent::FocusOut:
+            hasFocus = false;
+            hide();
+            break;
+        case QEvent::Hide:
+            hide();
+            break;
+        case QEvent::Show:
+        default:
+            return QFocusFrame::eventFilter(o, e);
+        }
+
+        return false;
+    }
+};
+
 namespace Breeze
 {
 
@@ -431,7 +482,7 @@ namespace Breeze
             || qobject_cast<QToolButton*>( widget )
             )
         {
-            auto w = new QFocusFrame(widget);
+            auto w = new GayRing(widget);
             w->setWidget(widget);
         }
 
@@ -705,7 +756,7 @@ namespace Breeze
             case SH_FocusFrame_Mask:
                 if ( auto mask = qstyleoption_cast<QStyleHintReturnMask*>( returnData ) )
                 {
-                    mask->region = QRegion(widget->rect());
+                    mask->region = QRegion(widget->rect().adjusted(-2, -2, 2, 2));
 
                     return true;
                 }
@@ -7397,3 +7448,5 @@ namespace Breeze
     }
 
 }
+
+#include "breezestyle.moc"
