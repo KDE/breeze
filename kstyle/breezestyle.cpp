@@ -756,7 +756,7 @@ namespace Breeze
             case SH_FocusFrame_Mask:
                 if ( auto mask = qstyleoption_cast<QStyleHintReturnMask*>( returnData ) )
                 {
-                    mask->region = QRegion(widget->rect().adjusted(-2, -2, 2, 2));
+                    mask->region = QRegion(widget->rect().adjusted(-5, -5, 5, 5)); // expand a little outside the bounds of the widget so we don't run into clipping
 
                     return true;
                 }
