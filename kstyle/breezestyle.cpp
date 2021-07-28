@@ -551,7 +551,7 @@ namespace Breeze
 
             case PM_FocusFrameHMargin:
             case PM_FocusFrameVMargin:
-                return Metrics::FocusFrame_Extent + 1;
+                return Metrics::FocusFrame_Extent;
 
             // frame width
             case PM_DefaultFrameWidth:
@@ -701,7 +701,15 @@ namespace Breeze
         switch( hint )
         {
 
-            case SH_FocusFrame_AboveWidget: return true;
+            case SH_FocusFrame_AboveWidget: return false;
+            case SH_FocusFrame_Mask:
+                if ( auto mask = qstyleoption_cast<QStyleHintReturnMask*>( returnData ) )
+                {
+                    mask->region = QRegion(widget->rect());
+
+                    return true;
+                }
+                return false;
 
             case SH_RubberBand_Mask:
             {
@@ -904,14 +912,19 @@ namespace Breeze
 
     }
 
-    bool Style::drawFocusFrame( const QStyleOption* opt, QPainter* painter, const QWidget* ) const
+    bool Style::drawFocusFrame( const QStyleOption* opt, QPainter* p, const QWidget* wid ) const
     {
         // painter->setClipping(false);
-        // painter->setClipRegion(opt->rect);
 
-        painter->setBrush(Qt::red);
-        painter->setPen(Qt::red);
-        painter->drawRect(opt->rect);
+        auto c = _helper->focusColor(opt->palette);
+        c.setAlphaF(0.3);
+
+        p->save();
+        p->setRenderHint(QPainter::Antialiasing);
+        p->setBrush(c);
+        p->setPen(Qt::transparent);
+        p->drawRoundedRect(opt->rect, 5.0, 5.0);
+        p->restore();
 
         return true;
     }
