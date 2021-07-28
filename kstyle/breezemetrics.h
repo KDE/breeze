@@ -47,6 +47,8 @@ namespace Breeze
         // line editors
         static constexpr int LineEdit_FrameWidth = 6;
 
+        static constexpr int FocusFrame_Extent = 2;
+
         // menu items
         static constexpr int Menu_FrameWidth = 0;
         static constexpr int MenuItem_MarginWidth = 8;

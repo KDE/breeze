@@ -30,6 +30,7 @@
 #include <QDialog>
 #include <QDBusConnection>
 #include <QFormLayout>
+#include <QFocusFrame>
 #include <QGraphicsView>
 #include <QGroupBox>
 #include <QLineEdit>
@@ -421,6 +422,19 @@ namespace Breeze
         }
 
 
+        if(
+            qobject_cast<QAbstractSpinBox*>( widget )
+            || qobject_cast<QComboBox*>( widget )
+            || qobject_cast<QLineEdit*>( widget )
+            || qobject_cast<QPushButton*>( widget )
+            || qobject_cast<QTextEdit*>( widget )
+            || qobject_cast<QToolButton*>( widget )
+            )
+        {
+            auto w = new QFocusFrame(widget);
+            w->setWidget(widget);
+        }
+
         // base class polishing
         ParentStyleClass::polish( widget );
 
@@ -534,6 +548,10 @@ namespace Breeze
         // handle special cases
         switch( metric )
         {
+
+            case PM_FocusFrameHMargin:
+            case PM_FocusFrameVMargin:
+                return Metrics::FocusFrame_Extent + 1;
 
             // frame width
             case PM_DefaultFrameWidth:
@@ -682,6 +700,8 @@ namespace Breeze
     {
         switch( hint )
         {
+
+            case SH_FocusFrame_AboveWidget: return true;
 
             case SH_RubberBand_Mask:
             {
@@ -884,6 +904,18 @@ namespace Breeze
 
     }
 
+    bool Style::drawFocusFrame( const QStyleOption* opt, QPainter* painter, const QWidget* ) const
+    {
+        // painter->setClipping(false);
+        // painter->setClipRegion(opt->rect);
+
+        painter->setBrush(Qt::red);
+        painter->setPen(Qt::red);
+        painter->drawRect(opt->rect);
+
+        return true;
+    }
+
     //______________________________________________________________
     void Style::drawPrimitive( PrimitiveElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
     {
@@ -1025,6 +1057,7 @@ namespace Breeze
             case CE_ToolBoxTabLabel: fcn = &Style::drawToolBoxTabLabelControl; break;
             case CE_ToolBoxTabShape: fcn = &Style::drawToolBoxTabShapeControl; break;
             case CE_DockWidgetTitle: fcn = &Style::drawDockWidgetTitleControl; break;
+            case CE_FocusFrame: fcn = &Style::drawFocusFrame; break;
 
             // fallback
             default: break;

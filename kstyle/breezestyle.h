@@ -272,6 +272,7 @@ namespace Breeze
         bool drawIndicatorToolBarSeparatorPrimitive( const QStyleOption*, QPainter*, const QWidget* ) const;
         bool drawIndicatorBranchPrimitive( const QStyleOption*, QPainter*, const QWidget* ) const;
         bool drawWidgetPrimitive( const QStyleOption*, QPainter*, const QWidget* ) const;
+        bool drawFocusFrame( const QStyleOption*, QPainter*, const QWidget* ) const;
 
         //@}
 
