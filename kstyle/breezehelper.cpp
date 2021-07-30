@@ -1272,7 +1272,7 @@ namespace Breeze
         painter->setRenderHint( QPainter::Antialiasing, true );
 
         const QRectF baseRect( rect );
-        const qreal radius( 0.5 * std::min({baseRect.width(), baseRect.height(), (qreal)Metrics::ScrollBar_SliderWidth}) );
+        const qreal radius( 3.0 );
 
         // content
         if( color.isValid() )

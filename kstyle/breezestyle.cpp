@@ -5161,11 +5161,11 @@ namespace Breeze
         if( grooveAnimationOpacity == AnimationData::OpacityInvalid ) grooveAnimationOpacity = (widgetMouseOver ? 1 : 0);
 
         // define handle rect
-        QRect handleRect;
+        QRect handleRect = rect;
         const State& state( option->state );
-        const bool horizontal( state & State_Horizontal );
-        if( horizontal ) handleRect = centerRect( rect, rect.width(), Metrics::ScrollBar_SliderWidth );
-        else handleRect = centerRect( rect, Metrics::ScrollBar_SliderWidth, rect.height() );
+        // const bool horizontal( state & State_Horizontal );
+        // if( horizontal ) handleRect = centerRect( rect, rect.width(), Metrics::ScrollBar_SliderWidth );
+        // else handleRect = centerRect( rect, Metrics::ScrollBar_SliderWidth, rect.height() );
 
         const bool enabled( state & State_Enabled );
         const bool mouseOver( enabled && ( state & State_MouseOver ) );
@@ -5320,7 +5320,11 @@ namespace Breeze
         const auto outline( hasHighlightNeutral( widget, option, mouseOver, hasFocus ) ? _helper->neutralText( palette ).lighter(mouseOver || hasFocus ? 150 : 100) : _helper->buttonOutlineColor( palette, mouseOver, hasFocus, 1.0, AnimationNone ) );
         const auto background( _helper->buttonBackgroundColor( palette, mouseOver, hasFocus, sunken, 1.0, AnimationNone ) );
 
-        _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocus, sunken );
+        painter->setBrush( background.first );
+        painter->setPen( outline );
+        painter->drawRect( rect.adjusted(0.5, 0.5, -0.5, -0.5) );
+
+        // _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocus, sunken );
 
         QColor color;
         QStyleOptionSlider copy( *sliderOption );
@@ -6689,7 +6693,7 @@ namespace Breeze
                                         QSize(PenWidth::Frame, option->rect.height()), option->rect);
         }
 
-        _helper->renderScrollBarBorder( painter, separatorRect, _helper->alphaColor( option->palette.color( QPalette::Text ), 0.1 ));
+        _helper->renderScrollBarBorder( painter, separatorRect, _helper->alphaColor( option->palette.color( QPalette::Text ), 0.5 ));
 
         // render full groove directly, rather than using the addPage and subPage control element methods
         if( (!StyleConfigData::animationsEnabled() || mouseOver || animated) && option->subControls & SC_ScrollBarGroove )
@@ -6707,12 +6711,12 @@ namespace Breeze
             }
 
             const auto& palette( option->palette );
-            const auto color( _helper->alphaColor( palette.color( QPalette::WindowText ), 0.3 * (animated ? opacity : 1) ) );
+            const auto color( _helper->alphaColor( palette.color( QPalette::WindowText ), 0.2 ) );
             const auto& state( option->state );
             const bool horizontal( state & State_Horizontal );
 
-            if( horizontal ) grooveRect = centerRect( grooveRect, grooveRect.width(), Metrics::ScrollBar_SliderWidth );
-            else grooveRect = centerRect( grooveRect, Metrics::ScrollBar_SliderWidth, grooveRect.height() );
+            // if( horizontal ) grooveRect = centerRect( grooveRect, grooveRect.width(), Metrics::ScrollBar_SliderWidth );
+            // else grooveRect = centerRect( grooveRect, Metrics::ScrollBar_SliderWidth, grooveRect.height() );
 
             // render
             _helper->renderScrollBarGroove( painter, grooveRect, color );
