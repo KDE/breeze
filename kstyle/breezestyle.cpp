@@ -4679,8 +4679,8 @@ namespace Breeze
         {
 
             QColor outlineColor;
-            if( sunken ) outlineColor = _helper->alphaColor( palette.text().color(), 0.1 );
-            else if( selected ) outlineColor = _helper->alphaColor( palette.text().color(), 0.05 );
+            if( sunken ) outlineColor = _helper->focusColor( palette );
+            else if( selected ) outlineColor = _helper->hoverColor( palette );
             _helper->renderFocusRect( painter, rect, outlineColor );
 
         }
@@ -4705,7 +4705,9 @@ namespace Breeze
 
             } else {
 
-                iconMode = QIcon::Normal;
+                if( useStrongFocus && sunken ) iconMode = QIcon::Selected;
+                else if( useStrongFocus && selected ) iconMode = QIcon::Active;
+                else iconMode = QIcon::Normal;
 
                 iconState = sunken ? QIcon::On : QIcon::Off;
 
@@ -4733,7 +4735,7 @@ namespace Breeze
             const auto textRect = option->fontMetrics.boundingRect( rect, textFlags, menuItemOption->text );
 
             // render text
-            const QPalette::ColorRole role = QPalette::WindowText;
+            const QPalette::ColorRole role = (useStrongFocus && sunken ) ? QPalette::HighlightedText : QPalette::WindowText;
             drawItemText( painter, textRect, textFlags, palette, enabled, menuItemOption->text, role );
 
             // render outline
