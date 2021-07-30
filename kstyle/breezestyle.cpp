@@ -5218,6 +5218,17 @@ namespace Breeze
             rect.setLeft(PenWidth::Frame);
         }
 
+        const bool mouseOver( state & State_MouseOver );
+        const bool hasFocus( state & State_HasFocus );
+        const auto& palette( option->palette );
+        const bool sunken( state & State_Sunken );
+
+        const auto shadow( _helper->shadowColor( palette ) );
+        const auto outline( hasHighlightNeutral( widget, option, mouseOver, hasFocus ) ? _helper->neutralText( palette ).lighter(mouseOver || hasFocus ? 150 : 100) : _helper->buttonOutlineColor( palette, mouseOver, hasFocus, 1.0, AnimationNone ) );
+        const auto background( _helper->buttonBackgroundColor( palette, mouseOver, hasFocus, sunken, 1.0, AnimationNone ) );
+
+        _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocus, sunken );
+
         QColor color;
         QStyleOptionSlider copy( *sliderOption );
         if( _addLineButtons == DoubleButton )
@@ -5299,6 +5310,17 @@ namespace Breeze
         } else {
             rect.setLeft(PenWidth::Frame);
         }
+
+        const bool mouseOver( state & State_MouseOver );
+        const bool hasFocus( state & State_HasFocus );
+        const auto& palette( option->palette );
+        const bool sunken( state & State_Sunken );
+
+        const auto shadow( _helper->shadowColor( palette ) );
+        const auto outline( hasHighlightNeutral( widget, option, mouseOver, hasFocus ) ? _helper->neutralText( palette ).lighter(mouseOver || hasFocus ? 150 : 100) : _helper->buttonOutlineColor( palette, mouseOver, hasFocus, 1.0, AnimationNone ) );
+        const auto background( _helper->buttonBackgroundColor( palette, mouseOver, hasFocus, sunken, 1.0, AnimationNone ) );
+
+        _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocus, sunken );
 
         QColor color;
         QStyleOptionSlider copy( *sliderOption );
