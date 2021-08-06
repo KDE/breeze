@@ -202,61 +202,37 @@ namespace BreezePrivate
 
 }
 
-class GayRing : public QWidget
+class GayRing : public QFocusFrame
 {
     Q_OBJECT
 
     bool hasFocus = false;
-    QWidget* tracking = nullptr;
 
 public:
-    GayRing(QWidget* parent) : QWidget(parent->window()), tracking(parent)
-    {
-        tracking->installEventFilter(this);
-        raise();
-    }
+    GayRing(QWidget* parent) : QFocusFrame(parent) { }
 
     bool event(QEvent* e) override
     {
         if (hasFocus) {
             show();
         } else {
-            // hide();
-            show();
+            hide();
         }
+
+        auto ret = QFocusFrame::event(e);
 
         clearMask();
 
-        return false;
-    }
-
-    void updateSize()
-    {
-        const auto t = tracking;
-
-        QStyleOption opt;
-        opt.initFrom(this);
-
-        int vmargin = style()->pixelMetric(QStyle::PM_FocusFrameVMargin, &opt),
-            hmargin = style()->pixelMetric(QStyle::PM_FocusFrameHMargin, &opt);
-
-        auto pos = t->mapTo(t->window(), QPoint(t->x(), t->y()));
-
-        QRect geom(pos.x()-hmargin, pos.y()-vmargin, t->width()+(hmargin*2), t->height()+(vmargin*2));
-        setGeometry(geom);
+        return ret;
     }
 
     bool eventFilter(QObject* o, QEvent* e) override
     {
-        if (o != tracking) {
+        if (o != widget()) {
             return false;
         }
 
         switch (e->type()) {
-        case QEvent::Move:
-        case QEvent::Resize:
-            updateSize();
-            break;
         case QEvent::FocusIn: {
             auto ev = dynamic_cast<QFocusEvent*>(e);
             if (ev->reason() != Qt::MouseFocusReason) {
@@ -273,8 +249,11 @@ public:
             hide();
             break;
         case QEvent::Show:
-            show();
-            break;
+        default:
+            if (!o->parent()) {
+                return false;
+            }
+            return QFocusFrame::eventFilter(o, e);
         }
 
         return false;
@@ -511,7 +490,7 @@ namespace Breeze
             )
         {
             auto w = new GayRing(widget);
-            // w->setWidget(widget);
+            w->setWidget(widget);
         }
 
         // base class polishing
