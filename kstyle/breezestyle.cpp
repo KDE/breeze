@@ -219,7 +219,11 @@ public:
             hide();
         }
 
-        return QFocusFrame::event(e);
+        auto ret = QFocusFrame::event(e);
+
+        clearMask();
+
+        return ret;
     }
 
     bool eventFilter(QObject* o, QEvent* e) override
@@ -246,6 +250,9 @@ public:
             break;
         case QEvent::Show:
         default:
+            if (!o->parent()) {
+                return false;
+            }
             return QFocusFrame::eventFilter(o, e);
         }
 
