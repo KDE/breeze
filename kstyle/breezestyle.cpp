@@ -5154,11 +5154,8 @@ namespace Breeze
         if( grooveAnimationOpacity == AnimationData::OpacityInvalid ) grooveAnimationOpacity = (widgetMouseOver ? 1 : 0);
 
         // define handle rect
-        QRect handleRect;
+        QRect handleRect = rect;
         const State& state( option->state );
-        const bool horizontal( state & State_Horizontal );
-        if( horizontal ) handleRect = centerRect( rect, rect.width(), Metrics::ScrollBar_SliderWidth );
-        else handleRect = centerRect( rect, Metrics::ScrollBar_SliderWidth, rect.height() );
 
         const bool enabled( state & State_Enabled );
         const bool mouseOver( enabled && ( state & State_MouseOver ) );
@@ -6662,32 +6659,23 @@ namespace Breeze
 
         _helper->renderScrollBarBorder( painter, separatorRect, _helper->alphaColor( option->palette.color( QPalette::Text ), 0.1 ));
 
-        // render full groove directly, rather than using the addPage and subPage control element methods
-        if( (!StyleConfigData::animationsEnabled() || mouseOver || animated) && option->subControls & SC_ScrollBarGroove )
-        {
-            // retrieve groove rectangle
-            auto grooveRect( subControlRect( CC_ScrollBar, option, SC_ScrollBarGroove, widget ) );
+        // retrieve groove rectangle
+        auto grooveRect( subControlRect( CC_ScrollBar, option, SC_ScrollBarGroove, widget ) );
 
-            // need to make it center due to the thin line separator
-            if( option->state & State_Horizontal ) {
-                grooveRect.setTop(PenWidth::Frame);
-            } else if (option->direction == Qt::RightToLeft) {
-                grooveRect.setRight(grooveRect.right() - PenWidth::Frame);
-            } else {
-                grooveRect.setLeft(PenWidth::Frame);
-            }
-
-            const auto& palette( option->palette );
-            const auto color( _helper->alphaColor( palette.color( QPalette::WindowText ), 0.3 * (animated ? opacity : 1) ) );
-            const auto& state( option->state );
-            const bool horizontal( state & State_Horizontal );
-
-            if( horizontal ) grooveRect = centerRect( grooveRect, grooveRect.width(), Metrics::ScrollBar_SliderWidth );
-            else grooveRect = centerRect( grooveRect, Metrics::ScrollBar_SliderWidth, grooveRect.height() );
-
-            // render
-            _helper->renderScrollBarGroove( painter, grooveRect, color );
+        // need to make it center due to the thin line separator
+        if( option->state & State_Horizontal ) {
+            grooveRect.setTop(PenWidth::Frame);
+        } else if (option->direction == Qt::RightToLeft) {
+            grooveRect.setRight(grooveRect.right() - PenWidth::Frame);
+        } else {
+            grooveRect.setLeft(PenWidth::Frame);
         }
+
+        const auto& palette( option->palette );
+        const auto& state( option->state );
+
+        // render
+        _helper->renderScrollBarGroove( painter, grooveRect, palette.color( QPalette::Window ) );
 
         // call base class primitive
         ParentStyleClass::drawComplexControl( CC_ScrollBar, option, painter, widget );

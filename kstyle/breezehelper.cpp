@@ -1272,14 +1272,41 @@ namespace Breeze
         painter->setRenderHint( QPainter::Antialiasing, true );
 
         const QRectF baseRect( rect );
-        const qreal radius( 0.5 * std::min({baseRect.width(), baseRect.height(), (qreal)Metrics::ScrollBar_SliderWidth}) );
+        const qreal radius( 3 );
 
         // content
         if( color.isValid() )
         {
             painter->setPen( Qt::NoPen );
-            painter->setBrush( color );
-            painter->drawRoundedRect( baseRect, radius, radius );
+            auto bg = color;
+            bg.setAlphaF(bg.alphaF() / 2);
+            painter->setBrush( bg );
+            painter->setPen( color );
+            painter->drawRoundedRect( strokedRect(baseRect), radius, radius );
+        }
+    }
+
+    void Helper::renderScrollBarGroove(
+        QPainter* painter, const QRect& rect,
+        const QColor& color ) const
+    {
+
+        // setup painter
+        painter->setRenderHint( QPainter::Antialiasing, true );
+
+        const QRectF baseRect( rect );
+        const qreal radius( 3 );
+
+        // content
+        if( color.isValid() )
+        {
+            QLinearGradient linearGrad(baseRect.bottomLeft(), baseRect.bottomRight());
+            linearGrad.setColorAt(0, color.darker(107));
+            linearGrad.setColorAt(1, color);
+
+            painter->setBrush( linearGrad );
+            painter->setPen( color );
+            painter->drawRoundedRect( strokedRect(baseRect), radius, radius );
         }
 
         
