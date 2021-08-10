@@ -89,7 +89,7 @@ namespace Breeze
 
         // scrollbars
         static constexpr int ScrollBar_Extend = 19;
-        static constexpr int ScrollBar_SliderWidth = 6;
+        static constexpr int ScrollBar_SliderWidth = 10;
         static constexpr int ScrollBar_MinSliderHeight = 20;
         static constexpr int ScrollBar_NoButtonHeight = (ScrollBar_Extend-ScrollBar_SliderWidth)/2;
         static constexpr int ScrollBar_SingleButtonHeight = ScrollBar_Extend;
