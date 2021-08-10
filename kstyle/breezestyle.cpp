@@ -5184,7 +5184,7 @@ namespace Breeze
             color.setAlphaF(color.alphaF() * (0.7 + 0.3 * grooveAnimationOpacity));
         }
 
-        _helper->renderScrollBarHandle( painter, handleRect, color );
+        _helper->renderScrollBarHandle( painter, handleRect, color, palette.color(QPalette::Window) );
         return true;
     }
 

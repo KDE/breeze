@@ -219,11 +219,10 @@ namespace Breeze
         void renderProgressBarBusyContents( QPainter* painter, const QRect& rect, const QColor& first, const QColor& second, bool horizontal, bool reverse, int progress  ) const;
 
         //* scrollbar groove
-        void renderScrollBarGroove( QPainter* painter, const QRect& rect, const QColor& color ) const
-        { return renderScrollBarHandle( painter, rect, color ); }
+        void renderScrollBarGroove( QPainter* painter, const QRect& rect, const QColor& color ) const;
 
         //* scrollbar handle
-        void renderScrollBarHandle( QPainter*, const QRect&, const QColor& ) const;
+        void renderScrollBarHandle( QPainter*, const QRect&, const QColor& fg, const QColor& bg ) const;
 
         //* separator between scrollbar and contents
         void renderScrollBarBorder( QPainter*, const QRect&, const QColor& ) const;
