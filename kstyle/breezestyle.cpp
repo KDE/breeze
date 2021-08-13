@@ -723,7 +723,12 @@ namespace Breeze
             case SH_ComboBox_ListMouseTracking: return true;
             case SH_MenuBar_MouseTracking: return true;
             case SH_Menu_MouseTracking: return true;
-            case SH_Menu_SubMenuPopupDelay: return 150;
+            case SH_Menu_SubMenuPopupDelay: return 100;
+            case SH_Menu_SubMenuUniDirection: return true;
+            case SH_Menu_SubMenuSloppyCloseTimeout: return 2000;
+            case SH_Menu_KeyboardSearch: return true;
+            case SH_Menu_SubMenuSloppySelectOtherActions: return false;
+            case SH_Menu_SubMenuUniDirectionFailCount: return 2;
             case SH_Menu_SloppySubMenus: return true;
 
             // TODO Qt6: drop deprecated SH_Widget_Animate
