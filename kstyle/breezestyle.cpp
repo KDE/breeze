@@ -2839,9 +2839,7 @@ namespace Breeze
             size.rwidth() += Metrics::MenuButton_IndicatorWidth;
         }
 
-        const int marginWidth( autoRaise ? Metrics::ToolButton_MarginWidth : Metrics::Button_MarginWidth + Metrics::Frame_FrameWidth );
-
-        size = expandSize( size, marginWidth );
+        size = expandSize( size, Metrics::ToolButton_MarginWidth, Metrics::ToolButton_MarginHeight );
 
         return size;
 
@@ -3636,7 +3634,7 @@ namespace Breeze
 
         // store relevant flags
         const State& state( option->state );
-        const bool autoRaise( state & State_AutoRaise );
+        const bool autoRaise( false );
         const bool enabled( state & State_Enabled );
         const bool sunken( state & (State_On | State_Sunken) );
         const bool mouseOver( enabled && (option->state & State_MouseOver) );
@@ -3667,7 +3665,7 @@ namespace Breeze
             }
 
             // render
-            _helper->renderButtonFrame( painter, rect, background, outline, shadow, hasFocus, sunken );
+            _helper->renderButtonFrame( painter, rect, background, outline, QColor(), hasFocus, sunken );
 
         } else {
 
@@ -6110,7 +6108,7 @@ namespace Breeze
         const bool mouseOver( enabled && (option->state & State_MouseOver) );
         const bool hasFocus( enabled && (option->state & State_HasFocus) );
         const bool sunken( state & (State_On | State_Sunken) );
-        const bool flat( state & State_AutoRaise );
+        const bool flat( false );
 
         // update animation state
         // mouse over takes precedence over focus

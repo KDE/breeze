@@ -74,6 +74,7 @@ namespace Breeze
 
         // tool buttons
         static constexpr int ToolButton_MarginWidth = 6;
+        static constexpr int ToolButton_MarginHeight = 4;
         static constexpr int ToolButton_ItemSpacing = 4;
         static constexpr int ToolButton_InlineIndicatorWidth = 12;
 
