@@ -7,6 +7,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     IconThemes
     ConfigWidgets
     WindowSystem)
+find_package(KF5Sonnet ${KF5_MIN_VERSION} CONFIG REQUIRED)
 
 find_package(Qt5 ${QT_MIN_VERSION} COMPONENTS Quick X11Extras)
 set(BREEZE_HAVE_QTQUICK ${Qt5Quick_FOUND})
@@ -88,7 +89,7 @@ endif()
 if (BREEZE_HAVE_QTX11EXTRAS)
     target_link_libraries(breeze Qt::X11Extras)
 endif()
-target_link_libraries(breeze KF5::ConfigCore KF5::ConfigWidgets KF5::GuiAddons KF5::IconThemes KF5::WindowSystem)
+target_link_libraries(breeze KF5::ConfigCore KF5::ConfigWidgets KF5::GuiAddons KF5::IconThemes KF5::WindowSystem KF5::SonnetCore KF5::SonnetUi)
 target_link_libraries(breeze breezecommon5)
 
 if(KF5FrameworkIntegration_FOUND)

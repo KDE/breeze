@@ -50,6 +50,8 @@
 #include <QWidgetAction>
 #include <QMdiArea>
 
+#include <Sonnet/SpellCheckDecorator>
+
 #if BREEZE_HAVE_QTQUICK
 #include <QQuickWindow>
 #endif
@@ -421,6 +423,8 @@ namespace Breeze
             btn->setAutoDefault(false);
         } else if ( auto spbx = qobject_cast<QAbstractSpinBox*> (widget) ) {
             spbx->setAlignment(Qt::AlignCenter);
+        } else if ( auto te = qobject_cast<QTextEdit*>( widget ) ) {
+            Sonnet::SpellCheckDecorator *decorator = new Sonnet::SpellCheckDecorator(te);
         }
 
 
@@ -725,6 +729,7 @@ namespace Breeze
             case SH_Menu_MouseTracking: return true;
             case SH_Menu_SubMenuPopupDelay: return 150;
             case SH_Menu_SloppySubMenus: return true;
+            case SH_SpellCheckUnderlineStyle: return QTextCharFormat::DotLine;
 
             // TODO Qt6: drop deprecated SH_Widget_Animate
             case SH_Widget_Animate: return StyleConfigData::animationsEnabled();
