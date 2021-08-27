@@ -21,6 +21,9 @@
 #include <QPainterPath>
 #include <QIcon>
 #include <QWidget>
+#include <QStyleOptionViewItem>
+
+class QItemSelectionModel;
 
 namespace Breeze
 {
@@ -177,7 +180,7 @@ namespace Breeze
         void renderTabWidgetFrame( QPainter*, const QRect&, const QColor& color, const QColor& outline, Corners ) const;
 
         //* selection frame
-        void renderSelection( QPainter*, const QRect&, const QColor& ) const;
+        void renderSelection( QPainter*, const QRect&, const QColor&, QStyleOptionViewItem::ViewItemPosition pos, const QModelIndex& idx, QItemSelectionModel* model ) const;
 
         //* separator
         void renderSeparator( QPainter*, const QRect&, const QColor&, bool vertical = false ) const;

@@ -22,6 +22,7 @@
 #include <QMdiArea>
 #include <QDockWidget>
 #include <QWindow>
+#include <QItemSelectionModel>
 
 #if BREEZE_HAVE_QTX11EXTRAS
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -799,13 +800,72 @@ namespace Breeze
     //______________________________________________________________________________
     void Helper::renderSelection(
         QPainter* painter, const QRect& rect,
-        const QColor& color ) const
+        const QColor& fg, QStyleOptionViewItem::ViewItemPosition pos,
+        const QModelIndex& idx, QItemSelectionModel* selModel ) const
     {
 
+        auto copied = rect;
+
+        // 20 is just an arbitrary number that pushes the edges
+        // beyond the edge of the rect
+
+        auto updateCopiedFromIndex = [&copied, idx, selModel]() {
+            const auto idxLeft = idx.siblingAtColumn(idx.column()-1);
+            const auto idxRight = idx.siblingAtColumn(idx.column()+1);
+            const auto idxTop = idx.siblingAtRow(idx.row()-1);
+            const auto idxBottom = idx.siblingAtRow(idx.row()+1);
+
+            const auto idxLeftSelected = selModel->isSelected(idxLeft);
+            const auto idxRightSelected = selModel->isSelected(idxRight);
+            const auto idxTopSelected = selModel->isSelected(idxTop);
+            const auto idxBottomSelected = selModel->isSelected(idxBottom);
+
+            // if we're at the left of the view...
+            if (idxLeftSelected) {
+                copied.setLeft(copied.left() - 20);
+            }
+            if (idxRightSelected) {
+                copied.setRight(copied.right() + 20);
+            }
+            if (idxTopSelected) {
+                copied.setTop(copied.top() - 20);
+            }
+            if (idxBottomSelected) {
+                copied.setBottom(copied.bottom() + 20);
+            }
+        };
+
+        switch (pos) {
+        case QStyleOptionViewItem::Invalid:
+            if (!selModel || !idx.isValid() || !selModel->isSelected(idx)) {
+                painter->setBrush( alphaColor(fg, 0.4) );
+                painter->setPen(Qt::NoPen);
+                painter->drawRect( rect );
+
+                return;
+            }
+            updateCopiedFromIndex();
+            break;
+        case QStyleOptionViewItem::OnlyOne:
+            break;
+        case QStyleOptionViewItem::Beginning:
+            copied.setRight(copied.right() + 20);
+            break;
+        case QStyleOptionViewItem::Middle:
+            copied.setLeft(copied.left() - 20);
+            copied.setRight(copied.right() * 2);
+            break;
+        case QStyleOptionViewItem::End:
+            copied.setLeft(copied.left() - 20);
+            break;
+        }
+
+        painter->setPen( QPen(fg, 1.001) );
+        painter->setBrush( alphaColor(fg, highlightBackgroundAlpha) );
+
         painter->setRenderHint( QPainter::Antialiasing );
-        painter->setPen( Qt::NoPen );
-        painter->setBrush( color );
-        painter->drawRect( rect );
+
+        painter->drawRoundedRect( strokedRect( copied ), Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius );
 
     }
 
