@@ -1,5 +1,11 @@
 [Desktop Entry]
 Name=Patak
+Name[ca]=Patak
+Name[es]=Patak
+Name[eu]=Patak
+Name[nl]=Patak
+Name[uk]=Патак
+Name[x-test]=xxPatakxx
 
 X-KDE-PluginInfo-Name=Next
 X-KDE-PluginInfo-Author=Áron Kovács
