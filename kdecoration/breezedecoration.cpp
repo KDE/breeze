@@ -191,21 +191,6 @@ namespace Breeze
     }
 
     //________________________________________________________________
-    QColor Decoration::outlineColor() const
-    {
-
-        auto c( client().data() );
-        if( !m_internalSettings->drawTitleBarSeparator() ) return QColor();
-        if( m_animation->state() == QAbstractAnimation::Running )
-        {
-            QColor color( c->palette().color( QPalette::Highlight ) );
-            color.setAlpha( color.alpha()*m_opacity );
-            return color;
-        } else if( c->isActive() ) return c->palette().color( QPalette::Highlight );
-        else return QColor();
-    }
-
-    //________________________________________________________________
     QColor Decoration::fontColor() const
     {
 
@@ -657,16 +642,6 @@ namespace Breeze
             painter->setBrush(frontBrush);
             drawThe(frontRect);
 
-        }
-
-        const QColor outlineColor( this->outlineColor() );
-        if( !c->isShaded() && outlineColor.isValid() )
-        {
-            // outline
-            painter->setRenderHint( QPainter::Antialiasing, false );
-            painter->setBrush( Qt::NoBrush );
-            painter->setPen( outlineColor );
-            painter->drawLine( backRect.bottomLeft(), backRect.bottomRight() );
         }
 
         painter->restore();

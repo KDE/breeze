@@ -145,13 +145,6 @@
          </property>
         </widget>
        </item>
-       <item row="6" column="0" colspan="3">
-        <widget class="QCheckBox" name="drawTitleBarSeparator">
-         <property name="text">
-          <string>Draw separator under active window's titlebar</string>
-         </property>
-        </widget>
-       </item>
        <item row="3" column="0" colspan="3">
         <widget class="QCheckBox" name="drawBorderOnMaximizedWindows">
          <property name="text">
@@ -331,7 +324,6 @@
   <tabstop>drawBorderOnMaximizedWindows</tabstop>
   <tabstop>drawBackgroundGradient</tabstop>
   <tabstop>drawSizeGrip</tabstop>
-  <tabstop>drawTitleBarSeparator</tabstop>
   <tabstop>shadowSize</tabstop>
   <tabstop>shadowStrength</tabstop>
   <tabstop>shadowColor</tabstop>
