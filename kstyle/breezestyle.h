@@ -468,6 +468,12 @@ namespace Breeze
          */
         bool hasHighlightNeutral( const QObject* widget, const QStyleOption* option, bool mouseOver = false, bool focus = false ) const;
 
+        //* return true if widget is styled by a stylesheet and is not null
+        bool hasSmallSpinBoxButtons(const QWidget* widget) const
+        {
+            return widget != nullptr && widget->testAttribute(Qt::WA_StyleSheet);
+        }
+
         //*@name scrollbar button types (for addLine and subLine )
         //@{
         ScrollBarButtonType _addLineButtons = SingleButton;

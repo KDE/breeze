@@ -413,8 +413,12 @@ namespace Breeze
         }
         else if ( qobject_cast<QDialog*> (widget) ) {
             widget->setAttribute(Qt::WA_StyledBackground);
-        } else if ( auto spbx = qobject_cast<QAbstractSpinBox*> (widget) ) {
-            spbx->setAlignment(Qt::AlignCenter);
+        } else if (auto spbx = qobject_cast<QAbstractSpinBox*> (widget)) {
+            const int buttonSize = spbx->fontMetrics().height() + Metrics::SpinBox_FrameWidth * 2;
+            const bool useSmallButtons = hasSmallSpinBoxButtons(widget);
+            if (!useSmallButtons) {
+                spbx->setAlignment(Qt::AlignCenter);
+            }
         }
 
 
@@ -2376,11 +2380,14 @@ namespace Breeze
         if( !spinBoxOption ) return ParentStyleClass::subControlRect( CC_SpinBox, option, subControl, widget );
         const bool flat( !spinBoxOption->frame );
 
-        const int frameWidth( pixelMetric( PM_SpinBoxFrameWidth, option, widget ) );
-        const int buttonSize( option->fontMetrics.height() + 2*frameWidth );
-
         // copy rect
         auto rect( option->rect );
+
+        const int frameWidth = pixelMetric( PM_SpinBoxFrameWidth, option, widget );
+        const int fullButtonSize = option->fontMetrics.height() + frameWidth * 2;
+        const bool useSmallButtons = hasSmallSpinBoxButtons(widget);
+        const int buttonWidth = useSmallButtons ? fullButtonSize / 2 + frameWidth : fullButtonSize;
+        const int buttonHeight = useSmallButtons ? fullButtonSize / 2 : fullButtonSize;
 
         if (subControl == SC_SpinBoxUp || subControl == SC_SpinBoxDown) {
             // compensate for 1px margin + 1px border
@@ -2394,35 +2401,59 @@ namespace Breeze
             case SC_SpinBoxUp:
             {
                 auto r = rect;
-                r.setWidth(buttonSize);
+                r.setWidth(buttonWidth);
                 r.moveRight(rect.right());
-                return r;
+                if (useSmallButtons) {
+                    r.setHeight(buttonHeight);
+                    r.moveTop(rect.top());
+                }
+                return visualRect(option, r);
             }
 
             case SC_SpinBoxDown:
             {
                 auto r = rect;
-                r.setWidth(buttonSize);
-                r.moveLeft(rect.left());
-                return r;
+                r.setWidth(buttonWidth);
+                if (useSmallButtons) {
+                    r.setHeight(buttonHeight);
+                    r.moveRight(rect.right());
+                    r.moveBottom(rect.bottom());
+                } else {
+                    r.moveLeft(rect.left());
+                }
+                return visualRect(option, r);
             }
 
             case SC_SpinBoxEditField:
             {
                 const bool showButtons = spinBoxOption->buttonSymbols != QAbstractSpinBox::NoButtons;
-                const int frameWidth( pixelMetric( PM_SpinBoxFrameWidth, option, widget ) );
-                const int buttonSize( option->fontMetrics.height() + 2*frameWidth );
 
                 QRect r = rect;
                 if( showButtons ) {
                     auto w = r.width();
-                    r.setLeft(buttonSize);
-                    r.setRight(w-buttonSize);
+                    if (!useSmallButtons) {
+                        r.setLeft(buttonWidth);
+                    }
+                    r.setRight(w-buttonWidth);
                 }
 
-                // remove right side line editor margins
-                if( !flat && r.height() >= option->fontMetrics.height() + 2*frameWidth )
-                { r.adjust( frameWidth, frameWidth, -frameWidth, -frameWidth ); }
+                if( !flat &&  r.height() >= fullButtonSize) {
+                    if (showButtons) {
+                        if (useSmallButtons) {
+                            // remove right side line editor margins
+                            // -3 is a magic number that makes the edit area fill the area between the buttons.
+                            // This helps to prevent text from being cut off when there's still a bit of room.
+                            r.adjust( frameWidth, frameWidth, -3, -frameWidth );
+                        } else {
+                            // remove both side line editor margins
+                            // 2 and -3 are magic numbers that make the edit area fill the area between the buttons.
+                            // This helps to prevent text from being cut off when there's still a bit of room.
+                            r.adjust( 2, frameWidth, -3, -frameWidth );
+                        }
+                    } else {
+                        r.adjust( frameWidth, frameWidth, -frameWidth, -frameWidth );
+                    }
+                }
 
                 return visualRect( option, r );
 
@@ -2711,17 +2742,22 @@ namespace Breeze
         // copy size
         QSize size( contentsSize );
 
-        // add editor margins
         const int frameWidth( pixelMetric( PM_SpinBoxFrameWidth, option, widget ) );
+        const int buttonSize = option->fontMetrics.height() + 2 * frameWidth;
+
+        // add editor margins
         if( !flat ) size = expandSize( size, frameWidth );
 
         // make sure there is enough height for the button
-        size.setHeight( qMax( size.height(), int(Metrics::SpinBox_ArrowButtonWidth) ) );
+        size.setHeight( qMax( size.height(), buttonSize ) );
 
-        // add in the buttons, which are square w/ length of height, and we have two of them
+        // Add in the buttons, which are square w/ length of height, and we have two of them.
+        // Use buttonSize * 3 + 2 as minimum size hint width because it looks nice. +2 is the added width of separator lines.
+        // Adding 2 also fixes the appearance of spinboxes in VLC by switching the button style to small buttons,
+        // but this is an unintentional hack/bugfix that should not be relied upon as a real bugfix.
+        // It is most likely a problem with VLC forcing a specific width without accounting for the size hint width.
         const bool showButtons = spinBoxOption->buttonSymbols != QAbstractSpinBox::NoButtons;
-        const int buttonSize( option->fontMetrics.height() + 2*frameWidth );
-        if( showButtons ) size.rwidth() += buttonSize*2;
+        if( showButtons ) size.rwidth() += buttonSize * 2;
 
         return size;
 
@@ -6368,13 +6404,15 @@ namespace Breeze
         const auto& palette( option->palette );
         const auto& rect( option->rect );
 
+        const int frameWidth = pixelMetric(PM_SpinBoxFrameWidth, option, widget);
+
 
         if( option->subControls & SC_SpinBoxFrame )
         {
 
             // detect flat spinboxes
             bool flat( !spinBoxOption->frame );
-            flat |= ( rect.height() < 2*Metrics::Frame_FrameWidth + Metrics::SpinBox_ArrowButtonWidth );
+            flat |= ( rect.height() < 2 * frameWidth + option->fontMetrics.height() );
             if( flat )
             {
 
@@ -6845,6 +6883,9 @@ namespace Breeze
         const bool animated( enabled && _animations->spinBoxEngine().isAnimated( widget, subControl ) );
         const qreal opacity( _animations->spinBoxEngine().opacity( widget, subControl ) );
 
+        const int fontHeight = option->fontMetrics.height();
+        const bool useSmallButtons = hasSmallSpinBoxButtons(widget);
+
         auto color = _helper->arrowColor( palette, QPalette::Text );
         if( animated )
         {
@@ -6871,11 +6912,15 @@ namespace Breeze
         // render
         _helper->renderArrow( painter, arrowRect, color, orientation );
 
-        painter->setPen( _helper->separatorColor( palette ));
-        if (subControl == SC_SpinBoxUp) {
-            painter->drawLine(QLine(arrowRect.topLeft()+QPoint(0, 2), arrowRect.bottomLeft()-QPoint(0, 2)));
-        } else {
-            painter->drawLine(QLine(arrowRect.topRight()+QPoint(0, 2), arrowRect.bottomRight()-QPoint(0, 2)));
+        if (!useSmallButtons) {
+            painter->setPen( _helper->separatorColor( palette ));
+            const int margin = std::max(0, (arrowRect.height() - fontHeight) / 2);
+            QRect lineRect = arrowRect.adjusted(0, margin, -arrowRect.width() + 1, -margin);
+            if (subControl == SC_SpinBoxDown) {
+                lineRect.moveRight(arrowRect.right());
+            }
+            lineRect = visualRect(option->direction, arrowRect, lineRect);
+            painter->drawLine(lineRect.topLeft(), lineRect.bottomLeft());
         }
 
     }
