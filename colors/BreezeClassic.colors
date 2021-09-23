@@ -105,6 +105,15 @@ ForegroundVisited=61,174,230
 [General]
 ColorScheme=BreezeClassic
 Name=Breeze Classic
+Name[ca]=Brisa clàssica
+Name[es]=Brisa clásico
+Name[eu]=Breeze klasikoa
+Name[hu]=Breeze Classic
+Name[ia]=Brisa Classic
+Name[nl]=Breeze Classic
+Name[sv]=Breeze klassisk
+Name[uk]=Класична Breeze
+Name[x-test]=xxBreeze Classicxx
 shadeSortColumn=true
 
 [KDE]
