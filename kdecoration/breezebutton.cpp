@@ -123,7 +123,7 @@ namespace Breeze
         if( m_flag == FlagFirstInList ) painter->translate( m_offset );
         else painter->translate( 0, m_offset.y() );
 
-        if( !m_iconSize.isValid() ) m_iconSize = geometry().size().toSize();
+        if( !m_iconSize.isValid() || isStandAlone() ) m_iconSize = geometry().size().toSize();
 
         // menu button
         if (type() == DecorationButtonType::Menu)
