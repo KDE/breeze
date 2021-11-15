@@ -1,5 +1,4 @@
 add_subdirectory(qtcurvepreset)
-add_subdirectory(kde4breeze)
 add_subdirectory(breezetobreezelight)
 add_subdirectory(breezehighcontrasttobreezedark)
 add_subdirectory(breezetobreezeclassic)
