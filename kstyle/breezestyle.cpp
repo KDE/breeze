@@ -5153,7 +5153,7 @@ namespace Breeze
     bool Style::drawProgressBarGrooveControl( const QStyleOption* option, QPainter* painter, const QWidget* ) const
     {
         const auto& palette( option->palette );
-        const auto color( _helper->alphaColor( palette.color( QPalette::WindowText ), 0.3 ) );
+        const auto color( _helper->alphaColor( palette.color( QPalette::WindowText ), 0.2 ) );
         _helper->renderProgressBarGroove( painter, option->rect, color, palette.color(QPalette::Window) );
         return true;
     }
@@ -6645,7 +6645,7 @@ namespace Breeze
             auto grooveRect( subControlRect( CC_Slider, sliderOption, SC_SliderGroove, widget ) );
 
             // base color
-            const auto grooveColor( _helper->alphaColor( palette.color( QPalette::WindowText ), 0.3 ) );
+            const auto grooveColor( _helper->alphaColor( palette.color( QPalette::WindowText ), 0.2 ) );
 
             if( !enabled ) _helper->renderSliderGroove( painter, grooveRect, grooveColor );
             else {
@@ -6744,7 +6744,7 @@ namespace Breeze
             auto grooveRect( subControlRect( CC_Dial, sliderOption, SC_SliderGroove, widget ) );
 
             // groove
-            const auto grooveColor( KColorUtils::mix( palette.color( QPalette::Window ), palette.color( QPalette::WindowText ), 0.3 ) );
+            const auto grooveColor( KColorUtils::mix( palette.color( QPalette::Window ), palette.color( QPalette::WindowText ), 0.2 ) );
 
             // angles
             const qreal first( dialAngle( sliderOption, sliderOption->minimum ) );
@@ -6839,7 +6839,7 @@ namespace Breeze
             }
 
             const auto& palette( option->palette );
-            const auto color( _helper->alphaColor( palette.color( QPalette::WindowText ), 0.3 * (animated ? opacity : 1) ) );
+            const auto color( _helper->alphaColor( palette.color( QPalette::WindowText ), 0.2 * (animated ? opacity : 1) ) );
             const auto& state( option->state );
             const bool horizontal( state & State_Horizontal );
 
