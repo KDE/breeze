@@ -2463,6 +2463,7 @@ namespace Breeze
         const State& state( option->state );
         const bool horizontal( state & State_Horizontal );
         const bool mouseOver( state & State_MouseOver );
+        const bool autoHideArrows( shouldAutoHideArrows(widget) );
 
         switch( subControl )
         {
@@ -2481,7 +2482,7 @@ namespace Breeze
                 
                 bool enlargeOverSubPage = false;
                 bool enlargeOverAddPage = false;
-                if( StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() && (sliderOption->minimum == sliderOption->maximum) ){
+                if( autoHideArrows && (sliderOption->minimum == sliderOption->maximum) ){
                     enlargeOverSubPage = true;
                     enlargeOverAddPage = true;
                 }
@@ -2536,6 +2537,8 @@ namespace Breeze
                 return visualRect( option, QRect( topLeftCorner, botRightCorner )  );
 
             }
+            
+            
 
             case SC_ScrollBarSlider:
             {
@@ -2561,8 +2564,8 @@ namespace Breeze
                 // determines whether to enlarge the slider over the area occupied by the arrows when slider is at extremities and mouse is not over
                 bool enlargeOverSubPage = false;
                 bool enlargeOverAddPage = false;
-                if( _subLineButtons != ScrollBarButtonType::NoButton && sliderAtMin && !mouseOver && StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() )  enlargeOverSubPage = true;
-                if( _addLineButtons != ScrollBarButtonType::NoButton && sliderAtMax && !mouseOver && StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() )  enlargeOverAddPage = true;
+                if( _subLineButtons != ScrollBarButtonType::NoButton && sliderAtMin && !mouseOver && autoHideArrows )  enlargeOverSubPage = true;
+                if( _addLineButtons != ScrollBarButtonType::NoButton && sliderAtMax && !mouseOver && autoHideArrows )  enlargeOverAddPage = true;
                 
                 int pos = qRound( qreal( sliderOption->sliderPosition - sliderOption->minimum )/ ( sliderOption->maximum - sliderOption->minimum )*space );
                 if( sliderOption->upsideDown ) pos = space - pos;
@@ -2623,6 +2626,33 @@ namespace Breeze
         }
     }
 
+    //there are some edge cases where extending the scrollBar slider will look wrong such as the Kate/KDevelop ScrollBar Minimap
+    //Also in LibreOffice, auto-hiding does not work -- LibreOffice uses a null widget
+    //do not auto-hide arrows with slider extension in these cases
+    bool Style::scrollBarAutoHideArrowsException( const QWidget* widget ) const
+    {
+        bool exception = false;
+        
+        if( widget ){
+            std::array<char*,1> exceptionClassNames = {"KateScrollBar"};
+            for( int i=0; i < exceptionClassNames.size(); i++ ){
+                if( !strcmp(widget->metaObject()->className(), exceptionClassNames[i]) ){
+                    exception = true;
+                    break;
+                }
+            }
+        } else exception = true;
+        
+        return exception;
+    }
+    
+    bool Style::shouldAutoHideArrows( const QWidget* widget ) const
+    {
+        if( StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() && !scrollBarAutoHideArrowsException(widget) )
+            return true;
+        else return false;
+    }
+    
     //___________________________________________________________________________________________________________________
     QRect Style::dialSubControlRect( const QStyleOptionComplex* option, SubControl subControl, const QWidget* widget ) const
     {
@@ -5283,7 +5313,7 @@ namespace Breeze
         const auto sliderOption( qstyleoption_cast<const QStyleOptionSlider*>( option ) );
         if( !sliderOption ) return true;
         
-        if( StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() && (sliderOption->minimum == sliderOption->maximum) ) return true;
+        if( shouldAutoHideArrows(widget) && (sliderOption->minimum == sliderOption->maximum) ) return true;
 
         const State& state( option->state );
         const bool horizontal( state & State_Horizontal );
@@ -5366,7 +5396,7 @@ namespace Breeze
         const auto sliderOption( qstyleoption_cast<const QStyleOptionSlider*>( option ) );
         if( !sliderOption ) return true;
         
-        if( StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() && (sliderOption->minimum == sliderOption->maximum) ) return true;
+        if( shouldAutoHideArrows(widget) && (sliderOption->minimum == sliderOption->maximum) ) return true;
 
         const State& state( option->state );
         const bool horizontal( state & State_Horizontal );
@@ -7048,11 +7078,13 @@ namespace Breeze
         if( widget ) widgetMouseOver = widget->underMouse();
         // in case this QStyle is used by QQuickControls QStyle wrapper
         else if( option->styleObject ) widgetMouseOver = option->styleObject->property("hover").toBool();
-
+        
+        bool autoHideArrows = shouldAutoHideArrows(widget);
+        
         // check enabled state
         const bool enabled( option->state & State_Enabled );
         if( !enabled ) {
-            if( StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() ) {
+            if( autoHideArrows ) {
                 // finally, global opacity when ScrollBarShowOnMouseOver
                 const qreal globalOpacity( _animations->scrollBarEngine().opacity( widget, QStyle::SC_ScrollBarGroove ) );
                 if( globalOpacity >= 0 && widgetMouseOver ) color.setAlphaF( globalOpacity );
@@ -7069,7 +7101,7 @@ namespace Breeze
 
             // manually disable arrow, to indicate that scrollbar is at limit
             color = _helper->arrowColor( palette, QPalette::Disabled, QPalette::WindowText );
-            if( StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() ) {
+            if( autoHideArrows ) {
                 // finally, global opacity when ScrollBarShowOnMouseOver
                 const qreal globalOpacity( _animations->scrollBarEngine().opacity( widget, QStyle::SC_ScrollBarGroove ) );
                 if( globalOpacity >= 0 && widgetMouseOver ) color.setAlphaF( globalOpacity );
@@ -7111,7 +7143,7 @@ namespace Breeze
 
         }
 
-        if( StyleConfigData::animationsEnabled() && StyleConfigData::scrollBarAutoHideArrows() ) {
+        if( autoHideArrows ) {
             // finally, global opacity when ScrollBarShowOnMouseOver
             const qreal globalOpacity( _animations->scrollBarEngine().opacity( widget, QStyle::SC_ScrollBarGroove ) );
             if( globalOpacity >= 0 && widgetMouseOver ) color.setAlphaF( globalOpacity );

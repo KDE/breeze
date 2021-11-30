@@ -200,6 +200,8 @@ namespace Breeze
         QRect spinBoxSubControlRect( const QStyleOptionComplex*, SubControl, const QWidget* ) const;
         QRect scrollBarInternalSubControlRect( const QStyleOptionComplex*, SubControl ) const;
         QRect scrollBarSubControlRect( const QStyleOptionComplex*, SubControl, const QWidget* ) const;
+        bool scrollBarAutoHideArrowsException( const QWidget* widget ) const;
+        bool shouldAutoHideArrows( const QWidget* widget ) const;
         QRect dialSubControlRect( const QStyleOptionComplex*, SubControl, const QWidget* ) const;
         QRect sliderSubControlRect( const QStyleOptionComplex*, SubControl, const QWidget* ) const;
 
