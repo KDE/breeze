@@ -2634,8 +2634,8 @@ namespace Breeze
         bool exception = false;
         
         if( widget ){
-            std::array<char*,1> exceptionClassNames = {"KateScrollBar"};
-            for( int i=0; i < exceptionClassNames.size(); i++ ){
+            std::array<const char*,1> exceptionClassNames = {"KateScrollBar"};
+            for( unsigned i=0; i < exceptionClassNames.size(); i++ ){
                 if( !strcmp(widget->metaObject()->className(), exceptionClassNames[i]) ){
                     exception = true;
                     break;
