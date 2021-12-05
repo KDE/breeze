@@ -4024,7 +4024,7 @@ namespace Breeze
 
         // cast option and check
         const auto complexOption( qstyleoption_cast<const QStyleOptionComplex*>( option ) );
-        if( !complexOption && !(complexOption->subControls & SC_ToolButtonMenu) ) return true;
+        if( !complexOption || !(complexOption->subControls & SC_ToolButtonMenu) ) return true;
 
         // button state
         bool enabled = option->state & QStyle::State_Enabled;
