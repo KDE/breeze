@@ -1278,7 +1278,8 @@ namespace Breeze
         painter->setRenderHint( QPainter::Antialiasing, true );
 
         const QRectF baseRect( rect );
-        const qreal radius( 0.5 * std::min({baseRect.width(), baseRect.height(), (qreal)Metrics::ScrollBar_SliderWidth}) );
+        //const qreal radius( 0.5 * std::min({baseRect.width(), baseRect.height(), (qreal)Metrics::ScrollBar_SliderWidth}) );
+        const qreal radius( 0.5 * std::min({baseRect.width(), baseRect.height()}) );
 
         painter->setPen( Qt::NoPen );
         painter->setPen( QPen(fg, 1.001) );
@@ -1297,7 +1298,8 @@ namespace Breeze
         painter->setRenderHint( QPainter::Antialiasing, true );
 
         const QRectF baseRect( rect );
-        const qreal radius( 0.5 * std::min({baseRect.width(), baseRect.height(), (qreal)Metrics::ScrollBar_SliderWidth}) );
+        //const qreal radius( 0.5 * std::min({baseRect.width(), baseRect.height(), (qreal)Metrics::ScrollBar_SliderWidth}) );
+        const qreal radius( 0.5 * std::min({baseRect.width(), baseRect.height()}) );
 
         // content
         if( color.isValid() )

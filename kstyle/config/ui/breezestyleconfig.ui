@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>564</width>
-    <height>266</height>
+    <width>631</width>
+    <height>482</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -39,33 +39,14 @@
        <string>General</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="6" column="1">
-        <widget class="QLabel" name="_windowDragLabel">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
+       <item row="0" column="0" colspan="2">
+        <widget class="QCheckBox" name="_tabBarDrawCenteredTabs">
          <property name="text">
-          <string>W&amp;indows' drag mode:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-         <property name="buddy">
-          <cstring>_windowDragMode</cstring>
+          <string>Centre tabbar tabs</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="1" colspan="4">
-        <widget class="QCheckBox" name="_viewDrawFocusIndicator">
-         <property name="text">
-          <string>Draw focus indicator in lists</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="1">
+       <item row="7" column="0" colspan="2">
         <widget class="QLabel" name="_mnemonicsLabel">
          <property name="text">
           <string>&amp;Keyboard accelerators visibility:</string>
@@ -78,7 +59,20 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="2" colspan="2">
+       <item row="9" column="0" rowspan="3" colspan="3">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>60</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="7" column="2" colspan="3">
         <widget class="QComboBox" name="_mnemonicsMode">
          <item>
           <property name="text">
@@ -97,21 +91,27 @@
          </item>
         </widget>
        </item>
-       <item row="5" column="4">
-        <spacer name="horizontalSpacer_3">
+       <item row="7" column="5">
+        <spacer name="horizontalSpacer_2">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>65</width>
+           <width>100</width>
            <height>20</height>
           </size>
          </property>
         </spacer>
        </item>
-       <item row="6" column="2" colspan="2">
+       <item row="8" column="2" colspan="3">
         <widget class="QComboBox" name="_windowDragMode">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <item>
           <property name="text">
            <string>Drag windows from titlebar only</string>
@@ -129,46 +129,141 @@
          </item>
         </widget>
        </item>
-       <item row="7" column="1" colspan="3">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
+       <item row="8" column="0" colspan="2">
+        <widget class="QLabel" name="_windowDragLabel">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>49</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="1" colspan="4">
-        <widget class="QCheckBox" name="_tabBarDrawCenteredTabs">
          <property name="text">
-          <string>Center tabbar tabs</string>
+          <string>W&amp;indows' drag mode:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>_windowDragMode</cstring>
          </property>
         </widget>
        </item>
-       <item row="1" column="1" colspan="4">
-        <widget class="QCheckBox" name="_toolBarDrawItemSeparator">
+       <item row="6" column="0" colspan="3">
+        <widget class="QCheckBox" name="_splitterProxyEnabled">
          <property name="text">
-          <string>Draw toolbar item separators</string>
+          <string>Enable extended resize handles</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="1" colspan="4">
+       <item row="3" column="0" colspan="2">
+        <widget class="QCheckBox" name="_viewDrawFocusIndicator">
+         <property name="text">
+          <string>Draw focus indicator in lists</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0" colspan="2">
         <widget class="QCheckBox" name="_sliderDrawTickMarks">
          <property name="text">
           <string>Draw slider tick marks</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="1" colspan="4">
-        <widget class="QCheckBox" name="_splitterProxyEnabled">
+       <item row="1" column="0" rowspan="2" colspan="3">
+        <widget class="QCheckBox" name="_toolBarDrawItemSeparator">
          <property name="text">
-          <string>Enable extended resize handles</string>
+          <string>Draw toolbar item separators</string>
          </property>
         </widget>
+       </item>
+       <item row="13" column="0" colspan="6">
+        <layout class="QGridLayout" name="gridLayout_4">
+         <item row="2" column="1">
+          <widget class="QLabel" name="label_24">
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;v3.0 git&lt;br /&gt;&lt;a href=&quot;https://github.com/paulmcauley/classik&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#2980b9;&quot;&gt;Source code&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+           <property name="openExternalLinks">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="1">
+          <widget class="QGraphicsView" name="graphicsView">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>170</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>170</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>170</width>
+             <height>64</height>
+            </size>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">border-image: url(:/images/Classik_logo.svg);</string>
+           </property>
+           <property name="interactive">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignBottom|Qt::AlignRight|Qt::AlignTrailing</set>
+           </property>
+           <property name="rubberBandSelectionMode">
+            <enum>Qt::IntersectsItemShape</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <spacer name="horizontalSpacer_7">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
@@ -213,89 +308,365 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_4">
+     <widget class="QWidget" name="tab_scrollbars">
       <attribute name="title">
        <string>Scrollbars</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_6">
-       <item row="1" column="2">
-        <spacer name="horizontalSpacer_2">
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <layout class="QFormLayout" name="formLayout_4">
+         <property name="leftMargin">
+          <number>8</number>
+         </property>
+         <property name="topMargin">
+          <number>8</number>
+         </property>
+         <property name="rightMargin">
+          <number>8</number>
+         </property>
+         <property name="bottomMargin">
+          <number>8</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>Scrollbar top/bottom margins:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QSpinBox" name="_scrollBarTopBottomMargins"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_6">
          <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
-           <width>40</width>
-           <height>20</height>
+           <width>20</width>
+           <height>15</height>
           </size>
          </property>
         </spacer>
        </item>
-       <item row="0" column="1">
-        <widget class="QComboBox" name="_scrollBarSubLineButtons">
-         <item>
-          <property name="text">
-           <string>No Buttons</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>One Button</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Two Buttons</string>
-          </property>
-         </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Arrow buttons</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <layout class="QGridLayout" name="gridLayout_3">
+            <item row="1" column="3">
+             <widget class="QStackedWidget" name="stackedWidget_2">
+              <property name="currentIndex">
+               <number>0</number>
+              </property>
+              <widget class="QWidget" name="page_bottom_no_buttons">
+               <layout class="QFormLayout" name="formLayout_3"/>
+              </widget>
+              <widget class="QWidget" name="page_bottom_one_button">
+               <layout class="QFormLayout" name="formLayout_6">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_4">
+                  <property name="text">
+                   <string>Space between arrow and groove:</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>_scrollBarBottomOneButtonSpacing</cstring>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QSpinBox" name="_scrollBarBottomOneButtonSpacing">
+                  <property name="minimum">
+                   <number>-10</number>
+                  </property>
+                  <property name="maximum">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+              <widget class="QWidget" name="page_bottom_two_buttons">
+               <layout class="QFormLayout" name="formLayout_8">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_7">
+                  <property name="text">
+                   <string>Space between arrows and groove:</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>_scrollBarBottomTwoButtonSpacing</cstring>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QSpinBox" name="_scrollBarBottomTwoButtonSpacing">
+                  <property name="minimum">
+                   <number>-10</number>
+                  </property>
+                  <property name="maximum">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="_autoHideArrows">
+              <property name="text">
+               <string>Auto-hide arrows</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="3">
+             <widget class="QStackedWidget" name="stackedWidget">
+              <property name="currentIndex">
+               <number>0</number>
+              </property>
+              <widget class="QWidget" name="page_top_no_buttons">
+               <layout class="QFormLayout" name="formLayout"/>
+              </widget>
+              <widget class="QWidget" name="page_top_one_button">
+               <layout class="QFormLayout" name="formLayout_5">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_3">
+                  <property name="text">
+                   <string>Space between arrow and groove:</string>
+                  </property>
+                  <property name="buddy">
+                   <cstring>_scrollBarTopOneButtonSpacing</cstring>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QSpinBox" name="_scrollBarTopOneButtonSpacing">
+                  <property name="minimum">
+                   <number>-10</number>
+                  </property>
+                  <property name="maximum">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+              <widget class="QWidget" name="page_top_two_buttons">
+               <layout class="QFormLayout" name="formLayout_7">
+                <item row="0" column="1">
+                 <widget class="QSpinBox" name="_scrollBarTopTwoButtonSpacing">
+                  <property name="minimum">
+                   <number>-10</number>
+                  </property>
+                  <property name="maximum">
+                   <number>10</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_6">
+                  <property name="text">
+                   <string>Space between arrows and groove:</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="_scrollBarSubLineButtons">
+              <item>
+               <property name="text">
+                <string>No Buttons</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>One Button</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Two Buttons</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="_scrollBarAddLineLabel">
+              <property name="text">
+               <string>Bottom arrow button t&amp;ype:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="buddy">
+               <cstring>_scrollBarAddLineButtons</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="_scrollBarAddLineButtons">
+              <item>
+               <property name="text">
+                <string>No Buttons</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>One Button</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Two Buttons</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="_scrollBarSubLineLabel">
+              <property name="text">
+               <string>&amp;Top arrow button type:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+              <property name="buddy">
+               <cstring>_scrollBarSubLineButtons</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QComboBox" name="_scrollBarAddLineButtons">
-         <item>
-          <property name="text">
-           <string>No Buttons</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>One Button</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Two Buttons</string>
-          </property>
-         </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>15</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="title">
+          <string>Groove/Slider</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <layout class="QFormLayout" name="formLayout_2">
+            <item row="1" column="0">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Slider thickness when mouse is over:</string>
+              </property>
+              <property name="buddy">
+               <cstring>_scrollBarSliderThicknessMouseOver</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QSpinBox" name="_scrollBarSliderThicknessMouseOver">
+              <property name="minimumSize">
+               <size>
+                <width>74</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>50</number>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Slider thickness when mouse is not over:</string>
+              </property>
+              <property name="buddy">
+               <cstring>_scrollBarSliderThicknessMouseNotOverPercent</cstring>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QSpinBox" name="_scrollBarSliderThicknessMouseNotOverPercent">
+              <property name="suffix">
+               <string> %</string>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>100</number>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QSpinBox" name="_scrollBarSliderPadding">
+              <property name="minimumSize">
+               <size>
+                <width>74</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximum">
+               <number>20</number>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Slider side padding:</string>
+              </property>
+              <property name="buddy">
+               <cstring>_scrollBarSliderPadding</cstring>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="_scrollBarAddLineLabel">
-         <property name="text">
-          <string>Bottom arrow button t&amp;ype:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-         <property name="buddy">
-          <cstring>_scrollBarAddLineButtons</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="_scrollBarSubLineLabel">
-         <property name="text">
-          <string>&amp;Top arrow button type:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-         <property name="buddy">
-          <cstring>_scrollBarSubLineButtons</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0" colspan="3">
+       <item>
         <spacer name="verticalSpacer_4">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -307,13 +678,6 @@
           </size>
          </property>
         </spacer>
-       </item>
-       <item row="2" column="0">
-        <widget class="QCheckBox" name="_autoHideArrows">
-         <property name="text">
-          <string>Auto-hide arrows</string>
-         </property>
-        </widget>
        </item>
       </layout>
      </widget>
@@ -460,18 +824,123 @@
   <tabstop>_tabBarDrawCenteredTabs</tabstop>
   <tabstop>_toolBarDrawItemSeparator</tabstop>
   <tabstop>_sliderDrawTickMarks</tabstop>
+  <tabstop>_viewDrawFocusIndicator</tabstop>
   <tabstop>_splitterProxyEnabled</tabstop>
   <tabstop>_mnemonicsMode</tabstop>
   <tabstop>_windowDragMode</tabstop>
   <tabstop>_dockWidgetDrawFrame</tabstop>
   <tabstop>_sidePanelDrawFrame</tabstop>
   <tabstop>_menuItemDrawThinFocus</tabstop>
+  <tabstop>_scrollBarTopBottomMargins</tabstop>
   <tabstop>_scrollBarSubLineButtons</tabstop>
+  <tabstop>_scrollBarTopOneButtonSpacing</tabstop>
+  <tabstop>_scrollBarTopTwoButtonSpacing</tabstop>
   <tabstop>_scrollBarAddLineButtons</tabstop>
+  <tabstop>_scrollBarBottomOneButtonSpacing</tabstop>
+  <tabstop>_scrollBarBottomTwoButtonSpacing</tabstop>
   <tabstop>_autoHideArrows</tabstop>
-  <tabstop>_viewDrawFocusIndicator</tabstop>
+  <tabstop>_scrollBarSliderThicknessMouseOver</tabstop>
+  <tabstop>_scrollBarSliderThicknessMouseNotOverPercent</tabstop>
+  <tabstop>_scrollBarSliderPadding</tabstop>
   <tabstop>_menuOpacity</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>_scrollBarSubLineButtons</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>stackedWidget</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>301</x>
+     <y>186</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>611</x>
+     <y>192</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_scrollBarAddLineButtons</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>stackedWidget_2</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>301</x>
+     <y>236</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>611</x>
+     <y>242</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_scrollBarTopOneButtonSpacing</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>_scrollBarBottomOneButtonSpacing</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>599</x>
+     <y>186</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>599</x>
+     <y>236</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_scrollBarBottomOneButtonSpacing</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>_scrollBarTopOneButtonSpacing</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>599</x>
+     <y>236</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>599</x>
+     <y>186</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_scrollBarTopTwoButtonSpacing</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>_scrollBarBottomTwoButtonSpacing</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>566</x>
+     <y>176</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>566</x>
+     <y>219</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>_scrollBarBottomTwoButtonSpacing</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>_scrollBarTopTwoButtonSpacing</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>576</x>
+     <y>215</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>584</x>
+     <y>180</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
