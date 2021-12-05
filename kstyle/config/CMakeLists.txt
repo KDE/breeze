@@ -1,12 +1,14 @@
 ### configuration plugin
 add_definitions(-DTRANSLATION_DOMAIN=\"classikstyles_style_config\")
-set(kstyle_breeze_config_PART_SRCS breezestyleconfig.cpp)
+set(kstyle_breeze_config_PART_SRCS breezestyleconfig.cpp ui/classikstyleconfig.qrc)
 
-set(kstyle_breeze_config_PART_SRCS ${kstyle_breeze_config_PART_SRCS} breezestyleconfigmodule.cpp)
+set(kstyle_breeze_config_PART_SRCS ${kstyle_breeze_config_PART_SRCS} breezestyleconfigmodule.cpp )
 
 kconfig_add_kcfg_files(kstyle_breeze_config_PART_SRCS ../breezestyleconfigdata.kcfgc)
 set(kstyle_breeze_config_PART_FORMS ui/breezestyleconfig.ui)
 ki18n_wrap_ui(kstyle_breeze_config_PART_FORMS_HEADERS ${kstyle_breeze_config_PART_FORMS})
+
+set(CMAKE_AUTORCC ON)
 
 add_library(kstyle_classikstyles_config MODULE
     ${kstyle_breeze_config_PART_SRCS}

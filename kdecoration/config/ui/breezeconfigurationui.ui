@@ -2418,19 +2418,6 @@ side margins:</string>
        </item>
        <item row="7" column="1">
         <layout class="QGridLayout" name="gridLayout_10">
-         <item row="0" column="1">
-          <widget class="QLabel" name="animationsSpeedLabel3">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="0">
           <widget class="QLabel" name="animationsSpeedLabel2">
            <property name="enabled">
@@ -2441,7 +2428,7 @@ side margins:</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="2">
+         <item row="0" column="1">
           <widget class="QLabel" name="animationsSpeedLabel4">
            <property name="enabled">
             <bool>false</bool>

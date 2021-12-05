@@ -1,6 +1,7 @@
 /* SPDX-FileCopyrightText: 2014 Hugo Pereira Da Costa <hugo.pereira@free.fr>
  * SPDX-FileCopyrightText: 2016 The Qt Company Ltd.
  * SPDX-FileCopyrightText: 2021 Noah Davis <noahadvs@gmail.com>
+ * SPDX-FileCopyrightText: 2021 Paul A McAuley <kde@paulmcauley.com>
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
@@ -2586,45 +2587,45 @@ namespace Breeze
                 if( horizontal )
                 {
                     if( _subLineButtons == ScrollBarButtonType::NoButton ) {
-                        topLeftCorner  = QPoint( topRect.right() + 1, topRect.top() );
+                        topLeftCorner  = QPoint( topRect.left() + Metrics::ScrollBar_TopBottomMargins, topRect.top() );
                     } else if( _subLineButtons == ScrollBarButtonType::SingleButton ){
-                        if( enlargeOverSubPage ) topLeftCorner = QPoint ( topRect.left() + (topRect.right() - topRect.left())/4 , topRect.top() );
-                        else topLeftCorner  = QPoint( topRect.right() - 5, topRect.top() );
+                        if( enlargeOverSubPage ) topLeftCorner = QPoint ( topRect.left() + Metrics::ScrollBar_TopBottomMargins, topRect.top() );
+                        else topLeftCorner  = QPoint( topRect.right() + StyleConfigData::scrollBarTopOneButtonSpacing(), topRect.top() );
                     } else if( _subLineButtons == ScrollBarButtonType::DoubleButton ){
-                        if( enlargeOverSubPage ) topLeftCorner = QPoint ( topRect.left() + (topRect.right() - topRect.left())/8 , topRect.top() );
-                        else topLeftCorner  = QPoint( topRect.right() + 1, topRect.top() );
+                        if( enlargeOverSubPage ) topLeftCorner = QPoint ( topRect.left() + Metrics::ScrollBar_TopBottomMargins, topRect.top() );
+                        else topLeftCorner  = QPoint( topRect.right() + StyleConfigData::scrollBarTopTwoButtonSpacing(), topRect.top() );
                     }
                     
                     if( _addLineButtons == ScrollBarButtonType::NoButton ) {
-                        botRightCorner = QPoint( bottomRect.left()  - 1, topRect.bottom() );
+                        botRightCorner = QPoint( bottomRect.right() - Metrics::ScrollBar_TopBottomMargins, topRect.bottom() );
                     } else if( _addLineButtons == ScrollBarButtonType::SingleButton ){
-                        if( enlargeOverAddPage ) botRightCorner = QPoint ( bottomRect.left() + (bottomRect.right() - bottomRect.left()) *3/4, topRect.bottom() );
-                        else botRightCorner = QPoint( bottomRect.left()  + 5, topRect.bottom() );
+                        if( enlargeOverAddPage ) botRightCorner = QPoint ( bottomRect.right() - Metrics::ScrollBar_TopBottomMargins, topRect.bottom() );
+                        else botRightCorner = QPoint( bottomRect.left() - StyleConfigData::scrollBarBottomOneButtonSpacing(), topRect.bottom() );
                     } else if( _addLineButtons == ScrollBarButtonType::DoubleButton ){
-                        if( enlargeOverAddPage ) botRightCorner = QPoint ( bottomRect.left() + (bottomRect.right() - bottomRect.left()) *7/8, topRect.bottom() );
-                        else botRightCorner = QPoint( bottomRect.left()  - 1, topRect.bottom() );
+                        if( enlargeOverAddPage ) botRightCorner = QPoint ( bottomRect.right() - Metrics::ScrollBar_TopBottomMargins, topRect.bottom() );
+                        else botRightCorner = QPoint( bottomRect.left() - StyleConfigData::scrollBarBottomTwoButtonSpacing(), topRect.bottom() );
                     }
 
                 } else {
                     
                     if( _subLineButtons == ScrollBarButtonType::NoButton ) {
-                        topLeftCorner  = QPoint( topRect.left(),  topRect.bottom() + 1 );
+                        topLeftCorner  = QPoint( topRect.left(),  topRect.top() + Metrics::ScrollBar_TopBottomMargins );
                     } else if( _subLineButtons == ScrollBarButtonType::SingleButton ) {
-                        if( enlargeOverSubPage ) topLeftCorner = QPoint ( topRect.left(), topRect.top() + (topRect.bottom() - topRect.top())/4 );
-                        else topLeftCorner  = QPoint( topRect.left(),  topRect.bottom() - 5 );
+                        if( enlargeOverSubPage ) topLeftCorner = QPoint ( topRect.left(), topRect.top() + Metrics::ScrollBar_TopBottomMargins );
+                        else topLeftCorner  = QPoint( topRect.left(),  topRect.bottom() + StyleConfigData::scrollBarTopOneButtonSpacing() );
                     } else if( _subLineButtons == ScrollBarButtonType::DoubleButton ){
-                        if( enlargeOverSubPage ) topLeftCorner = QPoint ( topRect.left(), topRect.top() + (topRect.bottom() - topRect.top())/8 );
-                        else topLeftCorner  = QPoint( topRect.left(),  topRect.bottom() + 1 );
+                        if( enlargeOverSubPage ) topLeftCorner = QPoint ( topRect.left(), topRect.top() + Metrics::ScrollBar_TopBottomMargins );
+                        else topLeftCorner  = QPoint( topRect.left(),  topRect.bottom() + StyleConfigData::scrollBarTopTwoButtonSpacing() );
                     }
                     
                     if( _addLineButtons == ScrollBarButtonType::NoButton ) {
-                        botRightCorner = QPoint( topRect.right(), bottomRect.top() - 1 );
+                        botRightCorner = QPoint( topRect.right(), bottomRect.bottom() - Metrics::ScrollBar_TopBottomMargins );
                     } else if( _addLineButtons == ScrollBarButtonType::SingleButton ) {
-                        if( enlargeOverAddPage ) botRightCorner = QPoint ( topRect.right(), bottomRect.top() + (bottomRect.bottom() - bottomRect.top()) *3/4 );
-                        else botRightCorner = QPoint( topRect.right(), bottomRect.top() + 5 );
+                        if( enlargeOverAddPage ) botRightCorner = QPoint ( topRect.right(), bottomRect.bottom() - Metrics::ScrollBar_TopBottomMargins );
+                        else botRightCorner = QPoint( topRect.right(), bottomRect.top() - StyleConfigData::scrollBarBottomOneButtonSpacing() );
                     } else if( _addLineButtons == ScrollBarButtonType::DoubleButton ) {
-                        if( enlargeOverAddPage ) botRightCorner = QPoint ( topRect.right(), bottomRect.top() + (bottomRect.bottom() - bottomRect.top()) *7/8 );
-                        else botRightCorner = QPoint( topRect.right(), bottomRect.top() - 1 );
+                        if( enlargeOverAddPage ) botRightCorner = QPoint ( topRect.right(), bottomRect.bottom() - Metrics::ScrollBar_TopBottomMargins );
+                        else botRightCorner = QPoint( topRect.right(), bottomRect.top() - StyleConfigData::scrollBarBottomTwoButtonSpacing() );
                     }
 
                 }
@@ -2670,26 +2671,26 @@ namespace Breeze
                 if( horizontal ) {
                     if( enlargeOverSubPage ) {
                         int enlargeToTopRectXPos = topRect.left();
-                        if (_subLineButtons == ScrollBarButtonType::SingleButton ) enlargeToTopRectXPos = topRect.left() + ( (topRect.right() - topRect.left()) /4 );
-                        else if (_subLineButtons == ScrollBarButtonType::DoubleButton ) enlargeToTopRectXPos = topRect.left() + ( (topRect.right() - topRect.left()) /8 );
+                        if (_subLineButtons == ScrollBarButtonType::SingleButton ) enlargeToTopRectXPos = topRect.left() + Metrics::ScrollBar_TopBottomMargins;
+                        else if (_subLineButtons == ScrollBarButtonType::DoubleButton ) enlargeToTopRectXPos = topRect.left() + Metrics::ScrollBar_TopBottomMargins;
                         return visualRect( option, QRect( enlargeToTopRectXPos + pos, groove.top(), sliderSize + ( groove.left() - enlargeToTopRectXPos ), groove.height() ) );
                     } else if (enlargeOverAddPage ) {
-                        int enlargeToBottomRectXBy = 4;
-                        if (_addLineButtons == ScrollBarButtonType::SingleButton ) enlargeToBottomRectXBy = ((bottomRect.right() - groove.right()) *3/4);
-                        else if (_addLineButtons == ScrollBarButtonType::DoubleButton ) enlargeToBottomRectXBy = ((bottomRect.right() - groove.right()) *7/8);
+                        int enlargeToBottomRectXBy = 0;
+                        if (_addLineButtons == ScrollBarButtonType::SingleButton ) enlargeToBottomRectXBy = bottomRect.right() - groove.right() - Metrics::ScrollBar_TopBottomMargins;
+                        else if (_addLineButtons == ScrollBarButtonType::DoubleButton ) enlargeToBottomRectXBy = bottomRect.right() - groove.right() - Metrics::ScrollBar_TopBottomMargins;
                         return visualRect( option, QRect( groove.left() + pos, groove.top(), sliderSize + enlargeToBottomRectXBy, groove.height() ) );
                     } else return visualRect( option, QRect( groove.left() + pos, groove.top(), sliderSize, groove.height() ) );
                     
                 } else {
                     if( enlargeOverSubPage ) {
                         int enlargeToTopRectYPos = topRect.top();
-                        if (_subLineButtons == ScrollBarButtonType::SingleButton ) enlargeToTopRectYPos = topRect.top() + ( (topRect.bottom() - topRect.top()) /4 );
-                        else if (_subLineButtons == ScrollBarButtonType::DoubleButton ) enlargeToTopRectYPos = topRect.top() + ( (topRect.bottom() - topRect.top()) /8 ); 
+                        if (_subLineButtons == ScrollBarButtonType::SingleButton ) enlargeToTopRectYPos = topRect.top() + Metrics::ScrollBar_TopBottomMargins;
+                        else if (_subLineButtons == ScrollBarButtonType::DoubleButton ) enlargeToTopRectYPos = topRect.top() + Metrics::ScrollBar_TopBottomMargins; 
                         return visualRect( option, QRect( groove.left(), enlargeToTopRectYPos + pos, groove.width(), sliderSize + ( groove.top() - enlargeToTopRectYPos ) ) );
                     } else if (enlargeOverAddPage ) {
-                        int enlargeToBottomRectYBy = 4;
-                        if (_addLineButtons == ScrollBarButtonType::SingleButton ) enlargeToBottomRectYBy = ((bottomRect.bottom() - groove.bottom()) *3/4);
-                        else if (_addLineButtons == ScrollBarButtonType::DoubleButton ) enlargeToBottomRectYBy = ((bottomRect.bottom() - groove.bottom()) *7/8);
+                        int enlargeToBottomRectYBy = 0;
+                        if (_addLineButtons == ScrollBarButtonType::SingleButton ) enlargeToBottomRectYBy = bottomRect.bottom() - groove.bottom() - Metrics::ScrollBar_TopBottomMargins;
+                        else if (_addLineButtons == ScrollBarButtonType::DoubleButton ) enlargeToBottomRectYBy = bottomRect.bottom() - groove.bottom() - Metrics::ScrollBar_TopBottomMargins;
                         return visualRect( option, QRect( groove.left(), groove.top() + pos, groove.width(), sliderSize + enlargeToBottomRectYBy ) );
                     } else return visualRect( option, QRect( groove.left(), groove.top() + pos, groove.width(), sliderSize ) );
                 }
@@ -2713,8 +2714,8 @@ namespace Breeze
                 auto slider = visualRect( option, subControlRect( CC_ScrollBar, option, SC_ScrollBarSlider, widget ) );
                 auto groove = visualRect( option, subControlRect( CC_ScrollBar, option, SC_ScrollBarGroove, widget ) );
 
-                if( horizontal ) return visualRect( option, QRect( slider.right() + 1, groove.top(), groove.right() - slider.right(), groove.height() ) );
-                else return visualRect( option, QRect( groove.left(), slider.bottom() + 1, groove.width(), groove.bottom() - slider.bottom() ) );
+                if( horizontal ) return visualRect( option, QRect( slider.right(), groove.top(), groove.right() - slider.right(), groove.height() ) );
+                else return visualRect( option, QRect( groove.left(), slider.bottom(), groove.width(), groove.bottom() - slider.bottom() ) );
 
             }
 
@@ -2737,7 +2738,7 @@ namespace Breeze
                     break;
                 }
             }
-        } else exception = true;
+        }
         
         return exception;
     }
@@ -5370,8 +5371,16 @@ namespace Breeze
         QRect handleRect;
         const State& state( option->state );
         const bool horizontal( state & State_Horizontal );
-        if( horizontal ) handleRect = centerRect( rect, rect.width(), Metrics::ScrollBar_SliderWidth );
-        else handleRect = centerRect( rect, Metrics::ScrollBar_SliderWidth, rect.height() );
+        if( horizontal ) {
+            if ( widgetMouseOver ){
+                handleRect = centerRect( rect, rect.width(), Metrics::ScrollBar_SliderWidthMouseOver );
+            } else handleRect = centerRect( rect, rect.width(), Metrics::ScrollBar_SliderWidthMouseNotOver );
+        }
+        else {
+            if ( widgetMouseOver ){
+                handleRect = centerRect( rect, Metrics::ScrollBar_SliderWidthMouseOver, rect.height() );
+            } else handleRect = centerRect( rect, Metrics::ScrollBar_SliderWidthMouseNotOver, rect.height() );
+        }
 
         const bool enabled( state & State_Enabled );
         const bool mouseOver( enabled && ( state & State_MouseOver ) );
@@ -7012,8 +7021,15 @@ namespace Breeze
             const auto& state( option->state );
             const bool horizontal( state & State_Horizontal );
 
-            if( horizontal ) grooveRect = centerRect( grooveRect, grooveRect.width(), Metrics::ScrollBar_SliderWidth );
-            else grooveRect = centerRect( grooveRect, Metrics::ScrollBar_SliderWidth, grooveRect.height() );
+            if( horizontal ){
+                if( mouseOver ){
+                    grooveRect = centerRect( grooveRect, grooveRect.width(), Metrics::ScrollBar_SliderWidthMouseOver );
+                } else grooveRect = centerRect( grooveRect, grooveRect.width(), Metrics::ScrollBar_SliderWidthMouseNotOver );
+            } else {
+                if( mouseOver ){
+                    grooveRect = centerRect( grooveRect, Metrics::ScrollBar_SliderWidthMouseOver, grooveRect.height() );
+                } else grooveRect = centerRect( grooveRect, Metrics::ScrollBar_SliderWidthMouseNotOver, grooveRect.height() );
+            }
 
             // render
             _helper->renderScrollBarGroove( painter, grooveRect, color );

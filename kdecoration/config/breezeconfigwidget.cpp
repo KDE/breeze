@@ -348,7 +348,6 @@ namespace Breeze
         m_ui.animationsSpeedRelativeSystem->setEnabled(m_ui.animationsEnabled->isChecked());
         m_ui.animationsSpeedLabel1->setEnabled(m_ui.animationsEnabled->isChecked());
         m_ui.animationsSpeedLabel2->setEnabled(m_ui.animationsEnabled->isChecked());
-        m_ui.animationsSpeedLabel3->setEnabled(m_ui.animationsEnabled->isChecked());
         m_ui.animationsSpeedLabel4->setEnabled(m_ui.animationsEnabled->isChecked());
     }
     
