@@ -1755,9 +1755,9 @@ namespace Breeze
                 return false;
             }
         }
-        if (borderSize != "None" && borderSize != "NoSides") {
+        /*if (borderSize != "None" && borderSize != "NoSides") {
             return false;
-        }
+        }*/
         return true;
     }
 }
