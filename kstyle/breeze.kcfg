@@ -109,13 +109,13 @@
     </entry>
     
     <entry name="ScrollBarSliderThicknessMouseOver" type = "Int">
-       <default>11</default>
+       <default>10</default>
        <min>1</min>
        <max>50</max>
     </entry>
     
     <entry name="ScrollBarSliderThicknessMouseNotOverPercent" type = "Int">
-       <default>70</default>
+       <default>60</default>
        <min>1</min>
        <max>100</max>
     </entry>
