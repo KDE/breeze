@@ -10,6 +10,7 @@
 
 #include <KWindowInfo>
 
+#include <QRegularExpression>
 #include <QTextStream>
 
 namespace Breeze
@@ -104,7 +105,8 @@ namespace Breeze
             }
 
             // check matching
-            if( QRegExp( internalSettings->exceptionPattern() ).indexIn( value ) >= 0 )
+            QRegularExpression rx( internalSettings->exceptionPattern() );
+            if( rx.match( value ).hasMatch() )
             { return internalSettings; }
 
         }
