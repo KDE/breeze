@@ -49,10 +49,10 @@ namespace Breeze
         updatePosition();
 
         // connections
-        auto c = decoration->client().data();
-        connect( c, &KDecoration2::DecoratedClient::widthChanged, this, &SizeGrip::updatePosition );
-        connect( c, &KDecoration2::DecoratedClient::heightChanged, this, &SizeGrip::updatePosition );
-        connect( c, &KDecoration2::DecoratedClient::activeChanged, this, &SizeGrip::updateActiveState );
+        const auto c = decoration->client().toStrongRef();
+        connect( c.data(), &KDecoration2::DecoratedClient::widthChanged, this, &SizeGrip::updatePosition );
+        connect( c.data(), &KDecoration2::DecoratedClient::heightChanged, this, &SizeGrip::updatePosition );
+        connect( c.data(), &KDecoration2::DecoratedClient::activeChanged, this, &SizeGrip::updateActiveState );
 
         // show
         show();
@@ -86,7 +86,7 @@ namespace Breeze
         #if BREEZE_HAVE_X11
 
         if( !QX11Info::isPlatformX11() ) return;
-        auto c = m_decoration.data()->client().data();
+        const auto c = m_decoration.data()->client().toStrongRef();
 
         xcb_window_t windowId = c->windowId();
         if( windowId )
@@ -178,7 +178,7 @@ namespace Breeze
         #if BREEZE_HAVE_X11
         if( !QX11Info::isPlatformX11() ) return;
 
-        auto c = m_decoration.data()->client().data();
+        const auto c = m_decoration.data()->client().toStrongRef();
         QPoint position(
             c->width() - GripSize - Offset,
             c->height() - GripSize - Offset );
@@ -200,7 +200,7 @@ namespace Breeze
         auto connection( QX11Info::connection() );
 
         // client
-        auto c = m_decoration.data()->client().data();
+        const auto c = m_decoration.data()->client().toStrongRef();
 
         /*
         get root position matching position

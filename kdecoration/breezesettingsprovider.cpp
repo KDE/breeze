@@ -61,7 +61,7 @@ namespace Breeze
         QString className;
 
         // get the client
-        auto client = decoration->client().data();
+        const auto client = decoration->client().toStrongRef();
 
         foreach( auto internalSettings, m_exceptions )
         {
