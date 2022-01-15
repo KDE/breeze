@@ -1,7 +1,7 @@
 add_definitions(-DTRANSLATION_DOMAIN="breeze_kwin_deco")
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons GuiAddons ConfigWidgets WindowSystem I18n IconThemes)
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS DBus)
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS DBus)
 
 ### XCB
 find_package(XCB COMPONENTS XCB)
@@ -15,7 +15,7 @@ set_package_properties(XCB PROPERTIES
 if(UNIX AND NOT APPLE)
 
   set(BREEZE_HAVE_X11 ${XCB_XCB_FOUND})
-  if (XCB_XCB_FOUND)
+  if (XCB_XCB_FOUND AND TARGET Qt5::Core)
     find_package(Qt5 ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS X11Extras)
   endif()
 
@@ -86,12 +86,14 @@ target_link_libraries(breezedecoration
         KF5::WindowSystem)
 
 if(BREEZE_HAVE_X11)
-  target_link_libraries(breezedecoration
-    PUBLIC
-      Qt::X11Extras
-      XCB::XCB)
+  target_link_libraries(breezedecoration PUBLIC XCB::XCB)
+  if (TARGET Qt5::X11Extras)
+    target_link_libraries(breezedecoration PUBLIC Qt5::X11Extras)
+  else ()
+    target_link_libraries(breezedecoration PUBLIC Qt6::GuiPrivate)
+  endif()
 endif()
 
 
 install(TARGETS breezedecoration DESTINATION ${KDE_INSTALL_PLUGINDIR}/org.kde.kdecoration2)
-install(FILES config/breezedecorationconfig.desktop DESTINATION  ${KDE_INSTALL_KSERVICES5DIR})
+install(FILES config/breezedecorationconfig.desktop DESTINATION  ${KDE_INSTALL_KSERVICESDIR})
