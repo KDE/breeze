@@ -7785,8 +7785,7 @@ namespace Breeze
     //____________________________________________________________________
     bool Style::showIconsInMenuItems() const
     {
-        const KConfigGroup g(KSharedConfig::openConfig(), "KDE");
-        return g.readEntry("ShowIconsInMenuItems", true);
+        return !QApplication::testAttribute(Qt::AA_DontShowIconsInMenus);
     }
 
     //____________________________________________________________________
