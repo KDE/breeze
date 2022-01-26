@@ -281,13 +281,6 @@ namespace Breeze
         _splitterFactory->registerWidget( widget );
         _toolsAreaManager->registerWidget ( widget );
 
-        #ifdef BREEZE_HAVE_QTQUICK
-        using namespace Kirigami;
-        connect(TabletModeWatcher::self(), &TabletModeWatcher::tabletModeChanged, widget, [widget]() {
-            widget->updateGeometry();
-        });
-        #endif
-
         // enable mouse over effects for all necessary widgets
         if(
             qobject_cast<QAbstractItemView*>( widget )
