@@ -3683,12 +3683,17 @@ namespace Breeze
     //______________________________________________________________
     bool Style::drawPanelButtonCommandPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
     {
+        const auto buttonOption = qstyleoption_cast<const QStyleOptionButton*>(option);
+        const bool isCommandLinkButton = buttonOption && (buttonOption->features & QStyleOptionButton::CommandLinkButton);
+
         // button state
         bool enabled = option->state & QStyle::State_Enabled;
         bool activeFocus = option->state & QStyle::State_HasFocus;
         // Using `widget->focusProxy() == nullptr` to work around a possible Qt bug
         // where buttons that have a focusProxy still show focus.
-        bool visualFocus = activeFocus && option->state & QStyle::State_KeyboardFocusChange && (widget == nullptr || widget->focusProxy() == nullptr);
+        bool visualFocus = activeFocus
+                           && (option->state & QStyle::State_KeyboardFocusChange || isCommandLinkButton)
+                           && (widget == nullptr || widget->focusProxy() == nullptr);
         bool hovered = option->state & QStyle::State_MouseOver;
         bool down = option->state & QStyle::State_Sunken;
         bool checked = option->state & QStyle::State_On;
