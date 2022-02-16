@@ -136,6 +136,8 @@ Name[sv]=Breeze klassisk
 Name[uk]=Класична Breeze
 Name[x-test]=xxBreeze Classicxx
 Name[zh_CN]=Breeze 微风经典
+accentActiveTitlebar=true
+accentInactiveTitlebar=false
 shadeSortColumn=true
 
 [KDE]
