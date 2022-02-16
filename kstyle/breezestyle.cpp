@@ -558,6 +558,10 @@ namespace Breeze
         switch( metric )
         {
 
+            case PM_MenuHMargin:
+            case PM_MenuVMargin:
+                return Metrics::MenuItem_HighlightGap;
+
             // small icon size
             case PM_SmallIconSize:
             if ( isTabletMode() )
