@@ -3705,7 +3705,6 @@ namespace Breeze
         bool autoDefault = false;
         bool hasNeutralHighlight = hasHighlightNeutral(widget, option);
 
-        const auto buttonOption = qstyleoption_cast<const QStyleOptionButton*>(option);
         if (buttonOption) {
             flat = buttonOption->features & QStyleOptionButton::Flat;
             hasMenu = buttonOption->features & QStyleOptionButton::HasMenu;
