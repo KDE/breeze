@@ -7397,7 +7397,7 @@ namespace Breeze
 
             // state off icons
             { KColorUtils::mix( palette.color( QPalette::Window ), base,  0.5 ), invertNormalState, QIcon::Normal, QIcon::Off },
-            { KColorUtils::mix( palette.color( QPalette::Window ), selected, 0.5 ), invertNormalState, QIcon::Selected, QIcon::Off },
+            { KColorUtils::mix( palette.color( QPalette::Window ), base, 0.5 ), invertNormalState, QIcon::Selected, QIcon::Off },
             { KColorUtils::mix( palette.color( QPalette::Window ), negative, 0.5 ), true, QIcon::Active, QIcon::Off },
             { KColorUtils::mix( palette.color( QPalette::Window ), base, 0.2 ), invertNormalState, QIcon::Disabled, QIcon::Off },
 
