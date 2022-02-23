@@ -39,6 +39,7 @@ namespace Breeze
         connect( _menuItemDrawThinFocus, &QAbstractButton::toggled, this, &StyleConfig::updateChanged );
         connect( _sliderDrawTickMarks, &QAbstractButton::toggled, this, &StyleConfig::updateChanged );
         connect( _splitterProxyEnabled, &QAbstractButton::toggled, this, &StyleConfig::updateChanged );
+        connect( _outlineCloseButton, &QAbstractButton::toggled, this, &StyleConfig::updateChanged );
         connect( _mnemonicsMode, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( _scrollBarAddLineButtons, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( _scrollBarSubLineButtons, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
@@ -62,6 +63,7 @@ namespace Breeze
         StyleConfigData::setScrollBarAddLineButtons( _scrollBarAddLineButtons->currentIndex() );
         StyleConfigData::setScrollBarSubLineButtons( _scrollBarSubLineButtons->currentIndex() );
         StyleConfigData::setWindowDragMode( _windowDragMode->currentIndex() );
+        StyleConfigData::setOutlineCloseButton( _outlineCloseButton->isChecked() );
         StyleConfigData::setMenuOpacity( _menuOpacity->value() );
 
         StyleConfigData::self()->save();
@@ -101,6 +103,7 @@ namespace Breeze
         else if( _dockWidgetDrawFrame->isChecked() != StyleConfigData::dockWidgetDrawFrame() ) modified = true;
         else if( _sidePanelDrawFrame->isChecked() != StyleConfigData::sidePanelDrawFrame() ) modified = true;
         else if( _menuItemDrawThinFocus->isChecked() == StyleConfigData::menuItemDrawStrongFocus() ) modified = true;
+        else if( _outlineCloseButton->isChecked() != StyleConfigData::outlineCloseButton() ) modified = true;
         else if( _sliderDrawTickMarks->isChecked() != StyleConfigData::sliderDrawTickMarks() ) modified = true;
         else if( _mnemonicsMode->currentIndex() != StyleConfigData::mnemonicsMode() ) modified = true;
         else if( _scrollBarAddLineButtons->currentIndex() != StyleConfigData::scrollBarAddLineButtons() ) modified = true;
@@ -124,6 +127,7 @@ namespace Breeze
         _sidePanelDrawFrame->setChecked( StyleConfigData::sidePanelDrawFrame() );
         _menuItemDrawThinFocus->setChecked( !StyleConfigData::menuItemDrawStrongFocus() );
         _sliderDrawTickMarks->setChecked( StyleConfigData::sliderDrawTickMarks() );
+        _outlineCloseButton->setChecked( StyleConfigData::outlineCloseButton() );
         _mnemonicsMode->setCurrentIndex( StyleConfigData::mnemonicsMode() );
         _splitterProxyEnabled->setChecked( StyleConfigData::splitterProxyEnabled() );
         _scrollBarAddLineButtons->setCurrentIndex( StyleConfigData::scrollBarAddLineButtons() );
