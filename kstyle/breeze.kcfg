@@ -15,6 +15,13 @@
        <max>255</max>
     </entry>
 
+    <!-- caret width -->
+    <entry name="TextCaretWidth" type = "Int">
+        <default>1</default>
+        <min>1</min>
+        <max>32</max>
+    </entry>
+
     <!-- shadow -->
     <entry name="ShadowSize" type = "Enum">
       <choices>

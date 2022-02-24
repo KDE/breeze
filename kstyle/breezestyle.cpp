@@ -555,6 +555,9 @@ namespace Breeze
         switch( metric )
         {
 
+            case PM_TextCursorWidth:
+                return StyleConfigData::textCaretWidth();
+
             case PM_MenuHMargin:
             case PM_MenuVMargin:
                 return Metrics::MenuItem_HighlightGap;

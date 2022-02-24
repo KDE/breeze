@@ -44,6 +44,7 @@ namespace Breeze
         connect( _scrollBarSubLineButtons, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( _windowDragMode, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( _menuOpacity, &QAbstractSlider::valueChanged, this, &StyleConfig::updateChanged );
+        connect( _textCaretWidth, QOverload<int>::of(&QSpinBox::valueChanged), this, &StyleConfig::updateChanged );
 
     }
 
@@ -63,6 +64,7 @@ namespace Breeze
         StyleConfigData::setScrollBarSubLineButtons( _scrollBarSubLineButtons->currentIndex() );
         StyleConfigData::setWindowDragMode( _windowDragMode->currentIndex() );
         StyleConfigData::setMenuOpacity( _menuOpacity->value() );
+        StyleConfigData::setTextCaretWidth( _textCaretWidth->value() );
 
         StyleConfigData::self()->save();
 
@@ -108,6 +110,7 @@ namespace Breeze
         else if( _splitterProxyEnabled->isChecked() != StyleConfigData::splitterProxyEnabled() ) modified = true;
         else if( _windowDragMode->currentIndex() != StyleConfigData::windowDragMode() ) modified = true;
         else if( _menuOpacity->value() != StyleConfigData::menuOpacity() ) modified = true;
+        else if( _textCaretWidth->value() != StyleConfigData::textCaretWidth() ) modified = true;
 
         emit changed(modified);
 
@@ -130,6 +133,7 @@ namespace Breeze
         _scrollBarSubLineButtons->setCurrentIndex( StyleConfigData::scrollBarSubLineButtons() );
         _windowDragMode->setCurrentIndex( StyleConfigData::windowDragMode() );
         _menuOpacity->setValue( StyleConfigData::menuOpacity() );
+        _textCaretWidth->setValue( StyleConfigData::textCaretWidth() );
 
     }
 
