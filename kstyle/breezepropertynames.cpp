@@ -21,5 +21,6 @@ namespace Breeze
     const char PropertyNames::noSeparator[] = "_breeze_no_separator";
     const char PropertyNames::isTopMenu[] = "_breeze_menu_is_top";
     const char PropertyNames::bordersSides[] = "_breeze_borders_sides";
+    const char PropertyNames::modernSpinboxStyle[] = "_breeze_modern_spinbox_style";
 
 }

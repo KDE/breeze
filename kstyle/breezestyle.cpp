@@ -22,6 +22,7 @@
 #include <KColorUtils>
 #include <KIconLoader>
 
+#include <QAbstractSpinBox>
 #include <QApplication>
 #include <QBitmap>
 #include <QCheckBox>
@@ -267,6 +268,15 @@ namespace Breeze
         delete _helper;
     }
 
+    inline bool isModernStyleSpinbox(const QStyleOption* opt)
+    {
+    #if BREEZE_HAVE_QTQUICK
+        return qApp->property(PropertyNames::modernSpinboxStyle).toBool() || qobject_cast<QQuickItem*>(opt->styleObject);
+    #else
+        return false;
+    #endif
+    }
+
     //______________________________________________________________
     void Style::polish( QWidget* widget )
     {
@@ -420,6 +430,10 @@ namespace Breeze
         }
         else if ( qobject_cast<QDialog*> (widget) ) {
             widget->setAttribute(Qt::WA_StyledBackground);
+        } else if ( auto spbx = qobject_cast<QAbstractSpinBox*> (widget) ) {
+            if (qApp->property(PropertyNames::modernSpinboxStyle).toBool()) {
+                spbx->setAlignment(Qt::AlignCenter);
+            }
         } else if (auto pushButton = qobject_cast<QPushButton*>(widget)) {
             QDialog *dialog = nullptr;
             auto p = pushButton->parentWidget();
@@ -2470,8 +2484,16 @@ namespace Breeze
         if( !spinBoxOption ) return ParentStyleClass::subControlRect( CC_SpinBox, option, subControl, widget );
         const bool flat( !spinBoxOption->frame );
 
+        const int frameWidth( pixelMetric( PM_SpinBoxFrameWidth, option, widget ) );
+        const int buttonSize( option->fontMetrics.height() + 2*frameWidth );
+
         // copy rect
         auto rect( option->rect );
+
+        if (subControl == SC_SpinBoxUp || subControl == SC_SpinBoxDown) {
+            // compensate for 1px margin + 1px border
+            rect.adjust( 2, 2, -2, -2 );
+        }
 
         switch( subControl )
         {
@@ -2480,42 +2502,76 @@ namespace Breeze
             case SC_SpinBoxUp:
             case SC_SpinBoxDown:
             {
+                if ( isModernStyleSpinbox(option) ) {
+                    switch ( subControl ) {
+                    case SC_SpinBoxUp: {
+                        auto r = rect;
+                        r.setWidth(buttonSize);
+                        r.moveRight(rect.right());
+                        return r;
+                    }
+                    case SC_SpinBoxDown: {
+                        auto r = rect;
+                        r.setWidth(buttonSize);
+                        r.moveLeft(rect.left());
+                        return r;
+                    }
+                    default: Q_ASSERT(false);
+                    }
+                } else {
+                    // take out frame width
+                    if ( !flat && rect.height() >= 2*Metrics::Frame_FrameWidth + Metrics::SpinBox_ArrowButtonWidth )
+                        rect = insideMargin( rect, Metrics::Frame_FrameWidth );
 
-                // take out frame width
-                if( !flat && rect.height() >= 2*Metrics::Frame_FrameWidth + Metrics::SpinBox_ArrowButtonWidth ) rect = insideMargin( rect, Metrics::Frame_FrameWidth );
+                    QRect arrowRect;
+                    arrowRect = QRect(
+                        rect.right() - Metrics::SpinBox_ArrowButtonWidth + 1,
+                        rect.top(),
+                        Metrics::SpinBox_ArrowButtonWidth,
+                        rect.height() );
 
-                QRect arrowRect;
-                arrowRect = QRect(
-                    rect.right() - Metrics::SpinBox_ArrowButtonWidth + 1,
-                    rect.top(),
-                    Metrics::SpinBox_ArrowButtonWidth,
-                    rect.height() );
+                    const int arrowHeight( qMin( rect.height(), int(Metrics::SpinBox_ArrowButtonWidth) ) );
+                    arrowRect = centerRect( arrowRect, Metrics::SpinBox_ArrowButtonWidth, arrowHeight );
+                    arrowRect.setHeight( arrowHeight/2 );
+                    if( subControl == SC_SpinBoxDown ) arrowRect.translate( 0, arrowHeight/2 );
 
-                const int arrowHeight( qMin( rect.height(), int(Metrics::SpinBox_ArrowButtonWidth) ) );
-                arrowRect = centerRect( arrowRect, Metrics::SpinBox_ArrowButtonWidth, arrowHeight );
-                arrowRect.setHeight( arrowHeight/2 );
-                if( subControl == SC_SpinBoxDown ) arrowRect.translate( 0, arrowHeight/2 );
-
-                return visualRect( option, arrowRect );
-
+                    return visualRect( option, arrowRect );
+                }
             }
 
             case SC_SpinBoxEditField:
             {
                 const bool showButtons = spinBoxOption->buttonSymbols != QAbstractSpinBox::NoButtons;
 
-                QRect labelRect = rect;
-                if( showButtons ) {
-                    labelRect.setRight( rect.right() - Metrics::SpinBox_ArrowButtonWidth );
+                if (isModernStyleSpinbox(option)) {
+                    const int frameWidth( pixelMetric( PM_SpinBoxFrameWidth, option, widget ) );
+                    const int buttonSize( option->fontMetrics.height() + 2*frameWidth );
+
+                    QRect r = rect;
+                    if( showButtons ) {
+                        auto w = r.width();
+                        r.setLeft(buttonSize);
+                        r.setRight(w-buttonSize);
+                    }
+
+                    // remove right side line editor margins
+                    if( !flat && r.height() >= option->fontMetrics.height() + 2*frameWidth )
+                    { r.adjust( frameWidth, frameWidth, -frameWidth, -frameWidth ); }
+
+                    return visualRect( option, r );
+
+                } else {
+                    QRect labelRect = rect;
+                    if( showButtons ) {
+                        labelRect.setRight( rect.right() - Metrics::SpinBox_ArrowButtonWidth );
+                    }
+
+                    // remove right side line editor margins
+                    if( !flat && labelRect.height() >= option->fontMetrics.height() + 2*frameWidth )
+                    { labelRect.adjust( frameWidth, frameWidth, showButtons ? 0 : -frameWidth, -frameWidth ); }
+
+                    return visualRect( option, labelRect );
                 }
-
-                // remove right side line editor margins
-                const int frameWidth( pixelMetric( PM_SpinBoxFrameWidth, option, widget ) );
-                if( !flat && labelRect.height() >= option->fontMetrics.height() + 2*frameWidth )
-                { labelRect.adjust( frameWidth, frameWidth, showButtons ? 0 : -frameWidth, -frameWidth ); }
-
-                return visualRect( option, labelRect );
-
             }
 
             default: break;
@@ -2808,9 +2864,15 @@ namespace Breeze
         // make sure there is enough height for the button
         size.setHeight( qMax( size.height(), int(Metrics::SpinBox_ArrowButtonWidth) ) );
 
-        // add button width and spacing
         const bool showButtons = spinBoxOption->buttonSymbols != QAbstractSpinBox::NoButtons;
-        if( showButtons ) size.rwidth() += Metrics::SpinBox_ArrowButtonWidth;
+        if (isModernStyleSpinbox(option)) {
+            // add in the buttons, which are square w/ length of height, and we have two of them
+            const int buttonSize( option->fontMetrics.height() + 2*frameWidth );
+            if( showButtons ) size.rwidth() += buttonSize*2;
+        } else {
+            // add in button width and spacing
+            if( showButtons ) size.rwidth() += Metrics::SpinBox_ArrowButtonWidth;
+        }
 
         return size;
 
@@ -7117,6 +7179,14 @@ namespace Breeze
         // render
         _helper->renderArrow( painter, arrowRect, color, orientation );
 
+        painter->setPen( _helper->separatorColor( palette ));
+        if (isModernStyleSpinbox(option)) {
+            if (subControl == SC_SpinBoxUp) {
+                painter->drawLine(QLine(arrowRect.topLeft()+QPoint(0, 2), arrowRect.bottomLeft()-QPoint(0, 2)));
+            } else {
+                painter->drawLine(QLine(arrowRect.topRight()+QPoint(0, 2), arrowRect.bottomRight()-QPoint(0, 2)));
+            }
+        }
     }
 
     //______________________________________________________________________________
