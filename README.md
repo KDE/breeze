@@ -54,7 +54,7 @@ _ClassiK_ (formerly _ClassikStyles_) is a highly customizable binary Window Deco
 > ![Composite screenshot of thin window outlines with Contrast blended with accent colour (light)](screenshots/thin_window_outline_light_contrast_accent.png?raw=true "Composite screenshot of thin window outlines with Contrast blended with accent colour (light)")
 
 * Configurable scrollbars:
-> ![Screenshot of scrollbar customization](screenshots/configurable_scrollbars.png?raw=true "Screenshot of scrollbar customization")
+> <img src="https://raw.githubusercontent.com/paulmcauley/classik/master/screenshots/configurable_scrollbars.png" width="80%">![Default scrollbar animation](screenshots/scrollbar_mouseover.gif?raw=true "Default scrollbar animation")
 
 * Configurable animations
 
