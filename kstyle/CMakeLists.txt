@@ -8,7 +8,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     ConfigWidgets
     WindowSystem)
 
-find_package(Qt5 ${QT_MIN_VERSION} COMPONENTS Quick X11Extras)
+find_package(Qt5 ${QT_MIN_VERSION} OPTIONAL_COMPONENTS Quick X11Extras)
 set(BREEZE_HAVE_QTQUICK ${Qt5Quick_FOUND})
 set(BREEZE_HAVE_QTX11EXTRAS ${Qt5X11Extras_FOUND})
 
