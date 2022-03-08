@@ -1,6 +1,7 @@
 ################# Qt/KDE #################
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS Widgets DBus)
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
+    CoreAddons
     I18n
     Config
     GuiAddons
@@ -99,7 +100,7 @@ if (TARGET Qt5::X11Extras)
 elseif (TARGET Qt6::Gui)
     target_link_libraries(breeze Qt6::GuiPrivate)
 endif()
-target_link_libraries(breeze KF5::ConfigCore KF5::ConfigWidgets KF5::GuiAddons KF5::IconThemes KF5::WindowSystem)
+target_link_libraries(breeze KF5::CoreAddons KF5::ConfigCore KF5::ConfigWidgets KF5::GuiAddons KF5::IconThemes KF5::WindowSystem)
 target_link_libraries(breeze breezecommon5)
 
 if(KF5FrameworkIntegration_FOUND)
