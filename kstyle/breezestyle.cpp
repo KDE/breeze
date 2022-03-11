@@ -982,7 +982,7 @@ namespace Breeze
     bool Style::drawWidgetPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const {
         Q_UNUSED(option)
         auto parent = widget;
-        if (!_toolsAreaManager->hasHeaderColors() || !_helper->shouldDrawToolsArea(widget)) {
+        if (!_toolsAreaManager->hasHeaderColors() || !_helper->windowContentIsEdgeToEdge(widget)) {
             return true;
         }
         auto mw = qobject_cast<const QMainWindow*>(widget);
@@ -3281,7 +3281,40 @@ namespace Breeze
 
             const auto background( palette.base().color() );
             const auto outline( _helper->frameOutlineColor( palette ) );
-            _helper->renderFrameWithSides( painter, rect, background, widget->property( PropertyNames::bordersSides ).value<Qt::Edges>(), outline );
+            auto sides = widget->property( PropertyNames::bordersSides ).value<Qt::Edges>();
+
+            auto comparisonRect = rect;
+            const auto widgetWindowRect = widget->window()->geometry();
+            if (widget->window() != widget) {
+                comparisonRect.moveTopLeft(widget->mapTo(widget->window(), comparisonRect.topLeft()));
+            }
+
+            static const QList<QPair<Qt::Edges, int(QRect::*)() const>> edges = {
+                {Qt::LeftEdge, &QRect::left},
+                {Qt::RightEdge, &QRect::right},
+                {Qt::TopEdge, &QRect::top},
+                {Qt::BottomEdge, &QRect::bottom},
+            };
+
+            if (_helper->windowContentIsEdgeToEdge(widget)) for (auto& [edge, method] : edges) {
+                if (!(sides & edge))
+                    continue;
+
+                if ((comparisonRect.*method)() == (widgetWindowRect.*method)())
+                    sides &= ~edge;
+            }
+
+            if (_helper->windowContentIsEdgeToEdge(widget) && sides & Qt::TopEdge) {
+                auto mw = qobject_cast<const QMainWindow*>(widget->window());
+                auto toolsAreaRect = mw ? _toolsAreaManager->toolsAreaRect(mw) : QRect();
+
+                const auto bottom = toolsAreaRect.bottom(), top = comparisonRect.top();
+
+                if (toolsAreaRect.isValid() && (bottom == top || bottom+1 == top))
+                    sides &= ~Qt::TopEdge;
+            }
+
+            _helper->renderFrameWithSides( painter, rect, background, sides, outline );
 
             return true;
         }

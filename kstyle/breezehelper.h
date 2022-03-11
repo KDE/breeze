@@ -254,7 +254,7 @@ namespace Breeze
         bool hasAlphaChannel( const QWidget* ) const;
 
         //* returns true if the tools area should be drawn
-        bool shouldDrawToolsArea ( const QWidget* ) const;
+        bool windowContentIsEdgeToEdge ( const QWidget* ) const;
 
         //@}
 

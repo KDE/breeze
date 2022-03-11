@@ -1713,7 +1713,7 @@ namespace Breeze
         return pixmap;
     }
 
-    bool Helper::shouldDrawToolsArea(const QWidget* widget) const {
+    bool Helper::windowContentIsEdgeToEdge(const QWidget* widget) const {
         if (!widget) {
             return false;
         }
