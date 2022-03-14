@@ -287,14 +287,9 @@ namespace Breeze
     //________________________________________________________________
     void Decoration::updateTitleBar()
     {
-        auto s = settings();
-        const auto c = client().toStrongRef();
-        const bool maximized = isMaximized();
-        const int width =  maximized ? c->width() : c->width() - 2*s->largeSpacing()*Metrics::TitleBar_SideMargin;
-        const int height = maximized ? borderTop() : borderTop() - s->smallSpacing()*Metrics::TitleBar_TopMargin;
-        const int x = maximized ? 0 : s->largeSpacing()*Metrics::TitleBar_SideMargin;
-        const int y = maximized ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
-        setTitleBar(QRect(x, y, width, height));
+        const int width =  client().toStrongRef()->width();
+        const int height = borderTop();
+        setTitleBar(QRect(0, 0, width, height));
     }
 
     //________________________________________________________________
