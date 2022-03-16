@@ -98,6 +98,7 @@ namespace Breeze
         void updateTitleBar();
         void updateAnimationState();
         void updateSizeGripVisibility();
+        void onTabletModeChanged(bool mode);
 
         private:
 
@@ -144,6 +145,8 @@ namespace Breeze
         
         //*frame corner radius, scaled according to DPI
         qreal m_scaledCornerRadius = 3;
+
+        bool m_tabletMode = false;
     };
 
     bool Decoration::hasBorders() const
