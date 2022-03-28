@@ -9,6 +9,7 @@
 #include "breeze.h"
 #include "breezestyleconfigdata.h"
 
+#include <KColorScheme>
 #include <KColorUtils>
 #include <KIconLoader>
 #include <KWindowSystem>
