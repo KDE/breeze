@@ -257,7 +257,19 @@ namespace Breeze
         // call the slot directly; this initial call will set up things that also
         // need to be reset when the system palette changes
         loadConfiguration();
-
+#if BREEZE_HAVE_QTQUICK
+        connect(Kirigami::TabletModeWatcher::self(), &Kirigami::TabletModeWatcher::tabletModeChanged, this, [this] () {
+            const QWidgetList all = qApp->allWidgets();
+            for (QWidgetList::ConstIterator it = all.constBegin(), cend = all.constEnd(); it != cend; ++it) {
+                QWidget *w = *it;
+                if (w->windowType() != Qt::Desktop && !w->testAttribute(Qt::WA_SetStyle)) {
+                        QEvent e(QEvent::StyleChange);
+                        QCoreApplication::sendEvent(w, &e);
+                        w->update();
+                }
+            }
+        });
+#endif
     }
 
     //______________________________________________________________
@@ -548,6 +560,88 @@ namespace Breeze
     }
 
     //______________________________________________________________
+    int Style::formFactorMetric( MetricsType type ) const
+    {
+        switch( type )
+        {
+            case Menu_FrameWidth:
+                if( isTabletMode() ) {
+                    return Metrics::Menu_FrameWidth_Tablet;
+                } else {
+                    return Metrics::Menu_FrameWidth;
+                }
+            case MenuItem_MarginHeight:
+                if( isTabletMode() ) {
+                    return Metrics::MenuItem_MarginHeight_Tablet;
+                } else {
+                    return Metrics::MenuItem_MarginHeight;
+                }
+            case LineEdit_FrameWidth:
+                if( isTabletMode() ) {
+                    return Metrics::LineEdit_FrameWidth_Tablet;
+                } else {
+                    return Metrics::LineEdit_FrameWidth;
+                }
+            case ComboBox_FrameWidth:
+                if( isTabletMode() ) {
+                    return Metrics::ComboBox_FrameWidth_Tablet;
+                } else {
+                    return Metrics::ComboBox_FrameWidth;
+                }
+            case SpinBox_FrameWidth:
+                if( isTabletMode() ) {
+                    return Metrics::SpinBox_FrameWidth_Tablet;
+                } else {
+                    return Metrics::SpinBox_FrameWidth;
+                }
+            case CheckBox_Size:
+                if( isTabletMode() ) {
+                    return Metrics::CheckBox_Size_Tablet;
+                } else {
+                    return Metrics::CheckBox_Size;
+                }
+            case Button_MarginWidth:
+                if( isTabletMode() ) {
+                    return Metrics::Button_MarginWidth_Tablet;
+                } else {
+                    return Metrics::Button_MarginWidth;
+                }
+            case ToolButton_MarginWidth:
+                if( isTabletMode() ) {
+                    return Metrics::ToolButton_MarginWidth_Tablet;
+                } else {
+                    return Metrics::ToolButton_MarginWidth;
+                }
+            case Slider_GrooveThickness:
+                if( isTabletMode() ) {
+                    return Metrics::Slider_GrooveThickness_Tablet;
+                } else {
+                    return Metrics::Slider_GrooveThickness;
+                }
+            case Slider_ControlThickness:
+                if( isTabletMode() ) {
+                    return Metrics::Slider_ControlThickness_Tablet;
+                } else {
+                    return Metrics::Slider_ControlThickness;
+                }
+            case TabBar_TabMarginHeight:
+                if( isTabletMode() ) {
+                    return Metrics::TabBar_TabMarginHeight_Tablet;
+                } else {
+                    return Metrics::TabBar_TabMarginHeight;
+                }
+            case TabBar_TabMarginWidth:
+                if( isTabletMode() ) {
+                    return Metrics::TabBar_TabMarginWidth_Tablet;
+                } else {
+                    return Metrics::TabBar_TabMarginWidth;
+                }
+            default:
+                return 0;
+        }
+    }
+
+    //______________________________________________________________
     int Style::pixelMetric( PixelMetric metric, const QStyleOption* option, const QWidget* widget ) const
     {
 
@@ -572,33 +666,35 @@ namespace Breeze
 
             // frame width
             case PM_DefaultFrameWidth:
-            if( qobject_cast<const QMenu*>( widget ) ) return Metrics::Menu_FrameWidth;
-            if( qobject_cast<const QLineEdit*>( widget ) ) return Metrics::LineEdit_FrameWidth;
-            else if( isQtQuickControl( option, widget ) )
             {
-                const QString &elementType = option->styleObject->property( "elementType" ).toString();
-                if( elementType == QLatin1String( "edit" ) || elementType == QLatin1String( "spinbox" ) )
+                if( qobject_cast<const QMenu*>( widget ) ) return formFactorMetric(MetricsType::Menu_FrameWidth);
+                if( qobject_cast<const QLineEdit*>( widget ) ) return formFactorMetric(MetricsType::LineEdit_FrameWidth);
+                else if( isQtQuickControl( option, widget ) )
                 {
+                    const QString &elementType = option->styleObject->property( "elementType" ).toString();
+                    if( elementType == QLatin1String( "edit" ) || elementType == QLatin1String( "spinbox" ) )
+                    {
 
-                    return Metrics::LineEdit_FrameWidth;
+                        return formFactorMetric(MetricsType::LineEdit_FrameWidth);
 
-                } else if( elementType == QLatin1String( "combobox" ) ) {
+                    } else if( elementType == QLatin1String( "combobox" ) ) {
 
-                    return Metrics::ComboBox_FrameWidth;
+                        return formFactorMetric(MetricsType::ComboBox_FrameWidth);
+                    }
+
                 }
 
+                // fallback
+                return Metrics::Frame_FrameWidth;
             }
-
-            // fallback
-            return Metrics::Frame_FrameWidth;
 
             case PM_ComboBoxFrameWidth:
             {
                 const auto comboBoxOption( qstyleoption_cast< const QStyleOptionComboBox*>( option ) );
-                return comboBoxOption && comboBoxOption->editable ? Metrics::LineEdit_FrameWidth : Metrics::ComboBox_FrameWidth;
+                return comboBoxOption && comboBoxOption->editable ? formFactorMetric(MetricsType::LineEdit_FrameWidth) : formFactorMetric(MetricsType::ComboBox_FrameWidth);
             }
 
-            case PM_SpinBoxFrameWidth: return Metrics::SpinBox_FrameWidth;
+            case PM_SpinBoxFrameWidth: return formFactorMetric( MetricsType::SpinBox_FrameWidth );
             case PM_ToolBarFrameWidth: return Metrics::ToolBar_FrameWidth;
             case PM_ToolTipLabelFrameWidth: return Metrics::ToolTip_FrameWidth;
 
@@ -671,8 +767,8 @@ namespace Breeze
             case PM_TabBarTabShiftHorizontal: return 0;
             case PM_TabBarTabOverlap: return Metrics::TabBar_TabOverlap;
             case PM_TabBarBaseOverlap: return Metrics::TabBar_BaseOverlap;
-            case PM_TabBarTabHSpace: return 2*Metrics::TabBar_TabMarginWidth;
-            case PM_TabBarTabVSpace: return 2*Metrics::TabBar_TabMarginHeight;
+            case PM_TabBarTabHSpace: return 2*formFactorMetric( MetricsType::TabBar_TabMarginWidth );
+            case PM_TabBarTabVSpace: return 2*formFactorMetric( MetricsType::TabBar_TabMarginHeight );
             case PM_TabCloseIndicatorWidth:
             case PM_TabCloseIndicatorHeight:
             return pixelMetric( PM_SmallIconSize, option, widget );
@@ -685,15 +781,15 @@ namespace Breeze
             case PM_TitleBarHeight: return 2*Metrics::TitleBar_MarginWidth + pixelMetric( PM_SmallIconSize, option, widget );
 
             // sliders
-            case PM_SliderThickness: return Metrics::Slider_ControlThickness;
-            case PM_SliderControlThickness: return Metrics::Slider_ControlThickness;
-            case PM_SliderLength: return Metrics::Slider_ControlThickness;
+            case PM_SliderThickness: return formFactorMetric( MetricsType::Slider_ControlThickness );
+            case PM_SliderControlThickness: return formFactorMetric( MetricsType::Slider_ControlThickness );
+            case PM_SliderLength: return formFactorMetric( MetricsType::Slider_ControlThickness );
 
             // checkboxes and radio buttons
-            case PM_IndicatorWidth: return Metrics::CheckBox_Size;
-            case PM_IndicatorHeight: return Metrics::CheckBox_Size;
-            case PM_ExclusiveIndicatorWidth: return Metrics::CheckBox_Size;
-            case PM_ExclusiveIndicatorHeight: return Metrics::CheckBox_Size;
+            case PM_IndicatorWidth: return formFactorMetric(MetricsType::CheckBox_Size);
+            case PM_IndicatorHeight: return formFactorMetric(MetricsType::CheckBox_Size);
+            case PM_ExclusiveIndicatorWidth: return formFactorMetric(MetricsType::CheckBox_Size);
+            case PM_ExclusiveIndicatorHeight: return formFactorMetric(MetricsType::CheckBox_Size);
 
             // list heaaders
             case PM_HeaderMarkSize: return Metrics::Header_ArrowSize;
@@ -1682,7 +1778,7 @@ namespace Breeze
 
     //___________________________________________________________________________________________________________________
     QRect Style::checkBoxContentsRect( const QStyleOption* option, const QWidget* ) const
-    { return visualRect( option, option->rect.adjusted( Metrics::CheckBox_Size + Metrics::CheckBox_ItemSpacing, 0, 0, 0 ) ); }
+    { return visualRect( option, option->rect.adjusted( formFactorMetric(MetricsType::CheckBox_Size) + Metrics::CheckBox_ItemSpacing, 0, 0, 0 ) ); }
 
     //___________________________________________________________________________________________________________________
     QRect Style::lineEditContentsRect( const QStyleOption* option, const QWidget* widget ) const
@@ -2268,7 +2364,7 @@ namespace Breeze
                 // calculate title height
                 int titleHeight( 0 );
                 if( !emptyText ) titleHeight = groupBoxOption->fontMetrics.height();
-                if( checkable ) titleHeight = qMax( titleHeight, int(Metrics::CheckBox_Size) );
+                if( checkable ) titleHeight = qMax( titleHeight, int(formFactorMetric(MetricsType::CheckBox_Size)) );
 
                 // add margin
                 if( titleHeight > 0 ) titleHeight += 2*Metrics::GroupBox_TitleMarginWidth;
@@ -2304,8 +2400,8 @@ namespace Breeze
 
                 if( checkable )
                 {
-                    titleHeight = qMax( titleHeight, int(Metrics::CheckBox_Size) );
-                    titleWidth += Metrics::CheckBox_Size;
+                    titleHeight = qMax( titleHeight, int(formFactorMetric(MetricsType::CheckBox_Size)) );
+                    titleWidth += formFactorMetric(MetricsType::CheckBox_Size);
                     if( !emptyText ) titleWidth += Metrics::CheckBox_ItemSpacing;
                 }
 
@@ -2321,10 +2417,10 @@ namespace Breeze
                 {
 
                     // vertical centering
-                    titleRect = centerRect( titleRect, titleWidth, Metrics::CheckBox_Size );
+                    titleRect = centerRect( titleRect, titleWidth, formFactorMetric(MetricsType::CheckBox_Size) );
 
                     // horizontal positioning
-                    const QRect subRect( titleRect.topLeft(), QSize( Metrics::CheckBox_Size, titleRect.height() ) );
+                    const QRect subRect( titleRect.topLeft(), QSize( formFactorMetric(MetricsType::CheckBox_Size), titleRect.height() ) );
                     return visualRect( option->direction, titleRect, subRect );
 
                 } else {
@@ -2335,7 +2431,7 @@ namespace Breeze
 
                     // horizontal positioning
                     auto subRect( titleRect );
-                    if( checkable ) subRect.adjust( Metrics::CheckBox_Size + Metrics::CheckBox_ItemSpacing, 0, 0, 0 );
+                    if( checkable ) subRect.adjust( formFactorMetric(MetricsType::CheckBox_Size) + Metrics::CheckBox_ItemSpacing, 0, 0, 0 );
                     return visualRect( option->direction, titleRect, subRect );
 
                 }
@@ -2668,7 +2764,7 @@ namespace Breeze
 
         switch( subControl )
         {
-            case QStyle::SC_DialGroove: return insideMargin( rect, (Metrics::Slider_ControlThickness - Metrics::Slider_GrooveThickness)/2 );
+            case QStyle::SC_DialGroove: return insideMargin( rect, (formFactorMetric( MetricsType::Slider_ControlThickness ) - formFactorMetric( MetricsType::Slider_GrooveThickness ) )/2 );
             case QStyle::SC_DialHandle:
             {
 
@@ -2676,14 +2772,14 @@ namespace Breeze
                 const qreal angle( dialAngle( sliderOption, sliderOption->sliderPosition ) );
 
                 // groove rect
-                const QRectF grooveRect( insideMargin( rect, Metrics::Slider_ControlThickness/2 ) );
+                const QRectF grooveRect( insideMargin( rect, formFactorMetric( MetricsType::Slider_ControlThickness )/2 ) );
                 qreal radius( grooveRect.width()/2 );
 
                 // slider center
                 QPointF center( grooveRect.center() + QPointF( radius*std::cos( angle ), -radius*std::sin( angle ) ) );
 
                 // slider rect
-                QRect handleRect( 0, 0, Metrics::Slider_ControlThickness, Metrics::Slider_ControlThickness );
+                QRect handleRect( 0, 0, formFactorMetric( MetricsType::Slider_ControlThickness ), formFactorMetric( MetricsType::Slider_ControlThickness ) );
                 handleRect.moveCenter( center.toPoint() );
                 return handleRect;
 
@@ -2716,9 +2812,17 @@ namespace Breeze
                 grooveRect = insideMargin( grooveRect, pixelMetric( PM_DefaultFrameWidth, option, widget ) );
 
                 // centering
-                if( horizontal ) grooveRect = centerRect( grooveRect, grooveRect.width(), Metrics::Slider_GrooveThickness );
-                else grooveRect = centerRect( grooveRect, Metrics::Slider_GrooveThickness, grooveRect.height() );
+                if( horizontal ) grooveRect = centerRect( grooveRect, grooveRect.width(), formFactorMetric( MetricsType::Slider_GrooveThickness ) );
+                else grooveRect = centerRect( grooveRect, formFactorMetric( MetricsType::Slider_GrooveThickness ), grooveRect.height() );
                 return grooveRect;
+
+            }
+
+            case SC_SliderHandle:
+            {
+
+                QRect handleRect = ParentStyleClass::subControlRect( CC_Slider, option, subControl, widget );
+                return centerRect( handleRect, handleRect.width() - Metrics::Shadow_Overlap,  handleRect.height() - Metrics::Shadow_Overlap);
 
             }
 
@@ -2737,10 +2841,10 @@ namespace Breeze
         size = expandSize( size, 0, Metrics::CheckBox_FocusMarginWidth );
 
         // make sure there is enough height for indicator
-        size.setHeight( qMax( size.height(), int(Metrics::CheckBox_Size) ) );
+        size.setHeight( qMax( size.height(), int(formFactorMetric(MetricsType::CheckBox_Size)) ) );
 
         // Add space for the indicator and the icon
-        size.rwidth() += Metrics::CheckBox_Size + Metrics::CheckBox_ItemSpacing;
+        size.rwidth() += formFactorMetric(MetricsType::CheckBox_Size) + Metrics::CheckBox_ItemSpacing;
 
         // also add extra space, to leave room to the right of the label
         size.rwidth() += Metrics::CheckBox_ItemSpacing;
@@ -2838,7 +2942,7 @@ namespace Breeze
          */
         const int tickLength( disableTicks ? 0 : (
             Metrics::Slider_TickLength + Metrics::Slider_TickMarginWidth +
-            (Metrics::Slider_GrooveThickness - Metrics::Slider_ControlThickness)/2 ) );
+            (formFactorMetric( MetricsType::Slider_GrooveThickness ) - formFactorMetric( MetricsType::Slider_ControlThickness ) )/2 ) );
 
         const int builtInTickLength( 5 );
 
@@ -2922,7 +3026,7 @@ namespace Breeze
         }
 
         // expand with buttons margin
-        size = expandSize( size, Metrics::Button_MarginWidth );
+        size = expandSize( size, formFactorMetric( MetricsType::Button_MarginWidth ) );
 
         // make sure buttons have a minimum width
         if( hasText )
@@ -2975,7 +3079,7 @@ namespace Breeze
             size.rwidth() += Metrics::MenuButton_IndicatorWidth;
         }
 
-        const int marginWidth( autoRaise ? Metrics::ToolButton_MarginWidth : Metrics::Button_MarginWidth + Metrics::Frame_FrameWidth );
+        const int marginWidth( autoRaise ? formFactorMetric( MetricsType::ToolButton_MarginWidth ) : formFactorMetric( MetricsType::Button_MarginWidth) + Metrics::Frame_FrameWidth );
 
         size = expandSize( size, marginWidth );
 
@@ -3023,7 +3127,7 @@ namespace Breeze
 
                 // add checkbox indicator width
                 if( menuItemOption->menuHasCheckableItems )
-                { leftColumnWidth += Metrics::CheckBox_Size + Metrics::MenuItem_ItemSpacing; }
+                { leftColumnWidth += formFactorMetric(MetricsType::CheckBox_Size) + Metrics::MenuItem_ItemSpacing; }
 
                 // add spacing for accelerator
                 /*
@@ -3042,9 +3146,9 @@ namespace Breeze
 
                 // make sure height is large enough for icon and arrow
                 size.setHeight( qMax( size.height(), int(Metrics::MenuButton_IndicatorWidth) ) );
-                size.setHeight( qMax( size.height(), int(Metrics::CheckBox_Size) ) );
+                size.setHeight( qMax( size.height(), int(formFactorMetric(MetricsType::CheckBox_Size)) ) );
                 size.setHeight( qMax( size.height(), iconWidth ) );
-                return expandSize( size, Metrics::MenuItem_MarginWidth, (isTabletMode() ? 2 : 1) * Metrics::MenuItem_MarginHeight );
+                return expandSize( size, Metrics::MenuItem_MarginWidth, formFactorMetric( MetricsType::MenuItem_MarginHeight ) );
 
             }
 
@@ -3324,7 +3428,7 @@ namespace Breeze
         const auto& rect( option->rect );
 
         // make sure there is enough room to render frame
-        if( rect.height() < 2*Metrics::LineEdit_FrameWidth + option->fontMetrics.height())
+        if( rect.height() < 2*formFactorMetric( MetricsType::LineEdit_FrameWidth) + option->fontMetrics.height())
         {
 
             const auto &background = palette.color( QPalette::Base );
@@ -4971,14 +5075,14 @@ namespace Breeze
         }
 
         // get rect available for contents
-        auto contentsRect( insideMargin( rect,  Metrics::MenuItem_MarginWidth, (isTabletMode() ? 2 : 1) * Metrics::MenuItem_MarginHeight ) );
+        auto contentsRect( insideMargin( rect,  Metrics::MenuItem_MarginWidth, formFactorMetric( MetricsType::MenuItem_MarginHeight ) ) );
 
         // define relevant rectangles
         // checkbox
         QRect checkBoxRect;
         if( menuItemOption->menuHasCheckableItems )
         {
-            checkBoxRect = QRect( contentsRect.left(), contentsRect.top() + (contentsRect.height()-Metrics::CheckBox_Size)/2, Metrics::CheckBox_Size, Metrics::CheckBox_Size );
+            checkBoxRect = QRect( contentsRect.left(), contentsRect.top() + (contentsRect.height()-formFactorMetric(MetricsType::CheckBox_Size))/2, formFactorMetric(MetricsType::CheckBox_Size), formFactorMetric(MetricsType::CheckBox_Size) );
             contentsRect.setLeft( checkBoxRect.right() + Metrics::MenuItem_ItemSpacing + 1 );
         }
 
@@ -6747,21 +6851,21 @@ namespace Breeze
                 {
 
                     auto leftRect( grooveRect );
-                    leftRect.setRight( handleRect.right() - Metrics::Slider_ControlThickness/2 );
+                    leftRect.setRight( handleRect.right() - formFactorMetric( MetricsType::Slider_ControlThickness )/2 );
                     _helper->renderSliderGroove( painter, leftRect, upsideDown ? grooveColor:highlight );
 
                     auto rightRect( grooveRect );
-                    rightRect.setLeft( handleRect.left() + Metrics::Slider_ControlThickness/2 );
+                    rightRect.setLeft( handleRect.left() + formFactorMetric( MetricsType::Slider_ControlThickness )/2 );
                     _helper->renderSliderGroove( painter, rightRect, upsideDown ? highlight:grooveColor );
 
                 } else {
 
                     auto topRect( grooveRect );
-                    topRect.setBottom( handleRect.bottom() - Metrics::Slider_ControlThickness/2 );
+                    topRect.setBottom( handleRect.bottom() - formFactorMetric( MetricsType::Slider_ControlThickness )/2 );
                     _helper->renderSliderGroove( painter, topRect, upsideDown ? grooveColor:highlight );
 
                     auto bottomRect( grooveRect );
-                    bottomRect.setTop( handleRect.top() + Metrics::Slider_ControlThickness/2 );
+                    bottomRect.setTop( handleRect.top() + formFactorMetric( MetricsType::Slider_ControlThickness )/2 );
                     _helper->renderSliderGroove( painter, bottomRect, upsideDown ? highlight:grooveColor );
 
                 }
@@ -6860,7 +6964,7 @@ namespace Breeze
 
             // get handle rect
             auto handleRect( subControlRect( CC_Dial, sliderOption, SC_DialHandle, widget ) );
-            handleRect = centerRect( handleRect, Metrics::Slider_ControlThickness, Metrics::Slider_ControlThickness );
+            handleRect = centerRect( handleRect, formFactorMetric( MetricsType::Slider_ControlThickness ), formFactorMetric( MetricsType::Slider_ControlThickness ) );
 
             // handle state
             const bool handleActive( mouseOver && handleRect.contains( _animations->dialEngine().position( widget ) ) );
@@ -7136,7 +7240,7 @@ namespace Breeze
         // icon is discarded on purpose
         // make text the same size as a level 4 heading so it looks more title-ish
         painter->setFont( menuTitleFont(*option) );
-        const auto contentsRect = insideMargin( option->rect, Metrics::MenuItem_MarginWidth, (isTabletMode() ? 2 : 1) * Metrics::MenuItem_MarginHeight );
+        const auto contentsRect = insideMargin( option->rect, Metrics::MenuItem_MarginWidth, formFactorMetric( MetricsType::MenuItem_MarginHeight) );
         drawItemText( painter, contentsRect, Qt::AlignCenter, palette, true, option->text, QPalette::WindowText );
 
     }
