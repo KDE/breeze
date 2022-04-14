@@ -3909,6 +3909,7 @@ namespace Breeze
         stateProperties["hasMenu"] = hasMenu;
         stateProperties["defaultButton"] = defaultButton;
         stateProperties["hasNeutralHighlight"] = hasNeutralHighlight;
+        stateProperties["isActiveWindow"] = widget ? widget->isActiveWindow() : true;
 
         _helper->renderButtonFrame(painter, option->rect, option->palette, stateProperties, bgAnimation, penAnimation);
 
