@@ -55,7 +55,9 @@
 #include <QDialogButtonBox>
 #include <QGraphicsItem>
 #include <QGraphicsProxyWidget>
+#include <QFontDatabase>
 #include <array>
+
 
 #if BREEZE_HAVE_QTQUICK
 #include <QQuickWindow>
@@ -446,7 +448,6 @@ namespace Breeze
             pushButton->setAutoDefault(autoDefaultNoDialog || (autoDefaultInDialog && dialogButtonBox));
         }
 
-
         // base class polishing
         ParentStyleClass::polish( widget );
 
@@ -455,7 +456,15 @@ namespace Breeze
     //______________________________________________________________
     void Style::polish( QApplication *application )
     {
+        const auto smallFont = QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont);
+        application->setFont(smallFont, "QHeaderView");
         _toolsAreaManager->registerApplication(application);
+    }
+
+    //______________________________________________________________
+    void Style::unpolish( QApplication *application )
+    {
+        application->setFont(QFont(), "QHeaderView");
     }
 
     //______________________________________________________________
