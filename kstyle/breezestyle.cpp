@@ -3909,6 +3909,7 @@ namespace Breeze
         stateProperties["checked"] = checked;
         stateProperties["flat"] = flat;
         stateProperties["hasNeutralHighlight"] = hasNeutralHighlight;
+        stateProperties["isActiveWindow"] = widget ? widget->isActiveWindow() : true;
 
         _helper->renderButtonFrame(painter, baseRect, option->palette, stateProperties, bgAnimation, penAnimation);
         if (painter->hasClipping()) {
@@ -4235,6 +4236,7 @@ namespace Breeze
         stateProperties["checked"] = checked;
         stateProperties["flat"] = flat;
         stateProperties["hasNeutralHighlight"] = hasNeutralHighlight;
+        stateProperties["isActiveWindow"] = widget ? widget->isActiveWindow() : true;
 
         _helper->renderButtonFrame(painter, baseRect, option->palette, stateProperties, bgAnimation, penAnimation);
 
@@ -6651,6 +6653,7 @@ namespace Breeze
                 stateProperties["down"] = down || checked;
                 stateProperties["flat"] = flat;
                 stateProperties["hasNeutralHighlight"] = hasNeutralHighlight;
+                stateProperties["isActiveWindow"] = widget ? widget->isActiveWindow() : true;
 
                 _helper->renderButtonFrame(painter, option->rect, option->palette, stateProperties, bgAnimation, penAnimation);
             }
