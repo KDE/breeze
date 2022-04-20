@@ -701,7 +701,7 @@ namespace Breeze
         }
 
         // Gradient
-        if (isActiveWindow && !(flat || down || hovered || checked) && enabled) {
+        if (isActiveWindow && !(flat || down || checked) && enabled) {
             QLinearGradient bgGradient(frameRect.topLeft(), frameRect.bottomLeft());
             bgGradient.setColorAt(0, KColorUtils::mix(bgBrush.color(), Qt::white, 0.03125));
             bgGradient.setColorAt(0.5, bgBrush.color());
