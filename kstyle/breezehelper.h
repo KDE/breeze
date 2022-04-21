@@ -168,7 +168,7 @@ namespace Breeze
         void renderMenuFrame( QPainter*, const QRect&, const QColor& color, const QColor& outline, bool roundCorners = true, bool isTopMenu = false ) const;
 
         //* button frame
-        void renderButtonFrame(QPainter* painter, const QRect& rect, const QPalette& palette, const QHash<QByteArray, bool>& stateProperties, qreal bgAnimation = AnimationData::OpacityInvalid, qreal penAnimation = AnimationData::OpacityInvalid) const;
+        void renderButtonFrame(QPainter* painter, const QRect& rect, const QPalette& palette, const QHash<QByteArray, bool>& stateProperties, qreal bgAnimation = AnimationData::OpacityInvalid, qreal penAnimation = AnimationData::OpacityInvalid, bool borders = true) const;
 
         //* toolbutton frame
         void renderToolBoxFrame( QPainter*, const QRect&, int tabWidth, const QColor& color ) const;

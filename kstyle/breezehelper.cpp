@@ -613,7 +613,7 @@ namespace Breeze
     }
 
     //______________________________________________________________________________
-    void Helper::renderButtonFrame(QPainter* painter, const QRect& rect, const QPalette& palette, const QHash<QByteArray, bool>& stateProperties, qreal bgAnimation, qreal penAnimation) const
+    void Helper::renderButtonFrame(QPainter* painter, const QRect& rect, const QPalette& palette, const QHash<QByteArray, bool>& stateProperties, qreal bgAnimation, qreal penAnimation, bool borders) const
     {
         bool enabled = stateProperties.value("enabled", true);
         bool visualFocus = stateProperties.value("visualFocus");
@@ -635,7 +635,7 @@ namespace Breeze
 
         QRectF shadowedRect = this->shadowedRect(rect);
         QRectF frameRect = strokedRect(shadowedRect);
-        qreal radius = frameRadius( PenWidth::Frame );
+        qreal radius = frameRadius( PenWidth::Frame ) * (borders ? 1 : 2);
         // setting color group to work around KColorScheme feature
         const QColor &highlightColor = palette.color(!enabled ? QPalette::Disabled : QPalette::Active, QPalette::Highlight);
         QBrush bgBrush;
@@ -648,18 +648,18 @@ namespace Breeze
             } else if (checked) {
                 bgBrush = hasNeutralHighlight ? alphaColor(neutralText(palette), highlightBackgroundAlpha)
                     : alphaColor(palette.buttonText().color(), 0.125);
-                penBrush = hasNeutralHighlight ? neutralText(palette)
+                if (borders) penBrush = hasNeutralHighlight ? neutralText(palette)
                     : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), 0.3);
             } else if (isActiveWindow && defaultButton) {
                 bgBrush = alphaColor(highlightColor, 0.125);
-                penBrush = KColorUtils::mix(
+                if (borders) penBrush = KColorUtils::mix(
                     highlightColor,
                     KColorUtils::mix(palette.button().color(), palette.buttonText().color(), 0.333),
                     0.5
                 );
             } else {
                 bgBrush = alphaColor(highlightColor, 0);
-                penBrush = hasNeutralHighlight ? neutralText(palette) : bgBrush;
+                if (borders) penBrush = hasNeutralHighlight ? neutralText(palette) : bgBrush;
             }
         } else {
             if (down && enabled) {
@@ -667,18 +667,18 @@ namespace Breeze
             } else if (checked) {
                 bgBrush = hasNeutralHighlight ? KColorUtils::mix(palette.button().color(), neutralText(palette), 0.333)
                     : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), 0.125);
-                penBrush = hasNeutralHighlight ? neutralText(palette)
+                if (borders) penBrush = hasNeutralHighlight ? neutralText(palette)
                     : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), 0.3);
             } else if (isActiveWindow && defaultButton) {
                 bgBrush = KColorUtils::mix(palette.button().color(), highlightColor, 0.2);
-                penBrush = KColorUtils::mix(
+                if (borders) penBrush = KColorUtils::mix(
                     highlightColor,
                     KColorUtils::mix(palette.button().color(), palette.buttonText().color(), 0.333),
                     0.5
                 );
             } else {
                 bgBrush = palette.button().color();
-                penBrush = hasNeutralHighlight ? neutralText(palette)
+                if (borders) penBrush = hasNeutralHighlight ? neutralText(palette)
                     : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), 0.3);
             }
         }
@@ -697,7 +697,7 @@ namespace Breeze
         if (penAnimation != AnimationData::OpacityInvalid && enabled) {
             QColor color1 = penBrush.color();
             QColor color2 = highlightColor;
-            penBrush = KColorUtils::mix(color1, color2, penAnimation);
+            if (borders) penBrush = KColorUtils::mix(color1, color2, penAnimation);
         }
 
         // Gradient
@@ -710,18 +710,23 @@ namespace Breeze
             penGradient.setColorAt(0, KColorUtils::mix(penBrush.color(), Qt::white, 0.03125));
             penGradient.setColorAt(1, KColorUtils::mix(penBrush.color(), Qt::black, 0.0625));
             bgBrush = bgGradient;
-            penBrush = penGradient;
+            if (borders) penBrush = penGradient;
         }
 
         // Shadow
-        if (isActiveWindow && !(flat || down || checked) && enabled) {
-            renderRoundedRectShadow(painter, shadowedRect, shadowColor(palette));
+        if (isActiveWindow && !(flat || down || checked) && (enabled || !borders)) {
+            auto shadowRadius = Metrics::Frame_FrameRadius - PenWidth::Shadow / 2;
+            if (!borders) shadowRadius *= 2;
+            renderRoundedRectShadow(painter, shadowedRect, shadowColor(palette), shadowRadius);
         }
 
         // Render button
         painter->setRenderHint( QPainter::Antialiasing, true );
         painter->setBrush(bgBrush);
-        painter->setPen(QPen(penBrush, PenWidth::Frame));
+        if (penBrush != QBrush())
+            painter->setPen(QPen(penBrush, PenWidth::Frame));
+        else
+            painter->setPen(Qt::transparent);
         painter->drawRoundedRect(frameRect, radius, radius);
     }
 

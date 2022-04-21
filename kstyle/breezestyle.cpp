@@ -314,6 +314,10 @@ namespace Breeze
             )
         { widget->setAttribute( Qt::WA_Hover ); }
 
+        if (auto btn = qobject_cast<QToolButton*>(widget)) {
+            btn->setIconSize({16, 16});
+        }
+
         // enforce translucency for drag and drop window
         if( widget->testAttribute( Qt::WA_X11NetWmWindowTypeDND ) && _helper->compositingActive() )
         {
@@ -463,6 +467,9 @@ namespace Breeze
     {
         const auto smallFont = QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont);
         application->setFont(smallFont, "QHeaderView");
+        application->setFont(smallFont, "QToolButton");
+        application->setFont(smallFont, "KDEPrivate::KUrlNavigatorButton");
+        application->setFont(smallFont, "KUrlNavigator");
         _toolsAreaManager->registerApplication(application);
     }
 
@@ -3090,6 +3097,7 @@ namespace Breeze
         const int marginWidth( autoRaise ? formFactorMetric( MetricsType::ToolButton_MarginWidth ) : formFactorMetric( MetricsType::Button_MarginWidth) + Metrics::Frame_FrameWidth );
 
         size = expandSize( size, marginWidth );
+        if ( autoRaise && !toolButtonOption->icon.isNull() && !toolButtonOption->text.isEmpty() ) size.rwidth() += Metrics::ToolButton_ExtraIconSpacing;
 
         return size;
 
@@ -3882,6 +3890,81 @@ namespace Breeze
     bool Style::drawPanelButtonToolPrimitive( const QStyleOption* option, QPainter* painter, const QWidget* widget ) const
     {
 
+        const auto toolButtonOption( qstyleoption_cast<const QStyleOptionToolButton*>(option) );
+
+        const bool hasArrow( toolButtonOption && toolButtonOption->features & QStyleOptionToolButton::Arrow );
+        const bool hasIcon( toolButtonOption && !( hasArrow || toolButtonOption->icon.isNull() ) );
+        const bool hasText( toolButtonOption && !toolButtonOption->text.isEmpty() );
+
+        // contents
+        auto contentsRect( option->rect );
+
+        // icon size
+        const QSize iconSize( toolButtonOption ? toolButtonOption->iconSize : QSize() );
+
+        // text size
+        int textFlags( _mnemonics->textFlags() );
+        const QSize textSize( option->fontMetrics.size( textFlags, toolButtonOption ? toolButtonOption->text : "" ) );
+
+        // adjust text and icon rect based on options
+        QRect iconRect;
+
+        const auto menuStyle = BreezePrivate::toolButtonMenuArrowStyle( option );
+        if ( menuStyle == BreezePrivate::ToolButtonMenuArrowStyle::InlineLarge )
+        {
+            // Place contents to the left of the menu arrow.
+            const auto arrowRect = toolButtonSubControlRect( toolButtonOption, SC_ToolButtonMenu, widget );
+            contentsRect.setRight( contentsRect.right() - arrowRect.width() );
+        }
+
+        if( toolButtonOption && (hasArrow||hasIcon) && (!hasText || toolButtonOption->toolButtonStyle == Qt::ToolButtonIconOnly ) ) {
+
+            // icon only
+            iconRect = contentsRect;
+
+        } else if( toolButtonOption && toolButtonOption->toolButtonStyle == Qt::ToolButtonTextUnderIcon ) {
+
+            const int contentsHeight( iconSize.height() + textSize.height() + Metrics::ToolButton_ItemSpacing );
+            iconRect = QRect( QPoint( contentsRect.left() + (contentsRect.width() - iconSize.width())/2, contentsRect.top() + (contentsRect.height() - contentsHeight)/2 ), iconSize );
+            iconRect.adjust(-Metrics::ToolButton_MarginWidth, -Metrics::ToolButton_MarginWidth, Metrics::ToolButton_MarginWidth, Metrics::ToolButton_MarginWidth);
+
+        } else if (toolButtonOption) {
+
+            const bool leftAlign( widget && widget->property( PropertyNames::toolButtonAlignment ).toInt() == Qt::AlignLeft );
+            if( leftAlign ) {
+                const int marginWidth( Metrics::Button_MarginWidth + Metrics::Frame_FrameWidth + 1 );
+                iconRect = QRect( QPoint( contentsRect.left() + marginWidth, contentsRect.top() + (contentsRect.height() - iconSize.height())/2 ), iconSize );
+                iconRect.adjust(-Metrics::ToolButton_MarginWidth, -Metrics::ToolButton_MarginWidth, Metrics::ToolButton_MarginWidth, Metrics::ToolButton_MarginWidth);
+            }
+            else {
+
+                const int contentsWidth( iconSize.width() + textSize.width() + Metrics::ToolButton_ItemSpacing );
+                iconRect = QRect( QPoint( contentsRect.left() + (contentsRect.width() - contentsWidth )/2, contentsRect.top() + (contentsRect.height() - iconSize.height())/2 ), iconSize );
+                iconRect.adjust(-Metrics::ToolButton_MarginWidth, -Metrics::ToolButton_MarginWidth, Metrics::ToolButton_MarginWidth, Metrics::ToolButton_MarginWidth);
+
+            }
+
+            // handle right to left layouts
+            iconRect = visualRect( option, iconRect );
+        } else {
+            iconRect = option->rect;
+
+            if(menuStyle == BreezePrivate::ToolButtonMenuArrowStyle::SubControl) {
+                // NOTE: working around weird issue with flat toolbuttons having unusually wide rects
+                // painter->setClipRect(baseRect.adjusted(0,0,flat ? -Metrics::ToolButton_InlineIndicatorWidth - Metrics::ToolButton_ItemSpacing * 2 : 0,0));
+                iconRect.adjust(0, 0, Metrics::Frame_FrameRadius + PenWidth::Shadow, 0);
+                iconRect = visualRect(option, iconRect);
+            }
+        }
+
+        auto plainRect = option->rect;
+        if(menuStyle == BreezePrivate::ToolButtonMenuArrowStyle::SubControl) {
+            // NOTE: working around weird issue with flat toolbuttons having unusually wide rects
+            // painter->setClipRect(baseRect.adjusted(0,0,flat ? -Metrics::ToolButton_InlineIndicatorWidth - Metrics::ToolButton_ItemSpacing * 2 : 0,0));
+            plainRect.adjust(0, 0, Metrics::Frame_FrameRadius + PenWidth::Shadow, 0);
+            plainRect = visualRect(option, plainRect);
+        }
+
         // button state
         bool enabled = option->state & QStyle::State_Enabled;
         bool activeFocus = option->state & QStyle::State_HasFocus;
@@ -3889,7 +3972,7 @@ namespace Breeze
         bool hovered = option->state & QStyle::State_MouseOver;
         bool down = option->state & QStyle::State_Sunken;
         bool checked = option->state & QStyle::State_On;
-        bool flat = option->state & QStyle::State_AutoRaise;
+        bool reducedForm = option->state & QStyle::State_AutoRaise;
         bool hasNeutralHighlight = hasHighlightNeutral(widget, option);
 
         // NOTE: Using focus animation for bg down because the pressed animation only works on press when enabled for buttons and not on release.
@@ -3899,27 +3982,17 @@ namespace Breeze
         qreal bgAnimation = _animations->widgetStateEngine().opacity(widget, AnimationFocus);
         qreal penAnimation = _animations->widgetStateEngine().opacity(widget, AnimationHover);
 
-        QRect baseRect = option->rect;
-        // adjust frame in case of menu
-        const auto menuStyle = BreezePrivate::toolButtonMenuArrowStyle(option);
-        if(menuStyle == BreezePrivate::ToolButtonMenuArrowStyle::SubControl) {
-            // NOTE: working around weird issue with flat toolbuttons having unusually wide rects
-            painter->setClipRect(baseRect.adjusted(0,0,flat ? -Metrics::ToolButton_InlineIndicatorWidth - Metrics::ToolButton_ItemSpacing * 2 : 0,0));
-            baseRect.adjust(0, 0, Metrics::Frame_FrameRadius + PenWidth::Shadow, 0);
-            baseRect = visualRect(option, baseRect);
-        }
-
         QHash<QByteArray, bool> stateProperties;
         stateProperties["enabled"] = enabled;
         stateProperties["visualFocus"] = visualFocus;
         stateProperties["hovered"] = hovered;
         stateProperties["down"] = down;
         stateProperties["checked"] = checked;
-        stateProperties["flat"] = flat;
+        stateProperties["flat"] = false;
         stateProperties["hasNeutralHighlight"] = hasNeutralHighlight;
         stateProperties["isActiveWindow"] = widget ? widget->isActiveWindow() : true;
 
-        _helper->renderButtonFrame(painter, baseRect, option->palette, stateProperties, bgAnimation, penAnimation);
+        _helper->renderButtonFrame(painter, reducedForm ? iconRect : plainRect, option->palette, stateProperties, bgAnimation, penAnimation, !reducedForm);
         if (painter->hasClipping()) {
             painter->setClipping(false);
         }
@@ -4719,6 +4792,8 @@ namespace Breeze
             textFlags |= Qt::AlignLeft | Qt::AlignVCenter;
 
         }
+
+        if ( flat && iconRect.isValid() && textRect.isValid() ) textRect.adjust(Metrics::ToolButton_ExtraIconSpacing, 0, Metrics::ToolButton_ExtraIconSpacing, 0);
 
         // make sure there is enough room for icon
         if( iconRect.isValid() ) iconRect = centerRect( iconRect, iconSize );
