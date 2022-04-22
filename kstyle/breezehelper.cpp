@@ -23,6 +23,7 @@
 #include <QMdiArea>
 #include <QDockWidget>
 #include <QWindow>
+#include <qnamespace.h>
 
 #if BREEZE_HAVE_QTX11EXTRAS
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -665,10 +666,17 @@ namespace Breeze
             if (down && enabled) {
                 bgBrush = KColorUtils::mix(palette.button().color(), highlightColor, 0.333);
             } else if (checked) {
-                bgBrush = hasNeutralHighlight ? KColorUtils::mix(palette.button().color(), neutralText(palette), 0.333)
-                    : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), 0.125);
-                if (borders) penBrush = hasNeutralHighlight ? neutralText(palette)
-                    : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), 0.3);
+                if (borders) {
+                    bgBrush = hasNeutralHighlight ? KColorUtils::mix(palette.button().color(), neutralText(palette), 0.333)
+                        : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), 0.125);
+                    penBrush = hasNeutralHighlight ? neutralText(palette)
+                        : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), 0.3);
+                } else {
+                    bgBrush = hasNeutralHighlight ? KColorUtils::mix(palette.button().color(), neutralText(palette), 0.333)
+                        : alphaColor(palette.shadow().color(), 0.2);
+                    penBrush = hasNeutralHighlight ? neutralText(palette)
+                        : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), 0.6);
+                }
             } else if (isActiveWindow && defaultButton) {
                 bgBrush = KColorUtils::mix(palette.button().color(), highlightColor, 0.2);
                 if (borders) penBrush = KColorUtils::mix(
@@ -720,6 +728,10 @@ namespace Breeze
             renderRoundedRectShadow(painter, shadowedRect, shadowColor(palette), shadowRadius);
         }
 
+        if (!borders && checked) {
+            frameRect.adjust(0, 0, 0, 1);
+        }
+
         // Render button
         painter->setRenderHint( QPainter::Antialiasing, true );
         painter->setBrush(bgBrush);
@@ -728,6 +740,28 @@ namespace Breeze
         else
             painter->setPen(Qt::transparent);
         painter->drawRoundedRect(frameRect, radius, radius);
+
+        // Inset shadow
+        if (!borders && checked) {
+            QPainterPath baseShape;
+            baseShape.addRoundedRect(frameRect, radius, radius);
+            auto translatedDown = baseShape.translated(QPointF(0, 2));
+            auto topShadowCutout = baseShape.subtracted(translatedDown);
+            auto translatedUp = baseShape.translated(QPointF(0, -2));
+            auto bottomShadowCutout = baseShape.subtracted(translatedUp);
+            QPainterPath scrunkledShapeCutout;
+            scrunkledShapeCutout.addRoundedRect(frameRect.adjusted(0.5, 0.5, -0.5, -0.5), radius, radius);
+            auto scrunkledShape = baseShape.subtracted(scrunkledShapeCutout);
+
+            painter->save();
+            painter->setBrush(shadowColor(palette));
+            painter->setPen(Qt::transparent);
+            painter->drawPath(topShadowCutout);
+            painter->setBrush(alphaColor(palette.light().color(), 0.3));
+            painter->drawPath(bottomShadowCutout);
+            painter->drawPath(scrunkledShape);
+            painter->restore();
+        }
     }
 
     //______________________________________________________________________________
