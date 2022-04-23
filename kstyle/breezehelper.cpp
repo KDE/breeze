@@ -672,10 +672,15 @@ namespace Breeze
                     penBrush = hasNeutralHighlight ? neutralText(palette)
                         : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), 0.3);
                 } else {
-                    bgBrush = hasNeutralHighlight ? KColorUtils::mix(palette.button().color(), neutralText(palette), 0.333)
-                        : alphaColor(palette.shadow().color(), 0.2);
-                    penBrush = hasNeutralHighlight ? neutralText(palette)
-                        : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), 0.6);
+                    if (isActiveWindow) {
+                        bgBrush = KColorUtils::mix(palette.button().color(), highlightColor, 0.333);
+                        penBrush = highlightColor;
+                    } else {
+                        bgBrush = hasNeutralHighlight ? KColorUtils::mix(palette.button().color(), neutralText(palette), 0.333)
+                            : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), 0.125);
+                        penBrush = hasNeutralHighlight ? neutralText(palette)
+                            : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), 0.3);
+                    }
                 }
             } else if (isActiveWindow && defaultButton) {
                 bgBrush = KColorUtils::mix(palette.button().color(), highlightColor, 0.2);
@@ -722,14 +727,16 @@ namespace Breeze
         }
 
         // Shadow
-        if (isActiveWindow && !(flat || down || checked) && (enabled || !borders)) {
-            auto shadowRadius = Metrics::Frame_FrameRadius - PenWidth::Shadow / 2;
-            if (!borders) shadowRadius *= 2;
-            renderRoundedRectShadow(painter, shadowedRect, shadowColor(palette), shadowRadius);
-        }
-
-        if (!borders && checked) {
-            frameRect.adjust(0, 0, 0, 1);
+        if (isActiveWindow) {
+            if (!borders && !down) {
+                auto shadowRadius = Metrics::Frame_FrameRadius - PenWidth::Shadow / 2;
+                if (!borders) shadowRadius *= 2;
+                renderRoundedRectShadow(painter, shadowedRect, shadowColor(palette), shadowRadius);
+            } else if (!(flat || down || checked)) {
+                auto shadowRadius = Metrics::Frame_FrameRadius - PenWidth::Shadow / 2;
+                if (!borders) shadowRadius *= 2;
+                renderRoundedRectShadow(painter, shadowedRect, shadowColor(palette), shadowRadius);
+            }
         }
 
         // Render button
@@ -740,28 +747,6 @@ namespace Breeze
         else
             painter->setPen(Qt::transparent);
         painter->drawRoundedRect(frameRect, radius, radius);
-
-        // Inset shadow
-        if (!borders && checked) {
-            QPainterPath baseShape;
-            baseShape.addRoundedRect(frameRect, radius, radius);
-            auto translatedDown = baseShape.translated(QPointF(0, 2));
-            auto topShadowCutout = baseShape.subtracted(translatedDown);
-            auto translatedUp = baseShape.translated(QPointF(0, -2));
-            auto bottomShadowCutout = baseShape.subtracted(translatedUp);
-            QPainterPath scrunkledShapeCutout;
-            scrunkledShapeCutout.addRoundedRect(frameRect.adjusted(0.5, 0.5, -0.5, -0.5), radius, radius);
-            auto scrunkledShape = baseShape.subtracted(scrunkledShapeCutout);
-
-            painter->save();
-            painter->setBrush(shadowColor(palette));
-            painter->setPen(Qt::transparent);
-            painter->drawPath(topShadowCutout);
-            painter->setBrush(alphaColor(palette.light().color(), 0.3));
-            painter->drawPath(bottomShadowCutout);
-            painter->drawPath(scrunkledShape);
-            painter->restore();
-        }
     }
 
     //______________________________________________________________________________
