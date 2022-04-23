@@ -3097,7 +3097,7 @@ namespace Breeze
         const int marginWidth( autoRaise ? formFactorMetric( MetricsType::ToolButton_MarginWidth ) : formFactorMetric( MetricsType::Button_MarginWidth) + Metrics::Frame_FrameWidth );
 
         size = expandSize( size, marginWidth );
-        if ( autoRaise && !toolButtonOption->icon.isNull() && !toolButtonOption->text.isEmpty() ) size.rwidth() += Metrics::ToolButton_ExtraIconSpacing;
+        if ( autoRaise && !toolButtonOption->icon.isNull() && !toolButtonOption->text.isEmpty() && toolButtonOption->toolButtonStyle != Qt::ToolButtonTextUnderIcon ) size.rwidth() += Metrics::ToolButton_ExtraIconSpacing;
 
         return size;
 
@@ -4793,7 +4793,11 @@ namespace Breeze
 
         }
 
-        if ( flat && iconRect.isValid() && textRect.isValid() ) textRect.adjust(Metrics::ToolButton_ExtraIconSpacing, 0, Metrics::ToolButton_ExtraIconSpacing, 0);
+        if ( flat && iconRect.isValid() && textRect.isValid() && toolButtonOption->toolButtonStyle != Qt::ToolButtonTextUnderIcon ) textRect.adjust(Metrics::ToolButton_ExtraIconSpacing, 0, Metrics::ToolButton_ExtraIconSpacing, 0);
+        if ( flat && iconRect.isValid() && textRect.isValid() && toolButtonOption->toolButtonStyle == Qt::ToolButtonTextUnderIcon )
+        {
+            textRect.adjust(0, 1, 0, 1);
+        }
 
         // make sure there is enough room for icon
         if( iconRect.isValid() ) iconRect = centerRect( iconRect, iconSize );
