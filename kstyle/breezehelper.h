@@ -16,6 +16,7 @@
 #include <KSharedConfig>
 #include <KStatefulBrush>
 #include <KConfigWatcher>
+#include <KStatefulBrush>
 
 #include <QToolBar>
 #include <QPainterPath>
