@@ -94,9 +94,6 @@ namespace Breeze
         //* polish scrollarea
         void polishScrollArea( QAbstractScrollArea* );
 
-        //* some controls alter the metrics when in tablet mode, possibly more form factors in the future
-        int formFactorMetric( MetricsType type ) const;
-
         //* pixel metrics
         int pixelMetric(PixelMetric, const QStyleOption* = nullptr, const QWidget* = nullptr) const override;
 

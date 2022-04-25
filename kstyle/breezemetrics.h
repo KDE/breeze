@@ -33,22 +33,6 @@ namespace Breeze
         static constexpr int NoPen = 0;
     };
 
-    enum MetricsType
-    {
-        Menu_FrameWidth,
-        MenuItem_MarginHeight,
-        LineEdit_FrameWidth,
-        ComboBox_FrameWidth,
-        SpinBox_FrameWidth,
-        CheckBox_Size,
-        Button_MarginWidth,
-        ToolButton_MarginWidth,
-        Slider_GrooveThickness,
-        Slider_ControlThickness,
-        TabBar_TabMarginHeight,
-        TabBar_TabMarginWidth
-    };
-
     //* metrics
     struct Metrics
     {
@@ -63,16 +47,13 @@ namespace Breeze
 
         // line editors
         static constexpr int LineEdit_FrameWidth = 6;
-        static constexpr int LineEdit_FrameWidth_Tablet = 10;
 
         // menu items
         static constexpr int Menu_FrameWidth = 0;
-        static constexpr int Menu_FrameWidth_Tablet = 4;
         static constexpr int MenuItem_MarginWidth = 5;
         static constexpr int MenuItem_HighlightGap = 4;
         static constexpr int MenuItem_ExtraLeftMargin = 4;
         static constexpr int MenuItem_MarginHeight = 3;
-        static constexpr int MenuItem_MarginHeight_Tablet = 6;
         static constexpr int MenuItem_ItemSpacing = 4;
         static constexpr int MenuItem_SeparatorPadding = 3;
         static constexpr int MenuItem_AcceleratorSpace = 16;
@@ -80,11 +61,9 @@ namespace Breeze
 
         // combobox
         static constexpr int ComboBox_FrameWidth = 6;
-        static constexpr int ComboBox_FrameWidth_Tablet = 10;
 
         // spinbox
         static constexpr int SpinBox_FrameWidth = LineEdit_FrameWidth;
-        static constexpr int SpinBox_FrameWidth_Tablet = LineEdit_FrameWidth_Tablet;
         static constexpr int SpinBox_ArrowButtonWidth = 20;
 
         // groupbox title margin
@@ -93,18 +72,15 @@ namespace Breeze
         // buttons
         static constexpr int Button_MinWidth = 80;
         static constexpr int Button_MarginWidth = 6;
-        static constexpr int Button_MarginWidth_Tablet = 10;
         static constexpr int Button_ItemSpacing = 4;
 
         // tool buttons
         static constexpr int ToolButton_MarginWidth = 6;
-        static constexpr int ToolButton_MarginWidth_Tablet = 10;
         static constexpr int ToolButton_ItemSpacing = 4;
         static constexpr int ToolButton_InlineIndicatorWidth = 12;
 
         // checkboxes and radio buttons
         static constexpr int CheckBox_Size = 20;
-        static constexpr int CheckBox_Size_Tablet = 24;
         static constexpr int CheckBox_FocusMarginWidth = 2;
         static constexpr int CheckBox_ItemSpacing = 4;
         static constexpr int CheckBox_Radius = Frame_FrameRadius - 1;
@@ -141,15 +117,11 @@ namespace Breeze
         static constexpr int Slider_TickLength = 8;
         static constexpr int Slider_TickMarginWidth = 2;
         static constexpr int Slider_GrooveThickness = 6;
-        static constexpr int Slider_GrooveThickness_Tablet = 8;
         static constexpr int Slider_ControlThickness = 20;
-        static constexpr int Slider_ControlThickness_Tablet = 24;
 
         // tabbar
         static constexpr int TabBar_TabMarginHeight = 4;
-        static constexpr int TabBar_TabMarginHeight_Tablet = 10;
         static constexpr int TabBar_TabMarginWidth = 8;
-        static constexpr int TabBar_TabMarginWidth_Tablet = 12;
         static constexpr int TabBar_TabMinWidth = 80;
         static constexpr int TabBar_TabMinHeight = 30;
         static constexpr int TabBar_TabItemSpacing = 8;
