@@ -31,7 +31,6 @@ namespace Breeze
         // load setup from configData
         load();
 
-        connect( _bigControlsOnTablet, &QAbstractButton::toggled, this, &StyleConfig::updateChanged );
         connect( _tabBarDrawCenteredTabs, &QAbstractButton::toggled, this, &StyleConfig::updateChanged );
         connect( _toolBarDrawItemSeparator, &QAbstractButton::toggled, this, &StyleConfig::updateChanged );
         connect( _viewDrawFocusIndicator, &QAbstractButton::toggled, this, &StyleConfig::updateChanged );
@@ -51,7 +50,6 @@ namespace Breeze
     //__________________________________________________________________
     void StyleConfig::save()
     {
-        StyleConfigData::setBigControlsOnTablet( _bigControlsOnTablet->isChecked() );
         StyleConfigData::setTabBarDrawCenteredTabs( _tabBarDrawCenteredTabs->isChecked() );
         StyleConfigData::setToolBarDrawItemSeparator( _toolBarDrawItemSeparator->isChecked() );
         StyleConfigData::setViewDrawFocusIndicator( _viewDrawFocusIndicator->isChecked() );
@@ -98,7 +96,6 @@ namespace Breeze
 
         // check if any value was modified
         if( _tabBarDrawCenteredTabs->isChecked() != StyleConfigData::tabBarDrawCenteredTabs() ) modified = true;
-        else if( _bigControlsOnTablet->isChecked() != StyleConfigData::bigControlsOnTablet() ) modified = true;
         else if( _toolBarDrawItemSeparator->isChecked() != StyleConfigData::toolBarDrawItemSeparator() ) modified = true;
         else if( _viewDrawFocusIndicator->isChecked() != StyleConfigData::viewDrawFocusIndicator() ) modified = true;
         else if( _dockWidgetDrawFrame->isChecked() != StyleConfigData::dockWidgetDrawFrame() ) modified = true;
@@ -120,7 +117,6 @@ namespace Breeze
     void StyleConfig::load()
     {
 
-        _bigControlsOnTablet->setChecked( StyleConfigData::bigControlsOnTablet() );
         _tabBarDrawCenteredTabs->setChecked( StyleConfigData::tabBarDrawCenteredTabs() );
         _toolBarDrawItemSeparator->setChecked( StyleConfigData::toolBarDrawItemSeparator() );
         _viewDrawFocusIndicator->setChecked( StyleConfigData::viewDrawFocusIndicator() );

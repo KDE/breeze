@@ -8,11 +8,6 @@
   <!-- common options -->
   <group name="Common">
 
-    <!-- tablet mode -->
-    <entry name="BigControlsOnTablet" type = "Bool">
-       <default>false</default>
-    </entry>
-  
     <!-- shadow -->
     <entry name="ShadowStrength" type = "Int">
        <default>255</default>
