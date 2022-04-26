@@ -267,6 +267,7 @@ namespace Breeze
                         QEvent e(QEvent::StyleChange);
                         QCoreApplication::sendEvent(w, &e);
                         w->update();
+                        w->updateGeometry();
                 }
             }
         });
@@ -585,61 +586,61 @@ namespace Breeze
                     return Metrics::MenuItem_MarginHeight;
                 }
             case LineEdit_FrameWidth:
-                if( isTabletMode() ) {
+                if( isTabletMode() && StyleConfigData::bigControlsOnTablet() ) {
                     return Metrics::LineEdit_FrameWidth_Tablet;
                 } else {
                     return Metrics::LineEdit_FrameWidth;
                 }
             case ComboBox_FrameWidth:
-                if( isTabletMode() ) {
+                if( isTabletMode() && StyleConfigData::bigControlsOnTablet() ) {
                     return Metrics::ComboBox_FrameWidth_Tablet;
                 } else {
                     return Metrics::ComboBox_FrameWidth;
                 }
             case SpinBox_FrameWidth:
-                if( isTabletMode() ) {
+                if( isTabletMode() && StyleConfigData::bigControlsOnTablet() ) {
                     return Metrics::SpinBox_FrameWidth_Tablet;
                 } else {
                     return Metrics::SpinBox_FrameWidth;
                 }
             case CheckBox_Size:
-                if( isTabletMode() ) {
+                if( isTabletMode() && StyleConfigData::bigControlsOnTablet() ) {
                     return Metrics::CheckBox_Size_Tablet;
                 } else {
                     return Metrics::CheckBox_Size;
                 }
             case Button_MarginWidth:
-                if( isTabletMode() ) {
+                if( isTabletMode() && StyleConfigData::bigControlsOnTablet() ) {
                     return Metrics::Button_MarginWidth_Tablet;
                 } else {
                     return Metrics::Button_MarginWidth;
                 }
             case ToolButton_MarginWidth:
-                if( isTabletMode() ) {
+                if( isTabletMode() && StyleConfigData::bigControlsOnTablet() ) {
                     return Metrics::ToolButton_MarginWidth_Tablet;
                 } else {
                     return Metrics::ToolButton_MarginWidth;
                 }
             case Slider_GrooveThickness:
-                if( isTabletMode() ) {
+                if( isTabletMode() && StyleConfigData::bigControlsOnTablet() ) {
                     return Metrics::Slider_GrooveThickness_Tablet;
                 } else {
                     return Metrics::Slider_GrooveThickness;
                 }
             case Slider_ControlThickness:
-                if( isTabletMode() ) {
+                if( isTabletMode() && StyleConfigData::bigControlsOnTablet() ) {
                     return Metrics::Slider_ControlThickness_Tablet;
                 } else {
                     return Metrics::Slider_ControlThickness;
                 }
             case TabBar_TabMarginHeight:
-                if( isTabletMode() ) {
+                if( isTabletMode() && StyleConfigData::bigControlsOnTablet() ) {
                     return Metrics::TabBar_TabMarginHeight_Tablet;
                 } else {
                     return Metrics::TabBar_TabMarginHeight;
                 }
             case TabBar_TabMarginWidth:
-                if( isTabletMode() ) {
+                if( isTabletMode() && StyleConfigData::bigControlsOnTablet() ) {
                     return Metrics::TabBar_TabMarginWidth_Tablet;
                 } else {
                     return Metrics::TabBar_TabMarginWidth;
@@ -1778,6 +1779,20 @@ namespace Breeze
         // widget explorer
         _widgetExplorer->setEnabled( StyleConfigData::widgetExplorerEnabled() );
         _widgetExplorer->setDrawWidgetRects( StyleConfigData::drawWidgetRects() );
+
+        // Refresh the tablet mode layout changes
+#if BREEZE_HAVE_QTQUICK
+        const QWidgetList all = qApp->allWidgets();
+        for (QWidgetList::ConstIterator it = all.constBegin(), cend = all.constEnd(); it != cend; ++it) {
+            QWidget *w = *it;
+            if (w->windowType() != Qt::Desktop && !w->testAttribute(Qt::WA_SetStyle)) {
+                    QEvent e(QEvent::StyleChange);
+                    QCoreApplication::sendEvent(w, &e);
+                    w->update();
+                    w->updateGeometry();
+            }
+        }
+#endif
     }
 
     //___________________________________________________________________________________________________________________
