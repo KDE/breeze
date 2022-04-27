@@ -10,7 +10,7 @@
 
     <!-- tablet mode -->
     <entry name="BigControlsOnTablet" type = "Bool">
-       <default>false</default>
+       <default>true</default>
     </entry>
   
     <!-- shadow -->
