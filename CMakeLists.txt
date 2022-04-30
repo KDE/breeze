@@ -20,6 +20,7 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 include(KDEClangFormat)
+include(KDEGitCommitHooks)
 
 include(GtkUpdateIconCache)
 
@@ -67,6 +68,7 @@ configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/BreezeConfig.cmake.in
 # add clang-format target for all our real source files
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
+kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 
 install(FILES  "${CMAKE_CURRENT_BINARY_DIR}/BreezeConfig.cmake"
                "${CMAKE_CURRENT_BINARY_DIR}/BreezeConfigVersion.cmake"
