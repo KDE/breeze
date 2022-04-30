@@ -9,68 +9,62 @@
 // SPDX-License-Identifier: MIT
 //////////////////////////////////////////////////////////////////////////////
 
-#include "ui_breezeconfigurationui.h"
+#include "breeze.h"
 #include "breezeexceptionlistwidget.h"
 #include "breezesettings.h"
-#include "breeze.h"
+#include "ui_breezeconfigurationui.h"
 
 #include <KCModule>
 #include <KSharedConfig>
 
-#include <QWidget>
 #include <QSharedPointer>
+#include <QWidget>
 
 namespace Breeze
 {
+//_____________________________________________
+class ConfigWidget : public KCModule
+{
+    Q_OBJECT
 
-    //_____________________________________________
-    class ConfigWidget: public KCModule
-    {
+public:
+    //* constructor
+    explicit ConfigWidget(QWidget *, const QVariantList &);
 
-        Q_OBJECT
+    //* destructor
+    virtual ~ConfigWidget() = default;
 
-        public:
+    //* default
+    void defaults() override;
 
-        //* constructor
-        explicit ConfigWidget( QWidget*, const QVariantList& );
+    //* load configuration
+    void load() override;
 
-        //* destructor
-        virtual ~ConfigWidget() = default;
+    //* save configuration
+    void save() override;
 
-        //* default
-        void defaults() override;
+protected Q_SLOTS:
 
-        //* load configuration
-        void load() override;
+    //* update changed state
+    virtual void updateChanged();
 
-        //* save configuration
-        void save() override;
+protected:
+    //* set changed state
+    void setChanged(bool);
 
-        protected Q_SLOTS:
+private:
+    //* ui
+    Ui_BreezeConfigurationUI m_ui;
 
-        //* update changed state
-        virtual void updateChanged();
+    //* kconfiguration object
+    KSharedConfig::Ptr m_configuration;
 
-        protected:
+    //* internal exception
+    InternalSettingsPtr m_internalSettings;
 
-        //* set changed state
-        void setChanged( bool );
-
-        private:
-
-        //* ui
-        Ui_BreezeConfigurationUI m_ui;
-
-        //* kconfiguration object
-        KSharedConfig::Ptr m_configuration;
-
-        //* internal exception
-        InternalSettingsPtr m_internalSettings;
-
-        //* changed state
-        bool m_changed;
-
-    };
+    //* changed state
+    bool m_changed;
+};
 
 }
 

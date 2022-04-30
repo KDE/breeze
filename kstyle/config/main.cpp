@@ -20,18 +20,17 @@ int main(int argc, char *argv[])
 {
     KLocalizedString::setApplicationDomain("breeze_style_config");
 
-    QApplication app( argc, argv );
-    app.setApplicationName( i18n( "Breeze Settings" ) );
-    app.setWindowIcon( QIcon::fromTheme( QStringLiteral( "breeze-settings" ) ) );
+    QApplication app(argc, argv);
+    app.setApplicationName(i18n("Breeze Settings"));
+    app.setWindowIcon(QIcon::fromTheme(QStringLiteral("breeze-settings")));
 
     KCMultiDialog dialog;
-    dialog.setWindowTitle( i18n( "Breeze Settings" ) );
-    dialog.addModule( QStringLiteral( "breezestyleconfig" ) );
-    dialog.addModule( QStringLiteral( "breezedecorationconfig" ) );
+    dialog.setWindowTitle(i18n("Breeze Settings"));
+    dialog.addModule(QStringLiteral("breezestyleconfig"));
+    dialog.addModule(QStringLiteral("breezedecorationconfig"));
     dialog.show();
 
-    foreach( auto child, dialog.findChildren<QAbstractScrollArea*>() )
-    {
+    foreach (auto child, dialog.findChildren<QAbstractScrollArea *>()) {
         child->adjustSize();
         child->viewport()->adjustSize();
     }

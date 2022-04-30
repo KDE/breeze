@@ -10,27 +10,26 @@
 
 namespace Breeze
 {
+//____________________________________________________________
+bool HeaderViewEngine::registerWidget(QWidget *widget)
+{
+    if (!widget)
+        return false;
 
-    //____________________________________________________________
-    bool HeaderViewEngine::registerWidget( QWidget* widget )
-    {
+    // create new data class
+    if (!_data.contains(widget))
+        _data.insert(widget, new HeaderViewData(this, widget, duration()), enabled());
 
-        if( !widget ) return false;
+    // connect destruction signal
+    connect(widget, SIGNAL(destroyed(QObject *)), this, SLOT(unregisterWidget(QObject *)), Qt::UniqueConnection);
+    return true;
+}
 
-        // create new data class
-        if( !_data.contains( widget ) ) _data.insert( widget, new HeaderViewData( this, widget, duration() ), enabled() );
-
-        // connect destruction signal
-        connect( widget, SIGNAL(destroyed(QObject*)), this, SLOT(unregisterWidget(QObject*)), Qt::UniqueConnection );
-        return true;
-
-    }
-
-    //____________________________________________________________
-    bool HeaderViewEngine::updateState( const QObject* object, const QPoint& position, bool value )
-    {
-        DataMap<HeaderViewData>::Value data( _data.find( object ) );
-        return ( data && data.data()->updateState( position, value ) );
-    }
+//____________________________________________________________
+bool HeaderViewEngine::updateState(const QObject *object, const QPoint &position, bool value)
+{
+    DataMap<HeaderViewData>::Value data(_data.find(object));
+    return (data && data.data()->updateState(position, value));
+}
 
 }

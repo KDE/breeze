@@ -12,8 +12,8 @@
 
 #include <QMouseEvent>
 #include <QPaintEvent>
-#include <QWidget>
 #include <QPointer>
+#include <QWidget>
 
 #if BREEZE_HAVE_X11
 #include <xcb/xcb.h>
@@ -21,66 +21,59 @@
 
 namespace Breeze
 {
+//* implements size grip for all widgets
+class SizeGrip : public QWidget
+{
+    Q_OBJECT
 
-    //* implements size grip for all widgets
-    class SizeGrip: public QWidget
-    {
+public:
+    //* constructor
+    explicit SizeGrip(Decoration *);
 
-        Q_OBJECT
+    //* constructor
+    virtual ~SizeGrip();
 
-        public:
+protected Q_SLOTS:
 
-        //* constructor
-        explicit SizeGrip( Decoration* );
+    //* update background color
+    void updateActiveState();
 
-        //* constructor
-        virtual ~SizeGrip();
+    //* update position
+    void updatePosition();
 
-        protected Q_SLOTS:
+    //* embed into parent widget
+    void embed();
 
-        //* update background color
-        void updateActiveState();
+protected:
+    //*@name event handlers
+    //@{
 
-        //* update position
-        void updatePosition();
+    //* paint
+    virtual void paintEvent(QPaintEvent *) override;
 
-        //* embed into parent widget
-        void embed();
+    //* mouse press
+    virtual void mousePressEvent(QMouseEvent *) override;
 
-        protected:
+    //@}
 
-        //*@name event handlers
-        //@{
+private:
+    //* send resize event
+    void sendMoveResizeEvent(QPoint);
 
-        //* paint
-        virtual void paintEvent( QPaintEvent* ) override;
-
-        //* mouse press
-        virtual void mousePressEvent( QMouseEvent* ) override;
-
-        //@}
-
-        private:
-
-        //* send resize event
-        void sendMoveResizeEvent( QPoint );
-
-        //* grip size
-        enum {
-            Offset = 0,
-            GripSize = 14,
-        };
-
-        //* decoration
-        QPointer<Decoration> m_decoration;
-
-        //* move/resize atom
-        #if BREEZE_HAVE_X11
-        xcb_atom_t m_moveResizeAtom = 0;
-        #endif
-
+    //* grip size
+    enum {
+        Offset = 0,
+        GripSize = 14,
     };
 
+    //* decoration
+    QPointer<Decoration> m_decoration;
+
+//* move/resize atom
+#if BREEZE_HAVE_X11
+    xcb_atom_t m_moveResizeAtom = 0;
+#endif
+};
 
 }
 

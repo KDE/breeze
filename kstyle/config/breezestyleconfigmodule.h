@@ -13,28 +13,24 @@
 
 namespace Breeze
 {
+//* configuration module
+class ConfigurationModule : public KCModule
+{
+    Q_OBJECT
 
-    //* configuration module
-    class ConfigurationModule: public KCModule
-    {
+public:
+    ConfigurationModule(QWidget *parent, const QVariantList &args);
 
-        Q_OBJECT
+public Q_SLOTS:
 
-        public:
-        ConfigurationModule(QWidget *parent, const QVariantList &args);
+    void defaults() override;
+    void load() override;
+    void save() override;
 
-        public Q_SLOTS:
-
-        void defaults() override;
-        void load() override;
-        void save() override;
-
-        private:
-
-        //* configuration
-        StyleConfig* m_config;
-
-    };
+private:
+    //* configuration
+    StyleConfig *m_config;
+};
 
 }
 

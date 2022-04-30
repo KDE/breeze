@@ -17,7 +17,6 @@
 
 namespace Breeze
 {
-
 class BREEZECOMMON_EXPORT BoxShadowRenderer
 {
 public:

@@ -11,19 +11,19 @@
 
 namespace Breeze
 {
-
-    //_________________________________________________
-    QStyle* StylePlugin::create( const QString &key )
-    {
-        if( key.toLower() == QStringLiteral( "breeze" ) )
-        {
-            return new Style;
-        }
-        return nullptr;
+//_________________________________________________
+QStyle *StylePlugin::create(const QString &key)
+{
+    if (key.toLower() == QStringLiteral("breeze")) {
+        return new Style;
     }
+    return nullptr;
+}
 
-    //_________________________________________________
-    QStringList StylePlugin::keys() const
-    { return QStringList( QStringLiteral( "Breeze" ) ); }
+//_________________________________________________
+QStringList StylePlugin::keys() const
+{
+    return QStringList(QStringLiteral("Breeze"));
+}
 
 }
