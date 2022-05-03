@@ -1605,7 +1605,7 @@ QPixmap Helper::coloredIcon(const QIcon &icon, const QPalette &palette, const QS
     return pixmap;
 }
 
-bool Helper::shouldDrawToolsArea(const QWidget *widget) const
+bool Helper::windowContentsAreEdgeToEdge(const QWidget *widget) const
 {
     if (!widget) {
         return false;

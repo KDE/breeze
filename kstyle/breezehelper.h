@@ -323,7 +323,7 @@ public:
     bool hasAlphaChannel(const QWidget *) const;
 
     //* returns true if the tools area should be drawn
-    bool shouldDrawToolsArea(const QWidget *) const;
+    bool windowContentsAreEdgeToEdge(const QWidget *) const;
 
     //@}
 
