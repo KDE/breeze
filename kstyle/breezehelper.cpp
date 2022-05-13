@@ -690,7 +690,7 @@ namespace Breeze
                     0.5
                 );
             } else {
-                bgBrush = palette.button().color();
+                bgBrush = KColorUtils::mix(palette.button().color(), palette.window().color(), 0.4);
                 if (borders) penBrush = hasNeutralHighlight ? neutralText(palette)
                     : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), 0.3);
             }

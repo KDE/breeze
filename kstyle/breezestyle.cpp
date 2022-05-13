@@ -3973,6 +3973,7 @@ namespace Breeze
         bool down = option->state & QStyle::State_Sunken;
         bool checked = option->state & QStyle::State_On;
         bool reducedForm = option->state & QStyle::State_AutoRaise;
+        bool shrinkWrapToIcon = toolButtonOption && toolButtonOption->toolButtonStyle == Qt::ToolButtonTextUnderIcon;
         bool hasNeutralHighlight = hasHighlightNeutral(widget, option);
 
         // NOTE: Using focus animation for bg down because the pressed animation only works on press when enabled for buttons and not on release.
@@ -3992,7 +3993,7 @@ namespace Breeze
         stateProperties["hasNeutralHighlight"] = hasNeutralHighlight;
         stateProperties["isActiveWindow"] = widget ? widget->isActiveWindow() : true;
 
-        _helper->renderButtonFrame(painter, reducedForm ? iconRect : plainRect, option->palette, stateProperties, bgAnimation, penAnimation, !reducedForm);
+        _helper->renderButtonFrame(painter, shrinkWrapToIcon ? iconRect : plainRect, option->palette, stateProperties, bgAnimation, penAnimation, !reducedForm);
         if (painter->hasClipping()) {
             painter->setClipping(false);
         }
