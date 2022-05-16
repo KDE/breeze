@@ -467,9 +467,6 @@ namespace Breeze
     {
         const auto smallFont = QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont);
         application->setFont(smallFont, "QHeaderView");
-        application->setFont(smallFont, "QToolButton");
-        application->setFont(smallFont, "KDEPrivate::KUrlNavigatorButton");
-        application->setFont(smallFont, "KUrlNavigator");
         _toolsAreaManager->registerApplication(application);
     }
 
