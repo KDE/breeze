@@ -54,6 +54,7 @@
 #include <QDialogButtonBox>
 #include <QGraphicsItem>
 #include <QGraphicsProxyWidget>
+#include <array>
 
 #if BREEZE_HAVE_QTQUICK
 #include <QQuickWindow>
