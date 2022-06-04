@@ -5342,6 +5342,8 @@ bool Style::drawProgressBarControl(const QStyleOption *option, QPainter *painter
 
     const QObject *styleObject(widget ? widget : progressBarOption->styleObject);
 
+    const bool busy(progressBarOption->minimum == 0 && progressBarOption->maximum == 0);
+
     // enable busy animations
     // need to check both widget and passed styleObject, used for QML
     if (styleObject && _animations->busyIndicatorEngine().enabled()) {
@@ -5350,7 +5352,7 @@ bool Style::drawProgressBarControl(const QStyleOption *option, QPainter *painter
             _animations->busyIndicatorEngine().registerWidget(progressBarOption->styleObject);
         }
 
-        _animations->busyIndicatorEngine().setAnimated(styleObject, progressBarOption->maximum == 0 && progressBarOption->minimum == 0);
+        _animations->busyIndicatorEngine().setAnimated(styleObject, busy);
     }
 
     // check if animated and pass to option
@@ -5364,7 +5366,6 @@ bool Style::drawProgressBarControl(const QStyleOption *option, QPainter *painter
 
     // render text
     const bool textVisible(progressBarOption->textVisible);
-    const bool busy(progressBarOption->minimum == 0 && progressBarOption->maximum == 0);
     if (textVisible && !busy) {
         progressBarOption2.rect = subElementRect(SE_ProgressBarLabel, progressBarOption, widget);
         drawControl(CE_ProgressBarLabel, &progressBarOption2, painter, widget);
