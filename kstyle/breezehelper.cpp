@@ -655,19 +655,6 @@ void Helper::renderButtonFrame(QPainter *painter,
         penBrush = KColorUtils::mix(color1, color2, penAnimation);
     }
 
-    // Gradient
-    if (isActiveWindow && !(flat || down || hovered || checked) && enabled) {
-        QLinearGradient bgGradient(frameRect.topLeft(), frameRect.bottomLeft());
-        bgGradient.setColorAt(0, KColorUtils::mix(bgBrush.color(), Qt::white, 0.03125));
-        bgGradient.setColorAt(0.5, bgBrush.color());
-        bgGradient.setColorAt(1, KColorUtils::mix(bgBrush.color(), Qt::black, 0.03125));
-        QLinearGradient penGradient(frameRect.topLeft(), frameRect.bottomLeft());
-        penGradient.setColorAt(0, KColorUtils::mix(penBrush.color(), Qt::white, 0.03125));
-        penGradient.setColorAt(1, KColorUtils::mix(penBrush.color(), Qt::black, 0.0625));
-        bgBrush = bgGradient;
-        penBrush = penGradient;
-    }
-
     // Shadow
     if (isActiveWindow && !(flat || down || checked) && enabled) {
         renderRoundedRectShadow(painter, shadowedRect, shadowColor(palette));
