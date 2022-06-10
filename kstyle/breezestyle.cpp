@@ -1184,12 +1184,10 @@ namespace Breeze
     void drawToolsAreaSeparator(QPainter* painter, Helper* _helper, ToolsAreaManager* _toolsAreaManager, QMainWindow* mw)
     {
         if (mw->property(PropertyNames::noSeparator).toBool() || mw->isFullScreen()) {
-            painter->restore();
             return;
         }
         painter->setPen(QPen(_helper->separatorColor(_toolsAreaManager->palette()), PenWidth::Frame * mw->devicePixelRatio()));
         painter->drawLine(mw->rect().topLeft(), mw->rect().topRight());
-        painter->restore();
     }
 
     void drawToolsAreaBackground(QPainter* painter, Helper* _helper, ToolsAreaManager* _toolsAreaManager, QMainWindow* mw, const QRect& rect)
@@ -1202,8 +1200,6 @@ namespace Breeze
 
         painter->setPen(_helper->separatorColor(_toolsAreaManager->palette()));
         painter->drawLine(rect.bottomLeft(), rect.bottomRight());
-
-        painter->restore();
     }
 
     //_____________________________________________________________________
@@ -1242,6 +1238,7 @@ namespace Breeze
                     drawToolsAreaBackground(&painter, _helper, _toolsAreaManager, mw, rect);
                 }
             }
+            painter.restore();
 
         }
 
