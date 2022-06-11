@@ -1732,6 +1732,7 @@ namespace Breeze
         if (!widget) {
             return false;
         }
+        
         static bool isAuto = false;
         static QString borderSize;
         if (!_cachedAutoValid) {
@@ -1762,7 +1763,7 @@ namespace Breeze
         }
         /*if (borderSize != "None" && borderSize != "NoSides") {
             return false;
-        }*/
+        }*/ //edited out for classik as we can set the borders to titlebar colour to avoid any such visual glitches
         return true;
     }
 }
