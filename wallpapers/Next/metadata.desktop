@@ -5,6 +5,7 @@ Name[ca]=Aterratge segur
 Name[ca@valencia]=Aterratge segur
 Name[es]=Aterrizaje seguro
 Name[fr]=Atterrissage en douceur
+Name[it]=Atterraggio sicuro
 Name[nl]=Veilige landing
 Name[pl]=Bezpieczne lądowanie
 Name[pt]=Aterragem Segura
@@ -14,6 +15,7 @@ Name[sv]=Säker landning
 Name[tr]=Sakın İniş
 Name[uk]=Безпечне приземлення
 Name[x-test]=xxSafe Landingxx
+Name[zh_CN]=Safe Landing 着陆
 
 X-KDE-PluginInfo-Name=Next
 X-KDE-PluginInfo-Author=Louis Durrant
