@@ -1,5 +1,12 @@
 [Desktop Entry]
 Name=Safe Landing
+Name[ca]=Safe Landing
+Name[ca@valencia]=Safe Landing
+Name[es]=Aterrizaje seguro
+Name[fr]=Atterrissage en douceur
+Name[nl]=Veilige landing
+Name[uk]=Безпечне приземлення
+Name[x-test]=xxSafe Landingxx
 
 X-KDE-PluginInfo-Name=Next
 X-KDE-PluginInfo-Author=Louis Durrant
