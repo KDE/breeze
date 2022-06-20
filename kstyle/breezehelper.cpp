@@ -1460,7 +1460,7 @@ namespace Breeze
    }
 
     //______________________________________________________________________________
-    void Helper::renderDecorationButton( QPainter* painter, const QRect& rect, const QColor& foregroundColor, ButtonType buttonType, bool inverted, bool paintBackground, const QColor& backgroundColor, const QColor& outlineColor ) const
+    void Helper::renderDecorationButton( QPainter* painter, const QRect& rect, const QColor& foregroundColor, ButtonType buttonType, bool inverted, bool paintBackground, const QColor& backgroundColor, const QColor& outlineColor, const qreal devicePixelRatio ) const
     {
         
         painter->save();
@@ -1519,7 +1519,10 @@ namespace Breeze
         painter->setPen(pen);
         
         std::unique_ptr<RenderDecorationButtonIcon18By18> iconRenderer;
-        iconRenderer = RenderDecorationButtonIcon18By18::factory( decorationConfig(), painter, true );
+        if( decorationConfig()->buttonIconStyle() == InternalSettings::EnumButtonIconStyle::StyleSystemIconTheme ){
+            painter->setWindow( 0, 0, 16, 16 );
+            iconRenderer = RenderDecorationButtonIcon18By18::factory( decorationConfig(), painter, true, false, 16, devicePixelRatio );
+        } else iconRenderer = RenderDecorationButtonIcon18By18::factory( decorationConfig(), painter, true );
         
         switch( buttonType )
         {
