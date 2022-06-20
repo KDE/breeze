@@ -56,7 +56,12 @@
 
 #if BREEZE_HAVE_QTQUICK
 #include <KCoreAddons>
+#if __has_include(<Kirigami/TabletModeWatcher>)
+// the namespaced include is new in KF 5.91
 #include <Kirigami/TabletModeWatcher>
+#else
+#include <TabletModeWatcher>
+#endif
 #include <QQuickWindow>
 #endif
 
