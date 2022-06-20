@@ -5,11 +5,15 @@ Name[ca@valencia]=Safe Landing
 Name[de]=Sichere Landung
 Name[es]=Aterrizaje seguro
 Name[fr]=Atterrissage en douceur
+Name[ia]=Safe Landing (Atterrage Secur)
 Name[it]=Atterraggio sicuro
 Name[nl]=Veilige landing
+Name[nn]=Trygg landing
+Name[sl]=Varen pristanek
 Name[sv]=Säker landning
 Name[uk]=Безпечне приземлення
 Name[x-test]=xxSafe Landingxx
+Name[zh_CN]=Safe Landing 着陆
 
 X-KDE-PluginInfo-Name=Next
 X-KDE-PluginInfo-Author=Louis Durrant
