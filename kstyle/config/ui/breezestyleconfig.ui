@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>631</width>
-    <height>482</height>
+    <height>520</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -678,6 +678,35 @@
               </property>
              </widget>
             </item>
+            <item row="4" column="1">
+             <widget class="QSpinBox" name="_scrollBarMinSliderHeight">
+              <property name="minimumSize">
+               <size>
+                <width>74</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="minimum">
+               <number>5</number>
+              </property>
+              <property name="maximum">
+               <number>80</number>
+              </property>
+              <property name="singleStep">
+               <number>2</number>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="label_8">
+              <property name="text">
+               <string>Slider minimum height:</string>
+              </property>
+              <property name="buddy">
+               <cstring>_scrollBarMinSliderHeight</cstring>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
          </layout>
@@ -860,7 +889,9 @@
   <tabstop>_scrollBarSliderThicknessMouseOver</tabstop>
   <tabstop>_scrollBarSliderThicknessMouseNotOverPercent</tabstop>
   <tabstop>_scrollBarSliderPadding</tabstop>
+  <tabstop>_scrollBarMinSliderHeight</tabstop>
   <tabstop>_menuOpacity</tabstop>
+  <tabstop>graphicsView</tabstop>
  </tabstops>
  <resources/>
  <connections>

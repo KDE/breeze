@@ -94,7 +94,7 @@ namespace Breeze
         static int const& ScrollBar_TopBottomMargins = StyleConfigData::scrollBarTopBottomMargins();
         static int const& ScrollBar_SliderWidthMouseOver = StyleConfigData::scrollBarSliderThicknessMouseOver();
         static int const& ScrollBar_SliderWidthMouseNotOver = int( std::max( 1.0, qreal( ScrollBar_SliderWidthMouseOver ) * ( qreal(StyleConfigData::scrollBarSliderThicknessMouseNotOverPercent() ) / 100.0f) ) ) ;
-        static constexpr int ScrollBar_MinSliderHeight = 20;
+        static int const& ScrollBar_MinSliderHeight = StyleConfigData::scrollBarMinSliderHeight();
         static int const& ScrollBarSliderPadding = StyleConfigData::scrollBarSliderPadding();
         static int const& ScrollBar_Extend = int( ScrollBar_SliderWidthMouseOver + (ScrollBarSliderPadding * 2) + 1 );
         static int ScrollBar_NoButtonHeight = (ScrollBar_Extend-ScrollBar_SliderWidthMouseOver)/2 + ScrollBar_TopBottomMargins;
