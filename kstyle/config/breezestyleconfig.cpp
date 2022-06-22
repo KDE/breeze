@@ -67,6 +67,7 @@ namespace Breeze
         connect( _scrollBarSliderThicknessMouseOver, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
         connect( _scrollBarSliderThicknessMouseNotOverPercent, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
         connect( _scrollBarSliderPadding, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
+        connect( _scrollBarMinSliderHeight, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
         
         connect( _windowDragMode, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()) );
         connect( _menuOpacity, &QAbstractSlider::valueChanged, this, &StyleConfig::updateChanged );
@@ -99,6 +100,7 @@ namespace Breeze
         StyleConfigData::setScrollBarSliderThicknessMouseOver( _scrollBarSliderThicknessMouseOver->value() );
         StyleConfigData::setScrollBarSliderThicknessMouseNotOverPercent( _scrollBarSliderThicknessMouseNotOverPercent->value() );
         StyleConfigData::setScrollBarSliderPadding( _scrollBarSliderPadding->value() );
+        StyleConfigData::setScrollBarMinSliderHeight( _scrollBarMinSliderHeight->value() );
         StyleConfigData::setWindowDragMode( _windowDragMode->currentIndex() );
         StyleConfigData::setMenuOpacity( _menuOpacity->value() );
 
@@ -152,6 +154,7 @@ namespace Breeze
         else if( _scrollBarSliderThicknessMouseOver->value() != StyleConfigData::scrollBarSliderThicknessMouseOver() ) modified = true;
         else if( _scrollBarSliderThicknessMouseNotOverPercent->value() != StyleConfigData::scrollBarSliderThicknessMouseNotOverPercent() ) modified = true;
         else if( _scrollBarSliderPadding->value() != StyleConfigData::scrollBarSliderPadding() ) modified = true;
+        else if( _scrollBarMinSliderHeight->value() != StyleConfigData::scrollBarMinSliderHeight() ) modified = true;
         else if( _splitterProxyEnabled->isChecked() != StyleConfigData::splitterProxyEnabled() ) modified = true;
         else if( _windowDragMode->currentIndex() != StyleConfigData::windowDragMode() ) modified = true;
         else if( _menuOpacity->value() != StyleConfigData::menuOpacity() ) modified = true;
@@ -185,6 +188,7 @@ namespace Breeze
         _scrollBarSliderThicknessMouseOver->setValue( StyleConfigData::scrollBarSliderThicknessMouseOver() );
         _scrollBarSliderThicknessMouseNotOverPercent->setValue( StyleConfigData::scrollBarSliderThicknessMouseNotOverPercent() );
         _scrollBarSliderPadding->setValue( StyleConfigData::scrollBarSliderPadding() );
+        _scrollBarMinSliderHeight->setValue( StyleConfigData::scrollBarMinSliderHeight() );
         _windowDragMode->setCurrentIndex( StyleConfigData::windowDragMode() );
         _menuOpacity->setValue( StyleConfigData::menuOpacity() );
 
