@@ -72,6 +72,7 @@ sb_v_double_arrow size_ver
 size_all fleur
 split_h col-resize
 split_v row-resize
+tcross crosshair
 top_left_arrow default
 top_left_corner size_fdiag
 top_right_corner size_bdiag
