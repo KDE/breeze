@@ -12,48 +12,46 @@
 namespace Breeze
 {
 
-    class StyleConfig: public QWidget, Ui::BreezeStyleConfig
+class StyleConfig : public QWidget, Ui::BreezeStyleConfig
+{
+    Q_OBJECT
+
+public:
+    //* constructor
+    explicit StyleConfig(QWidget *);
+
+    //* destructor
+    virtual ~StyleConfig()
     {
+    }
 
-        Q_OBJECT
+Q_SIGNALS:
 
-        public:
+    //* emitted whenever one option is changed.
+    void changed(bool);
 
-        //* constructor
-        explicit StyleConfig(QWidget*);
+public Q_SLOTS:
 
-        //* destructor
-        virtual ~StyleConfig()
-        {}
+    //* load setup from config data
+    void load();
 
-        Q_SIGNALS:
+    //* save current state
+    void save();
 
-        //* emitted whenever one option is changed.
-        void changed(bool);
+    //* restore all default values
+    void defaults();
 
-        public Q_SLOTS:
+    //* reset to saved configuration
+    void reset();
 
-        //* load setup from config data
-        void load();
+protected Q_SLOTS:
 
-        //* save current state
-        void save();
+    //* update modified state when option is checked/unchecked
+    void updateChanged();
 
-        //* restore all default values
-        void defaults();
-
-        //* reset to saved configuration
-        void reset();
-
-        protected Q_SLOTS:
-
-        //* update modified state when option is checked/unchecked
-        void updateChanged();
-        
-        //* enable/disable _autoHideArrows checkbox depending on if scrollbar arrow button type is selected
-        void setEnabledAutoHideArrows();
-
-    };
+    //* enable/disable _autoHideArrows checkbox depending on if scrollbar arrow button type is selected
+    void setEnabledAutoHideArrows();
+};
 
 }
 #endif
