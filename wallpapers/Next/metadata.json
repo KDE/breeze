@@ -1,0 +1,44 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "foss@louisdurrant.co.uk",
+                "Name": "Louis Durrant"
+            }
+        ],
+        "Id": "Next",
+        "License": "CC-BY-SA-4.0",
+        "Name": "Safe Landing",
+        "Name[ar]": "هبوط آمن",
+        "Name[az]": "Yumşaq eniş",
+        "Name[bg]": "Safe Landing",
+        "Name[ca@valencia]": "Aterratge segur",
+        "Name[ca]": "Aterratge segur",
+        "Name[cs]": "Bezpečné přistání",
+        "Name[da]": "Sikker landing",
+        "Name[de]": "Sichere Landung",
+        "Name[en_GB]": "Safe Landing",
+        "Name[es]": "Aterrizaje seguro",
+        "Name[eu]": "Lurreratze segurua",
+        "Name[fi]": "Turvallinen laskeutuminen",
+        "Name[fr]": "Atterrissage en douceur",
+        "Name[ia]": "Atterrage secur (Safe Landing)",
+        "Name[it]": "Atterraggio sicuro",
+        "Name[ka]": "უსაფრთხო დაჯდომა",
+        "Name[ko]": "안전한 착륙",
+        "Name[nl]": "Veilige landing",
+        "Name[nn]": "Trygg landing",
+        "Name[pl]": "Bezpieczne lądowanie",
+        "Name[pt]": "Aterragem Segura",
+        "Name[pt_BR]": "Pouso seguro",
+        "Name[ro]": "Aterizare ușoară",
+        "Name[ru]": "Safe Landing",
+        "Name[sk]": "Bezpečné pristátie",
+        "Name[sl]": "Varen pristanek",
+        "Name[sv]": "Säker landning",
+        "Name[tr]": "Güvenli İniş",
+        "Name[uk]": "Безпечне приземлення",
+        "Name[x-test]": "xxSafe Landingxx",
+        "Name[zh_CN]": "Safe Landing 着陆"
+    }
+}
