@@ -55,7 +55,6 @@
 #include <QToolButton>
 #include <QTreeView>
 #include <QWidgetAction>
-#include <array>
 #include <memory>
 #include <qnamespace.h>
 
@@ -2909,9 +2908,9 @@ bool Style::scrollBarAutoHideArrowsException(const QWidget *widget) const
     bool exception = false;
 
     if (widget) {
-        std::array<const char *, 1> exceptionClassNames = {"KateScrollBar"};
-        for (unsigned i = 0; i < exceptionClassNames.size(); i++) {
-            if (!strcmp(widget->metaObject()->className(), exceptionClassNames[i])) {
+        QVector<const char *> exceptionClassNames = {"KateScrollBar"};
+        for (int i = 0; i < exceptionClassNames.size(); i++) {
+            if (widget->inherits(exceptionClassNames[i])) {
                 exception = true;
                 break;
             }
