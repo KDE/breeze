@@ -7,8 +7,8 @@
 
 #include "breezestyleconfig.h"
 
-#include "../breeze.h"
 #include "../config-breeze.h"
+#include "breeze.h"
 #include "breezestyleconfigdata.h"
 
 #include <QDBusConnection>
