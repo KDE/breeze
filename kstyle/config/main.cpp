@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     KCMultiDialog dialog;
     dialog.setWindowTitle(i18n("Breeze Settings"));
     dialog.addModule(KPluginMetaData(QStringLiteral("plasma/kcms/systemsettings_qwidgets/breezestyleconfig")));
-    dialog.addModule(KPluginMetaData(QStringLiteral("plasma/kcms/systemsettings_qwidgets/kcm_breezedecoration")));
+    dialog.addModule(KPluginMetaData(QStringLiteral("plasma/kcms/breeze/kcm_breezedecoration")));
     dialog.show();
 
     foreach (auto child, dialog.findChildren<QAbstractScrollArea *>()) {
