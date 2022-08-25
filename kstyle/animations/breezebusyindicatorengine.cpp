@@ -125,10 +125,10 @@ namespace Breeze
                 animated = true;
 
                 // emit update signal on object
-                if( const_cast<QObject*>( iter.key() )->inherits( "QQuickStyleItem" ))
+                if( const_cast<QObject*>( iter.key() )->inherits( "KQuickStyleItem" ))
                 {
 
-                    //QtQuickControls "rerender" method is updateItem
+                    //KQuickStyleItem "rerender" method is updateItem
                     QMetaObject::invokeMethod( const_cast<QObject*>( iter.key() ), "updateItem", Qt::QueuedConnection);
 
                 } else {
