@@ -1,0 +1,12 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "floris@livingstills.nl",
+                "Name": "Floris Kloet"
+            }
+        ],
+        "License": "CC-BY-4.0",
+        "Name": "Animated"
+    }
+}
