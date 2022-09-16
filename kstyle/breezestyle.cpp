@@ -4832,7 +4832,7 @@ bool Style::drawToolButtonLabelControl(const QStyleOption *option, QPainter *pai
     }
 
     if (hasIcon && !hasText) { // icon only
-        iconRect = centerRect(contentsRect, iconSize);
+        iconRect = contentsRect;
     } else if (!hasIcon && hasText) { // text only
         textRect = contentsRect;
         textFlags |= Qt::AlignCenter;
@@ -4885,6 +4885,7 @@ bool Style::drawToolButtonLabelControl(const QStyleOption *option, QPainter *pai
 
     // render arrow or icon
     if (hasIcon) {
+        iconRect = centerRect(iconRect, iconSize);
         if (hasArrow) {
             QStyleOptionToolButton copy(*toolButtonOption);
             copy.rect = iconRect;
