@@ -3,11 +3,33 @@
         "Authors": [
             {
                 "Email": "foss@louisdurrant.co.uk",
-                "Name": "Louis Durrant"
+                "Name": "Louis Durrant",
+                "Name[ar]": "لويس دورانت",
+                "Name[ca@valencia]": "Louis Durrant",
+                "Name[ca]": "Louis Durrant",
+                "Name[es]": "Louis Durrant",
+                "Name[eu]": "Louis Durrant",
+                "Name[nl]": "Louis Durrant",
+                "Name[pt]": "Louis Durrant",
+                "Name[sv]": "Louis Durrant",
+                "Name[tr]": "Louis Durrant",
+                "Name[uk]": "Louis Durrant",
+                "Name[x-test]": "xxLouis Durrantxx"
             }
         ],
         "Id": "Next",
         "License": "CC-BY-SA-4.0",
-        "Name": "Safe Landing"
+        "Name": "Safe Landing",
+        "Name[ar]": "هبوط آمن",
+        "Name[ca@valencia]": "Aterratge segur",
+        "Name[ca]": "Aterratge segur",
+        "Name[es]": "Aterrizaje seguro",
+        "Name[eu]": "Lurreratze segurua",
+        "Name[nl]": "Veilige landing",
+        "Name[pt]": "Aterragem Suave",
+        "Name[sv]": "Säker landning",
+        "Name[tr]": "Güvenli İniş",
+        "Name[uk]": "Безпечне приземлення",
+        "Name[x-test]": "xxSafe Landingxx"
     }
 }

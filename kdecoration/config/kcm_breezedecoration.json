@@ -1,8 +1,30 @@
 {
     "KPlugin": {
         "Description": "Modify the appearance of window decorations",
+        "Description[ar]": "عدّل مظهر زخرفات النّوافذ",
+        "Description[ca@valencia]": "Modifica l'aparença de les decoracions de les finestres",
+        "Description[ca]": "Modifica l'aparença de les decoracions de les finestres",
+        "Description[es]": "Modificar el aspecto de las decoraciones de ventanas",
+        "Description[eu]": "Leiho apainduren itxura aldatzea",
+        "Description[nl]": "Wijzig het uiterlijk van vensterdecoraties",
+        "Description[pt]": "Modificar a aparência das decorações das janelas",
+        "Description[sv]": "Ändra utseendet hos fönsterdekorationer",
+        "Description[tr]": "Pencere dekorasyonlarının görünüşünü değiştirin",
+        "Description[uk]": "Внесення змін до обрамлення вікон",
+        "Description[x-test]": "xxModify the appearance of window decorationsxx",
         "Icon": "preferences-system-windows",
         "Name": "Breeze Window Decoration",
+        "Name[ar]": "زخرفة نوافذ نسيم",
+        "Name[ca@valencia]": "Decoració Brisa de les finestres",
+        "Name[ca]": "Decoració Brisa de les finestres",
+        "Name[es]": "Decoración de ventanas Brisa",
+        "Name[eu]": "Breeze leihoen apaindura",
+        "Name[nl]": "Breeze vensterdecoratie",
+        "Name[pt]": "Decoração de Janelas Brisa",
+        "Name[sv]": "Breeze fönsterdekoration",
+        "Name[tr]": "Esinti Pencere Dekorasyonu",
+        "Name[uk]": "Обрамлення вікон Breeze",
+        "Name[x-test]": "xxBreeze Window Decorationxx",
         "ServiceTypes": [
             "KCModule"
         ]
