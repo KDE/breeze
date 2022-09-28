@@ -14,6 +14,7 @@
 
 #include <QDBusConnection>
 #include <QDBusMessage>
+#include <QFontDatabase>
 
 namespace Breeze
 {
@@ -41,6 +42,9 @@ ConfigWidget::ConfigWidget(QWidget *parent, const QVariantList &args)
 
     // track exception changes
     connect(m_ui.exceptions, &ExceptionListWidget::changed, this, &ConfigWidget::updateChanged);
+
+    // set formatting
+    m_ui.drawBorderOnMaximizedWindowsHelpLabel->setFont(QFontDatabase::systemFont(QFontDatabase::SmallestReadableFont));
 }
 
 //_________________________________________________________
