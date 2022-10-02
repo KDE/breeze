@@ -51,10 +51,8 @@ if (WITH_WALLPAPERS)
     add_subdirectory(wallpapers)
 endif()
 
-if(EXISTS ${CMAKE_SOURCE_DIR}/po AND IS_DIRECTORY ${CMAKE_SOURCE_DIR}/po)
-    find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
-    ki18n_install(po)
-endif()
+find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
+ki18n_install(po)
 
 include(ECMSetupVersion)
 ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX BREEZE
