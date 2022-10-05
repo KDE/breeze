@@ -3,8 +3,10 @@
 import logging
 from pathlib import Path
 from itertools import chain
+from typing import Final
 
 try:
+	import PIL
 	from PIL import Image
 except ImportError:
 	logging.critical("Please install the python PIL library.")
@@ -26,6 +28,8 @@ templates = {
 	'vertical':  ('vertical_base_size.png', 'vertical_base_size.jpg')
 	}
 
+PIL_VERSION: Final = tuple(map(int, PIL.__version__.split(".")))
+
 for orientation in ('horizontal', 'vertical'):
 	for file in chain(*map(Path().rglob, templates[orientation])):
 		image = Image.open(file)
@@ -41,6 +45,10 @@ for orientation in ('horizontal', 'vertical'):
 				crop = int(base_width - width/(height/base_height))//2
 				box = (crop, 0, base_width-crop, base_height)
 			else: box = None
-			resized_image = image.resize((width, height), Image.LANCZOS, box)
+			# Image.LANCZOS is deprecated since 9.1.0 https://pillow.readthedocs.io/en/stable/deprecations.html#constants
+			if PIL_VERSION >= (9, 1):
+				resized_image = image.resize((width, height), Image.Resampling.LANCZOS, box)
+			else:
+				resized_image = image.resize((width, height), Image.LANCZOS, box)
 			resized_image.save(base_dir / f'{width}x{height}{extension}',
 					  quality=90, optimize=True, subsampling=1)
