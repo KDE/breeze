@@ -2,47 +2,12 @@
     "KPlugin": {
         "Authors": [
             {
-                "Email": "foss@louisdurrant.co.uk",
-                "Name": "Louis Durrant",
-                "Name[ar]": "لويس دورانت",
-                "Name[bg]": "Louis Durrant",
-                "Name[ca@valencia]": "Louis Durrant",
-                "Name[ca]": "Louis Durrant",
-                "Name[es]": "Louis Durrant",
-                "Name[eu]": "Louis Durrant",
-                "Name[fr]": "Louis Durrant",
-                "Name[ko]": "Louis Durrant",
-                "Name[nl]": "Louis Durrant",
-                "Name[pl]": "Louis Durrant",
-                "Name[pt]": "Louis Durrant",
-                "Name[ru]": "Louis Durrant",
-                "Name[sl]": "Louis Durrant",
-                "Name[sv]": "Louis Durrant",
-                "Name[tr]": "Louis Durrant",
-                "Name[uk]": "Louis Durrant",
-                "Name[x-test]": "xxLouis Durrantxx"
+                "Email": "universalemail.gm@gmail.com",
+                "Name": "ruvkr"
             }
         ],
         "Id": "Next",
         "License": "CC-BY-SA-4.0",
-        "Name": "Safe Landing",
-        "Name[ar]": "هبوط آمن",
-        "Name[bg]": "Safe Landing",
-        "Name[ca@valencia]": "Aterratge segur",
-        "Name[ca]": "Aterratge segur",
-        "Name[cs]": "Bezpečné přistání",
-        "Name[es]": "Aterrizaje seguro",
-        "Name[eu]": "Lurreratze segurua",
-        "Name[fr]": "Atterrissage en douceur",
-        "Name[ko]": "안전한 착륙",
-        "Name[nl]": "Veilige landing",
-        "Name[pl]": "Bezpieczne lądowanie",
-        "Name[pt]": "Aterragem Suave",
-        "Name[ru]": "Безопасная посадка",
-        "Name[sl]": "Varen pristanek",
-        "Name[sv]": "Säker landning",
-        "Name[tr]": "Güvenli İniş",
-        "Name[uk]": "Безпечне приземлення",
-        "Name[x-test]": "xxSafe Landingxx"
+        "Name": "Kay"
     }
 }
