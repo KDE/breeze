@@ -136,7 +136,7 @@ msgstr "Dibuixa un marc al voltant dels quadros laterals"
 msgid "Draw a thin line to indicate focus in menus and menubars"
 msgstr ""
 "Dibuixa una línia fina per a indicar el focus en els menús i les barres de "
-"menús"
+"menú"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: ui/breezestyleconfig.ui:218
