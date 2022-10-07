@@ -3,11 +3,29 @@
         "Authors": [
             {
                 "Email": "universalemail.gm@gmail.com",
-                "Name": "ruvkr"
+                "Name": "ruvkr",
+                "Name[ca@valencia]": "ruvkr",
+                "Name[ca]": "ruvkr",
+                "Name[eu]": "ruvkr",
+                "Name[fr]": "ruvkr",
+                "Name[nl]": "ruvkr",
+                "Name[pt]": "ruvkr",
+                "Name[tr]": "ruvkr",
+                "Name[uk]": "ruvkr",
+                "Name[x-test]": "xxruvkrxx"
             }
         ],
         "Id": "Next",
         "License": "CC-BY-SA-4.0",
-        "Name": "Kay"
+        "Name": "Kay",
+        "Name[ca@valencia]": "Kay",
+        "Name[ca]": "Kay",
+        "Name[eu]": "Kay",
+        "Name[fr]": "Kay",
+        "Name[nl]": "Kay",
+        "Name[pt]": "Kay",
+        "Name[tr]": "Kay",
+        "Name[uk]": "Кей",
+        "Name[x-test]": "xxKayxx"
     }
 }
