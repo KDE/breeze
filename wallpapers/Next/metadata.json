@@ -4,20 +4,28 @@
             {
                 "Email": "universalemail.gm@gmail.com",
                 "Name": "ruvkr",
+                "Name[ca@valencia]": "ruvkr",
                 "Name[ca]": "ruvkr",
                 "Name[es]": "ruvkr",
                 "Name[eu]": "ruvkr",
+                "Name[fr]": "ruvkr",
                 "Name[nl]": "ruvkr",
+                "Name[sv]": "ruvkr",
+                "Name[tr]": "ruvkr",
                 "Name[x-test]": "xxruvkrxx"
             }
         ],
         "Id": "Next",
         "License": "CC-BY-SA-4.0",
         "Name": "Kay",
+        "Name[ca@valencia]": "Kay",
         "Name[ca]": "Kay",
         "Name[es]": "Kay",
         "Name[eu]": "Kay",
+        "Name[fr]": "Kay",
         "Name[nl]": "Kay",
+        "Name[sv]": "Kay",
+        "Name[tr]": "Kay",
         "Name[x-test]": "xxKayxx"
     }
 }
