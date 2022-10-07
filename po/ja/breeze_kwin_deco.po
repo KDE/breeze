@@ -419,6 +419,3 @@ msgstr "追加"
 #, kde-format
 msgid "Edit"
 msgstr "編集"
-
-#~ msgid "Allow resizing maximized windows from window edges"
-#~ msgstr "最大化されたウィンドウの縁からリサイズすることを許可"
