@@ -10,8 +10,10 @@
                 "Name[eu]": "ruvkr",
                 "Name[fr]": "ruvkr",
                 "Name[nl]": "ruvkr",
+                "Name[sl]": "ruvkr",
                 "Name[sv]": "ruvkr",
                 "Name[tr]": "ruvkr",
+                "Name[uk]": "ruvkr",
                 "Name[x-test]": "xxruvkrxx"
             }
         ],
@@ -24,8 +26,10 @@
         "Name[eu]": "Kay",
         "Name[fr]": "Kay",
         "Name[nl]": "Kay",
+        "Name[sl]": "Kay",
         "Name[sv]": "Kay",
         "Name[tr]": "Kay",
+        "Name[uk]": "Кей",
         "Name[x-test]": "xxKayxx"
     }
 }
