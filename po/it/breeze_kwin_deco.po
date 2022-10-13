@@ -2,21 +2,21 @@
 # Andrea Rizzi <rizzi@kde.org>, 2004, 2005.
 # Luciano Montanaro <mikelima@cirulla.net>, 2007, 2008, 2009, 2010, 2011, 2012.
 # Andrea Rizzi <rizzi@sns.it>, 2007.
-# Vincenzo Reale <smart2128vr@gmail.com>, 2015, 2017, 2018, 2020.
+# Vincenzo Reale <smart2128vr@gmail.com>, 2015, 2017, 2018, 2020, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: kwin_clients\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-29 00:47+0000\n"
-"PO-Revision-Date: 2020-05-03 14:19+0200\n"
-"Last-Translator: Vincenzo Reale <smart2128@baslug.org>\n"
+"PO-Revision-Date: 2022-09-30 02:35+0200\n"
+"Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 20.04.0\n"
+"X-Generator: Lokalize 22.08.1\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -174,10 +174,9 @@ msgstr "Disegna un cerchio intorno al pulsante di chiusura"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBorderOnMaximizedWindows)
 #: config/ui/breezeconfigurationui.ui:138
-#, fuzzy, kde-format
-#| msgid "Display window borders for maximized windows"
+#, kde-format
 msgid "Draw border on maximized and tiled windows"
-msgstr "Visualizza i bordi per le finestre massimizzate"
+msgstr "Disegna il bordo sulle finestre ingrandite e affiancate"
 
 #. i18n: ectx: property (text), widget (QLabel, drawBorderOnMaximizedWindowsHelpLabel)
 #: config/ui/breezeconfigurationui.ui:163
@@ -187,6 +186,10 @@ msgid ""
 "edges. Scrollbars and window close buttons will shift positions and will not "
 "touch screen edges."
 msgstr ""
+"Questa impostazione ti consentirà di ridimensionare dai bordi della finestra "
+"toccando i bordi dello schermo. Le barre di scorrimento e i pulsanti di "
+"chiusura della finestra cambieranno le posizioni e non toccheranno i bordi "
+"dello schermo."
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
 #: config/ui/breezeconfigurationui.ui:175
