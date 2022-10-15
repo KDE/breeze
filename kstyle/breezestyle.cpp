@@ -1637,7 +1637,7 @@ bool Style::eventFilterCommandLinkButton(QCommandLinkButton *button, QEvent *eve
             const QRect pixmapRect(QPoint(offset.x(), button->description().isEmpty() ? (button->height() - pixmapSize.height()) / 2 : offset.y()), pixmapSize);
             const QPixmap pixmap(_helper->coloredIcon(button->icon(),
                                                       button->palette(),
-                                                      pixmapSize,
+                                                      pixmapSize * button->devicePixelRatio(),
                                                       enabled ? QIcon::Normal : QIcon::Disabled,
                                                       button->isChecked() ? QIcon::On : QIcon::Off));
             drawItemPixmap(&painter, pixmapRect, Qt::AlignCenter, pixmap);
@@ -4275,7 +4275,7 @@ bool Style::drawIndicatorTabClosePrimitive(const QStyleOption *option, QPainter 
     const QSize iconSize(iconWidth, iconWidth);
 
     // get pixmap
-    const QPixmap pixmap(_helper->coloredIcon(icon, option->palette, iconSize, iconMode, iconState));
+    const QPixmap pixmap(_helper->coloredIcon(icon, option->palette, iconSize * widget->devicePixelRatio(), iconMode, iconState));
 
     // render
     drawItemPixmap(painter, option->rect, Qt::AlignCenter, pixmap);
@@ -4583,7 +4583,7 @@ bool Style::drawPushButtonLabelControl(const QStyleOption *option, QPainter *pai
         else
             iconMode = QIcon::Normal;
 
-        const auto pixmap = _helper->coloredIcon(buttonOption->icon, buttonOption->palette, iconSize, iconMode, iconState);
+        const auto pixmap = _helper->coloredIcon(buttonOption->icon, buttonOption->palette, iconSize * widget->devicePixelRatio(), iconMode, iconState);
         drawItemPixmap(painter, iconRect, Qt::AlignCenter, pixmap);
     }
 
@@ -4736,9 +4736,8 @@ bool Style::drawToolButtonLabelControl(const QStyleOption *option, QPainter *pai
             else
                 iconMode = QIcon::Normal;
 
-            const QPixmap pixmap = _helper->coloredIcon(toolButtonOption->icon,
-                                                        toolButtonOption->palette,
-                                                        iconSize, iconMode, iconState);
+            const QPixmap pixmap =
+                _helper->coloredIcon(toolButtonOption->icon, toolButtonOption->palette, iconSize * widget->devicePixelRatio(), iconMode, iconState);
             drawItemPixmap(painter, iconRect, Qt::AlignCenter, pixmap);
         }
     }
@@ -4784,7 +4783,7 @@ bool Style::drawCheckBoxLabelControl(const QStyleOption *option, QPainter *paint
     // render icon
     if (!buttonOption->icon.isNull()) {
         const QIcon::Mode mode(enabled ? QIcon::Normal : QIcon::Disabled);
-        const QPixmap pixmap(_helper->coloredIcon(buttonOption->icon, buttonOption->palette, buttonOption->iconSize, mode));
+        const QPixmap pixmap(_helper->coloredIcon(buttonOption->icon, buttonOption->palette, buttonOption->iconSize * widget->devicePixelRatio(), mode));
         drawItemPixmap(painter, rect, textFlags, pixmap);
 
         // adjust rect (copied from QCommonStyle)
@@ -4863,7 +4862,7 @@ bool Style::drawComboBoxLabelControl(const QStyleOption *option, QPainter *paint
             else
                 mode = QIcon::Normal;
 
-            const QPixmap pixmap = _helper->coloredIcon(cb->currentIcon, cb->palette, cb->iconSize, mode);
+            const QPixmap pixmap = _helper->coloredIcon(cb->currentIcon, cb->palette, cb->iconSize * widget->devicePixelRatio(), mode);
             auto iconRect(editRect);
             iconRect.setWidth(cb->iconSize.width() + 4);
             iconRect = alignedRect(cb->direction, Qt::AlignLeft | Qt::AlignVCenter, iconRect.size(), editRect);
@@ -4949,7 +4948,8 @@ bool Style::drawMenuBarItemControl(const QStyleOption *option, QPainter *painter
             iconState = sunken ? QIcon::On : QIcon::Off;
         }
 
-        const auto pixmap = _helper->coloredIcon(menuItemOption->icon, menuItemOption->palette, iconRect.size(), iconMode, iconState);
+        const auto pixmap =
+            _helper->coloredIcon(menuItemOption->icon, menuItemOption->palette, iconRect.size() * widget->devicePixelRatio(), iconMode, iconState);
         drawItemPixmap(painter, iconRect, Qt::AlignCenter, pixmap);
 
         // render outline
@@ -5124,7 +5124,7 @@ bool Style::drawMenuItemControl(const QStyleOption *option, QPainter *painter, c
 
         // icon state
         const QIcon::State iconState(sunken ? QIcon::On : QIcon::Off);
-        const QPixmap icon = _helper->coloredIcon(menuItemOption->icon, menuItemOption->palette, iconRect.size(), mode, iconState);
+        const QPixmap icon = _helper->coloredIcon(menuItemOption->icon, menuItemOption->palette, iconRect.size() * widget->devicePixelRatio(), mode, iconState);
         painter->drawPixmap(iconRect, icon);
     }
 
@@ -6261,7 +6261,7 @@ bool Style::drawToolBoxTabLabelControl(const QStyleOption *option, QPainter *pai
 
         iconRect = visualRect(option, iconRect);
         const QIcon::Mode mode(enabled ? QIcon::Normal : QIcon::Disabled);
-        const QPixmap pixmap(_helper->coloredIcon(toolBoxOption->icon, toolBoxOption->palette, iconRect.size(), mode));
+        const QPixmap pixmap(_helper->coloredIcon(toolBoxOption->icon, toolBoxOption->palette, iconRect.size() * widget->devicePixelRatio(), mode));
         drawItemPixmap(painter, iconRect, textFlags, pixmap);
     }
 
@@ -7096,7 +7096,7 @@ bool Style::drawTitleBarComplexControl(const QStyleOptionComplex *option, QPaint
         }
 
         // get pixmap and render
-        const QPixmap pixmap = _helper->coloredIcon(icon, option->palette, iconSize, iconMode, iconState);
+        const QPixmap pixmap = _helper->coloredIcon(icon, option->palette, iconSize * widget->devicePixelRatio(), iconMode, iconState);
         painter->drawPixmap(iconRect, pixmap);
     }
 
