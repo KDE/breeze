@@ -416,8 +416,3 @@ msgstr "Добавяне"
 #, kde-format
 msgid "Edit"
 msgstr "Редактиране"
-
-#~ msgid "Allow resizing maximized windows from window edges"
-#~ msgstr ""
-#~ "Позволяване на преоразмеряване на максимизирани прозорци от рамката на "
-#~ "прозореца"
