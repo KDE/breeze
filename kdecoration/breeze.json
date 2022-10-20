@@ -2,7 +2,6 @@
     "KPlugin": {
         "Description": "Window decoration using the Breeze visual style for the Plasma Desktop",
         "Description[ar]": "زخرفة نوافذ تستخدم نمط «نسيم» المرئيّ لسطح مكتب «بلازما»",
-        "Description[ast]": "La decoración de ventanes pal escritoriu de Plasma qu'usa l'estilu visual Breeze",
         "Description[az]": "Plazma Masaüstü üçün Breeze vizual üslubundan istifadə edən pəncərə dekorasiyası",
         "Description[bg]": "Декорация на прозорци, използваща Breeze визуален стил за работнаta среда на Plasma",
         "Description[ca@valencia]": "Decoració de les finestres que utilitza l'estil visual Brisa per a l'escriptori Plasma",
@@ -54,7 +53,6 @@
         "Id": "org.kde.breeze",
         "Name": "Breeze",
         "Name[ar]": "نسيم",
-        "Name[ast]": "Breeze",
         "Name[az]": "Breeze",
         "Name[bg]": "Breeze",
         "Name[ca@valencia]": "Brisa",
