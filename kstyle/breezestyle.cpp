@@ -3437,8 +3437,7 @@ bool Style::drawFrameLineEditPrimitive(const QStyleOption *option, QPainter *pai
 
         // render
         const auto &background = palette.color(QPalette::Base);
-        const auto outline(hasHighlightNeutral(widget, option, mouseOver, hasFocus) ? _helper->neutralText(palette).lighter(mouseOver || hasFocus ? 150 : 100)
-                                                                                    : _helper->frameOutlineColor(palette, mouseOver, hasFocus, opacity, mode));
+        const auto outline(palette.buttonText().color());
         _helper->renderFrame(painter, rect, background, outline);
     }
 
@@ -5871,7 +5870,7 @@ bool Style::drawHeaderSectionControl(const QStyleOption *option, QPainter *paint
     }
 
     // separators
-    painter->setPen(_helper->alphaColor(palette.color(QPalette::WindowText), 0.2));
+    painter->setPen(palette.color(QPalette::WindowText));
 
     // If the separator would be next to a "HeaderEmptyArea", skip it and let that draw
     // the separator instead. This means that those separators are only visible when necessary.
@@ -5912,7 +5911,7 @@ bool Style::drawHeaderEmptyAreaControl(const QStyleOption *option, QPainter *pai
 
     // outline
     painter->setBrush(Qt::NoBrush);
-    painter->setPen(_helper->alphaColor(palette.color(QPalette::ButtonText), 0.1));
+    painter->setPen(palette.color(QPalette::ButtonText));
 
     if (horizontal) {
         painter->drawLine(rect.bottomLeft(), rect.bottomRight());
@@ -5925,7 +5924,7 @@ bool Style::drawHeaderEmptyAreaControl(const QStyleOption *option, QPainter *pai
     }
 
     // separators
-    painter->setPen(_helper->alphaColor(palette.color(QPalette::WindowText), 0.2));
+    painter->setPen(palette.color(QPalette::WindowText));
 
     if (horizontal) {
         // 26aa20407d in qtbase introduced a 1px empty area in reversed horizontal headers. Ignore it.

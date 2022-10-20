@@ -124,8 +124,8 @@ QColor transparentize(const QColor &color, qreal amount)
 //____________________________________________________________________
 QColor Helper::frameOutlineColor(const QPalette &palette, bool mouseOver, bool hasFocus, qreal opacity, AnimationMode mode) const
 {
-    QColor outline(KColorUtils::mix(palette.color(QPalette::Window), palette.color(QPalette::WindowText), 0.25));
-
+    QColor outline(palette.color(QPalette::WindowText));
+    return outline;
     // focus takes precedence over hover
     if (mode == AnimationFocus) {
         const QColor focus(focusColor(palette));
@@ -318,7 +318,7 @@ QColor Helper::checkBoxIndicatorColor(const QPalette &palette, bool mouseOver, b
 //______________________________________________________________________________
 QColor Helper::separatorColor(const QPalette &palette) const
 {
-    return KColorUtils::mix(palette.color(QPalette::Window), palette.color(QPalette::WindowText), 0.25);
+    return palette.color(QPalette::WindowText);
 }
 
 //______________________________________________________________________________
@@ -642,6 +642,7 @@ void Helper::renderButtonFrame(QPainter *painter,
         } else {
             bgBrush = palette.button().color();
             penBrush = hasNeutralHighlight ? neutralText(palette) : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), 0.3);
+            penBrush = palette.buttonText().color();
         }
     }
 
@@ -793,6 +794,7 @@ void Helper::renderCheckBoxBackground(QPainter *painter,
         penBrush = palette.highlight().color();
     } else {
         penBrush = transparentize(palette.text().color(), highlightBackgroundAlpha);
+        penBrush = palette.text().color();
     }
     painter->setPen(QPen(penBrush, PenWidth::Frame));
 
@@ -950,6 +952,7 @@ void Helper::renderRadioButtonBackground(QPainter *painter,
         penBrush = palette.highlight().color();
     } else {
         penBrush = transparentize(palette.text().color(), highlightBackgroundAlpha);
+        penBrush = palette.text().color();
     }
     painter->setPen(QPen(penBrush, PenWidth::Frame));
 
