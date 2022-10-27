@@ -31,6 +31,7 @@
 #include <QDBusPendingCallWatcher>
 #include <QDBusPendingReply>
 #include <QPainter>
+#include <QPainterPath>
 #include <QTextStream>
 #include <QTimer>
 
@@ -134,6 +135,8 @@ static int g_shadowStrength = 255;
 static QColor g_shadowColor = Qt::black;
 static QSharedPointer<KDecoration2::DecorationShadow> g_sShadow;
 static QSharedPointer<KDecoration2::DecorationShadow> g_sShadowInactive;
+static int g_lastBorderSize;
+static QColor g_lastOutlineColor;
 
 //________________________________________________________________
 Decoration::Decoration(QObject *parent, const QVariantList &args)
@@ -464,6 +467,9 @@ void Decoration::recalculateBorders()
     }
 
     setResizeOnlyBorders(QMargins(extSides, 0, extSides, extBottom));
+
+    // Update shadows and clear outline to make sure outline changes when borders are changed
+    updateShadow();
 }
 
 //________________________________________________________________
@@ -583,11 +589,11 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
 void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
 {
     const auto c = client().toStrongRef();
-    const QRect frontRect(QPoint(0, 1), QSize(size().width(), borderTop() + 1));
-    const QRect backRect(QPoint(0, 0), QSize(size().width(), borderTop()));
+    const QRect frontRect(QPoint(0, 1), QSize(size().width(), borderTop()));
+    const QRect backRect(QPoint(0, 1), QSize(size().width(), borderTop() - 1));
 
     QBrush frontBrush;
-    QBrush backBrush(this->titleBarColor().lighter(130));
+    QBrush backBrush(this->titleBarColor());
 
     if (!backRect.intersects(repaintRegion))
         return;
@@ -744,9 +750,29 @@ QPair<QRect, Qt::Alignment> Decoration::captionRect() const
 void Decoration::updateShadow()
 {
     auto s = settings();
+    auto c = client().toStrongRef();
+    auto outlineColor = c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::TitleBar);
+    auto backgroundColor = c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame);
+    // Bind lightness between 0.1 and 1.0 so it can never be completely black.
+    // Outlines only have transparency if alpha channel is supported
+    outlineColor.setHslF(outlineColor.hslHueF(),
+                         outlineColor.hslSaturationF(),
+                         qBound(0.1, outlineColor.lightnessF(), 1.0),
+                         s->isAlphaChannelSupported() ? 0.9 : 1.0);
+    // If outlinecolor is very close to the window backgroundcolor, the shadow coloring should be enough,
+    // so we use the background color as the outline as well.
+    // This is only checked for very light colors, like the default Breeze Light (#e5e6e7)
+    // If not, we just modify the lightness like usual
+    if (!lookupShadowParams(m_internalSettings->shadowSize()).isNone() && backgroundColor.lightnessF() >= 0.85
+        && (backgroundColor.lightnessF() - outlineColor.lightnessF()) <= 0.05f) {
+        outlineColor = backgroundColor;
+    } else {
+        outlineColor.lightnessF() >= 0.5 ? outlineColor = outlineColor.darker(130) : outlineColor = outlineColor.lighter(130);
+    }
+
     // Animated case, no cached shadow object
     if ((m_shadowAnimation->state() == QAbstractAnimation::Running) && (m_shadowOpacity != 0.0) && (m_shadowOpacity != 1.0)) {
-        setShadow(createShadowObject(0.5 + m_shadowOpacity * 0.5));
+        setShadow(createShadowObject(0.5 + m_shadowOpacity * 0.5, outlineColor));
         return;
     }
 
@@ -759,20 +785,25 @@ void Decoration::updateShadow()
         g_shadowColor = m_internalSettings->shadowColor();
     }
 
-    auto c = client().toStrongRef();
     auto &shadow = (c->isActive()) ? g_sShadow : g_sShadowInactive;
-    if (!shadow) {
-        shadow = createShadowObject(c->isActive() ? 1.0 : 0.5);
+    if (!shadow || g_lastBorderSize != borderSize(true) || g_lastOutlineColor != outlineColor) {
+        // Update both active and inactive shadows so outline stays consistent between the two
+        g_sShadow = createShadowObject(1.0, outlineColor);
+        g_sShadowInactive = createShadowObject(0.5, outlineColor);
+        g_lastBorderSize = borderSize(true);
+        g_lastOutlineColor = outlineColor;
     }
     setShadow(shadow);
 }
 
 //________________________________________________________________
-QSharedPointer<KDecoration2::DecorationShadow> Decoration::createShadowObject(const float strengthScale)
+QSharedPointer<KDecoration2::DecorationShadow> Decoration::createShadowObject(const float strengthScale, const QColor &outlineColor)
 {
-    const CompositeShadowParams params = lookupShadowParams(m_internalSettings->shadowSize());
+    CompositeShadowParams params = lookupShadowParams(m_internalSettings->shadowSize());
     if (params.isNone()) {
-        return nullptr;
+        // If shadows are disabled, set shadow opacity to 0.
+        // This allows the outline effect to show up without the shadow effect.
+        params = CompositeShadowParams(QPoint(0, 4), ShadowParams(QPoint(0, 0), 16, 0), ShadowParams(QPoint(0, -2), 8, 0));
     }
 
     auto withOpacity = [](const QColor &color, qreal opacity) -> QColor {
@@ -814,11 +845,38 @@ QSharedPointer<KDecoration2::DecorationShadow> Decoration::createShadowObject(co
     painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
     painter.drawRoundedRect(innerRect, m_scaledCornerRadius + 0.5, m_scaledCornerRadius + 0.5);
 
-    // Draw outline.
-    painter.setPen(withOpacity(Qt::black, 0.1));
+    // Draw window outline
+    const qreal outlineWidth = 1.001;
+    const qreal penOffset = outlineWidth / 2;
+
+    // Titlebar already has an outline, so move the top of the outline on the same level to avoid 2px width on top outline.
+    QRectF outlineRect = innerRect + QMarginsF(penOffset, -penOffset, penOffset, penOffset);
+    qreal cornerSize = m_scaledCornerRadius * 2;
+    QRectF cornerRect(outlineRect.x(), outlineRect.y(), cornerSize, cornerSize);
+    QPainterPath outlinePath;
+
+    outlinePath.arcMoveTo(cornerRect, 180);
+    outlinePath.arcTo(cornerRect, 180, -90);
+    cornerRect.moveTopRight(outlineRect.topRight());
+    outlinePath.arcTo(cornerRect, 90, -90);
+
+    // Check if border size is "no borders" or "no side-borders"
+    if (borderSize(true) == 0) {
+        outlinePath.lineTo(outlineRect.bottomRight());
+        outlinePath.lineTo(outlineRect.bottomLeft());
+    } else {
+        cornerRect.moveBottomRight(outlineRect.bottomRight());
+        outlinePath.arcTo(cornerRect, 0, -90);
+        cornerRect.moveBottomLeft(outlineRect.bottomLeft());
+        outlinePath.arcTo(cornerRect, 270, -90);
+    }
+    outlinePath.closeSubpath();
+
+    painter.setPen(QPen(outlineColor, outlineWidth));
     painter.setBrush(Qt::NoBrush);
-    painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
-    painter.drawRoundedRect(innerRect, m_scaledCornerRadius - 0.5, m_scaledCornerRadius - 0.5);
+    painter.setCompositionMode(QPainter::CompositionMode_Source);
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.drawPath(outlinePath);
 
     painter.end();
 
