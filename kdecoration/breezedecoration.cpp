@@ -759,16 +759,7 @@ void Decoration::updateShadow()
                          outlineColor.hslSaturationF(),
                          qBound(0.1, outlineColor.lightnessF(), 1.0),
                          s->isAlphaChannelSupported() ? 0.9 : 1.0);
-    // If outlinecolor is very close to the window backgroundcolor, the shadow coloring should be enough,
-    // so we use the background color as the outline as well.
-    // This is only checked for very light colors, like the default Breeze Light (#e5e6e7)
-    // If not, we just modify the lightness like usual
-    if (!lookupShadowParams(m_internalSettings->shadowSize()).isNone() && backgroundColor.lightnessF() >= 0.85
-        && (backgroundColor.lightnessF() - outlineColor.lightnessF()) <= 0.05f) {
-        outlineColor = backgroundColor;
-    } else {
-        outlineColor.lightnessF() >= 0.5 ? outlineColor = outlineColor.darker(130) : outlineColor = outlineColor.lighter(130);
-    }
+    outlineColor.lightnessF() >= 0.5 ? outlineColor = outlineColor.darker(170) : outlineColor = outlineColor.lighter(170);
 
     // Animated case, no cached shadow object
     if ((m_shadowAnimation->state() == QAbstractAnimation::Running) && (m_shadowOpacity != 0.0) && (m_shadowOpacity != 1.0)) {
