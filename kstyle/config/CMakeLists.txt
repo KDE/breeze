@@ -21,7 +21,7 @@ kcmutils_generate_desktop_file(breezestyleconfig)
 set(breeze_settings_SOURCES main.cpp)
 add_executable(breeze-settings5 ${breeze_settings_SOURCES} )
 target_link_libraries(breeze-settings5 Qt::Core Qt::Gui Qt::Widgets )
-target_link_libraries(breeze-settings5 KF5::I18n KF5::KCMUtils)
+target_link_libraries(breeze-settings5 KF5::I18n KF5::KCMUtils KF5::CoreAddons)
 
 install(TARGETS breeze-settings5 ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
