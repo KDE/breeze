@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-29 00:47+0000\n"
-"PO-Revision-Date: 2022-09-29 12:33+0300\n"
+"PO-Revision-Date: 2022-11-09 13:17+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -187,7 +187,7 @@ msgid ""
 "touch screen edges."
 msgstr ""
 "Bu ayar, ekran kenarlarına dokunan pencere kenarlarından pencereyi yeniden "
-"boyutlandırmanıza izin verir. Kaydırma çubuklarının ve pencere kapatma "
+"boyutlandırmanıza izin verir. Sarma çubuklarının ve pencere kapatma "
 "düğmelerinin konumları kaydırılacak ve ekran kenarlarına dokunmayacaklardır."
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
