@@ -8,8 +8,6 @@
 
 #include "breezeexceptionlist.h"
 
-#include <KWindowInfo>
-
 #include <QRegularExpression>
 #include <QTextStream>
 
@@ -88,11 +86,7 @@ InternalSettingsPtr SettingsProvider::internalSettings(Decoration *decoration) c
         default:
         case InternalSettings::ExceptionWindowClassName: {
             if (className.isEmpty()) {
-                // retrieve class name
-                KWindowInfo info(client->windowId(), {}, NET::WM2WindowClass);
-                QString window_className(QString::fromUtf8(info.windowClassName()));
-                QString window_class(QString::fromUtf8(info.windowClassClass()));
-                className = window_className + QStringLiteral(" ") + window_class;
+                className = client->resourceName() + QStringLiteral(" ") + client->resourceClass();
             }
 
             value = className;
