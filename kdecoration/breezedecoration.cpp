@@ -589,8 +589,11 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
 void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
 {
     const auto c = client().toStrongRef();
+    // Check if the window is maximized and if so, remove the extra gap that makes room for outlines,
+    // since they're not even drawn when window is maximized
+    const int outlineGap = isMaximized() ? 0 : 1;
     const QRect frontRect(QPoint(0, 1), QSize(size().width(), borderTop()));
-    const QRect backRect(QPoint(0, 1), QSize(size().width(), borderTop() - 1));
+    const QRect backRect(QPoint(0, outlineGap), QSize(size().width(), borderTop() - outlineGap));
 
     QBrush frontBrush;
     QBrush backBrush(this->titleBarColor());
