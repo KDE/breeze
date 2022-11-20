@@ -21,6 +21,7 @@
         "Description[tr]": "Pencere dekorasyonlarının görünüşünü değiştirin",
         "Description[uk]": "Внесення змін до обрамлення вікон",
         "Description[x-test]": "xxModify the appearance of window decorationsxx",
+        "Description[zh_CN]": "调整窗口装饰外观",
         "Icon": "preferences-system-windows",
         "Name": "Breeze Window Decoration",
         "Name[ar]": "زخرفة نوافذ نسيم",
@@ -44,6 +45,7 @@
         "Name[tr]": "Esinti Pencere Dekorasyonu",
         "Name[uk]": "Обрамлення вікон Breeze",
         "Name[x-test]": "xxBreeze Window Decorationxx",
+        "Name[zh_CN]": "Breeze 微风窗口装饰",
         "ServiceTypes": [
             "KCModule"
         ]

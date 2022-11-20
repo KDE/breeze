@@ -21,6 +21,7 @@
         "Description[tr]": "Araç takımlarının görünüşünü değiştirin",
         "Description[uk]": "Внесення змін до вигляду віджетів",
         "Description[x-test]": "xxModify the appearance of widgetsxx",
+        "Description[zh_CN]": "调整窗口部件外观",
         "Icon": "preferences-desktop-theme",
         "Name": "Breeze Widget Style",
         "Name[ar]": "نمط ودجات نسيم",
@@ -44,6 +45,7 @@
         "Name[tr]": "Esinti Araç Takımı Biçemi",
         "Name[uk]": "Стиль віджетів Breeze",
         "Name[x-test]": "xxBreeze Widget Stylexx",
+        "Name[zh_CN]": "Breeze 微风窗口部件风格",
         "ServiceTypes": [
             "KCModule"
         ]
