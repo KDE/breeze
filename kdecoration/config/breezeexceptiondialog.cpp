@@ -11,14 +11,6 @@
 #include "breezedetectwidget.h"
 #include "config-breeze.h"
 
-#if BREEZE_HAVE_X11
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#include <private/qtx11extras_p.h>
-#else
-#include <QX11Info>
-#endif
-#endif
-
 namespace Breeze
 {
 //___________________________________________
@@ -45,14 +37,6 @@ ExceptionDialog::ExceptionDialog(QWidget *parent)
     }
 
     connect(m_ui.hideTitleBar, &QAbstractButton::clicked, this, &ExceptionDialog::updateChanged);
-
-// hide detection dialog on non X11 platforms
-#if BREEZE_HAVE_X11
-    if (!QX11Info::isPlatformX11())
-        m_ui.detectDialogButton->hide();
-#else
-    m_ui.detectDialogButton->hide();
-#endif
 }
 
 //___________________________________________
@@ -129,7 +113,7 @@ void ExceptionDialog::selectWindowProperties()
         connect(m_detectDialog, &DetectDialog::detectionDone, this, &ExceptionDialog::readWindowProperties);
     }
 
-    m_detectDialog->detect(0);
+    m_detectDialog->detect();
 }
 
 //___________________________________________
@@ -137,20 +121,17 @@ void ExceptionDialog::readWindowProperties(bool valid)
 {
     Q_CHECK_PTR(m_detectDialog);
     if (valid) {
-        // type
-        m_ui.exceptionType->setCurrentIndex(m_detectDialog->exceptionType());
-
         // window info
-        const KWindowInfo &info(m_detectDialog->windowInfo());
+        const QVariantMap properties = m_detectDialog->properties();
 
-        switch (m_detectDialog->exceptionType()) {
+        switch (m_ui.exceptionType->currentIndex()) {
         default:
         case InternalSettings::ExceptionWindowClassName:
-            m_ui.exceptionEditor->setText(QString::fromUtf8(info.windowClassClass()));
+            m_ui.exceptionEditor->setText(properties.value(QStringLiteral("resourceClass")).toString());
             break;
 
         case InternalSettings::ExceptionWindowTitle:
-            m_ui.exceptionEditor->setText(info.name());
+            m_ui.exceptionEditor->setText(properties.value(QStringLiteral("caption")).toString());
             break;
         }
     }
