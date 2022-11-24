@@ -1,6 +1,6 @@
 add_definitions(-DTRANSLATION_DOMAIN="breeze_kwin_deco")
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons GuiAddons ConfigWidgets WindowSystem I18n IconThemes)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS CoreAddons GuiAddons ConfigWidgets I18n IconThemes)
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS DBus)
 
 ### XCB
@@ -72,7 +72,7 @@ target_link_libraries(breezedecoration_STATIC
         KF5::GuiAddons
         KF5::I18n
         KF5::IconThemes
-        KF5::WindowSystem)
+)
 if(BREEZE_HAVE_X11)
   target_link_libraries(breezedecoration_STATIC PUBLIC XCB::XCB)
   if (TARGET Qt5::X11Extras)
@@ -97,7 +97,7 @@ target_link_libraries(breezedecoration
         KF5::GuiAddons
         KF5::I18n
         KF5::IconThemes
-        KF5::WindowSystem)
+)
 
 install(TARGETS breezedecoration DESTINATION ${KDE_INSTALL_PLUGINDIR}/org.kde.kdecoration2)
 
