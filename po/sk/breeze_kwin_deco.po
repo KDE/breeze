@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: breeze_kwin_deco\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-29 00:47+0000\n"
+"POT-Creation-Date: 2022-11-26 00:47+0000\n"
 "PO-Revision-Date: 2021-07-20 17:42+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -243,48 +243,11 @@ msgstr "Farba:"
 msgid "Window-Specific Overrides"
 msgstr "Špecifické nastavenia okna"
 
-#. i18n: ectx: property (windowTitle), widget (QDialog, BreezeDetectWidget)
 #. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
-#: config/ui/breezedetectwidget.ui:14 config/ui/breezeexceptiondialog.ui:14
+#: config/ui/breezeexceptiondialog.ui:14
 #, kde-format
 msgid "Dialog"
 msgstr "Dialóg"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: config/ui/breezedetectwidget.ui:20
-#, kde-format
-msgid "Information about Selected Window"
-msgstr "Informácie o vybranom okne"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezedetectwidget.ui:26
-#, kde-format
-msgid "Class: "
-msgstr "Trieda: "
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezedetectwidget.ui:43
-#, kde-format
-msgid "Title: "
-msgstr "Titulok: "
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: config/ui/breezedetectwidget.ui:63
-#, kde-format
-msgid "Window Property Selection"
-msgstr "Výber vlastnosti okna"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowClassCheckBox)
-#: config/ui/breezedetectwidget.ui:69
-#, kde-format
-msgid "Use window class (whole application)"
-msgstr "Použiť triedu okna (celá aplikácia)"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowTitleCheckBox)
-#: config/ui/breezedetectwidget.ui:79
-#, kde-format
-msgid "Use window title"
-msgstr "Použiť titulok okna"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/ui/breezeexceptiondialog.ui:20
@@ -306,8 +269,9 @@ msgstr "Zodpovedajúci regulárny výraz: "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, kde-format
-msgid "Detect Window Properties"
+#, fuzzy, kde-format
+#| msgid "Detect Window Properties"
+msgid "Detect Window Properties…"
 msgstr "Zistiť vlastnosti okna"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
@@ -414,6 +378,24 @@ msgstr "Pridať"
 #, kde-format
 msgid "Edit"
 msgstr "Upraviť"
+
+#~ msgid "Information about Selected Window"
+#~ msgstr "Informácie o vybranom okne"
+
+#~ msgid "Class: "
+#~ msgstr "Trieda: "
+
+#~ msgid "Title: "
+#~ msgstr "Titulok: "
+
+#~ msgid "Window Property Selection"
+#~ msgstr "Výber vlastnosti okna"
+
+#~ msgid "Use window class (whole application)"
+#~ msgstr "Použiť triedu okna (celá aplikácia)"
+
+#~ msgid "Use window title"
+#~ msgstr "Použiť titulok okna"
 
 #~ msgid "Allow resizing maximized windows from window edges"
 #~ msgstr "Povoliť zmenu veľkosti maximalizovaných okien pomocou okrajov okna"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-29 00:47+0000\n"
+"POT-Creation-Date: 2022-11-26 00:47+0000\n"
 "PO-Revision-Date: 2022-09-29 06:54+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -249,48 +249,11 @@ msgstr "Kolorea:"
 msgid "Window-Specific Overrides"
 msgstr "Leihoen berariazko gainezartzeak"
 
-#. i18n: ectx: property (windowTitle), widget (QDialog, BreezeDetectWidget)
 #. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
-#: config/ui/breezedetectwidget.ui:14 config/ui/breezeexceptiondialog.ui:14
+#: config/ui/breezeexceptiondialog.ui:14
 #, kde-format
 msgid "Dialog"
 msgstr "Elkarrizketa-koadroa"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: config/ui/breezedetectwidget.ui:20
-#, kde-format
-msgid "Information about Selected Window"
-msgstr "Hautatutako leihoari buruzko informazioa"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezedetectwidget.ui:26
-#, kde-format
-msgid "Class: "
-msgstr "Klasea: "
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezedetectwidget.ui:43
-#, kde-format
-msgid "Title: "
-msgstr "Titulua: "
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: config/ui/breezedetectwidget.ui:63
-#, kde-format
-msgid "Window Property Selection"
-msgstr "Leiho-propietateen hautaketa"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowClassCheckBox)
-#: config/ui/breezedetectwidget.ui:69
-#, kde-format
-msgid "Use window class (whole application)"
-msgstr "Erabili leiho klasea (aplikazio osoarekin)"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowTitleCheckBox)
-#: config/ui/breezedetectwidget.ui:79
-#, kde-format
-msgid "Use window title"
-msgstr "Erabili leiho-titulua"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/ui/breezeexceptiondialog.ui:20
@@ -312,8 +275,9 @@ msgstr "Bat etorri be&harreko adierazpen erregularra:"
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, kde-format
-msgid "Detect Window Properties"
+#, fuzzy, kde-format
+#| msgid "Detect Window Properties"
+msgid "Detect Window Properties…"
 msgstr "Detektatu leihoaren propietateak"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
@@ -420,6 +384,24 @@ msgstr "Erantsi"
 #, kde-format
 msgid "Edit"
 msgstr "Editatu"
+
+#~ msgid "Information about Selected Window"
+#~ msgstr "Hautatutako leihoari buruzko informazioa"
+
+#~ msgid "Class: "
+#~ msgstr "Klasea: "
+
+#~ msgid "Title: "
+#~ msgstr "Titulua: "
+
+#~ msgid "Window Property Selection"
+#~ msgstr "Leiho-propietateen hautaketa"
+
+#~ msgid "Use window class (whole application)"
+#~ msgstr "Erabili leiho klasea (aplikazio osoarekin)"
+
+#~ msgid "Use window title"
+#~ msgstr "Erabili leiho-titulua"
 
 #~ msgid "Allow resizing maximized windows from window edges"
 #~ msgstr "Baimendu maximizatutako leihoak ertzetatik neurriz aldatzea"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-29 00:47+0000\n"
+"POT-Creation-Date: 2022-11-26 00:47+0000\n"
 "PO-Revision-Date: 2022-09-29 21:49+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -242,48 +242,11 @@ msgstr "நிறம்:"
 msgid "Window-Specific Overrides"
 msgstr "தனிப்பட்ட சாளரங்களுக்கான அமைப்புகள்"
 
-#. i18n: ectx: property (windowTitle), widget (QDialog, BreezeDetectWidget)
 #. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
-#: config/ui/breezedetectwidget.ui:14 config/ui/breezeexceptiondialog.ui:14
+#: config/ui/breezeexceptiondialog.ui:14
 #, kde-format
 msgid "Dialog"
 msgstr "துணைச்சாளரம்"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: config/ui/breezedetectwidget.ui:20
-#, kde-format
-msgid "Information about Selected Window"
-msgstr "தேர்ந்தெடுத்துள்ள சாளரங்குறித்த விவரங்கள்"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezedetectwidget.ui:26
-#, kde-format
-msgid "Class: "
-msgstr "வகுப்பு: "
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezedetectwidget.ui:43
-#, kde-format
-msgid "Title: "
-msgstr "தலைப்பு: "
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: config/ui/breezedetectwidget.ui:63
-#, kde-format
-msgid "Window Property Selection"
-msgstr "சாளரப்பண்புத் தேர்வு"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowClassCheckBox)
-#: config/ui/breezedetectwidget.ui:69
-#, kde-format
-msgid "Use window class (whole application)"
-msgstr "சாளர வகுப்பைப பயன்படுத்து (முழுச்செயலி)"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowTitleCheckBox)
-#: config/ui/breezedetectwidget.ui:79
-#, kde-format
-msgid "Use window title"
-msgstr "சாளர தலைப்பை பயன்படுத்து"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/ui/breezeexceptiondialog.ui:20
@@ -305,8 +268,9 @@ msgstr "பொ&ருந்த வேண்டிய சுருங்குற
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, kde-format
-msgid "Detect Window Properties"
+#, fuzzy, kde-format
+#| msgid "Detect Window Properties"
+msgid "Detect Window Properties…"
 msgstr "சாளர பண்புகளை கண்டறி"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
@@ -413,3 +377,21 @@ msgstr "சேர்"
 #, kde-format
 msgid "Edit"
 msgstr "திருத்து"
+
+#~ msgid "Information about Selected Window"
+#~ msgstr "தேர்ந்தெடுத்துள்ள சாளரங்குறித்த விவரங்கள்"
+
+#~ msgid "Class: "
+#~ msgstr "வகுப்பு: "
+
+#~ msgid "Title: "
+#~ msgstr "தலைப்பு: "
+
+#~ msgid "Window Property Selection"
+#~ msgstr "சாளரப்பண்புத் தேர்வு"
+
+#~ msgid "Use window class (whole application)"
+#~ msgstr "சாளர வகுப்பைப பயன்படுத்து (முழுச்செயலி)"
+
+#~ msgid "Use window title"
+#~ msgstr "சாளர தலைப்பை பயன்படுத்து"

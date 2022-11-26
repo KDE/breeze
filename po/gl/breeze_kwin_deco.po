@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-29 00:47+0000\n"
+"POT-Creation-Date: 2022-11-26 00:47+0000\n"
 "PO-Revision-Date: 2019-10-19 22:22+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -244,48 +244,11 @@ msgstr "Cor:"
 msgid "Window-Specific Overrides"
 msgstr "Substitucións específicas da xanela"
 
-#. i18n: ectx: property (windowTitle), widget (QDialog, BreezeDetectWidget)
 #. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
-#: config/ui/breezedetectwidget.ui:14 config/ui/breezeexceptiondialog.ui:14
+#: config/ui/breezeexceptiondialog.ui:14
 #, kde-format
 msgid "Dialog"
 msgstr "Diálogo"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: config/ui/breezedetectwidget.ui:20
-#, kde-format
-msgid "Information about Selected Window"
-msgstr "Información sobre a xanela escollida"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezedetectwidget.ui:26
-#, kde-format
-msgid "Class: "
-msgstr "Clase: "
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezedetectwidget.ui:43
-#, kde-format
-msgid "Title: "
-msgstr "Título: "
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: config/ui/breezedetectwidget.ui:63
-#, kde-format
-msgid "Window Property Selection"
-msgstr "Selección da propiedade da xanela"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowClassCheckBox)
-#: config/ui/breezedetectwidget.ui:69
-#, kde-format
-msgid "Use window class (whole application)"
-msgstr "Usar a clase de xanela (para toda a aplicación)"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowTitleCheckBox)
-#: config/ui/breezedetectwidget.ui:79
-#, kde-format
-msgid "Use window title"
-msgstr "Usar o título da xanela"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/ui/breezeexceptiondialog.ui:20
@@ -307,8 +270,9 @@ msgstr "Expresión &regular para atopar coincidencias: "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, kde-format
-msgid "Detect Window Properties"
+#, fuzzy, kde-format
+#| msgid "Detect Window Properties"
+msgid "Detect Window Properties…"
 msgstr "&Detectar as propiedades da xanela"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
@@ -415,6 +379,24 @@ msgstr "Engadir"
 #, kde-format
 msgid "Edit"
 msgstr "Editar"
+
+#~ msgid "Information about Selected Window"
+#~ msgstr "Información sobre a xanela escollida"
+
+#~ msgid "Class: "
+#~ msgstr "Clase: "
+
+#~ msgid "Title: "
+#~ msgstr "Título: "
+
+#~ msgid "Window Property Selection"
+#~ msgstr "Selección da propiedade da xanela"
+
+#~ msgid "Use window class (whole application)"
+#~ msgstr "Usar a clase de xanela (para toda a aplicación)"
+
+#~ msgid "Use window title"
+#~ msgstr "Usar o título da xanela"
 
 #~ msgid "Allow resizing maximized windows from window edges"
 #~ msgstr ""

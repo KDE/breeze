@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-29 00:47+0000\n"
+"POT-Creation-Date: 2022-11-26 00:47+0000\n"
 "PO-Revision-Date: 2022-11-09 13:17+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -246,48 +246,11 @@ msgstr "Renk:"
 msgid "Window-Specific Overrides"
 msgstr "Pencereye Özel Yok saymalar"
 
-#. i18n: ectx: property (windowTitle), widget (QDialog, BreezeDetectWidget)
 #. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
-#: config/ui/breezedetectwidget.ui:14 config/ui/breezeexceptiondialog.ui:14
+#: config/ui/breezeexceptiondialog.ui:14
 #, kde-format
 msgid "Dialog"
 msgstr "İletişim Kutusu"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: config/ui/breezedetectwidget.ui:20
-#, kde-format
-msgid "Information about Selected Window"
-msgstr "Seçilen Pencere Hakkında Bilgi"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezedetectwidget.ui:26
-#, kde-format
-msgid "Class: "
-msgstr "Sınıf: "
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezedetectwidget.ui:43
-#, kde-format
-msgid "Title: "
-msgstr "Başlık: "
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: config/ui/breezedetectwidget.ui:63
-#, kde-format
-msgid "Window Property Selection"
-msgstr "Pencere Özellik Seçimi"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowClassCheckBox)
-#: config/ui/breezedetectwidget.ui:69
-#, kde-format
-msgid "Use window class (whole application)"
-msgstr "Pencere sınıfını kullan (tüm uygulama)"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowTitleCheckBox)
-#: config/ui/breezedetectwidget.ui:79
-#, kde-format
-msgid "Use window title"
-msgstr "Pencere başlığını kullan"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/ui/breezeexceptiondialog.ui:20
@@ -309,8 +272,9 @@ msgstr "&Eşleştirilecek düzenli ifade: "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, kde-format
-msgid "Detect Window Properties"
+#, fuzzy, kde-format
+#| msgid "Detect Window Properties"
+msgid "Detect Window Properties…"
 msgstr "Pencere Özelliklerini Algıla"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
@@ -417,6 +381,24 @@ msgstr "Ekle"
 #, kde-format
 msgid "Edit"
 msgstr "Düzenle"
+
+#~ msgid "Information about Selected Window"
+#~ msgstr "Seçilen Pencere Hakkında Bilgi"
+
+#~ msgid "Class: "
+#~ msgstr "Sınıf: "
+
+#~ msgid "Title: "
+#~ msgstr "Başlık: "
+
+#~ msgid "Window Property Selection"
+#~ msgstr "Pencere Özellik Seçimi"
+
+#~ msgid "Use window class (whole application)"
+#~ msgstr "Pencere sınıfını kullan (tüm uygulama)"
+
+#~ msgid "Use window title"
+#~ msgstr "Pencere başlığını kullan"
 
 #~ msgid "Allow resizing maximized windows from window edges"
 #~ msgstr ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-29 00:47+0000\n"
+"POT-Creation-Date: 2022-11-26 00:47+0000\n"
 "PO-Revision-Date: 2020-09-24 22:23+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -243,48 +243,11 @@ msgstr "Culoare:"
 msgid "Window-Specific Overrides"
 msgstr "Supradefiniri specifice ferestrei"
 
-#. i18n: ectx: property (windowTitle), widget (QDialog, BreezeDetectWidget)
 #. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
-#: config/ui/breezedetectwidget.ui:14 config/ui/breezeexceptiondialog.ui:14
+#: config/ui/breezeexceptiondialog.ui:14
 #, kde-format
 msgid "Dialog"
 msgstr "Dialog"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: config/ui/breezedetectwidget.ui:20
-#, kde-format
-msgid "Information about Selected Window"
-msgstr "Informații despre fereastra aleasă"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezedetectwidget.ui:26
-#, kde-format
-msgid "Class: "
-msgstr "Clasă: "
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezedetectwidget.ui:43
-#, kde-format
-msgid "Title: "
-msgstr "Titlu: "
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: config/ui/breezedetectwidget.ui:63
-#, kde-format
-msgid "Window Property Selection"
-msgstr "Alegerea proprietăților ferestrei"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowClassCheckBox)
-#: config/ui/breezedetectwidget.ui:69
-#, kde-format
-msgid "Use window class (whole application)"
-msgstr "Folosește clasa ferestrei (întreaga aplicație)"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowTitleCheckBox)
-#: config/ui/breezedetectwidget.ui:79
-#, kde-format
-msgid "Use window title"
-msgstr "Folosește titlul ferestrei"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/ui/breezeexceptiondialog.ui:20
@@ -306,8 +269,9 @@ msgstr "Expresia regula&tă de potrivit:  "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, kde-format
-msgid "Detect Window Properties"
+#, fuzzy, kde-format
+#| msgid "Detect Window Properties"
+msgid "Detect Window Properties…"
 msgstr "Detectează proprietățile ferestrei"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
@@ -414,6 +378,24 @@ msgstr "Adaugă"
 #, kde-format
 msgid "Edit"
 msgstr "Modifică"
+
+#~ msgid "Information about Selected Window"
+#~ msgstr "Informații despre fereastra aleasă"
+
+#~ msgid "Class: "
+#~ msgstr "Clasă: "
+
+#~ msgid "Title: "
+#~ msgstr "Titlu: "
+
+#~ msgid "Window Property Selection"
+#~ msgstr "Alegerea proprietăților ferestrei"
+
+#~ msgid "Use window class (whole application)"
+#~ msgstr "Folosește clasa ferestrei (întreaga aplicație)"
+
+#~ msgid "Use window title"
+#~ msgstr "Folosește titlul ferestrei"
 
 #~ msgid "Allow resizing maximized windows from window edges"
 #~ msgstr ""

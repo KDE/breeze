@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trunk-kf 5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-29 00:47+0000\n"
+"POT-Creation-Date: 2022-11-26 00:47+0000\n"
 "PO-Revision-Date: 2020-05-16 20:34+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -246,48 +246,11 @@ msgstr "Spalva:"
 msgid "Window-Specific Overrides"
 msgstr "Langų specifiniai nustelbimai"
 
-#. i18n: ectx: property (windowTitle), widget (QDialog, BreezeDetectWidget)
 #. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
-#: config/ui/breezedetectwidget.ui:14 config/ui/breezeexceptiondialog.ui:14
+#: config/ui/breezeexceptiondialog.ui:14
 #, kde-format
 msgid "Dialog"
 msgstr "Dialogas"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: config/ui/breezedetectwidget.ui:20
-#, kde-format
-msgid "Information about Selected Window"
-msgstr "Informacija apie pasirinktą langą"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezedetectwidget.ui:26
-#, kde-format
-msgid "Class: "
-msgstr "Klasė: "
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezedetectwidget.ui:43
-#, kde-format
-msgid "Title: "
-msgstr "Antraštė: "
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: config/ui/breezedetectwidget.ui:63
-#, kde-format
-msgid "Window Property Selection"
-msgstr "Lango savybių pasirinkimas"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowClassCheckBox)
-#: config/ui/breezedetectwidget.ui:69
-#, kde-format
-msgid "Use window class (whole application)"
-msgstr "Naudoti lango klasę (visa programa)"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowTitleCheckBox)
-#: config/ui/breezedetectwidget.ui:79
-#, kde-format
-msgid "Use window title"
-msgstr "Naudoti lango antraštę"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/ui/breezeexceptiondialog.ui:20
@@ -309,8 +272,9 @@ msgstr "Reguliarioji išraiška, kurią atiti&kti: "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, kde-format
-msgid "Detect Window Properties"
+#, fuzzy, kde-format
+#| msgid "Detect Window Properties"
+msgid "Detect Window Properties…"
 msgstr "Aptikti lango savybes"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
@@ -417,6 +381,24 @@ msgstr "Pridėti"
 #, kde-format
 msgid "Edit"
 msgstr "Taisyti"
+
+#~ msgid "Information about Selected Window"
+#~ msgstr "Informacija apie pasirinktą langą"
+
+#~ msgid "Class: "
+#~ msgstr "Klasė: "
+
+#~ msgid "Title: "
+#~ msgstr "Antraštė: "
+
+#~ msgid "Window Property Selection"
+#~ msgstr "Lango savybių pasirinkimas"
+
+#~ msgid "Use window class (whole application)"
+#~ msgstr "Naudoti lango klasę (visa programa)"
+
+#~ msgid "Use window title"
+#~ msgstr "Naudoti lango antraštę"
 
 #~ msgid "Allow resizing maximized windows from window edges"
 #~ msgstr "Leisti keisti išskleistų langų dydį tempiant už lango krašto"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-29 00:47+0000\n"
+"POT-Creation-Date: 2022-11-26 00:47+0000\n"
 "PO-Revision-Date: 2020-05-02 23:03+0800\n"
 "Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -245,48 +245,11 @@ msgstr "顏色："
 msgid "Window-Specific Overrides"
 msgstr "視窗指定覆寫"
 
-#. i18n: ectx: property (windowTitle), widget (QDialog, BreezeDetectWidget)
 #. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
-#: config/ui/breezedetectwidget.ui:14 config/ui/breezeexceptiondialog.ui:14
+#: config/ui/breezeexceptiondialog.ui:14
 #, kde-format
 msgid "Dialog"
 msgstr "對話框"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: config/ui/breezedetectwidget.ui:20
-#, kde-format
-msgid "Information about Selected Window"
-msgstr "選取的視窗的資訊"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezedetectwidget.ui:26
-#, kde-format
-msgid "Class: "
-msgstr "類別："
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezedetectwidget.ui:43
-#, kde-format
-msgid "Title: "
-msgstr "標題："
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: config/ui/breezedetectwidget.ui:63
-#, kde-format
-msgid "Window Property Selection"
-msgstr "視窗屬性選擇"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowClassCheckBox)
-#: config/ui/breezedetectwidget.ui:69
-#, kde-format
-msgid "Use window class (whole application)"
-msgstr "使用視窗類別（整個應用程式）"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowTitleCheckBox)
-#: config/ui/breezedetectwidget.ui:79
-#, kde-format
-msgid "Use window title"
-msgstr "使用視窗標題"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/ui/breezeexceptiondialog.ui:20
@@ -308,8 +271,9 @@ msgstr "要比對的正則表達式(&T)："
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, kde-format
-msgid "Detect Window Properties"
+#, fuzzy, kde-format
+#| msgid "Detect Window Properties"
+msgid "Detect Window Properties…"
 msgstr "偵測視窗屬性"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
@@ -416,6 +380,24 @@ msgstr "新增"
 #, kde-format
 msgid "Edit"
 msgstr "編輯"
+
+#~ msgid "Information about Selected Window"
+#~ msgstr "選取的視窗的資訊"
+
+#~ msgid "Class: "
+#~ msgstr "類別："
+
+#~ msgid "Title: "
+#~ msgstr "標題："
+
+#~ msgid "Window Property Selection"
+#~ msgstr "視窗屬性選擇"
+
+#~ msgid "Use window class (whole application)"
+#~ msgstr "使用視窗類別（整個應用程式）"
+
+#~ msgid "Use window title"
+#~ msgstr "使用視窗標題"
 
 #~ msgid "Allow resizing maximized windows from window edges"
 #~ msgstr "允許在螢幕角落縮放已放大視窗"

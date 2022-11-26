@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kwin_clients\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-29 00:47+0000\n"
+"POT-Creation-Date: 2022-11-26 00:47+0000\n"
 "PO-Revision-Date: 2020-06-28 18:25+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -253,48 +253,11 @@ msgstr "Väri:"
 msgid "Window-Specific Overrides"
 msgstr "Ikkunakohtaiset asetukset"
 
-#. i18n: ectx: property (windowTitle), widget (QDialog, BreezeDetectWidget)
 #. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
-#: config/ui/breezedetectwidget.ui:14 config/ui/breezeexceptiondialog.ui:14
+#: config/ui/breezeexceptiondialog.ui:14
 #, kde-format
 msgid "Dialog"
 msgstr "Ikkuna"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: config/ui/breezedetectwidget.ui:20
-#, kde-format
-msgid "Information about Selected Window"
-msgstr "Valitun ikkunan tiedot"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezedetectwidget.ui:26
-#, kde-format
-msgid "Class: "
-msgstr "Luokka: "
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezedetectwidget.ui:43
-#, kde-format
-msgid "Title: "
-msgstr "Otsikko: "
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: config/ui/breezedetectwidget.ui:63
-#, kde-format
-msgid "Window Property Selection"
-msgstr "Ikkunan ominaisuuden valinta"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowClassCheckBox)
-#: config/ui/breezedetectwidget.ui:69
-#, kde-format
-msgid "Use window class (whole application)"
-msgstr "Käytä ikkunaluokkaa (koko sovellus)"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowTitleCheckBox)
-#: config/ui/breezedetectwidget.ui:79
-#, kde-format
-msgid "Use window title"
-msgstr "Käytä ikkunan otsikkoa"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/ui/breezeexceptiondialog.ui:20
@@ -316,8 +279,9 @@ msgstr "Täsmättävä säännöllinen lauseke: "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, kde-format
-msgid "Detect Window Properties"
+#, fuzzy, kde-format
+#| msgid "Detect Window Properties"
+msgid "Detect Window Properties…"
 msgstr "Tunnista ikkunan ominaisuudet"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
@@ -424,6 +388,24 @@ msgstr "Lisää"
 #, kde-format
 msgid "Edit"
 msgstr "Muokkaa"
+
+#~ msgid "Information about Selected Window"
+#~ msgstr "Valitun ikkunan tiedot"
+
+#~ msgid "Class: "
+#~ msgstr "Luokka: "
+
+#~ msgid "Title: "
+#~ msgstr "Otsikko: "
+
+#~ msgid "Window Property Selection"
+#~ msgstr "Ikkunan ominaisuuden valinta"
+
+#~ msgid "Use window class (whole application)"
+#~ msgstr "Käytä ikkunaluokkaa (koko sovellus)"
+
+#~ msgid "Use window title"
+#~ msgstr "Käytä ikkunan otsikkoa"
 
 #~ msgid "Allow resizing maximized windows from window edges"
 #~ msgstr "Muuta myös suurennettujen ikkunoiden kokoa ikkunan reunoilta"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-29 00:47+0000\n"
+"POT-Creation-Date: 2022-11-26 00:47+0000\n"
 "PO-Revision-Date: 2020-05-02 10:28+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -243,48 +243,11 @@ msgstr "Värv:"
 msgid "Window-Specific Overrides"
 msgstr "Akende spetsiifilised tühistavad sätted"
 
-#. i18n: ectx: property (windowTitle), widget (QDialog, BreezeDetectWidget)
 #. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
-#: config/ui/breezedetectwidget.ui:14 config/ui/breezeexceptiondialog.ui:14
+#: config/ui/breezeexceptiondialog.ui:14
 #, kde-format
 msgid "Dialog"
 msgstr "Dialoog"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: config/ui/breezedetectwidget.ui:20
-#, kde-format
-msgid "Information about Selected Window"
-msgstr "Valitud akna teave"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezedetectwidget.ui:26
-#, kde-format
-msgid "Class: "
-msgstr "Klass: "
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezedetectwidget.ui:43
-#, kde-format
-msgid "Title: "
-msgstr "Tiitel: "
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: config/ui/breezedetectwidget.ui:63
-#, kde-format
-msgid "Window Property Selection"
-msgstr "Akna omaduse valik"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowClassCheckBox)
-#: config/ui/breezedetectwidget.ui:69
-#, kde-format
-msgid "Use window class (whole application)"
-msgstr "Kasutatakse akna klassi (kogu rakendus)"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowTitleCheckBox)
-#: config/ui/breezedetectwidget.ui:79
-#, kde-format
-msgid "Use window title"
-msgstr "Kasutatakse akna tiitlit"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/ui/breezeexceptiondialog.ui:20
@@ -306,8 +269,9 @@ msgstr "So&bivus regulaaravaldisega: "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, kde-format
-msgid "Detect Window Properties"
+#, fuzzy, kde-format
+#| msgid "Detect Window Properties"
+msgid "Detect Window Properties…"
 msgstr "Tuvasta akna omadused"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
@@ -414,6 +378,24 @@ msgstr "Lisa"
 #, kde-format
 msgid "Edit"
 msgstr "Muuda"
+
+#~ msgid "Information about Selected Window"
+#~ msgstr "Valitud akna teave"
+
+#~ msgid "Class: "
+#~ msgstr "Klass: "
+
+#~ msgid "Title: "
+#~ msgstr "Tiitel: "
+
+#~ msgid "Window Property Selection"
+#~ msgstr "Akna omaduse valik"
+
+#~ msgid "Use window class (whole application)"
+#~ msgstr "Kasutatakse akna klassi (kogu rakendus)"
+
+#~ msgid "Use window title"
+#~ msgstr "Kasutatakse akna tiitlit"
 
 #~ msgid "Allow resizing maximized windows from window edges"
 #~ msgstr "Maksimeeritud akende suuruse muutmise lubamine aknaservadest"

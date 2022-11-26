@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-29 00:47+0000\n"
+"POT-Creation-Date: 2022-11-26 00:47+0000\n"
 "PO-Revision-Date: 2020-09-16 09:50+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -245,48 +245,11 @@ msgstr "Χρώμα:"
 msgid "Window-Specific Overrides"
 msgstr "Αντικαταστάσεις ειδικά για παράθυρα"
 
-#. i18n: ectx: property (windowTitle), widget (QDialog, BreezeDetectWidget)
 #. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
-#: config/ui/breezedetectwidget.ui:14 config/ui/breezeexceptiondialog.ui:14
+#: config/ui/breezeexceptiondialog.ui:14
 #, kde-format
 msgid "Dialog"
 msgstr "Διάλογος"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: config/ui/breezedetectwidget.ui:20
-#, kde-format
-msgid "Information about Selected Window"
-msgstr "Πληροφορίες για το επιλεγμένο παράθυρο"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezedetectwidget.ui:26
-#, kde-format
-msgid "Class: "
-msgstr "Κατηγορία: "
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezedetectwidget.ui:43
-#, kde-format
-msgid "Title: "
-msgstr "Τίτλος: "
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: config/ui/breezedetectwidget.ui:63
-#, kde-format
-msgid "Window Property Selection"
-msgstr "Επιλογή ιδιότητας παραθύρου"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowClassCheckBox)
-#: config/ui/breezedetectwidget.ui:69
-#, kde-format
-msgid "Use window class (whole application)"
-msgstr "Χρήση κατηγορίας παραθύρων (ολόκληρη εφαρμογή)"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowTitleCheckBox)
-#: config/ui/breezedetectwidget.ui:79
-#, kde-format
-msgid "Use window title"
-msgstr "Χρήση τίτλου παραθύρου"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/ui/breezeexceptiondialog.ui:20
@@ -308,8 +271,9 @@ msgstr "&Κανονική έκφραση για ταίριασμα: "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, kde-format
-msgid "Detect Window Properties"
+#, fuzzy, kde-format
+#| msgid "Detect Window Properties"
+msgid "Detect Window Properties…"
 msgstr "Ανίχνευση ιδιοτήτων παραθύρου"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
@@ -416,6 +380,24 @@ msgstr "Προσθήκη"
 #, kde-format
 msgid "Edit"
 msgstr "Επεξεργασία"
+
+#~ msgid "Information about Selected Window"
+#~ msgstr "Πληροφορίες για το επιλεγμένο παράθυρο"
+
+#~ msgid "Class: "
+#~ msgstr "Κατηγορία: "
+
+#~ msgid "Title: "
+#~ msgstr "Τίτλος: "
+
+#~ msgid "Window Property Selection"
+#~ msgstr "Επιλογή ιδιότητας παραθύρου"
+
+#~ msgid "Use window class (whole application)"
+#~ msgstr "Χρήση κατηγορίας παραθύρων (ολόκληρη εφαρμογή)"
+
+#~ msgid "Use window title"
+#~ msgstr "Χρήση τίτλου παραθύρου"
 
 #~ msgid "Allow resizing maximized windows from window edges"
 #~ msgstr ""

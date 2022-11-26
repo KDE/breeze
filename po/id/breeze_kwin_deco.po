@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-29 00:47+0000\n"
+"POT-Creation-Date: 2022-11-26 00:47+0000\n"
 "PO-Revision-Date: 2022-09-27 18:12+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -242,48 +242,11 @@ msgstr "Warna:"
 msgid "Window-Specific Overrides"
 msgstr "Penimpaan Jendela Tertentu"
 
-#. i18n: ectx: property (windowTitle), widget (QDialog, BreezeDetectWidget)
 #. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
-#: config/ui/breezedetectwidget.ui:14 config/ui/breezeexceptiondialog.ui:14
+#: config/ui/breezeexceptiondialog.ui:14
 #, kde-format
 msgid "Dialog"
 msgstr "Dialog"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: config/ui/breezedetectwidget.ui:20
-#, kde-format
-msgid "Information about Selected Window"
-msgstr "Informasi tentang Jendela Terpilih"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezedetectwidget.ui:26
-#, kde-format
-msgid "Class: "
-msgstr "Kelas: "
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezedetectwidget.ui:43
-#, kde-format
-msgid "Title: "
-msgstr "Judul: "
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: config/ui/breezedetectwidget.ui:63
-#, kde-format
-msgid "Window Property Selection"
-msgstr "Pemilihan Properti Jendela"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowClassCheckBox)
-#: config/ui/breezedetectwidget.ui:69
-#, kde-format
-msgid "Use window class (whole application)"
-msgstr "Gunakan kelas jendela (keseluruhan aplikasi)"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowTitleCheckBox)
-#: config/ui/breezedetectwidget.ui:79
-#, kde-format
-msgid "Use window title"
-msgstr "Gunakan judul jendela"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/ui/breezeexceptiondialog.ui:20
@@ -305,8 +268,9 @@ msgstr "Ekspresi reguler &untuk mencocokkan: "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, kde-format
-msgid "Detect Window Properties"
+#, fuzzy, kde-format
+#| msgid "Detect Window Properties"
+msgid "Detect Window Properties…"
 msgstr "Deteksi Properti Jendela"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
@@ -417,6 +381,24 @@ msgstr "Tambah"
 #, kde-format
 msgid "Edit"
 msgstr "Edit"
+
+#~ msgid "Information about Selected Window"
+#~ msgstr "Informasi tentang Jendela Terpilih"
+
+#~ msgid "Class: "
+#~ msgstr "Kelas: "
+
+#~ msgid "Title: "
+#~ msgstr "Judul: "
+
+#~ msgid "Window Property Selection"
+#~ msgstr "Pemilihan Properti Jendela"
+
+#~ msgid "Use window class (whole application)"
+#~ msgstr "Gunakan kelas jendela (keseluruhan aplikasi)"
+
+#~ msgid "Use window title"
+#~ msgstr "Gunakan judul jendela"
 
 #~ msgid "Allow resizing maximized windows from window edges"
 #~ msgstr ""

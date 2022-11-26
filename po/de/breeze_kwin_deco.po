@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-29 00:47+0000\n"
+"POT-Creation-Date: 2022-11-26 00:47+0000\n"
 "PO-Revision-Date: 2021-04-19 06:07+0200\n"
 "Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -240,48 +240,11 @@ msgstr "Farbe:"
 msgid "Window-Specific Overrides"
 msgstr "Fensterspezifische Einstellungen"
 
-#. i18n: ectx: property (windowTitle), widget (QDialog, BreezeDetectWidget)
 #. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
-#: config/ui/breezedetectwidget.ui:14 config/ui/breezeexceptiondialog.ui:14
+#: config/ui/breezeexceptiondialog.ui:14
 #, kde-format
 msgid "Dialog"
 msgstr "Dialog"
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: config/ui/breezedetectwidget.ui:20
-#, kde-format
-msgid "Information about Selected Window"
-msgstr "Informationen zum ausgewählten Fenster"
-
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezedetectwidget.ui:26
-#, kde-format
-msgid "Class: "
-msgstr "Klasse: "
-
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezedetectwidget.ui:43
-#, kde-format
-msgid "Title: "
-msgstr "Titel: "
-
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: config/ui/breezedetectwidget.ui:63
-#, kde-format
-msgid "Window Property Selection"
-msgstr "Auswahl der Fenster-Eigenschaft"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowClassCheckBox)
-#: config/ui/breezedetectwidget.ui:69
-#, kde-format
-msgid "Use window class (whole application)"
-msgstr "Fensterklasse verwenden (gesamte Anwendung)"
-
-#. i18n: ectx: property (text), widget (QRadioButton, windowTitleCheckBox)
-#: config/ui/breezedetectwidget.ui:79
-#, kde-format
-msgid "Use window title"
-msgstr "Fenstertitel verwenden"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/ui/breezeexceptiondialog.ui:20
@@ -303,8 +266,9 @@ msgstr "Passender &regulärer Ausdruck: "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, kde-format
-msgid "Detect Window Properties"
+#, fuzzy, kde-format
+#| msgid "Detect Window Properties"
+msgid "Detect Window Properties…"
 msgstr "Fenstereigenschaften ermitteln"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
@@ -411,6 +375,24 @@ msgstr "Hinzufügen"
 #, kde-format
 msgid "Edit"
 msgstr "Bearbeiten"
+
+#~ msgid "Information about Selected Window"
+#~ msgstr "Informationen zum ausgewählten Fenster"
+
+#~ msgid "Class: "
+#~ msgstr "Klasse: "
+
+#~ msgid "Title: "
+#~ msgstr "Titel: "
+
+#~ msgid "Window Property Selection"
+#~ msgstr "Auswahl der Fenster-Eigenschaft"
+
+#~ msgid "Use window class (whole application)"
+#~ msgstr "Fensterklasse verwenden (gesamte Anwendung)"
+
+#~ msgid "Use window title"
+#~ msgstr "Fenstertitel verwenden"
 
 #~ msgid "Allow resizing maximized windows from window edges"
 #~ msgstr ""
