@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: breeze_kwin_deco\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-26 00:47+0000\n"
-"PO-Revision-Date: 2022-09-29 11:10+0300\n"
+"POT-Creation-Date: 2022-11-27 00:47+0000\n"
+"PO-Revision-Date: 2022-11-26 10:54+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -135,7 +135,7 @@ msgstr "Крихітний"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:108
-#: config/ui/breezeconfigurationui.ui:228
+#: config/ui/breezeconfigurationui.ui:221
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Small"
@@ -144,7 +144,7 @@ msgstr "Малий"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:113
-#: config/ui/breezeconfigurationui.ui:233
+#: config/ui/breezeconfigurationui.ui:226
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Medium"
@@ -153,7 +153,7 @@ msgstr "Середній"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:118
-#: config/ui/breezeconfigurationui.ui:238
+#: config/ui/breezeconfigurationui.ui:231
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Large"
@@ -162,7 +162,7 @@ msgstr "Великий"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:123
-#: config/ui/breezeconfigurationui.ui:243
+#: config/ui/breezeconfigurationui.ui:236
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Very Large"
@@ -198,52 +198,46 @@ msgstr ""
 msgid "Draw titlebar background gradient"
 msgstr "Малювати градієнт тла смужки заголовка"
 
-#. i18n: ectx: property (text), widget (QCheckBox, drawSizeGrip)
-#: config/ui/breezeconfigurationui.ui:182
-#, kde-format
-msgid "Add handle to resize windows with no border"
-msgstr "Додавати елемент керування для зміни розмірів вікон без обрамлення"
-
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
-#: config/ui/breezeconfigurationui.ui:203
+#: config/ui/breezeconfigurationui.ui:196
 #, kde-format
 msgid "Shadows"
 msgstr "Тіні"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezeconfigurationui.ui:209
+#: config/ui/breezeconfigurationui.ui:202
 #, kde-format
 msgid "Si&ze:"
 msgstr "&Розмір:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
-#: config/ui/breezeconfigurationui.ui:223
+#: config/ui/breezeconfigurationui.ui:216
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "None"
 msgstr "Немає"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezeconfigurationui.ui:251
+#: config/ui/breezeconfigurationui.ui:244
 #, kde-format
 msgctxt "strength of the shadow (from transparent to opaque)"
 msgid "S&trength:"
 msgstr "С&ила:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
-#: config/ui/breezeconfigurationui.ui:264
+#: config/ui/breezeconfigurationui.ui:257
 #, no-c-format, kde-format
 msgid "%"
 msgstr "%"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: config/ui/breezeconfigurationui.ui:290
+#: config/ui/breezeconfigurationui.ui:283
 #, kde-format
 msgid "Color:"
 msgstr "Колір:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: config/ui/breezeconfigurationui.ui:317
+#: config/ui/breezeconfigurationui.ui:310
 #, kde-format
 msgid "Window-Specific Overrides"
 msgstr "Параметри для окремих вікон"
@@ -274,10 +268,9 @@ msgstr "Формальний ви&раз для пошуку:"
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, fuzzy, kde-format
-#| msgid "Detect Window Properties"
+#, kde-format
 msgid "Detect Window Properties…"
-msgstr "Визначити властивості вікна"
+msgstr "Визначити властивості вікна…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: config/ui/breezeexceptiondialog.ui:83
@@ -383,6 +376,9 @@ msgstr "Додати"
 #, kde-format
 msgid "Edit"
 msgstr "Змінити"
+
+#~ msgid "Add handle to resize windows with no border"
+#~ msgstr "Додавати елемент керування для зміни розмірів вікон без обрамлення"
 
 #~ msgid "Information about Selected Window"
 #~ msgstr "Інформація про вибране вікно"

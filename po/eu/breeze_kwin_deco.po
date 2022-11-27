@@ -1,6 +1,5 @@
 # Translation of breeze_kwin_deco.po to Euskara/Basque (eu).
-# Copyright (C) 2016-2018, Free Software Foundation, Inc.
-# Copyright (C) 2019-2020, This file is copyright:
+# Copyright (C) 2016-2020, This file is copyright:
 # This file is distributed under the same license as the breeze package.
 # KDE euskaratzeko proiektuko arduraduna <xalba@euskalnet.net>
 #
@@ -10,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-26 00:47+0000\n"
-"PO-Revision-Date: 2022-09-29 06:54+0200\n"
+"POT-Creation-Date: 2022-11-27 00:47+0000\n"
+"PO-Revision-Date: 2022-11-26 09:29+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -19,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -136,7 +135,7 @@ msgstr "Ñimiñoa"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:108
-#: config/ui/breezeconfigurationui.ui:228
+#: config/ui/breezeconfigurationui.ui:221
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Small"
@@ -145,7 +144,7 @@ msgstr "Txikia"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:113
-#: config/ui/breezeconfigurationui.ui:233
+#: config/ui/breezeconfigurationui.ui:226
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Medium"
@@ -154,7 +153,7 @@ msgstr "Ertaina"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:118
-#: config/ui/breezeconfigurationui.ui:238
+#: config/ui/breezeconfigurationui.ui:231
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Large"
@@ -163,7 +162,7 @@ msgstr "Handia"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:123
-#: config/ui/breezeconfigurationui.ui:243
+#: config/ui/breezeconfigurationui.ui:236
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Very Large"
@@ -199,52 +198,46 @@ msgstr ""
 msgid "Draw titlebar background gradient"
 msgstr "Marraztu titulu-barrako atzealdeko gradientea"
 
-#. i18n: ectx: property (text), widget (QCheckBox, drawSizeGrip)
-#: config/ui/breezeconfigurationui.ui:182
-#, kde-format
-msgid "Add handle to resize windows with no border"
-msgstr "Erantsi heldulekua ertzik gabeko leihoen neurria aldatzeko"
-
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
-#: config/ui/breezeconfigurationui.ui:203
+#: config/ui/breezeconfigurationui.ui:196
 #, kde-format
 msgid "Shadows"
 msgstr "Itzalak"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezeconfigurationui.ui:209
+#: config/ui/breezeconfigurationui.ui:202
 #, kde-format
 msgid "Si&ze:"
 msgstr "&Neurria:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
-#: config/ui/breezeconfigurationui.ui:223
+#: config/ui/breezeconfigurationui.ui:216
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "None"
 msgstr "Bat ere ez"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezeconfigurationui.ui:251
+#: config/ui/breezeconfigurationui.ui:244
 #, kde-format
 msgctxt "strength of the shadow (from transparent to opaque)"
 msgid "S&trength:"
 msgstr "Ilun&tasuna:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
-#: config/ui/breezeconfigurationui.ui:264
+#: config/ui/breezeconfigurationui.ui:257
 #, no-c-format, kde-format
 msgid "%"
 msgstr "%"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: config/ui/breezeconfigurationui.ui:290
+#: config/ui/breezeconfigurationui.ui:283
 #, kde-format
 msgid "Color:"
 msgstr "Kolorea:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: config/ui/breezeconfigurationui.ui:317
+#: config/ui/breezeconfigurationui.ui:310
 #, kde-format
 msgid "Window-Specific Overrides"
 msgstr "Leihoen berariazko gainezartzeak"
@@ -275,10 +268,9 @@ msgstr "Bat etorri be&harreko adierazpen erregularra:"
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, fuzzy, kde-format
-#| msgid "Detect Window Properties"
+#, kde-format
 msgid "Detect Window Properties…"
-msgstr "Detektatu leihoaren propietateak"
+msgstr "Antzeman leihoaren propietateak..."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: config/ui/breezeexceptiondialog.ui:83
@@ -384,6 +376,9 @@ msgstr "Erantsi"
 #, kde-format
 msgid "Edit"
 msgstr "Editatu"
+
+#~ msgid "Add handle to resize windows with no border"
+#~ msgstr "Erantsi heldulekua ertzik gabeko leihoen neurria aldatzeko"
 
 #~ msgid "Information about Selected Window"
 #~ msgstr "Hautatutako leihoari buruzko informazioa"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kde5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-26 00:47+0000\n"
+"POT-Creation-Date: 2022-11-27 00:47+0000\n"
 "PO-Revision-Date: 2015-02-24 20:36+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: Bosnian\n"
@@ -140,7 +140,7 @@ msgstr "sićušne"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:108
-#: config/ui/breezeconfigurationui.ui:228
+#: config/ui/breezeconfigurationui.ui:221
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Small"
@@ -149,7 +149,7 @@ msgstr "Mala"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:113
-#: config/ui/breezeconfigurationui.ui:233
+#: config/ui/breezeconfigurationui.ui:226
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Medium"
@@ -158,7 +158,7 @@ msgstr ""
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:118
-#: config/ui/breezeconfigurationui.ui:238
+#: config/ui/breezeconfigurationui.ui:231
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Large"
@@ -167,7 +167,7 @@ msgstr "Velika"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:123
-#: config/ui/breezeconfigurationui.ui:243
+#: config/ui/breezeconfigurationui.ui:236
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Very Large"
@@ -201,52 +201,46 @@ msgstr ""
 msgid "Draw titlebar background gradient"
 msgstr ""
 
-#. i18n: ectx: property (text), widget (QCheckBox, drawSizeGrip)
-#: config/ui/breezeconfigurationui.ui:182
-#, kde-format
-msgid "Add handle to resize windows with no border"
-msgstr "Dodaj dršku za raširivanje prozora bez ivica"
-
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
-#: config/ui/breezeconfigurationui.ui:203
+#: config/ui/breezeconfigurationui.ui:196
 #, kde-format
 msgid "Shadows"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezeconfigurationui.ui:209
+#: config/ui/breezeconfigurationui.ui:202
 #, kde-format
 msgid "Si&ze:"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
-#: config/ui/breezeconfigurationui.ui:223
+#: config/ui/breezeconfigurationui.ui:216
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "None"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezeconfigurationui.ui:251
+#: config/ui/breezeconfigurationui.ui:244
 #, kde-format
 msgctxt "strength of the shadow (from transparent to opaque)"
 msgid "S&trength:"
 msgstr ""
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
-#: config/ui/breezeconfigurationui.ui:264
+#: config/ui/breezeconfigurationui.ui:257
 #, no-c-format, kde-format
 msgid "%"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: config/ui/breezeconfigurationui.ui:290
+#: config/ui/breezeconfigurationui.ui:283
 #, kde-format
 msgid "Color:"
 msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: config/ui/breezeconfigurationui.ui:317
+#: config/ui/breezeconfigurationui.ui:310
 #, kde-format
 msgid "Window-Specific Overrides"
 msgstr "Potiskivanja posebna po prozoru"
@@ -386,6 +380,9 @@ msgstr "Dodaj"
 #, kde-format
 msgid "Edit"
 msgstr "Izmijeni"
+
+#~ msgid "Add handle to resize windows with no border"
+#~ msgstr "Dodaj dršku za raširivanje prozora bez ivica"
 
 #~ msgid "Information about Selected Window"
 #~ msgstr "Podaci o izabranom prozoru"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-26 00:47+0000\n"
+"POT-Creation-Date: 2022-11-27 00:47+0000\n"
 "PO-Revision-Date: 2022-09-29 13:59+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -132,7 +132,7 @@ msgstr "Миниатюрен"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:108
-#: config/ui/breezeconfigurationui.ui:228
+#: config/ui/breezeconfigurationui.ui:221
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Small"
@@ -141,7 +141,7 @@ msgstr "Малък"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:113
-#: config/ui/breezeconfigurationui.ui:233
+#: config/ui/breezeconfigurationui.ui:226
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Medium"
@@ -150,7 +150,7 @@ msgstr "Среден"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:118
-#: config/ui/breezeconfigurationui.ui:238
+#: config/ui/breezeconfigurationui.ui:231
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Large"
@@ -159,7 +159,7 @@ msgstr "Голям"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:123
-#: config/ui/breezeconfigurationui.ui:243
+#: config/ui/breezeconfigurationui.ui:236
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Very Large"
@@ -195,52 +195,46 @@ msgstr ""
 msgid "Draw titlebar background gradient"
 msgstr "Показване на градиент на фона на заглавната лента"
 
-#. i18n: ectx: property (text), widget (QCheckBox, drawSizeGrip)
-#: config/ui/breezeconfigurationui.ui:182
-#, kde-format
-msgid "Add handle to resize windows with no border"
-msgstr "Добавяне на манипулатор за преоразмеряване на прозорци без рамки"
-
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
-#: config/ui/breezeconfigurationui.ui:203
+#: config/ui/breezeconfigurationui.ui:196
 #, kde-format
 msgid "Shadows"
 msgstr "Сенки"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezeconfigurationui.ui:209
+#: config/ui/breezeconfigurationui.ui:202
 #, kde-format
 msgid "Si&ze:"
 msgstr "Ра&змер:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
-#: config/ui/breezeconfigurationui.ui:223
+#: config/ui/breezeconfigurationui.ui:216
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "None"
 msgstr "Без"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezeconfigurationui.ui:251
+#: config/ui/breezeconfigurationui.ui:244
 #, kde-format
 msgctxt "strength of the shadow (from transparent to opaque)"
 msgid "S&trength:"
 msgstr "&Сила:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
-#: config/ui/breezeconfigurationui.ui:264
+#: config/ui/breezeconfigurationui.ui:257
 #, no-c-format, kde-format
 msgid "%"
 msgstr "%"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: config/ui/breezeconfigurationui.ui:290
+#: config/ui/breezeconfigurationui.ui:283
 #, kde-format
 msgid "Color:"
 msgstr "Цвят:"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: config/ui/breezeconfigurationui.ui:317
+#: config/ui/breezeconfigurationui.ui:310
 #, kde-format
 msgid "Window-Specific Overrides"
 msgstr "Настройки, специфични за прозореца"
@@ -380,6 +374,9 @@ msgstr "Добавяне"
 #, kde-format
 msgid "Edit"
 msgstr "Редактиране"
+
+#~ msgid "Add handle to resize windows with no border"
+#~ msgstr "Добавяне на манипулатор за преоразмеряване на прозорци без рамки"
 
 #~ msgid "Information about Selected Window"
 #~ msgstr "Информация за избрания прозорец"
