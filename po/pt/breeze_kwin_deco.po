@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: breeze_kwin_deco\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-27 00:47+0000\n"
-"PO-Revision-Date: 2022-09-30 00:08+0100\n"
+"PO-Revision-Date: 2022-11-28 18:21+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -266,10 +266,9 @@ msgstr "Expressão regular a &corresponder: "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, fuzzy, kde-format
-#| msgid "Detect Window Properties"
+#, kde-format
 msgid "Detect Window Properties…"
-msgstr "Detectar as Propriedades da Janela"
+msgstr "Detectar as Propriedades da Janela…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: config/ui/breezeexceptiondialog.ui:83
@@ -375,24 +374,3 @@ msgstr "Adicionar"
 #, kde-format
 msgid "Edit"
 msgstr "Editar"
-
-#~ msgid "Add handle to resize windows with no border"
-#~ msgstr "Adicionar uma pega para dimensionar as janelas sem contorno"
-
-#~ msgid "Information about Selected Window"
-#~ msgstr "Informação Acerca da Janela Seleccionada"
-
-#~ msgid "Class: "
-#~ msgstr "Classe: "
-
-#~ msgid "Title: "
-#~ msgstr "Título: "
-
-#~ msgid "Window Property Selection"
-#~ msgstr "Selecção da Propriedade da Janela"
-
-#~ msgid "Use window class (whole application)"
-#~ msgstr "Usar a classe da janela (aplicação inteira)"
-
-#~ msgid "Use window title"
-#~ msgstr "Usar o título da janela"

@@ -380,6 +380,3 @@ msgstr "Afig"
 #, kde-format
 msgid "Edit"
 msgstr "Edita"
-
-#~ msgid "Add handle to resize windows with no border"
-#~ msgstr "Afig l'ansa per a canviar la mida de les finestres sense vores"
