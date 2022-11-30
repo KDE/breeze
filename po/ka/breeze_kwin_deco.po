@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-27 00:47+0000\n"
-"PO-Revision-Date: 2022-09-19 18:27+0200\n"
+"PO-Revision-Date: 2022-11-29 09:01+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,27 +16,27 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
 msgid "New Exception - Breeze Settings"
-msgstr ""
+msgstr "ახალი გამონაკლისი - Breeze -ის მორგება"
 
 #: config/breezeexceptionlistwidget.cpp:134
 #, kde-format
 msgid "Edit Exception - Breeze Settings"
-msgstr ""
+msgstr "გამონაკლისის ჩასწორება - Breeze -ის მორგება"
 
 #: config/breezeexceptionlistwidget.cpp:164
 #, kde-format
 msgid "Question - Breeze Settings"
-msgstr ""
+msgstr "კითხვა - Breeze -ის მორგება"
 
 #: config/breezeexceptionlistwidget.cpp:165
 #, kde-format
 msgid "Remove selected exception?"
-msgstr ""
+msgstr "წავშალო მონიშნული გამონაკლისი?"
 
 #. i18n: ectx: property (text), widget (QPushButton, removeButton)
 #: config/breezeexceptionlistwidget.cpp:167
@@ -48,12 +48,12 @@ msgstr "წაშლა"
 #: config/breezeexceptionlistwidget.cpp:292
 #, kde-format
 msgid "Warning - Breeze Settings"
-msgstr ""
+msgstr "გაფრთხილება - Breeze -ის მორგება"
 
 #: config/breezeexceptionlistwidget.cpp:292
 #, kde-format
 msgid "Regular Expression syntax is incorrect"
-msgstr ""
+msgstr "რეგულარული გამოსახულების სინტაქსი არასწორია"
 
 #: config/breezeexceptionmodel.cpp:17
 #, kde-format
@@ -80,7 +80,7 @@ msgstr "ფანჯრის კლასის სახელი"
 #: config/breezeexceptionmodel.cpp:54
 #, kde-format
 msgid "Enable/disable this exception"
-msgstr ""
+msgstr "ამ გამონაკლისის ჩართვა/გამორთვა"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: config/ui/breezeconfigurationui.ui:33
@@ -170,7 +170,7 @@ msgstr "ძალიან დიდი"
 #: config/ui/breezeconfigurationui.ui:131
 #, kde-format
 msgid "Draw a circle around close button"
-msgstr ""
+msgstr "დახურვის ღილაკის გარშემო წრის დახატვა"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBorderOnMaximizedWindows)
 #: config/ui/breezeconfigurationui.ui:138
@@ -191,7 +191,7 @@ msgstr ""
 #: config/ui/breezeconfigurationui.ui:175
 #, kde-format
 msgid "Draw titlebar background gradient"
-msgstr ""
+msgstr "სათაურის ზოლზე ფონის გრადიენტის დახავა"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: config/ui/breezeconfigurationui.ui:196
@@ -235,7 +235,7 @@ msgstr "ფერი:"
 #: config/ui/breezeconfigurationui.ui:310
 #, kde-format
 msgid "Window-Specific Overrides"
-msgstr ""
+msgstr "ფანჯარაზე-დამოკიდებული გადაფარვები"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
 #: config/ui/breezeexceptiondialog.ui:14
@@ -253,19 +253,20 @@ msgstr "ფანჯრის იდენტიფიკაცია"
 #: config/ui/breezeexceptiondialog.ui:26
 #, kde-format
 msgid "&Matching window property: "
-msgstr ""
+msgstr "&შესაბამისი ფანჯრის თვისება: "
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: config/ui/breezeexceptiondialog.ui:39
 #, kde-format
 msgid "Regular expression &to match: "
-msgstr ""
+msgstr "&შესაბამისი რეგულარული გამოსახულება:"
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Detect Window Properties"
 msgid "Detect Window Properties…"
-msgstr ""
+msgstr "ფანჯრის თვისებების აღმოჩენა"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: config/ui/breezeexceptiondialog.ui:83
@@ -283,7 +284,7 @@ msgstr "საზღვრის ზომა:"
 #: config/ui/breezeexceptiondialog.ui:96
 #, kde-format
 msgid "Hide window title bar"
-msgstr ""
+msgstr "ფანჯრის სათაურის ზოლის დამალვა"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:107
@@ -372,6 +373,15 @@ msgstr "დამატება"
 msgid "Edit"
 msgstr "ჩასწორება"
 
+#~ msgid "Add handle to resize windows with no border"
+#~ msgstr "საზღვრის არმქონი ფანჯრების ზომის შესაცვლელი სახელურის დამატება"
+
+#~ msgid "Allow resizing maximized windows from window edges"
+#~ msgstr "მთელ ეკრანზე გაშლილი ფანჯრების წიბოებიდან ზომის შეცვლის დაშვება"
+
+#~ msgid "Information about Selected Window"
+#~ msgstr "ინფორმაცია მონიშნული ფანჯრის შესახებ"
+
 #~ msgid "Class: "
 #~ msgstr "კლასი: "
 
@@ -380,6 +390,9 @@ msgstr "ჩასწორება"
 
 #~ msgid "Window Property Selection"
 #~ msgstr "ფანჯრის თვისების არჩევანი"
+
+#~ msgid "Use window class (whole application)"
+#~ msgstr "ფანჯრის კლასის გამოყენება (მთლიანი აპლიკაცია)"
 
 #~ msgid "Use window title"
 #~ msgstr "ფანჯრის სათაურის გამოყენება"

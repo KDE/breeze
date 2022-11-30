@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-27 00:47+0000\n"
-"PO-Revision-Date: 2022-11-28 15:44+0100\n"
+"PO-Revision-Date: 2022-11-29 22:25+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.11.80\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -175,7 +175,7 @@ msgstr "Designa un circulo circa le button de clauder"
 #: config/ui/breezeconfigurationui.ui:138
 #, kde-format
 msgid "Draw border on maximized and tiled windows"
-msgstr ""
+msgstr "Designa bordo sur fenestras maximisate e tegulate (tiled)"
 
 #. i18n: ectx: property (text), widget (QLabel, drawBorderOnMaximizedWindowsHelpLabel)
 #: config/ui/breezeconfigurationui.ui:163
@@ -185,6 +185,9 @@ msgid ""
 "edges. Scrollbars and window close buttons will shift positions and will not "
 "touch screen edges."
 msgstr ""
+"Iste configuration te permittera redimensionar ab orlos de fenestras per "
+"toccar orlos de schermo. Barras de rolar e buttones de clauder fenestra "
+"displaciara positiones e non toccara orlos de schermo."
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
 #: config/ui/breezeconfigurationui.ui:175
