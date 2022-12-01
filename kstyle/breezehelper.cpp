@@ -1565,8 +1565,7 @@ bool Helper::compositingActive() const
     }
 #endif
 
-    // use KWindowSystem
-    return KWindowSystem::compositingActive();
+    return true;
 }
 
 //____________________________________________________________________
