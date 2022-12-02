@@ -14,6 +14,7 @@
                 "Name[fr]": "ruvkr",
                 "Name[ia]": "ruvkr",
                 "Name[it]": "ruvkr",
+                "Name[ka]": "ruvkr",
                 "Name[nl]": "ruvkr",
                 "Name[nn]": "ruvkr",
                 "Name[pl]": "ruvkr",
@@ -23,7 +24,8 @@
                 "Name[sl]": "ruvkr",
                 "Name[tr]": "ruvkr",
                 "Name[uk]": "ruvkr",
-                "Name[x-test]": "xxruvkrxx"
+                "Name[x-test]": "xxruvkrxx",
+                "Name[zh_CN]": "ruvkr"
             }
         ],
         "Id": "Next",
@@ -39,6 +41,7 @@
         "Name[fr]": "Kay",
         "Name[ia]": "Kay",
         "Name[it]": "Kay",
+        "Name[ka]": "კეი",
         "Name[nl]": "Kay",
         "Name[nn]": "Kay",
         "Name[pl]": "Kay",
@@ -48,6 +51,7 @@
         "Name[sl]": "Kay",
         "Name[tr]": "Kay",
         "Name[uk]": "Кей",
-        "Name[x-test]": "xxKayxx"
+        "Name[x-test]": "xxKayxx",
+        "Name[zh_CN]": "Kay"
     }
 }
