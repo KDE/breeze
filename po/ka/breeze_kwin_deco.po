@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-27 00:47+0000\n"
-"PO-Revision-Date: 2022-11-29 09:01+0100\n"
+"PO-Revision-Date: 2022-12-01 06:48+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -176,7 +176,7 @@ msgstr "დახურვის ღილაკის გარშემო წ
 #: config/ui/breezeconfigurationui.ui:138
 #, kde-format
 msgid "Draw border on maximized and tiled windows"
-msgstr ""
+msgstr "ფილებად დალაგებული და მთელ ეკრანზე გაშლილი ფანჯრების საზღვრის დახატვა"
 
 #. i18n: ectx: property (text), widget (QLabel, drawBorderOnMaximizedWindowsHelpLabel)
 #: config/ui/breezeconfigurationui.ui:163
@@ -186,6 +186,9 @@ msgid ""
 "edges. Scrollbars and window close buttons will shift positions and will not "
 "touch screen edges."
 msgstr ""
+"ეს პარამეტრი საშუალებას გაძლევთ ფანჯრის ზომის კუთხეებში შეხების საშუალებით "
+"შეცვალოთ. ჩოჩიები და ფანჯრის დახურვის ღილაკები ადგილს შეიცვლიან და ეკრანის "
+"კუთხეებში აღარ გამჩნდებიან."
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
 #: config/ui/breezeconfigurationui.ui:175
@@ -259,14 +262,13 @@ msgstr "&შესაბამისი ფანჯრის თვისებ
 #: config/ui/breezeexceptiondialog.ui:39
 #, kde-format
 msgid "Regular expression &to match: "
-msgstr "&შესაბამისი რეგულარული გამოსახულება:"
+msgstr "&შესაბამისი რეგულარული გამოსახულება: "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, fuzzy, kde-format
-#| msgid "Detect Window Properties"
+#, kde-format
 msgid "Detect Window Properties…"
-msgstr "ფანჯრის თვისებების აღმოჩენა"
+msgstr "ფანჯრის თვისებების აღმოჩენა…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: config/ui/breezeexceptiondialog.ui:83

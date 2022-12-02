@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-27 00:47+0000\n"
-"PO-Revision-Date: 2022-11-19 14:48\n"
+"PO-Revision-Date: 2022-12-01 06:51\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -175,7 +175,7 @@ msgstr "在关闭按钮周围绘制圆圈"
 #: config/ui/breezeconfigurationui.ui:138
 #, kde-format
 msgid "Draw border on maximized and tiled windows"
-msgstr ""
+msgstr "最大化和拼贴窗口绘制边框"
 
 #. i18n: ectx: property (text), widget (QLabel, drawBorderOnMaximizedWindowsHelpLabel)
 #: config/ui/breezeconfigurationui.ui:163
@@ -185,6 +185,8 @@ msgid ""
 "edges. Scrollbars and window close buttons will shift positions and will not "
 "touch screen edges."
 msgstr ""
+"此设置用于应对在调整窗口大小时窗口边缘触碰到触摸屏边缘的情况。滚动条和窗口的"
+"关闭按钮将移动位置以避免触碰屏幕边缘"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
 #: config/ui/breezeconfigurationui.ui:175
@@ -262,10 +264,9 @@ msgstr "匹配正则表达式(&T)："
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, fuzzy, kde-format
-#| msgid "Detect Window Properties"
+#, kde-format
 msgid "Detect Window Properties…"
-msgstr "检测窗口属性"
+msgstr "检测窗口属性…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: config/ui/breezeexceptiondialog.ui:83
@@ -371,24 +372,3 @@ msgstr "添加"
 #, kde-format
 msgid "Edit"
 msgstr "编辑"
-
-#~ msgid "Add handle to resize windows with no border"
-#~ msgstr "为无边框窗口添加缩放柄"
-
-#~ msgid "Information about Selected Window"
-#~ msgstr "选中窗口的信息"
-
-#~ msgid "Class: "
-#~ msgstr "窗口类："
-
-#~ msgid "Title: "
-#~ msgstr "标题："
-
-#~ msgid "Window Property Selection"
-#~ msgstr "窗口属性选择"
-
-#~ msgid "Use window class (whole application)"
-#~ msgstr "使用窗口类 (整个应用程序)"
-
-#~ msgid "Use window title"
-#~ msgstr "使用窗口标题"

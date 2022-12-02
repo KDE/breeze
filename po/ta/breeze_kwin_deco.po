@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-27 00:47+0000\n"
-"PO-Revision-Date: 2022-09-29 21:49+0530\n"
+"PO-Revision-Date: 2022-12-01 21:53+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -185,6 +185,8 @@ msgid ""
 "edges. Scrollbars and window close buttons will shift positions and will not "
 "touch screen edges."
 msgstr ""
+"திரையின் ஓரத்தைத் தொடும் விளிம்புகளை இழுத்து சாளரத்தின் அளவை மாற்ற இத்தேர்வு உதவும். "
+"உருள்பட்டைகளும் சாளரத்தை மூடும் பட்டன்களும் திரையின் ஓரத்தைத் தொடாதவாறு அமைக்கப்படும்."
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
 #: config/ui/breezeconfigurationui.ui:175
@@ -262,10 +264,9 @@ msgstr "பொ&ருந்த வேண்டிய சுருங்குற
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, fuzzy, kde-format
-#| msgid "Detect Window Properties"
+#, kde-format
 msgid "Detect Window Properties…"
-msgstr "சாளர பண்புகளை கண்டறி"
+msgstr "சாளரப் பண்புகளை கண்டறி…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: config/ui/breezeexceptiondialog.ui:83
