@@ -65,12 +65,14 @@ InternalSettingsPtr SettingsProvider::internalSettings(Decoration *decoration) c
 
     foreach (auto internalSettings, m_exceptions) {
         // discard disabled exceptions
-        if (!internalSettings->enabled())
+        if (!internalSettings->enabled()) {
             continue;
+        }
 
         // discard exceptions with empty exception pattern
-        if (internalSettings->exceptionPattern().isEmpty())
+        if (internalSettings->exceptionPattern().isEmpty()) {
             continue;
+        }
 
         /*
         decide which value is to be compared

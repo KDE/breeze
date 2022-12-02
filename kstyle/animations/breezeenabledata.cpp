@@ -11,8 +11,9 @@ namespace Breeze
 //______________________________________________
 bool EnableData::eventFilter(QObject *object, QEvent *event)
 {
-    if (!enabled())
+    if (!enabled()) {
         return WidgetStateData::eventFilter(object, event);
+    }
 
     // check event type
     switch (event->type()) {

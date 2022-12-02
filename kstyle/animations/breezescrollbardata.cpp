@@ -46,8 +46,9 @@ bool ScrollBarData::eventFilter(QObject *object, QEvent *event)
     case QEvent::HoverEnter:
         setGrooveHovered(true);
         grooveAnimation().data()->setDirection(Animation::Forward);
-        if (!grooveAnimation().data()->isRunning())
+        if (!grooveAnimation().data()->isRunning()) {
             grooveAnimation().data()->start();
+        }
         break;
 
     case QEvent::HoverMove:
@@ -57,8 +58,9 @@ bool ScrollBarData::eventFilter(QObject *object, QEvent *event)
     case QEvent::HoverLeave:
         setGrooveHovered(false);
         grooveAnimation().data()->setDirection(Animation::Backward);
-        if (!grooveAnimation().data()->isRunning())
+        if (!grooveAnimation().data()->isRunning()) {
             grooveAnimation().data()->start();
+        }
         hoverLeaveEvent(object, event);
         break;
 
@@ -112,8 +114,9 @@ void ScrollBarData::hoverMoveEvent(QObject *object, QEvent *event)
 {
     // try cast object to scrollbar
     QScrollBar *scrollBar(qobject_cast<QScrollBar *>(object));
-    if (!scrollBar || scrollBar->isSliderDown())
+    if (!scrollBar || scrollBar->isSliderDown()) {
         return;
+    }
 
     // retrieve scrollbar option
     QStyleOptionSlider opt(qt_qscrollbarStyleOption(scrollBar));
@@ -149,10 +152,12 @@ void ScrollBarData::updateSubLineArrow(QStyle::SubControl hoverControl)
             setSubLineArrowHovered(true);
             if (enabled()) {
                 subLineAnimation().data()->setDirection(Animation::Forward);
-                if (!subLineAnimation().data()->isRunning())
+                if (!subLineAnimation().data()->isRunning()) {
                     subLineAnimation().data()->start();
-            } else
+                }
+            } else {
                 setDirty();
+            }
         }
 
     } else {
@@ -160,10 +165,12 @@ void ScrollBarData::updateSubLineArrow(QStyle::SubControl hoverControl)
             setSubLineArrowHovered(false);
             if (enabled()) {
                 subLineAnimation().data()->setDirection(Animation::Backward);
-                if (!subLineAnimation().data()->isRunning())
+                if (!subLineAnimation().data()->isRunning()) {
                     subLineAnimation().data()->start();
-            } else
+                }
+            } else {
                 setDirty();
+            }
         }
     }
 }
@@ -176,10 +183,12 @@ void ScrollBarData::updateAddLineArrow(QStyle::SubControl hoverControl)
             setAddLineArrowHovered(true);
             if (enabled()) {
                 addLineAnimation().data()->setDirection(Animation::Forward);
-                if (!addLineAnimation().data()->isRunning())
+                if (!addLineAnimation().data()->isRunning()) {
                     addLineAnimation().data()->start();
-            } else
+                }
+            } else {
                 setDirty();
+            }
         }
 
     } else {
@@ -187,10 +196,12 @@ void ScrollBarData::updateAddLineArrow(QStyle::SubControl hoverControl)
             setAddLineArrowHovered(false);
             if (enabled()) {
                 addLineAnimation().data()->setDirection(Animation::Backward);
-                if (!addLineAnimation().data()->isRunning())
+                if (!addLineAnimation().data()->isRunning()) {
                     addLineAnimation().data()->start();
-            } else
+                }
+            } else {
                 setDirty();
+            }
         }
     }
 }

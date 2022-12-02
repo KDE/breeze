@@ -48,8 +48,9 @@ public:
     void setCurrentOpacity(qreal value)
     {
         value = digitize(value);
-        if (_current._opacity == value)
+        if (_current._opacity == value) {
             return;
+        }
         _current._opacity = value;
         setDirty();
     }
@@ -87,8 +88,9 @@ public:
     void setPreviousOpacity(qreal value)
     {
         value = digitize(value);
-        if (_previous._opacity == value)
+        if (_previous._opacity == value) {
             return;
+        }
         _previous._opacity = value;
         setDirty();
     }

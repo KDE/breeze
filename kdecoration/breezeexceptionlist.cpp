@@ -36,8 +36,9 @@ void ExceptionList::readConfig(KSharedConfig::Ptr config)
         configuration->setMask(exception.mask());
 
         // propagate all features found in mask to the output configuration
-        if (exception.mask() & BorderSize)
+        if (exception.mask() & BorderSize) {
             configuration->setBorderSize(exception.borderSize());
+        }
         configuration->setHideTitleBar(exception.hideTitleBar());
 
         // append to exceptions
@@ -77,11 +78,13 @@ void ExceptionList::writeConfig(KCoreConfigSkeleton *skeleton, KConfig *config, 
     // write all items
     foreach (auto key, keys) {
         KConfigSkeletonItem *item(skeleton->findItem(key));
-        if (!item)
+        if (!item) {
             continue;
+        }
 
-        if (!groupName.isEmpty())
+        if (!groupName.isEmpty()) {
             item->setGroup(groupName);
+        }
         KConfigGroup configGroup(config, item->group());
         configGroup.writeEntry(item->key(), item->property());
     }
@@ -91,8 +94,9 @@ void ExceptionList::writeConfig(KCoreConfigSkeleton *skeleton, KConfig *config, 
 void ExceptionList::readConfig(KCoreConfigSkeleton *skeleton, KConfig *config, const QString &groupName)
 {
     foreach (KConfigSkeletonItem *item, skeleton->items()) {
-        if (!groupName.isEmpty())
+        if (!groupName.isEmpty()) {
             item->setGroup(groupName);
+        }
         item->readConfig(config);
     }
 }

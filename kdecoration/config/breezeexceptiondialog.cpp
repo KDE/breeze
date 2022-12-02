@@ -69,8 +69,9 @@ void ExceptionDialog::save()
     // mask
     unsigned int mask = None;
     for (CheckBoxMap::iterator iter = m_checkboxes.begin(); iter != m_checkboxes.end(); ++iter) {
-        if (iter.value()->isChecked())
+        if (iter.value()->isChecked()) {
             mask |= iter.key();
+        }
     }
 
     m_exception->setMask(mask);
@@ -82,15 +83,15 @@ void ExceptionDialog::save()
 void ExceptionDialog::updateChanged()
 {
     bool modified(false);
-    if (m_exception->exceptionType() != m_ui.exceptionType->currentIndex())
+    if (m_exception->exceptionType() != m_ui.exceptionType->currentIndex()) {
         modified = true;
-    else if (m_exception->exceptionPattern() != m_ui.exceptionEditor->text())
+    } else if (m_exception->exceptionPattern() != m_ui.exceptionEditor->text()) {
         modified = true;
-    else if (m_exception->borderSize() != m_ui.borderSizeComboBox->currentIndex())
+    } else if (m_exception->borderSize() != m_ui.borderSizeComboBox->currentIndex()) {
         modified = true;
-    else if (m_exception->hideTitleBar() != m_ui.hideTitleBar->isChecked())
+    } else if (m_exception->hideTitleBar() != m_ui.hideTitleBar->isChecked()) {
         modified = true;
-    else {
+    } else {
         // check mask
         for (CheckBoxMap::iterator iter = m_checkboxes.begin(); iter != m_checkboxes.end(); ++iter) {
             if (iter.value()->isChecked() != (bool)(m_exception->mask() & iter.key())) {

@@ -116,8 +116,9 @@ protected:
     void updateShadowZOrder(QObject *object) const
     {
         if (MdiWindowShadow *windowShadow = findShadow(object)) {
-            if (!windowShadow->isVisible())
+            if (!windowShadow->isVisible()) {
                 windowShadow->show();
+            }
             windowShadow->updateZOrder();
         }
     }

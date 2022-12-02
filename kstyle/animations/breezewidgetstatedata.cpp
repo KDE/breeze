@@ -22,8 +22,9 @@ bool WidgetStateData::updateState(bool value)
     } else {
         _state = value;
         animation().data()->setDirection(_state ? Animation::Forward : Animation::Backward);
-        if (!animation().data()->isRunning())
+        if (!animation().data()->isRunning()) {
             animation().data()->start();
+        }
         return true;
     }
 }

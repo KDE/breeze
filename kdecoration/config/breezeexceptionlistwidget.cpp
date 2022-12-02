@@ -102,8 +102,9 @@ void ExceptionListWidget::add()
     delete dialog;
 
     // check exceptions
-    if (!checkException(exception))
+    if (!checkException(exception)) {
         return;
+    }
 
     // create new item
     model().add(exception);
@@ -124,8 +125,9 @@ void ExceptionListWidget::edit()
 {
     // retrieve selection
     QModelIndex current(m_ui.exceptionListView->selectionModel()->currentIndex());
-    if (!model().contains(current))
+    if (!model().contains(current)) {
         return;
+    }
 
     InternalSettingsPtr exception(model().get(current));
 
@@ -141,8 +143,9 @@ void ExceptionListWidget::edit()
     }
 
     // check modifications
-    if (!dialog->isChanged())
+    if (!dialog->isChanged()) {
         return;
+    }
 
     // retrieve exception
     dialog->save();
@@ -166,8 +169,9 @@ void ExceptionListWidget::remove()
                                QMessageBox::Yes | QMessageBox::Cancel);
         messageBox.button(QMessageBox::Yes)->setText(i18n("Remove"));
         messageBox.setDefaultButton(QMessageBox::Cancel);
-        if (messageBox.exec() == QMessageBox::Cancel)
+        if (messageBox.exec() == QMessageBox::Cancel) {
             return;
+        }
     }
 
     // remove
@@ -181,10 +185,12 @@ void ExceptionListWidget::remove()
 //_______________________________________________________
 void ExceptionListWidget::toggle(const QModelIndex &index)
 {
-    if (!model().contains(index))
+    if (!model().contains(index)) {
         return;
-    if (index.column() != ExceptionModel::ColumnEnabled)
+    }
+    if (index.column() != ExceptionModel::ColumnEnabled) {
         return;
+    }
 
     // get matching exception
     InternalSettingsPtr exception(model().get(index));
@@ -216,8 +222,9 @@ void ExceptionListWidget::up()
             newExceptions.removeLast();
             newExceptions.append(*iter);
             newExceptions.append(last);
-        } else
+        } else {
             newExceptions.append(*iter);
+        }
     }
 
     model().set(newExceptions);
@@ -261,8 +268,9 @@ void ExceptionListWidget::down()
             newExceptions.prepend(current);
             newExceptions.prepend(first);
 
-        } else
+        } else {
             newExceptions.prepend(current);
+        }
     }
 
     model().set(newExceptions);

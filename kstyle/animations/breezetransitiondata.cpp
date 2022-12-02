@@ -23,8 +23,9 @@ TransitionData::TransitionData(QObject *parent, QWidget *target, int duration)
 //_________________________________________________________________
 TransitionData::~TransitionData()
 {
-    if (_transition)
+    if (_transition) {
         _transition.data()->deleteLater();
+    }
 }
 
 }

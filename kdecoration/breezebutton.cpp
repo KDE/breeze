@@ -110,19 +110,22 @@ void Button::paint(QPainter *painter, const QRect &repaintRegion)
 {
     Q_UNUSED(repaintRegion)
 
-    if (!decoration())
+    if (!decoration()) {
         return;
+    }
 
     painter->save();
 
     // translate from offset
-    if (m_flag == FlagFirstInList)
+    if (m_flag == FlagFirstInList) {
         painter->translate(m_offset);
-    else
+    } else {
         painter->translate(0, m_offset.y());
+    }
 
-    if (!m_iconSize.isValid() || isStandAlone())
+    if (!m_iconSize.isValid() || isStandAlone()) {
         m_iconSize = geometry().size().toSize();
+    }
 
     // menu button
     if (type() == DecorationButtonType::Menu) {
@@ -222,8 +225,9 @@ void Button::drawIcon(QPainter *painter) const
                 // center dot
                 QColor backgroundColor(this->backgroundColor());
                 auto d = qobject_cast<Decoration *>(decoration());
-                if (!backgroundColor.isValid() && d)
+                if (!backgroundColor.isValid() && d) {
                     backgroundColor = d->titleBarColor();
+                }
 
                 if (backgroundColor.isValid()) {
                     painter->setBrush(backgroundColor);
@@ -332,10 +336,11 @@ QColor Button::backgroundColor() const
     QColor redColor(c->color(ColorGroup::Warning, ColorRole::Foreground));
 
     if (isPressed()) {
-        if (type() == DecorationButtonType::Close)
+        if (type() == DecorationButtonType::Close) {
             return redColor.darker();
-        else
+        } else {
             return KColorUtils::mix(d->titleBarColor(), d->fontColor(), 0.3);
+        }
 
     } else if ((type() == DecorationButtonType::KeepBelow || type() == DecorationButtonType::KeepAbove || type() == DecorationButtonType::Shade)
                && isChecked()) {
@@ -359,10 +364,11 @@ QColor Button::backgroundColor() const
         }
 
     } else if (isHovered()) {
-        if (type() == DecorationButtonType::Close)
+        if (type() == DecorationButtonType::Close) {
             return c->isActive() ? redColor.lighter() : redColor;
-        else
+        } else {
             return d->fontColor();
+        }
 
     } else if (type() == DecorationButtonType::Close && d->internalSettings()->outlineCloseButton()) {
         return c->isActive() ? redColor : d->fontColor();
@@ -377,20 +383,23 @@ void Button::reconfigure()
 {
     // animation
     auto d = qobject_cast<Decoration *>(decoration());
-    if (d)
+    if (d) {
         m_animation->setDuration(d->animationsDuration());
+    }
 }
 
 //__________________________________________________________________
 void Button::updateAnimationState(bool hovered)
 {
     auto d = qobject_cast<Decoration *>(decoration());
-    if (!(d && d->animationsDuration() > 0))
+    if (!(d && d->animationsDuration() > 0)) {
         return;
+    }
 
     m_animation->setDirection(hovered ? QAbstractAnimation::Forward : QAbstractAnimation::Backward);
-    if (m_animation->state() != QAbstractAnimation::Running)
+    if (m_animation->state() != QAbstractAnimation::Running) {
         m_animation->start();
+    }
 }
 
 } // namespace

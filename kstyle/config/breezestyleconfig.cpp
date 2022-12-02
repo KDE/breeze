@@ -93,33 +93,33 @@ void StyleConfig::updateChanged()
     bool modified(false);
 
     // check if any value was modified
-    if (_tabBarDrawCenteredTabs->isChecked() != StyleConfigData::tabBarDrawCenteredTabs())
+    if (_tabBarDrawCenteredTabs->isChecked() != StyleConfigData::tabBarDrawCenteredTabs()) {
         modified = true;
-    else if (_toolBarDrawItemSeparator->isChecked() != StyleConfigData::toolBarDrawItemSeparator())
+    } else if (_toolBarDrawItemSeparator->isChecked() != StyleConfigData::toolBarDrawItemSeparator()) {
         modified = true;
-    else if (_viewDrawFocusIndicator->isChecked() != StyleConfigData::viewDrawFocusIndicator())
+    } else if (_viewDrawFocusIndicator->isChecked() != StyleConfigData::viewDrawFocusIndicator()) {
         modified = true;
-    else if (_dockWidgetDrawFrame->isChecked() != StyleConfigData::dockWidgetDrawFrame())
+    } else if (_dockWidgetDrawFrame->isChecked() != StyleConfigData::dockWidgetDrawFrame()) {
         modified = true;
-    else if (_sidePanelDrawFrame->isChecked() != StyleConfigData::sidePanelDrawFrame())
+    } else if (_sidePanelDrawFrame->isChecked() != StyleConfigData::sidePanelDrawFrame()) {
         modified = true;
-    else if (_menuItemDrawThinFocus->isChecked() == StyleConfigData::menuItemDrawStrongFocus())
+    } else if (_menuItemDrawThinFocus->isChecked() == StyleConfigData::menuItemDrawStrongFocus()) {
         modified = true;
-    else if (_sliderDrawTickMarks->isChecked() != StyleConfigData::sliderDrawTickMarks())
+    } else if (_sliderDrawTickMarks->isChecked() != StyleConfigData::sliderDrawTickMarks()) {
         modified = true;
-    else if (_mnemonicsMode->currentIndex() != StyleConfigData::mnemonicsMode())
+    } else if (_mnemonicsMode->currentIndex() != StyleConfigData::mnemonicsMode()) {
         modified = true;
-    else if (_scrollBarAddLineButtons->currentIndex() != StyleConfigData::scrollBarAddLineButtons())
+    } else if (_scrollBarAddLineButtons->currentIndex() != StyleConfigData::scrollBarAddLineButtons()) {
         modified = true;
-    else if (_scrollBarSubLineButtons->currentIndex() != StyleConfigData::scrollBarSubLineButtons())
+    } else if (_scrollBarSubLineButtons->currentIndex() != StyleConfigData::scrollBarSubLineButtons()) {
         modified = true;
-    else if (_splitterProxyEnabled->isChecked() != StyleConfigData::splitterProxyEnabled())
+    } else if (_splitterProxyEnabled->isChecked() != StyleConfigData::splitterProxyEnabled()) {
         modified = true;
-    else if (_windowDragMode->currentIndex() != StyleConfigData::windowDragMode())
+    } else if (_windowDragMode->currentIndex() != StyleConfigData::windowDragMode()) {
         modified = true;
-    else if (_menuOpacity->value() != StyleConfigData::menuOpacity())
+    } else if (_menuOpacity->value() != StyleConfigData::menuOpacity()) {
         modified = true;
-
+    }
     emit changed(modified);
 }
 

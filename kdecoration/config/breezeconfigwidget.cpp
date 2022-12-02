@@ -61,10 +61,11 @@ void ConfigWidget::load()
     m_ui.drawBackgroundGradient->setChecked(m_internalSettings->drawBackgroundGradient());
 
     // load shadows
-    if (m_internalSettings->shadowSize() <= InternalSettings::ShadowVeryLarge)
+    if (m_internalSettings->shadowSize() <= InternalSettings::ShadowVeryLarge) {
         m_ui.shadowSize->setCurrentIndex(m_internalSettings->shadowSize());
-    else
+    } else {
         m_ui.shadowSize->setCurrentIndex(InternalSettings::ShadowLarge);
+    }
 
     m_ui.shadowStrength->setValue(qRound(qreal(m_internalSettings->shadowStrength() * 100) / 255));
     m_ui.shadowColor->setColor(m_internalSettings->shadowColor());
@@ -141,34 +142,36 @@ void ConfigWidget::defaults()
 void ConfigWidget::updateChanged()
 {
     // check configuration
-    if (!m_internalSettings)
+    if (!m_internalSettings) {
         return;
+    }
 
     // track modifications
     bool modified(false);
 
-    if (m_ui.titleAlignment->currentIndex() != m_internalSettings->titleAlignment())
+    if (m_ui.titleAlignment->currentIndex() != m_internalSettings->titleAlignment()) {
         modified = true;
-    else if (m_ui.buttonSize->currentIndex() != m_internalSettings->buttonSize())
+    } else if (m_ui.buttonSize->currentIndex() != m_internalSettings->buttonSize()) {
         modified = true;
-    else if (m_ui.outlineCloseButton->isChecked() != m_internalSettings->outlineCloseButton())
+    } else if (m_ui.outlineCloseButton->isChecked() != m_internalSettings->outlineCloseButton()) {
         modified = true;
-    else if (m_ui.drawBorderOnMaximizedWindows->isChecked() != m_internalSettings->drawBorderOnMaximizedWindows())
+    } else if (m_ui.drawBorderOnMaximizedWindows->isChecked() != m_internalSettings->drawBorderOnMaximizedWindows()) {
         modified = true;
-    else if (m_ui.drawBackgroundGradient->isChecked() != m_internalSettings->drawBackgroundGradient())
-        modified = true;
-
-    // shadows
-    else if (m_ui.shadowSize->currentIndex() != m_internalSettings->shadowSize())
-        modified = true;
-    else if (qRound(qreal(m_ui.shadowStrength->value() * 255) / 100) != m_internalSettings->shadowStrength())
-        modified = true;
-    else if (m_ui.shadowColor->color() != m_internalSettings->shadowColor())
+    } else if (m_ui.drawBackgroundGradient->isChecked() != m_internalSettings->drawBackgroundGradient()) {
         modified = true;
 
-    // exceptions
-    else if (m_ui.exceptions->isChanged())
+        // shadows
+    } else if (m_ui.shadowSize->currentIndex() != m_internalSettings->shadowSize()) {
         modified = true;
+    } else if (qRound(qreal(m_ui.shadowStrength->value() * 255) / 100) != m_internalSettings->shadowStrength()) {
+        modified = true;
+    } else if (m_ui.shadowColor->color() != m_internalSettings->shadowColor()) {
+        modified = true;
+
+        // exceptions
+    } else if (m_ui.exceptions->isChanged()) {
+        modified = true;
+    }
 
     setChanged(modified);
 }

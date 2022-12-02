@@ -96,8 +96,9 @@ public:
     void setAddLineOpacity(qreal value)
     {
         value = digitize(value);
-        if (_addLineData._opacity == value)
+        if (_addLineData._opacity == value) {
             return;
+        }
         _addLineData._opacity = value;
         setDirty();
     }
@@ -112,8 +113,9 @@ public:
     void setSubLineOpacity(qreal value)
     {
         value = digitize(value);
-        if (_subLineData._opacity == value)
+        if (_subLineData._opacity == value) {
             return;
+        }
         _subLineData._opacity = value;
         setDirty();
     }
@@ -128,8 +130,9 @@ public:
     void setGrooveOpacity(qreal value)
     {
         value = digitize(value);
-        if (_grooveData._opacity == value)
+        if (_grooveData._opacity == value) {
             return;
+        }
         _grooveData._opacity = value;
         setDirty();
     }
