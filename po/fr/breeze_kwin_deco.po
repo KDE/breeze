@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: kwin_clients\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-27 00:47+0000\n"
-"PO-Revision-Date: 2022-09-29 22:21+0200\n"
+"PO-Revision-Date: 2022-12-04 02:28+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.11.90\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -281,10 +281,9 @@ msgstr "Correspondance avec l'expression rationnelle :"
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, fuzzy, kde-format
-#| msgid "Detect Window Properties"
+#, kde-format
 msgid "Detect Window Properties…"
-msgstr "Détecter les propriétés de fenêtre"
+msgstr "Détecter les propriétés de fenêtre..."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: config/ui/breezeexceptiondialog.ui:83
