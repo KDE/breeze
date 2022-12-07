@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-27 00:47+0000\n"
+"POT-Creation-Date: 2022-12-07 00:48+0000\n"
 "PO-Revision-Date: 2022-12-01 21:53+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -22,34 +22,34 @@ msgstr ""
 msgid "New Exception - Breeze Settings"
 msgstr "புதிய விதிவிலக்கு - பிரீஸ் அமைப்புகள்"
 
-#: config/breezeexceptionlistwidget.cpp:134
+#: config/breezeexceptionlistwidget.cpp:136
 #, kde-format
 msgid "Edit Exception - Breeze Settings"
 msgstr "விதிவிலக்கை திருத்துவது - பிரீஸ் அமைப்புகள்"
 
-#: config/breezeexceptionlistwidget.cpp:164
+#: config/breezeexceptionlistwidget.cpp:167
 #, kde-format
 msgid "Question - Breeze Settings"
 msgstr "கேள்வி - பிரீஸ் அமைப்புகள்"
 
-#: config/breezeexceptionlistwidget.cpp:165
+#: config/breezeexceptionlistwidget.cpp:168
 #, kde-format
 msgid "Remove selected exception?"
 msgstr "தேர்ந்தெடுத்துள்ள விதிவிலக்கை நீக்கலாமா?"
 
 #. i18n: ectx: property (text), widget (QPushButton, removeButton)
-#: config/breezeexceptionlistwidget.cpp:167
+#: config/breezeexceptionlistwidget.cpp:170
 #: config/ui/breezeexceptionlistwidget.ui:91
 #, kde-format
 msgid "Remove"
 msgstr "நீக்கு"
 
-#: config/breezeexceptionlistwidget.cpp:292
+#: config/breezeexceptionlistwidget.cpp:300
 #, kde-format
 msgid "Warning - Breeze Settings"
 msgstr "எச்சரிக்கை - பிரீஸ் அமைப்புகள்"
 
-#: config/breezeexceptionlistwidget.cpp:292
+#: config/breezeexceptionlistwidget.cpp:300
 #, kde-format
 msgid "Regular Expression syntax is incorrect"
 msgstr "சுருங்குறித் தொடரின் வடிவம் தவறானது"
@@ -65,18 +65,18 @@ msgid "Regular Expression"
 msgstr "சுருங்குறி தொடர்"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, exceptionType)
-#: config/breezeexceptionmodel.cpp:35 config/ui/breezeexceptiondialog.ui:72
+#: config/breezeexceptionmodel.cpp:36 config/ui/breezeexceptiondialog.ui:72
 #, kde-format
 msgid "Window Title"
 msgstr "சாளர தலைப்பு"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, exceptionType)
-#: config/breezeexceptionmodel.cpp:39 config/ui/breezeexceptiondialog.ui:67
+#: config/breezeexceptionmodel.cpp:40 config/ui/breezeexceptiondialog.ui:67
 #, kde-format
 msgid "Window Class Name"
 msgstr "சாளர வகைப்பெயர்"
 
-#: config/breezeexceptionmodel.cpp:54
+#: config/breezeexceptionmodel.cpp:55
 #, kde-format
 msgid "Enable/disable this exception"
 msgstr "இவ்விதிவிலக்கை இயக்கு/முடக்கு"
