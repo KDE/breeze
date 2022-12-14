@@ -377,24 +377,3 @@ msgstr "追加"
 #, kde-format
 msgid "Edit"
 msgstr "編集"
-
-#~ msgid "Add handle to resize windows with no border"
-#~ msgstr "枠がないウィンドウをリサイズするハンドルを追加"
-
-#~ msgid "Information about Selected Window"
-#~ msgstr "選択されたウィンドウに関する情報"
-
-#~ msgid "Class: "
-#~ msgstr "クラス: "
-
-#~ msgid "Title: "
-#~ msgstr "タイトル: "
-
-#~ msgid "Window Property Selection"
-#~ msgstr "ウィンドウプロパティの選択"
-
-#~ msgid "Use window class (whole application)"
-#~ msgstr "ウィンドウのクラスを使う (アプリケーション全体)"
-
-#~ msgid "Use window title"
-#~ msgstr "ウィンドウのタイトルを使う"
