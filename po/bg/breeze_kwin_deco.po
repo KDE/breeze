@@ -373,24 +373,3 @@ msgstr "Добавяне"
 #, kde-format
 msgid "Edit"
 msgstr "Редактиране"
-
-#~ msgid "Add handle to resize windows with no border"
-#~ msgstr "Добавяне на манипулатор за преоразмеряване на прозорци без рамки"
-
-#~ msgid "Information about Selected Window"
-#~ msgstr "Информация за избрания прозорец"
-
-#~ msgid "Class: "
-#~ msgstr "Клас: "
-
-#~ msgid "Title: "
-#~ msgstr "Заглавие: "
-
-#~ msgid "Window Property Selection"
-#~ msgstr "Избор на свойства на прозореца"
-
-#~ msgid "Use window class (whole application)"
-#~ msgstr "Използване на клас на прозорец (за цялото приложение)"
-
-#~ msgid "Use window title"
-#~ msgstr "Използване на заглавието на прозореца"
