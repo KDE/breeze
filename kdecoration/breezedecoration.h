@@ -19,8 +19,6 @@
 #include <QVariant>
 #include <QVariantAnimation>
 
-class QVariantAnimation;
-
 namespace KDecoration2
 {
 class DecorationButton;
