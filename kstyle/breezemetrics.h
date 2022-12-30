@@ -53,7 +53,6 @@ struct Metrics {
     static constexpr int MenuItem_ExtraLeftMargin = 4;
     static constexpr int MenuItem_MarginHeight = 3;
     static constexpr int MenuItem_ItemSpacing = 4;
-    static constexpr int MenuItem_SeparatorPadding = 3;
     static constexpr int MenuItem_AcceleratorSpace = 16;
     static constexpr int MenuButton_IndicatorWidth = 20;
 
