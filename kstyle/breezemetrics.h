@@ -5,8 +5,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#ifndef breezemetrics_h
-#define breezemetrics_h
+#pragma once
 
 #include <QtGlobal>
 
@@ -160,4 +159,3 @@ struct Metrics {
     static constexpr int Shadow_Overlap = 2;
 };
 }
-#endif

@@ -1,12 +1,11 @@
-#ifndef BREEZE_DECORATION_H
-#define BREEZE_DECORATION_H
-
 /*
  * SPDX-FileCopyrightText: 2014 Martin Gräßlin <mgraesslin@kde.org>
  * SPDX-FileCopyrightText: 2014 Hugo Pereira Da Costa <hugo.pereira@free.fr>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
+
+#pragma once
 
 #include "breeze.h"
 #include "breezesettings.h"
@@ -213,5 +212,3 @@ bool Decoration::hideTitleBar() const
 }
 
 }
-
-#endif

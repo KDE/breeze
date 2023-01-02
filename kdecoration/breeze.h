@@ -1,11 +1,10 @@
-#ifndef breeze_h
-#define breeze_h
-
 /*
  * SPDX-FileCopyrightText: 2014 Hugo Pereira Da Costa <hugo.pereira@free.fr>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
+
+#pragma once
 
 #include "breezesettings.h"
 
@@ -53,5 +52,3 @@ enum ExceptionMask {
     BorderSize = 1 << 4,
 };
 }
-
-#endif

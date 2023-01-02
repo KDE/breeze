@@ -1,6 +1,3 @@
-#ifndef breezeexceptionlist_h
-#define breezeexceptionlist_h
-
 //////////////////////////////////////////////////////////////////////////////
 // breezeexceptionlist.h
 // window decoration exceptions
@@ -10,6 +7,8 @@
 //
 // SPDX-License-Identifier: MIT
 //////////////////////////////////////////////////////////////////////////////
+
+#pragma once
 
 #include "breeze.h"
 #include "breezesettings.h"
@@ -56,5 +55,3 @@ private:
 };
 
 }
-
-#endif

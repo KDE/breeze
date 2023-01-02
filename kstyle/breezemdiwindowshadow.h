@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#ifndef breezemdiwindowshadow_h
-#define breezemdiwindowshadow_h
+#pragma once
 
 #include <QEvent>
 #include <QObject>
@@ -153,5 +152,3 @@ private:
 };
 
 }
-
-#endif

@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#ifndef breezestyleconfig_h
-#define breezestyleconfig_h
+#pragma once
 
 #include "ui_breezestyleconfig.h"
 
@@ -50,4 +49,3 @@ protected Q_SLOTS:
 };
 
 }
-#endif

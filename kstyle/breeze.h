@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#ifndef breeze_h
-#define breeze_h
+#pragma once
 
 #include <QFlags>
 #include <QPointer>
@@ -101,5 +100,3 @@ enum ButtonType {
 Q_DECLARE_OPERATORS_FOR_FLAGS(Breeze::AnimationModes)
 Q_DECLARE_OPERATORS_FOR_FLAGS(Breeze::Corners)
 Q_DECLARE_OPERATORS_FOR_FLAGS(Breeze::Sides)
-
-#endif
