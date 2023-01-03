@@ -1,33 +1,35 @@
-# Frederik Schwarzer <schwarzer@kde.org>, 2014, 2016.
+# Frederik Schwarzer <schwarzer@kde.org>, 2014, 2016, 2022.
 # Burkhard Lück <lueck@hube-lueck.de>, 2014, 2015, 2017, 2018, 2020, 2021.
+# Frank Steinmetzger <dev-kde@felsenfleischer.de>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-07 00:48+0000\n"
-"PO-Revision-Date: 2021-04-19 06:07+0200\n"
-"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"PO-Revision-Date: 2022-12-19 10:02+0100\n"
+"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
 msgid "New Exception - Breeze Settings"
-msgstr "Neue Ausnahme - Breeze-Einstellungen"
+msgstr "Neue Ausnahme – Breeze-Einstellungen"
 
 #: config/breezeexceptionlistwidget.cpp:136
 #, kde-format
 msgid "Edit Exception - Breeze Settings"
-msgstr "Ausnahme bearbeiten - Breeze-Einstellungen"
+msgstr "Ausnahme bearbeiten – Breeze-Einstellungen"
 
 #: config/breezeexceptionlistwidget.cpp:167
 #, kde-format
 msgid "Question - Breeze Settings"
-msgstr "Frage - Breeze-Einstellungen"
+msgstr "Frage – Breeze-Einstellungen"
 
 #: config/breezeexceptionlistwidget.cpp:168
 #, kde-format
@@ -44,7 +46,7 @@ msgstr "Entfernen"
 #: config/breezeexceptionlistwidget.cpp:300
 #, kde-format
 msgid "Warning - Breeze Settings"
-msgstr "Warnung - Breeze-Einstellungen"
+msgstr "Warnung – Breeze-Einstellungen"
 
 #: config/breezeexceptionlistwidget.cpp:300
 #, kde-format
@@ -166,14 +168,13 @@ msgstr "Sehr groß"
 #: config/ui/breezeconfigurationui.ui:131
 #, kde-format
 msgid "Draw a circle around close button"
-msgstr "Einen Kreis um den Schließ-Knopf zeichnen"
+msgstr "Einen Kreis um den Schließen-Knopf zeichnen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBorderOnMaximizedWindows)
 #: config/ui/breezeconfigurationui.ui:138
-#, fuzzy, kde-format
-#| msgid "Display window borders for maximized windows"
+#, kde-format
 msgid "Draw border on maximized and tiled windows"
-msgstr "Fensterumrandung bei maximierten Fenstern anzeigen"
+msgstr "Umrandung um maximierte und gekachelte Fenster zeichnen"
 
 #. i18n: ectx: property (text), widget (QLabel, drawBorderOnMaximizedWindowsHelpLabel)
 #: config/ui/breezeconfigurationui.ui:163
@@ -183,6 +184,9 @@ msgid ""
 "edges. Scrollbars and window close buttons will shift positions and will not "
 "touch screen edges."
 msgstr ""
+"Diese Einstellung erlaubt es, die Größe über Fensterkanten zu verändern, die "
+"den Bildschirmrand berühren. Bildlaufleisten und Schließen-Knöpfe werden "
+"verschoben und berühren nicht mehr die Bildschirmränder."
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
 #: config/ui/breezeconfigurationui.ui:175
@@ -220,7 +224,7 @@ msgstr "S&tärke:"
 #: config/ui/breezeconfigurationui.ui:257
 #, no-c-format, kde-format
 msgid "%"
-msgstr "%"
+msgstr " %"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/ui/breezeconfigurationui.ui:283
@@ -260,10 +264,9 @@ msgstr "Passender &regulärer Ausdruck: "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, fuzzy, kde-format
-#| msgid "Detect Window Properties"
+#, kde-format
 msgid "Detect Window Properties…"
-msgstr "Fenstereigenschaften ermitteln"
+msgstr "Fenstereigenschaften ermitteln ..."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: config/ui/breezeexceptiondialog.ui:83
