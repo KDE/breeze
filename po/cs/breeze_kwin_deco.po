@@ -264,10 +264,9 @@ msgstr "Re&gulární výraz pro porovnání: "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, fuzzy, kde-format
-#| msgid "Detect Window Properties"
+#, kde-format
 msgid "Detect Window Properties…"
-msgstr "Detekovat vlastnosti okna"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: config/ui/breezeexceptiondialog.ui:83
@@ -373,24 +372,3 @@ msgstr "Přidat"
 #, kde-format
 msgid "Edit"
 msgstr "Upravit"
-
-#~ msgid "Add handle to resize windows with no border"
-#~ msgstr "Přidat úchytku pro změnu velikosti oken bez okrajů"
-
-#~ msgid "Information about Selected Window"
-#~ msgstr "Informace o vybraném oknu"
-
-#~ msgid "Class: "
-#~ msgstr "Třída: "
-
-#~ msgid "Title: "
-#~ msgstr "Název: "
-
-#~ msgid "Window Property Selection"
-#~ msgstr "Výběr vlastnosti okna"
-
-#~ msgid "Use window class (whole application)"
-#~ msgstr "Použít třídu okna (celá aplikace)"
-
-#~ msgid "Use window title"
-#~ msgstr "Použít titulek okna"
