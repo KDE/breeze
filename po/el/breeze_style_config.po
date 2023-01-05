@@ -3,20 +3,21 @@
 #
 # Dimitris Kardarakos <dimkard@gmail.com>, 2014, 2015, 2016.
 # Petros Vidalis <pvidalis@gmail.com>, 2018.
+# Stelios <sstavra@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-25 00:45+0000\n"
-"PO-Revision-Date: 2018-10-19 10:40+0200\n"
-"Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
+"PO-Revision-Date: 2023-01-04 11:10+0200\n"
+"Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: main.cpp:25 main.cpp:29
 #, kde-format
@@ -51,19 +52,19 @@ msgstr "&Ορατότητα επιταχυντών πληκτρολογίου:"
 #: ui/breezestyleconfig.ui:85
 #, kde-format
 msgid "Always hide"
-msgstr ""
+msgstr "Απόκρυψη πάντα"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
 #: ui/breezestyleconfig.ui:90
 #, kde-format
 msgid "Show when Alt key is pressed"
-msgstr ""
+msgstr "Να εμφανίζεται με την πίεση του πλήκτρου Alt"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
 #: ui/breezestyleconfig.ui:95
 #, kde-format
 msgid "Always show"
-msgstr ""
+msgstr "Εμφάνιση πάντα"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
 #: ui/breezestyleconfig.ui:117

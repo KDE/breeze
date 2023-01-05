@@ -3,13 +3,13 @@
 #
 # Dimitris Kardarakos <dimkard@gmail.com>, 2014, 2015, 2016.
 # Long Run <pvidalis@gmail.com>, 2018.
-# Stelios <sstavra@gmail.com>, 2020.
+# Stelios <sstavra@gmail.com>, 2020, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-07 00:48+0000\n"
-"PO-Revision-Date: 2020-09-16 09:50+0300\n"
+"PO-Revision-Date: 2023-01-04 11:08+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
 "Language: el\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -175,10 +175,9 @@ msgstr "Σχεδιάστε έναν κύκλο γύρω από το κουμπί
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBorderOnMaximizedWindows)
 #: config/ui/breezeconfigurationui.ui:138
-#, fuzzy, kde-format
-#| msgid "Display window borders for maximized windows"
+#, kde-format
 msgid "Draw border on maximized and tiled windows"
-msgstr "Εμφάνιση περιγραμμάτων παραθύρου για τα μεγιστοποιημένα παράθυρα"
+msgstr "Σχεδιάστε περιθώριο σε μεγιστοποιημένα και σε παράθεση παράθυρα"
 
 #. i18n: ectx: property (text), widget (QLabel, drawBorderOnMaximizedWindowsHelpLabel)
 #: config/ui/breezeconfigurationui.ui:163
@@ -188,6 +187,9 @@ msgid ""
 "edges. Scrollbars and window close buttons will shift positions and will not "
 "touch screen edges."
 msgstr ""
+"Αυτή η ρύθμιση θα σας επιτρέψει να αλλάζετε μέγεθος από τις άκρες των "
+"παραθύρων στις άκρες της οθόνης. Γραμμές κύλισης και κουμπιά κλεισίματος θα "
+"αλλάξουν θέση και δεν θα αγγίζουν τις άκρες της οθόνης."
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
 #: config/ui/breezeconfigurationui.ui:175
@@ -265,10 +267,9 @@ msgstr "&Κανονική έκφραση για ταίριασμα: "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, fuzzy, kde-format
-#| msgid "Detect Window Properties"
+#, kde-format
 msgid "Detect Window Properties…"
-msgstr "Ανίχνευση ιδιοτήτων παραθύρου"
+msgstr "Ανίχνευση ιδιοτήτων παραθύρου…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: config/ui/breezeexceptiondialog.ui:83
