@@ -27,6 +27,7 @@
         "Description[uk]": "Внесення змін до обрамлення вікон",
         "Description[x-test]": "xxModify the appearance of window decorationsxx",
         "Description[zh_CN]": "调整窗口装饰外观",
+        "Description[zh_TW]": "修改視窗裝飾的外觀",
         "Icon": "preferences-system-windows",
         "Name": "Breeze Window Decoration",
         "Name[ar]": "زخرفة نوافذ نسيم",
@@ -56,6 +57,7 @@
         "Name[uk]": "Обрамлення вікон Breeze",
         "Name[x-test]": "xxBreeze Window Decorationxx",
         "Name[zh_CN]": "Breeze 微风窗口装饰",
+        "Name[zh_TW]": "Breeze 視窗裝飾",
         "ServiceTypes": [
             "KCModule"
         ]

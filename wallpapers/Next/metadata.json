@@ -27,7 +27,8 @@
                 "Name[tr]": "ruvkr",
                 "Name[uk]": "ruvkr",
                 "Name[x-test]": "xxruvkrxx",
-                "Name[zh_CN]": "ruvkr"
+                "Name[zh_CN]": "ruvkr",
+                "Name[zh_TW]": "ruvkr"
             }
         ],
         "Id": "Next",
@@ -56,6 +57,7 @@
         "Name[tr]": "Kay",
         "Name[uk]": "Кей",
         "Name[x-test]": "xxKayxx",
-        "Name[zh_CN]": "Kay"
+        "Name[zh_CN]": "Kay",
+        "Name[zh_TW]": "Kay"
     }
 }
