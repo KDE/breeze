@@ -4,13 +4,13 @@
 # Andrey Cherepanov <skull@kde.ru>, 2009, 2011.
 # Alexander Potashev <aspotashev@gmail.com>, 2009, 2010, 2011, 2014, 2015, 2016, 2017, 2018.
 # Yuri Efremov <yur.arh@gmail.com>, 2013.
-# Alexander Yavorsky <kekcuha@gmail.com>, 2018, 2020, 2022.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2018, 2020, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kstyle_config\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-07 00:48+0000\n"
-"PO-Revision-Date: 2022-10-02 14:40+0300\n"
+"PO-Revision-Date: 2023-01-12 11:24+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -180,8 +180,7 @@ msgstr "Круг вокруг кнопки закрытия окна"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBorderOnMaximizedWindows)
 #: config/ui/breezeconfigurationui.ui:138
-#, fuzzy, kde-format
-#| msgid "Display window borders for maximized windows"
+#, kde-format
 msgid "Draw border on maximized and tiled windows"
 msgstr "Показывать границы распахнутых или расположенных каскадом окон"
 
@@ -270,10 +269,9 @@ msgstr "Совпадает с &регулярным выражением: "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, fuzzy, kde-format
-#| msgid "Detect Window Properties"
+#, kde-format
 msgid "Detect Window Properties…"
-msgstr "Определить свойства окна"
+msgstr "Определить свойства окна…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: config/ui/breezeexceptiondialog.ui:83
