@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(breeze)
-set(PROJECT_VERSION "5.26.90")
+set(PROJECT_VERSION "5.28.80")
 set(PROJECT_VERSION_MAJOR 5)
 
 set(KF5_MIN_VERSION "5.98.0")
