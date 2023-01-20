@@ -571,11 +571,8 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
 void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
 {
     const auto c = client().toStrongRef();
-    // Check if the window is maximized and if so, remove the extra gap that makes room for outlines,
-    // since they're not even drawn when window is maximized
-    const int outlineGap = isMaximized() ? 0 : 1;
-    const QRect frontRect(QPoint(0, 1), QSize(size().width(), borderTop()));
-    const QRect backRect(QPoint(0, outlineGap), QSize(size().width(), borderTop() - outlineGap));
+    const QRect frontRect(QPoint(0, 0), QSize(size().width(), borderTop()));
+    const QRect backRect(QPoint(0, 0), QSize(size().width(), borderTop()));
 
     QBrush frontBrush;
     QBrush backBrush(this->titleBarColor());
@@ -827,8 +824,7 @@ QSharedPointer<KDecoration2::DecorationShadow> Decoration::createShadowObject(co
     const qreal outlineWidth = 1.001;
     const qreal penOffset = outlineWidth / 2;
 
-    // Titlebar already has an outline, so move the top of the outline on the same level to avoid 2px width on top outline.
-    QRectF outlineRect = innerRect + QMarginsF(penOffset, -penOffset, penOffset, penOffset);
+    QRectF outlineRect = innerRect + QMarginsF(penOffset, penOffset, penOffset, penOffset);
     qreal cornerSize = m_scaledCornerRadius * 2;
     QRectF cornerRect(outlineRect.x(), outlineRect.y(), cornerSize, cornerSize);
     QPainterPath outlinePath;
