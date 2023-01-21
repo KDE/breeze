@@ -4356,7 +4356,7 @@ bool Style::drawIndicatorButtonDropDownPrimitive(const QStyleOption *option, QPa
 
     QRect baseRect = option->rect;
     painter->setClipRect(baseRect);
-    baseRect.adjust(-Metrics::Frame_FrameRadius - PenWidth::Shadow, 0, 0, 0);
+    baseRect.adjust(-Metrics::Frame_FrameRadius - qRound(PenWidth::Shadow), 0, 0, 0);
     baseRect = visualRect(option, baseRect);
 
     QHash<QByteArray, bool> stateProperties;
@@ -5571,7 +5571,7 @@ bool Style::drawScrollBarSliderControl(const QStyleOption *option, QPainter *pai
     if (option->state & State_Horizontal) {
         rect.setTop(PenWidth::Frame);
     } else if (option->direction == Qt::RightToLeft) {
-        rect.setRight(rect.right() - PenWidth::Frame);
+        rect.setRight(rect.right() - qRound(PenWidth::Frame));
     } else {
         rect.setLeft(PenWidth::Frame);
     }
@@ -5648,7 +5648,7 @@ bool Style::drawScrollBarAddLineControl(const QStyleOption *option, QPainter *pa
     if (option->state & State_Horizontal) {
         rect.setTop(PenWidth::Frame);
     } else if (option->direction == Qt::RightToLeft) {
-        rect.setRight(rect.right() - PenWidth::Frame);
+        rect.setRight(rect.right() - qRound(PenWidth::Frame));
     } else {
         rect.setLeft(PenWidth::Frame);
     }
@@ -5727,7 +5727,7 @@ bool Style::drawScrollBarSubLineControl(const QStyleOption *option, QPainter *pa
     if (option->state & State_Horizontal) {
         rect.setTop(PenWidth::Frame);
     } else if (option->direction == Qt::RightToLeft) {
-        rect.setRight(rect.right() - PenWidth::Frame);
+        rect.setRight(rect.right() - qRound(PenWidth::Frame));
     } else {
         rect.setLeft(PenWidth::Frame);
     }
@@ -7226,7 +7226,7 @@ bool Style::drawScrollBarComplexControl(const QStyleOptionComplex *option, QPain
 
     QRect separatorRect;
     if (option->state & State_Horizontal) {
-        separatorRect = QRect(0, 0, option->rect.width(), 1);
+        separatorRect = QRect(0, 0, option->rect.width(), PenWidth::Frame);
     } else {
         separatorRect = alignedRect(option->direction, Qt::AlignLeft, QSize(PenWidth::Frame, option->rect.height()), option->rect);
     }
@@ -7242,7 +7242,7 @@ bool Style::drawScrollBarComplexControl(const QStyleOptionComplex *option, QPain
         if (option->state & State_Horizontal) {
             grooveRect.setTop(PenWidth::Frame);
         } else if (option->direction == Qt::RightToLeft) {
-            grooveRect.setRight(grooveRect.right() - PenWidth::Frame);
+            grooveRect.setRight(grooveRect.right() - qRound(PenWidth::Frame));
         } else {
             grooveRect.setLeft(PenWidth::Frame);
         }
