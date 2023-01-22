@@ -10,20 +10,20 @@ include_directories(${CMAKE_BINARY_DIR}/libbreezecommon)
 ################# newt target #################
 ### plugin classes
 set(breezedecoration_SRCS
-    breezebutton.cpp
-    breezedecoration.cpp
-    breezesettingsprovider.cpp
+    breezebutton.cpp breezebutton.h
+    breezedecoration.cpp breezedecoration.h
+    breezesettingsprovider.cpp breezesettingsprovider.h
 )
 
 ### config classes
 set(breezedecoration_config_SRCS
-    breezeexceptionlist.cpp
-    config/breezeconfigwidget.cpp
-    config/breezedetectwidget.cpp
-    config/breezeexceptiondialog.cpp
-    config/breezeexceptionlistwidget.cpp
-    config/breezeexceptionmodel.cpp
-    config/breezeitemmodel.cpp
+    breezeexceptionlist.cpp breezeexceptionlist.h
+    config/breezeconfigwidget.cpp config/breezeconfigwidget.h
+    config/breezedetectwidget.cpp config/breezedetectwidget.h
+    config/breezeexceptiondialog.cpp config/breezeexceptiondialog.h
+    config/breezeexceptionlistwidget.cpp config/breezeexceptionlistwidget.h
+    config/breezeexceptionmodel.cpp config/breezeexceptionmodel.h
+    config/breezeitemmodel.cpp config/breezeitemmodel.h
 )
 ki18n_wrap_ui(breezedecoration_config_SRCS
    config/ui/breezeconfigurationui.ui

@@ -1,8 +1,8 @@
 ### configuration plugin
 add_definitions(-DTRANSLATION_DOMAIN=\"breeze_style_config\")
-set(kstyle_breeze_config_PART_SRCS breezestyleconfig.cpp)
+set(kstyle_breeze_config_PART_SRCS breezestyleconfig.cpp breezestyleconfig.h)
 
-set(kstyle_breeze_config_PART_SRCS ${kstyle_breeze_config_PART_SRCS} breezestyleconfigmodule.cpp)
+set(kstyle_breeze_config_PART_SRCS ${kstyle_breeze_config_PART_SRCS} breezestyleconfigmodule.cpp breezestyleconfigmodule.h)
 
 kconfig_add_kcfg_files(kstyle_breeze_config_PART_SRCS ../breezestyleconfigdata.kcfgc)
 set(kstyle_breeze_config_PART_FORMS ui/breezestyleconfig.ui)
