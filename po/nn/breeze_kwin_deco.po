@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kwin_clients\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-07 00:48+0000\n"
-"PO-Revision-Date: 2023-01-15 12:23+0100\n"
+"PO-Revision-Date: 2023-01-23 21:07+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -274,7 +274,7 @@ msgstr "Oppdag vindaugseigenskapar …"
 #: config/ui/breezeexceptiondialog.ui:83
 #, kde-format
 msgid "Decoration Options"
-msgstr "Alternativ for dekorasjon"
+msgstr "Alternativ for pynt"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderSizeCheckBox)
 #: config/ui/breezeexceptiondialog.ui:89
