@@ -46,46 +46,46 @@ configure_file(config-breeze.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-breeze.h
 
 ########### next target ###############
 set(breeze_PART_SRCS
-    animations/breezeanimation.cpp animations/breezeanimation.h
-    animations/breezeanimations.cpp animations/breezeanimations.h
-    animations/breezeanimationdata.cpp animations/breezeanimationdata.h
-    animations/breezebaseengine.cpp animations/breezebaseengine.h
-    animations/breezebusyindicatordata.cpp animations/breezebusyindicatordata.h
-    animations/breezebusyindicatorengine.cpp animations/breezebusyindicatorengine.h
-    animations/breezedialdata.cpp animations/breezedialdata.h
-    animations/breezedialengine.cpp animations/breezedialengine.h
-    animations/breezeenabledata.cpp animations/breezeenabledata.h
-    animations/breezegenericdata.cpp animations/breezegenericdata.h
-    animations/breezeheaderviewdata.cpp animations/breezeheaderviewdata.h
-    animations/breezeheaderviewengine.cpp animations/breezeheaderviewengine.h
-    animations/breezescrollbardata.cpp animations/breezescrollbardata.h
-    animations/breezescrollbarengine.cpp animations/breezescrollbarengine.h
-    animations/breezespinboxengine.cpp animations/breezespinboxengine.h
-    animations/breezespinboxdata.cpp animations/breezespinboxdata.h
-    animations/breezestackedwidgetdata.cpp animations/breezestackedwidgetdata.h
-    animations/breezestackedwidgetengine.cpp animations/breezestackedwidgetengine.h
-    animations/breezetabbarengine.cpp animations/breezetabbarengine.h
-    animations/breezetabbardata.cpp animations/breezetabbardata.h
-    animations/breezetoolboxengine.cpp animations/breezetoolboxengine.h
-    animations/breezetransitiondata.cpp animations/breezetransitiondata.h
-    animations/breezetransitionwidget.cpp animations/breezetransitionwidget.h
-    animations/breezewidgetstateengine.cpp animations/breezewidgetstateengine.h
-    animations/breezewidgetstatedata.cpp animations/breezewidgetstatedata.h
-    debug/breezewidgetexplorer.cpp debug/breezewidgetexplorer.h
-    breezeaddeventfilter.cpp breezeaddeventfilter.h
-    breezeblurhelper.cpp breezeblurhelper.h
-    breezeframeshadow.cpp breezeframeshadow.h
-    breezehelper.cpp breezehelper.h
-    breezemdiwindowshadow.cpp breezemdiwindowshadow.h
-    breezemnemonics.cpp breezemnemonics.h
-    breezepropertynames.cpp breezepropertynames.h
-    breezeshadowhelper.cpp breezeshadowhelper.h
-    breezesplitterproxy.cpp breezesplitterproxy.h
-    breezestyle.cpp breezestyle.h
-    breezestyleplugin.cpp breezestyleplugin.h
-    breezetileset.cpp breezetileset.h
-    breezewindowmanager.cpp breezewindowmanager.h
-    breezetoolsareamanager.cpp breezetoolsareamanager.h
+    animations/breezeanimation.cpp
+    animations/breezeanimations.cpp
+    animations/breezeanimationdata.cpp
+    animations/breezebaseengine.cpp
+    animations/breezebusyindicatordata.cpp
+    animations/breezebusyindicatorengine.cpp
+    animations/breezedialdata.cpp
+    animations/breezedialengine.cpp
+    animations/breezeenabledata.cpp
+    animations/breezegenericdata.cpp
+    animations/breezeheaderviewdata.cpp
+    animations/breezeheaderviewengine.cpp
+    animations/breezescrollbardata.cpp
+    animations/breezescrollbarengine.cpp
+    animations/breezespinboxengine.cpp
+    animations/breezespinboxdata.cpp
+    animations/breezestackedwidgetdata.cpp
+    animations/breezestackedwidgetengine.cpp
+    animations/breezetabbarengine.cpp
+    animations/breezetabbardata.cpp
+    animations/breezetoolboxengine.cpp
+    animations/breezetransitiondata.cpp
+    animations/breezetransitionwidget.cpp
+    animations/breezewidgetstateengine.cpp
+    animations/breezewidgetstatedata.cpp
+    debug/breezewidgetexplorer.cpp
+    breezeaddeventfilter.cpp
+    breezeblurhelper.cpp
+    breezeframeshadow.cpp
+    breezehelper.cpp
+    breezemdiwindowshadow.cpp
+    breezemnemonics.cpp
+    breezepropertynames.cpp
+    breezeshadowhelper.cpp
+    breezesplitterproxy.cpp
+    breezestyle.cpp
+    breezestyleplugin.cpp
+    breezetileset.cpp
+    breezewindowmanager.cpp
+    breezetoolsareamanager.cpp
 )
 
 kconfig_add_kcfg_files(breeze_PART_SRCS ../kdecoration/breezesettings.kcfgc)

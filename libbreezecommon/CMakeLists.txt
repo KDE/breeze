@@ -4,7 +4,7 @@ find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS 
 
 ################# breezestyle target #################
 set(breezecommon_LIB_SRCS
-    breezeboxshadowrenderer.cpp breezeboxshadowrenderer.h
+    breezeboxshadowrenderer.cpp
 )
 
 add_library(breezecommon5 ${breezecommon_LIB_SRCS})
