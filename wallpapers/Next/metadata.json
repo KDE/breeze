@@ -11,7 +11,7 @@
         "Name": "Mountain"
     },
     "X-KDE-PlasmaImageWallpaper-AccentColor": {
-        "Light": "#3d818d",
-        "Dark": "#018786"
+        "Dark": "#018786",
+        "Light": "#3d818d"
     }
 }
