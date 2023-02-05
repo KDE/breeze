@@ -9,7 +9,9 @@
                 "Name[cs]": "Andy Betts",
                 "Name[es]": "Andy Betts",
                 "Name[eu]": "Andy Betts",
+                "Name[fr]": "Andy Betts",
                 "Name[nl]": "Andy Betts",
+                "Name[pl]": "Andy Betts",
                 "Name[tr]": "Andy Betts",
                 "Name[uk]": "Andy Betts",
                 "Name[x-test]": "xxAndy Bettsxx"
@@ -23,7 +25,9 @@
         "Name[cs]": "Hora",
         "Name[es]": "Montaña",
         "Name[eu]": "Mendia",
+        "Name[fr]": "Montagne",
         "Name[nl]": "Berg",
+        "Name[pl]": "Góra",
         "Name[tr]": "Dağ",
         "Name[uk]": "Гора",
         "Name[x-test]": "xxMountainxx"
