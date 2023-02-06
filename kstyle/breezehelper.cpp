@@ -1617,8 +1617,7 @@ QPixmap Helper::coloredIcon(const QIcon &icon, const QPalette &palette, const QS
     if (changePalette) {
         KIconLoader::global()->setCustomPalette(palette);
     }
-    const QSize actualSize = icon.actualSize(size, mode, state);
-    const QPixmap pixmap = icon.pixmap(actualSize, mode, state);
+    const QPixmap pixmap = icon.pixmap(size, mode, state);
     if (changePalette) {
         if (activePalette == QPalette()) {
             KIconLoader::global()->resetPalette();
