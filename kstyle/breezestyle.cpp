@@ -5335,7 +5335,6 @@ bool Style::drawMenuItemControl(const QStyleOption *option, QPainter *painter, c
         // icon state
         const QIcon::State iconState(sunken ? QIcon::On : QIcon::Off);
         const QPixmap icon = _helper->coloredIcon(menuItemOption->icon, menuItemOption->palette, iconRect.size(), mode, iconState);
-        iconRect = centerRect(iconRect, icon.size());
         painter->drawPixmap(iconRect, icon);
     }
 
