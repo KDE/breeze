@@ -4,6 +4,7 @@
             {
                 "Email": "anditosan@kde.org",
                 "Name": "Andy Betts",
+                "Name[ar]": "أندي بتتس",
                 "Name[bg]": "Andy Betts",
                 "Name[ca@valencia]": "Andy Betts",
                 "Name[ca]": "Andy Betts",
@@ -29,6 +30,7 @@
         "Id": "Next",
         "License": "CC-BY-SA-4.0",
         "Name": "Mountain",
+        "Name[ar]": "الجبل",
         "Name[bg]": "Планина",
         "Name[ca@valencia]": "Muntanya",
         "Name[ca]": "Muntanya",
