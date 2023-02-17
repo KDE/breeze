@@ -735,15 +735,17 @@ void Decoration::updateShadow()
 {
     auto s = settings();
     auto c = client().toStrongRef();
-    auto outlineColor = c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::TitleBar);
-    auto backgroundColor = c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame);
-    // Bind lightness between 0.1 and 1.0 so it can never be completely black.
-    // Outlines only have transparency if alpha channel is supported
-    outlineColor.setHslF(outlineColor.hslHueF(),
-                         outlineColor.hslSaturationF(),
-                         qBound(0.1, outlineColor.lightnessF(), 1.0),
-                         s->isAlphaChannelSupported() ? 0.9 : 1.0);
-    outlineColor.lightnessF() >= 0.5 ? outlineColor = outlineColor.darker(170) : outlineColor = outlineColor.lighter(170);
+    QColor outlineColor;
+    if (m_internalSettings->outlineWindow()) {
+        outlineColor = c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::TitleBar);
+        // Bind lightness between 0.1 and 1.0 so it can never be completely black.
+        // Outlines only have transparency if alpha channel is supported
+        outlineColor.setHslF(outlineColor.hslHueF(),
+                             outlineColor.hslSaturationF(),
+                             qBound(0.1, outlineColor.lightnessF(), 1.0),
+                             s->isAlphaChannelSupported() ? 0.9 : 1.0);
+        outlineColor.lightnessF() >= 0.5 ? outlineColor = outlineColor.darker(170) : outlineColor = outlineColor.lighter(170);
+    }
 
     // Animated case, no cached shadow object
     if ((m_shadowAnimation->state() == QAbstractAnimation::Running) && (m_shadowOpacity != 0.0) && (m_shadowOpacity != 1.0)) {
@@ -821,36 +823,43 @@ QSharedPointer<KDecoration2::DecorationShadow> Decoration::createShadowObject(co
     painter.drawRoundedRect(innerRect, m_scaledCornerRadius + 0.5, m_scaledCornerRadius + 0.5);
 
     // Draw window outline
-    const qreal outlineWidth = 1.001;
-    const qreal penOffset = outlineWidth / 2;
-
-    QRectF outlineRect = innerRect + QMarginsF(penOffset, penOffset, penOffset, penOffset);
-    qreal cornerSize = m_scaledCornerRadius * 2;
-    QRectF cornerRect(outlineRect.x(), outlineRect.y(), cornerSize, cornerSize);
-    QPainterPath outlinePath;
-
-    outlinePath.arcMoveTo(cornerRect, 180);
-    outlinePath.arcTo(cornerRect, 180, -90);
-    cornerRect.moveTopRight(outlineRect.topRight());
-    outlinePath.arcTo(cornerRect, 90, -90);
-
-    // Check if border size is "no borders" or "no side-borders"
-    if (borderSize(true) == 0) {
-        outlinePath.lineTo(outlineRect.bottomRight());
-        outlinePath.lineTo(outlineRect.bottomLeft());
-    } else {
-        cornerRect.moveBottomRight(outlineRect.bottomRight());
-        outlinePath.arcTo(cornerRect, 0, -90);
-        cornerRect.moveBottomLeft(outlineRect.bottomLeft());
-        outlinePath.arcTo(cornerRect, 270, -90);
-    }
-    outlinePath.closeSubpath();
-
-    painter.setPen(QPen(outlineColor, outlineWidth));
     painter.setBrush(Qt::NoBrush);
-    painter.setCompositionMode(QPainter::CompositionMode_Source);
-    painter.setRenderHint(QPainter::Antialiasing);
-    painter.drawPath(outlinePath);
+
+    if (m_internalSettings->outlineWindow()) {
+        const qreal outlineWidth = 1.001;
+        const qreal penOffset = outlineWidth / 2;
+
+        QRectF outlineRect = innerRect + QMarginsF(penOffset, penOffset, penOffset, penOffset);
+        qreal cornerSize = m_scaledCornerRadius * 2;
+        QRectF cornerRect(outlineRect.x(), outlineRect.y(), cornerSize, cornerSize);
+        QPainterPath outlinePath;
+
+        outlinePath.arcMoveTo(cornerRect, 180);
+        outlinePath.arcTo(cornerRect, 180, -90);
+        cornerRect.moveTopRight(outlineRect.topRight());
+        outlinePath.arcTo(cornerRect, 90, -90);
+
+        // Check if border size is "no borders" or "no side-borders"
+        if (borderSize(true) == 0) {
+            outlinePath.lineTo(outlineRect.bottomRight());
+            outlinePath.lineTo(outlineRect.bottomLeft());
+        } else {
+            cornerRect.moveBottomRight(outlineRect.bottomRight());
+            outlinePath.arcTo(cornerRect, 0, -90);
+            cornerRect.moveBottomLeft(outlineRect.bottomLeft());
+            outlinePath.arcTo(cornerRect, 270, -90);
+        }
+        outlinePath.closeSubpath();
+
+        painter.setPen(QPen(outlineColor, outlineWidth));
+        painter.setCompositionMode(QPainter::CompositionMode_Source);
+        painter.setRenderHint(QPainter::Antialiasing);
+        painter.drawPath(outlinePath);
+    } else {
+        painter.setPen(withOpacity(Qt::black, 0.1));
+        painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+        painter.drawRoundedRect(innerRect, m_scaledCornerRadius - 0.5, m_scaledCornerRadius - 0.5);
+    }
 
     painter.end();
 

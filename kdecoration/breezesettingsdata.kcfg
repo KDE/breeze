@@ -35,6 +35,11 @@
         <default>false</default>
     </entry>
 
+    <!-- window outline -->
+    <entry name="OutlineWindow" type = "Bool">
+        <default>true</default>
+    </entry>
+
   </group>
 
   <group name="Windeco">

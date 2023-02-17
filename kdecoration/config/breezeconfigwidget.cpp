@@ -38,6 +38,7 @@ ConfigWidget::ConfigWidget(QWidget *parent, const QVariantList &args)
     connect(m_ui.shadowSize, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()));
     connect(m_ui.shadowStrength, SIGNAL(valueChanged(int)), SLOT(updateChanged()));
     connect(m_ui.shadowColor, &KColorButton::changed, this, &ConfigWidget::updateChanged);
+    connect(m_ui.outlineWindowCheckBox, &QCheckBox::toggled, this, &ConfigWidget::updateChanged);
 
     // track exception changes
     connect(m_ui.exceptions, &ExceptionListWidget::changed, this, &ConfigWidget::updateChanged);
@@ -69,6 +70,7 @@ void ConfigWidget::load()
 
     m_ui.shadowStrength->setValue(qRound(qreal(m_internalSettings->shadowStrength() * 100) / 255));
     m_ui.shadowColor->setColor(m_internalSettings->shadowColor());
+    m_ui.outlineWindowCheckBox->setChecked(m_internalSettings->outlineWindow());
 
     // load exceptions
     ExceptionList exceptions;
@@ -94,6 +96,7 @@ void ConfigWidget::save()
     m_internalSettings->setShadowSize(m_ui.shadowSize->currentIndex());
     m_internalSettings->setShadowStrength(qRound(qreal(m_ui.shadowStrength->value() * 255) / 100));
     m_internalSettings->setShadowColor(m_ui.shadowColor->color());
+    m_internalSettings->setOutlineWindow(m_ui.outlineWindowCheckBox->isChecked());
 
     // save configuration
     m_internalSettings->save();
@@ -136,6 +139,7 @@ void ConfigWidget::defaults()
     m_ui.shadowSize->setCurrentIndex(m_internalSettings->shadowSize());
     m_ui.shadowStrength->setValue(qRound(qreal(m_internalSettings->shadowStrength() * 100) / 255));
     m_ui.shadowColor->setColor(m_internalSettings->shadowColor());
+    m_ui.outlineWindowCheckBox->setChecked(m_internalSettings->outlineWindow());
 }
 
 //_______________________________________________
@@ -166,6 +170,8 @@ void ConfigWidget::updateChanged()
     } else if (qRound(qreal(m_ui.shadowStrength->value() * 255) / 100) != m_internalSettings->shadowStrength()) {
         modified = true;
     } else if (m_ui.shadowColor->color() != m_internalSettings->shadowColor()) {
+        modified = true;
+    } else if (m_ui.outlineWindowCheckBox->isChecked() != m_internalSettings->outlineWindow()) {
         modified = true;
 
         // exceptions
