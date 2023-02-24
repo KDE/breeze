@@ -50,7 +50,6 @@
         "Description[zh_CN]": "Breeze 微风视觉风格的 Plasma 桌面窗口装饰",
         "Description[zh_TW]": "使用 Plasma 桌面 Breeze 視覺樣式的視窗裝飾",
         "EnabledByDefault": true,
-        "Id": "org.kde.breeze",
         "Name": "Breeze",
         "Name[ar]": "نسيم",
         "Name[az]": "Breeze",
