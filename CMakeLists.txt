@@ -3,7 +3,7 @@ project(breeze)
 set(PROJECT_VERSION "5.27.80")
 set(PROJECT_VERSION_MAJOR 5)
 
-set(KF5_MIN_VERSION "5.102.0")
+set(KF_MIN_VERSION "5.102.0")
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
 set(QT_MIN_VERSION "5.15.2")
 
@@ -11,7 +11,7 @@ include(GenerateExportHeader)
 include(WriteBasicConfigVersionFile)
 include(FeatureSummary)
 
-find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
+find_package(ECM ${KF_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH}  ${CMAKE_SOURCE_DIR}/cmake)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -33,7 +33,7 @@ if(WIN32 OR APPLE OR QT_MAJOR_VERSION STREQUAL "5")
     set(WITH_DECORATIONS OFF)
 endif()
 
-find_package(KF5KCMUtils ${KF5_MIN_VERSION} REQUIRED)
+find_package(KF${QT_MAJOR_VERSION}KCMUtils ${KF_MIN_VERSION} REQUIRED)
 
 if(WITH_DECORATIONS)
     find_package(KDecoration2 REQUIRED)
@@ -51,7 +51,7 @@ if (WITH_WALLPAPERS)
     add_subdirectory(wallpapers)
 endif()
 
-find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF${QT_MAJOR_VERSION}I18n ${KF_MIN_VERSION} CONFIG REQUIRED)
 ki18n_install(po)
 
 include(ECMSetupVersion)

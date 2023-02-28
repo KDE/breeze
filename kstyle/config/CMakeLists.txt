@@ -15,13 +15,13 @@ kcoreaddons_add_plugin(breezestyleconfig SOURCES
 )
 
 target_link_libraries(breezestyleconfig Qt::Core Qt::Gui Qt::Widgets Qt::DBus)
-target_link_libraries(breezestyleconfig KF5::CoreAddons KF5::ConfigCore KF5::ConfigWidgets KF5::I18n)
+target_link_libraries(breezestyleconfig KF${QT_MAJOR_VERSION}::CoreAddons KF${QT_MAJOR_VERSION}::ConfigCore KF${QT_MAJOR_VERSION}::ConfigWidgets KF${QT_MAJOR_VERSION}::I18n)
 kcmutils_generate_desktop_file(breezestyleconfig)
 
 set(breeze_settings_SOURCES main.cpp)
 add_executable(breeze-settings5 ${breeze_settings_SOURCES} )
 target_link_libraries(breeze-settings5 Qt::Core Qt::Gui Qt::Widgets )
-target_link_libraries(breeze-settings5 KF5::I18n KF5::KCMUtils KF5::CoreAddons)
+target_link_libraries(breeze-settings5 KF${QT_MAJOR_VERSION}::I18n KF${QT_MAJOR_VERSION}::KCMUtils KF${QT_MAJOR_VERSION}::CoreAddons)
 
 install(TARGETS breeze-settings5 ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
