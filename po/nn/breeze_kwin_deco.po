@@ -190,8 +190,8 @@ msgid ""
 "touch screen edges."
 msgstr ""
 "Denne innstillinga lèt deg endra vindaugs­storleik frå vindaugs­kantar som "
-"rører skjerm­kantane. Rullfelt og lukke­knappar vert flytta og vil ikkje "
-"røra skjermkantane."
+"rører skjerm­kantane. Rullfelt og lukke­knappar vert flytta og vil ikkje røra "
+"skjermkantane."
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
 #: config/ui/breezeconfigurationui.ui:175

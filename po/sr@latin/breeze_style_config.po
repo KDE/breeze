@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: breeze_style_config\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2019-05-20 03:23+0200\n"
+"POT-Creation-Date: 2022-09-25 00:45+0000\n"
 "PO-Revision-Date: 2017-10-30 23:08+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: main.cpp:40 main.cpp:44
+#: main.cpp:25 main.cpp:29
 #, kde-format
 msgid "Breeze Settings"
 msgstr "Postavke Povetarca"
@@ -47,29 +47,23 @@ msgstr "Pokazatelji fokusa u spiskovima"
 msgid "&Keyboard accelerators visibility:"
 msgstr "&Vidljivost ubrzivača sa tastature:"
 
-# >> @item:inlistbox Keyboard accelerators visibility:
-# rewrite-msgid: /Keyboard Accelerators//
 #. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
 #: ui/breezestyleconfig.ui:85
 #, kde-format
-msgid "Always Hide Keyboard Accelerators"
-msgstr "uvek skriveni"
+msgid "Always hide"
+msgstr ""
 
-# >> @item:inlistbox Keyboard accelerators visibility:
-# rewrite-msgid: /Keyboard Accelerators//
 #. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
 #: ui/breezestyleconfig.ui:90
 #, kde-format
-msgid "Show Keyboard Accelerators When Needed"
-msgstr "vidljivi po potrebi"
+msgid "Show when Alt key is pressed"
+msgstr ""
 
-# >> @item:inlistbox Keyboard accelerators visibility:
-# rewrite-msgid: /Keyboard Accelerators//
 #. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
 #: ui/breezestyleconfig.ui:95
 #, kde-format
-msgid "Always Show Keyboard Accelerators"
-msgstr "uvek vidljivi"
+msgid "Always show"
+msgstr ""
 
 # >> @item:inlistbox Window drag mode:
 # rewrite-msgid: /Drag windows//
@@ -120,121 +114,122 @@ msgstr "Zarezi na klizačkoj traci"
 msgid "Enable extended resize handles"
 msgstr "Proširene ručke za promenu veličine"
 
-#. i18n: ectx: attribute (title), widget (QWidget, tab_2)
-#: ui/breezestyleconfig.ui:177
-#, kde-format
-msgid "Animations"
-msgstr "Animacije"
-
-#. i18n: ectx: property (text), widget (QLabel, _animationsDurationLabel)
-#: ui/breezestyleconfig.ui:186
-#, fuzzy, kde-format
-#| msgid "Anima&tions duration:"
-msgid "A&nimations duration:"
-msgstr "&Trajanje animacija:"
-
-#. i18n: ectx: property (suffix), widget (QSpinBox, _animationsDuration)
-#: ui/breezestyleconfig.ui:202
-#, kde-format
-msgid " ms"
-msgstr " ms"
-
-#. i18n: ectx: property (text), widget (QCheckBox, _animationsEnabled)
-#: ui/breezestyleconfig.ui:212
-#, kde-format
-msgid "Enable animations"
-msgstr "Uključi animacije"
-
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: ui/breezestyleconfig.ui:246
+#: ui/breezestyleconfig.ui:177
 #, kde-format
 msgid "Frames"
 msgstr "Okviri"
 
 #. i18n: ectx: property (text), widget (QCheckBox, _dockWidgetDrawFrame)
-#: ui/breezestyleconfig.ui:252
+#: ui/breezestyleconfig.ui:183
 #, kde-format
 msgid "Draw frame around dockable panels"
 msgstr "Okviri oko usidrivih panela"
 
-#. i18n: ectx: property (text), widget (QCheckBox, _titleWidgetDrawFrame)
-#: ui/breezestyleconfig.ui:259
-#, kde-format
-msgid "Draw frame around page titles"
-msgstr "Okviri oko naslova stranica"
-
 #. i18n: ectx: property (text), widget (QCheckBox, _sidePanelDrawFrame)
-#: ui/breezestyleconfig.ui:266
+#: ui/breezestyleconfig.ui:190
 #, kde-format
 msgid "Draw frame around side panels"
 msgstr "Okviri oko bočnih panela"
 
 # skip-rule: t-line
 #. i18n: ectx: property (text), widget (QCheckBox, _menuItemDrawThinFocus)
-#: ui/breezestyleconfig.ui:273
+#: ui/breezestyleconfig.ui:197
 #, kde-format
 msgid "Draw a thin line to indicate focus in menus and menubars"
 msgstr "Tanka linija pokazuje fokus u menijima i trakama menija"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
-#: ui/breezestyleconfig.ui:294
+#: ui/breezestyleconfig.ui:218
 #, kde-format
 msgid "Scrollbars"
 msgstr "Klizačke trake"
 
 #. i18n: ectx: property (text), widget (QLabel, _scrollBarAddLineLabel)
-#: ui/breezestyleconfig.ui:313
+#: ui/breezestyleconfig.ui:237
 #, kde-format
 msgid "Bottom arrow button t&ype:"
 msgstr "Tip dugmeta &donje strelice:"
 
 #. i18n: ectx: property (text), widget (QLabel, _scrollBarSubLineLabel)
-#: ui/breezestyleconfig.ui:326
+#: ui/breezestyleconfig.ui:250
 #, kde-format
 msgid "&Top arrow button type:"
 msgstr "Tip dugmeta &gornje strelice:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
-#: ui/breezestyleconfig.ui:340 ui/breezestyleconfig.ui:359
+#: ui/breezestyleconfig.ui:264 ui/breezestyleconfig.ui:283
 #, kde-format
 msgid "No Buttons"
 msgstr "bez dugmadi"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
-#: ui/breezestyleconfig.ui:345 ui/breezestyleconfig.ui:364
+#: ui/breezestyleconfig.ui:269 ui/breezestyleconfig.ui:288
 #, kde-format
 msgid "One Button"
 msgstr "jedno dugme"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
-#: ui/breezestyleconfig.ui:350 ui/breezestyleconfig.ui:369
+#: ui/breezestyleconfig.ui:274 ui/breezestyleconfig.ui:293
 #, kde-format
 msgid "Two Buttons"
 msgstr "dva dugmeta"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_5)
-#: ui/breezestyleconfig.ui:391
+#: ui/breezestyleconfig.ui:315
 #, kde-format
 msgid "Transparency"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, _menuOpacityTransparentLabel)
-#: ui/breezestyleconfig.ui:412
+#: ui/breezestyleconfig.ui:336
 #, kde-format
 msgid "Transparent"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, _menuOpacityOpaqueLabel)
-#: ui/breezestyleconfig.ui:438
+#: ui/breezestyleconfig.ui:362
 #, kde-format
 msgid "Opaque"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, _menuGroupDescription)
-#: ui/breezestyleconfig.ui:449
+#: ui/breezestyleconfig.ui:373
 #, kde-format
 msgid "Menu:"
 msgstr ""
+
+# >> @item:inlistbox Keyboard accelerators visibility:
+# rewrite-msgid: /Keyboard Accelerators//
+#~ msgid "Always Hide Keyboard Accelerators"
+#~ msgstr "uvek skriveni"
+
+# >> @item:inlistbox Keyboard accelerators visibility:
+# rewrite-msgid: /Keyboard Accelerators//
+#~ msgid "Show Keyboard Accelerators When Needed"
+#~ msgstr "vidljivi po potrebi"
+
+# >> @item:inlistbox Keyboard accelerators visibility:
+# rewrite-msgid: /Keyboard Accelerators//
+#~ msgid "Always Show Keyboard Accelerators"
+#~ msgstr "uvek vidljivi"
+
+#~ msgid "Animations"
+#~ msgstr "Animacije"
+
+#, fuzzy
+#~| msgid "Anima&tions duration:"
+#~ msgid "A&nimations duration:"
+#~ msgstr "&Trajanje animacija:"
+
+#~ msgid " ms"
+#~ msgstr " ms"
+
+#~ msgid "Enable animations"
+#~ msgstr "Uključi animacije"
+
+#~ msgid "Draw frame around page titles"
+#~ msgstr "Okviri oko naslova stranica"
