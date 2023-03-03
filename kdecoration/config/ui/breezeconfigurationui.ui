@@ -193,13 +193,13 @@
      </widget>
      <widget class="QWidget" name="tab_4">
       <attribute name="title">
-       <string>Shadows</string>
+       <string>Shadows and Outline</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
        <item row="0" column="0">
         <widget class="QLabel" name="label">
          <property name="text">
-          <string>Si&amp;ze:</string>
+          <string>Shadow size:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -241,7 +241,7 @@
        <item row="1" column="0">
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string comment="strength of the shadow (from transparent to opaque)">S&amp;trength:</string>
+          <string comment="strength of the shadow (from transparent to opaque)">Shadow strength:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -280,7 +280,7 @@
        <item row="2" column="0">
         <widget class="QLabel" name="label_5">
          <property name="text">
-          <string>Color:</string>
+          <string>Shadow color:</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -290,7 +290,49 @@
        <item row="2" column="1">
         <widget class="KColorButton" name="shadowColor"/>
        </item>
-       <item row="3" column="0" colspan="3">
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string comment="outline intensity">Outline intensity:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="buddy">
+          <cstring>outlineIntensity</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QComboBox" name="outlineIntensity">
+         <item>
+          <property name="text">
+           <string comment="@item:inlistbox Outline intensity:">Off</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string comment="@item:inlistbox Outline intensity:">Low</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string comment="@item:inlistbox Outline intensity:">Medium</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string comment="@item:inlistbox Outline intensity:">High</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string comment="@item:inlistbox Outline intensity:">Maximum</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="4" column="0" colspan="3">
         <spacer name="verticalSpacer_3">
          <property name="orientation">
           <enum>Qt::Vertical</enum>

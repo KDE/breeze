@@ -111,6 +111,25 @@ inline CompositeShadowParams lookupShadowParams(int size)
         return s_shadowParams[3];
     }
 }
+
+inline int lookupOutlineIntensity(int intensity)
+{
+    switch (intensity) {
+    case Breeze::InternalSettings::OutlineOff:
+        return 100;
+    case Breeze::InternalSettings::OutlineLow:
+        return 130;
+    case Breeze::InternalSettings::OutlineMedium:
+        return 170;
+    case Breeze::InternalSettings::OutlineHigh:
+        return 210;
+    case Breeze::InternalSettings::OutlineMaximum:
+        return 250;
+    default:
+        // Fallback to the Medium intensity.
+        return 170;
+    }
+}
 }
 
 namespace Breeze
@@ -743,7 +762,8 @@ void Decoration::updateShadow()
                          outlineColor.hslSaturationF(),
                          qBound(0.1, outlineColor.lightnessF(), 1.0),
                          s->isAlphaChannelSupported() ? 0.9 : 1.0);
-    outlineColor.lightnessF() >= 0.5 ? outlineColor = outlineColor.darker(170) : outlineColor = outlineColor.lighter(170);
+    outlineColor.lightnessF() >= 0.5 ? outlineColor = outlineColor.darker(lookupOutlineIntensity(m_internalSettings->outlineIntensity()))
+                                     : outlineColor = outlineColor.lighter(lookupOutlineIntensity(m_internalSettings->outlineIntensity()));
 
     // Animated case, no cached shadow object
     if ((m_shadowAnimation->state() == QAbstractAnimation::Running) && (m_shadowOpacity != 0.0) && (m_shadowOpacity != 1.0)) {
@@ -821,36 +841,38 @@ QSharedPointer<KDecoration2::DecorationShadow> Decoration::createShadowObject(co
     painter.drawRoundedRect(innerRect, m_scaledCornerRadius + 0.5, m_scaledCornerRadius + 0.5);
 
     // Draw window outline
-    const qreal outlineWidth = 1.001;
-    const qreal penOffset = outlineWidth / 2;
+    if (lookupOutlineIntensity(m_internalSettings->outlineIntensity()) > 100) {
+        const qreal outlineWidth = 1.001;
+        const qreal penOffset = outlineWidth / 2;
 
-    QRectF outlineRect = innerRect + QMarginsF(penOffset, penOffset, penOffset, penOffset);
-    qreal cornerSize = m_scaledCornerRadius * 2;
-    QRectF cornerRect(outlineRect.x(), outlineRect.y(), cornerSize, cornerSize);
-    QPainterPath outlinePath;
+        QRectF outlineRect = innerRect + QMarginsF(penOffset, penOffset, penOffset, penOffset);
+        qreal cornerSize = m_scaledCornerRadius * 2;
+        QRectF cornerRect(outlineRect.x(), outlineRect.y(), cornerSize, cornerSize);
+        QPainterPath outlinePath;
 
-    outlinePath.arcMoveTo(cornerRect, 180);
-    outlinePath.arcTo(cornerRect, 180, -90);
-    cornerRect.moveTopRight(outlineRect.topRight());
-    outlinePath.arcTo(cornerRect, 90, -90);
+        outlinePath.arcMoveTo(cornerRect, 180);
+        outlinePath.arcTo(cornerRect, 180, -90);
+        cornerRect.moveTopRight(outlineRect.topRight());
+        outlinePath.arcTo(cornerRect, 90, -90);
 
-    // Check if border size is "no borders" or "no side-borders"
-    if (borderSize(true) == 0) {
-        outlinePath.lineTo(outlineRect.bottomRight());
-        outlinePath.lineTo(outlineRect.bottomLeft());
-    } else {
-        cornerRect.moveBottomRight(outlineRect.bottomRight());
-        outlinePath.arcTo(cornerRect, 0, -90);
-        cornerRect.moveBottomLeft(outlineRect.bottomLeft());
-        outlinePath.arcTo(cornerRect, 270, -90);
+        // Check if border size is "no borders" or "no side-borders"
+        if (borderSize(true) == 0) {
+            outlinePath.lineTo(outlineRect.bottomRight());
+            outlinePath.lineTo(outlineRect.bottomLeft());
+        } else {
+            cornerRect.moveBottomRight(outlineRect.bottomRight());
+            outlinePath.arcTo(cornerRect, 0, -90);
+            cornerRect.moveBottomLeft(outlineRect.bottomLeft());
+            outlinePath.arcTo(cornerRect, 270, -90);
+        }
+        outlinePath.closeSubpath();
+
+        painter.setPen(QPen(outlineColor, outlineWidth));
+        painter.setBrush(Qt::NoBrush);
+        painter.setCompositionMode(QPainter::CompositionMode_Source);
+        painter.setRenderHint(QPainter::Antialiasing);
+        painter.drawPath(outlinePath);
     }
-    outlinePath.closeSubpath();
-
-    painter.setPen(QPen(outlineColor, outlineWidth));
-    painter.setBrush(Qt::NoBrush);
-    painter.setCompositionMode(QPainter::CompositionMode_Source);
-    painter.setRenderHint(QPainter::Antialiasing);
-    painter.drawPath(outlinePath);
 
     painter.end();
 
