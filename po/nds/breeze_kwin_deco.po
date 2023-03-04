@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kwin_clients\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-07 00:48+0000\n"
+"POT-Creation-Date: 2023-03-04 02:12+0000\n"
 "PO-Revision-Date: 2014-02-17 11:58+0100\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -202,14 +202,15 @@ msgstr "Finsterachtergrund wiesen"
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: config/ui/breezeconfigurationui.ui:196
 #, kde-format
-msgid "Shadows"
-msgstr "Schaddens"
+msgid "Shadows and Outline"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: config/ui/breezeconfigurationui.ui:202
-#, kde-format
-msgid "Si&ze:"
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "Shadows"
+msgid "Shadow size:"
+msgstr "Schaddens"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:216
@@ -220,10 +221,11 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: config/ui/breezeconfigurationui.ui:244
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Shadows"
 msgctxt "strength of the shadow (from transparent to opaque)"
-msgid "S&trength:"
-msgstr ""
+msgid "Shadow strength:"
+msgstr "Schaddens"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
 #: config/ui/breezeconfigurationui.ui:257
@@ -233,12 +235,57 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/ui/breezeconfigurationui.ui:283
+#, fuzzy, kde-format
+#| msgid "Shadows"
+msgid "Shadow color:"
+msgstr "Schaddens"
+
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#: config/ui/breezeconfigurationui.ui:296
+#, fuzzy, kde-format
+#| msgid "Outline active window title:"
+msgctxt "outline intensity"
+msgid "Outline intensity:"
+msgstr "Ümreet för aktiev Finstertitel:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:310
 #, kde-format
-msgid "Color:"
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "Off"
 msgstr ""
 
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:315
+#, kde-format
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "Low"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:320
+#, kde-format
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "Medium"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:325
+#, kde-format
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "High"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:330
+#, fuzzy, kde-format
+#| msgid "Maximize"
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "Maximum"
+msgstr "Maximeren"
+
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: config/ui/breezeconfigurationui.ui:310
+#: config/ui/breezeconfigurationui.ui:352
 #, kde-format
 msgid "Window-Specific Overrides"
 msgstr "Besünner Instellen för enkelte Finstern"
@@ -502,9 +549,6 @@ msgstr "Bewerken"
 #~ msgid "Enabled"
 #~ msgstr "Anmaakt"
 
-#~ msgid "Outline active window title:"
-#~ msgstr "Ümreet för aktiev Finstertitel:"
-
 #~ msgid "Separator display:"
 #~ msgstr "Trenner wiesen:"
 
@@ -530,9 +574,6 @@ msgstr "Bewerken"
 
 #~ msgid "Minimize"
 #~ msgstr "Minimeren"
-
-#~ msgid "Maximize"
-#~ msgstr "Maximeren"
 
 #~ msgid "Close"
 #~ msgstr "Tomaken"

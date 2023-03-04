@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-07 00:48+0000\n"
+"POT-Creation-Date: 2023-03-04 02:12+0000\n"
 "PO-Revision-Date: 2022-12-01 23:56+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -198,14 +198,15 @@ msgstr "Показване на градиент на фона на заглав
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: config/ui/breezeconfigurationui.ui:196
 #, kde-format
-msgid "Shadows"
-msgstr "Сенки"
+msgid "Shadows and Outline"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: config/ui/breezeconfigurationui.ui:202
-#, kde-format
-msgid "Si&ze:"
-msgstr "Ра&змер:"
+#, fuzzy, kde-format
+#| msgid "Shadows"
+msgid "Shadow size:"
+msgstr "Сенки"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:216
@@ -216,9 +217,11 @@ msgstr "Без"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: config/ui/breezeconfigurationui.ui:244
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "strength of the shadow (from transparent to opaque)"
+#| msgid "S&trength:"
 msgctxt "strength of the shadow (from transparent to opaque)"
-msgid "S&trength:"
+msgid "Shadow strength:"
 msgstr "&Сила:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
@@ -229,12 +232,57 @@ msgstr "%"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/ui/breezeconfigurationui.ui:283
+#, fuzzy, kde-format
+#| msgid "Shadows"
+msgid "Shadow color:"
+msgstr "Сенки"
+
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#: config/ui/breezeconfigurationui.ui:296
 #, kde-format
-msgid "Color:"
-msgstr "Цвят:"
+msgctxt "outline intensity"
+msgid "Outline intensity:"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:310
+#, kde-format
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "Off"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:315
+#, kde-format
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "Low"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:320
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox Button size:"
+#| msgid "Medium"
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "Medium"
+msgstr "Среден"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:325
+#, kde-format
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "High"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:330
+#, kde-format
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "Maximum"
+msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: config/ui/breezeconfigurationui.ui:310
+#: config/ui/breezeconfigurationui.ui:352
 #, kde-format
 msgid "Window-Specific Overrides"
 msgstr "Настройки, специфични за прозореца"
@@ -373,3 +421,9 @@ msgstr "Добавяне"
 #, kde-format
 msgid "Edit"
 msgstr "Редактиране"
+
+#~ msgid "Si&ze:"
+#~ msgstr "Ра&змер:"
+
+#~ msgid "Color:"
+#~ msgstr "Цвят:"

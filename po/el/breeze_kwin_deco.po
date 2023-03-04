@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-07 00:48+0000\n"
+"POT-Creation-Date: 2023-03-04 02:12+0000\n"
 "PO-Revision-Date: 2023-01-04 11:08+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -200,14 +200,15 @@ msgstr "Σχεδιάστε διαβάθμιση φόντου γραμμής τί
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: config/ui/breezeconfigurationui.ui:196
 #, kde-format
-msgid "Shadows"
-msgstr "Σκιές"
+msgid "Shadows and Outline"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: config/ui/breezeconfigurationui.ui:202
-#, kde-format
-msgid "Si&ze:"
-msgstr "&Μέγεθος:"
+#, fuzzy, kde-format
+#| msgid "Shadows"
+msgid "Shadow size:"
+msgstr "Σκιές"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:216
@@ -218,9 +219,11 @@ msgstr "Κανένα"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: config/ui/breezeconfigurationui.ui:244
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "strength of the shadow (from transparent to opaque)"
+#| msgid "S&trength:"
 msgctxt "strength of the shadow (from transparent to opaque)"
-msgid "S&trength:"
+msgid "Shadow strength:"
 msgstr "&Δύναμη:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
@@ -231,12 +234,59 @@ msgstr "%"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/ui/breezeconfigurationui.ui:283
+#, fuzzy, kde-format
+#| msgid "Shadows"
+msgid "Shadow color:"
+msgstr "Σκιές"
+
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#: config/ui/breezeconfigurationui.ui:296
+#, fuzzy, kde-format
+#| msgid "Outline active window title:"
+msgctxt "outline intensity"
+msgid "Outline intensity:"
+msgstr "Περίγραμμα τίτλου ενεργού παραθύρου:"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:310
 #, kde-format
-msgid "Color:"
-msgstr "Χρώμα:"
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "Off"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:315
+#, kde-format
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "Low"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:320
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox Button size:"
+#| msgid "Medium"
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "Medium"
+msgstr "Μεσαίο"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:325
+#, kde-format
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "High"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:330
+#, fuzzy, kde-format
+#| msgid "Maximize"
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "Maximum"
+msgstr "Μεγιστοποίηση"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: config/ui/breezeconfigurationui.ui:310
+#: config/ui/breezeconfigurationui.ui:352
 #, kde-format
 msgid "Window-Specific Overrides"
 msgstr "Αντικαταστάσεις ειδικά για παράθυρα"
@@ -376,6 +426,12 @@ msgstr "Προσθήκη"
 msgid "Edit"
 msgstr "Επεξεργασία"
 
+#~ msgid "Si&ze:"
+#~ msgstr "&Μέγεθος:"
+
+#~ msgid "Color:"
+#~ msgstr "Χρώμα:"
+
 #~ msgid "Add handle to resize windows with no border"
 #~ msgstr ""
 #~ "Προσθήκη χειριστηρίου για αλλαγή μεγέθους παραθύρων χωρίς περίγραμμα"
@@ -512,9 +568,6 @@ msgstr "Επεξεργασία"
 #~ msgid "Enabled"
 #~ msgstr "Ανενεργό"
 
-#~ msgid "Outline active window title:"
-#~ msgstr "Περίγραμμα τίτλου ενεργού παραθύρου:"
-
 #~ msgid "Separator display:"
 #~ msgstr "Εμφάνιση διαχωριστή:"
 
@@ -540,9 +593,6 @@ msgstr "Επεξεργασία"
 
 #~ msgid "Minimize"
 #~ msgstr "Ελαχιστοποίηση"
-
-#~ msgid "Maximize"
-#~ msgstr "Μεγιστοποίηση"
 
 #~ msgid "Close"
 #~ msgstr "Κλείσιμο"
