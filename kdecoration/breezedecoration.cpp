@@ -759,8 +759,7 @@ void Decoration::updateShadow()
 {
     auto s = settings();
     auto c = client();
-    auto outlineColor = c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::TitleBar);
-    auto backgroundColor = c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame);
+    auto outlineColor = c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame);
     // Bind lightness between 0.1 and 1.0 so it can never be completely black.
     // Outlines only have transparency if alpha channel is supported
     outlineColor.setHslF(outlineColor.hslHueF(),
