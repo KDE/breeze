@@ -414,9 +414,3 @@ msgstr ""
 #, kde-format
 msgid "Edit"
 msgstr ""
-
-#~ msgid "Si&ze:"
-#~ msgstr "S&turrodat:"
-
-#~ msgid "Color:"
-#~ msgstr "Ivdni:"
