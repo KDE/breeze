@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kwin_clients\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-04 02:12+0000\n"
-"PO-Revision-Date: 2023-01-30 11:20+0100\n"
+"PO-Revision-Date: 2023-03-06 16:59+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -197,14 +197,13 @@ msgstr "Vykreslit přechod pruhu titulku okna"
 #: config/ui/breezeconfigurationui.ui:196
 #, kde-format
 msgid "Shadows and Outline"
-msgstr ""
+msgstr "Stíny a obrys"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: config/ui/breezeconfigurationui.ui:202
-#, fuzzy, kde-format
-#| msgid "Shadows"
+#, kde-format
 msgid "Shadow size:"
-msgstr "Stíny"
+msgstr "Velikost stínu:"
 
 # žádné parametry funkce v inspektoru funkcí
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
@@ -216,12 +215,10 @@ msgstr "Žádný"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: config/ui/breezeconfigurationui.ui:244
-#, fuzzy, kde-format
-#| msgctxt "strength of the shadow (from transparent to opaque)"
-#| msgid "S&trength:"
+#, kde-format
 msgctxt "strength of the shadow (from transparent to opaque)"
 msgid "Shadow strength:"
-msgstr "Sí&la:"
+msgstr "Síla stínu:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
 #: config/ui/breezeconfigurationui.ui:257
@@ -231,37 +228,34 @@ msgstr "%"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/ui/breezeconfigurationui.ui:283
-#, fuzzy, kde-format
-#| msgid "Shadows"
+#, kde-format
 msgid "Shadow color:"
-msgstr "Stíny"
+msgstr "Barva stínu:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: config/ui/breezeconfigurationui.ui:296
 #, kde-format
 msgctxt "outline intensity"
 msgid "Outline intensity:"
-msgstr ""
+msgstr "Intenzita obrysu:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:310
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Off"
-msgstr ""
+msgstr "Vypnuto"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:315
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Low"
-msgstr ""
+msgstr "Nízká"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:320
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox Button size:"
-#| msgid "Medium"
+#, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Medium"
 msgstr "Střední"
@@ -271,14 +265,14 @@ msgstr "Střední"
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "High"
-msgstr ""
+msgstr "Vysoká"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:330
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Maximum"
-msgstr ""
+msgstr "Maximum"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:352
@@ -420,9 +414,3 @@ msgstr "Přidat"
 #, kde-format
 msgid "Edit"
 msgstr "Upravit"
-
-#~ msgid "Si&ze:"
-#~ msgstr "Veliko&st:"
-
-#~ msgid "Color:"
-#~ msgstr "Barva:"
