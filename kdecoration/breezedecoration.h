@@ -166,46 +166,46 @@ bool Decoration::hasNoSideBorders() const
 
 bool Decoration::isMaximized() const
 {
-    return client().toStrongRef()->isMaximized() && !m_internalSettings->drawBorderOnMaximizedWindows();
+    return client()->isMaximized() && !m_internalSettings->drawBorderOnMaximizedWindows();
 }
 
 bool Decoration::isMaximizedHorizontally() const
 {
-    return client().toStrongRef()->isMaximizedHorizontally() && !m_internalSettings->drawBorderOnMaximizedWindows();
+    return client()->isMaximizedHorizontally() && !m_internalSettings->drawBorderOnMaximizedWindows();
 }
 
 bool Decoration::isMaximizedVertically() const
 {
-    return client().toStrongRef()->isMaximizedVertically() && !m_internalSettings->drawBorderOnMaximizedWindows();
+    return client()->isMaximizedVertically() && !m_internalSettings->drawBorderOnMaximizedWindows();
 }
 
 bool Decoration::isLeftEdge() const
 {
-    const auto c = client().toStrongRef();
+    const auto c = client();
     return (c->isMaximizedHorizontally() || c->adjacentScreenEdges().testFlag(Qt::LeftEdge)) && !m_internalSettings->drawBorderOnMaximizedWindows();
 }
 
 bool Decoration::isRightEdge() const
 {
-    const auto c = client().toStrongRef();
+    const auto c = client();
     return (c->isMaximizedHorizontally() || c->adjacentScreenEdges().testFlag(Qt::RightEdge)) && !m_internalSettings->drawBorderOnMaximizedWindows();
 }
 
 bool Decoration::isTopEdge() const
 {
-    const auto c = client().toStrongRef();
+    const auto c = client();
     return (c->isMaximizedVertically() || c->adjacentScreenEdges().testFlag(Qt::TopEdge)) && !m_internalSettings->drawBorderOnMaximizedWindows();
 }
 
 bool Decoration::isBottomEdge() const
 {
-    const auto c = client().toStrongRef();
+    const auto c = client();
     return (c->isMaximizedVertically() || c->adjacentScreenEdges().testFlag(Qt::BottomEdge)) && !m_internalSettings->drawBorderOnMaximizedWindows();
 }
 
 bool Decoration::hideTitleBar() const
 {
-    return m_internalSettings->hideTitleBar() && !client().toStrongRef()->isShaded();
+    return m_internalSettings->hideTitleBar() && !client()->isShaded();
 }
 
 }
