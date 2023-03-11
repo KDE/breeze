@@ -5,7 +5,7 @@
 # Kim Enkovaara <kim.enkovaara@iki.fi>, 2005.
 # Teemu Rytilahti <teemu.rytilahti@kde-fi.org>, 2008.
 # Teemu Rytilahti <teemu.rytilahti@d5k.net>, 2008.
-# Tommi Nieminen <translator@legisign.org>, 2009, 2010, 2012, 2016, 2017, 2018, 2020.
+# Tommi Nieminen <translator@legisign.org>, 2009, 2010, 2012, 2016, 2017, 2018, 2020, 2022, 2023.
 # Lasse Liehu <lliehu@kolumbus.fi>, 2010, 2011, 2012, 2013, 2014, 2015.
 # Jorma Karvonen <karvonen.jorma@gmail.com>, 2011.
 #
@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kwin_clients\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-07 00:48+0000\n"
-"PO-Revision-Date: 2020-06-28 18:25+0300\n"
+"PO-Revision-Date: 2023-03-08 22:03+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2012-12-01 22:22:29+0000\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -183,10 +183,9 @@ msgstr "Piirrä ympyrä sulkemispainikkeen ympärille"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBorderOnMaximizedWindows)
 #: config/ui/breezeconfigurationui.ui:138
-#, fuzzy, kde-format
-#| msgid "Display window borders for maximized windows"
+#, kde-format
 msgid "Draw border on maximized and tiled windows"
-msgstr "Näytän ikkunan reunus suurennetuissa ikkunoissa"
+msgstr "Näytä suurennetuille ja laatoitetuille ikkunoille reunus"
 
 #. i18n: ectx: property (text), widget (QLabel, drawBorderOnMaximizedWindowsHelpLabel)
 #: config/ui/breezeconfigurationui.ui:163
@@ -196,6 +195,9 @@ msgid ""
 "edges. Scrollbars and window close buttons will shift positions and will not "
 "touch screen edges."
 msgstr ""
+"Tällä asetuksella ikkunoiden kokoa voi muuttaa koskettamalla näytön reunoja. "
+"Vierityspalkit ja ikkunoiden sulkemispainikkeet siirtyvät koskettamasta "
+"näytön reunoja."
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
 #: config/ui/breezeconfigurationui.ui:175
@@ -273,10 +275,9 @@ msgstr "Täsmättävä säännöllinen lauseke: "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, fuzzy, kde-format
-#| msgid "Detect Window Properties"
+#, kde-format
 msgid "Detect Window Properties…"
-msgstr "Tunnista ikkunan ominaisuudet"
+msgstr "Tunnista ikkunan ominaisuudet…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: config/ui/breezeexceptiondialog.ui:83
