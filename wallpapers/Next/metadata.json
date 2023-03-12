@@ -13,6 +13,7 @@
                 "Name[en_GB]": "Andy Betts",
                 "Name[es]": "Andy Betts",
                 "Name[eu]": "Andy Betts",
+                "Name[fi]": "Andy Betts",
                 "Name[fr]": "Andy Betts",
                 "Name[ia]": "Andy Betts",
                 "Name[it]": "Andy Betts",
@@ -42,6 +43,7 @@
         "Name[en_GB]": "Mountain",
         "Name[es]": "Montaña",
         "Name[eu]": "Mendia",
+        "Name[fi]": "Vuori",
         "Name[fr]": "Montagne",
         "Name[ia]": "Mountain (Montania)",
         "Name[it]": "Montagna",
@@ -56,7 +58,7 @@
         "Name[tr]": "Dağ",
         "Name[uk]": "Гора",
         "Name[x-test]": "xxMountainxx",
-        "Name[zh_CN]": "Mountain 山峰"
+        "Name[zh_CN]": "Mountain 雪峰"
     },
     "X-KDE-PlasmaImageWallpaper-AccentColor": {
         "Dark": "#018786",
