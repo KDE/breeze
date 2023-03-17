@@ -4,13 +4,13 @@
 #
 # Abd_Allatif, 2014.
 # Safa Alfulaij <safa1996alfulaij@gmail.com>, ٢٠١٥, ٢٠١٦.
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2021, 2022.
+# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-04 02:12+0000\n"
-"PO-Revision-Date: 2022-11-26 10:58+0400\n"
+"PO-Revision-Date: 2023-03-16 11:40+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -202,14 +202,13 @@ msgstr "ارسم تدرّج خلفيّة لشريط العنوان"
 #: config/ui/breezeconfigurationui.ui:196
 #, kde-format
 msgid "Shadows and Outline"
-msgstr ""
+msgstr "الظلال والحدود"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: config/ui/breezeconfigurationui.ui:202
-#, fuzzy, kde-format
-#| msgid "Shadows"
+#, kde-format
 msgid "Shadow size:"
-msgstr "الظلال"
+msgstr "حجم الظل:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:216
@@ -220,71 +219,64 @@ msgstr "بلا"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: config/ui/breezeconfigurationui.ui:244
-#, fuzzy, kde-format
-#| msgctxt "strength of the shadow (from transparent to opaque)"
-#| msgid "S&trength:"
+#, kde-format
 msgctxt "strength of the shadow (from transparent to opaque)"
 msgid "Shadow strength:"
-msgstr "ال&قوّة:"
+msgstr "القوة الظل:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
 #: config/ui/breezeconfigurationui.ui:257
 #, no-c-format, kde-format
 msgid "%"
-msgstr "%"
+msgstr "٪"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/ui/breezeconfigurationui.ui:283
-#, fuzzy, kde-format
-#| msgid "Shadows"
+#, kde-format
 msgid "Shadow color:"
-msgstr "الظلال"
+msgstr "لون الظل:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: config/ui/breezeconfigurationui.ui:296
-#, fuzzy, kde-format
-#| msgid "Outline active window title:"
+#, kde-format
 msgctxt "outline intensity"
 msgid "Outline intensity:"
-msgstr "حدود عنوان النافذة النشطة"
+msgstr "شدة الحدود:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:310
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Off"
-msgstr ""
+msgstr "معطلة"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:315
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Low"
-msgstr ""
+msgstr "منخفضة"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:320
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox Button size:"
-#| msgid "Medium"
+#, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Medium"
-msgstr "متوسط"
+msgstr "متوسطة"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:325
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "High"
-msgstr ""
+msgstr "عالية"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:330
-#, fuzzy, kde-format
-#| msgid "Maximize"
+#, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Maximum"
-msgstr "تكبير"
+msgstr "القصوى"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:352

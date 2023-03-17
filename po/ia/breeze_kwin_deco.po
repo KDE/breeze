@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Giovanni Sora <g.sora@tiscali.it>, 2014, 2016, 2017, 2019, 2020, 2022.
+# Giovanni Sora <g.sora@tiscali.it>, 2014, 2016, 2017, 2019, 2020, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-04 02:12+0000\n"
-"PO-Revision-Date: 2022-11-29 22:25+0100\n"
+"PO-Revision-Date: 2023-03-16 10:42+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.11.80\n"
+"X-Generator: Lokalize 21.12.1\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -199,14 +199,13 @@ msgstr "Designa gradiente de fundo de barra de titulo"
 #: config/ui/breezeconfigurationui.ui:196
 #, kde-format
 msgid "Shadows and Outline"
-msgstr ""
+msgstr "Umbras e Profilo"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: config/ui/breezeconfigurationui.ui:202
-#, fuzzy, kde-format
-#| msgid "Shadows"
+#, kde-format
 msgid "Shadow size:"
-msgstr "Umbras"
+msgstr "Grandor de Umbra:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:216
@@ -217,12 +216,10 @@ msgstr "Necun"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: config/ui/breezeconfigurationui.ui:244
-#, fuzzy, kde-format
-#| msgctxt "strength of the shadow (from transparent to opaque)"
-#| msgid "S&trength:"
+#, kde-format
 msgctxt "strength of the shadow (from transparent to opaque)"
 msgid "Shadow strength:"
-msgstr "For&tia"
+msgstr "Fortia de Umbra:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
 #: config/ui/breezeconfigurationui.ui:257
@@ -232,38 +229,34 @@ msgstr "%"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/ui/breezeconfigurationui.ui:283
-#, fuzzy, kde-format
-#| msgid "Shadows"
+#, kde-format
 msgid "Shadow color:"
-msgstr "Umbras"
+msgstr "Color de Umbra:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: config/ui/breezeconfigurationui.ui:296
-#, fuzzy, kde-format
-#| msgid "Outline active window title:"
+#, kde-format
 msgctxt "outline intensity"
 msgid "Outline intensity:"
-msgstr "Contorna titulo de fenestra active:"
+msgstr "Intensitate de Profilo:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:310
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Off"
-msgstr ""
+msgstr "De-Activate (Off)"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:315
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Low"
-msgstr ""
+msgstr "Basse"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:320
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox Button size:"
-#| msgid "Medium"
+#, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Medium"
 msgstr "Medie"
@@ -273,15 +266,14 @@ msgstr "Medie"
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "High"
-msgstr ""
+msgstr "Alte"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:330
-#, fuzzy, kde-format
-#| msgid "Maximize"
+#, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Maximum"
-msgstr "Maximiza"
+msgstr "Maxime"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:352
