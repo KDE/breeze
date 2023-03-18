@@ -108,7 +108,7 @@ private:
     void createButtons();
     void paintTitleBar(QPainter *painter, const QRect &repaintRegion);
     void updateShadow();
-    QSharedPointer<KDecoration2::DecorationShadow> createShadowObject(const float strengthScale, const QColor &outlineColor);
+    std::shared_ptr<KDecoration2::DecorationShadow> createShadowObject(const float strengthScale, const QColor &outlineColor);
     void setScaledCornerRadius();
 
     //*@name border size

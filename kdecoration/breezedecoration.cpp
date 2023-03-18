@@ -142,8 +142,8 @@ static int g_sDecoCount = 0;
 static int g_shadowSizeEnum = InternalSettings::ShadowLarge;
 static int g_shadowStrength = 255;
 static QColor g_shadowColor = Qt::black;
-static QSharedPointer<KDecoration2::DecorationShadow> g_sShadow;
-static QSharedPointer<KDecoration2::DecorationShadow> g_sShadowInactive;
+static std::shared_ptr<KDecoration2::DecorationShadow> g_sShadow;
+static std::shared_ptr<KDecoration2::DecorationShadow> g_sShadowInactive;
 static int g_lastBorderSize;
 static QColor g_lastOutlineColor;
 
@@ -162,7 +162,7 @@ Decoration::~Decoration()
     g_sDecoCount--;
     if (g_sDecoCount == 0) {
         // last deco destroyed, clean up shadow
-        g_sShadow.clear();
+        g_sShadow.reset();
     }
 }
 
@@ -258,21 +258,21 @@ void Decoration::init()
     reconfigure();
     updateTitleBar();
     auto s = settings();
-    connect(s.data(), &KDecoration2::DecorationSettings::borderSizeChanged, this, &Decoration::recalculateBorders);
+    connect(s.get(), &KDecoration2::DecorationSettings::borderSizeChanged, this, &Decoration::recalculateBorders);
 
     // a change in font might cause the borders to change
-    connect(s.data(), &KDecoration2::DecorationSettings::fontChanged, this, &Decoration::recalculateBorders);
-    connect(s.data(), &KDecoration2::DecorationSettings::spacingChanged, this, &Decoration::recalculateBorders);
+    connect(s.get(), &KDecoration2::DecorationSettings::fontChanged, this, &Decoration::recalculateBorders);
+    connect(s.get(), &KDecoration2::DecorationSettings::spacingChanged, this, &Decoration::recalculateBorders);
 
     // buttons
-    connect(s.data(), &KDecoration2::DecorationSettings::spacingChanged, this, &Decoration::updateButtonsGeometryDelayed);
-    connect(s.data(), &KDecoration2::DecorationSettings::decorationButtonsLeftChanged, this, &Decoration::updateButtonsGeometryDelayed);
-    connect(s.data(), &KDecoration2::DecorationSettings::decorationButtonsRightChanged, this, &Decoration::updateButtonsGeometryDelayed);
+    connect(s.get(), &KDecoration2::DecorationSettings::spacingChanged, this, &Decoration::updateButtonsGeometryDelayed);
+    connect(s.get(), &KDecoration2::DecorationSettings::decorationButtonsLeftChanged, this, &Decoration::updateButtonsGeometryDelayed);
+    connect(s.get(), &KDecoration2::DecorationSettings::decorationButtonsRightChanged, this, &Decoration::updateButtonsGeometryDelayed);
 
     // full reconfiguration
-    connect(s.data(), &KDecoration2::DecorationSettings::reconfigured, this, &Decoration::reconfigure);
-    connect(s.data(), &KDecoration2::DecorationSettings::reconfigured, SettingsProvider::self(), &SettingsProvider::reconfigure, Qt::UniqueConnection);
-    connect(s.data(), &KDecoration2::DecorationSettings::reconfigured, this, &Decoration::updateButtonsGeometryDelayed);
+    connect(s.get(), &KDecoration2::DecorationSettings::reconfigured, this, &Decoration::reconfigure);
+    connect(s.get(), &KDecoration2::DecorationSettings::reconfigured, SettingsProvider::self(), &SettingsProvider::reconfigure, Qt::UniqueConnection);
+    connect(s.get(), &KDecoration2::DecorationSettings::reconfigured, this, &Decoration::updateButtonsGeometryDelayed);
 
     connect(c, &KDecoration2::DecoratedClient::adjacentScreenEdgesChanged, this, &Decoration::recalculateBorders);
     connect(c, &KDecoration2::DecoratedClient::maximizedHorizontallyChanged, this, &Decoration::recalculateBorders);
@@ -773,8 +773,8 @@ void Decoration::updateShadow()
 
     if (g_shadowSizeEnum != m_internalSettings->shadowSize() || g_shadowStrength != m_internalSettings->shadowStrength()
         || g_shadowColor != m_internalSettings->shadowColor()) {
-        g_sShadow.clear();
-        g_sShadowInactive.clear();
+        g_sShadow.reset();
+        g_sShadowInactive.reset();
         g_shadowSizeEnum = m_internalSettings->shadowSize();
         g_shadowStrength = m_internalSettings->shadowStrength();
         g_shadowColor = m_internalSettings->shadowColor();
@@ -792,7 +792,7 @@ void Decoration::updateShadow()
 }
 
 //________________________________________________________________
-QSharedPointer<KDecoration2::DecorationShadow> Decoration::createShadowObject(const float strengthScale, const QColor &outlineColor)
+std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(const float strengthScale, const QColor &outlineColor)
 {
     CompositeShadowParams params = lookupShadowParams(m_internalSettings->shadowSize());
     if (params.isNone()) {
@@ -876,7 +876,7 @@ QSharedPointer<KDecoration2::DecorationShadow> Decoration::createShadowObject(co
 
     painter.end();
 
-    auto ret = QSharedPointer<KDecoration2::DecorationShadow>::create();
+    auto ret = std::make_shared<KDecoration2::DecorationShadow>();
     ret->setPadding(padding);
     ret->setInnerShadowRect(QRect(outerRect.center(), QSize(1, 1)));
     ret->setShadow(shadowTexture);
