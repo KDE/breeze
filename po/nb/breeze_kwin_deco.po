@@ -419,9 +419,3 @@ msgstr "Legg til"
 #, kde-format
 msgid "Edit"
 msgstr "Rediger"
-
-#~ msgid "Si&ze:"
-#~ msgstr "Størrelse"
-
-#~ msgid "Color:"
-#~ msgstr "Farge:"
