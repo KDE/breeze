@@ -15,6 +15,14 @@ K_PLUGIN_CLASS_WITH_JSON(Breeze::ConfigurationModule, "breezestyleconfig.json")
 namespace Breeze
 {
 //_______________________________________________________________________
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+ConfigurationModule::ConfigurationModule(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+    : KCModule(parent, data, args)
+{
+    widget()->layout()->addWidget(m_config = new StyleConfig(widget()));
+    connect(m_config, &StyleConfig::changed, this, &KCModule::setNeedsSave);
+}
+#else
 ConfigurationModule::ConfigurationModule(QWidget *parent, const QVariantList &args)
     : KCModule(parent, args)
 {
@@ -22,6 +30,7 @@ ConfigurationModule::ConfigurationModule(QWidget *parent, const QVariantList &ar
     layout()->addWidget(m_config = new StyleConfig(this));
     connect(m_config, static_cast<void (StyleConfig::*)(bool)>(&StyleConfig::changed), this, static_cast<void (KCModule::*)(bool)>(&KCModule::changed));
 }
+#endif
 
 //_______________________________________________________________________
 void ConfigurationModule::defaults()

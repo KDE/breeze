@@ -16,6 +16,9 @@ kcoreaddons_add_plugin(breezestyleconfig SOURCES
 
 target_link_libraries(breezestyleconfig Qt::Core Qt::Gui Qt::Widgets Qt::DBus)
 target_link_libraries(breezestyleconfig KF${QT_MAJOR_VERSION}::CoreAddons KF${QT_MAJOR_VERSION}::ConfigCore KF${QT_MAJOR_VERSION}::ConfigWidgets KF${QT_MAJOR_VERSION}::I18n)
+if(QT_MAJOR_VERSION STREQUAL "6")
+    target_link_libraries(breezestyleconfig KF${QT_MAJOR_VERSION}::KCMUtils)
+endif()
 kcmutils_generate_desktop_file(breezestyleconfig)
 
 set(breeze_settings_SOURCES main.cpp)
