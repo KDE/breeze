@@ -47,6 +47,7 @@ target_link_libraries(breezedecoration_STATIC
         KF6::GuiAddons
         KF6::I18n
         KF6::IconThemes
+        KF6::KCMUtils
 )
 
 ### build library
@@ -67,6 +68,7 @@ target_link_libraries(breezedecoration
         KF6::GuiAddons
         KF6::I18n
         KF6::IconThemes
+        KF6::KCMUtils
 )
 
 install(TARGETS breezedecoration DESTINATION ${KDE_INSTALL_PLUGINDIR}/org.kde.kdecoration2)

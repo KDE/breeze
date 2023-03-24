@@ -29,7 +29,7 @@ class ConfigWidget : public KCModule
 
 public:
     //* constructor
-    explicit ConfigWidget(QWidget *, const QVariantList &);
+    explicit ConfigWidget(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
     //* destructor
     virtual ~ConfigWidget() = default;
@@ -47,10 +47,6 @@ protected Q_SLOTS:
 
     //* update changed state
     virtual void updateChanged();
-
-protected:
-    //* set changed state
-    void setChanged(bool);
 
 private:
     //* ui
