@@ -7,19 +7,20 @@ set(breezecommon_LIB_SRCS
     breezeboxshadowrenderer.cpp
 )
 
-add_library(breezecommon5 ${breezecommon_LIB_SRCS})
+add_library(breezecommon ${breezecommon_LIB_SRCS})
 
-generate_export_header(breezecommon5
+generate_export_header(breezecommon
     BASE_NAME breezecommon
     EXPORT_FILE_NAME breezecommon_export.h)
 
-target_link_libraries(breezecommon5
+target_link_libraries(breezecommon
     PUBLIC
         Qt::Core
         Qt::Gui)
 
-set_target_properties(breezecommon5 PROPERTIES
+set_target_properties(breezecommon PROPERTIES
     VERSION ${PROJECT_VERSION}
-    SOVERSION ${PROJECT_VERSION_MAJOR})
+    SOVERSION ${PROJECT_VERSION_MAJOR}
+    OUTPUT_NAME breezecommon${QT_MAJOR_VERSION})
 
-install(TARGETS breezecommon5 ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)
+install(TARGETS breezecommon ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} LIBRARY NAMELINK_SKIP)

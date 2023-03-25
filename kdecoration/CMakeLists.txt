@@ -61,7 +61,7 @@ set_target_properties(breezedecoration PROPERTIES
 
 target_link_libraries(breezedecoration
     PRIVATE
-        breezecommon5
+        breezecommon
         breezedecoration_STATIC
         KF6::CoreAddons
         KF6::ConfigWidgets

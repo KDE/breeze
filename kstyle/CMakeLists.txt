@@ -101,7 +101,7 @@ elseif (TARGET Qt6::Gui)
     target_link_libraries(breeze Qt6::GuiPrivate)
 endif()
 target_link_libraries(breeze KF${QT_MAJOR_VERSION}::CoreAddons KF${QT_MAJOR_VERSION}::ConfigCore KF${QT_MAJOR_VERSION}::ConfigWidgets KF${QT_MAJOR_VERSION}::GuiAddons KF${QT_MAJOR_VERSION}::IconThemes KF${QT_MAJOR_VERSION}::WindowSystem)
-target_link_libraries(breeze breezecommon5)
+target_link_libraries(breeze breezecommon)
 
 if(KF${QT_MAJOR_VERSION}FrameworkIntegration_FOUND)
     target_link_libraries(breeze KF${QT_MAJOR_VERSION}::Style)
