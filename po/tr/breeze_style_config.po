@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-25 00:45+0000\n"
-"PO-Revision-Date: 2023-01-18 22:31+0300\n"
+"PO-Revision-Date: 2023-03-25 17:15+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: main.cpp:25 main.cpp:29
 #, kde-format
@@ -100,7 +100,7 @@ msgstr "Araç çubuğu öge ayraçlarını çiz"
 #: ui/breezestyleconfig.ui:162
 #, kde-format
 msgid "Draw slider tick marks"
-msgstr "Kaydırıcı onay imleyicilerini çiz"
+msgstr "Kaydırıcı onay imlerini çiz"
 
 #. i18n: ectx: property (text), widget (QCheckBox, _splitterProxyEnabled)
 #: ui/breezestyleconfig.ui:169
@@ -142,13 +142,13 @@ msgstr "Sarma Çubukları"
 #: ui/breezestyleconfig.ui:237
 #, kde-format
 msgid "Bottom arrow button t&ype:"
-msgstr "Aşağ&ı ok düğme türü:"
+msgstr "&Aşağı ok düğmesi türü:"
 
 #. i18n: ectx: property (text), widget (QLabel, _scrollBarSubLineLabel)
 #: ui/breezestyleconfig.ui:250
 #, kde-format
 msgid "&Top arrow button type:"
-msgstr "&Yukarı ok düğme türü:"
+msgstr "&Yukarı ok düğmesi türü:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
