@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-25 00:45+0000\n"
-"PO-Revision-Date: 2023-03-25 17:15+0300\n"
+"PO-Revision-Date: 2023-03-28 17:50+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -57,7 +57,7 @@ msgstr "Her zaman gizle"
 #: ui/breezestyleconfig.ui:90
 #, kde-format
 msgid "Show when Alt key is pressed"
-msgstr "Alt düğmesi basıldığında göster"
+msgstr "Seçenek düğmesi basıldığında göster"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
 #: ui/breezestyleconfig.ui:95
