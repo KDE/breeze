@@ -17,6 +17,10 @@ namespace Breeze
 //* metrics
 namespace Metrics
 {
+// general
+static constexpr int ArrowSize = 10;
+static constexpr int SmallArrowSize = 5;
+
 // frames
 static constexpr int Frame_FrameWidth = 2;
 static constexpr int Frame_FrameRadius = 3;
@@ -37,7 +41,6 @@ static constexpr int MenuItem_ExtraLeftMargin = 4;
 static constexpr int MenuItem_MarginHeight = 3;
 static constexpr int MenuItem_ItemSpacing = 4;
 static constexpr int MenuItem_AcceleratorSpace = 16;
-static constexpr int MenuButton_IndicatorWidth = 20;
 
 // combobox
 static constexpr int ComboBox_FrameWidth = 6;
@@ -58,6 +61,9 @@ static constexpr int Button_ItemSpacing = 4;
 static constexpr int ToolButton_MarginWidth = 6;
 static constexpr int ToolButton_ItemSpacing = 4;
 static constexpr int ToolButton_InlineIndicatorWidth = 12;
+
+// menu button indicator
+static constexpr int MenuButton_IndicatorWidth = 20;
 
 // checkboxes and radio buttons
 static constexpr int CheckBox_Size = 20;
@@ -127,10 +133,10 @@ static constexpr int ToolTip_FrameWidth = 3;
 // list headers
 static constexpr int Header_MarginWidth = 6;
 static constexpr int Header_ItemSpacing = 4;
-static constexpr int Header_ArrowSize = 10;
+static constexpr int Header_ArrowSize = ArrowSize;
 
 // tree view
-static constexpr int ItemView_ArrowSize = 10;
+static constexpr int ItemView_ArrowSize = ArrowSize;
 static constexpr int ItemView_ItemMarginWidth = 3;
 static constexpr int SidePanel_ItemMarginWidth = 4;
 
