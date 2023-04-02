@@ -86,7 +86,6 @@ enum ArrowOrientation {
     ArrowDown,
     ArrowLeft,
     ArrowRight,
-    ArrowDown_Small,
 };
 
 //* button type
