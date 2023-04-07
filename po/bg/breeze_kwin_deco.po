@@ -415,9 +415,3 @@ msgstr "Добавяне"
 #, kde-format
 msgid "Edit"
 msgstr "Редактиране"
-
-#~ msgid "Si&ze:"
-#~ msgstr "Ра&змер:"
-
-#~ msgid "Color:"
-#~ msgstr "Цвят:"
