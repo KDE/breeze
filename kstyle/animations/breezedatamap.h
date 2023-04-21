@@ -101,7 +101,7 @@ public:
     void setEnabled(bool enabled)
     {
         _enabled = enabled;
-        foreach (const Value &value, *this) {
+        for (const Value &value : std::as_const(*this)) {
             if (value) {
                 value.data()->setEnabled(enabled);
             }
@@ -117,7 +117,7 @@ public:
     //* duration
     void setDuration(int duration) const
     {
-        foreach (const Value &value, *this) {
+        for (const Value &value : std::as_const(*this)) {
             if (value) {
                 value.data()->setDuration(duration);
             }

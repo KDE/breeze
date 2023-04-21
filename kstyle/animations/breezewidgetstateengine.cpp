@@ -43,7 +43,7 @@ BaseEngine::WidgetList WidgetStateEngine::registeredWidgets(AnimationModes mode)
     using Value = DataMap<WidgetStateData>::Value;
 
     if (mode & AnimationHover) {
-        foreach (const Value &value, _hoverData) {
+        for (const Value &value : std::as_const(_hoverData)) {
             if (value) {
                 out.insert(value.data()->target().data());
             }
@@ -51,7 +51,7 @@ BaseEngine::WidgetList WidgetStateEngine::registeredWidgets(AnimationModes mode)
     }
 
     if (mode & AnimationFocus) {
-        foreach (const Value &value, _focusData) {
+        for (const Value &value : std::as_const(_focusData)) {
             if (value) {
                 out.insert(value.data()->target().data());
             }
@@ -59,7 +59,7 @@ BaseEngine::WidgetList WidgetStateEngine::registeredWidgets(AnimationModes mode)
     }
 
     if (mode & AnimationEnable) {
-        foreach (const Value &value, _enableData) {
+        for (const Value &value : std::as_const(_enableData)) {
             if (value) {
                 out.insert(value.data()->target().data());
             }
@@ -67,7 +67,7 @@ BaseEngine::WidgetList WidgetStateEngine::registeredWidgets(AnimationModes mode)
     }
 
     if (mode & AnimationPressed) {
-        foreach (const Value &value, _pressedData) {
+        for (const Value &value : std::as_const(_pressedData)) {
             if (value) {
                 out.insert(value.data()->target().data());
             }

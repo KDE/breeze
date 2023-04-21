@@ -491,7 +491,8 @@ void Decoration::updateButtonsGeometry()
     const int bHeight = captionHeight() + (isTopEdge() ? s->smallSpacing() * Metrics::TitleBar_TopMargin : 0);
     const int bWidth = buttonHeight();
     const int verticalOffset = (isTopEdge() ? s->smallSpacing() * Metrics::TitleBar_TopMargin : 0) + (captionHeight() - buttonHeight()) / 2;
-    foreach (const QPointer<KDecoration2::DecorationButton> &button, m_leftButtons->buttons() + m_rightButtons->buttons()) {
+    const auto buttonList = m_leftButtons->buttons() + m_rightButtons->buttons();
+    for (const QPointer<KDecoration2::DecorationButton> &button : buttonList) {
         button.data()->setGeometry(QRectF(QPoint(0, 0), QSizeF(bWidth, bHeight)));
         static_cast<Button *>(button.data())->setOffset(QPointF(0, verticalOffset));
         static_cast<Button *>(button.data())->setIconSize(QSize(bWidth, bWidth));

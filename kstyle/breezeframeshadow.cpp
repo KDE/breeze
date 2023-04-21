@@ -126,7 +126,7 @@ void FrameShadowFactory::removeShadows(QWidget *widget)
     widget->removeEventFilter(this);
 
     const QList<QObject *> children = widget->children();
-    foreach (QObject *child, children) {
+    for (QObject *child : children) {
         if (FrameShadow *shadow = qobject_cast<FrameShadow *>(child)) {
             shadow->hide();
             shadow->setParent(nullptr);
@@ -139,7 +139,7 @@ void FrameShadowFactory::removeShadows(QWidget *widget)
 void FrameShadowFactory::updateShadowsGeometry(const QObject *object, QRect rect) const
 {
     const QList<QObject *> &children = object->children();
-    foreach (QObject *child, children) {
+    for (QObject *child : children) {
         if (FrameShadow *shadow = qobject_cast<FrameShadow *>(child)) {
             shadow->updateGeometry(rect);
         }
@@ -150,7 +150,7 @@ void FrameShadowFactory::updateShadowsGeometry(const QObject *object, QRect rect
 void FrameShadowFactory::raiseShadows(QObject *object) const
 {
     const QList<QObject *> &children = object->children();
-    foreach (QObject *child, children) {
+    for (QObject *child : children) {
         if (FrameShadow *shadow = qobject_cast<FrameShadow *>(child)) {
             shadow->raise();
         }
@@ -161,7 +161,7 @@ void FrameShadowFactory::raiseShadows(QObject *object) const
 void FrameShadowFactory::update(QObject *object) const
 {
     const QList<QObject *> &children = object->children();
-    foreach (QObject *child, children) {
+    for (QObject *child : children) {
         if (FrameShadow *shadow = qobject_cast<FrameShadow *>(child)) {
             shadow->update();
         }
@@ -172,7 +172,7 @@ void FrameShadowFactory::update(QObject *object) const
 void FrameShadowFactory::updateState(const QWidget *widget, bool focus, bool hover, qreal opacity, AnimationMode mode) const
 {
     const QList<QObject *> &children = widget->children();
-    foreach (QObject *child, children) {
+    for (QObject *child : children) {
         if (FrameShadow *shadow = qobject_cast<FrameShadow *>(child)) {
             shadow->updateState(focus, hover, opacity, mode);
         }
