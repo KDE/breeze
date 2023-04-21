@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-07 00:48+0000\n"
-"PO-Revision-Date: 2023-03-27 19:51+0300\n"
+"PO-Revision-Date: 2023-04-20 14:22+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.03.70\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -335,7 +335,7 @@ msgstr "Çok Büyük"
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "Huge"
-msgstr "Devasa"
+msgstr "Kocaman"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:142
@@ -349,7 +349,7 @@ msgstr "En Büyük"
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "Oversized"
-msgstr "Aşırı Büyük"
+msgstr "Devasa"
 
 #. i18n: ectx: property (text), widget (QPushButton, moveUpButton)
 #: config/ui/breezeexceptionlistwidget.ui:70
