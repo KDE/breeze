@@ -699,7 +699,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_ExclusiveIndicatorHeight:
         return Metrics::CheckBox_Size;
 
-    // list heaaders
+    // list headers
     case PM_HeaderMarkSize:
         return Metrics::Header_ArrowSize;
     case PM_HeaderMargin:
