@@ -260,7 +260,12 @@ Style::Style()
 
     dbus.connect(QString(), QStringLiteral("/KWin"), QStringLiteral("org.kde.KWin"), QStringLiteral("reloadConfig"), this, SLOT(configurationChanged()));
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    qApp->installEventFilter(this);
+#else
     connect(qApp, &QApplication::paletteChanged, this, &Style::configurationChanged);
+#endif
+
     // call the slot directly; this initial call will set up things that also
     // need to be reset when the system palette changes
     loadConfiguration();
@@ -1402,6 +1407,10 @@ bool Style::eventFilter(QObject *object, QEvent *event)
     }
 #if QT_VERSION < 0x050D00 // Check if Qt version < 5.13
     else if (object == qApp && event->type() == QEvent::ApplicationPaletteChange) {
+        configurationChanged();
+    }
+#elif QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    else if (object == qApp && event->type() == QEvent::PaletteChange) {
         configurationChanged();
     }
 #endif
