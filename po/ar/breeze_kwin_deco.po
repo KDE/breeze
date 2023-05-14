@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Abd_Allatif, 2014.
-# Safa Alfulaij <safa1996alfulaij@gmail.com>, ٢٠١٥, ٢٠١٦.
+# Safa Alfulaij <safa1996alfulaij@gmail.com>, 2015, 2016.
 # Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
