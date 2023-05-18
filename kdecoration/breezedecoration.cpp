@@ -1375,13 +1375,13 @@ QSharedPointer<KDecoration2::DecorationShadow> Decoration::createShadowObject(co
     innerRectPath.addRect(innerRect);
 
     // if we have no borders we don't have rounded bottom corners, so make a taller rounded rectangle and clip off its bottom
-    if (hasNoBorders() && !c->isShaded())
+    if (hasNoBorders() && !c->isShaded() && !m_internalSettings->roundBottomCornersWhenNoBorders())
         innerRectPotentiallyTaller.adjust(0, 0, 0, m_scaledCornerRadius);
 
     QPainterPath roundedRectMask;
     roundedRectMask.addRoundedRect(innerRectPotentiallyTaller, m_scaledCornerRadius + 0.5, m_scaledCornerRadius + 0.5);
 
-    if (hasNoBorders() && !c->isShaded())
+    if (hasNoBorders() && !c->isShaded() && !m_internalSettings->roundBottomCornersWhenNoBorders())
         roundedRectMask = roundedRectMask.intersected(innerRectPath);
 
     painter.drawPath(roundedRectMask);
@@ -1458,7 +1458,7 @@ QSharedPointer<KDecoration2::DecorationShadow> Decoration::createShadowObject(co
             QRectF outlineRectPotentiallyTaller = outlineRect;
 
             // if we have no borders we don't have rounded bottom corners, so make a taller rounded rectangle and clip off its bottom
-            if (hasNoBorders() && !c->isShaded())
+            if (hasNoBorders() && !c->isShaded() && !m_internalSettings->roundBottomCornersWhenNoBorders())
                 outlineRectPotentiallyTaller = outlineRect.adjusted(0, 0, 0, m_scaledCornerRadius);
 
             p.setWidthF(outlinePenWidth);
@@ -1476,7 +1476,7 @@ QSharedPointer<KDecoration2::DecorationShadow> Decoration::createShadowObject(co
 
             roundedRectOutline.addRoundedRect(outlineRectPotentiallyTaller, cornerRadius, cornerRadius);
 
-            if (hasNoBorders() && !c->isShaded())
+            if (hasNoBorders() && !c->isShaded() && !m_internalSettings->roundBottomCornersWhenNoBorders())
                 roundedRectOutline = roundedRectOutline.intersected(outlineRectPath);
 
             painter.drawPath(roundedRectOutline);
