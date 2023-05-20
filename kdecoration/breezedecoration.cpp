@@ -1006,7 +1006,7 @@ void Decoration::calculateWindowAndTitleBarShapes(const bool windowShapeOnly)
     m_windowPath->clear(); // clear the path for subsequent calls to this function
     if (!c->isShaded()) {
         if (s->isAlphaChannelSupported() && !isMaximized()) {
-            if (hasNoBorders()) { // round at top, square at bottom
+            if (hasNoBorders() && !m_internalSettings->roundBottomCornersWhenNoBorders()) { // round at top, square at bottom
                 *m_windowPath = constructRoundedTopRectangle(rect(), m_scaledCornerRadius);
             } else {
                 m_windowPath->addRoundedRect(rect(), m_scaledCornerRadius, m_scaledCornerRadius);
@@ -1363,7 +1363,7 @@ QSharedPointer<KDecoration2::DecorationShadow> Decoration::createShadowObject(co
     painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
 
     QPainterPath roundedRectMask;
-    if (hasNoBorders() && !c->isShaded()) {
+    if (hasNoBorders() && !m_internalSettings->roundBottomCornersWhenNoBorders() && !c->isShaded()) {
         roundedRectMask = constructRoundedTopRectangle(innerRect, m_scaledCornerRadius + 0.5);
     } else {
         roundedRectMask.addRoundedRect(innerRect, m_scaledCornerRadius + 0.5, m_scaledCornerRadius + 0.5);
@@ -1416,7 +1416,7 @@ QSharedPointer<KDecoration2::DecorationShadow> Decoration::createShadowObject(co
             else
                 cornerRadius = m_scaledCornerRadius + outlineAdjustment; // else round corner slightly more to account for pen width
 
-            if (hasNoBorders() && !c->isShaded()) {
+            if (hasNoBorders() && !m_internalSettings->roundBottomCornersWhenNoBorders() && !c->isShaded()) {
                 outlinePath = constructRoundedTopRectangle(outlineRect, cornerRadius);
             } else {
                 outlinePath.addRoundedRect(outlineRect, cornerRadius, cornerRadius);

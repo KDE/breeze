@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>769</width>
-    <height>652</height>
+    <height>634</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -2282,6 +2282,16 @@ Scrollbars and window close buttons will shift positions and will not touch scre
             </item>
            </layout>
           </item>
+          <item>
+           <widget class="QCheckBox" name="roundBottomCornersWhenNoBorders">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Normally, you can round bottom corners by setting a border in the Window Decoration settings. &lt;/p&gt;&lt;p&gt;This option allows a 3rd party Desktop Effect (e.g. LightlyShaders) to round the bottom corners on a borderless window by clipping the window content.&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="text">
+             <string>Round bottom corners when no borders (requires corresponding Desktop Effect)</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -2333,6 +2343,9 @@ Scrollbars and window close buttons will shift positions and will not touch scre
           </item>
           <item row="0" column="0">
            <layout class="QFormLayout" name="formLayout_6">
+            <property name="fieldGrowthPolicy">
+             <enum>QFormLayout::FieldsStayAtSizeHint</enum>
+            </property>
             <item row="0" column="0">
              <widget class="QLabel" name="label_23">
               <property name="text">
@@ -2991,6 +3004,7 @@ Scrollbars and window close buttons will shift positions and will not touch scre
   <tabstop>blurTransparentTitlebars</tabstop>
   <tabstop>applyOpacityToHeader</tabstop>
   <tabstop>cornerRadius</tabstop>
+  <tabstop>roundBottomCornersWhenNoBorders</tabstop>
   <tabstop>useTitlebarColorForAllBorders</tabstop>
   <tabstop>drawBorderOnMaximizedWindows</tabstop>
   <tabstop>thinWindowOutlineStyle</tabstop>
