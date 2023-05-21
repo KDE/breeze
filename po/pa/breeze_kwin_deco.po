@@ -1,26 +1,26 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# A S Alam <aalam@users.sf.net>, 2014.
+# A S Alam <aalam@users.sf.net>, 2014, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-04 02:12+0000\n"
-"PO-Revision-Date: 2014-06-28 22:23-0500\n"
-"Last-Translator: A S Alam <aalam@users.sf.net>\n"
-"Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
+"PO-Revision-Date: 2023-05-19 20:13-0700\n"
+"Last-Translator: A S Alam <aalam@satluj.org>\n"
+"Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
 msgid "New Exception - Breeze Settings"
-msgstr ""
+msgstr "ਨਵੀਂ ਛੋਟ - ਬਰੀਜ਼ ਸੈਟਿੰਗਾਂ"
 
 #: config/breezeexceptionlistwidget.cpp:136
 #, kde-format
@@ -42,7 +42,7 @@ msgstr ""
 #: config/ui/breezeexceptionlistwidget.ui:91
 #, kde-format
 msgid "Remove"
-msgstr ""
+msgstr "ਹਟਾਓ"
 
 #: config/breezeexceptionlistwidget.cpp:300
 #, kde-format
@@ -57,7 +57,7 @@ msgstr ""
 #: config/breezeexceptionmodel.cpp:17
 #, kde-format
 msgid "Exception Type"
-msgstr ""
+msgstr "ਛੋਟ ਦੀ ਕਿਸਮ"
 
 #: config/breezeexceptionmodel.cpp:17
 #, kde-format
@@ -97,25 +97,25 @@ msgstr ""
 #: config/ui/breezeconfigurationui.ui:53
 #, kde-format
 msgid "Left"
-msgstr ""
+msgstr "ਖੱਬੇ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
 #: config/ui/breezeconfigurationui.ui:58
 #, kde-format
 msgid "Center"
-msgstr ""
+msgstr "ਵਿਚਾਲੇ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
 #: config/ui/breezeconfigurationui.ui:63
 #, kde-format
 msgid "Center (Full Width)"
-msgstr ""
+msgstr "ਵਿਚਾਲੇ (ਪੂਰੀ ਚੌੜਾਈ)"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
 #: config/ui/breezeconfigurationui.ui:68
 #, kde-format
 msgid "Right"
-msgstr ""
+msgstr "ਸੱਜੇ"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: config/ui/breezeconfigurationui.ui:89
@@ -127,7 +127,7 @@ msgstr ""
 #: config/ui/breezeconfigurationui.ui:103
 #, kde-format
 msgid "Tiny"
-msgstr ""
+msgstr "ਨਿੰਮਾ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
@@ -136,7 +136,7 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Small"
-msgstr ""
+msgstr "ਛੋਟਾ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
@@ -145,7 +145,7 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Medium"
-msgstr ""
+msgstr "ਮੱਧਮ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
@@ -154,7 +154,7 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Large"
-msgstr ""
+msgstr "ਵੱਡਾ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
@@ -163,7 +163,7 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Very Large"
-msgstr ""
+msgstr "ਬਹੁਤ ਵੱਡਾ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, outlineCloseButton)
 #: config/ui/breezeconfigurationui.ui:131
@@ -209,7 +209,7 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "None"
-msgstr ""
+msgstr "ਕੋਈ ਨਹੀਂ"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: config/ui/breezeconfigurationui.ui:244
@@ -222,7 +222,7 @@ msgstr ""
 #: config/ui/breezeconfigurationui.ui:257
 #, no-c-format, kde-format
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/ui/breezeconfigurationui.ui:283
@@ -242,35 +242,35 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Off"
-msgstr ""
+msgstr "ਬੰਦ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:315
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Low"
-msgstr ""
+msgstr "ਘੱਟ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:320
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Medium"
-msgstr ""
+msgstr "ਮੱਧਮ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:325
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "High"
-msgstr ""
+msgstr "ਜਿਆਦਾ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:330
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Maximum"
-msgstr ""
+msgstr "ਵੱਧੋ-ਵੱਧ"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:352
@@ -282,7 +282,7 @@ msgstr ""
 #: config/ui/breezeexceptiondialog.ui:14
 #, kde-format
 msgid "Dialog"
-msgstr ""
+msgstr "ਡਾਈਲਾਗ"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/ui/breezeexceptiondialog.ui:20
@@ -331,7 +331,7 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "No Border"
-msgstr ""
+msgstr "ਹਾਸ਼ੀਆ ਨਹੀਂ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:112
@@ -345,28 +345,28 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "Tiny"
-msgstr ""
+msgstr "ਨਿੰਮਾ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:122
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "Normal"
-msgstr ""
+msgstr "ਸਧਾਰਨ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:127
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "Large"
-msgstr ""
+msgstr "ਵੱਡਾ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:132
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "Very Large"
-msgstr ""
+msgstr "ਬਹੁਤ ਵੱਡਾ"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:137
@@ -393,25 +393,25 @@ msgstr ""
 #: config/ui/breezeexceptionlistwidget.ui:70
 #, kde-format
 msgid "Move Up"
-msgstr ""
+msgstr "ਉੱਤੇ ਭੇਜੋ"
 
 #. i18n: ectx: property (text), widget (QPushButton, moveDownButton)
 #: config/ui/breezeexceptionlistwidget.ui:77
 #, kde-format
 msgid "Move Down"
-msgstr ""
+msgstr "ਹੇਠਾਂ ਭੇਜੋ"
 
 #. i18n: ectx: property (text), widget (QPushButton, addButton)
 #: config/ui/breezeexceptionlistwidget.ui:84
-#, fuzzy, kde-format
+#, kde-format
 msgid "Add"
-msgstr "ਸ਼ਾਮਿਲ"
+msgstr "ਜੋੜੋ"
 
 #. i18n: ectx: property (text), widget (QPushButton, editButton)
 #: config/ui/breezeexceptionlistwidget.ui:98
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "ਸੋਧੋ"
 
 #~ msgid "Animations"
 #~ msgstr "ਐਨੀਮੇਸ਼ਨ"
