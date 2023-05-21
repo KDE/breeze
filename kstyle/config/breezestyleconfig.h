@@ -7,6 +7,8 @@
 #ifndef breezestyleconfig_h
 #define breezestyleconfig_h
 
+#include <KPluginMetaData>
+
 #include "ui_breezestyleconfig.h"
 
 namespace Breeze

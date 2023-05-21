@@ -22,7 +22,6 @@ namespace Breeze
 ConfigWidget::ConfigWidget(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : KCModule(parent, data, args)
     , m_configuration(KSharedConfig::openConfig(QStringLiteral("breezerc")))
-    , m_changed(false)
 {
     // configuration
     m_ui.setupUi(widget());

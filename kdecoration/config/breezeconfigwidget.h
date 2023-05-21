@@ -15,6 +15,7 @@
 #include "ui_breezeconfigurationui.h"
 
 #include <KCModule>
+#include <KPluginMetaData>
 #include <KSharedConfig>
 
 #include <QSharedPointer>
