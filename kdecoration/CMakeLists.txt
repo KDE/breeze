@@ -73,4 +73,6 @@ target_link_libraries(breezedecoration
 
 install(TARGETS breezedecoration DESTINATION ${KDE_INSTALL_PLUGINDIR}/org.kde.kdecoration2)
 
-add_subdirectory(config)
+if (TARGET "KF${QT_MAJOR_VERSION}::KCMUtils")
+    add_subdirectory(config)
+endif()
