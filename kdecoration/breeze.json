@@ -105,9 +105,9 @@
             "org.kde.kdecoration2"
         ]
     },
+    "X-KDE-ConfigModule": "kcm_breezedecoration",
     "org.kde.kdecoration2": {
         "blur": false,
-        "kcmodule": true,
         "recommendedBorderSize": "None"
     }
 }

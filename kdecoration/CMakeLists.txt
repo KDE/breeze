@@ -13,44 +13,11 @@ set(breezedecoration_SRCS
     breezebutton.cpp
     breezedecoration.cpp
     breezesettingsprovider.cpp
-)
-
-### config classes
-set(breezedecoration_config_SRCS
     breezeexceptionlist.cpp
-    config/breezeconfigwidget.cpp
-    config/breezedetectwidget.cpp
-    config/breezeexceptiondialog.cpp
-    config/breezeexceptionlistwidget.cpp
-    config/breezeexceptionmodel.cpp
-    config/breezeitemmodel.cpp
-)
-ki18n_wrap_ui(breezedecoration_config_SRCS
-   config/ui/breezeconfigurationui.ui
-   config/ui/breezeexceptiondialog.ui
-   config/ui/breezeexceptionlistwidget.ui
-)
-add_library(breezedecoration_STATIC STATIC ${breezedecoration_config_SRCS})
-# Needed to link this static lib to shared libs
-set_property(TARGET breezedecoration_STATIC PROPERTY POSITION_INDEPENDENT_CODE ON)
-kconfig_add_kcfg_files(breezedecoration_STATIC breezesettings.kcfgc)
-target_link_libraries(breezedecoration_STATIC
-    PUBLIC
-        Qt::Core
-        Qt::Gui
-        Qt::DBus
-        KDecoration2::KDecoration
-    PRIVATE
-        KF6::ConfigCore
-        KF6::CoreAddons
-        KF6::ConfigWidgets
-        KF6::GuiAddons
-        KF6::I18n
-        KF6::IconThemes
-        KF6::KCMUtils
 )
 
 ### build library
+kconfig_add_kcfg_files(breezedecoration_SRCS breezesettings.kcfgc)
 add_library(breezedecoration MODULE
     ${breezedecoration_SRCS}
     ${breezedecoration_config_PART_FORMS_HEADERS})
@@ -62,16 +29,16 @@ set_target_properties(breezedecoration PROPERTIES
 target_link_libraries(breezedecoration
     PRIVATE
         breezecommon
-        breezedecoration_STATIC
+        Qt::DBus
         KF6::CoreAddons
         KF6::ConfigWidgets
         KF6::GuiAddons
         KF6::I18n
         KF6::IconThemes
-        KF6::KCMUtils
+        KDecoration2::KDecoration
 )
 
-install(TARGETS breezedecoration DESTINATION ${KDE_INSTALL_PLUGINDIR}/org.kde.kdecoration2)
+install(TARGETS breezedecoration DESTINATION ${KDE_INSTALL_PLUGINDIR}/${KDECORATION_PLUGIN_DIR})
 
 if (TARGET "KF${QT_MAJOR_VERSION}::KCMUtils")
     add_subdirectory(config)

@@ -10,7 +10,6 @@
 #include "breezedecoration.h"
 
 #include "breezesettingsprovider.h"
-#include "config/breezeconfigwidget.h"
 
 #include "breezebutton.h"
 
@@ -35,8 +34,7 @@
 
 #include <cmath>
 
-K_PLUGIN_FACTORY_WITH_JSON(BreezeDecoFactory, "breeze.json", registerPlugin<Breeze::Decoration>(); registerPlugin<Breeze::Button>();
-                           registerPlugin<Breeze::ConfigWidget>();)
+K_PLUGIN_FACTORY_WITH_JSON(BreezeDecoFactory, "breeze.json", registerPlugin<Breeze::Decoration>(); registerPlugin<Breeze::Button>();)
 
 namespace
 {
