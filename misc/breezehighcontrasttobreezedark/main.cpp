@@ -4,7 +4,7 @@
 
 #include <QDebug>
 
-int main()
+int main(int, char **)
 {
     KConfig globals("kdeglobals");
     KConfigGroup general(&globals, "General");
@@ -20,4 +20,5 @@ int main()
         auto destination = KConfigGroup(&globals, group);
         KConfigGroup(&breezeDark, group).copyTo(&destination, KConfig::Notify);
     }
+    return 0;
 }
