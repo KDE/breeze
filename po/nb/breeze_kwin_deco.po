@@ -204,7 +204,6 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: config/ui/breezeconfigurationui.ui:202
 #, fuzzy, kde-format
-#| msgid "Shadows"
 msgid "Shadow size:"
 msgstr "Skygger"
 
@@ -218,8 +217,6 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: config/ui/breezeconfigurationui.ui:244
 #, fuzzy, kde-format
-#| msgctxt "strength of the shadow (from transparent to opaque)"
-#| msgid "S&trength:"
 msgctxt "strength of the shadow (from transparent to opaque)"
 msgid "Shadow strength:"
 msgstr "S&tyrke:"
@@ -233,7 +230,6 @@ msgstr "%"
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/ui/breezeconfigurationui.ui:283
 #, fuzzy, kde-format
-#| msgid "Shadows"
 msgid "Shadow color:"
 msgstr "Skygger"
 
