@@ -360,7 +360,9 @@ void Decoration::init()
     if (!g_decorationColors)
         ColorTools::generateDecorationColors(c->palette(), true);
     connect(c.data(), &KDecoration2::DecoratedClient::paletteChanged, ColorTools::systemPaletteUpdated);
-
+    
+    reconfigureMain(true);
+    
     // active state change animation
     // It is important start and end value are of the same type, hence 0.0 and not just 0
     m_animation->setStartValue(0.0);
@@ -423,7 +425,6 @@ void Decoration::init()
         call->deleteLater();
     });
 
-    reconfigureMain(true);
     updateTitleBar();
     auto s = settings();
     connect(s.data(), &KDecoration2::DecorationSettings::borderSizeChanged, this, &Decoration::recalculateBorders);
@@ -604,6 +605,7 @@ int Decoration::borderSize(bool bottom) const
 //________________________________________________________________
 void Decoration::reconfigureMain(const bool noUpdateShadow)
 {
+    SettingsProvider::self()->reconfigure();
     m_internalSettings = SettingsProvider::self()->internalSettings(this);
 
     KSharedConfig::Ptr config = KSharedConfig::openConfig();
