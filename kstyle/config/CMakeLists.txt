@@ -22,11 +22,13 @@ endif()
 kcmutils_generate_desktop_file(breezestyleconfig)
 
 set(breeze_settings_SOURCES main.cpp)
-add_executable(breeze-settings5 ${breeze_settings_SOURCES} )
-target_link_libraries(breeze-settings5 Qt::Core Qt::Gui Qt::Widgets )
-target_link_libraries(breeze-settings5 KF${QT_MAJOR_VERSION}::I18n KF${QT_MAJOR_VERSION}::KCMUtils KF${QT_MAJOR_VERSION}::CoreAddons)
+add_executable(breeze-settings ${breeze_settings_SOURCES} )
+target_link_libraries(breeze-settings Qt::Core Qt::Gui Qt::Widgets )
+target_link_libraries(breeze-settings KF${QT_MAJOR_VERSION}::I18n KF${QT_MAJOR_VERSION}::KCMUtils KF${QT_MAJOR_VERSION}::CoreAddons)
 
-install(TARGETS breeze-settings5 ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+set_target_properties(breeze-settings PROPERTIES OUTPUT_NAME breeze-settings${QT_MAJOR_VERSION})
+
+install(TARGETS breeze-settings ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 # icon
 ecm_install_icons(ICONS sc-apps-breeze-settings.svgz
