@@ -361,13 +361,13 @@ msgstr "Fora de mida"
 #: config/ui/breezeexceptionlistwidget.ui:70
 #, kde-format
 msgid "Move Up"
-msgstr "Mou amunt"
+msgstr "Mou cap amunt"
 
 #. i18n: ectx: property (text), widget (QPushButton, moveDownButton)
 #: config/ui/breezeexceptionlistwidget.ui:77
 #, kde-format
 msgid "Move Down"
-msgstr "Mou avall"
+msgstr "Mou cap avall"
 
 #. i18n: ectx: property (text), widget (QPushButton, addButton)
 #: config/ui/breezeexceptionlistwidget.ui:84
