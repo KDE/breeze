@@ -100,10 +100,7 @@
         "Name[uk]": "Breeze",
         "Name[x-test]": "xxBreezexx",
         "Name[zh_CN]": "Breeze 微风",
-        "Name[zh_TW]": "Breeze",
-        "ServiceTypes": [
-            "org.kde.kdecoration2"
-        ]
+        "Name[zh_TW]": "Breeze"
     },
     "X-KDE-ConfigModule": "kcm_breezedecoration",
     "org.kde.kdecoration2": {
