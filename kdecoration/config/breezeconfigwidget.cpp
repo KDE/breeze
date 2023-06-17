@@ -38,7 +38,7 @@ ConfigWidget::ConfigWidget(QObject *parent, const KPluginMetaData &data, const Q
     connect(m_ui.shadowSize, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()));
     connect(m_ui.shadowStrength, SIGNAL(valueChanged(int)), SLOT(updateChanged()));
     connect(m_ui.shadowColor, &KColorButton::changed, this, &ConfigWidget::updateChanged);
-    connect(m_ui.outlineIntensity, SIGNAL(valueChanged(int)), SLOT(updateChanged()));
+    connect(m_ui.outlineIntensity, SIGNAL(activated(int)), SLOT(updateChanged()));
 
     // track exception changes
     connect(m_ui.exceptions, &ExceptionListWidget::changed, this, &ConfigWidget::updateChanged);
