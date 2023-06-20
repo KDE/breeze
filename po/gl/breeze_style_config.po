@@ -57,13 +57,13 @@ msgstr "Agochar sempre"
 #: ui/breezestyleconfig.ui:90
 #, kde-format
 msgid "Show when Alt key is pressed"
-msgstr "Mostrar ao premer a tecla Alt"
+msgstr "Amosar ao premer a tecla Alt"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
 #: ui/breezestyleconfig.ui:95
 #, kde-format
 msgid "Always show"
-msgstr "Mostrar sempre"
+msgstr "Amosar sempre"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
 #: ui/breezestyleconfig.ui:117
@@ -101,7 +101,7 @@ msgstr "Debuxar os separadores dos elementos das barras de ferramentas."
 #: ui/breezestyleconfig.ui:162
 #, kde-format
 msgid "Draw slider tick marks"
-msgstr "Mostrar as marcas de valores do desprazador."
+msgstr "Amosar as marcas de valores do desprazador."
 
 #. i18n: ectx: property (text), widget (QCheckBox, _splitterProxyEnabled)
 #: ui/breezestyleconfig.ui:169
@@ -119,20 +119,20 @@ msgstr "Marcos"
 #: ui/breezestyleconfig.ui:183
 #, kde-format
 msgid "Draw frame around dockable panels"
-msgstr "Mostrar un marco arredor de cada panel ancorábel."
+msgstr "Amosar un marco arredor de cada panel ancorábel."
 
 #. i18n: ectx: property (text), widget (QCheckBox, _sidePanelDrawFrame)
 #: ui/breezestyleconfig.ui:190
 #, kde-format
 msgid "Draw frame around side panels"
-msgstr "Mostrar un marco arredor de cada panel lateral."
+msgstr "Amosar un marco arredor de cada panel lateral."
 
 #. i18n: ectx: property (text), widget (QCheckBox, _menuItemDrawThinFocus)
 #: ui/breezestyleconfig.ui:197
 #, kde-format
 msgid "Draw a thin line to indicate focus in menus and menubars"
 msgstr ""
-"Mostrar unha liña delgada para indicar o foco nos menús e barras de menús."
+"Amosar unha liña delgada para indicar o foco nos menús e barras de menús."
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: ui/breezestyleconfig.ui:218
