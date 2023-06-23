@@ -46,7 +46,6 @@ class Mnemonics;
 class ShadowHelper;
 class SplitterFactory;
 class WidgetExplorer;
-class WindowManager;
 class BlurHelper;
 class ToolsAreaManager;
 
@@ -490,9 +489,6 @@ private:
 
     //* blur helper
     BlurHelper *_blurHelper = nullptr;
-
-    //* window manager
-    WindowManager *_windowManager = nullptr;
 
     //* frame shadows
     FrameShadowFactory *_frameShadowFactory = nullptr;

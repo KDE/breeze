@@ -84,7 +84,6 @@ set(breeze_PART_SRCS
     breezestyle.cpp
     breezestyleplugin.cpp
     breezetileset.cpp
-    breezewindowmanager.cpp
     breezetoolsareamanager.cpp
 )
 

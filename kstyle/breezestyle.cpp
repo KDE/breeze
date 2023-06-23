@@ -17,7 +17,6 @@
 #include "breezestyleconfigdata.h"
 #include "breezetoolsareamanager.h"
 #include "breezewidgetexplorer.h"
-#include "breezewindowmanager.h"
 
 #include <KColorUtils>
 #include <KIconLoader>
@@ -223,7 +222,6 @@ Style::Style()
     , _animations(new Animations(this))
     , _mnemonics(new Mnemonics(this))
     , _blurHelper(new BlurHelper(this))
-    , _windowManager(new WindowManager(this))
     , _frameShadowFactory(new FrameShadowFactory(this))
     , _mdiWindowShadowFactory(new MdiWindowShadowFactory(this))
     , _splitterFactory(new SplitterFactory(this))
@@ -287,7 +285,6 @@ void Style::polish(QWidget *widget)
 
     // register widget to animations
     _animations->registerWidget(widget);
-    _windowManager->registerWidget(widget);
     _frameShadowFactory->registerWidget(widget, *_helper);
     _mdiWindowShadowFactory->registerWidget(widget);
     _shadowHelper->registerWidget(widget);
@@ -509,7 +506,6 @@ void Style::unpolish(QWidget *widget)
     _frameShadowFactory->unregisterWidget(widget);
     _mdiWindowShadowFactory->unregisterWidget(widget);
     _shadowHelper->unregisterWidget(widget);
-    _windowManager->unregisterWidget(widget);
     _splitterFactory->unregisterWidget(widget);
     _blurHelper->unregisterWidget(widget);
     _toolsAreaManager->unregisterWidget(widget);
@@ -1799,7 +1795,6 @@ void Style::loadConfiguration()
 
     // reinitialize engines
     _animations->setupEngines();
-    _windowManager->initialize();
 
     // mnemonics
     _mnemonics->setMode(StyleConfigData::mnemonicsMode());
@@ -7768,9 +7763,6 @@ bool Style::isQtQuickControl(const QStyleOption *option, const QWidget *widget) 
 {
 #if BREEZE_HAVE_QTQUICK
     const bool is = (widget == nullptr) && option && option->styleObject && option->styleObject->inherits("QQuickItem");
-    if (is) {
-        _windowManager->registerQuickItem(static_cast<QQuickItem *>(option->styleObject));
-    }
     return is;
 #else
     Q_UNUSED(widget);
