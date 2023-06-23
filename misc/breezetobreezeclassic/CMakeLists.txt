@@ -1,5 +1,3 @@
-find_package(KF${QT_MAJOR_VERSION}ConfigWidgets ${KF_MIN_VERSION} REQUIRED)
-
 add_executable(breezetobreezeclassic main.cpp)
 
 target_link_libraries(breezetobreezeclassic KF${QT_MAJOR_VERSION}::ConfigWidgets)

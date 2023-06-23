@@ -1,7 +1,3 @@
-################# dependencies #################
-### Qt/KDE
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS Widgets)
-
 ################# breezestyle target #################
 set(breezecommon_LIB_SRCS
     breezeboxshadowrenderer.cpp
