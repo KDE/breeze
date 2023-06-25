@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-25 00:45+0000\n"
-"PO-Revision-Date: 2023-05-01 10:59+0200\n"
+"PO-Revision-Date: 2023-06-24 11:04+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #: main.cpp:25 main.cpp:29
 #, kde-format
@@ -95,13 +95,13 @@ msgstr "Centrar os separadores na barra de separadores"
 #: ui/breezestyleconfig.ui:155
 #, kde-format
 msgid "Draw toolbar item separators"
-msgstr "Debuxar os separadores dos elementos das barras de ferramentas."
+msgstr "Debuxar as divisorias dos elementos das barras de ferramentas."
 
 #. i18n: ectx: property (text), widget (QCheckBox, _sliderDrawTickMarks)
 #: ui/breezestyleconfig.ui:162
 #, kde-format
 msgid "Draw slider tick marks"
-msgstr "Amosar as marcas de valores do desprazador."
+msgstr "Amosar as marcas de valores do control esvaradío."
 
 #. i18n: ectx: property (text), widget (QCheckBox, _splitterProxyEnabled)
 #: ui/breezestyleconfig.ui:169
