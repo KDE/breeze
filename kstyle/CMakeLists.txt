@@ -57,19 +57,25 @@ set(breeze_PART_SRCS
 kconfig_add_kcfg_files(breeze_PART_SRCS ../kdecoration/breezesettings.kcfgc)
 kconfig_add_kcfg_files(breeze_PART_SRCS breezestyleconfigdata.kcfgc)
 
-add_library(breeze MODULE ${breeze_PART_SRCS})
 
-target_link_libraries(breeze Qt::Core Qt::Gui Qt::Widgets Qt::DBus)
+add_library(breeze${QT_MAJOR_VERSION} MODULE ${breeze_PART_SRCS})
+
+target_link_libraries(breeze${QT_MAJOR_VERSION}
+    Qt${QT_MAJOR_VERSION}::Core
+    Qt${QT_MAJOR_VERSION}::Gui
+    Qt${QT_MAJOR_VERSION}::Widgets
+    Qt${QT_MAJOR_VERSION}::DBus
+)
+
 if( BREEZE_HAVE_QTQUICK )
-    target_link_libraries(breeze
-        Qt::Quick
+    target_link_libraries(breeze${QT_MAJOR_VERSION} 
+        Qt${QT_MAJOR_VERSION}::Quick
         KF${QT_MAJOR_VERSION}::CoreAddons
         KF${QT_MAJOR_VERSION}::Kirigami2
     )
 endif()
 
-
-target_link_libraries(breeze
+target_link_libraries(breeze${QT_MAJOR_VERSION}
     KF${QT_MAJOR_VERSION}::CoreAddons
     KF${QT_MAJOR_VERSION}::ConfigCore
     KF${QT_MAJOR_VERSION}::ConfigGui
@@ -79,30 +85,31 @@ target_link_libraries(breeze
 )
 
 if(QT_MAJOR_VERSION STREQUAL "5")
-    target_link_libraries(breeze KF5::ConfigWidgets)
+    target_link_libraries(breeze5 KF5::ConfigWidgets)
 else()
-    target_link_libraries(breeze KF6::ColorScheme)
+    target_link_libraries(breeze6 KF6::ColorScheme)
 endif()
 
-target_link_libraries(breeze breezecommon)
+target_link_libraries(breeze${QT_MAJOR_VERSION} breezecommon${QT_MAJOR_VERSION})
 
 if(KF${QT_MAJOR_VERSION}FrameworkIntegration_FOUND)
-    target_link_libraries(breeze KF${QT_MAJOR_VERSION}::Style)
+    target_link_libraries(breeze${QT_MAJOR_VERSION}  KF${QT_MAJOR_VERSION}::Style)
 endif()
+
 
 if (WIN32)
     # As stated in https://docs.microsoft.com/en-us/cpp/c-runtime-library/math-constants M_PI only gets defined
     # when if _USE_MATH_DEFINES is defined
-    target_compile_definitions(breeze PRIVATE _USE_MATH_DEFINES _BSD_SOURCE)
+    target_compile_definitions(breeze${QT_MAJOR_VERSION}  PRIVATE _USE_MATH_DEFINES _BSD_SOURCE)
 endif()
 
 
 ########### install files ###############
-install(TARGETS breeze DESTINATION ${KDE_INSTALL_QTPLUGINDIR}/styles/)
+install(TARGETS breeze${QT_MAJOR_VERSION}  DESTINATION ${KDE_INSTALL_QTPLUGINDIR}/styles/)
 install(FILES breeze.themerc  DESTINATION  ${KDE_INSTALL_DATADIR}/kstyle/themes)
 
 ########### subdirectories ###############
 
-if (TARGET "KF${QT_MAJOR_VERSION}::KCMUtils")
+if (QT_MAJOR_VERSION EQUAL "6" AND TARGET "KF6::KCMUtils")
     add_subdirectory(config)
 endif()

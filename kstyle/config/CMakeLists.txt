@@ -14,19 +14,19 @@ kcoreaddons_add_plugin(breezestyleconfig SOURCES
     INSTALL_NAMESPACE "kstyle_config"
 )
 
-target_link_libraries(breezestyleconfig Qt::Core Qt::Gui Qt::Widgets Qt::DBus)
-target_link_libraries(breezestyleconfig KF${QT_MAJOR_VERSION}::CoreAddons KF${QT_MAJOR_VERSION}::ConfigCore KF${QT_MAJOR_VERSION}::ConfigWidgets KF${QT_MAJOR_VERSION}::I18n)
+target_link_libraries(breezestyleconfig Qt6::Core Qt6::Gui Qt6::Widgets Qt6::DBus)
+target_link_libraries(breezestyleconfig KF6::CoreAddons KF6::ConfigCore KF6::ConfigWidgets KF6::I18n)
 if(QT_MAJOR_VERSION STREQUAL "6")
-    target_link_libraries(breezestyleconfig KF${QT_MAJOR_VERSION}::KCMUtils)
+    target_link_libraries(breezestyleconfig KF6::KCMUtils)
 endif()
 kcmutils_generate_desktop_file(breezestyleconfig)
 
 set(breeze_settings_SOURCES main.cpp)
 add_executable(breeze-settings ${breeze_settings_SOURCES} )
-target_link_libraries(breeze-settings Qt::Core Qt::Gui Qt::Widgets )
-target_link_libraries(breeze-settings KF${QT_MAJOR_VERSION}::I18n KF${QT_MAJOR_VERSION}::KCMUtils KF${QT_MAJOR_VERSION}::CoreAddons)
+target_link_libraries(breeze-settings Qt6::Core Qt6::Gui Qt6::Widgets )
+target_link_libraries(breeze-settings KF6::I18n KF6::KCMUtils KF6::CoreAddons)
 
-set_target_properties(breeze-settings PROPERTIES OUTPUT_NAME breeze-settings${QT_MAJOR_VERSION})
+set_target_properties(breeze-settings PROPERTIES OUTPUT_NAME breeze-settings6)
 
 install(TARGETS breeze-settings ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 

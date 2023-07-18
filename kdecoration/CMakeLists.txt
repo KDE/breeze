@@ -25,8 +25,8 @@ set_target_properties(breezedecoration PROPERTIES
 
 target_link_libraries(breezedecoration
     PRIVATE
-        breezecommon
-        Qt::DBus
+        breezecommon6
+        Qt6::DBus
         KF6::CoreAddons
         KF6::ConfigGui
         KF6::GuiAddons
@@ -37,6 +37,5 @@ target_link_libraries(breezedecoration
 
 install(TARGETS breezedecoration DESTINATION ${KDE_INSTALL_PLUGINDIR}/${KDECORATION_PLUGIN_DIR})
 
-if (TARGET "KF${QT_MAJOR_VERSION}::KCMUtils")
-    add_subdirectory(config)
-endif()
+add_subdirectory(config)
+

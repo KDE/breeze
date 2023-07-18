@@ -18,9 +18,9 @@ kconfig_add_kcfg_files(kcm_breezedecoration ../breezesettings.kcfgc)
 target_include_directories(kcm_breezedecoration PRIVATE ${CMAKE_SOURCE_DIR}/kdecoration ${CMAKE_BINARY_DIR}/kdecoration/)
 target_link_libraries(kcm_breezedecoration
     PUBLIC
-        Qt::Core
-        Qt::Gui
-        Qt::DBus
+        Qt6::Core
+        Qt6::Gui
+        Qt6::DBus
     PRIVATE
         KF6::ConfigCore
         KF6::CoreAddons
@@ -28,6 +28,5 @@ target_link_libraries(kcm_breezedecoration
         KF6::I18n
         KF6::IconThemes
         KF6::KCMUtils
-        breezecommon
 )
 kcmutils_generate_desktop_file(kcm_breezedecoration)
