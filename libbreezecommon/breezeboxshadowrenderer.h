@@ -6,9 +6,6 @@
 
 #pragma once
 
-// own
-#include "breezecommon_export.h"
-
 // Qt
 #include <QColor>
 #include <QImage>
@@ -17,7 +14,7 @@
 
 namespace Breeze
 {
-class BREEZECOMMON_EXPORT BoxShadowRenderer
+class BoxShadowRenderer
 {
 public:
     // Compiler generated constructors & destructor are fine.
