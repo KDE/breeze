@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Shinjo Park <kde@peremen.name>, 2014, 2015, 2016, 2017, 2018, 2020, 2022.
+# Shinjo Park <kde@peremen.name>, 2014, 2015, 2016, 2017, 2018, 2020, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-25 00:45+0000\n"
-"PO-Revision-Date: 2022-02-20 21:48+0100\n"
+"PO-Revision-Date: 2023-07-23 20:23+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.08.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: main.cpp:25 main.cpp:29
 #, kde-format
@@ -38,7 +38,7 @@ msgstr "창 드래그 모드(&I):"
 #: ui/breezestyleconfig.ui:64
 #, kde-format
 msgid "Draw focus indicator in lists"
-msgstr "목록에 초점 표시기 그리기"
+msgstr "목록에 포커스 표시기 그리기"
 
 #. i18n: ectx: property (text), widget (QLabel, _mnemonicsLabel)
 #: ui/breezestyleconfig.ui:71
@@ -128,7 +128,7 @@ msgstr "측면 패널 주위로 프레임 그 리기"
 #: ui/breezestyleconfig.ui:197
 #, kde-format
 msgid "Draw a thin line to indicate focus in menus and menubars"
-msgstr "메뉴 및 메뉴 표시줄에 초점을 나타내는 얇은 선 그리기"
+msgstr "메뉴 및 메뉴 표시줄에 포커스를 나타내는 얇은 선 그리기"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: ui/breezestyleconfig.ui:218
