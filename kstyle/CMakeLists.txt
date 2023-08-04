@@ -56,13 +56,27 @@ set(breeze_PART_SRCS
 
 kconfig_add_kcfg_files(breeze_PART_SRCS ../kdecoration/breezesettings.kcfgc)
 kconfig_add_kcfg_files(breeze_PART_SRCS breezestyleconfigdata.kcfgc)
+
 add_library(breeze MODULE ${breeze_PART_SRCS})
+
 target_link_libraries(breeze Qt::Core Qt::Gui Qt::Widgets Qt::DBus)
 if( BREEZE_HAVE_QTQUICK )
-    target_link_libraries(breeze Qt::Quick KF${QT_MAJOR_VERSION}::CoreAddons KF${QT_MAJOR_VERSION}::Kirigami2)
+    target_link_libraries(breeze
+        Qt::Quick
+        KF${QT_MAJOR_VERSION}::CoreAddons
+        KF${QT_MAJOR_VERSION}::Kirigami2
+    )
 endif()
 
-target_link_libraries(breeze KF${QT_MAJOR_VERSION}::CoreAddons KF${QT_MAJOR_VERSION}::ConfigCore KF${QT_MAJOR_VERSION}::ConfigGui KF${QT_MAJOR_VERSION}::GuiAddons KF${QT_MAJOR_VERSION}::IconThemes KF${QT_MAJOR_VERSION}::WindowSystem)
+
+target_link_libraries(breeze
+    KF${QT_MAJOR_VERSION}::CoreAddons
+    KF${QT_MAJOR_VERSION}::ConfigCore
+    KF${QT_MAJOR_VERSION}::ConfigGui
+    KF${QT_MAJOR_VERSION}::GuiAddons
+    KF${QT_MAJOR_VERSION}::IconThemes
+    KF${QT_MAJOR_VERSION}::WindowSystem
+)
 
 if(QT_MAJOR_VERSION STREQUAL "5")
     target_link_libraries(breeze KF5::ConfigWidgets)
