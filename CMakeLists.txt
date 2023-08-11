@@ -49,6 +49,8 @@ if(WIN32 OR APPLE)
 endif()
 
 if(BUILD_QT6)
+    include(KDEInstallDirs6)
+    include(KDECMakeSettings)
     find_package(Qt6 ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS Widgets DBus)
     find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS
         CoreAddons
@@ -81,6 +83,8 @@ if(BUILD_QT6)
 endif()
 
 if(BUILD_QT5)
+    include(KDEInstallDirs)
+    include(KDECMakeSettings)
     find_package(Qt5 ${QT5_MIN_VERSION} REQUIRED CONFIG COMPONENTS Widgets DBus)
     find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
         CoreAddons
