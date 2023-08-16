@@ -31,6 +31,7 @@ include(GtkUpdateIconCache)
 option(BUILD_QT5 "Build Qt5 style" ON)
 option(BUILD_QT6 "Build with Qt6" ON)
 option(WITH_DECORATIONS "Build Breeze window decorations for KWin" ${BUILD_QT6})
+option(WITH_WALLPAPERS "Install Breeze default wallpapers" ${BUILD_QT6})
 
 set(QT_NO_CREATE_VERSIONLESS_TARGETS ON)
 set(QT_NO_CREATE_VERSIONLESS_FUNCTIONS ON)
@@ -151,17 +152,14 @@ if(BUILD_QT6)
         find_package(KDecoration2 REQUIRED)
         add_subdirectory(kdecoration)
     endif()
+    if (WITH_WALLPAPERS)
+        add_subdirectory(wallpapers)
+    endif()
 
     ki18n_install(po)
 
     unset(QUERY_EXECUTABLE CACHE)
 endif()
-
-option(WITH_WALLPAPERS "Install Breeze default wallpapers" ON)
-if (WITH_WALLPAPERS)
-    add_subdirectory(wallpapers)
-endif()
-
 
 include(ECMSetupVersion)
 ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX BREEZE
