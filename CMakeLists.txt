@@ -49,7 +49,52 @@ if(WIN32 OR APPLE)
     set(WITH_DECORATIONS OFF)
 endif()
 
-if(BUILD_QT6)
+function(build_Qt5)
+    set(QT_MAJOR_VERSION 5)
+    include(KDEInstallDirs5)
+    include(KDECMakeSettings)
+    find_package(Qt5 ${QT5_MIN_VERSION} REQUIRED CONFIG COMPONENTS Widgets DBus)
+    find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
+        CoreAddons
+        Config
+        ConfigWidgets
+        GuiAddons
+        IconThemes
+        WindowSystem)
+
+    find_package(Qt5 ${QT5_MIN_VERSION} OPTIONAL_COMPONENTS Quick)
+    if(${Qt5Quick_FOUND})
+        find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Kirigami2)
+    endif()
+
+    find_package(KF5FrameworkIntegration ${KF5_MIN_VERSION} CONFIG )
+    set_package_properties(KF${QT_MAJOR_VERSION}FrameworkIntegration PROPERTIES
+        DESCRIPTION "KF${QT_MAJOR_VERSION} Framework Integration"
+        URL "https://projects.kde.org/projects/frameworks/frameworkintegration"
+        TYPE OPTIONAL
+        PURPOSE "Required to use KStyle convenience functionalities in style")
+
+    find_package(Qt5 ${QT5_MIN_VERSION} OPTIONAL_COMPONENTS X11Extras)
+    set_package_properties(KF${QT_MAJOR_VERSION}FrameworkIntegration PROPERTIES
+        DESCRIPTION "KF${QT_MAJOR_VERSION} Framework Integration"
+        URL "https://projects.kde.org/projects/frameworks/frameworkintegration"
+        TYPE OPTIONAL
+        PURPOSE "Required to use KStyle convenience functionalities in style")
+
+    set(BREEZE_HAVE_KSTYLE ${KF5FrameworkIntegration_FOUND})
+    set(BREEZE_HAVE_QTQUICK ${Qt5Quick_FOUND})
+
+    add_subdirectory(kstyle kstyle5)
+    add_subdirectory(libbreezecommon libbreezecommon5)
+
+    unset(QUERY_EXECUTABLE CACHE)
+endfunction()
+if(BUILD_QT5)
+    build_Qt5()
+endif()
+
+function(build_Qt6)
+    set(QT_MAJOR_VERSION 6)
     include(KDEInstallDirs6)
     include(KDECMakeSettings)
     find_package(Qt6 ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS Widgets DBus)
@@ -81,57 +126,6 @@ if(BUILD_QT6)
         URL "https://projects.kde.org/projects/frameworks/frameworkintegration"
         TYPE OPTIONAL
         PURPOSE "Required to use KStyle convenience functionalities in style")
-endif()
-
-if(BUILD_QT5)
-    include(KDEInstallDirs)
-    include(KDECMakeSettings)
-    find_package(Qt5 ${QT5_MIN_VERSION} REQUIRED CONFIG COMPONENTS Widgets DBus)
-    find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
-        CoreAddons
-        Config
-        ConfigWidgets
-        GuiAddons
-        IconThemes
-        WindowSystem)
-
-    find_package(Qt5 ${QT5_MIN_VERSION} OPTIONAL_COMPONENTS Quick)
-    if(${Qt5Quick_FOUND})
-        find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Kirigami2)
-    endif()
-
-    find_package(KF5FrameworkIntegration ${KF5_MIN_VERSION} CONFIG )
-    set_package_properties(KF${QT_MAJOR_VERSION}FrameworkIntegration PROPERTIES
-        DESCRIPTION "KF${QT_MAJOR_VERSION} Framework Integration"
-        URL "https://projects.kde.org/projects/frameworks/frameworkintegration"
-        TYPE OPTIONAL
-        PURPOSE "Required to use KStyle convenience functionalities in style")
-
-    find_package(Qt5 ${QT5_MIN_VERSION} OPTIONAL_COMPONENTS X11Extras)
-    set_package_properties(KF${QT_MAJOR_VERSION}FrameworkIntegration PROPERTIES
-        DESCRIPTION "KF${QT_MAJOR_VERSION} Framework Integration"
-        URL "https://projects.kde.org/projects/frameworks/frameworkintegration"
-        TYPE OPTIONAL
-        PURPOSE "Required to use KStyle convenience functionalities in style")
-endif()
-
-if(BUILD_QT5)
-    set(QT_MAJOR_VERSION 5)
-    include(KDEInstallDirs5)
-    include(KDECMakeSettings)
-
-    set(BREEZE_HAVE_KSTYLE ${KF5FrameworkIntegration_FOUND})
-    set(BREEZE_HAVE_QTQUICK ${Qt5Quick_FOUND})
-
-    add_subdirectory(kstyle kstyle5)
-    add_subdirectory(libbreezecommon libbreezecommon5)
-
-    unset(QUERY_EXECUTABLE CACHE)
-endif()
-if(BUILD_QT6)
-    set(QT_MAJOR_VERSION 6)
-    include(KDEInstallDirs6)
-    include(KDECMakeSettings)
 
     set(BREEZE_HAVE_KSTYLE ${KF6FrameworkIntegration_FOUND})
     set(BREEZE_HAVE_QTQUICK ${Qt6Quick_FOUND})
@@ -158,32 +152,33 @@ if(BUILD_QT6)
 
     ki18n_install(po)
 
-    unset(QUERY_EXECUTABLE CACHE)
-endif()
+    # create a Config.cmake and a ConfigVersion.cmake file and install them
+    include(ECMSetupVersion)
+    ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX BREEZE
+        PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/BreezeConfigVersion.cmake"
+    )
+    set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/Breeze")
 
-include(ECMSetupVersion)
-ecm_setup_version(${PROJECT_VERSION} VARIABLE_PREFIX BREEZE
-                  PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/BreezeConfigVersion.cmake"
-                  )
-
-# create a Config.cmake and a ConfigVersion.cmake file and install them
-set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/Breeze")
-
-configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/BreezeConfig.cmake.in"
+    configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/BreezeConfig.cmake.in"
                                   "${CMAKE_CURRENT_BINARY_DIR}/BreezeConfig.cmake"
                                   PATH_VARS KDE_INSTALL_FULL_DATADIR
                                   INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
-                                  )
+    )
+    install(FILES  "${CMAKE_CURRENT_BINARY_DIR}/BreezeConfig.cmake"
+                   "${CMAKE_CURRENT_BINARY_DIR}/BreezeConfigVersion.cmake"
+            DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+            COMPONENT Devel
+    )
+
+    unset(QUERY_EXECUTABLE CACHE)
+endfunction()
+if(BUILD_QT6)
+    build_Qt6()
+endif()
 
 # add clang-format target for all our real source files
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
-
-install(FILES  "${CMAKE_CURRENT_BINARY_DIR}/BreezeConfig.cmake"
-               "${CMAKE_CURRENT_BINARY_DIR}/BreezeConfigVersion.cmake"
-        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-        COMPONENT Devel
-        )
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
