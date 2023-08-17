@@ -9,7 +9,7 @@ This repository contains many parts of Breeze, such as:
 * Color schemes, located under [/colors](/colors).
 * Cursors, located under [/cursors](/cursor).
 * Window decorations, located under [/kdecoration](/kdecoration).
-* Application style, under located [/kstyle](/kstyle).
+* Application style, located under [/kstyle](/kstyle).
 * Wallpapers, located under [/wallpapers](/wallpapers).
 
 ### See Also
