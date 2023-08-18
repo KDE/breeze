@@ -96,8 +96,8 @@ function(build_Qt6)
     include(KDEInstallDirs6)
     include(KDECMakeSettings)
 
-    option(WITH_DECORATIONS "Build Breeze window decorations for KWin")
-    option(WITH_WALLPAPERS "Install Breeze default wallpapers")
+    option(WITH_DECORATIONS "Build Breeze window decorations for KWin" ON)
+    option(WITH_WALLPAPERS "Install Breeze default wallpapers" ON)
 
     find_package(Qt6 ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS Widgets DBus)
     find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
