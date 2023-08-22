@@ -281,6 +281,7 @@ private:
     bool drawIndicatorToolBarSeparatorPrimitive(const QStyleOption *, QPainter *, const QWidget *) const;
     bool drawIndicatorBranchPrimitive(const QStyleOption *, QPainter *, const QWidget *) const;
     bool drawDockWidgetResizeHandlePrimitive(const QStyleOption *, QPainter *, const QWidget *) const;
+    bool drawPanelStatusBarPrimitive(const QStyleOption *, QPainter *, const QWidget *) const;
     bool drawWidgetPrimitive(const QStyleOption *, QPainter *, const QWidget *) const;
 
     //@}
