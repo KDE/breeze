@@ -10,6 +10,7 @@
 #include "breezeblurhelper.h"
 #include "breezeframeshadow.h"
 #include "breezemdiwindowshadow.h"
+#include "breezemetrics.h"
 #include "breezemnemonics.h"
 #include "breezepropertynames.h"
 #include "breezeshadowhelper.h"
@@ -46,13 +47,13 @@
 #include <QRadioButton>
 #include <QScrollBar>
 #include <QSplitterHandle>
+#include <QStackedLayout>
 #include <QTextEdit>
 #include <QToolBar>
 #include <QToolBox>
 #include <QToolButton>
 #include <QTreeView>
 #include <QWidgetAction>
-#include <qnamespace.h>
 
 #if BREEZE_HAVE_QTQUICK
 #include <KCoreAddons>
@@ -563,8 +564,34 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
             }
         }
 
+        if (qobject_cast<const QAbstractScrollArea *>(widget)) {
+            if (widget->parentWidget() && widget->parentWidget()->objectName() == QStringLiteral("centralwidget")) {
+                return 0;
+            }
+            if (widget->parentWidget() && widget->parentWidget()->layout()) {
+                auto layout = widget->parentWidget()->layout();
+
+                if (layout->inherits("QDockWidgetLayout") || layout->inherits("QMainWindowLayout") || qobject_cast<const QStackedLayout *>(layout)) {
+                    return 0;
+                }
+                if (layout->spacing() > 0 && layout->count() > 1) {
+                    return Metrics::Frame_FrameWidth;
+                }
+
+                if (auto grid = qobject_cast<const QGridLayout *>(widget->parentWidget()->layout())) {
+                    if (grid->horizontalSpacing() > 0 || grid->verticalSpacing() > 0) {
+                        return Metrics::Frame_FrameWidth;
+                    }
+                }
+            }
+        }
+
+        if (qobject_cast<const QTabWidget *>(widget)) {
+            return Metrics::Frame_FrameWidth;
+        }
+
         // fallback
-        return Metrics::Frame_FrameWidth;
+        return 0;
 
     case PM_ComboBoxFrameWidth: {
         const auto comboBoxOption(qstyleoption_cast<const QStyleOptionComboBox *>(option));
@@ -5929,10 +5956,9 @@ bool Style::drawShapedFrameControl(const QStyleOption *option, QPainter *painter
             // ComboBox popup frame
             drawFrameMenuPrimitive(option, painter, widget);
             return true;
-
-        } else {
-            break;
         }
+
+        return pixelMetric(PM_DefaultFrameWidth, option, widget) == 0;
     }
 
     default:
