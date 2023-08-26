@@ -21,7 +21,7 @@ struct PropertyNames {
     static const char noSeparator[];
     static const char isTopMenu[];
     static const char bordersSides[];
-    static const char showHandle[];
+    static const char forceFrame[];
 };
 
 }
