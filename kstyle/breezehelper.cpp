@@ -1272,6 +1272,11 @@ void Helper::renderScrollBarHandle(QPainter *painter, const QRect &rect, const Q
 
 void Helper::renderScrollBarGroove(QPainter *painter, const QRect &rect, const QColor &color) const
 {
+    // check for negative size, possible with squeezed controls
+    if (!rect.isValid()) {
+        return;
+    }
+
     // setup painter
     painter->setRenderHint(QPainter::Antialiasing, true);
 
