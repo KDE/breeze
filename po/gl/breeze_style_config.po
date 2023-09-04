@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-25 00:45+0000\n"
-"PO-Revision-Date: 2023-06-24 11:04+0200\n"
+"PO-Revision-Date: 2023-09-03 13:43+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.2\n"
+"X-Generator: Lokalize 23.04.3\n"
 
 #: main.cpp:25 main.cpp:29
 #, kde-format
@@ -76,7 +76,7 @@ msgstr "Arrastrar as xanelas só pola barra do título"
 #, kde-format
 msgid "Drag windows from titlebar, menubar and toolbars"
 msgstr ""
-"Arrastrar as xanelas pola barra do título, a barra do menú e as barras de "
+"Arrastrar as xanelas pola barra do título, a barra de menú e as barras de "
 "ferramentas"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
@@ -89,13 +89,13 @@ msgstr "Arrastrar as xanelas por calquera área baleira"
 #: ui/breezestyleconfig.ui:148
 #, kde-format
 msgid "Center tabbar tabs"
-msgstr "Centrar os separadores na barra de separadores"
+msgstr "Centrar as lapelas na barra de lapelas"
 
 #. i18n: ectx: property (text), widget (QCheckBox, _toolBarDrawItemSeparator)
 #: ui/breezestyleconfig.ui:155
 #, kde-format
 msgid "Draw toolbar item separators"
-msgstr "Debuxar as divisorias dos elementos das barras de ferramentas."
+msgstr "Debuxar os divisores dos elementos das barras de ferramentas."
 
 #. i18n: ectx: property (text), widget (QCheckBox, _sliderDrawTickMarks)
 #: ui/breezestyleconfig.ui:162
@@ -132,7 +132,7 @@ msgstr "Amosar un marco arredor de cada panel lateral."
 #, kde-format
 msgid "Draw a thin line to indicate focus in menus and menubars"
 msgstr ""
-"Amosar unha liña delgada para indicar o foco nos menús e barras de menús."
+"Amosar unha liña delgada para indicar o foco nos menús e barras de menú."
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: ui/breezestyleconfig.ui:218
