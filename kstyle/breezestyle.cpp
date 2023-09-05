@@ -7237,6 +7237,10 @@ bool Style::drawSliderComplexControl(const QStyleOptionComplex *option, QPainter
     // direction
     const bool horizontal(sliderOption->orientation == Qt::Horizontal);
 
+    // retrieve rects of sub controls
+    const auto grooveRect(subControlRect(CC_Slider, sliderOption, SC_SliderGroove, widget));
+    const auto handleRect(subControlRect(CC_Slider, sliderOption, SC_SliderHandle, widget));
+
     // tickmarks
     if (StyleConfigData::sliderDrawTickMarks() && (sliderOption->subControls & SC_SliderTickmarks)) {
         const bool upsideDown(sliderOption->upsideDown);
@@ -7251,7 +7255,6 @@ bool Style::drawSliderComplexControl(const QStyleOptionComplex *option, QPainter
             int current(sliderOption->minimum);
 
             // store tick lines
-            const auto grooveRect(subControlRect(CC_Slider, sliderOption, SC_SliderGroove, widget));
             QList<QLine> tickLines;
             if (horizontal) {
                 if (tickPosition & QSlider::TicksAbove) {
@@ -7311,9 +7314,6 @@ bool Style::drawSliderComplexControl(const QStyleOptionComplex *option, QPainter
 
     // groove
     if (sliderOption->subControls & SC_SliderGroove) {
-        // retrieve groove rect
-        auto grooveRect(subControlRect(CC_Slider, sliderOption, SC_SliderGroove, widget));
-
         // base color
         const auto grooveColor(_helper->alphaColor(palette.color(QPalette::WindowText), 0.2));
 
@@ -7321,9 +7321,6 @@ bool Style::drawSliderComplexControl(const QStyleOptionComplex *option, QPainter
             _helper->renderSliderGroove(painter, grooveRect, grooveColor);
         } else {
             const bool upsideDown(sliderOption->upsideDown);
-
-            // handle rect
-            auto handleRect(subControlRect(CC_Slider, sliderOption, SC_SliderHandle, widget));
 
             // highlight color
             const auto &highlight =
@@ -7356,9 +7353,6 @@ bool Style::drawSliderComplexControl(const QStyleOptionComplex *option, QPainter
 
     // handle
     if (sliderOption->subControls & SC_SliderHandle) {
-        // get rect and center
-        auto handleRect(subControlRect(CC_Slider, sliderOption, SC_SliderHandle, widget));
-
         // handle state
         const bool handleActive(sliderOption->activeSubControls & SC_SliderHandle);
         const bool sunken(state & (State_On | State_Sunken));
