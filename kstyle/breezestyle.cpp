@@ -41,6 +41,7 @@
 #include <QMainWindow>
 #include <QMdiArea>
 #include <QMenu>
+#include <QMenuBar>
 #include <QMetaEnum>
 #include <QPainter>
 #include <QPushButton>
@@ -1138,6 +1139,40 @@ bool Style::drawWidgetPrimitive(const QStyleOption *option, QPainter *painter, c
         if (dialog->isFullScreen()) {
             return true;
         }
+        if (auto vLayout = qobject_cast<QVBoxLayout *>(widget->layout())) {
+            QRect rect(0, 0, widget->width(), 0);
+            const auto color = _toolsAreaManager->palette().brush(widget->isActiveWindow() ? QPalette::Active : QPalette::Inactive, QPalette::Window);
+
+            if (vLayout->menuBar()) {
+                rect.setHeight(rect.height() + vLayout->menuBar()->rect().height());
+            }
+
+            for (int i = 0, count = vLayout->count(); i < count; i++) {
+                const auto layoutItem = vLayout->itemAt(i);
+                if (layoutItem->widget() && qobject_cast<QToolBar *>(layoutItem->widget())) {
+                    rect.setHeight(rect.height() + layoutItem->widget()->rect().height() + vLayout->spacing());
+                } else {
+                    break;
+                }
+            }
+
+            if (rect.height() > 0) {
+                // We found either a QMenuBar or a QToolBar
+
+                // Add contentsMargins + separator
+                rect.setHeight(rect.height() + widget->devicePixelRatio() + vLayout->contentsMargins().top());
+
+                painter->setPen(Qt::transparent);
+                painter->setBrush(color);
+                painter->drawRect(rect);
+
+                painter->setPen(QPen(_helper->separatorColor(_toolsAreaManager->palette()), widget->devicePixelRatio()));
+                painter->drawLine(rect.bottomLeft(), rect.bottomRight());
+
+                return true;
+            }
+        }
+
         painter->setPen(QPen(_helper->separatorColor(_toolsAreaManager->palette()), PenWidth::Frame * widget->devicePixelRatio()));
         painter->drawLine(widget->rect().topLeft(), widget->rect().topRight());
     }
