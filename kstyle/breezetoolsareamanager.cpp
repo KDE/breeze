@@ -70,7 +70,7 @@ QRect ToolsAreaManager::toolsAreaRect(const QMainWindow *window)
         }
     }
     if (itemHeight > 0) {
-        itemHeight += window->devicePixelRatio();
+        itemHeight += 1;
     }
 
     return QRect(0, 0, window->width(), itemHeight);
