@@ -434,9 +434,8 @@ void Decoration::recalculateBorders()
         top += qMax(fm.height(), buttonHeight());
 
         // padding below
-        // extra pixel is used for the active window outline
         const int baseSize = s->smallSpacing();
-        top += baseSize * Metrics::TitleBar_BottomMargin + 1;
+        top += baseSize * Metrics::TitleBar_BottomMargin;
 
         // padding above
         top += baseSize * Metrics::TitleBar_TopMargin;
