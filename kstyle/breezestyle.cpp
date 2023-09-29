@@ -1448,12 +1448,14 @@ bool Style::eventFilter(QObject *object, QEvent *event)
         configurationChanged();
     }
 #endif
-    // cast to QWidget
-    QWidget *widget = static_cast<QWidget *>(object);
-    if (widget->inherits("QAbstractScrollArea") || widget->inherits("KTextEditor::View")) {
-        return eventFilterScrollArea(widget, event);
-    } else if (widget->inherits("QComboBoxPrivateContainer")) {
-        return eventFilterComboBoxContainer(widget, event);
+
+    if (object->isWidgetType()) {
+        QWidget *widget = static_cast<QWidget *>(object);
+        if (widget->inherits("QAbstractScrollArea") || widget->inherits("KTextEditor::View")) {
+            return eventFilterScrollArea(widget, event);
+        } else if (widget->inherits("QComboBoxPrivateContainer")) {
+            return eventFilterComboBoxContainer(widget, event);
+        }
     }
 
     // fallback
