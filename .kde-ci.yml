@@ -37,5 +37,19 @@ Dependencies:
     'frameworks/frameworkintegration': '@latest-kf6'
     'frameworks/kcmutils': '@latest-kf6'
 
+RuntimeDependencies:
+- 'on': ['Linux/Qt5']
+  'require':
+    'plasma/kde-cli-tools': 'Plasma/5.27'
+    'plasma/kwin': 'Plasma/5.27'
+    'plasma/plasma-workspace': 'Plasma/5.27'
+    'sdk/selenium-webdriver-at-spi': '@latest'
+
+- 'on': ['Linux/Qt6']
+  'require':
+    'plasma/kwin': '@same'
+    'plasma/plasma-workspace': '@same'
+    'sdk/selenium-webdriver-at-spi': '@latest-kf6'
+
 Options:
   require-passing-tests-on: [ 'Linux', 'FreeBSD']
