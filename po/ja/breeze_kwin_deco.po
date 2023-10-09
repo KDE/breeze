@@ -425,9 +425,3 @@ msgstr "追加"
 #, kde-format
 msgid "Edit"
 msgstr "編集"
-
-#~ msgid "Si&ze:"
-#~ msgstr "サイズ(&Z):"
-
-#~ msgid "Color:"
-#~ msgstr "色:"
