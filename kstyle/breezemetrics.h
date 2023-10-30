@@ -132,7 +132,7 @@ struct Metrics {
     static constexpr int TabBar_BaseOverlap = 2;
 
     // tab widget
-    static constexpr int TabWidget_MarginWidth = 4;
+    static constexpr int TabWidget_MarginWidth = 3;
 
     // toolbox
     static constexpr int ToolBox_TabMinWidth = 80;
