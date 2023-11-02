@@ -364,7 +364,7 @@ void Style::polish(QWidget *widget)
         // add event filter on dock widgets
         // and alter palette
         widget->setAutoFillBackground(false);
-        widget->setContentsMargins(Metrics::Frame_FrameWidth, Metrics::Frame_FrameWidth, Metrics::Frame_FrameWidth, Metrics::Frame_FrameWidth);
+        widget->setContentsMargins({});
         addEventFilter(widget);
 
     } else if (qobject_cast<QMdiSubWindow *>(widget)) {
@@ -604,9 +604,6 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
         }
 
         if (qobject_cast<const QAbstractScrollArea *>(widget)) {
-            if (widget->parentWidget() && widget->parentWidget()->objectName() == QStringLiteral("centralwidget")) {
-                return 0;
-            }
             if (widget->parentWidget() && widget->parentWidget()->layout()) {
                 auto layout = widget->parentWidget()->layout();
 
@@ -1687,9 +1684,6 @@ bool Style::eventFilterDockWidget(QDockWidget *dockWidget, QEvent *event)
         // render
         if (dockWidget->isFloating()) {
             _helper->renderMenuFrame(&painter, rect, background, outline, false);
-        } else if (StyleConfigData::dockWidgetDrawFrame()
-                   || (dockWidget->features() & (QDockWidget::DockWidgetClosable | QDockWidget::DockWidgetMovable | QDockWidget::DockWidgetFloatable))) {
-            _helper->renderFrame(&painter, rect, background, outline);
         }
     }
 
