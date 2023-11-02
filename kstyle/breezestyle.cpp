@@ -599,7 +599,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
         if (forceFrame.isValid() && !forceFrame.toBool()) {
             return 0;
         }
-        if (widget && (forceFrame.toBool() || widget->property(PropertyNames::bordersSides).isValid())) {
+        if ((forceFrame.isValid() && forceFrame.toBool()) || widget->property(PropertyNames::bordersSides).isValid()) {
             return Metrics::Frame_FrameWidth;
         }
 
@@ -3899,7 +3899,10 @@ bool Style::drawFrameTabWidgetPrimitive(const QStyleOption *option, QPainter *pa
     const auto outline(_helper->frameOutlineColor(palette));
 
     if (const auto bordersSides = widget->property(PropertyNames::bordersSides); bordersSides.isValid()) {
-        rect.adjust(0, 1, 0, 0);
+        // Move separator one pixel down as normal frame tab is supposed to take PM_DefaultFrameWidth
+        // as height
+        rect.adjust(0, pixelMetric(PM_DefaultFrameWidth, option, widget) / 2, 0, 0);
+
         const auto value = bordersSides.value<Qt::Edges>();
         painter->setPen(outline);
         if (value & Qt::TopEdge) {
@@ -6106,6 +6109,8 @@ bool Style::drawShapedFrameControl(const QStyleOption *option, QPainter *painter
             return true;
         }
 
+        // pixelMetric(PM_DefaultFrameWidth) contains heuristics to decide
+        // when to draw a frame and return 0 when we shouldn't draw a frame.
         return pixelMetric(PM_DefaultFrameWidth, option, widget) == 0;
     }
 
@@ -6938,16 +6943,9 @@ bool Style::drawDockWidgetTitleControl(const QStyleOption *option, QPainter *pai
 //______________________________________________________________
 bool Style::drawSplitterControl(const QStyleOption *option, QPainter *painter, const QWidget *widget) const
 {
-    auto rect(option->rect);
-    const auto color(_helper->separatorColor(option->palette));
-    const bool isVertical(option->state & QStyle::State_Horizontal);
-    const auto size = pixelMetric(QStyle::PM_SplitterWidth, option, widget);
-    if (isVertical) {
-        rect.setWidth(size);
-    } else {
-        rect.setHeight(size);
-    }
-    _helper->renderSeparator(painter, rect, color, isVertical);
+    painter->setBrush(_helper->separatorColor(option->palette));
+    painter->setPen(Qt::NoPen);
+    painter->drawRect(option->rect);
     return true;
 }
 //______________________________________________________________
