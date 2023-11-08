@@ -406,6 +406,29 @@ void Style::polish(QWidget *widget)
     } else if (widget->inherits("QTipLabel")) {
         setTranslucentBackground(widget);
 
+    } else if (widget->inherits("KMultiTabBar")) {
+        enum class Position {
+            Left,
+            Right,
+            Top,
+            Bottom,
+        };
+
+        const Position position = static_cast<Position>(widget->property("position").toInt());
+
+        const auto splitterWidth = Metrics::Splitter_SplitterWidth;
+        const auto frameWidth = pixelMetric(QStyle::PM_DefaultFrameWidth, nullptr, widget);
+
+        int left = frameWidth, right = frameWidth;
+        if ((position == Position::Left && widget->layoutDirection() == Qt::LeftToRight)
+            || (position == Position::Right && widget->layoutDirection() == Qt::RightToLeft)) {
+            right += splitterWidth;
+        } else if ((position == Position::Right && widget->layoutDirection() == Qt::LeftToRight)
+                   || (position == Position::Left && widget->layoutDirection() == Qt::RightToLeft)) {
+            left += splitterWidth;
+        }
+        widget->setContentsMargins(left, frameWidth, right, frameWidth);
+
     } else if (qobject_cast<QMainWindow *>(widget)) {
         widget->setAttribute(Qt::WA_StyledBackground);
     } else if (qobject_cast<QDialog *>(widget)) {
@@ -1237,6 +1260,31 @@ bool Style::drawWidgetPrimitive(const QStyleOption *option, QPainter *painter, c
 
         painter->setPen(QPen(_helper->separatorColor(_toolsAreaManager->palette()), PenWidth::Frame * widget->devicePixelRatio()));
         painter->drawLine(widget->rect().topLeft(), widget->rect().topRight());
+    } else if (widget->inherits("KMultiTabBar")) {
+        enum class Position {
+            Left,
+            Right,
+            Top,
+            Bottom,
+        };
+
+        const Position position = static_cast<Position>(widget->property("position").toInt());
+        const auto splitterWidth = Metrics::Splitter_SplitterWidth;
+        QRect rect = option->rect;
+
+        if (position == Position::Top || position == Position::Bottom) {
+            return true;
+        }
+
+        if ((position == Position::Left && widget->layoutDirection() == Qt::LeftToRight)
+            || (position == Position::Right && widget->layoutDirection() == Qt::RightToLeft)) {
+            rect.setX(rect.width() - splitterWidth);
+        }
+
+        rect.setWidth(splitterWidth);
+
+        const auto color(_helper->separatorColor(option->palette));
+        _helper->renderSeparator(painter, rect, color, true);
     }
     return true;
 }
