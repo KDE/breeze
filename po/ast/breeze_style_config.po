@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the breeze package.
 #
-# Enol P. <enolp@softastur.org>, 2023.
+# SPDX-FileCopyrightText: 2023 Enol P. <enolp@softastur.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-25 00:45+0000\n"
-"PO-Revision-Date: 2023-05-03 22:34+0200\n"
+"PO-Revision-Date: 2023-11-11 01:00+0100\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
 "Language: ast\n"
@@ -15,18 +15,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #: main.cpp:25 main.cpp:29
 #, kde-format
 msgid "Breeze Settings"
-msgstr ""
+msgstr "Configuración de Breeze"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: ui/breezestyleconfig.ui:39
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "Xeneral"
 
 #. i18n: ectx: property (text), widget (QLabel, _windowDragLabel)
 #: ui/breezestyleconfig.ui:51
@@ -160,26 +160,26 @@ msgstr ""
 #: ui/breezestyleconfig.ui:269 ui/breezestyleconfig.ui:288
 #, kde-format
 msgid "One Button"
-msgstr ""
+msgstr "Un botón"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
 #: ui/breezestyleconfig.ui:274 ui/breezestyleconfig.ui:293
 #, kde-format
 msgid "Two Buttons"
-msgstr ""
+msgstr "Dos botones"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_5)
 #: ui/breezestyleconfig.ui:315
 #, kde-format
 msgid "Transparency"
-msgstr ""
+msgstr "Tresparencia"
 
 #. i18n: ectx: property (text), widget (QLabel, _menuOpacityTransparentLabel)
 #: ui/breezestyleconfig.ui:336
 #, kde-format
 msgid "Transparent"
-msgstr ""
+msgstr "Tresparente"
 
 #. i18n: ectx: property (text), widget (QLabel, _menuOpacityOpaqueLabel)
 #: ui/breezestyleconfig.ui:362
