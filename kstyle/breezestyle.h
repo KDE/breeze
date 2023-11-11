@@ -30,6 +30,8 @@
 
 #include <functional>
 
+class QDialogButtonBox;
+
 namespace BreezePrivate
 {
 class TabBarData;
@@ -130,6 +132,7 @@ public:
     bool eventFilterDockWidget(QDockWidget *, QEvent *);
     bool eventFilterMdiSubWindow(QMdiSubWindow *, QEvent *);
     bool eventFilterCommandLinkButton(QCommandLinkButton *, QEvent *);
+    bool eventFilterDialogButtonBox(QDialogButtonBox *, QEvent *);
 
     //* install event filter to object, in a unique way
     void addEventFilter(QObject *object)
