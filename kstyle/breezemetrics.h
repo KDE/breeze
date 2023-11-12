@@ -107,6 +107,7 @@ struct Metrics {
     static constexpr int ToolBar_ExtensionWidth = 20;
     static constexpr int ToolBar_ItemMargin = 6;
     static constexpr int ToolBar_ItemSpacing = 0;
+    static constexpr int ToolBar_SeparatorVerticalMargin = 2;
 
     // progressbars
     static constexpr int ProgressBar_BusyIndicatorSize = 14;
