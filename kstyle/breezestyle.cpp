@@ -2409,6 +2409,7 @@ QRect Style::tabWidgetTabBarRect(const QStyleOption *option, const QWidget *widg
     case QTabBar::RoundedNorth:
     case QTabBar::TriangularNorth:
         tabBarRect.moveTop(rect.top());
+        tabBarRect.adjust(-1, 0, 1, 0);
         tabBarRect.setBottom(tabBarRect.bottom() + 1);
         break;
 
@@ -2450,7 +2451,7 @@ QRect Style::tabWidgetTabContentsRect(const QStyleOption *option, const QWidget 
     if (tabOption->tabBarSize.isEmpty()) {
         return option->rect;
     }
-    const auto rect = tabWidgetTabPaneRect(option, widget);
+    auto rect = tabWidgetTabPaneRect(option, widget);
 
     const bool documentMode(tabOption->lineWidth == 0);
     if (documentMode) {
@@ -2458,7 +2459,7 @@ QRect Style::tabWidgetTabContentsRect(const QStyleOption *option, const QWidget 
         switch (tabOption->shape) {
         case QTabBar::RoundedNorth:
         case QTabBar::TriangularNorth:
-            return rect.adjusted(0, Metrics::TabWidget_MarginWidth, 0, 0);
+            return rect.adjusted(0, Metrics::TabWidget_MarginWidth - 1, 0, 0);
 
         case QTabBar::RoundedSouth:
         case QTabBar::TriangularSouth:
@@ -2493,10 +2494,15 @@ QRect Style::tabWidgetTabPaneRect(const QStyleOption *option, const QWidget *) c
     const QSize tabBarSize(tabOption->tabBarSize - QSize(overlap, overlap));
 
     auto rect(option->rect);
+    const bool documentMode(tabOption->lineWidth == 0);
+
     switch (tabOption->shape) {
     case QTabBar::RoundedNorth:
     case QTabBar::TriangularNorth:
         rect.adjust(0, tabBarSize.height(), 0, 0);
+        if (documentMode) {
+            rect.adjust(-1, 0, 1, 0);
+        }
         break;
 
     case QTabBar::RoundedSouth:
