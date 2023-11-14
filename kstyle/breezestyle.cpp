@@ -1233,9 +1233,8 @@ bool Style::drawWidgetPrimitive(const QStyleOption *option, QPainter *painter, c
 {
     Q_UNUSED(option)
     auto parent = widget;
-    if (!_toolsAreaManager->hasHeaderColors() || !_helper->shouldDrawToolsArea(widget)) {
-        return true;
-    }
+    const auto drawBackground = _toolsAreaManager->hasHeaderColors() && _helper->shouldDrawToolsArea(widget);
+
     auto mw = qobject_cast<const QMainWindow *>(widget);
     if (mw && mw == mw->window()) {
         painter->save();
@@ -1255,9 +1254,11 @@ bool Style::drawWidgetPrimitive(const QStyleOption *option, QPainter *painter, c
 
         auto color = _toolsAreaManager->palette().brush(mw->isActiveWindow() ? QPalette::Active : QPalette::Inactive, QPalette::Window);
 
-        painter->setPen(Qt::transparent);
-        painter->setBrush(color);
-        painter->drawRect(rect);
+        if (drawBackground) {
+            painter->setPen(Qt::transparent);
+            painter->setBrush(color);
+            painter->drawRect(rect);
+        }
 
         painter->setPen(_helper->separatorColor(_toolsAreaManager->palette()));
         painter->drawLine(rect.bottomLeft(), rect.bottomRight());
@@ -1290,9 +1291,11 @@ bool Style::drawWidgetPrimitive(const QStyleOption *option, QPainter *painter, c
                 // Add contentsMargins + separator
                 rect.setHeight(rect.height() + widget->devicePixelRatio() + vLayout->contentsMargins().top());
 
-                painter->setPen(Qt::transparent);
-                painter->setBrush(color);
-                painter->drawRect(rect);
+                if (drawBackground) {
+                    painter->setPen(Qt::transparent);
+                    painter->setBrush(color);
+                    painter->drawRect(rect);
+                }
 
                 painter->setPen(QPen(_helper->separatorColor(_toolsAreaManager->palette()), widget->devicePixelRatio()));
                 painter->drawLine(rect.bottomLeft(), rect.bottomRight());
