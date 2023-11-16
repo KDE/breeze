@@ -1306,7 +1306,7 @@ bool Style::drawWidgetPrimitive(const QStyleOption *option, QPainter *painter, c
 
         painter->setPen(QPen(_helper->separatorColor(_toolsAreaManager->palette()), PenWidth::Frame * widget->devicePixelRatio()));
         painter->drawLine(widget->rect().topLeft(), widget->rect().topRight());
-    } else if (widget->inherits("KMultiTabBar")) {
+    } else if (widget && widget->inherits("KMultiTabBar")) {
         enum class Position {
             Left,
             Right,
