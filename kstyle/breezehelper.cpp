@@ -7,12 +7,14 @@
 #include "breezehelper.h"
 
 #include "breeze.h"
+#include "breezemetrics.h"
 #include "breezestyleconfigdata.h"
 
 #include <KColorScheme>
 #include <KColorUtils>
 #include <KIconLoader>
 #include <KWindowSystem>
+#include <qpoint.h>
 #if __has_include(<KX11Extras>)
 #include <KX11Extras>
 #endif
@@ -1305,9 +1307,7 @@ void Helper::renderTabBarTab(QPainter *painter,
                              qreal animation) const
 {
     bool enabled = stateProperties.value("enabled", true);
-    bool visualFocus = stateProperties.value("visualFocus");
     bool hovered = stateProperties.value("hovered");
-    bool down = stateProperties.value("down");
     bool selected = stateProperties.value("selected");
     bool documentMode = stateProperties.value("documentMode");
     bool north = stateProperties.value("north");
@@ -1388,6 +1388,96 @@ void Helper::renderTabBarTab(QPainter *painter,
         painter->setPen(Qt::NoPen);
         QPainterPath path = roundedPath(frameRect, corners, Metrics::Frame_FrameRadius);
         painter->drawPath(path);
+    }
+}
+
+//______________________________________________________________________________
+void Helper::renderTabBarDocumentTab(QPainter *painter,
+                                     const QRect &rect,
+                                     const QPalette &palette,
+                                     const QHash<QByteArray, bool> &stateProperties,
+                                     Corners corners,
+                                     qreal animation) const
+{
+    bool enabled = stateProperties.value("enabled", true);
+    bool visualFocus = stateProperties.value("visualFocus");
+    bool hovered = stateProperties.value("hovered");
+    bool down = stateProperties.value("down");
+    bool selected = stateProperties.value("selected");
+    bool documentMode = stateProperties.value("documentMode");
+    bool north = stateProperties.value("north");
+    bool south = stateProperties.value("south");
+    bool west = stateProperties.value("west");
+    bool east = stateProperties.value("east");
+    bool isFirst = stateProperties.value("isFirst");
+    bool isLast = stateProperties.value("isLast");
+    bool isLeftOfSelected = stateProperties.value("isLeftOfSelected");
+    bool isRightOfSelected = stateProperties.value("isRightOfSelected");
+    bool animated = animation != AnimationData::OpacityInvalid;
+    bool isQtQuickControl = stateProperties.value("isQtQuickControl");
+    bool hasAlteredBackground = stateProperties.value("hasAlteredBackground");
+
+    // setup painter
+    painter->setRenderHint(QPainter::Antialiasing, true);
+    QRectF frameRect = rect;
+    QColor bgBrush;
+    const auto radius = Metrics::TabBar_DocumentTabRadius;
+
+    QColor penColor;
+    if (selected) {
+        if (documentMode && !isQtQuickControl && !hasAlteredBackground) {
+            bgBrush = palette.color(QPalette::Window);
+        } else {
+            bgBrush = palette.color(QPalette::Window);
+        }
+        penColor = KColorUtils::mix(bgBrush.darker(110), palette.color(QPalette::WindowText), 0.25);
+    } else {
+        const auto windowColor = palette.color(QPalette::Window);
+        bgBrush = windowColor.darker(120);
+        const auto hover = alphaColor(hoverColor(palette), 0.2);
+        if (animated) {
+            bgBrush = KColorUtils::mix(bgBrush, hover, animation);
+        } else if (enabled && hovered && !selected) {
+            bgBrush = hover;
+        }
+        penColor = KColorUtils::mix(windowColor.darker(110), palette.color(QPalette::WindowText), 0.25);
+    }
+
+    painter->setPen(Qt::NoPen);
+    painter->setBrush(bgBrush);
+    QPainterPath path = roundedPath(frameRect, corners, selected ? radius : 0);
+    painter->drawPath(path);
+
+    QPen pen(penColor, 0.95);
+    painter->setPen(pen);
+    painter->setBrush(Qt::NoBrush);
+
+    if (selected) {
+        drawExternalBorder(painter, rect, corners, radius);
+    } else {
+        painter->setPen(Qt::NoPen);
+        painter->setBrush(penColor);
+        if (north) {
+            painter->drawLine(frameRect.bottomLeft(), frameRect.bottomRight());
+            QRectF lineRect = frameRect;
+            lineRect.setTop(lineRect.bottom() - 1);
+            painter->drawRect(lineRect);
+        }
+
+        if (!isRightOfSelected && !isFirst) {
+            QRectF lineRect = frameRect;
+            lineRect.setRight(lineRect.x() + 1);
+            lineRect.adjust(0, 0, 0, -1);
+
+            // ensure the background it the right color
+            painter->setBrush(bgBrush);
+            painter->drawRect(lineRect);
+
+            // draw separator
+            lineRect.adjust(0, 4, 0, -3);
+            painter->setBrush(penColor);
+            painter->drawRect(lineRect);
+        }
     }
 }
 
@@ -1602,6 +1692,35 @@ QRectF Helper::strokedRect(const QRectF &rect, const qreal penWidth) const
 }
 
 //______________________________________________________________________________
+void Helper::drawExternalBorder(QPainter *painter, const QRectF &rect, Corners corners, qreal radius) const
+{
+    // Draw external border
+
+    const QSizeF cornerSize(2 * radius, 2 * radius);
+
+    if (corners & CornerTopLeft) {
+        QPainterPath borderPath;
+        borderPath.moveTo(rect.topLeft() + QPointF(radius, -1));
+        borderPath.arcTo(QRectF(rect.topLeft() - QPointF(0, 1), cornerSize), 90, 90);
+        borderPath.lineTo(rect.bottomLeft() - QPointF(0, radius));
+
+        borderPath.arcTo(QRectF(rect.bottomLeft() - QPointF(cornerSize.width(), cornerSize.height()), cornerSize), 0, -90);
+
+        painter->drawPath(borderPath);
+    }
+
+    if (corners & CornerTopRight) {
+        QPainterPath borderPath;
+        borderPath.moveTo(rect.bottomRight() + QPointF(radius, 0));
+        borderPath.arcTo(QRectF(rect.bottomRight() - QPointF(0, cornerSize.height()), cornerSize), 270, -90);
+        borderPath.lineTo(rect.topRight() + QPointF(0, radius));
+        borderPath.arcTo(QRectF(rect.topRight() - QPointF(2 * radius, 1), cornerSize), 0, 90);
+
+        painter->drawPath(borderPath);
+    }
+}
+
+//______________________________________________________________________________
 QPainterPath Helper::roundedPath(const QRectF &rect, Corners corners, qreal radius) const
 {
     QPainterPath path;
@@ -1633,7 +1752,10 @@ QPainterPath Helper::roundedPath(const QRectF &rect, Corners corners, qreal radi
     if (corners & CornerBottomLeft) {
         path.lineTo(rect.bottomLeft() - QPointF(0, radius));
         path.arcTo(QRectF(rect.bottomLeft() - QPointF(0, 2 * radius), cornerSize), 180, 90);
-
+    } else if (corners & CornerTopLeft) {
+        path.lineTo(rect.bottomLeft() - QPointF(0, radius));
+        path.arcTo(QRectF(rect.bottomLeft() - QPointF(radius * 2, radius * 2), cornerSize), 0, -90);
+        path.lineTo(rect.bottomLeft());
     } else {
         path.lineTo(rect.bottomLeft());
     }
@@ -1642,6 +1764,10 @@ QPainterPath Helper::roundedPath(const QRectF &rect, Corners corners, qreal radi
     if (corners & CornerBottomRight) {
         path.lineTo(rect.bottomRight() - QPointF(radius, 0));
         path.arcTo(QRectF(rect.bottomRight() - QPointF(2 * radius, 2 * radius), cornerSize), 270, 90);
+
+    } else if (corners & CornerTopRight) {
+        path.lineTo(rect.bottomRight() + QPointF(radius, 0));
+        path.arcTo(QRectF(rect.bottomRight() - QPointF(0, radius * 2), cornerSize), 270, -90);
 
     } else {
         path.lineTo(rect.bottomRight());

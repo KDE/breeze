@@ -340,6 +340,10 @@ void Style::polish(QWidget *widget)
 
     } else if (qobject_cast<QFrame *>(widget) && widget->parent() && widget->parent()->inherits("KTitleWidget")) {
         widget->setAutoFillBackground(false);
+    } else if (auto tabbar = qobject_cast<QTabBar *>(widget)) {
+        if (tabbar->documentMode()) {
+            tabbar->setExpanding(true);
+        }
     }
 
     if (qobject_cast<QScrollBar *>(widget)) {
@@ -796,7 +800,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
     case PM_TabBarTabHSpace:
         return 2 * Metrics::TabBar_TabMarginWidth;
     case PM_TabBarTabVSpace:
-        return 2 * Metrics::TabBar_TabMarginHeight;
+        return 4 * Metrics::TabBar_TabMarginHeight;
     case PM_TabCloseIndicatorWidth:
     case PM_TabCloseIndicatorHeight:
         return pixelMetric(PM_SmallIconSize, option, widget);
@@ -2436,13 +2440,13 @@ QRect Style::tabWidgetTabBarRect(const QStyleOption *option, const QWidget *widg
         const auto rightButtonRect(visualRect(option, subElementRect(SE_TabWidgetRightCorner, option, widget)));
 
         rect.setLeft(leftButtonRect.width());
-        rect.setRight(rightButtonRect.left() - 1);
+        rect.setRight(rightButtonRect.left());
 
-        tabBarRect.setWidth(qMin(tabBarRect.width(), rect.width() - 2));
+        tabBarRect.setWidth(qMin(tabBarRect.width(), rect.width()));
         if (tabBarAlignment == Qt::AlignCenter) {
             tabBarRect.moveLeft(rect.left() + (rect.width() - tabBarRect.width()) / 2);
         } else {
-            tabBarRect.moveLeft(rect.left() + 1);
+            tabBarRect.moveLeft(rect.left());
         }
 
         tabBarRect = visualRect(option, tabBarRect);
@@ -6667,6 +6671,17 @@ bool Style::drawTabBarTabShapeControl(const QStyleOption *option, QPainter *pain
     const bool south = tabOption->shape == QTabBar::RoundedSouth || tabOption->shape == QTabBar::TriangularSouth;
     const bool west = tabOption->shape == QTabBar::RoundedWest || tabOption->shape == QTabBar::TriangularWest;
     const bool east = tabOption->shape == QTabBar::RoundedEast || tabOption->shape == QTabBar::TriangularEast;
+    bool documentMode = false;
+
+    const auto tabWidget = qobject_cast<const QTabWidget *>(widget);
+    if (tabWidget && tabWidget->documentMode()) {
+        documentMode = true;
+    }
+
+    const auto tabBar = qobject_cast<const QTabBar *>(widget);
+    if (tabBar && tabBar->documentMode()) {
+        documentMode = true;
+    }
 
     // check if tab is being dragged
     const bool isDragged(widget && selected && painter->device() != widget);
@@ -6710,7 +6725,9 @@ bool Style::drawTabBarTabShapeControl(const QStyleOption *option, QPainter *pain
 
     // overlap
     // for QtQuickControls, ovelap is already accounted of in the option. Unlike in the qwidget case
-    const int overlap = isQtQuickControl ? 0 : Metrics::TabBar_TabOverlap;
+    const int overlap = isQtQuickControl ? 0 : (documentMode ? Metrics::TabBar_DocumentTabOverlap : Metrics::TabBar_TabOverlap);
+
+    const int radius = documentMode ? Metrics::TabBar_DocumentTabRadius : Metrics::Frame_FrameRadius;
 
     // adjust rect and define corners based on tabbar orientation
     Corners corners;
@@ -6719,20 +6736,20 @@ bool Style::drawTabBarTabShapeControl(const QStyleOption *option, QPainter *pain
     case QTabBar::TriangularNorth:
         if (selected) {
             corners = CornersTop;
-        } else {
             if (isFirst) {
-                corners |= CornerTopLeft;
+                corners &= ~CornerTopLeft;
             }
             if (isLast) {
-                corners |= CornerTopRight;
+                corners &= ~CornerTopRight;
             }
+        } else {
             if (isRightOfSelected) {
-                rect.adjust(-Metrics::Frame_FrameRadius, 0, 0, 0);
+                rect.adjust(-radius, 0, 0, 0);
+                corners |= CornerTopLeft;
             }
             if (isLeftOfSelected) {
-                rect.adjust(0, 0, Metrics::Frame_FrameRadius, 0);
-            } else if (!isLast) {
-                rect.adjust(0, 0, overlap, 0);
+                rect.adjust(0, 0, radius, 0);
+                corners |= CornerTopRight;
             }
         }
         break;
@@ -6831,14 +6848,21 @@ bool Style::drawTabBarTabShapeControl(const QStyleOption *option, QPainter *pain
     stateProperties["hovered"] = hovered;
     stateProperties["down"] = down;
     stateProperties["selected"] = selected;
-    stateProperties["documentMode"] = true;
     stateProperties["north"] = north;
     stateProperties["south"] = south;
     stateProperties["west"] = west;
     stateProperties["east"] = east;
+    stateProperties["isLeftOfSelected"] = isLeftOfSelected;
+    stateProperties["isRightOfSelected"] = isRightOfSelected;
+    stateProperties["isFirst"] = isFirst;
+    stateProperties["isLast"] = isLast;
     stateProperties["isQtQuickControl"] = isQtQuickControl;
     stateProperties["hasAlteredBackground"] = hasAlteredBackground(widget);
-    _helper->renderTabBarTab(painter, rect, option->palette, stateProperties, corners, animation);
+    if (documentMode) {
+        _helper->renderTabBarDocumentTab(painter, rect, option->palette, stateProperties, corners, animation);
+    } else {
+        _helper->renderTabBarTab(painter, rect, option->palette, stateProperties, corners, animation);
+    }
 
     return true;
 }

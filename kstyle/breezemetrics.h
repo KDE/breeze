@@ -128,8 +128,12 @@ struct Metrics {
     static constexpr int TabBar_TabMinWidth = 80;
     static constexpr int TabBar_TabMinHeight = 30;
     static constexpr int TabBar_TabItemSpacing = 8;
-    static constexpr int TabBar_TabOverlap = 1;
     static constexpr int TabBar_BaseOverlap = 2;
+    static constexpr int TabBar_TabOverlap = 1;
+
+    // Document tabbar
+    static constexpr int TabBar_DocumentTabRadius = 11;
+    static constexpr int TabBar_DocumentTabOverlap = 7;
 
     // tab widget
     static constexpr int TabWidget_MarginWidth = 3;
