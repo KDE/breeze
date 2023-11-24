@@ -2,19 +2,20 @@
 # Roman Paholik <wizzardsk@gmail.com>, 2014, 2015, 2016, 2017.
 # Mthw <jari_45@hotmail.com>, 2018.
 # Matej Mrenica <matejm98mthw@gmail.com>, 2019, 2021, 2023.
+# Ferdinand Galko <galko.ferdinand@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: breeze_kwin_deco\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-04 02:12+0000\n"
-"PO-Revision-Date: 2023-01-11 21:10+0100\n"
-"Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
-"Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2023-11-23 08:47+0100\n"
+"Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
+"Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
@@ -173,10 +174,9 @@ msgstr "Kresliť kružnicu okolo tlačidla zatvorenia"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBorderOnMaximizedWindows)
 #: config/ui/breezeconfigurationui.ui:138
-#, fuzzy, kde-format
-#| msgid "Display window borders for maximized windows"
+#, kde-format
 msgid "Draw border on maximized and tiled windows"
-msgstr "Zobraziť okraje okna pre maximalizované okná"
+msgstr "Kresliť okraj na maximalizovaných a dlaždicovaných oknách"
 
 #. i18n: ectx: property (text), widget (QLabel, drawBorderOnMaximizedWindowsHelpLabel)
 #: config/ui/breezeconfigurationui.ui:163
@@ -186,6 +186,9 @@ msgid ""
 "edges. Scrollbars and window close buttons will shift positions and will not "
 "touch screen edges."
 msgstr ""
+"Toto nastavenie vám umožní meniť veľkosť od okrajov okna, ktoré sa dotýkajú "
+"okrajov obrazovky. Posuvníky a tlačidlá na zatvorenie okna budú posúvať "
+"svoje pozície a nebudú sa dotýkať okrajov obrazovky."
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
 #: config/ui/breezeconfigurationui.ui:175
@@ -197,14 +200,13 @@ msgstr "Kresliť prechod pozadia záhlavia"
 #: config/ui/breezeconfigurationui.ui:196
 #, kde-format
 msgid "Shadows and Outline"
-msgstr ""
+msgstr "Tiene a obrysy"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: config/ui/breezeconfigurationui.ui:202
-#, fuzzy, kde-format
-#| msgid "Shadows"
+#, kde-format
 msgid "Shadow size:"
-msgstr "Tiene"
+msgstr "Veľkosť tieňa:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:216
@@ -215,12 +217,10 @@ msgstr "Žiadne"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: config/ui/breezeconfigurationui.ui:244
-#, fuzzy, kde-format
-#| msgctxt "strength of the shadow (from transparent to opaque)"
-#| msgid "S&trength:"
+#, kde-format
 msgctxt "strength of the shadow (from transparent to opaque)"
 msgid "Shadow strength:"
-msgstr "Sila:"
+msgstr "Sila tieňa:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
 #: config/ui/breezeconfigurationui.ui:257
@@ -230,54 +230,51 @@ msgstr "%"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/ui/breezeconfigurationui.ui:283
-#, fuzzy, kde-format
-#| msgid "Shadows"
+#, kde-format
 msgid "Shadow color:"
-msgstr "Tiene"
+msgstr "Farba tieňa:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: config/ui/breezeconfigurationui.ui:296
 #, kde-format
 msgctxt "outline intensity"
 msgid "Outline intensity:"
-msgstr ""
+msgstr "Intenzita obrysov:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:310
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Off"
-msgstr ""
+msgstr "Vypnuté"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:315
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Low"
-msgstr ""
+msgstr "Nízka"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:320
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox Button size:"
-#| msgid "Medium"
+#, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Medium"
-msgstr "Stredné"
+msgstr "Stredná"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:325
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "High"
-msgstr ""
+msgstr "Vysoká"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:330
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Maximum"
-msgstr ""
+msgstr "Maximálna"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:352
