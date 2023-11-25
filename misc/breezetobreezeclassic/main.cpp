@@ -4,7 +4,7 @@
 int main()
 {
     KConfig globals("kdeglobals");
-    KConfigGroup general(&globals, "General");
+    KConfigGroup general(&globals, QStringLiteral("General"));
     if (general.readEntry(QStringLiteral("ColorScheme")) != QStringLiteral("Breeze")) {
         return 0;
     }

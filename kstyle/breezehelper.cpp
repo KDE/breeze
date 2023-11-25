@@ -48,14 +48,14 @@ Helper::Helper(KSharedConfig::Ptr config, QObject *parent)
     , _decorationConfig(new InternalSettings())
 {
     if (qApp) {
-        connect(qApp, &QApplication::paletteChanged, this, [=]() {
+        connect(qApp, &QApplication::paletteChanged, this, [this]() {
             if (!qApp->property("KDE_COLOR_SCHEME_PATH").isValid()) {
                 return;
             }
             const auto path = qApp->property("KDE_COLOR_SCHEME_PATH").toString();
             if (!path.isEmpty()) {
                 KConfig config(path, KConfig::SimpleConfig);
-                KConfigGroup group(config.group("WM"));
+                KConfigGroup group(config.group(QStringLiteral("WM")));
                 const QPalette palette(QApplication::palette());
                 _activeTitleBarColor = group.readEntry("activeBackground", palette.color(QPalette::Active, QPalette::Highlight));
                 _activeTitleBarTextColor = group.readEntry("activeForeground", palette.color(QPalette::Active, QPalette::HighlightedText));
@@ -94,7 +94,7 @@ void Helper::loadConfig()
     _cachedAutoValid = false;
     _decorationConfig->load();
 
-    KConfigGroup globalGroup(_config->group("WM"));
+    KConfigGroup globalGroup(_config->group(QStringLiteral("WM")));
     _activeTitleBarColor = globalGroup.readEntry("activeBackground", palette.color(QPalette::Active, QPalette::Highlight));
     _activeTitleBarTextColor = globalGroup.readEntry("activeForeground", palette.color(QPalette::Active, QPalette::HighlightedText));
     _inactiveTitleBarColor = globalGroup.readEntry("inactiveBackground", palette.color(QPalette::Disabled, QPalette::Highlight));
@@ -102,7 +102,7 @@ void Helper::loadConfig()
 
     if (const QString colorSchemePath = qApp->property("KDE_COLOR_SCHEME_PATH").toString(); !colorSchemePath.isEmpty()) {
         KConfig config(colorSchemePath, KConfig::SimpleConfig);
-        KConfigGroup appGroup(config.group("WM"));
+        KConfigGroup appGroup(config.group(QStringLiteral("WM")));
         _activeTitleBarColor = appGroup.readEntry("activeBackground", _activeTitleBarColor);
         _activeTitleBarTextColor = appGroup.readEntry("activeForeground", _activeTitleBarTextColor);
         _inactiveTitleBarColor = appGroup.readEntry("inactiveBackground", _inactiveTitleBarColor);
@@ -1310,9 +1310,7 @@ void Helper::renderTabBarTab(QPainter *painter,
                              qreal animation) const
 {
     bool enabled = stateProperties.value("enabled", true);
-    bool visualFocus = stateProperties.value("visualFocus");
     bool hovered = stateProperties.value("hovered");
-    bool down = stateProperties.value("down");
     bool selected = stateProperties.value("selected");
     bool documentMode = stateProperties.value("documentMode");
     bool north = stateProperties.value("north");
@@ -1718,7 +1716,7 @@ bool Helper::shouldDrawToolsArea(const QWidget *widget) const
     static bool isAuto = false;
     static QString borderSize;
     if (!_cachedAutoValid) {
-        KConfigGroup kdecorationGroup(_kwinConfig->group("org.kde.kdecoration2"));
+        KConfigGroup kdecorationGroup(_kwinConfig->group(QStringLiteral("org.kde.kdecoration2")));
         isAuto = kdecorationGroup.readEntry("BorderSizeAuto", true);
         borderSize = kdecorationGroup.readEntry("BorderSize", "Normal");
         _cachedAutoValid = true;

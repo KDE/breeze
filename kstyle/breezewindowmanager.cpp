@@ -115,7 +115,7 @@ protected:
         post some mouseRelease event to the target, in order to counter balance
         the mouse press that triggered the drag. Note that it triggers a resetDrag
         */
-        QMouseEvent mouseEvent(QEvent::MouseButtonRelease, _parent->_dragPoint, Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+        QMouseEvent mouseEvent(QEvent::MouseButtonRelease, _parent->_dragPoint, QCursor::pos(), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
         qApp->sendEvent(_parent->_target.data(), &mouseEvent);
 
         return false;
@@ -314,7 +314,12 @@ bool WindowManager::mousePressEvent(QObject *object, QEvent *event)
     if (auto item = qobject_cast<QQuickItem *>(object)) {
         _quickTarget = item;
         _dragPoint = mouseEvent->pos();
-        _globalDragPoint = mouseEvent->globalPos();
+        _globalDragPoint =
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+            mouseEvent->globalPosition().toPoint();
+#else
+            mouseEvent->globalPos();
+#endif
 
         if (_dragTimer.isActive()) {
             _dragTimer.stop();
@@ -349,7 +354,12 @@ bool WindowManager::mousePressEvent(QObject *object, QEvent *event)
     // save target and drag point
     _target = widget;
     _dragPoint = position;
-    _globalDragPoint = mouseEvent->globalPos();
+    _globalDragPoint =
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        mouseEvent->globalPosition().toPoint();
+#else
+        mouseEvent->globalPos();
+#endif
     _dragAboutToStart = true;
 
     // send a move event to the current child with same position
@@ -360,7 +370,14 @@ bool WindowManager::mousePressEvent(QObject *object, QEvent *event)
     } else {
         child = widget;
     }
-    QMouseEvent localMouseEvent(QEvent::MouseMove, localPoint, Qt::NoButton, Qt::LeftButton, Qt::NoModifier);
+    QMouseEvent localMouseEvent(QEvent::MouseMove,
+                                localPoint,
+#if QT_VERSION >= QT_VERSION_CHECK(6, 4, 0)
+                                QCursor::pos(),
+#endif
+                                Qt::NoButton,
+                                Qt::LeftButton,
+                                Qt::NoModifier);
     localMouseEvent.setTimestamp(mouseEvent->timestamp());
     qApp->sendEvent(child, &localMouseEvent);
 
@@ -383,6 +400,12 @@ bool WindowManager::mouseMoveEvent(QObject *object, QEvent *event)
     if (mouseEvent->source() != Qt::MouseEventNotSynthesized) {
         return false;
     }
+    auto eventPos =
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        mouseEvent->globalPosition().toPoint();
+#else
+        mouseEvent->globalPos();
+#endif
     if (!_dragInProgress) {
         if (_dragAboutToStart) {
             if (mouseEvent->pos() == _dragPoint) {
@@ -397,7 +420,7 @@ bool WindowManager::mouseMoveEvent(QObject *object, QEvent *event)
                 resetDrag();
             }
 
-        } else if (QPoint(mouseEvent->globalPos() - _globalDragPoint).manhattanLength() >= _dragDistance) {
+        } else if (QPoint(eventPos - _globalDragPoint).manhattanLength() >= _dragDistance) {
             _dragTimer.start(0, this);
         }
 
