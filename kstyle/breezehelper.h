@@ -26,6 +26,7 @@ class QStyleOptionSlider;
 
 namespace Breeze
 {
+class PaletteChangedEventFilter;
 //* breeze style helper class.
 /** contains utility functions used at multiple places in both breeze style and breeze window decoration */
 class Helper : public QObject
@@ -49,6 +50,12 @@ public:
 
     //* pointer to kdecoration config
     QSharedPointer<InternalSettings> decorationConfig() const;
+
+    //* install event filter for palette change event
+    void installEventFilter(QApplication *app) const;
+
+    //* uninstall event filter
+    void removeEventFilter(QApplication *app) const;
 
     //*@name color utilities
     //@{
@@ -380,6 +387,9 @@ private:
     //* decoration configuration
     QSharedPointer<InternalSettings> _decorationConfig;
 
+    //* event filter
+    PaletteChangedEventFilter *_eventFilter;
+
     //*@name brushes
     //@{
     KStatefulBrush _viewFocusBrush;
@@ -401,6 +411,20 @@ private:
     mutable bool _cachedAutoValid = false;
 
     friend class ToolsAreaManager;
+    friend class PaletteChangedEventFilter;
 };
 
+class PaletteChangedEventFilter : public QObject
+{
+    Q_OBJECT
+
+public:
+    explicit PaletteChangedEventFilter(Helper *);
+
+protected:
+    bool eventFilter(QObject *watched, QEvent *event) override;
+
+private:
+    Helper *_helper;
+};
 }

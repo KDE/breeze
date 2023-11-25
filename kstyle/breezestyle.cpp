@@ -472,6 +472,12 @@ void Style::polish(QWidget *widget)
 void Style::polish(QApplication *application)
 {
     _toolsAreaManager->registerApplication(application);
+    _helper->installEventFilter(application);
+}
+
+void Style::unpolish(QApplication *application)
+{
+    _helper->removeEventFilter(application);
 }
 
 //______________________________________________________________

@@ -13,6 +13,7 @@
 #include <KColorUtils>
 #include <KIconLoader>
 #include <KWindowSystem>
+#include <qobject.h>
 #if __has_include(<KX11Extras>)
 #include <KX11Extras>
 #endif
@@ -40,30 +41,41 @@ static const qreal highlightBackgroundAlpha = 0.33;
 
 static const auto radioCheckSunkenDarkeningFactor = 110;
 
+PaletteChangedEventFilter::PaletteChangedEventFilter(Helper *helper)
+    : QObject(helper)
+    , _helper(helper)
+{
+}
+
+bool PaletteChangedEventFilter::eventFilter(QObject *watched, QEvent *event)
+{
+    if (event->type() != QEvent::ApplicationPaletteChange || watched != qApp) {
+        return QObject::eventFilter(watched, event);
+    }
+    if (!qApp->property("KDE_COLOR_SCHEME_PATH").isValid()) {
+        return QObject::eventFilter(watched, event);
+    }
+    const auto path = qApp->property("KDE_COLOR_SCHEME_PATH").toString();
+    if (!path.isEmpty()) {
+        KConfig config(path, KConfig::SimpleConfig);
+        KConfigGroup group(config.group(QStringLiteral("WM")));
+        const QPalette palette(QApplication::palette());
+        _helper->_activeTitleBarColor = group.readEntry("activeBackground", palette.color(QPalette::Active, QPalette::Highlight));
+        _helper->_activeTitleBarTextColor = group.readEntry("activeForeground", palette.color(QPalette::Active, QPalette::HighlightedText));
+        _helper->_inactiveTitleBarColor = group.readEntry("inactiveBackground", palette.color(QPalette::Disabled, QPalette::Highlight));
+        _helper->_inactiveTitleBarTextColor = group.readEntry("inactiveForeground", palette.color(QPalette::Disabled, QPalette::HighlightedText));
+    }
+    return QObject::eventFilter(watched, event);
+}
+
 //____________________________________________________________________
 Helper::Helper(KSharedConfig::Ptr config, QObject *parent)
     : QObject(parent)
     , _config(std::move(config))
     , _kwinConfig(KSharedConfig::openConfig("kwinrc"))
     , _decorationConfig(new InternalSettings())
+    , _eventFilter(new PaletteChangedEventFilter(this))
 {
-    if (qApp) {
-        connect(qApp, &QApplication::paletteChanged, this, [this]() {
-            if (!qApp->property("KDE_COLOR_SCHEME_PATH").isValid()) {
-                return;
-            }
-            const auto path = qApp->property("KDE_COLOR_SCHEME_PATH").toString();
-            if (!path.isEmpty()) {
-                KConfig config(path, KConfig::SimpleConfig);
-                KConfigGroup group(config.group(QStringLiteral("WM")));
-                const QPalette palette(QApplication::palette());
-                _activeTitleBarColor = group.readEntry("activeBackground", palette.color(QPalette::Active, QPalette::Highlight));
-                _activeTitleBarTextColor = group.readEntry("activeForeground", palette.color(QPalette::Active, QPalette::HighlightedText));
-                _inactiveTitleBarColor = group.readEntry("inactiveBackground", palette.color(QPalette::Disabled, QPalette::Highlight));
-                _inactiveTitleBarTextColor = group.readEntry("inactiveForeground", palette.color(QPalette::Disabled, QPalette::HighlightedText));
-            }
-        });
-    }
 }
 
 //____________________________________________________________________
@@ -107,6 +119,20 @@ void Helper::loadConfig()
         _activeTitleBarTextColor = appGroup.readEntry("activeForeground", _activeTitleBarTextColor);
         _inactiveTitleBarColor = appGroup.readEntry("inactiveBackground", _inactiveTitleBarColor);
         _inactiveTitleBarTextColor = appGroup.readEntry("inactiveForeground", _inactiveTitleBarTextColor);
+    }
+}
+
+void Helper::installEventFilter(QApplication *app) const
+{
+    if (app) {
+        app->installEventFilter(_eventFilter);
+    }
+}
+
+void Helper::removeEventFilter(QApplication *app) const
+{
+    if (app) {
+        app->removeEventFilter(_eventFilter);
     }
 }
 
@@ -1451,8 +1477,7 @@ void Helper::renderArrow(QPainter *painter, const QRect &rect, const QColor &col
         break;
     }
 
-    arrow.translate(rect.x() + (rect.width() - size) / 2.0,
-                    rect.y() + (rect.height() - size) / 2.0);
+    arrow.translate(rect.x() + (rect.width() - size) / 2.0, rect.y() + (rect.height() - size) / 2.0);
 
     painter->save();
     painter->setRenderHints(QPainter::Antialiasing);
