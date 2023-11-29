@@ -19,6 +19,7 @@ struct PropertyNames {
     static const char highlightNeutral[];
     static const char noSeparator[];
     static const char isTopMenu[];
+    static const char menuSeamlessEdges[];
     static const char bordersSides[];
     static const char forceFrame[];
 };
