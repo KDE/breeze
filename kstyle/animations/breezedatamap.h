@@ -112,7 +112,7 @@ public:
 
 private:
     //* enability
-    bool _enabled = false;
+    bool _enabled = true;
 
     //* last key
     Key _lastKey = nullptr;
