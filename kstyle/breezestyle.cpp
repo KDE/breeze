@@ -7928,8 +7928,8 @@ QIcon Style::titleBarButtonIcon(StandardPixmap standardPixmap, const QStyleOptio
         palette = QApplication::palette();
     }
 
-    const bool isAlwaysShownCloseButton(
-        buttonType == ButtonClose && _helper->decorationConfig()->alwaysShow() == InternalSettings::EnumAlwaysShow::AlwaysShowIconsAndCloseButtonBackground);
+    const bool isAlwaysShownCloseButton(buttonType == ButtonClose
+                                        && _helper->decorationConfig()->alwaysShow() == InternalSettings::EnumAlwaysShow::IconsAndCloseButtonBackground);
     const bool withTrafficLights(_helper->decorationConfig()->backgroundColors() == InternalSettings::EnumBackgroundColors::ColorsAccentWithTrafficLights);
 
     palette.setCurrentColorGroup(QPalette::Active);
@@ -8069,8 +8069,7 @@ QIcon Style::titleBarButtonIcon(StandardPixmap standardPixmap, const QStyleOptio
         }
     }
 
-    if (_helper->decorationConfig()->alwaysShowIconHighlightUsing()
-        == InternalSettings::EnumAlwaysShowIconHighlightUsing::AlwaysShowIconHighlightUsingBackgroundAndOutline
+    if (_helper->decorationConfig()->alwaysShowIconHighlightUsing() == InternalSettings::EnumAlwaysShowIconHighlightUsing::BackgroundAndOutline
         //&& !isAlwaysShownCloseButton
     ) {
         outline = onFocusBackground;
