@@ -37,17 +37,14 @@ if  ! type "xcursorgen" > /dev/null ; then
 fi
 echo -e "Checking Requirements... DONE"
 
-
+SCALES="50 75 100 125 150 175 200 225 250 275 300"
 
 echo -ne "Making Folders... $BASENAME\\r"
-DIR2X="build/x2"
-DIR1_5X="build/x1_5"
-DIR1X="build/x1"
 OUTPUT="$(grep --only-matching --perl-regex "(?<=Name\=).*$" $INDEX)"
 OUTPUT=${OUTPUT// /_}
-mkdir -p "$DIR2X"
-mkdir -p "$DIR1_5X"
-mkdir -p "$DIR1X"
+for scale in $SCALES; do
+	mkdir -p "build/x$scale"
+done
 mkdir -p "$OUTPUT/cursors"
 echo 'Making Folders... DONE';
 
@@ -60,17 +57,12 @@ for CUR in src/config/*.cursor; do
 
 	echo -ne "\033[0KGenerating simple cursor pixmaps... $BASENAME\\r"
 
-	if [ "$DIR1X/$BASENAME.png" -ot $RAWSVG ] ; then
-		inkscape $RAWSVG -i $BASENAME -w 32 -h 32 -o "$DIR1X/$BASENAME.png" > /dev/null
-	fi
-
-	if [ "$DIR1_5X/$BASENAME.png" -ot $RAWSVG ] ; then
-		inkscape $RAWSVG -i $BASENAME -w 48 -h 48 -o "$DIR1_5X/$BASENAME.png" > /dev/null
-	fi
-
-	if [ "$DIR2X/$BASENAME.png" -ot $RAWSVG ] ; then
-		inkscape $RAWSVG -i $BASENAME -w 64 -h 64 -o "$DIR2X/$BASENAME.png" > /dev/null
-	fi
+	for scale in $SCALES; do
+		DIR="build/x$scale"
+		if [ "$DIR/$BASENAME.png" -ot $RAWSVG ] ; then
+			inkscape $RAWSVG -i $BASENAME -w $((32*$scale/100)) -h $((32*$scale/100)) -o "$DIR/$BASENAME.png" > /dev/null
+		fi
+	done
 done
 echo -e "\033[0KGenerating simple cursor pixmaps... DONE"
 
@@ -80,29 +72,17 @@ for i in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23
 do
 	echo -ne "\033[0KGenerating animated cursor pixmaps... $i / 23 \\r"
 
-	if [ "$DIR1X/progress-$i.png" -ot $RAWSVG ] ; then
-		inkscape $RAWSVG -i progress-$i -w 32 -h 32 -o "$DIR1X/progress-$i.png" > /dev/null
-	fi
+	for scale in $SCALES; do
+		DIR="build/x$scale"
+		
+		if [ "$DIR/progress-$i.png" -ot $RAWSVG ] ; then
+			inkscape $RAWSVG -i progress-$i -w $((32*$scale/100)) -h $((32*$scale/100)) -o "$DIR/progress-$i.png" > /dev/null
+		fi
 
-    if [ "$DIR1_5X/progress-$i.png" -ot $RAWSVG ] ; then
-        inkscape $RAWSVG -i progress-$i -w 48 -h 48 -o "$DIR1_5X/progress-$i.png" > /dev/null
-	fi
-
-	if [ "$DIR2X/progress-$i.png" -ot $RAWSVG ] ; then
-		inkscape $RAWSVG -i progress-$i -w 64 -h 64 -o "$DIR2X/progress-$i.png" > /dev/null
-	fi
-
-	if [ "$DIR1X/wait-$i.png" -ot $RAWSVG ] ; then
-		inkscape $RAWSVG -i wait-$i -w 32 -h 32 -o "$DIR1X/wait-$i.png" > /dev/null
-	fi
-
-	if [ "$DIR1_5X/wait-$i.png" -ot $RAWSVG ] ; then
-		inkscape $RAWSVG -i wait-$i -w 48 -h 48 -o "$DIR1_5X/wait-$i.png" > /dev/null
-	fi
-
-	if [ "$DIR2X/wait-$i.png" -ot $RAWSVG ] ; then
-		inkscape $RAWSVG -i wait-$i -w 64 -h 64 -o "$DIR2X/wait-$i.png" > /dev/null
-	fi
+		if [ "$DIR/wait-$i.png" -ot $RAWSVG ] ; then
+			inkscape $RAWSVG -i wait-$i -w $((32*$scale/100)) -h $((32*$scale/100)) -o "$DIR/wait-$i.png" > /dev/null
+		fi
+	done
 done
 echo -e "\033[0KGenerating animated cursor pixmaps... DONE"
 
@@ -114,7 +94,10 @@ for CUR in src/config/*.cursor; do
 	BASENAME=${BASENAME##*/}
 	BASENAME=${BASENAME%.*}
 
-	ERR="$( xcursorgen -p build "$CUR" "$OUTPUT/cursors/$BASENAME" 2>&1 )"
+	TMP_CUR="tmp.cursor"
+	./scale_cursor $CUR $SCALES > $TMP_CUR
+	ERR="$( xcursorgen -p build "$TMP_CUR" "$OUTPUT/cursors/$BASENAME" 2>&1 )"
+	rm $TMP_CUR
 
 	if [[ "$?" -ne "0" ]]; then
 		echo "FAIL: $CUR $ERR"
