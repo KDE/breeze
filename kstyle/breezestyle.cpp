@@ -343,6 +343,8 @@ void Style::polish(QWidget *widget)
 
     } else if (qobject_cast<QFrame *>(widget) && widget->parent() && widget->parent()->inherits("KTitleWidget")) {
         widget->setAutoFillBackground(false);
+    } else if (widget->parent() && widget->parent()->inherits("QComboBoxListView")) {
+        widget->setAutoFillBackground(false);
     }
 
     if (qobject_cast<QScrollBar *>(widget)) {
