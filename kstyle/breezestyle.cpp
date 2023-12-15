@@ -131,21 +131,24 @@ public:
             return;
         }
 
+        auto rect = option.rect.adjusted(2, 2, -2, -2);
+
         // otherwise we draw the selected/highlighted background ourself...
         if (option.showDecorationSelected && (option.state & QStyle::State_Selected)) {
             using namespace Breeze;
 
             auto c = option.palette.brush((option.state & QStyle::State_Enabled) ? QPalette::Normal : QPalette::Disabled, QPalette::Highlight).color();
 
-            painter->setPen(c);
+            painter->setPen(QPen(c, 0));
             c.setAlphaF(c.alphaF() * 0.3);
             painter->setBrush(c);
             auto radius = Metrics::Frame_FrameRadius - (0.5 * PenWidth::Frame);
-            painter->drawRoundedRect(QRectF(option.rect).adjusted(0.5, 0.5, -0.5, -0.5), radius, radius);
+            painter->drawRoundedRect(QRectF(rect).adjusted(0.5, 0.5, -0.5, -0.5), radius, radius);
         }
 
         // and ask the base class to do everything else for us besides the selected/highlighted part which we just did
         auto opt = option;
+        opt.rect = rect;
         opt.showDecorationSelected = false;
         opt.state &= ~QStyle::State_Selected;
 
@@ -160,7 +163,7 @@ public:
 
         // adjust and return
         if (size.isValid()) {
-            size.rheight() += _itemMargin * 2;
+            size.rheight() += _itemMargin * 2 + 2;
         }
         return size;
     }
