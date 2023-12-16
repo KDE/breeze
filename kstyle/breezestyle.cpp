@@ -1376,7 +1376,7 @@ void Style::drawControl(ControlElement element, const QStyleOption *option, QPai
             fcn = &Style::drawMenuItemControl;
             break;
         case CE_ToolBar:
-            fcn = &Style::emptyControl;
+            fcn = &Style::drawToolBarControl;
             break;
         case CE_ProgressBar:
             fcn = &Style::drawProgressBarControl;
@@ -5801,6 +5801,48 @@ bool Style::drawMenuItemControl(const QStyleOption *option, QPainter *painter, c
         }
     }
 
+    return true;
+}
+
+//___________________________________________________________________________________
+bool Style::drawToolBarControl(const QStyleOption *option, QPainter *painter, const QWidget *widget) const
+{
+    const auto toolBarOption(qstyleoption_cast<const QStyleOptionToolBar *>(option));
+    if (!toolBarOption) {
+        return true;
+    }
+
+    painter->setBrush(_helper->separatorColor(option->palette));
+    painter->setPen(Qt::NoPen);
+
+    switch (toolBarOption->toolBarArea) {
+    case Qt::LeftToolBarArea: {
+        auto rect = option->rect;
+        rect.setLeft(rect.width() - 1);
+        painter->drawRect(rect);
+        break;
+    }
+    case Qt::RightToolBarArea: {
+        auto rect = option->rect;
+        rect.setWidth(1);
+        painter->drawRect(rect);
+        break;
+    }
+    case Qt::TopToolBarArea: {
+        auto rect = option->rect;
+        rect.setTop(rect.height() - 1);
+        painter->drawRect(rect);
+        break;
+    }
+    case Qt::BottomToolBarArea: {
+        auto rect = option->rect;
+        rect.setHeight(1);
+        painter->drawRect(rect);
+        break;
+    }
+    default:
+        break;
+    }
     return true;
 }
 
