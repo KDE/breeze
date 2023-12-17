@@ -846,26 +846,24 @@ void Helper::renderCheckBoxBackground(QPainter *painter,
     }
     painter->setPen(QPen(penBrush, PenWidth::Frame));
 
-    const auto radius = StyleConfigData::borderRadius() - 1;
-
     switch (state) {
     case CheckOff:
         painter->setBrush(palette.base().color().darker(sunken ? radioCheckSunkenDarkeningFactor : 100));
-        painter->drawRoundedRect(frameRect, radius, radius);
+        painter->drawRoundedRect(frameRect, Metrics::CheckBox_Radius, Metrics::CheckBox_Radius);
         break;
 
     case CheckPartial:
     case CheckOn:
         painter->setBrush(transparent.darker(sunken ? radioCheckSunkenDarkeningFactor : 100));
-        painter->drawRoundedRect(frameRect, radius, radius);
+        painter->drawRoundedRect(frameRect, Metrics::CheckBox_Radius, Metrics::CheckBox_Radius);
         break;
 
     case CheckAnimated:
         painter->setBrush(palette.base().color().darker(sunken ? radioCheckSunkenDarkeningFactor : 100));
-        painter->drawRoundedRect(frameRect, radius, radius);
+        painter->drawRoundedRect(frameRect, Metrics::CheckBox_Radius, Metrics::CheckBox_Radius);
         painter->setBrush(transparent);
         painter->setOpacity(animation);
-        painter->drawRoundedRect(frameRect, radius, radius);
+        painter->drawRoundedRect(frameRect, Metrics::CheckBox_Radius, Metrics::CheckBox_Radius);
         break;
     }
 }
@@ -900,8 +898,7 @@ void Helper::renderCheckBox(QPainter *painter,
 
         painter->setPen(QPen(neutalHighlight ? neutralText(palette).lighter() : focusColor(palette), PenWidth::Frame));
         painter->setBrush(Qt::NoBrush);
-        const auto radius = StyleConfigData::borderRadius() - 1;
-        painter->drawRoundedRect(frameRect.adjusted(0.5, 0.5, -0.5, -0.5), radius, radius);
+        painter->drawRoundedRect(frameRect.adjusted(0.5, 0.5, -0.5, -0.5), Metrics::CheckBox_Radius, Metrics::CheckBox_Radius);
 
         painter->restore();
     }
