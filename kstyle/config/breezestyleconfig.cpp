@@ -44,6 +44,7 @@ StyleConfig::StyleConfig(QWidget *parent)
     connect(_scrollBarSubLineButtons, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()));
     connect(_windowDragMode, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()));
     connect(_menuOpacity, &QAbstractSlider::valueChanged, this, &StyleConfig::updateChanged);
+    connect(_borderRadius, &QComboBox::currentIndexChanged, this, &StyleConfig::updateChanged);
 }
 
 //__________________________________________________________________
@@ -62,6 +63,7 @@ void StyleConfig::save()
     StyleConfigData::setScrollBarSubLineButtons(_scrollBarSubLineButtons->currentIndex());
     StyleConfigData::setWindowDragMode(_windowDragMode->currentIndex());
     StyleConfigData::setMenuOpacity(_menuOpacity->value());
+    StyleConfigData::setBorderRadius(_borderRadius->currentData().toInt());
 
     StyleConfigData::self()->save();
 
@@ -119,6 +121,8 @@ void StyleConfig::updateChanged()
         modified = true;
     } else if (_menuOpacity->value() != StyleConfigData::menuOpacity()) {
         modified = true;
+    } else if (_borderRadius->currentData().toInt() != StyleConfigData::borderRadius()) {
+        modified = true;
     }
     emit changed(modified);
 }
@@ -139,6 +143,23 @@ void StyleConfig::load()
     _scrollBarSubLineButtons->setCurrentIndex(StyleConfigData::scrollBarSubLineButtons());
     _windowDragMode->setCurrentIndex(StyleConfigData::windowDragMode());
     _menuOpacity->setValue(StyleConfigData::menuOpacity());
+
+    const auto borderRadiusValue = StyleConfigData::borderRadius();
+
+    _borderRadius->addItem(i18nc("@label:listbox", "Small"), 3);
+    _borderRadius->addItem(i18nc("@label:listbox", "Medium"), 5);
+    _borderRadius->addItem(i18nc("@label:listbox", "Large"), 7);
+
+    if (borderRadiusValue == 3) {
+        _borderRadius->setCurrentIndex(0);
+    } else if (borderRadiusValue == 5) {
+        _borderRadius->setCurrentIndex(1);
+    } else if (borderRadiusValue == 7) {
+        _borderRadius->setCurrentIndex(2);
+    } else {
+        _borderRadius->addItem(i18nc("@label:listbox", "Custom value (%1 pixel)", borderRadiusValue), borderRadiusValue);
+        _borderRadius->setCurrentIndex(3);
+    }
 }
 
 }

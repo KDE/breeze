@@ -8,6 +8,7 @@
 
 #include "breeze.h"
 #include "breezepropertynames.h"
+#include "breezestyleconfigdata.h"
 
 #include <KColorScheme>
 #include <KColorUtils>
@@ -845,7 +846,7 @@ void Helper::renderCheckBoxBackground(QPainter *painter,
     }
     painter->setPen(QPen(penBrush, PenWidth::Frame));
 
-    const auto radius = Metrics::CheckBox_Radius;
+    const auto radius = StyleConfigData::borderRadius() - 1;
 
     switch (state) {
     case CheckOff:
@@ -899,8 +900,8 @@ void Helper::renderCheckBox(QPainter *painter,
 
         painter->setPen(QPen(neutalHighlight ? neutralText(palette).lighter() : focusColor(palette), PenWidth::Frame));
         painter->setBrush(Qt::NoBrush);
-
-        painter->drawRoundedRect(frameRect.adjusted(0.5, 0.5, -0.5, -0.5), Metrics::CheckBox_Radius, Metrics::CheckBox_Radius);
+        const auto radius = StyleConfigData::borderRadius() - 1;
+        painter->drawRoundedRect(frameRect.adjusted(0.5, 0.5, -0.5, -0.5), radius, radius);
 
         painter->restore();
     }
@@ -1387,7 +1388,7 @@ void Helper::renderTabBarTab(QPainter *painter,
         }
         QPainterPath path = roundedPath(strokedRect(frameRect), corners, frameRadius(PenWidth::Frame));
         painter->drawPath(path);
-        QPainterPath highlightPath = roundedPath(highlightRect, corners, Metrics::Frame_FrameRadius);
+        QPainterPath highlightPath = roundedPath(highlightRect, corners, StyleConfigData::borderRadius());
         painter->setBrush(palette.color(QPalette::Highlight));
         painter->setPen(Qt::NoPen);
         painter->drawPath(highlightPath);
@@ -1415,7 +1416,7 @@ void Helper::renderTabBarTab(QPainter *painter,
         }
         painter->setBrush(bgBrush);
         painter->setPen(Qt::NoPen);
-        QPainterPath path = roundedPath(frameRect, corners, Metrics::Frame_FrameRadius);
+        QPainterPath path = roundedPath(frameRect, corners, StyleConfigData::borderRadius());
         painter->drawPath(path);
     }
 }

@@ -140,7 +140,7 @@ public:
             painter->setPen(c);
             c.setAlphaF(c.alphaF() * 0.3);
             painter->setBrush(c);
-            auto radius = Metrics::Frame_FrameRadius - (0.5 * PenWidth::Frame);
+            auto radius = StyleConfigData::borderRadius() - (0.5 * PenWidth::Frame);
             painter->drawRoundedRect(QRectF(option.rect).adjusted(0.5, 0.5, -0.5, -0.5), radius, radius);
         }
 
@@ -4036,6 +4036,7 @@ bool Style::drawFrameTabWidgetPrimitive(const QStyleOption *option, QPainter *pa
     const auto outline(_helper->frameOutlineColor(palette));
 
     Corners corners = AllCorners;
+    const auto borderRadius = StyleConfigData::borderRadius();
 
     // adjust corners to deal with oversized tabbars
     switch (tabOption->shape) {
@@ -4044,13 +4045,13 @@ bool Style::drawFrameTabWidgetPrimitive(const QStyleOption *option, QPainter *pa
         if (isQtQuickControl) {
             rect.adjust(-1, -1, 1, 0);
         }
-        if (tabBarSize.width() >= rect.width() - 2 * Metrics::Frame_FrameRadius) {
+        if (tabBarSize.width() >= rect.width() - 2 * borderRadius) {
             corners &= ~CornersTop;
         }
-        if (tabBarRect.left() < rect.left() + Metrics::Frame_FrameRadius) {
+        if (tabBarRect.left() < rect.left() + borderRadius) {
             corners &= ~CornerTopLeft;
         }
-        if (tabBarRect.right() > rect.right() - Metrics::Frame_FrameRadius) {
+        if (tabBarRect.right() > rect.right() - borderRadius) {
             corners &= ~CornerTopRight;
         }
         break;
@@ -4060,13 +4061,13 @@ bool Style::drawFrameTabWidgetPrimitive(const QStyleOption *option, QPainter *pa
         if (isQtQuickControl) {
             rect.adjust(-1, 0, 1, 1);
         }
-        if (tabBarSize.width() >= rect.width() - 2 * Metrics::Frame_FrameRadius) {
+        if (tabBarSize.width() >= rect.width() - 2 * borderRadius) {
             corners &= ~CornersBottom;
         }
-        if (tabBarRect.left() < rect.left() + Metrics::Frame_FrameRadius) {
+        if (tabBarRect.left() < rect.left() + borderRadius) {
             corners &= ~CornerBottomLeft;
         }
-        if (tabBarRect.right() > rect.right() - Metrics::Frame_FrameRadius) {
+        if (tabBarRect.right() > rect.right() - borderRadius) {
             corners &= ~CornerBottomRight;
         }
         break;
@@ -4076,13 +4077,13 @@ bool Style::drawFrameTabWidgetPrimitive(const QStyleOption *option, QPainter *pa
         if (isQtQuickControl) {
             rect.adjust(-1, 0, 0, 0);
         }
-        if (tabBarSize.height() >= rect.height() - 2 * Metrics::Frame_FrameRadius) {
+        if (tabBarSize.height() >= rect.height() - 2 * borderRadius) {
             corners &= ~CornersLeft;
         }
-        if (tabBarRect.top() < rect.top() + Metrics::Frame_FrameRadius) {
+        if (tabBarRect.top() < rect.top() + borderRadius) {
             corners &= ~CornerTopLeft;
         }
-        if (tabBarRect.bottom() > rect.bottom() - Metrics::Frame_FrameRadius) {
+        if (tabBarRect.bottom() > rect.bottom() - borderRadius) {
             corners &= ~CornerBottomLeft;
         }
         break;
@@ -4092,13 +4093,13 @@ bool Style::drawFrameTabWidgetPrimitive(const QStyleOption *option, QPainter *pa
         if (isQtQuickControl) {
             rect.adjust(0, 0, 1, 0);
         }
-        if (tabBarSize.height() >= rect.height() - 2 * Metrics::Frame_FrameRadius) {
+        if (tabBarSize.height() >= rect.height() - 2 * borderRadius) {
             corners &= ~CornersRight;
         }
-        if (tabBarRect.top() < rect.top() + Metrics::Frame_FrameRadius) {
+        if (tabBarRect.top() < rect.top() + borderRadius) {
             corners &= ~CornerTopRight;
         }
-        if (tabBarRect.bottom() > rect.bottom() - Metrics::Frame_FrameRadius) {
+        if (tabBarRect.bottom() > rect.bottom() - borderRadius) {
             corners &= ~CornerBottomRight;
         }
         break;
@@ -4379,7 +4380,7 @@ bool Style::drawPanelButtonToolPrimitive(const QStyleOption *option, QPainter *p
         // NOTE: working around weird issue with flat toolbuttons having unusually wide rects
         const auto clipRect = baseRect.adjusted(0, 0, flat ? -Metrics::ToolButton_InlineIndicatorWidth - Metrics::ToolButton_ItemSpacing * 2 : 0, 0);
         painter->setClipRect(visualRect(option, clipRect));
-        baseRect.adjust(0, 0, Metrics::Frame_FrameRadius + PenWidth::Shadow, 0);
+        baseRect.adjust(0, 0, StyleConfigData::borderRadius() + PenWidth::Shadow, 0);
         baseRect = visualRect(option, baseRect);
     }
 
@@ -4714,7 +4715,7 @@ bool Style::drawIndicatorButtonDropDownPrimitive(const QStyleOption *option, QPa
     QRect baseRect = option->rect;
     const auto clipRect = visualRect(option, baseRect);
     painter->setClipRect(clipRect);
-    baseRect.adjust(-Metrics::Frame_FrameRadius - qRound(PenWidth::Shadow), 0, 0, 0);
+    baseRect.adjust(-StyleConfigData::borderRadius() - qRound(PenWidth::Shadow), 0, 0, 0);
     baseRect = visualRect(option, baseRect);
 
     QHash<QByteArray, bool> stateProperties;
@@ -4735,10 +4736,10 @@ bool Style::drawIndicatorButtonDropDownPrimitive(const QStyleOption *option, QPa
     if (!flat || activeFocus || hovered || down || checked || penAnimation != AnimationData::OpacityInvalid) {
         painter->setBrush(Qt::NoBrush);
         if (option->direction == Qt::RightToLeft) {
-            QRectF separatorRect = frameRect.adjusted(0, 0, -Metrics::Frame_FrameRadius - PenWidth::Shadow, 0);
+            QRectF separatorRect = frameRect.adjusted(0, 0, -StyleConfigData::borderRadius() - PenWidth::Shadow, 0);
             painter->drawLine(separatorRect.topRight(), separatorRect.bottomRight());
         } else {
-            QRectF separatorRect = frameRect.adjusted(Metrics::Frame_FrameRadius + PenWidth::Shadow, 0, 0, 0);
+            QRectF separatorRect = frameRect.adjusted(StyleConfigData::borderRadius() + PenWidth::Shadow, 0, 0, 0);
             painter->drawLine(separatorRect.topLeft(), separatorRect.bottomLeft());
         }
     }
@@ -6254,7 +6255,7 @@ bool Style::drawFocusFrame(const QStyleOption *option, QPainter *painter, const 
     QRect innerRect = targetWidgetRect;
     QRect outerRect = option->rect;
 
-    qreal innerRadius = Metrics::Frame_FrameRadius;
+    qreal innerRadius = StyleConfigData::borderRadius();
     qreal outerRadius = innerRadius + vmargin;
 
     QPainterPath focusFramePath;
@@ -6415,11 +6416,12 @@ bool Style::drawRubberBandControl(const QStyleOption *option, QPainter *painter,
     const auto &palette(option->palette);
     const auto outline = KColorUtils::lighten(palette.color(QPalette::Highlight));
     auto background = palette.color(QPalette::Highlight);
+    const auto borderRadius = StyleConfigData::borderRadius();
     background.setAlphaF(0.20);
 
     painter->setPen(outline);
     painter->setBrush(background);
-    painter->drawRoundedRect(_helper->strokedRect(option->rect), Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
+    painter->drawRoundedRect(_helper->strokedRect(option->rect), borderRadius, borderRadius);
 
     painter->restore();
     return true;
@@ -6737,10 +6739,10 @@ bool Style::drawTabBarTabShapeControl(const QStyleOption *option, QPainter *pain
                 corners |= CornerTopRight;
             }
             if (isRightOfSelected) {
-                rect.adjust(-Metrics::Frame_FrameRadius, 0, 0, 0);
+                rect.adjust(-StyleConfigData::borderRadius(), 0, 0, 0);
             }
             if (isLeftOfSelected) {
-                rect.adjust(0, 0, Metrics::Frame_FrameRadius, 0);
+                rect.adjust(0, 0, StyleConfigData::borderRadius(), 0);
             } else if (!isLast) {
                 rect.adjust(0, 0, overlap, 0);
             }
@@ -6759,10 +6761,10 @@ bool Style::drawTabBarTabShapeControl(const QStyleOption *option, QPainter *pain
                 corners |= CornerBottomRight;
             }
             if (isRightOfSelected) {
-                rect.adjust(-Metrics::Frame_FrameRadius, 0, 0, 0);
+                rect.adjust(-StyleConfigData::borderRadius(), 0, 0, 0);
             }
             if (isLeftOfSelected) {
-                rect.adjust(0, 0, Metrics::Frame_FrameRadius, 0);
+                rect.adjust(0, 0, StyleConfigData::borderRadius(), 0);
             } else if (!isLast) {
                 rect.adjust(0, 0, overlap, 0);
             }
@@ -6781,10 +6783,10 @@ bool Style::drawTabBarTabShapeControl(const QStyleOption *option, QPainter *pain
                 corners |= CornerBottomLeft;
             }
             if (isRightOfSelected) {
-                rect.adjust(0, -Metrics::Frame_FrameRadius, 0, 0);
+                rect.adjust(0, -StyleConfigData::borderRadius(), 0, 0);
             }
             if (isLeftOfSelected) {
-                rect.adjust(0, 0, 0, Metrics::Frame_FrameRadius);
+                rect.adjust(0, 0, 0, StyleConfigData::borderRadius());
             } else if (!isLast) {
                 rect.adjust(0, 0, 0, overlap);
             }
@@ -6803,10 +6805,10 @@ bool Style::drawTabBarTabShapeControl(const QStyleOption *option, QPainter *pain
                 corners |= CornerBottomRight;
             }
             if (isRightOfSelected) {
-                rect.adjust(0, -Metrics::Frame_FrameRadius, 0, 0);
+                rect.adjust(0, -StyleConfigData::borderRadius(), 0, 0);
             }
             if (isLeftOfSelected) {
-                rect.adjust(0, 0, 0, Metrics::Frame_FrameRadius);
+                rect.adjust(0, 0, 0, StyleConfigData::borderRadius());
             } else if (!isLast) {
                 rect.adjust(0, 0, 0, overlap);
             }

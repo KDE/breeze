@@ -230,7 +230,7 @@ void FrameShadow::updateGeometry(QRect rect)
     rect.adjust(1, 1, -1, -1);
 
     // adjust geometry
-    const int shadowSize(Metrics::Frame_FrameRadius);
+    const int shadowSize(StyleConfigData::borderRadius());
     switch (_area) {
     case SideTop:
         rect.setHeight(shadowSize);

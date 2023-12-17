@@ -10,6 +10,7 @@
 #include "breezeanimationdata.h"
 #include "breezemetrics.h"
 #include "breezesettings.h"
+#include "breezestyleconfigdata.h"
 #include "config-breeze.h"
 
 #include <KConfigWatcher>
@@ -316,7 +317,7 @@ public:
     void renderDecorationButton(QPainter *, const QRect &, const QColor &, ButtonType, bool inverted) const;
 
     //* generic shadow for rounded rectangles
-    void renderRoundedRectShadow(QPainter *, const QRectF &, const QColor &, qreal radius = Metrics::Frame_FrameRadius - PenWidth::Shadow / 2) const;
+    void renderRoundedRectShadow(QPainter *, const QRectF &, const QColor &, qreal radius = StyleConfigData::borderRadius() - PenWidth::Shadow / 2) const;
 
     //* generic shadow for ellipses
     void renderEllipseShadow(QPainter *, const QRectF &, const QColor &) const;
@@ -344,9 +345,9 @@ public:
     //@}
 
     //* frame radius
-    constexpr qreal frameRadius(const int penWidth = PenWidth::NoPen, const qreal bias = 0) const
+    qreal frameRadius(const int penWidth = PenWidth::NoPen, const qreal bias = 0) const
     {
-        return qMax(Metrics::Frame_FrameRadius - (0.5 * penWidth) + bias, 0.0);
+        return qMax(StyleConfigData::borderRadius() - (0.5 * penWidth) + bias, 0.0);
     }
 
     //* frame radius with new pen width

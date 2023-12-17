@@ -36,6 +36,11 @@
         <default>false</default>
     </entry>
 
+    <entry name="BorderRadius" type="Int">
+     <default>3</default>
+     <min>3</min>
+     <max>7</max>
+    </entry>
   </group>
 
   <!-- widget style -->
