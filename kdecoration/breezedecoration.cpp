@@ -110,22 +110,22 @@ inline CompositeShadowParams lookupShadowParams(int size)
     }
 }
 
-inline int lookupOutlineIntensity(int intensity)
+inline qreal lookupOutlineIntensity(int intensity)
 {
     switch (intensity) {
     case Breeze::InternalSettings::OutlineOff:
-        return 100;
+        return 0;
     case Breeze::InternalSettings::OutlineLow:
-        return 130;
+        return 0.1;
     case Breeze::InternalSettings::OutlineMedium:
-        return 170;
+        return 0.25;
     case Breeze::InternalSettings::OutlineHigh:
-        return 210;
+        return 0.4;
     case Breeze::InternalSettings::OutlineMaximum:
-        return 250;
+        return 0.6;
     default:
         // Fallback to the Medium intensity.
-        return 170;
+        return 0.2;
     }
 }
 }
@@ -759,15 +759,9 @@ void Decoration::updateShadow()
 {
     auto s = settings();
     auto c = client();
-    auto outlineColor = c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame);
-    // Bind lightness between 0.1 and 1.0 so it can never be completely black.
-    // Outlines only have transparency if alpha channel is supported
-    outlineColor.setHslF(outlineColor.hslHueF(),
-                         outlineColor.hslSaturationF(),
-                         qBound(0.1, outlineColor.lightnessF(), 1.0),
-                         s->isAlphaChannelSupported() ? 0.9 : 1.0);
-    outlineColor.lightnessF() >= 0.5 ? outlineColor = outlineColor.darker(lookupOutlineIntensity(m_internalSettings->outlineIntensity()))
-                                     : outlineColor = outlineColor.lighter(lookupOutlineIntensity(m_internalSettings->outlineIntensity()));
+    auto outlineColor = KColorUtils::mix(c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame),
+                                         c->palette().text().color(),
+                                         lookupOutlineIntensity(m_internalSettings->outlineIntensity()));
 
     // Animated case, no cached shadow object
     if ((m_shadowAnimation->state() == QAbstractAnimation::Running) && (m_shadowOpacity != 0.0) && (m_shadowOpacity != 1.0)) {
@@ -845,7 +839,7 @@ std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(c
     painter.drawRoundedRect(innerRect, m_scaledCornerRadius + 0.5, m_scaledCornerRadius + 0.5);
 
     // Draw window outline
-    if (lookupOutlineIntensity(m_internalSettings->outlineIntensity()) > 100) {
+    if (m_internalSettings->outlineIntensity() != InternalSettings::OutlineOff) {
         const qreal outlineWidth = 1.001;
         const qreal penOffset = outlineWidth / 2;
 
