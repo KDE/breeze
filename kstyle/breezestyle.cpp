@@ -451,6 +451,10 @@ void Style::polish(QWidget *widget)
         bool autoDefaultInDialog = pushButton->autoDefault() && dialog;
         auto dialogButtonBox = qobject_cast<QDialogButtonBox *>(pushButton->parent());
         pushButton->setAutoDefault(autoDefaultNoDialog || (autoDefaultInDialog && dialogButtonBox));
+    } else if (auto tabbar = qobject_cast<QTabBar *>(widget)) {
+        if (tabbar->documentMode() && !tabbar->isMovable() && !tabbar->tabsClosable()) {
+            tabbar->setExpanding(true);
+        }
     }
     if (_toolsAreaManager->hasHeaderColors()) {
         // style TitleWidget and Search KPageView to look the same as KDE System Settings
