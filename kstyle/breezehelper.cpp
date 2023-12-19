@@ -650,9 +650,6 @@ void Helper::renderButtonFrame(QPainter *painter,
     bool isActiveWindow = stateProperties.value("isActiveWindow");
 
     // don't render background if flat and not hovered, down, checked, or given visual focus
-    if (flat && !(hovered || down || checked || visualFocus) && bgAnimation == AnimationData::OpacityInvalid && penAnimation == AnimationData::OpacityInvalid) {
-        return;
-    }
 
     QRectF shadowedRect = this->shadowedRect(rect);
     QRectF frameRect = strokedRect(shadowedRect);
@@ -674,7 +671,7 @@ void Helper::renderButtonFrame(QPainter *painter,
             bgBrush = alphaColor(highlightColor, 0.125);
             penBrush = KColorUtils::mix(highlightColor, KColorUtils::mix(palette.button().color(), palette.buttonText().color(), Metrics::Bias_Default), 0.5);
         } else {
-            bgBrush = alphaColor(highlightColor, 0);
+            bgBrush = palette.window().color();
             penBrush = hasNeutralHighlight ? neutralText(palette) : bgBrush;
         }
     } else {
