@@ -6,14 +6,14 @@
 # Matthieu Robin <kde@macolu.org>, 2004, 2006.
 # Nicolas Ternisien <nicolast@libertysurf.fr>, 2004, 2005.
 # Nicolas Ternisien <nicolas.ternisien@gmail.com>, 2005, 2007, 2008, 2010, 2012.
-# xavier <ktranslator31@yahoo.fr>, 2013.
+# Xavier Besnard <xavier.besnard@kde.org>, 2013.
 # Bruno Patri <bruno.patri@gmail.com>, 2013, 2015.
 # Sophie ABBAD <abbadsophie@gmail.com>, 2015.
 # Vincent Pinon <vpinon@kde.org>, 2016.
 # Yoann Laissus <yoann.laissus@gmail.com>, 2018.
 # Simon Depiets <sdepiets@gmail.com>, 2019, 2020.
-# Xavier Besnard <xavier.besnard@neuf.fr>, 2022.
-# Xavier BESNARD <xavier.besnard@neuf.fr>, 2023.
+# Xavier Besnard <xavier.besnard@kde.org>, 2022.
+# Xavier Besnard <xavier.besnard@kde.org>, 2023.
 #
 msgid ""
 msgstr ""
