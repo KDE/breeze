@@ -22,6 +22,7 @@ struct PropertyNames {
     static const char menuSeamlessEdges[];
     static const char bordersSides[];
     static const char forceFrame[];
+    static const char statusBarSeparator[];
 };
 
 }
