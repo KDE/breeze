@@ -210,9 +210,9 @@ private:
     private:
         QPair<QString, QString> _exception;
 
-        friend uint qHash(const ExceptionId &value)
+        friend size_t qHash(const ExceptionId &value, size_t seed = 0)
         {
-            return qHash(value._exception);
+            return qHash(value._exception, seed);
         }
 
         friend bool operator==(const ExceptionId &lhs, const ExceptionId &rhs)
