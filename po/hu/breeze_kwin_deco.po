@@ -3,20 +3,21 @@
 #
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2014, 2015.
 # Kiszel Kristóf <kiszel.kristof@gmail.com>, 2017, 2018, 2020.
+# SPDX-FileCopyrightText: 2023 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-04 02:12+0000\n"
-"PO-Revision-Date: 2020-12-19 13:38+0100\n"
-"Last-Translator: Kristóf Kiszel <kiszel.kristof@gmail.com>\n"
+"PO-Revision-Date: 2023-12-22 21:20+0100\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.03.70\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -174,10 +175,9 @@ msgstr "Kör rajzolása a bezárás gomb körül"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBorderOnMaximizedWindows)
 #: config/ui/breezeconfigurationui.ui:138
-#, fuzzy, kde-format
-#| msgid "Display window borders for maximized windows"
+#, kde-format
 msgid "Draw border on maximized and tiled windows"
-msgstr "Ablakkeretek megjelenítése maximalizált ablakoknál"
+msgstr "Keretek rajzolása maximalizált és csempe ablakokra"
 
 #. i18n: ectx: property (text), widget (QLabel, drawBorderOnMaximizedWindowsHelpLabel)
 #: config/ui/breezeconfigurationui.ui:163
@@ -187,6 +187,9 @@ msgid ""
 "edges. Scrollbars and window close buttons will shift positions and will not "
 "touch screen edges."
 msgstr ""
+"Ez a beállítás lehetővé teszi az átméretezést az ablakok széleinek a "
+"képernyő széleihez érintésével. A görgetősávok és bezáró gombok pozíciója "
+"megváltozik, és nem érnek hozzá a képernyő széleihez."
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
 #: config/ui/breezeconfigurationui.ui:175
@@ -198,14 +201,13 @@ msgstr "Színátmenetes ablakháttér rajzolása"
 #: config/ui/breezeconfigurationui.ui:196
 #, kde-format
 msgid "Shadows and Outline"
-msgstr ""
+msgstr "Árnyékok és körvonal"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: config/ui/breezeconfigurationui.ui:202
-#, fuzzy, kde-format
-#| msgid "Shadows"
+#, kde-format
 msgid "Shadow size:"
-msgstr "Árnyékok"
+msgstr "Árnyék mérete:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:216
@@ -216,12 +218,10 @@ msgstr "Nincs"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: config/ui/breezeconfigurationui.ui:244
-#, fuzzy, kde-format
-#| msgctxt "strength of the shadow (from transparent to opaque)"
-#| msgid "S&trength:"
+#, kde-format
 msgctxt "strength of the shadow (from transparent to opaque)"
 msgid "Shadow strength:"
-msgstr "E&rősség:"
+msgstr "Árnyék erőssége:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
 #: config/ui/breezeconfigurationui.ui:257
@@ -231,38 +231,34 @@ msgstr "%"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/ui/breezeconfigurationui.ui:283
-#, fuzzy, kde-format
-#| msgid "Shadows"
+#, kde-format
 msgid "Shadow color:"
-msgstr "Árnyékok"
+msgstr "Árnyék színe:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: config/ui/breezeconfigurationui.ui:296
-#, fuzzy, kde-format
-#| msgid "Outline active window title:"
+#, kde-format
 msgctxt "outline intensity"
 msgid "Outline intensity:"
-msgstr "Az aktív ablak cím körvonalazása:"
+msgstr "Körvonal intenzitása:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:310
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Off"
-msgstr ""
+msgstr "Ki"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:315
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Low"
-msgstr ""
+msgstr "Alacsony"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:320
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox Button size:"
-#| msgid "Medium"
+#, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Medium"
 msgstr "Közepes"
@@ -272,15 +268,14 @@ msgstr "Közepes"
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "High"
-msgstr ""
+msgstr "Magas"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:330
-#, fuzzy, kde-format
-#| msgid "Maximize"
+#, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Maximum"
-msgstr "Maximalizálás"
+msgstr "Maximum"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:352
@@ -314,10 +309,9 @@ msgstr "Az illesz&tendő reguláris kifejezés: "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, fuzzy, kde-format
-#| msgid "Detect Window Properties"
+#, kde-format
 msgid "Detect Window Properties…"
-msgstr "Ablaktulajdonságok felismerése"
+msgstr "Ablaktulajdonságok felismerése…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: config/ui/breezeexceptiondialog.ui:83
