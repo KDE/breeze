@@ -373,6 +373,8 @@ public:
 
     static Qt::Edges menuSeamlessEdges(const QWidget *);
 
+    qreal frameBias = 0.15;
+
 protected:
     //* return rounded path in a given rect, with only selected corners rounded, and for a given radius
     QPainterPath roundedPath(const QRectF &, Corners, qreal) const;
