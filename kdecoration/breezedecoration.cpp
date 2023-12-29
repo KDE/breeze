@@ -115,17 +115,13 @@ inline qreal lookupOutlineIntensity(int intensity)
     switch (intensity) {
     case Breeze::InternalSettings::OutlineOff:
         return 0;
-    case Breeze::InternalSettings::OutlineLow:
-        return 0.1;
-    case Breeze::InternalSettings::OutlineMedium:
-        return 0.25;
-    case Breeze::InternalSettings::OutlineHigh:
-        return 0.4;
-    case Breeze::InternalSettings::OutlineMaximum:
+    case Breeze::InternalSettings::OutlineDefault:
+        return 0.15;
+    case Breeze::InternalSettings::OutlineHighContrast:
         return 0.6;
     default:
         // Fallback to the Medium intensity.
-        return 0.2;
+        return 0.15;
     }
 }
 }

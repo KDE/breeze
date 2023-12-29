@@ -72,10 +72,10 @@ void ConfigWidget::load()
     m_ui.shadowColor->setColor(m_internalSettings->shadowColor());
 
     // load outline intensity
-    if (m_internalSettings->outlineIntensity() <= InternalSettings::OutlineMaximum) {
+    if (m_internalSettings->outlineIntensity() <= InternalSettings::OutlineHighContrast) {
         m_ui.outlineIntensity->setCurrentIndex(m_internalSettings->outlineIntensity());
     } else {
-        m_ui.outlineIntensity->setCurrentIndex(InternalSettings::OutlineMedium);
+        m_ui.outlineIntensity->setCurrentIndex(InternalSettings::OutlineDefault);
     }
 
     // load exceptions

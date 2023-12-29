@@ -38,12 +38,10 @@
     <entry name="OutlineIntensity" type = "Enum">
       <choices>
           <choice name="OutlineOff"/>
-          <choice name="OutlineLow"/>
-          <choice name="OutlineMedium"/>
-          <choice name="OutlineHigh"/>
-          <choice name="OutlineMaximum"/>
+          <choice name="OutlineDefault"/>
+          <choice name="OutlineHighContrast"/>
       </choices>
-      <default>OutlineMedium</default>
+      <default>OutlineDefault</default>
     </entry>
   </group>
 

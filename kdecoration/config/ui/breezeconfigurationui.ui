@@ -312,24 +312,13 @@
          </item>
          <item>
           <property name="text">
-           <string comment="@item:inlistbox Outline intensity:">Low</string>
+           <string comment="@item:inlistbox Outline intensity:">Default</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string comment="@item:inlistbox Outline intensity:">Medium</string>
+           <string comment="@item:inlistbox Outline intensity:">High Contrast</string>
           </property>
-         </item>
-         <item>
-          <property name="text">
-           <string comment="@item:inlistbox Outline intensity:">High</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string comment="@item:inlistbox Outline intensity:">Maximum</string>
-          </property>
-         </item>
         </widget>
        </item>
        <item row="4" column="0" colspan="3">
