@@ -37,6 +37,7 @@ StyleConfig::StyleConfig(QWidget *parent)
     connect(_dockWidgetDrawFrame, &QAbstractButton::toggled, this, &StyleConfig::updateChanged);
     connect(_sidePanelDrawFrame, &QAbstractButton::toggled, this, &StyleConfig::updateChanged);
     connect(_menuItemDrawThinFocus, &QAbstractButton::toggled, this, &StyleConfig::updateChanged);
+    connect(_highContrastFrames, &QAbstractButton::toggled, this, &StyleConfig::updateChanged);
     connect(_sliderDrawTickMarks, &QAbstractButton::toggled, this, &StyleConfig::updateChanged);
     connect(_splitterProxyEnabled, &QAbstractButton::toggled, this, &StyleConfig::updateChanged);
     connect(_mnemonicsMode, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()));
@@ -55,6 +56,7 @@ void StyleConfig::save()
     StyleConfigData::setDockWidgetDrawFrame(_dockWidgetDrawFrame->isChecked());
     StyleConfigData::setSidePanelDrawFrame(_sidePanelDrawFrame->isChecked());
     StyleConfigData::setMenuItemDrawStrongFocus(!_menuItemDrawThinFocus->isChecked());
+    StyleConfigData::setHighContrastFrames(_highContrastFrames->isChecked());
     StyleConfigData::setSliderDrawTickMarks(_sliderDrawTickMarks->isChecked());
     StyleConfigData::setSplitterProxyEnabled(_splitterProxyEnabled->isChecked());
     StyleConfigData::setMnemonicsMode(_mnemonicsMode->currentIndex());
@@ -105,6 +107,8 @@ void StyleConfig::updateChanged()
         modified = true;
     } else if (_menuItemDrawThinFocus->isChecked() == StyleConfigData::menuItemDrawStrongFocus()) {
         modified = true;
+    } else if (_highContrastFrames->isChecked() != StyleConfigData::highContrastFrames()) {
+        modified = true;
     } else if (_sliderDrawTickMarks->isChecked() != StyleConfigData::sliderDrawTickMarks()) {
         modified = true;
     } else if (_mnemonicsMode->currentIndex() != StyleConfigData::mnemonicsMode()) {
@@ -132,6 +136,7 @@ void StyleConfig::load()
     _dockWidgetDrawFrame->setChecked(StyleConfigData::dockWidgetDrawFrame());
     _sidePanelDrawFrame->setChecked(StyleConfigData::sidePanelDrawFrame());
     _menuItemDrawThinFocus->setChecked(!StyleConfigData::menuItemDrawStrongFocus());
+    _highContrastFrames->setChecked(StyleConfigData::highContrastFrames());
     _sliderDrawTickMarks->setChecked(StyleConfigData::sliderDrawTickMarks());
     _mnemonicsMode->setCurrentIndex(StyleConfigData::mnemonicsMode());
     _splitterProxyEnabled->setChecked(StyleConfigData::splitterProxyEnabled());
