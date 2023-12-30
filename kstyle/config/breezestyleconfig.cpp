@@ -257,6 +257,7 @@ void StyleConfig::load()
 
 void StyleConfig::kPageWidgetChanged(KPageWidgetItem *current, KPageWidgetItem *before)
 {
+    Q_UNUSED(before)
     if (current) {
         current->setHeaderVisible(false);
     }
