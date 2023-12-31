@@ -159,6 +159,6 @@ struct Metrics {
     static constexpr int Shadow_Overlap = 2;
 
     // frame intensities (called bias in KColorUtilities::Mix)
-    static constexpr qreal Bias_Default = 0.25;
+    static constexpr qreal Bias_Default = 0.15;
 };
 }
