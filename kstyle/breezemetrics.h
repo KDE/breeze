@@ -160,5 +160,6 @@ struct Metrics {
 
     // frame intensities (called bias in KColorUtilities::Mix)
     static constexpr qreal Bias_Default = 0.15;
+    static constexpr qreal Bias_HighContrast = 0.6;
 };
 }

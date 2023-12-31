@@ -7630,7 +7630,7 @@ bool Style::drawScrollBarComplexControl(const QStyleOptionComplex *option, QPain
         separatorRect = alignedRect(option->direction, Qt::AlignLeft, QSize(PenWidth::Frame, option->rect.height()), option->rect);
     }
 
-    _helper->renderScrollBarBorder(painter, separatorRect, _helper->alphaColor(option->palette.color(QPalette::Text), Metrics::Bias_Default));
+    _helper->renderScrollBarBorder(painter, separatorRect, _helper->alphaColor(option->palette.color(QPalette::Text), _helper->frameBias()));
 
     // render full groove directly, rather than using the addPage and subPage control element methods
     if ((!StyleConfigData::animationsEnabled() || mouseOver || animated) && option->subControls & SC_ScrollBarGroove) {

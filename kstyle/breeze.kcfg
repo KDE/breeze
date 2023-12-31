@@ -182,6 +182,11 @@
         <default>100</default>
     </entry>
 
+    <!-- high contrast frames -->
+    <entry name="HighContrastFrames" type="Bool">
+      <default>false</default>
+    </entry>
+
   </group>
 
 </kcfg>

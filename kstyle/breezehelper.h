@@ -10,6 +10,7 @@
 #include "breezeanimationdata.h"
 #include "breezemetrics.h"
 #include "breezesettings.h"
+#include "breezestyleconfigdata.h"
 #include "config-breeze.h"
 
 #include <KConfigWatcher>
@@ -372,6 +373,8 @@ public:
                         QIcon::State state = QIcon::Off);
 
     static Qt::Edges menuSeamlessEdges(const QWidget *);
+
+    static qreal frameBias();
 
 protected:
     //* return rounded path in a given rect, with only selected corners rounded, and for a given radius

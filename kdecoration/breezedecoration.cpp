@@ -9,6 +9,7 @@
 
 #include "breezedecoration.h"
 
+#include "breeze.h"
 #include "breezesettingsprovider.h"
 
 #include "breezebutton.h"
@@ -116,12 +117,12 @@ inline qreal lookupOutlineIntensity(int intensity)
     case Breeze::InternalSettings::OutlineOff:
         return 0;
     case Breeze::InternalSettings::OutlineDefault:
-        return 0.15;
+        return Breeze::Metrics::Bias_Default;
     case Breeze::InternalSettings::OutlineHighContrast:
-        return 0.6;
+        return Breeze::Metrics::Bias_HighContrast;
     default:
-        // Fallback to the Medium intensity.
-        return 0.15;
+        // Fallback to the default intensity.
+        return Breeze::Metrics::Bias_Default;
     }
 }
 }

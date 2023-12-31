@@ -35,6 +35,7 @@ static constexpr int Shadow_Overlap = 3;
 
 // frame intensities (called bias in KColorUtilities::Mix)
 static constexpr qreal Bias_Default = 0.15;
+static constexpr qreal Bias_HighContrast = 0.6;
 }
 
 //* standard pen widths
