@@ -844,7 +844,7 @@ void Helper::renderCheckBoxBackground(QPainter *painter,
     } else if (state == CheckOn || state == CheckPartial) {
         penBrush = palette.highlight().color();
     } else {
-        penBrush = transparentize(palette.text().color(), frameBias());
+        penBrush = transparentize(palette.text().color(), Metrics::Bias_Default);
     }
     painter->setPen(QPen(penBrush, PenWidth::Frame));
 
@@ -1004,7 +1004,7 @@ void Helper::renderRadioButtonBackground(QPainter *painter,
     } else if (state == RadioOn) {
         penBrush = palette.highlight().color();
     } else {
-        penBrush = transparentize(palette.text().color(), frameBias());
+        penBrush = transparentize(palette.text().color(), Metrics::Bias_Default);
     }
     painter->setPen(QPen(penBrush, PenWidth::Frame));
 
