@@ -595,8 +595,8 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
 void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
 {
     const auto c = client();
-    const QRect frontRect(QPoint(0, 0), QSize(size().width(), borderTop()));
-    const QRect backRect(QPoint(0, 0), QSize(size().width(), borderTop()));
+    const QRectF frontRect(QPoint(0, 0), QSizeF(size().width(), borderTop()));
+    const QRectF backRect(QPoint(0, 0), QSizeF(size().width(), borderTop()));
 
     QBrush frontBrush;
     QBrush backBrush(this->titleBarColor());
@@ -640,7 +640,7 @@ void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
     } else {
         painter->setClipRect(backRect, Qt::IntersectClip);
 
-        auto drawThe = [=](const QRect &r) {
+        auto drawThe = [=](const QRectF &r) {
             // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
             painter->drawRoundedRect(r.adjusted(isLeftEdge() ? -m_scaledCornerRadius : 0,
                                                 isTopEdge() ? -m_scaledCornerRadius : 0,
