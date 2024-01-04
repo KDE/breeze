@@ -295,6 +295,8 @@ void Decoration::init()
     connect(c, &KDecoration2::DecoratedClient::adjacentScreenEdgesChanged, this, &Decoration::updateButtonsGeometry);
     connect(c, &KDecoration2::DecoratedClient::shadedChanged, this, &Decoration::updateButtonsGeometry);
 
+    connect(c, &KDecoration2::DecoratedClient::devicePixelRatioChanged, this, &Decoration::updateShadow);
+
     createButtons();
     updateShadow();
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -816,7 +818,7 @@ std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(c
     shadowRenderer.addShadow(params.shadow1.offset, params.shadow1.radius, withOpacity(m_internalSettings->shadowColor(), params.shadow1.opacity * strength));
     shadowRenderer.addShadow(params.shadow2.offset, params.shadow2.radius, withOpacity(m_internalSettings->shadowColor(), params.shadow2.opacity * strength));
 
-    QImage shadowTexture = shadowRenderer.render();
+    QImage shadowTexture = shadowRenderer.render(client()->devicePixelRatio());
 
     QPainter painter(&shadowTexture);
     painter.setRenderHint(QPainter::Antialiasing);
