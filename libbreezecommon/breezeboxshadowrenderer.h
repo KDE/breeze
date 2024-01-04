@@ -41,8 +41,9 @@ public:
 
     /**
      * Render the shadow.
+     * @param devicePixelRatio sets the device pixel ratio as per QImage documentation
      **/
-    QImage render() const;
+    QImage render(qreal devicePixelRatio = 1.0) const;
 
     /**
      * Calculate the minimum size of the box.

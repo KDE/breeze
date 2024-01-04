@@ -302,7 +302,7 @@ void BoxShadowRenderer::addShadow(const QPoint &offset, int radius, const QColor
     m_shadows.append(shadow);
 }
 
-QImage BoxShadowRenderer::render() const
+QImage BoxShadowRenderer::render(qreal devicePixelRatio) const
 {
     if (m_shadows.isEmpty()) {
         return {};
@@ -313,7 +313,8 @@ QImage BoxShadowRenderer::render() const
         canvasSize = canvasSize.expandedTo(calculateMinimumShadowTextureSize(m_boxSize, shadow.radius, shadow.offset));
     }
 
-    QImage canvas(canvasSize, QImage::Format_ARGB32_Premultiplied);
+    QImage canvas(canvasSize * devicePixelRatio, QImage::Format_ARGB32_Premultiplied);
+    canvas.setDevicePixelRatio(devicePixelRatio);
     canvas.fill(Qt::transparent);
 
     QRect boxRect(QPoint(0, 0), m_boxSize);
