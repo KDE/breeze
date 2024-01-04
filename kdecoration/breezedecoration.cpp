@@ -821,9 +821,9 @@ std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(c
     QPainter painter(&shadowTexture);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    const QRect outerRect = shadowTexture.rect();
+    const QRectF outerRect = QRectF(QPointF(0, 0), shadowTexture.deviceIndependentSize());
 
-    QRect boxRect(QPoint(0, 0), boxSize);
+    QRectF boxRect(QPoint(0, 0), boxSize);
     boxRect.moveCenter(outerRect.center());
 
     // Mask out inner rect.
@@ -831,7 +831,7 @@ std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(c
                                       boxRect.top() - outerRect.top() - Metrics::Shadow_Overlap - params.offset.y(),
                                       outerRect.right() - boxRect.right() - Metrics::Shadow_Overlap + params.offset.x(),
                                       outerRect.bottom() - boxRect.bottom() - Metrics::Shadow_Overlap + params.offset.y());
-    const QRect innerRect = outerRect - padding;
+    const QRectF innerRect = outerRect - padding;
 
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::black);
@@ -876,7 +876,7 @@ std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(c
 
     auto ret = std::make_shared<KDecoration2::DecorationShadow>();
     ret->setPadding(padding);
-    ret->setInnerShadowRect(QRect(outerRect.center(), QSize(1, 1)));
+    ret->setInnerShadowRect(QRect(outerRect.center().toPoint(), QSize(1, 1)));
     ret->setShadow(shadowTexture);
     return ret;
 }
