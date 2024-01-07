@@ -7616,8 +7616,6 @@ bool Style::drawScrollBarComplexControl(const QStyleOptionComplex *option, QPain
     // the animation for QStyle::SC_ScrollBarGroove is special: it will animate
     // the opacity of everything else as well, included slider and arrows
     qreal opacity(_animations->scrollBarEngine().opacity(widget, QStyle::SC_ScrollBarGroove));
-    const bool animated(StyleConfigData::animationsEnabled() && _animations->scrollBarEngine().isAnimated(widget, AnimationHover, QStyle::SC_ScrollBarGroove));
-    const bool mouseOver(option->state & State_MouseOver);
 
     if (opacity == AnimationData::OpacityInvalid) {
         opacity = 1;
@@ -7630,10 +7628,8 @@ bool Style::drawScrollBarComplexControl(const QStyleOptionComplex *option, QPain
         separatorRect = alignedRect(option->direction, Qt::AlignLeft, QSize(PenWidth::Frame, option->rect.height()), option->rect);
     }
 
-    _helper->renderScrollBarBorder(painter, separatorRect, _helper->alphaColor(option->palette.color(QPalette::Text), Metrics::Bias_Default));
-
     // render full groove directly, rather than using the addPage and subPage control element methods
-    if ((!StyleConfigData::animationsEnabled() || mouseOver || animated) && option->subControls & SC_ScrollBarGroove) {
+    if (option->subControls & SC_ScrollBarGroove) {
         // retrieve groove rectangle
         auto grooveRect(subControlRect(CC_ScrollBar, option, SC_ScrollBarGroove, widget));
 
@@ -7647,7 +7643,7 @@ bool Style::drawScrollBarComplexControl(const QStyleOptionComplex *option, QPain
         }
 
         const auto &palette(option->palette);
-        const auto color(_helper->alphaColor(palette.color(QPalette::WindowText), 0.2 * (animated ? opacity : 1)));
+        const auto color(_helper->alphaColor(palette.color(QPalette::WindowText), 0.2));
         const auto &state(option->state);
         const bool horizontal(state & State_Horizontal);
 
