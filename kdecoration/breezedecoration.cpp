@@ -878,7 +878,7 @@ std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(c
 
     auto ret = std::make_shared<KDecoration2::DecorationShadow>();
     ret->setPadding(padding);
-    ret->setInnerShadowRect(QRect(outerRect.center().toPoint(), QSize(1, 1)));
+    ret->setInnerShadowRect(QRectF(outerRect.center(), QSizeF(1, 1)));
     ret->setShadow(shadowTexture);
     return ret;
 }
