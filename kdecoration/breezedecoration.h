@@ -54,8 +54,8 @@ public:
     //* caption height
     int captionHeight() const;
 
-    //* button height
-    int buttonHeight() const;
+    //* button size
+    int buttonSize() const;
 
     //*@name active state change animation
     //@{

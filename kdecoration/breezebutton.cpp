@@ -34,10 +34,6 @@ Button::Button(DecorationButtonType type, Decoration *decoration, QObject *paren
         setOpacity(value.toReal());
     });
 
-    // setup default geometry
-    const int height = decoration->buttonHeight();
-    setGeometry(QRect(0, 0, height, height));
-
     // connections
     connect(decoration->client(), SIGNAL(iconChanged(QIcon)), this, SLOT(update()));
     connect(decoration->settings().get(), &KDecoration2::DecorationSettings::reconfigured, this, &Button::reconfigure);
@@ -50,6 +46,7 @@ Button::Button(DecorationButtonType type, Decoration *decoration, QObject *paren
 Button::Button(QObject *parent, const QVariantList &args)
     : Button(args.at(0).value<DecorationButtonType>(), args.at(1).value<Decoration *>(), parent)
 {
+    setGeometry(QRectF(QPointF(0, 0), preferredSize()));
 }
 
 //__________________________________________________________________
@@ -109,9 +106,8 @@ void Button::paint(QPainter *painter, const QRect &repaintRegion)
         return;
     }
 
-    painter->save();
-
-    if (type() == DecorationButtonType::Menu) {
+    switch (type()) {
+    case KDecoration2::DecorationButtonType::Menu: {
         const QRectF iconRect = geometry().marginsRemoved(m_padding);
         const auto c = decoration()->client();
         if (auto deco = qobject_cast<Decoration *>(decoration())) {
@@ -128,12 +124,16 @@ void Button::paint(QPainter *painter, const QRect &repaintRegion)
         } else {
             c->icon().paint(painter, iconRect.toRect());
         }
-
-    } else {
-        drawIcon(painter);
+        break;
     }
-
-    painter->restore();
+    case KDecoration2::DecorationButtonType::Spacer:
+        break;
+    default:
+        painter->save();
+        drawIcon(painter);
+        painter->restore();
+        break;
+    }
 }
 
 //__________________________________________________________________
@@ -367,9 +367,20 @@ void Button::reconfigure()
 {
     // animation
     auto d = qobject_cast<Decoration *>(decoration());
-    if (d) {
-        m_animation->setDuration(d->animationsDuration());
+    if (!d) {
+        return;
     }
+
+    switch (type()) {
+    case KDecoration2::DecorationButtonType::Spacer:
+        setPreferredSize(QSizeF(d->buttonSize() * 0.5, d->captionHeight()));
+        break;
+    default:
+        setPreferredSize(QSizeF(d->buttonSize(), d->captionHeight()));
+        break;
+    }
+
+    m_animation->setDuration(d->animationsDuration());
 }
 
 //__________________________________________________________________

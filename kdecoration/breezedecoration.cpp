@@ -435,7 +435,7 @@ void Decoration::recalculateBorders()
         top = bottom;
     } else {
         QFontMetrics fm(s->font());
-        top += qMax(fm.height(), buttonHeight());
+        top += qMax(fm.height(), buttonSize());
 
         // padding below
         const int baseSize = s->smallSpacing();
@@ -486,13 +486,17 @@ void Decoration::updateButtonsGeometry()
     const auto s = settings();
 
     // adjust button position
-    const int bHeight = captionHeight() + (isTopEdge() ? s->smallSpacing() * Metrics::TitleBar_TopMargin : 0);
-    const int bWidth = buttonHeight();
-    const int verticalOffset = (isTopEdge() ? s->smallSpacing() * Metrics::TitleBar_TopMargin : 0) + (captionHeight() - buttonHeight()) / 2;
     const auto buttonList = m_leftButtons->buttons() + m_rightButtons->buttons();
     for (const QPointer<KDecoration2::DecorationButton> &button : buttonList) {
-        button.data()->setGeometry(QRectF(QPoint(0, 0), QSizeF(bWidth, bHeight)));
-        static_cast<Button *>(button.data())->setPadding(QMargins(0, verticalOffset, 0, 0));
+        auto btn = static_cast<Button *>(button.get());
+
+        const QSizeF preferredSize = btn->preferredSize();
+        const int bHeight = preferredSize.height() + (isTopEdge() ? s->smallSpacing() * Metrics::TitleBar_TopMargin : 0);
+        const int bWidth = preferredSize.width();
+        const int verticalOffset = (isTopEdge() ? s->smallSpacing() * Metrics::TitleBar_TopMargin : 0) + (captionHeight() - preferredSize.height()) / 2;
+
+        btn->setGeometry(QRectF(QPoint(0, 0), QSizeF(bWidth, bHeight)));
+        btn->setPadding(QMargins(0, verticalOffset, 0, 0));
     }
 
     // left buttons
@@ -506,7 +510,10 @@ void Decoration::updateButtonsGeometry()
         if (isLeftEdge()) {
             // add offsets on the side buttons, to preserve padding, but satisfy Fitts law
             auto button = static_cast<Button *>(m_leftButtons->buttons().front());
-            button->setGeometry(QRectF(QPoint(0, 0), QSizeF(bWidth + hPadding, bHeight)));
+
+            QRectF geometry = button->geometry();
+            geometry.adjust(-hPadding, 0, 0, 0);
+            button->setGeometry(geometry);
             button->setLeftPadding(hPadding);
 
             m_leftButtons->setPos(QPointF(0, vPadding));
@@ -526,7 +533,10 @@ void Decoration::updateButtonsGeometry()
         const int hPadding = s->smallSpacing() * Metrics::TitleBar_SideMargin;
         if (isRightEdge()) {
             auto button = static_cast<Button *>(m_rightButtons->buttons().back());
-            button->setGeometry(QRectF(QPoint(0, 0), QSizeF(bWidth + hPadding, bHeight)));
+
+            QRectF geometry = button->geometry();
+            geometry.adjust(0, 0, hPadding, 0);
+            button->setGeometry(geometry);
             button->setRightPadding(hPadding);
 
             m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width(), vPadding));
@@ -702,7 +712,7 @@ void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
 }
 
 //________________________________________________________________
-int Decoration::buttonHeight() const
+int Decoration::buttonSize() const
 {
     const int baseSize = m_tabletMode ? settings()->gridUnit() * 2 : settings()->gridUnit();
     switch (m_internalSettings->buttonSize()) {

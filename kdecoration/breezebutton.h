@@ -70,6 +70,16 @@ public:
 
     //@}
 
+    void setPreferredSize(const QSizeF &size)
+    {
+        m_preferredSize = size;
+    }
+
+    QSizeF preferredSize() const
+    {
+        return m_preferredSize;
+    }
+
 private Q_SLOTS:
 
     //* apply configuration changes
@@ -96,6 +106,9 @@ private:
 
     //* padding (for rendering)
     QMargins m_padding;
+
+    //* implicit size
+    QSizeF m_preferredSize;
 
     //* active state change opacity
     qreal m_opacity = 0;
