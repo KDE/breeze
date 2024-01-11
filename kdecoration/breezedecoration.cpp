@@ -492,8 +492,7 @@ void Decoration::updateButtonsGeometry()
     const auto buttonList = m_leftButtons->buttons() + m_rightButtons->buttons();
     for (const QPointer<KDecoration2::DecorationButton> &button : buttonList) {
         button.data()->setGeometry(QRectF(QPoint(0, 0), QSizeF(bWidth, bHeight)));
-        static_cast<Button *>(button.data())->setOffset(QPointF(0, verticalOffset));
-        static_cast<Button *>(button.data())->setIconSize(QSize(bWidth, bWidth));
+        static_cast<Button *>(button.data())->setPadding(QMargins(0, verticalOffset, 0, 0));
     }
 
     // left buttons
@@ -508,8 +507,7 @@ void Decoration::updateButtonsGeometry()
             // add offsets on the side buttons, to preserve padding, but satisfy Fitts law
             auto button = static_cast<Button *>(m_leftButtons->buttons().front());
             button->setGeometry(QRectF(QPoint(0, 0), QSizeF(bWidth + hPadding, bHeight)));
-            button->setFlag(Button::FlagFirstInList);
-            button->setHorizontalOffset(hPadding);
+            button->setLeftPadding(hPadding);
 
             m_leftButtons->setPos(QPointF(0, vPadding));
 
@@ -529,7 +527,7 @@ void Decoration::updateButtonsGeometry()
         if (isRightEdge()) {
             auto button = static_cast<Button *>(m_rightButtons->buttons().back());
             button->setGeometry(QRectF(QPoint(0, 0), QSizeF(bWidth + hPadding, bHeight)));
-            button->setFlag(Button::FlagLastInList);
+            button->setRightPadding(hPadding);
 
             m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width(), vPadding));
 

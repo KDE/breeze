@@ -37,7 +37,6 @@ Button::Button(DecorationButtonType type, Decoration *decoration, QObject *paren
     // setup default geometry
     const int height = decoration->buttonHeight();
     setGeometry(QRect(0, 0, height, height));
-    setIconSize(QSize(height, height));
 
     // connections
     connect(decoration->client(), SIGNAL(iconChanged(QIcon)), this, SLOT(update()));
@@ -51,10 +50,6 @@ Button::Button(DecorationButtonType type, Decoration *decoration, QObject *paren
 Button::Button(QObject *parent, const QVariantList &args)
     : Button(args.at(0).value<DecorationButtonType>(), args.at(1).value<Decoration *>(), parent)
 {
-    m_flag = FlagStandalone;
-    //! icon size must return to !valid because it was altered from the default constructor,
-    //! in Standalone mode the button is not using the decoration metrics but its geometry
-    m_iconSize = QSize(-1, -1);
 }
 
 //__________________________________________________________________
@@ -116,20 +111,8 @@ void Button::paint(QPainter *painter, const QRect &repaintRegion)
 
     painter->save();
 
-    // translate from offset
-    if (m_flag == FlagFirstInList) {
-        painter->translate(m_offset);
-    } else {
-        painter->translate(0, m_offset.y());
-    }
-
-    if (!m_iconSize.isValid() || isStandAlone()) {
-        m_iconSize = geometry().size().toSize();
-    }
-
-    // menu button
     if (type() == DecorationButtonType::Menu) {
-        const QRectF iconRect(geometry().topLeft(), m_iconSize);
+        const QRectF iconRect = geometry().marginsRemoved(m_padding);
         const auto c = decoration()->client();
         if (auto deco = qobject_cast<Decoration *>(decoration())) {
             const QPalette activePalette = KIconLoader::global()->customPalette();
@@ -163,9 +146,10 @@ void Button::drawIcon(QPainter *painter) const
     this makes all further rendering and scaling simpler
     all further rendering is performed inside QRect( 0, 0, 18, 18 )
     */
-    painter->translate(geometry().topLeft());
+    const QRectF rect = geometry().marginsRemoved(m_padding);
+    painter->translate(rect.topLeft());
 
-    const qreal width(m_iconSize.width());
+    const qreal width(rect.width());
     painter->scale(width / 20, width / 20);
     painter->translate(1, 1);
 
