@@ -795,22 +795,31 @@ void Decoration::updateShadow()
 std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(const float strengthScale, const QColor &outlineColor)
 {
 #if 1
+    const qreal scale = client()->devicePixelRatio();
     const QSize size(50, 50);
     const QMarginsF padding(10, 10, 10, 10);
+    const QMargins devicePadding(std::round(padding.left() * scale),
+                                 std::round(padding.top() * scale),
+                                 std::round(padding.right() * scale),
+                                 std::round(padding.bottom() * scale));
     const QRectF outerRect(QPoint(), size);
 
-    QImage image(size * client()->devicePixelRatio(), QImage::Format_ARGB32_Premultiplied);
-    image.setDevicePixelRatio(client()->devicePixelRatio());
+    QImage image(size * scale, QImage::Format_ARGB32_Premultiplied);
     image.fill(Qt::black);
 
     QPainter painter(&image);
     painter.setRenderHint(QPainter::Antialiasing);
-    painter.setPen(QPen(Qt::red, 1));
-    painter.drawRect(outerRect.marginsRemoved(padding));
+    painter.setPen(QPen(Qt::red, std::round(scale)));
+    painter.drawRect(image.rect().marginsRemoved(devicePadding));
     painter.end();
 
+    image.setDevicePixelRatio(scale);
+
     auto ret = std::make_shared<KDecoration2::DecorationShadow>();
-    ret->setPadding(padding);
+    ret->setPadding(QMarginsF(devicePadding.left() / scale,
+                              devicePadding.top() / scale,
+                              devicePadding.right() / scale,
+                              devicePadding.bottom() / scale));
     ret->setInnerShadowRect(QRectF(outerRect.center(), QSizeF(1, 1)));
     ret->setShadow(image);
     return ret;
