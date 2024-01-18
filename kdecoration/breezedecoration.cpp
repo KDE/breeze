@@ -27,6 +27,7 @@
 #include <QDBusMessage>
 #include <QDBusPendingCallWatcher>
 #include <QDBusPendingReply>
+#include <QImageWriter>
 #include <QPainter>
 #include <QPainterPath>
 #include <QTextStream>
@@ -818,8 +819,8 @@ std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(c
 
     QImage shadowTexture = shadowRenderer.render();
 
-    QPainter painter(&shadowTexture);
-    painter.setRenderHint(QPainter::Antialiasing);
+    // QPainter painter(&shadowTexture);
+    // painter.setRenderHint(QPainter::Antialiasing);
 
     const QRect outerRect = shadowTexture.rect();
 
@@ -833,10 +834,48 @@ std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(c
                                       outerRect.bottom() - boxRect.bottom() - Metrics::Shadow_Overlap + params.offset.y());
     const QRect innerRect = outerRect - padding;
 
+    const int height = outerRect.height() / 2;
+    const int width = outerRect.width() / 2;
+
+    QImage image(outerRect.size(), QImage::Format_RGB32);
+    QPainter painter(&image);
     painter.setPen(Qt::NoPen);
-    painter.setBrush(Qt::black);
-    painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
-    painter.drawRoundedRect(innerRect, m_scaledCornerRadius + 0.5, m_scaledCornerRadius + 0.5);
+    // topleft
+    painter.setBrush(Qt::red);
+    painter.drawRect(0, 0, height, width);
+
+    // top
+    painter.setBrush(Qt::green);
+    painter.drawRect(width, 0, 1, height);
+
+    // topright
+    painter.setBrush(QColorConstants::Svg::orange);
+    painter.drawRect(width + 1, 0, width, height);
+
+    // left
+    painter.setBrush(Qt::cyan);
+    painter.drawRect(0, height, width, 1);
+
+    // right
+    painter.setBrush(Qt::magenta);
+    painter.drawRect(width + 1, height, width, 1);
+
+    // bottomleft
+    painter.setBrush(Qt::blue);
+    painter.drawRect(0, height + 1, width, height);
+
+    // bottom
+    painter.setBrush(Qt::yellow);
+    painter.drawRect(width, height + 1, 1, height);
+
+    // bottomright
+    painter.setBrush(Qt::white);
+    painter.drawRect(width + 1, height + 1, width, height);
+
+    // painter.setPen(Qt::NoPen);
+    // painter.setBrush(Qt::black);
+    // painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
+    // painter.drawRoundedRect(innerRect, m_scaledCornerRadius + 0.5, m_scaledCornerRadius + 0.5);
 
     // Draw window outline
     if (m_internalSettings->outlineIntensity() != InternalSettings::OutlineOff) {
@@ -874,10 +913,12 @@ std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(c
 
     painter.end();
 
+    QImageWriter("/tmp/shadow.png").write(image);
+
     auto ret = std::make_shared<KDecoration2::DecorationShadow>();
     ret->setPadding(padding);
     ret->setInnerShadowRect(QRect(outerRect.center(), QSize(1, 1)));
-    ret->setShadow(shadowTexture);
+    ret->setShadow(image);
     return ret;
 }
 
