@@ -794,6 +794,28 @@ void Decoration::updateShadow()
 //________________________________________________________________
 std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(const float strengthScale, const QColor &outlineColor)
 {
+#if 1
+    const QSize size(50, 50);
+    const QMarginsF padding(10, 10, 10, 10);
+    const QRectF outerRect(QPoint(), size);
+
+    QImage image(size * client()->devicePixelRatio(), QImage::Format_ARGB32_Premultiplied);
+    image.setDevicePixelRatio(client()->devicePixelRatio());
+    image.fill(Qt::black);
+
+    QPainter painter(&image);
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.setPen(QPen(Qt::red, 1));
+    painter.drawRect(outerRect.marginsRemoved(padding));
+    painter.end();
+
+    auto ret = std::make_shared<KDecoration2::DecorationShadow>();
+    ret->setPadding(padding);
+    ret->setInnerShadowRect(QRectF(outerRect.center(), QSizeF(1, 1)));
+    ret->setShadow(image);
+    return ret;
+
+#else
     CompositeShadowParams params = lookupShadowParams(m_internalSettings->shadowSize());
     if (params.isNone()) {
         // If shadows are disabled, set shadow opacity to 0.
@@ -881,6 +903,7 @@ std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(c
     ret->setInnerShadowRect(QRectF(outerRect.center(), QSizeF(1, 1)));
     ret->setShadow(shadowTexture);
     return ret;
+#endif
 }
 
 void Decoration::setScaledCornerRadius()
