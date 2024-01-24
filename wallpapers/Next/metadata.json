@@ -3,11 +3,27 @@
         "Authors": [
             {
                 "Email": "bluepancake72@gmail.com",
-                "Name": "axo1otl"
+                "Name": "axo1otl",
+                "Name[ca@valencia]": "axo1otl",
+                "Name[ca]": "axo1otl",
+                "Name[es]": "axo1otl",
+                "Name[eu]": "axo1otl",
+                "Name[gl]": "axo1otl",
+                "Name[hu]": "axo1otl",
+                "Name[tr]": "axo1otl",
+                "Name[zh_TW]": "axo1otl"
             }
         ],
         "Id": "Next",
         "License": "CC-BY-SA-4.0",
-        "Name": "Scarlet Tree"
+        "Name": "Scarlet Tree",
+        "Name[ca@valencia]": "Scarlet Tree",
+        "Name[ca]": "Scarlet Tree",
+        "Name[es]": "Árbol escarlata",
+        "Name[eu]": "Zuhaitz gorrimina",
+        "Name[gl]": "Árbore escarlata",
+        "Name[hu]": "Skarlátvörös fa",
+        "Name[tr]": "Kızıl Ağaç",
+        "Name[zh_TW]": "緋紅木"
     }
 }
