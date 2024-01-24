@@ -32,8 +32,6 @@
 #include <QTextStream>
 #include <QTimer>
 
-#include <cmath>
-
 K_PLUGIN_FACTORY_WITH_JSON(BreezeDecoFactory, "breeze.json", registerPlugin<Breeze::Decoration>(); registerPlugin<Breeze::Button>();)
 
 namespace
@@ -143,7 +141,6 @@ static QColor g_shadowColor = Qt::black;
 static std::shared_ptr<KDecoration2::DecorationShadow> g_sShadow;
 static std::shared_ptr<KDecoration2::DecorationShadow> g_sShadowInactive;
 static int g_lastBorderSize;
-static QColor g_lastOutlineColor;
 
 //________________________________________________________________
 Decoration::Decoration(QObject *parent, const QVariantList &args)
@@ -350,9 +347,9 @@ int Decoration::borderSize(bool bottom) const
     if (m_internalSettings && (m_internalSettings->mask() & BorderSize)) {
         switch (m_internalSettings->borderSize()) {
         case InternalSettings::BorderNone:
-            return 0;
+            return outlinesEnabled() ? 2 : 0;
         case InternalSettings::BorderNoSides:
-            return bottom ? qMax(4, baseSize) : 0;
+            return bottom ? qMax(4, baseSize) : outlinesEnabled() ? 2 : 0;
         default:
         case InternalSettings::BorderTiny:
             return bottom ? qMax(4, baseSize) : baseSize;
@@ -373,9 +370,9 @@ int Decoration::borderSize(bool bottom) const
     } else {
         switch (settings()->borderSize()) {
         case KDecoration2::BorderSize::None:
-            return 0;
+            return outlinesEnabled() ? 2 : 0;
         case KDecoration2::BorderSize::NoSides:
-            return bottom ? qMax(4, baseSize) : 0;
+            return bottom ? qMax(4, baseSize) : outlinesEnabled() ? 2 : 0;
         default:
         case KDecoration2::BorderSize::Tiny:
             return bottom ? qMax(4, baseSize) : baseSize;
@@ -467,9 +464,6 @@ void Decoration::recalculateBorders()
     }
 
     setResizeOnlyBorders(QMargins(extSides, 0, extSides, extBottom));
-
-    // Update shadows and clear outline to make sure outline changes when borders are changed
-    updateShadow();
 }
 
 //________________________________________________________________
@@ -553,7 +547,6 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
     // TODO: optimize based on repaintRegion
     auto c = client();
     auto s = settings();
-
     // paint background
     if (!c->isShaded()) {
         painter->fillRect(rect(), Qt::transparent);
@@ -568,7 +561,11 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
         }
 
         if (s->isAlphaChannelSupported()) {
-            painter->drawRoundedRect(rect(), m_scaledCornerRadius, m_scaledCornerRadius);
+            if (hasNoBorders()) {
+                painter->drawRoundedRect(rect(), 0, 0);
+            } else {
+                painter->drawRoundedRect(rect(), m_scaledCornerRadius, m_scaledCornerRadius);
+            }
         } else {
             painter->drawRect(rect());
         }
@@ -587,6 +584,41 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
         painter->setPen(c->isActive() ? c->color(ColorGroup::Active, ColorRole::TitleBar) : c->color(ColorGroup::Inactive, ColorRole::Foreground));
 
         painter->drawRect(rect().adjusted(0, 0, -1, -1));
+        painter->restore();
+    }
+    if (outlinesEnabled() && !isMaximized()) {
+        auto outlineColor = KColorUtils::mix(c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame),
+                                             c->palette().text().color(),
+                                             lookupOutlineIntensity(m_internalSettings->outlineIntensity()));
+
+        QRectF outlineRect = rect();
+        qreal cornerSize = m_scaledCornerRadius * 2.0;
+        QRectF cornerRect(outlineRect.x(), outlineRect.y(), cornerSize, cornerSize);
+
+        QPainterPath outlinePath;
+        outlinePath.arcMoveTo(cornerRect, 180);
+        outlinePath.arcTo(cornerRect, 180, -90);
+        cornerRect.moveTopRight(outlineRect.topRight());
+        outlinePath.arcTo(cornerRect, 90, -90);
+        // Check if border size is "no borders" or "no side-borders"
+        if (hasNoBorders()) {
+            outlinePath.lineTo(outlineRect.bottomRight());
+            outlinePath.lineTo(outlineRect.bottomLeft());
+        } else {
+            cornerRect.moveBottomRight(outlineRect.bottomRight());
+            outlinePath.arcTo(cornerRect, 0, -90);
+            cornerRect.moveBottomLeft(outlineRect.bottomLeft());
+            outlinePath.arcTo(cornerRect, 270, -90);
+        }
+        outlinePath.closeSubpath();
+
+        painter->fillPath(outlinePath.simplified(), Qt::transparent);
+        painter->save();
+        painter->setPen(QPen(outlineColor, 2));
+        painter->setBrush(Qt::NoBrush);
+        painter->setRenderHint(QPainter::Antialiasing);
+        painter->setCompositionMode(QPainter::CompositionMode_SourceAtop);
+        painter->drawPath(outlinePath.simplified());
         painter->restore();
     }
 }
@@ -759,13 +791,10 @@ void Decoration::updateShadow()
 {
     auto s = settings();
     auto c = client();
-    auto outlineColor = KColorUtils::mix(c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame),
-                                         c->palette().text().color(),
-                                         lookupOutlineIntensity(m_internalSettings->outlineIntensity()));
 
     // Animated case, no cached shadow object
     if ((m_shadowAnimation->state() == QAbstractAnimation::Running) && (m_shadowOpacity != 0.0) && (m_shadowOpacity != 1.0)) {
-        setShadow(createShadowObject(0.5 + m_shadowOpacity * 0.5, outlineColor));
+        setShadow(createShadowObject(0.5 + m_shadowOpacity * 0.5));
         return;
     }
 
@@ -779,24 +808,22 @@ void Decoration::updateShadow()
     }
 
     auto &shadow = (c->isActive()) ? g_sShadow : g_sShadowInactive;
-    if (!shadow || g_lastBorderSize != borderSize(true) || g_lastOutlineColor != outlineColor) {
+    if (!shadow || g_lastBorderSize != borderSize(true)) {
         // Update both active and inactive shadows so outline stays consistent between the two
-        g_sShadow = createShadowObject(1.0, outlineColor);
-        g_sShadowInactive = createShadowObject(0.5, outlineColor);
+        g_sShadow = createShadowObject(1.0);
+        g_sShadowInactive = createShadowObject(0.5);
         g_lastBorderSize = borderSize(true);
-        g_lastOutlineColor = outlineColor;
     }
     setShadow(shadow);
 }
 
 //________________________________________________________________
-std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(const float strengthScale, const QColor &outlineColor)
+std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(const float strengthScale)
 {
     CompositeShadowParams params = lookupShadowParams(m_internalSettings->shadowSize());
     if (params.isNone()) {
-        // If shadows are disabled, set shadow opacity to 0.
-        // This allows the outline effect to show up without the shadow effect.
-        params = CompositeShadowParams(QPoint(0, 4), ShadowParams(QPoint(0, 0), 16, 0), ShadowParams(QPoint(0, -2), 8, 0));
+        // If shadows are disabled, return nothing
+        return nullptr;
     }
 
     auto withOpacity = [](const QColor &color, qreal opacity) -> QColor {
@@ -831,46 +858,14 @@ std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(c
                                       boxRect.top() - outerRect.top() - Metrics::Shadow_Overlap - params.offset.y(),
                                       outerRect.right() - boxRect.right() - Metrics::Shadow_Overlap + params.offset.x(),
                                       outerRect.bottom() - boxRect.bottom() - Metrics::Shadow_Overlap + params.offset.y());
-    const QRect innerRect = outerRect - padding;
+    QRect innerRect = outerRect - padding;
+    // Push the shadow slightly under the window, which helps avoiding glitches with fractional scaling
+    innerRect.adjust(2, 2, -2, -2);
 
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::black);
     painter.setCompositionMode(QPainter::CompositionMode_DestinationOut);
     painter.drawRoundedRect(innerRect, m_scaledCornerRadius + 0.5, m_scaledCornerRadius + 0.5);
-
-    // Draw window outline
-    if (m_internalSettings->outlineIntensity() != InternalSettings::OutlineOff) {
-        const qreal outlineWidth = 1.001;
-        const qreal penOffset = outlineWidth / 2;
-
-        QRectF outlineRect = innerRect + QMarginsF(penOffset, penOffset, penOffset, penOffset);
-        qreal cornerSize = m_scaledCornerRadius * 2;
-        QRectF cornerRect(outlineRect.x(), outlineRect.y(), cornerSize, cornerSize);
-        QPainterPath outlinePath;
-
-        outlinePath.arcMoveTo(cornerRect, 180);
-        outlinePath.arcTo(cornerRect, 180, -90);
-        cornerRect.moveTopRight(outlineRect.topRight());
-        outlinePath.arcTo(cornerRect, 90, -90);
-
-        // Check if border size is "no borders" or "no side-borders"
-        if (borderSize(true) == 0) {
-            outlinePath.lineTo(outlineRect.bottomRight());
-            outlinePath.lineTo(outlineRect.bottomLeft());
-        } else {
-            cornerRect.moveBottomRight(outlineRect.bottomRight());
-            outlinePath.arcTo(cornerRect, 0, -90);
-            cornerRect.moveBottomLeft(outlineRect.bottomLeft());
-            outlinePath.arcTo(cornerRect, 270, -90);
-        }
-        outlinePath.closeSubpath();
-
-        painter.setPen(QPen(outlineColor, outlineWidth));
-        painter.setBrush(Qt::NoBrush);
-        painter.setCompositionMode(QPainter::CompositionMode_Source);
-        painter.setRenderHint(QPainter::Antialiasing);
-        painter.drawPath(outlinePath);
-    }
 
     painter.end();
 
