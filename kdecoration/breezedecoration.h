@@ -111,7 +111,7 @@ private:
     void createButtons();
     void paintTitleBar(QPainter *painter, const QRect &repaintRegion);
     void updateShadow();
-    std::shared_ptr<KDecoration2::DecorationShadow> createShadowObject(const float strengthScale, const QColor &outlineColor);
+    std::shared_ptr<KDecoration2::DecorationShadow> createShadowObject(const float strengthScale);
     void setScaledCornerRadius();
 
     //*@name border size
@@ -121,6 +121,8 @@ private:
     inline bool hasNoBorders() const;
     inline bool hasNoSideBorders() const;
     //@}
+
+    inline bool outlinesEnabled() const;
 
     InternalSettingsPtr m_internalSettings;
     KDecoration2::DecorationButtonGroup *m_leftButtons = nullptr;
@@ -211,4 +213,8 @@ bool Decoration::hideTitleBar() const
     return m_internalSettings->hideTitleBar() && !client()->isShaded();
 }
 
+bool Decoration::outlinesEnabled() const
+{
+    return (m_internalSettings->outlineIntensity() != InternalSettings::OutlineOff);
+}
 }
