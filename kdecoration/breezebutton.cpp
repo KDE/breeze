@@ -106,7 +106,7 @@ Button *Button::create(DecorationButtonType type, KDecoration2::Decoration *deco
 }
 
 //__________________________________________________________________
-void Button::paint(QPainter *painter, const QRect &repaintRegion)
+void Button::paint(QPainter *painter, const QRectF &repaintRegion)
 {
     Q_UNUSED(repaintRegion)
 

@@ -544,7 +544,7 @@ void Decoration::updateButtonsGeometry()
 }
 
 //________________________________________________________________
-void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
+void Decoration::paint(QPainter *painter, const QRectF &repaintRegion)
 {
     // TODO: optimize based on repaintRegion
     auto c = client();
@@ -556,6 +556,7 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
         painter->setRenderHint(QPainter::Antialiasing);
         painter->setPen(Qt::NoPen);
         painter->setBrush(c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame));
+        painter->setBrush(QColor(255, 0, 0, 120));
 
         // clip away the top part
         if (!hideTitleBar()) {
@@ -584,6 +585,7 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
         painter->setRenderHint(QPainter::Antialiasing, false);
         painter->setBrush(Qt::NoBrush);
         painter->setPen(c->isActive() ? c->color(ColorGroup::Active, ColorRole::TitleBar) : c->color(ColorGroup::Inactive, ColorRole::Foreground));
+        painter->setBrush(QColor(255, 0, 0, 120));
 
         painter->drawRect(rect().adjusted(0, 0, -1, -1));
         painter->restore();
@@ -626,7 +628,7 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
 }
 
 //________________________________________________________________
-void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
+void Decoration::paintTitleBar(QPainter *painter, const QRectF &repaintRegion)
 {
     const auto c = client();
     const QRectF frontRect(QPoint(0, 0), QSizeF(size().width(), borderTop()));
@@ -674,7 +676,7 @@ void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
     } else {
         painter->setClipRect(backRect, Qt::IntersectClip);
 
-        auto drawThe = [=](const QRectF &r) {
+        auto drawThe = [this, painter](const QRectF &r) {
             // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
             painter->drawRoundedRect(r.adjusted(isLeftEdge() ? -m_scaledCornerRadius : 0,
                                                 isTopEdge() ? -m_scaledCornerRadius : 0,
