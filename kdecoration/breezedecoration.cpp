@@ -445,7 +445,9 @@ void Decoration::recalculateBorders()
         top += baseSize * Metrics::TitleBar_TopMargin;
     }
 
-    setBorders(QMargins(left, top, right, bottom));
+    // HACK: for fractional scaling issues, this makes the borders slightly bigger
+    // on bottom and right side, which is then pushed under the window in kdecoration
+    setBorders(QMargins(left, top, right + 1, bottom + 1));
 
     // extended sizes
     const int extSize = s->largeSpacing();
