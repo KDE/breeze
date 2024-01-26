@@ -347,9 +347,9 @@ int Decoration::borderSize(bool bottom) const
     if (m_internalSettings && (m_internalSettings->mask() & BorderSize)) {
         switch (m_internalSettings->borderSize()) {
         case InternalSettings::BorderNone:
-            return outlinesEnabled() ? 2 : 0;
+            return outlinesEnabled() ? 1 : 0;
         case InternalSettings::BorderNoSides:
-            return bottom ? qMax(4, baseSize) : outlinesEnabled() ? 2 : 0;
+            return bottom ? qMax(4, baseSize) : outlinesEnabled() ? 1 : 0;
         default:
         case InternalSettings::BorderTiny:
             return bottom ? qMax(4, baseSize) : baseSize;
@@ -370,9 +370,9 @@ int Decoration::borderSize(bool bottom) const
     } else {
         switch (settings()->borderSize()) {
         case KDecoration2::BorderSize::None:
-            return outlinesEnabled() ? 2 : 0;
+            return outlinesEnabled() ? 1 : 0;
         case KDecoration2::BorderSize::NoSides:
-            return bottom ? qMax(4, baseSize) : outlinesEnabled() ? 2 : 0;
+            return bottom ? qMax(4, baseSize) : outlinesEnabled() ? 1 : 0;
         default:
         case KDecoration2::BorderSize::Tiny:
             return bottom ? qMax(4, baseSize) : baseSize;
