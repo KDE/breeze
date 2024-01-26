@@ -95,7 +95,7 @@ struct Metrics {
     static constexpr int ScrollBar_Extend = 21;
     static constexpr int ScrollBar_SliderWidth = 8;
     static constexpr int ScrollBar_MinSliderHeight = 20;
-    static constexpr int ScrollBar_NoButtonHeight = (ScrollBar_Extend - ScrollBar_SliderWidth) / 2;
+    static constexpr int ScrollBar_NoButtonHeight = 3;
     static constexpr int ScrollBar_SingleButtonHeight = ScrollBar_Extend;
     static constexpr int ScrollBar_DoubleButtonHeight = 2 * ScrollBar_Extend;
 

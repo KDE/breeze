@@ -1294,30 +1294,6 @@ void Helper::renderScrollBarHandle(QPainter *painter, const QRectF &rect, const 
     painter->drawRoundedRect(strokedRect(baseRect), radius, radius);
 }
 
-void Helper::renderScrollBarGroove(QPainter *painter, const QRect &rect, const QColor &color) const
-{
-    // check for negative size, possible with squeezed controls
-    if (!rect.isValid()) {
-        return;
-    }
-
-    // setup painter
-    painter->setRenderHint(QPainter::Antialiasing, true);
-
-    const QRectF baseRect(rect);
-    const qreal radius(0.5 * std::min({baseRect.width(), baseRect.height(), (qreal)Metrics::ScrollBar_SliderWidth}));
-
-    // content
-    if (color.isValid()) {
-        painter->setPen(Qt::NoPen);
-        auto bg = color;
-        bg.setAlphaF(bg.alphaF() / 2.0);
-        painter->setBrush(bg);
-        painter->setPen(QPen(color, 1.001));
-        painter->drawRoundedRect(strokedRect(baseRect), radius, radius);
-    }
-}
-
 //______________________________________________________________________________
 void Helper::renderScrollBarBorder(QPainter *painter, const QRectF &rect, const QColor &color) const
 {
