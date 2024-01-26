@@ -293,9 +293,6 @@ public:
                                        bool reverse,
                                        int progress) const;
 
-    //* scrollbar groove
-    void renderScrollBarGroove(QPainter *painter, const QRect &rect, const QColor &color) const;
-
     //* scrollbar handle
     void renderScrollBarHandle(QPainter *, const QRect &, const QColor &fg, const QColor &bg) const;
 
