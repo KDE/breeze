@@ -4,6 +4,7 @@
             {
                 "Email": "bluepancake72@gmail.com",
                 "Name": "axo1otl",
+                "Name[bg]": "axo1otl",
                 "Name[ca@valencia]": "axo1otl",
                 "Name[ca]": "axo1otl",
                 "Name[es]": "axo1otl",
@@ -11,6 +12,7 @@
                 "Name[fr]": "axo1otl",
                 "Name[gl]": "axo1otl",
                 "Name[hu]": "axo1otl",
+                "Name[pl]": "axo1otl",
                 "Name[sl]": "axo1otl",
                 "Name[tr]": "axo1otl",
                 "Name[zh_TW]": "axo1otl"
@@ -19,6 +21,7 @@
         "Id": "Next",
         "License": "CC-BY-SA-4.0",
         "Name": "Scarlet Tree",
+        "Name[bg]": "Scarlet Tree",
         "Name[ca@valencia]": "Scarlet Tree",
         "Name[ca]": "Scarlet Tree",
         "Name[es]": "Árbol escarlata",
@@ -26,6 +29,7 @@
         "Name[fr]": "Scarlet Tree",
         "Name[gl]": "Árbore escarlata",
         "Name[hu]": "Skarlátvörös fa",
+        "Name[pl]": "Szkarłatne drzewo",
         "Name[sl]": "Škrlatno drevo",
         "Name[tr]": "Kızıl Ağaç",
         "Name[zh_TW]": "緋紅木"
