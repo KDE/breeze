@@ -279,7 +279,7 @@ void Decoration::init()
     connect(c, &KDecoration2::DecoratedClient::shadedChanged, this, &Decoration::recalculateBorders);
     connect(c, &KDecoration2::DecoratedClient::captionChanged, this, [this]() {
         // update the caption area
-        update(titleBar());
+        update(titleBar().toRect());
     });
 
     connect(c, &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::updateAnimationState);
@@ -341,7 +341,7 @@ void Decoration::updateAnimationState()
 }
 
 //________________________________________________________________
-int Decoration::borderSize(bool bottom) const
+qreal Decoration::borderSize(bool bottom) const
 {
     const int baseSize = settings()->smallSpacing();
     if (m_internalSettings && (m_internalSettings->mask() & BorderSize)) {
@@ -445,7 +445,7 @@ void Decoration::recalculateBorders()
         top += baseSize * Metrics::TitleBar_TopMargin;
     }
 
-    setBorders(QMargins(left, top, right, bottom));
+    setBorders(QMarginsF(left, top, right, bottom));
 
     // extended sizes
     const int extSize = s->largeSpacing();
@@ -463,7 +463,7 @@ void Decoration::recalculateBorders()
         extSides = extSize;
     }
 
-    setResizeOnlyBorders(QMargins(extSides, 0, extSides, extBottom));
+    setResizeOnlyBorders(QMarginsF(extSides, 0, extSides, extBottom));
 }
 
 //________________________________________________________________
@@ -542,7 +542,7 @@ void Decoration::updateButtonsGeometry()
 }
 
 //________________________________________________________________
-void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
+void Decoration::paint(QPainter *painter, const QRectF &repaintRegion)
 {
     // TODO: optimize based on repaintRegion
     auto c = client();
@@ -624,11 +624,11 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
 }
 
 //________________________________________________________________
-void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
+void Decoration::paintTitleBar(QPainter *painter, const QRectF &repaintRegion)
 {
     const auto c = client();
-    const QRect frontRect(QPoint(0, 0), QSize(size().width(), borderTop()));
-    const QRect backRect(QPoint(0, 0), QSize(size().width(), borderTop()));
+    const QRectF frontRect(QPointF(0, 0), QSizeF(size().width(), borderTop()));
+    const QRectF backRect(QPointF(0, 0), QSizeF(size().width(), borderTop()));
 
     QBrush frontBrush;
     QBrush backBrush(this->titleBarColor());
