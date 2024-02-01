@@ -264,7 +264,7 @@ QColor Helper::arrowColor(const QPalette &palette, bool mouseOver, bool hasFocus
 //____________________________________________________________________
 QColor Helper::sliderOutlineColor(const QPalette &palette, bool mouseOver, bool hasFocus, qreal opacity, AnimationMode mode) const
 {
-    QColor outline(KColorUtils::mix(palette.color(QPalette::Window), palette.color(QPalette::WindowText), 0.4));
+    QColor outline(KColorUtils::mix(palette.color(QPalette::Button), palette.color(QPalette::ButtonText), Metrics::Bias_Default));
 
     // hover takes precedence over focus
     if (mode == AnimationHover) {
@@ -845,7 +845,7 @@ void Helper::renderCheckBoxBackground(QPainter *painter,
     } else if (state == CheckOn || state == CheckPartial) {
         penBrush = palette.highlight().color();
     } else {
-        penBrush = transparentize(palette.text().color(), Metrics::Bias_Default);
+        penBrush = separatorColor(palette);
     }
     painter->setPen(QPen(penBrush, PenWidth::Frame));
 
@@ -1005,7 +1005,7 @@ void Helper::renderRadioButtonBackground(QPainter *painter,
     } else if (state == RadioOn) {
         penBrush = palette.highlight().color();
     } else {
-        penBrush = transparentize(palette.text().color(), Metrics::Bias_Default);
+        penBrush = separatorColor(palette);
     }
     painter->setPen(QPen(penBrush, PenWidth::Frame));
 
@@ -1087,7 +1087,7 @@ void Helper::renderRadioButton(QPainter *painter,
 }
 
 //______________________________________________________________________________
-void Helper::renderSliderGroove(QPainter *painter, const QRectF &rect, const QColor &color) const
+void Helper::renderSliderGroove(QPainter *painter, const QRectF &rect, const QColor &fg, const QColor &bg) const
 {
     // setup painter
     painter->setRenderHint(QPainter::Antialiasing, true);
@@ -1097,11 +1097,10 @@ void Helper::renderSliderGroove(QPainter *painter, const QRectF &rect, const QCo
     const qreal radius(0.5 * Metrics::Slider_GrooveThickness);
 
     // content
-    if (color.isValid()) {
-        painter->setPen(QPen(color, PenWidth::Frame));
-        auto bg = color;
-        bg.setAlphaF(bg.alphaF() / 2);
-        painter->setBrush(bg);
+    // content
+    if (fg.isValid()) {
+        painter->setPen(QPen(transparentize(fg, Metrics::Bias_Default), PenWidth::Frame));
+        painter->setBrush(KColorUtils::overlayColors(bg, alphaColor(fg, 0.7)));
         painter->drawRoundedRect(baseRect, radius, radius);
     }
 }
@@ -1122,9 +1121,8 @@ void Helper::renderDialGroove(QPainter *painter, const QRectF &rect, const QColo
         // setup angles
         const int angleStart(first * 180 * 16 / M_PI);
         const int angleSpan((last - first) * 180 * 16 / M_PI);
-
         const QPen bgPen(fg, penWidth, Qt::SolidLine, Qt::RoundCap);
-        const QPen fgPen(KColorUtils::overlayColors(bg, alphaColor(fg, 0.5)), penWidth - 2, Qt::SolidLine, Qt::RoundCap);
+        const QPen fgPen(transparentize(KColorUtils::overlayColors(bg, alphaColor(fg, 0.5)), Metrics::Bias_Default), penWidth - 2, Qt::SolidLine, Qt::RoundCap);
 
         // setup pen
         if (angleSpan != 0) {
@@ -1223,8 +1221,8 @@ void Helper::renderProgressBarGroove(QPainter *painter, const QRectF &rect, cons
 
     // content
     if (fg.isValid()) {
-        painter->setPen(QPen(fg, PenWidth::Frame));
-        painter->setBrush(KColorUtils::overlayColors(bg, alphaColor(fg, 0.5)));
+        painter->setPen(QPen(transparentize(fg, Metrics::Bias_Default), PenWidth::Frame));
+        painter->setBrush(KColorUtils::overlayColors(bg, alphaColor(fg, 0.7)));
         painter->drawRoundedRect(baseRect, radius, radius);
     }
 }
@@ -1291,7 +1289,7 @@ void Helper::renderScrollBarHandle(QPainter *painter, const QRectF &rect, const 
     const qreal radius(0.5 * std::min({baseRect.width(), baseRect.height(), (qreal)Metrics::ScrollBar_SliderWidth}));
 
     painter->setPen(Qt::NoPen);
-    painter->setPen(QPen(fg, 1.001));
+    painter->setPen(QPen(transparentize(fg, Metrics::Bias_Default), 1.001));
     painter->setBrush(KColorUtils::overlayColors(bg, alphaColor(fg, 0.5)));
     painter->drawRoundedRect(strokedRect(baseRect), radius, radius);
 }
