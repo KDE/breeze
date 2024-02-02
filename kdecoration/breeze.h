@@ -34,7 +34,7 @@ static constexpr int TitleBar_ButtonSpacing = 2;
 static constexpr int Shadow_Overlap = 3;
 
 // frame intensities (called bias in KColorUtilities::Mix)
-static constexpr qreal Bias_Default = 0.25;
+static constexpr qreal Bias_Default = 0.15;
 }
 
 //* standard pen widths
