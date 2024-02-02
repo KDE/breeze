@@ -4382,7 +4382,7 @@ bool Style::drawFrameTabBarBasePrimitive(const QStyleOption *option, QPainter *p
     }
 
     // get rect, orientation, palette
-    const auto rect(option->rect);
+    const QRectF rect(option->rect);
     const auto outline(_helper->frameOutlineColor(option->palette));
 
     // setup painter
