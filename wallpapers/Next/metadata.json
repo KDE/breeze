@@ -26,6 +26,7 @@
                 "Name[tr]": "axo1otl",
                 "Name[uk]": "axo1otl",
                 "Name[x-test]": "xxaxo1otlxx",
+                "Name[zh_CN]": "axo1otl",
                 "Name[zh_TW]": "axo1otl"
             }
         ],
@@ -54,6 +55,7 @@
         "Name[tr]": "Kızıl Ağaç",
         "Name[uk]": "Рожеве дерево",
         "Name[x-test]": "xxScarlet Treexx",
+        "Name[zh_CN]": "Scarlet Tree 红树",
         "Name[zh_TW]": "緋紅木"
     }
 }
