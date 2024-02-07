@@ -78,6 +78,8 @@ using TabletModeWatcher = Kirigami::TabletModeWatcher;
 #include <QQuickWindow>
 #endif
 
+#include "breeze_logging.h"
+
 namespace BreezePrivate
 {
 
@@ -7899,6 +7901,7 @@ bool Style::drawDialComplexControl(const QStyleOptionComplex *option, QPainter *
 bool Style::drawScrollBarComplexControl(const QStyleOptionComplex *option, QPainter *painter, const QWidget *widget) const
 {
     if (!option) {
+        qCWarning(KLASSY) << "Style::drawScrollBarComplexControl: Style can't draw scrollbar without options";
         return true;
     }
     // the animation for QStyle::SC_ScrollBarGroove is special: it will animate
