@@ -74,6 +74,8 @@ using TabletModeWatcher = Kirigami::TabletModeWatcher;
 #include <QQuickWindow>
 #endif
 
+#include "breeze_logging.h"
+
 namespace BreezePrivate
 {
 // needed to keep track of tabbars when being dragged
@@ -7643,6 +7645,7 @@ bool Style::drawDialComplexControl(const QStyleOptionComplex *option, QPainter *
 bool Style::drawScrollBarComplexControl(const QStyleOptionComplex *option, QPainter *painter, const QWidget *widget) const
 {
     if (!option) {
+        qCWarning(BREEZE) << "Style::drawScrollBarComplexControl: Style can't draw scrollbar without options";
         return true;
     }
 
