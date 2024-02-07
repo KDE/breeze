@@ -7642,6 +7642,10 @@ bool Style::drawDialComplexControl(const QStyleOptionComplex *option, QPainter *
 //______________________________________________________________
 bool Style::drawScrollBarComplexControl(const QStyleOptionComplex *option, QPainter *painter, const QWidget *widget) const
 {
+    if (!option) {
+        return true;
+    }
+
     QRect separatorRect;
     if (option->state & State_Horizontal) {
         separatorRect = QRect(0, 0, option->rect.width(), PenWidth::Frame);
