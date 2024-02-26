@@ -2850,26 +2850,26 @@ QRect Style::scrollBarSubControlRect(const QStyleOptionComplex *option, SubContr
                 if (enlargeOverSubPage)
                     topLeftCorner = QPoint(topRect.left() + Metrics::ScrollBar_TopBottomMargins, topRect.top());
                 else
-                    topLeftCorner = QPoint(topRect.right() + StyleConfigData::scrollBarTopOneButtonSpacing(), topRect.top());
+                    topLeftCorner = QPoint(topRect.right() + 1 + StyleConfigData::scrollBarTopOneButtonSpacing(), topRect.top());
             } else if (_subLineButtons == ScrollBarButtonType::DoubleButton) {
                 if (enlargeOverSubPage)
                     topLeftCorner = QPoint(topRect.left() + Metrics::ScrollBar_TopBottomMargins, topRect.top());
                 else
-                    topLeftCorner = QPoint(topRect.right() + StyleConfigData::scrollBarTopTwoButtonSpacing(), topRect.top());
+                    topLeftCorner = QPoint(topRect.right() + 1 + StyleConfigData::scrollBarTopTwoButtonSpacing(), topRect.top());
             }
 
             if (_addLineButtons == ScrollBarButtonType::NoButton) {
-                botRightCorner = QPoint(bottomRect.right() - Metrics::ScrollBar_TopBottomMargins, topRect.bottom());
+                botRightCorner = QPoint(bottomRect.right() + 1 - Metrics::ScrollBar_TopBottomMargins, topRect.bottom() + 1);
             } else if (_addLineButtons == ScrollBarButtonType::SingleButton) {
                 if (enlargeOverAddPage)
-                    botRightCorner = QPoint(bottomRect.right() - Metrics::ScrollBar_TopBottomMargins, topRect.bottom());
+                    botRightCorner = QPoint(bottomRect.right() + 1 - Metrics::ScrollBar_TopBottomMargins, topRect.bottom() + 1);
                 else
-                    botRightCorner = QPoint(bottomRect.left() - StyleConfigData::scrollBarBottomOneButtonSpacing(), topRect.bottom());
+                    botRightCorner = QPoint(bottomRect.left() - StyleConfigData::scrollBarBottomOneButtonSpacing(), topRect.bottom() + 1);
             } else if (_addLineButtons == ScrollBarButtonType::DoubleButton) {
                 if (enlargeOverAddPage)
-                    botRightCorner = QPoint(bottomRect.right() - Metrics::ScrollBar_TopBottomMargins, topRect.bottom());
+                    botRightCorner = QPoint(bottomRect.right() + 1 - Metrics::ScrollBar_TopBottomMargins, topRect.bottom() + 1);
                 else
-                    botRightCorner = QPoint(bottomRect.left() - StyleConfigData::scrollBarBottomTwoButtonSpacing(), topRect.bottom());
+                    botRightCorner = QPoint(bottomRect.left() - StyleConfigData::scrollBarBottomTwoButtonSpacing(), topRect.bottom() + 1);
             }
 
         } else {
@@ -2879,31 +2879,33 @@ QRect Style::scrollBarSubControlRect(const QStyleOptionComplex *option, SubContr
                 if (enlargeOverSubPage)
                     topLeftCorner = QPoint(topRect.left(), topRect.top() + Metrics::ScrollBar_TopBottomMargins);
                 else
-                    topLeftCorner = QPoint(topRect.left(), topRect.bottom() + StyleConfigData::scrollBarTopOneButtonSpacing());
+                    topLeftCorner = QPoint(topRect.left(), topRect.bottom() + 1 + StyleConfigData::scrollBarTopOneButtonSpacing());
             } else if (_subLineButtons == ScrollBarButtonType::DoubleButton) {
                 if (enlargeOverSubPage)
                     topLeftCorner = QPoint(topRect.left(), topRect.top() + Metrics::ScrollBar_TopBottomMargins);
                 else
-                    topLeftCorner = QPoint(topRect.left(), topRect.bottom() + StyleConfigData::scrollBarTopTwoButtonSpacing());
+                    topLeftCorner = QPoint(topRect.left(), topRect.bottom() + 1 + StyleConfigData::scrollBarTopTwoButtonSpacing());
             }
 
             if (_addLineButtons == ScrollBarButtonType::NoButton) {
-                botRightCorner = QPoint(topRect.right(), bottomRect.bottom() - Metrics::ScrollBar_TopBottomMargins);
+                botRightCorner = QPoint(topRect.right() + 1, bottomRect.bottom() + 1 - Metrics::ScrollBar_TopBottomMargins);
             } else if (_addLineButtons == ScrollBarButtonType::SingleButton) {
                 if (enlargeOverAddPage)
-                    botRightCorner = QPoint(topRect.right(), bottomRect.bottom() - Metrics::ScrollBar_TopBottomMargins);
+                    botRightCorner = QPoint(topRect.right() + 1, bottomRect.bottom() + 1 - Metrics::ScrollBar_TopBottomMargins);
                 else
-                    botRightCorner = QPoint(topRect.right(), bottomRect.top() - StyleConfigData::scrollBarBottomOneButtonSpacing());
+                    botRightCorner = QPoint(topRect.right() + 1, bottomRect.top() - StyleConfigData::scrollBarBottomOneButtonSpacing());
             } else if (_addLineButtons == ScrollBarButtonType::DoubleButton) {
                 if (enlargeOverAddPage)
-                    botRightCorner = QPoint(topRect.right(), bottomRect.bottom() - Metrics::ScrollBar_TopBottomMargins);
+                    botRightCorner = QPoint(topRect.right() + 1, bottomRect.bottom() + 1 - Metrics::ScrollBar_TopBottomMargins);
                 else
-                    botRightCorner = QPoint(topRect.right(), bottomRect.top() - StyleConfigData::scrollBarBottomTwoButtonSpacing());
+                    botRightCorner = QPoint(topRect.right() + 1, bottomRect.top() - StyleConfigData::scrollBarBottomTwoButtonSpacing());
             }
         }
 
         // define rect
-        return visualRect(option, QRect(topLeftCorner, botRightCorner));
+        // all +1s above are due to QRect.bottomRight() not being the true bottomRight
+        // bottomRight constructor is also weird in QRect so have to specify -1 for bottomRight point
+        return visualRect(option, QRect(topLeftCorner, botRightCorner - QPoint(1, 1)));
     }
 
     case SC_ScrollBarSlider: {
@@ -2999,9 +3001,9 @@ QRect Style::scrollBarSubControlRect(const QStyleOptionComplex *option, SubContr
         auto groove = visualRect(option, subControlRect(CC_ScrollBar, option, SC_ScrollBarGroove, widget));
 
         if (horizontal)
-            return visualRect(option, QRect(slider.right(), groove.top(), groove.right() - slider.right(), groove.height()));
+            return visualRect(option, QRect(slider.right() + 1, groove.top(), groove.right() - slider.right(), groove.height()));
         else
-            return visualRect(option, QRect(groove.left(), slider.bottom(), groove.width(), groove.bottom() - slider.bottom()));
+            return visualRect(option, QRect(groove.left(), slider.bottom() + 1, groove.width(), groove.bottom() - slider.bottom()));
     }
 
     default:
