@@ -490,10 +490,11 @@ void Decoration::updateButtonsGeometry()
     for (const QPointer<KDecoration2::DecorationButton> &button : buttonList) {
         auto btn = static_cast<Button *>(button.get());
 
+        const int verticalOffset = (isTopEdge() ? s->smallSpacing() * Metrics::TitleBar_TopMargin : 0);
+
         const QSizeF preferredSize = btn->preferredSize();
-        const int bHeight = preferredSize.height() + (isTopEdge() ? s->smallSpacing() * Metrics::TitleBar_TopMargin : 0);
+        const int bHeight = preferredSize.height() + verticalOffset;
         const int bWidth = preferredSize.width();
-        const int verticalOffset = (isTopEdge() ? s->smallSpacing() * Metrics::TitleBar_TopMargin : 0) + (captionHeight() - preferredSize.height()) / 2;
 
         btn->setGeometry(QRectF(QPoint(0, 0), QSizeF(bWidth, bHeight)));
         btn->setPadding(QMargins(0, verticalOffset, 0, 0));
@@ -733,6 +734,8 @@ int Decoration::buttonSize() const
 void Decoration::onTabletModeChanged(bool mode)
 {
     m_tabletMode = mode;
+    Q_EMIT tabletModeChanged();
+
     recalculateBorders();
     updateButtonsGeometry();
 }

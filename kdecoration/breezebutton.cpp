@@ -35,6 +35,7 @@ Button::Button(DecorationButtonType type, Decoration *decoration, QObject *paren
     });
 
     // connections
+    connect(decoration, &Decoration::tabletModeChanged, this, &Button::reconfigure);
     connect(decoration->client(), SIGNAL(iconChanged(QIcon)), this, SLOT(update()));
     connect(decoration->settings().get(), &KDecoration2::DecorationSettings::reconfigured, this, &Button::reconfigure);
     connect(this, &KDecoration2::DecorationButton::hoveredChanged, this, &Button::updateAnimationState);
@@ -373,10 +374,10 @@ void Button::reconfigure()
 
     switch (type()) {
     case KDecoration2::DecorationButtonType::Spacer:
-        setPreferredSize(QSizeF(d->buttonSize() * 0.5, d->captionHeight()));
+        setPreferredSize(QSizeF(d->buttonSize() * 0.5, d->buttonSize()));
         break;
     default:
-        setPreferredSize(QSizeF(d->buttonSize(), d->captionHeight()));
+        setPreferredSize(QSizeF(d->buttonSize(), d->buttonSize()));
         break;
     }
 

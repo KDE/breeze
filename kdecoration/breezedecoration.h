@@ -88,6 +88,9 @@ public:
     inline bool hideTitleBar() const;
     //@}
 
+Q_SIGNALS:
+    void tabletModeChanged();
+
 public Q_SLOTS:
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     bool init() override;
