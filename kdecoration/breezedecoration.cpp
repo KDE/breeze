@@ -534,8 +534,9 @@ void Decoration::updateButtonsGeometry()
             auto button = static_cast<Button *>(m_rightButtons->buttons().back());
             button->setGeometry(QRectF(QPoint(0, 0), QSizeF(bWidth + hPadding, bHeight)));
             button->setFlag(Button::FlagLastInList);
-
-            m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width(), vPadding));
+            // HACK: Add +1 to xpos because of the fractional scaling hack
+            // BUG: 481857
+            m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width() + 1, vPadding));
 
         } else {
             m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width() - hPadding - borderRight(), vPadding));
