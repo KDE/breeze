@@ -1,6 +1,3 @@
-#ifndef breezestackedwidget_datah
-#define breezestackedwidget_datah
-
 //////////////////////////////////////////////////////////////////////////////
 // breezestackedwidgetdata.h
 // data container for QStackedWidget transition
@@ -10,6 +7,8 @@
 //
 // SPDX-License-Identifier: MIT
 //////////////////////////////////////////////////////////////////////////////
+
+#pragma once
 
 #include "breezetransitiondata.h"
 
@@ -50,5 +49,3 @@ private:
 };
 
 }
-
-#endif

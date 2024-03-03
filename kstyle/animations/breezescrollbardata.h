@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#ifndef breezescrollbar_data_h
-#define breezescrollbar_data_h
+#pragma once
 
 #include "breezewidgetstatedata.h"
 
@@ -272,5 +271,3 @@ private:
 };
 
 }
-
-#endif

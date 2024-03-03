@@ -1,5 +1,3 @@
-#ifndef breezetransitionwidget_h
-#define breezetransitionwidget_h
 //////////////////////////////////////////////////////////////////////////////
 // breezetransitionwidget.h
 // stores event filters and maps widgets to transitions for transitions
@@ -9,6 +7,8 @@
 //
 // SPDX-License-Identifier: MIT
 //////////////////////////////////////////////////////////////////////////////
+
+#pragma once
 
 #include "breeze.h"
 #include "breezeanimation.h"
@@ -244,5 +244,3 @@ private:
 };
 
 }
-
-#endif

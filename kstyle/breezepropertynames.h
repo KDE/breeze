@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#ifndef breezepropertynames_h
-#define breezepropertynames_h
+#pragma once
 
 namespace Breeze
 {
@@ -25,5 +24,3 @@ struct PropertyNames {
 };
 
 }
-
-#endif

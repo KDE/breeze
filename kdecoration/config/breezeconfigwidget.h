@@ -1,5 +1,3 @@
-#ifndef breezeconfigwidget_h
-#define breezeconfigwidget_h
 //////////////////////////////////////////////////////////////////////////////
 // breezeconfigwidget.h
 // -------------------
@@ -9,6 +7,8 @@
 //
 // SPDX-License-Identifier: MIT
 //////////////////////////////////////////////////////////////////////////////
+
+#pragma once
 
 #include "breeze.h"
 #include "breezeexceptionlistwidget.h"
@@ -161,5 +161,3 @@ private:
 };
 
 }
-
-#endif

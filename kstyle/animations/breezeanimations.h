@@ -3,8 +3,7 @@
  *
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
-#ifndef breezeanimations_h
-#define breezeanimations_h
+#pragma once
 
 #include "breezebusyindicatorengine.h"
 #include "breezedialengine.h"
@@ -165,5 +164,3 @@ private:
 };
 
 }
-
-#endif

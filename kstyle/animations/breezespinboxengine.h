@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#ifndef breezespinboxengine_h
-#define breezespinboxengine_h
+#pragma once
 
 #include "breezebaseengine.h"
 #include "breezedatamap.h"
@@ -87,5 +86,3 @@ private:
 };
 
 }
-
-#endif

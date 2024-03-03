@@ -1,6 +1,3 @@
-#ifndef ItemModel_h
-#define ItemModel_h
-
 //////////////////////////////////////////////////////////////////////////////
 // itemmodel.h
 // -------------------
@@ -9,6 +6,8 @@
 //
 // SPDX-License-Identifier: MIT
 //////////////////////////////////////////////////////////////////////////////
+
+#pragma once
 
 #include <QAbstractItemModel>
 
@@ -94,5 +93,3 @@ private:
 };
 
 }
-
-#endif
