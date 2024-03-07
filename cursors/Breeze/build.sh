@@ -9,6 +9,8 @@
 #	fi
 #fi
 
+set -e
+
 cd "$( dirname "${BASH_SOURCE[0]}" )"
 RAWSVG="src/cursors.svg"
 INDEX="src/index.theme"
@@ -45,8 +47,34 @@ OUTPUT=${OUTPUT// /_}
 for scale in $SCALES; do
 	mkdir -p "build/x$scale"
 done
+mkdir -p "build/scalable"
 mkdir -p "$OUTPUT/cursors"
+mkdir -p "$OUTPUT/cursors_scalable"
 echo 'Making Folders... DONE';
+
+
+
+for CUR in src/config/*.cursor; do
+	BASENAME=$CUR
+	BASENAME=${BASENAME##*/}
+	BASENAME=${BASENAME%.*}
+	
+	echo -ne "\033[0KGenerating SVG... $BASENAME\\r"	
+	
+	DIR="build/scalable"
+	if [ "$DIR/$BASENAME.svg" -ot $RAWSVG ] ; then
+		# Set viewbox around the cursor
+		inkscape $RAWSVG -i $BASENAME -o /tmp/"$BASENAME".svg > /dev/null
+		# Remove everything except the cursor
+		./clean_svg /tmp/"$BASENAME".svg /tmp/"$BASENAME"-cleaned.svg "$BASENAME"
+		# Remove groups in the middle, and remove Inkscape-specific attributes
+		inkscape /tmp/"$BASENAME"-cleaned.svg -o $DIR/"$BASENAME".svg --actions 'select-all:groups;selection-ungroup;select-all:groups;selection-ungroup' -l > /dev/null
+		# TODO: Further clean up the SVG, remove unused defs.
+
+		rm /tmp/"$BASENAME".svg /tmp/"$BASENAME"-cleaned.svg
+	fi
+done
+echo -e "\033[0KGenerating SVG... DONE"
 
 
 
@@ -72,16 +100,17 @@ for i in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23
 do
 	echo -ne "\033[0KGenerating animated cursor pixmaps... $i / 23 \\r"
 
-	for scale in $SCALES; do
-		DIR="build/x$scale"
-		
-		if [ "$DIR/progress-$i.png" -ot $RAWSVG ] ; then
-			inkscape $RAWSVG -i progress-$i -w $((32*$scale/100)) -h $((32*$scale/100)) -o "$DIR/progress-$i.png" > /dev/null
-		fi
+	for CUR in progress wait
+	do
+		BASENAME="$CUR-$i"
+		for scale in $SCALES; do
+			DIR="build/x$scale"
+			
+			if [ "$DIR/$BASENAME.png" -ot $RAWSVG ] ; then
+				inkscape $RAWSVG -i $BASENAME -w $((32*$scale/100)) -h $((32*$scale/100)) -o "$DIR/$BASENAME.png" > /dev/null
 
-		if [ "$DIR/wait-$i.png" -ot $RAWSVG ] ; then
-			inkscape $RAWSVG -i wait-$i -w $((32*$scale/100)) -h $((32*$scale/100)) -o "$DIR/wait-$i.png" > /dev/null
-		fi
+			fi
+		done
 	done
 done
 echo -e "\033[0KGenerating animated cursor pixmaps... DONE"
@@ -102,6 +131,13 @@ for CUR in src/config/*.cursor; do
 	if [[ "$?" -ne "0" ]]; then
 		echo "FAIL: $CUR $ERR"
 	fi
+
+	cp "build/scalable/$BASENAME.svg" "$OUTPUT/cursors_scalable/"
+done
+# Animated SVG cursors, currently hand-edited
+for CUR in progress wait
+do
+	cp src/"$CUR".svg $OUTPUT/cursors_scalable/
 done
 echo -e "Generating cursor theme... DONE"
 
@@ -117,6 +153,18 @@ while read ALIAS ; do
 	fi
 
 	ln -s "$TO" "$OUTPUT/cursors/$FROM"
+
+done < $ALIASES
+while read ALIAS ; do
+	FROM=${ALIAS% *}
+	TO=${ALIAS#* }
+
+	if [ -e "$OUTPUT/cursors_scalable/$FROM.svg" ] ; then
+		continue
+	fi
+
+	ln -s "$TO.svg" "$OUTPUT/cursors_scalable/$FROM.svg"
+
 done < $ALIASES
 echo -e "\033[0KGenerating shortcuts... DONE"
 

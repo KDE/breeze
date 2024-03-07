@@ -1,0 +1,64 @@
+#!/usr/bin/python3
+
+import sys
+import xml.etree.ElementTree as ET
+import os.path
+
+GROUP_TAG = '{http://www.w3.org/2000/svg}g'
+LABEL_ATTR = '{http://www.inkscape.org/namespaces/inkscape}label'
+
+def cut(src_path, dest_path, cursor_name):
+    tree = ET.parse(src_path)
+    root = tree.getroot()
+
+    new_tree = ET.ElementTree(ET.Element('svg'))
+    root = tree.getroot()
+
+    cursor_found = False
+
+    for child in root.findall(GROUP_TAG):
+        if child.attrib[LABEL_ATTR] != 'Cursors':
+            # help layers
+            root.remove(child)
+            continue
+
+        for row in child.findall(GROUP_TAG):
+            found_in_row = False;
+            for cursor in row.findall(GROUP_TAG):
+                if cursor.attrib[LABEL_ATTR] != cursor_name:
+                    row.remove(cursor)
+                else:
+                    found_in_row = True
+
+                    hotspot = cursor.find(f"*[@{LABEL_ATTR}='hotspot']")
+                    if hotspot is not None:
+                        hotspot.set('id', 'hotspot')
+                    else:
+                        print(f'hotspot not found: {cursor_name}')
+                        sys.exit(2)
+
+            if not found_in_row:
+                child.remove(row)
+            else:
+                cursor_found = True
+
+    if cursor_found is None:
+        print('Cursor %s not found' % cursor_name)
+        sys.exit(2)
+    
+    tree.write(dest_path)
+
+def help():
+    script_name = os.path.basename(sys.argv[0])
+    print(f'''Usage:
+    {script_name} <src_path> <dest_path> <cursor_name>''')
+
+if __name__ == '__main__':
+    if len(sys.argv) != 4:
+        help()
+        sys.exit(1)
+
+    src_path = sys.argv[1]
+    dest_path = sys.argv[2]
+    cursor_name = sys.argv[3]
+    cut(src_path, dest_path, cursor_name)

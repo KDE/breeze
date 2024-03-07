@@ -1,0 +1,37 @@
+Hotspot coordinates changed from src/*.cursor to the embedded rectangle in the SVG file.
+
+NAME                    *.cursor    SVG embedded
+all-scroll              16 16       15 15
+bottom_left_corner       4 26        5 26
+bottom_right_corner     26 26       27 26
+bottom_side             16 28       16 27
+cell                    16 16       15 15
+center_ptr              20  4       16  4
+col-resize              16 16       16 15
+color-picker             4 29        3 28
+context-menu             4  4        4  3
+crosshair               17 17       16 16
+dnd-no-drop             16 16       15 15
+down-arrow              16 28       16 27
+draft                    4 29        3 28
+fleur                   16 16       15 15
+left-arrow               4 16        4 15       
+left_side                4 16        4 15
+not-allowed             16 16       15 15
+pencil                   4 29        3 29
+pirate                  16 16       15 15
+right-arrow             28 16       27 15
+right_side              28 16       27 15
+row-resize              16 16       16 15
+size_bdiag              16 16       16 15
+size_fdiag              16 16       15 14
+size_hor                16 16       16 15
+size_ver                16 16       16 15
+text                    16 16       16 15
+up-arrow                16  4       15  4
+vertical-text           16 16       16 15
+wait                    16 16       16 15
+wayland-cursor          16 16       15 15
+x-cursor                16 16       16 15
+zoom-in                 16 16       15 15
+zoom-out                16 16       15 15
