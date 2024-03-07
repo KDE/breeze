@@ -1312,7 +1312,7 @@ void Helper::renderScrollBarHandle(QPainter *painter, const QRectF &rect, const 
     const qreal radius(0.5 * std::min({baseRect.width(), baseRect.height()}));
 
     painter->setPen(Qt::NoPen);
-    painter->setPen(QPen(transparentize(fg, Metrics::Bias_Default), 1.001));
+    painter->setPen(QPen(fg, 1.001));
     painter->setBrush(KColorUtils::overlayColors(bg, alphaColor(fg, 0.5)));
     painter->drawRoundedRect(strokedRect(baseRect), radius, radius);
 }
