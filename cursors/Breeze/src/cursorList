@@ -18,6 +18,7 @@ e29285e634086352946a0e7090d73106 pointer
 fcf21c00b30f7e3f83fe0dfd12e71cff dnd-move
 alias copy
 all-scroll fleur
+arrow default
 bottom_left_corner size_bdiag
 bottom_right_corner size_fdiag
 cell crosshair
