@@ -356,7 +356,7 @@ QColor Button::backgroundColor() const
         }
 
     } else if (type() == DecorationButtonType::Close && d->internalSettings()->outlineCloseButton()) {
-        return c->isActive() ? redColor : d->fontColor();
+        return (d->internalSettings()->outlineCloseButtonInRed() && c->isActive()) ? redColor : d->fontColor();
 
     } else {
         return QColor();
