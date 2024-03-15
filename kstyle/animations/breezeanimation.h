@@ -29,7 +29,7 @@ public:
     }
 
     //* true if running
-    bool isRunning() const
+    [[nodiscard]] bool isRunning() const
     {
         return state() == Animation::Running;
     }
