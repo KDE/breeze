@@ -65,7 +65,7 @@ argument_list: list[tuple] = []
 for orientation in ('horizontal', 'vertical'):
 	for file in chain(*map(Path().rglob, templates[orientation])):
 		image = Image.open(file)
-		image.load();
+		image.load()
 		for width, height in sizes[orientation]:
 			argument_list.append((file, image, width, height))
 
