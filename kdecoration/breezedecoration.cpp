@@ -292,6 +292,8 @@ void Decoration::init()
     connect(c, &KDecoration2::DecoratedClient::adjacentScreenEdgesChanged, this, &Decoration::updateButtonsGeometry);
     connect(c, &KDecoration2::DecoratedClient::shadedChanged, this, &Decoration::updateButtonsGeometry);
 
+    connect(c, &KDecoration2::DecoratedClient::scaleChanged, this, &Decoration::updateScale);
+
     createButtons();
     updateShadow();
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -306,11 +308,11 @@ void Decoration::updateTitleBar()
     auto s = settings();
     const auto c = client();
     const bool maximized = isMaximized();
-    const int width = maximized ? c->width() : c->width() - 2 * s->smallSpacing() * Metrics::TitleBar_SideMargin;
-    const int height = maximized ? borderTop() : borderTop() - s->smallSpacing() * Metrics::TitleBar_TopMargin;
-    const int x = maximized ? 0 : s->smallSpacing() * Metrics::TitleBar_SideMargin;
-    const int y = maximized ? 0 : s->smallSpacing() * Metrics::TitleBar_TopMargin;
-    setTitleBar(QRect(x, y, width, height));
+    const double width = maximized ? c->width() : c->width() - 2 * s->smallSpacing() * Metrics::TitleBar_SideMargin;
+    const double height = maximized ? borderTop() : borderTop() - s->smallSpacing() * Metrics::TitleBar_TopMargin;
+    const double x = maximized ? 0 : s->smallSpacing() * Metrics::TitleBar_SideMargin;
+    const double y = maximized ? 0 : s->smallSpacing() * Metrics::TitleBar_TopMargin;
+    setTitleBar(QRectF(x, y, width, height));
 }
 
 //________________________________________________________________
@@ -419,38 +421,42 @@ void Decoration::reconfigure()
     updateShadow();
 }
 
-//________________________________________________________________
-void Decoration::recalculateBorders()
+QMarginsF Decoration::bordersFor(double scale) const
 {
-    const auto c = client();
-    auto s = settings();
+    const auto snapToPixelGrid = [scale](double value) {
+        return std::round(value * scale) / scale;
+    };
 
-    // left, right and bottom borders
-    const int left = isLeftEdge() ? 0 : borderSize();
-    const int right = isRightEdge() ? 0 : borderSize();
-    const int bottom = (c->isShaded() || isBottomEdge()) ? 0 : borderSize(true);
+    const double pixelWidth = 1.0 / scale;
+    const double left = snapToPixelGrid(isLeftEdge() ? 0 : std::max<double>(pixelWidth, borderSize()));
+    const double right = snapToPixelGrid(isRightEdge() ? 0 : std::max<double>(pixelWidth, borderSize()));
+    const double bottom = snapToPixelGrid((client()->isShaded() || isBottomEdge()) ? 0 : std::max<double>(pixelWidth, borderSize(true)));
 
-    int top = 0;
+    double top = 0;
     if (hideTitleBar()) {
         top = bottom;
     } else {
-        QFontMetrics fm(s->font());
-        top += qMax(fm.height(), buttonSize());
+        QFontMetrics fm(settings()->font());
+        top += snapToPixelGrid(std::max(fm.height(), buttonSize()));
 
         // padding below
-        const int baseSize = s->smallSpacing();
-        top += baseSize * Metrics::TitleBar_BottomMargin;
+        const int baseSize = settings()->smallSpacing();
+        top += snapToPixelGrid(baseSize * Metrics::TitleBar_BottomMargin);
 
         // padding above
-        top += baseSize * Metrics::TitleBar_TopMargin;
+        top += snapToPixelGrid(baseSize * Metrics::TitleBar_TopMargin);
     }
+    return QMarginsF(left, top, right, bottom);
+}
 
-    setBorders(QMargins(left, top, right, bottom));
+void Decoration::recalculateBorders()
+{
+    setBorders(bordersFor(client()->scale()));
 
     // extended sizes
-    const int extSize = s->largeSpacing();
-    int extSides = 0;
-    int extBottom = 0;
+    const double extSize = client()->snapToPixelGrid(settings()->largeSpacing());
+    double extSides = 0;
+    double extBottom = 0;
     if (hasNoBorders()) {
         if (!isMaximizedHorizontally()) {
             extSides = extSize;
@@ -463,7 +469,7 @@ void Decoration::recalculateBorders()
         extSides = extSize;
     }
 
-    setResizeOnlyBorders(QMargins(extSides, 0, extSides, extBottom));
+    setResizeOnlyBorders(QMarginsF(extSides, 0, extSides, extBottom));
 }
 
 //________________________________________________________________
@@ -551,7 +557,7 @@ void Decoration::updateButtonsGeometry()
 }
 
 //________________________________________________________________
-void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
+void Decoration::paint(QPainter *painter, const QRectF &repaintRegion)
 {
     // TODO: optimize based on repaintRegion
     auto c = client();
@@ -600,7 +606,13 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
                                              c->palette().text().color(),
                                              lookupOutlineIntensity(m_internalSettings->outlineIntensity()));
 
+        const double pixelWidth = 1.0 / c->scale();
+        const double lineWidth = std::max(pixelWidth, c->snapToPixelGrid(1));
         QRectF outlineRect = rect();
+        // this is necessary to paint exactly in the center of the intended line
+        // otherwise anti aliasing kicks in and ruins the day
+        outlineRect.adjust(lineWidth / 2, lineWidth / 2, -lineWidth / 2, -lineWidth / 2);
+
         qreal cornerSize = m_scaledCornerRadius * 2.0;
         QRectF cornerRect(outlineRect.x(), outlineRect.y(), cornerSize, cornerSize);
 
@@ -621,28 +633,32 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
         }
         outlinePath.closeSubpath();
 
-        painter->fillPath(outlinePath.simplified(), Qt::transparent);
         painter->save();
-        painter->setPen(QPen(outlineColor, 2));
+        painter->setPen(QPen(outlineColor, lineWidth));
         painter->setBrush(Qt::NoBrush);
         painter->setRenderHint(QPainter::Antialiasing);
-        painter->setCompositionMode(QPainter::CompositionMode_SourceAtop);
         painter->drawPath(outlinePath.simplified());
         painter->restore();
     }
 }
 
 //________________________________________________________________
-void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
+void Decoration::paintTitleBar(QPainter *painter, const QRectF &repaintRegion)
 {
     const auto c = client();
-    const QRect frontRect(QPoint(0, 0), QSize(size().width(), borderTop()));
-    const QRect backRect(QPoint(0, 0), QSize(size().width(), borderTop()));
+    const double halfAPixel = 0.5 / c->scale();
+    QRectF rect(QPointF(0, 0), QSizeF(size().width(), borderTop()));
+    const bool noOutlines = isMaximized() || !settings()->isAlphaChannelSupported();
+    const bool bottomOutline = c->isShaded();
+    if (!noOutlines) {
+        // this is needed to match the corner radius with the outline
+        rect.adjust(halfAPixel, halfAPixel, -halfAPixel, bottomOutline ? -halfAPixel : 0);
+    }
 
     QBrush frontBrush;
     QBrush backBrush(this->titleBarColor());
 
-    if (!backRect.intersects(repaintRegion)) {
+    if (!rect.intersects(repaintRegion)) {
         return;
     }
 
@@ -651,7 +667,7 @@ void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
 
     // render a linear gradient on title area
     if (c->isActive() && m_internalSettings->drawBackgroundGradient()) {
-        QLinearGradient gradient(0, 0, 0, frontRect.height());
+        QLinearGradient gradient(0, 0, 0, rect.height());
         gradient.setColorAt(0.0, titleBarColor().lighter(120));
         gradient.setColorAt(0.8, titleBarColor());
 
@@ -663,49 +679,44 @@ void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
         painter->setBrush(titleBarColor());
     }
 
-    auto s = settings();
-    if (isMaximized() || !s->isAlphaChannelSupported()) {
+    if (noOutlines) {
         painter->setBrush(backBrush);
-        painter->drawRect(backRect);
+        painter->drawRect(rect);
 
         painter->setBrush(frontBrush);
-        painter->drawRect(frontRect);
+        painter->drawRect(rect);
 
-    } else if (c->isShaded()) {
+    } else if (bottomOutline) {
         painter->setBrush(backBrush);
-        painter->drawRoundedRect(backRect, m_scaledCornerRadius, m_scaledCornerRadius);
+        painter->drawRoundedRect(rect, m_scaledCornerRadius, m_scaledCornerRadius);
 
         painter->setBrush(frontBrush);
-        painter->drawRoundedRect(frontRect, m_scaledCornerRadius, m_scaledCornerRadius);
+        painter->drawRoundedRect(rect, m_scaledCornerRadius, m_scaledCornerRadius);
 
     } else {
-        painter->setClipRect(backRect, Qt::IntersectClip);
+        painter->setClipRect(rect, Qt::IntersectClip);
 
-        auto drawThe = [=](const QRect &r) {
-            // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
-            painter->drawRoundedRect(r.adjusted(isLeftEdge() ? -m_scaledCornerRadius : 0,
-                                                isTopEdge() ? -m_scaledCornerRadius : 0,
-                                                isRightEdge() ? m_scaledCornerRadius : 0,
-                                                m_scaledCornerRadius),
-                                     m_scaledCornerRadius,
-                                     m_scaledCornerRadius);
+        auto drawThe = [this, painter](const QRectF &r) {
+            painter->drawRoundedRect(r, m_scaledCornerRadius, m_scaledCornerRadius);
+            // remove the rounding on the bottom
+            painter->drawRect(QRectF(r.bottomLeft() - QPointF(0, m_scaledCornerRadius), r.bottomRight()));
         };
 
         painter->setBrush(backBrush);
-        drawThe(backRect);
+        drawThe(rect);
 
         painter->setBrush(frontBrush);
-        drawThe(frontRect);
+        drawThe(rect);
     }
 
     painter->restore();
 
     // draw caption
-    painter->setFont(s->font());
+    painter->setFont(settings()->font());
     painter->setPen(fontColor());
-    const auto cR = captionRect();
-    const QString caption = painter->fontMetrics().elidedText(c->caption(), Qt::ElideMiddle, cR.first.width());
-    painter->drawText(cR.first, cR.second | Qt::TextSingleLine, caption);
+    const auto [captionRectangle, alignment] = captionRect();
+    const QString caption = painter->fontMetrics().elidedText(c->caption(), Qt::ElideMiddle, captionRectangle.width());
+    painter->drawText(captionRectangle, alignment | Qt::TextSingleLine, caption);
 
     // draw all buttons
     m_leftButtons->paint(painter, repaintRegion);
@@ -741,28 +752,28 @@ void Decoration::onTabletModeChanged(bool mode)
 }
 
 //________________________________________________________________
-int Decoration::captionHeight() const
+double Decoration::captionHeight() const
 {
     return hideTitleBar() ? borderTop() : borderTop() - settings()->smallSpacing() * (Metrics::TitleBar_BottomMargin + Metrics::TitleBar_TopMargin) - 1;
 }
 
 //________________________________________________________________
-QPair<QRect, Qt::Alignment> Decoration::captionRect() const
+QPair<QRectF, Qt::Alignment> Decoration::captionRect() const
 {
     if (hideTitleBar()) {
-        return qMakePair(QRect(), Qt::AlignCenter);
+        return qMakePair(QRectF(), Qt::AlignCenter);
     } else {
         auto c = client();
-        const int leftOffset = m_leftButtons->buttons().isEmpty()
-            ? Metrics::TitleBar_SideMargin * settings()->smallSpacing()
-            : m_leftButtons->geometry().x() + m_leftButtons->geometry().width() + Metrics::TitleBar_SideMargin * settings()->smallSpacing();
+        const double leftOffset = c->snapToPixelGrid(m_leftButtons->buttons().isEmpty() ? Metrics::TitleBar_SideMargin * settings()->smallSpacing()
+                                                                                        : m_leftButtons->geometry().x() + m_leftButtons->geometry().width()
+                                                             + Metrics::TitleBar_SideMargin * settings()->smallSpacing());
 
-        const int rightOffset = m_rightButtons->buttons().isEmpty()
-            ? Metrics::TitleBar_SideMargin * settings()->smallSpacing()
-            : size().width() - m_rightButtons->geometry().x() + Metrics::TitleBar_SideMargin * settings()->smallSpacing();
+        const double rightOffset = c->snapToPixelGrid(m_rightButtons->buttons().isEmpty() ? Metrics::TitleBar_SideMargin * settings()->smallSpacing()
+                                                                                          : size().width() - m_rightButtons->geometry().x()
+                                                              + Metrics::TitleBar_SideMargin * settings()->smallSpacing());
 
-        const int yOffset = settings()->smallSpacing() * Metrics::TitleBar_TopMargin;
-        const QRect maxRect(leftOffset, yOffset, size().width() - leftOffset - rightOffset, captionHeight());
+        const double yOffset = c->snapToPixelGrid(settings()->smallSpacing() * Metrics::TitleBar_TopMargin);
+        const QRectF maxRect(leftOffset, yOffset, size().width() - leftOffset - rightOffset, captionHeight());
 
         switch (m_internalSettings->titleAlignment()) {
         case InternalSettings::AlignLeft:
@@ -777,8 +788,8 @@ QPair<QRect, Qt::Alignment> Decoration::captionRect() const
         default:
         case InternalSettings::AlignCenterFullWidth: {
             // full caption rect
-            const QRect fullRect = QRect(0, yOffset, size().width(), captionHeight());
-            QRect boundingRect(settings()->fontMetrics().boundingRect(c->caption()).toRect());
+            const QRectF fullRect = QRect(0, yOffset, size().width(), captionHeight());
+            QRectF boundingRect(settings()->fontMetrics().boundingRect(c->caption()));
 
             // text bounding rect
             boundingRect.setTop(yOffset);
@@ -859,19 +870,18 @@ std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(c
     QPainter painter(&shadowTexture);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    const QRect outerRect = shadowTexture.rect();
+    const QRectF outerRect = shadowTexture.rect();
 
-    QRect boxRect(QPoint(0, 0), boxSize);
+    QRectF boxRect(QPoint(0, 0), boxSize);
     boxRect.moveCenter(outerRect.center());
 
     // Mask out inner rect.
-    const QMargins padding = QMargins(boxRect.left() - outerRect.left() - Metrics::Shadow_Overlap - params.offset.x(),
-                                      boxRect.top() - outerRect.top() - Metrics::Shadow_Overlap - params.offset.y(),
-                                      outerRect.right() - boxRect.right() - Metrics::Shadow_Overlap + params.offset.x(),
-                                      outerRect.bottom() - boxRect.bottom() - Metrics::Shadow_Overlap + params.offset.y());
-    QRect innerRect = outerRect - padding;
-    // Push the shadow slightly under the window, which helps avoiding glitches with fractional scaling
-    innerRect.adjust(2, 2, -2, -2);
+    // TODO do these values need to be snapped to the pixel grid?
+    const QMarginsF padding = QMarginsF(boxRect.left() - outerRect.left() - Metrics::Shadow_Overlap - params.offset.x(),
+                                        boxRect.top() - outerRect.top() - Metrics::Shadow_Overlap - params.offset.y(),
+                                        outerRect.right() - boxRect.right() - Metrics::Shadow_Overlap + params.offset.x(),
+                                        outerRect.bottom() - boxRect.bottom() - Metrics::Shadow_Overlap + params.offset.y());
+    const QRectF innerRect = outerRect - padding;
 
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::black);
@@ -882,7 +892,7 @@ std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(c
 
     auto ret = std::make_shared<KDecoration2::DecorationShadow>();
     ret->setPadding(padding);
-    ret->setInnerShadowRect(QRect(outerRect.center(), QSize(1, 1)));
+    ret->setInnerShadowRect(QRectF(outerRect.center(), QSizeF(1, 1)));
     ret->setShadow(shadowTexture);
     return ret;
 }
@@ -892,7 +902,13 @@ void Decoration::setScaledCornerRadius()
     // On X11, the smallSpacing value is used for scaling.
     // On Wayland, this value has constant factor of 2.
     // Removing it will break radius scaling on X11.
-    m_scaledCornerRadius = Metrics::Frame_FrameRadius * settings()->smallSpacing();
+    m_scaledCornerRadius = client()->snapToPixelGrid(Metrics::Frame_FrameRadius * settings()->smallSpacing());
+}
+
+void Decoration::updateScale()
+{
+    setScaledCornerRadius();
+    recalculateBorders();
 }
 } // namespace
 
