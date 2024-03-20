@@ -31,14 +31,11 @@ class Decoration : public KDecoration2::Decoration
     Q_OBJECT
 
 public:
-    //* constructor
     explicit Decoration(QObject *parent = nullptr, const QVariantList &args = QVariantList());
+    ~Decoration();
 
-    //* destructor
-    virtual ~Decoration();
-
-    //* paint
-    void paint(QPainter *painter, const QRect &repaintRegion) override;
+    QMarginsF bordersFor(double scale) const override;
+    void paint(QPainter *painter, const QRectF &repaintRegion) override;
 
     //* internal settings
     InternalSettingsPtr internalSettings() const
@@ -52,7 +49,7 @@ public:
     }
 
     //* caption height
-    int captionHeight() const;
+    double captionHeight() const;
 
     //* button size
     int buttonSize() const;
@@ -106,13 +103,14 @@ private Q_SLOTS:
     void updateTitleBar();
     void updateAnimationState();
     void onTabletModeChanged(bool mode);
+    void updateScale();
 
 private:
     //* return the rect in which caption will be drawn
-    QPair<QRect, Qt::Alignment> captionRect() const;
+    QPair<QRectF, Qt::Alignment> captionRect() const;
 
     void createButtons();
-    void paintTitleBar(QPainter *painter, const QRect &repaintRegion);
+    void paintTitleBar(QPainter *painter, const QRectF &repaintRegion);
     void updateShadow();
     std::shared_ptr<KDecoration2::DecorationShadow> createShadowObject(const float strengthScale);
     void setScaledCornerRadius();
