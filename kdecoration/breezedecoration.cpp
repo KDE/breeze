@@ -306,11 +306,11 @@ void Decoration::updateTitleBar()
     auto s = settings();
     const auto c = client();
     const bool maximized = isMaximized();
-    const int width = maximized ? c->width() : c->width() - 2 * s->smallSpacing() * Metrics::TitleBar_SideMargin;
-    const int height = maximized ? borderTop() : borderTop() - s->smallSpacing() * Metrics::TitleBar_TopMargin;
-    const int x = maximized ? 0 : s->smallSpacing() * Metrics::TitleBar_SideMargin;
-    const int y = maximized ? 0 : s->smallSpacing() * Metrics::TitleBar_TopMargin;
-    setTitleBar(QRect(x, y, width, height));
+    const double width = maximized ? c->width() : c->width() - 2 * s->smallSpacing() * Metrics::TitleBar_SideMargin;
+    const double height = maximized ? borderTop() : borderTop() - s->smallSpacing() * Metrics::TitleBar_TopMargin;
+    const double x = maximized ? 0 : s->smallSpacing() * Metrics::TitleBar_SideMargin;
+    const double y = maximized ? 0 : s->smallSpacing() * Metrics::TitleBar_TopMargin;
+    setTitleBar(QRectF(x, y, width, height));
 }
 
 //________________________________________________________________
@@ -551,7 +551,7 @@ void Decoration::updateButtonsGeometry()
 }
 
 //________________________________________________________________
-void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
+void Decoration::paint(QPainter *painter, const QRectF &repaintRegion)
 {
     // TODO: optimize based on repaintRegion
     auto c = client();
@@ -633,11 +633,11 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
 }
 
 //________________________________________________________________
-void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
+void Decoration::paintTitleBar(QPainter *painter, const QRectF &repaintRegion)
 {
     const auto c = client();
-    const QRect frontRect(QPoint(0, 0), QSize(size().width(), borderTop()));
-    const QRect backRect(QPoint(0, 0), QSize(size().width(), borderTop()));
+    const QRectF frontRect(QPointF(0, 0), QSizeF(size().width(), borderTop()));
+    const QRectF backRect(QPointF(0, 0), QSizeF(size().width(), borderTop()));
 
     QBrush frontBrush;
     QBrush backBrush(this->titleBarColor());
@@ -681,7 +681,7 @@ void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
     } else {
         painter->setClipRect(backRect, Qt::IntersectClip);
 
-        auto drawThe = [=](const QRect &r) {
+        auto drawThe = [this, painter](const QRectF &r) {
             // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
             painter->drawRoundedRect(r.adjusted(isLeftEdge() ? -m_scaledCornerRadius : 0,
                                                 isTopEdge() ? -m_scaledCornerRadius : 0,
