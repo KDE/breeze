@@ -31,13 +31,10 @@ class Decoration : public KDecoration3::Decoration
     Q_OBJECT
 
 public:
-    //* constructor
     explicit Decoration(QObject *parent = nullptr, const QVariantList &args = QVariantList());
+    ~Decoration() override;
 
-    //* destructor
-    virtual ~Decoration();
-
-    //* paint
+    QMarginsF bordersFor(double scale) const override;
     void paint(QPainter *painter, const QRectF &repaintRegion) override;
 
     //* internal settings
@@ -52,7 +49,7 @@ public:
     }
 
     //* caption height
-    int captionHeight() const;
+    double captionHeight() const;
 
     //* button size
     int buttonSize() const;
@@ -106,10 +103,11 @@ private Q_SLOTS:
     void updateTitleBar();
     void updateAnimationState();
     void onTabletModeChanged(bool mode);
+    void updateScale();
 
 private:
     //* return the rect in which caption will be drawn
-    QPair<QRect, Qt::Alignment> captionRect() const;
+    QPair<QRectF, Qt::Alignment> captionRect() const;
 
     void createButtons();
     void paintTitleBar(QPainter *painter, const QRectF &repaintRegion);
