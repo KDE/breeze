@@ -12,7 +12,6 @@ set(QT_MIN_VERSION "6.6.0")
 include(GenerateExportHeader)
 include(WriteBasicConfigVersionFile)
 include(FeatureSummary)
-include(GNUInstallDirs)
 
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH}  ${CMAKE_SOURCE_DIR}/cmake)
@@ -190,8 +189,17 @@ if(BUILD_QT6)
     build_Qt6()
 endif()
 
-add_subdirectory(colors)
-add_subdirectory(cursors)
+function(build_colors_and_cursors)
+    # While it is technically not 100% correct to use versionless
+    # KDEInstallDirs while (maybe) building for both Qt versions,
+    # it doesn't really matter at the end, because colors and cursors
+    # only use ICONDIR and DATADIR which both do not depend on the version
+    include(KDEInstallDirs)
+    add_subdirectory(colors)
+    add_subdirectory(cursors)
+endfunction()
+
+build_colors_and_cursors()
 
 # add clang-format target for all our real source files
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
