@@ -1,2 +1,2 @@
-install(DIRECTORY Breeze/cursors DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/breeze_cursors)
-install(FILES Breeze/index.theme DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/breeze_cursors)
+install(DIRECTORY Breeze/cursors DESTINATION ${KDE_INSTALL_ICONDIR}/breeze_cursors)
+install(FILES Breeze/index.theme DESTINATION ${KDE_INSTALL_ICONDIR}/breeze_cursors)
