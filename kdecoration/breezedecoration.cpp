@@ -428,9 +428,10 @@ void Decoration::recalculateBorders()
     auto s = settings();
 
     // left, right and bottom borders
-    const double left = c->snapToPixelGrid(isLeftEdge() ? 0 : borderSize());
-    const double right = c->snapToPixelGrid(isRightEdge() ? 0 : borderSize());
-    const double bottom = c->snapToPixelGrid((c->isShaded() || isBottomEdge()) ? 0 : borderSize(true));
+    const double pixelWidth = 1.0 / c->scale();
+    const double left = c->snapToPixelGrid(isLeftEdge() ? 0 : std::max<double>(pixelWidth, borderSize()));
+    const double right = c->snapToPixelGrid(isRightEdge() ? 0 : std::max<double>(pixelWidth, borderSize()));
+    const double bottom = c->snapToPixelGrid((c->isShaded() || isBottomEdge()) ? 0 : std::max<double>(pixelWidth, borderSize(true)));
 
     double top = 0;
     if (hideTitleBar()) {
@@ -559,8 +560,6 @@ void Decoration::paint(QPainter *painter, const QRectF &repaintRegion)
     auto c = client();
     auto s = settings();
 
-    painter->fillRect(rect(), QColor(0, 255, 0, 0));
-
     // paint background
     if (!c->isShaded()) {
         painter->fillRect(rect(), Qt::transparent);
@@ -605,11 +604,15 @@ void Decoration::paint(QPainter *painter, const QRectF &repaintRegion)
                                              c->palette().text().color(),
                                              lookupOutlineIntensity(m_internalSettings->outlineIntensity()));
 
+        const double pixelWidth = 1.0 / c->scale();
+        const double lineWidth = std::max(pixelWidth, c->snapToPixelGrid(1));
         QRectF outlineRect = rect();
+        // this is necessary to paint exactly in the center of the intended line
+        // otherwise anti aliasing kicks in and ruins the day
+        outlineRect.adjust(lineWidth / 2, lineWidth / 2, -lineWidth / 2, -lineWidth / 2);
+
         qreal cornerSize = m_scaledCornerRadius * 2.0;
         QRectF cornerRect(outlineRect.x(), outlineRect.y(), cornerSize, cornerSize);
-
-        qWarning() << "painting outline at" << outlineRect << "aka" << (outlineRect.size() * client()->scale());
 
         QPainterPath outlinePath;
         outlinePath.arcMoveTo(cornerRect, 180);
@@ -628,14 +631,10 @@ void Decoration::paint(QPainter *painter, const QRectF &repaintRegion)
         }
         outlinePath.closeSubpath();
 
-        painter->fillPath(outlinePath.simplified(), Qt::transparent);
         painter->save();
-        painter->setPen(QPen(outlineColor, 2));
+        painter->setPen(QPen(outlineColor, lineWidth));
         painter->setBrush(Qt::NoBrush);
         painter->setRenderHint(QPainter::Antialiasing);
-        // this makes outlines sometimes disappear, for some unknown reason!
-        // but commenting it out makes the corners not be rounded anymore??
-        painter->setCompositionMode(QPainter::CompositionMode_SourceAtop);
         painter->drawPath(outlinePath.simplified());
         painter->restore();
     }
@@ -645,8 +644,11 @@ void Decoration::paint(QPainter *painter, const QRectF &repaintRegion)
 void Decoration::paintTitleBar(QPainter *painter, const QRectF &repaintRegion)
 {
     const auto c = client();
-    const QRectF frontRect(QPointF(0, 0), QSizeF(size().width(), borderTop()));
-    const QRectF backRect(QPointF(0, 0), QSizeF(size().width(), borderTop()));
+    const double halfAPixel = 0.5 / c->scale();
+    QRectF frontRect(QPointF(0, 0), QSizeF(size().width(), borderTop()));
+    // this is needed to match the corner radius with the outline
+    frontRect.adjust(halfAPixel, halfAPixel, -halfAPixel, 0);
+    const auto backRect = frontRect;
 
     QBrush frontBrush;
     QBrush backBrush(this->titleBarColor());
@@ -691,13 +693,9 @@ void Decoration::paintTitleBar(QPainter *painter, const QRectF &repaintRegion)
         painter->setClipRect(backRect, Qt::IntersectClip);
 
         auto drawThe = [this, painter](const QRectF &r) {
-            // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
-            painter->drawRoundedRect(r.adjusted(isLeftEdge() ? -m_scaledCornerRadius : 0,
-                                                isTopEdge() ? -m_scaledCornerRadius : 0,
-                                                isRightEdge() ? m_scaledCornerRadius : 0,
-                                                m_scaledCornerRadius),
-                                     m_scaledCornerRadius,
-                                     m_scaledCornerRadius);
+            painter->drawRoundedRect(r, m_scaledCornerRadius, m_scaledCornerRadius);
+            // remove the rounding on the bottom
+            painter->drawRect(QRectF(r.bottomLeft() - QPointF(0, m_scaledCornerRadius), r.bottomRight()));
         };
 
         painter->setBrush(backBrush);
