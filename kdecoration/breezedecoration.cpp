@@ -558,6 +558,9 @@ void Decoration::paint(QPainter *painter, const QRectF &repaintRegion)
     // TODO: optimize based on repaintRegion
     auto c = client();
     auto s = settings();
+
+    painter->fillRect(rect(), QColor(0, 255, 0, 0));
+
     // paint background
     if (!c->isShaded()) {
         painter->fillRect(rect(), Qt::transparent);
@@ -606,6 +609,8 @@ void Decoration::paint(QPainter *painter, const QRectF &repaintRegion)
         qreal cornerSize = m_scaledCornerRadius * 2.0;
         QRectF cornerRect(outlineRect.x(), outlineRect.y(), cornerSize, cornerSize);
 
+        qWarning() << "painting outline at" << outlineRect << "aka" << (outlineRect.size() * client()->scale());
+
         QPainterPath outlinePath;
         outlinePath.arcMoveTo(cornerRect, 180);
         outlinePath.arcTo(cornerRect, 180, -90);
@@ -628,6 +633,8 @@ void Decoration::paint(QPainter *painter, const QRectF &repaintRegion)
         painter->setPen(QPen(outlineColor, 2));
         painter->setBrush(Qt::NoBrush);
         painter->setRenderHint(QPainter::Antialiasing);
+        // this makes outlines sometimes disappear, for some unknown reason!
+        // but commenting it out makes the corners not be rounded anymore??
         painter->setCompositionMode(QPainter::CompositionMode_SourceAtop);
         painter->drawPath(outlinePath.simplified());
         painter->restore();
