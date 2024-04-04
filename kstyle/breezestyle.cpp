@@ -2962,6 +2962,7 @@ QRect Style::spinBoxSubControlRect(const QStyleOptionComplex *option, SubControl
         return ParentStyleClass::subControlRect(CC_SpinBox, option, subControl, widget);
     }
     const bool flat(!spinBoxOption->frame);
+    const bool showButtons = spinBoxOption->buttonSymbols != QAbstractSpinBox::NoButtons;
 
     // copy rect
     auto rect(option->rect);
@@ -2991,11 +2992,9 @@ QRect Style::spinBoxSubControlRect(const QStyleOptionComplex *option, SubControl
     }
 
     case SC_SpinBoxEditField: {
-        const bool showButtons = spinBoxOption->buttonSymbols != QAbstractSpinBox::NoButtons;
-
         QRect labelRect = rect;
         if (showButtons) {
-            labelRect.setRight(rect.right() - Metrics::SpinBox_ArrowButtonWidth);
+            labelRect.setRight(rect.right() - Metrics::SpinBox_ArrowButtonWidth - Metrics::SpinBox_ArrowButtonMarginWidth);
         }
 
         // remove right side line editor margins
@@ -3321,7 +3320,7 @@ QSize Style::spinBoxSizeFromContents(const QStyleOption *option, const QSize &co
     // add button width and spacing
     const bool showButtons = spinBoxOption->buttonSymbols != QAbstractSpinBox::NoButtons;
     if (showButtons) {
-        size.rwidth() += Metrics::SpinBox_ArrowButtonWidth;
+        size.rwidth() += Metrics::SpinBox_ArrowButtonWidth + Metrics::SpinBox_ArrowButtonMarginWidth;
     }
 
     return size;

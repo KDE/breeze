@@ -64,6 +64,7 @@ struct Metrics {
     // spinbox
     static constexpr int SpinBox_FrameWidth = LineEdit_FrameWidth;
     static constexpr int SpinBox_ArrowButtonWidth = 20;
+    static constexpr int SpinBox_ArrowButtonMarginWidth = 6;
 
     // groupbox title margin
     static constexpr int GroupBox_TitleMarginWidth = 4;
