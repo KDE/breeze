@@ -875,7 +875,7 @@ void Helper::renderCheckBoxBackground(QPainter *painter,
 
     switch (state) {
     case CheckOff:
-        painter->setBrush(palette.base().color().darker(sunken ? radioCheckSunkenDarkeningFactor : 100));
+        painter->setBrush(palette.button().color().darker(sunken ? radioCheckSunkenDarkeningFactor : 100));
         painter->drawRoundedRect(frameRect, radius, radius);
         break;
 
@@ -886,7 +886,7 @@ void Helper::renderCheckBoxBackground(QPainter *painter,
         break;
 
     case CheckAnimated:
-        painter->setBrush(palette.base().color().darker(sunken ? radioCheckSunkenDarkeningFactor : 100));
+        painter->setBrush(palette.button().color().darker(sunken ? radioCheckSunkenDarkeningFactor : 100));
         painter->drawRoundedRect(frameRect, radius, radius);
         painter->setBrush(transparent);
         painter->setOpacity(animation);
@@ -1033,7 +1033,7 @@ void Helper::renderRadioButtonBackground(QPainter *painter,
 
     switch (state) {
     case RadioOff:
-        painter->setBrush(palette.base().color().darker(sunken ? radioCheckSunkenDarkeningFactor : 100));
+        painter->setBrush(palette.button().color().darker(sunken ? radioCheckSunkenDarkeningFactor : 100));
         painter->drawEllipse(frameRect);
         break;
     case RadioOn:
@@ -1041,7 +1041,7 @@ void Helper::renderRadioButtonBackground(QPainter *painter,
         painter->drawEllipse(frameRect);
         break;
     case RadioAnimated:
-        painter->setBrush(palette.base().color().darker(sunken ? radioCheckSunkenDarkeningFactor : 100));
+        painter->setBrush(palette.button().color().darker(sunken ? radioCheckSunkenDarkeningFactor : 100));
         painter->drawEllipse(frameRect);
         painter->setBrush(transparent);
         painter->setOpacity(animation);
