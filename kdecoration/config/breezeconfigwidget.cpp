@@ -27,6 +27,8 @@ ConfigWidget::ConfigWidget(QObject *parent, const KPluginMetaData &data, const Q
     // configuration
     m_ui.setupUi(widget());
 
+    m_ui.tabWidget->tabBar()->setExpanding(true);
+
     // track ui changes
     connect(m_ui.titleAlignment, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()));
     connect(m_ui.buttonSize, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()));
