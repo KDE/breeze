@@ -585,7 +585,8 @@ void Helper::renderMenuFrame(QPainter *painter, const QRectF &rect, const QColor
     if (roundCorners) {
         painter->setRenderHint(QPainter::Antialiasing);
         QRectF frameRect(rect);
-        qreal radius(frameRadius(PenWidth::NoPen));
+
+        qreal radius(Metrics::Frame_FrameRadius);
 
         frameRect.adjust( //
             seamlessEdges.testFlag(Qt::LeftEdge) ? -radius : 0,
@@ -1347,9 +1348,9 @@ void Helper::renderTabBarTab(QPainter *painter,
         painter->setPen(QPen(penBrush, PenWidth::Frame));
         QRectF highlightRect = frameRect;
         if (north || south) {
-            highlightRect.setHeight(Metrics::Frame_FrameRadius);
+            highlightRect.setHeight(Metrics::TabBar_ActiveEffectSize);
         } else if (west || east) {
-            highlightRect.setWidth(Metrics::Frame_FrameRadius);
+            highlightRect.setWidth(Metrics::TabBar_ActiveEffectSize);
         }
         if (south) {
             highlightRect.moveBottom(frameRect.bottom());

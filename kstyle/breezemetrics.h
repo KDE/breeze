@@ -39,7 +39,7 @@ struct Metrics {
 
     // frames
     static constexpr int Frame_FrameWidth = 2;
-    static constexpr int Frame_FrameRadius = 3;
+    static constexpr int Frame_FrameRadius = 5;
 
     // layout
     static constexpr int Layout_TopLevelMarginWidth = 10;
@@ -131,6 +131,7 @@ struct Metrics {
     static constexpr int TabBar_TabItemSpacing = 8;
     static constexpr int TabBar_TabOverlap = 1;
     static constexpr int TabBar_BaseOverlap = 2;
+    static constexpr int TabBar_ActiveEffectSize = 3;
 
     // tab widget
     static constexpr int TabWidget_MarginWidth = 3;

@@ -22,7 +22,9 @@ using InternalSettingsListIterator = QListIterator<InternalSettingsPtr>;
 namespace Metrics
 {
 //* corner radius, in units of small spacing
-static constexpr qreal Frame_FrameRadius = 2;
+// Keep this value in sync with Bias_Default in
+// kstyle/breezemetrics.h
+static constexpr qreal Frame_FrameRadius = 5;
 
 //* titlebar metrics, in units of small spacing
 static constexpr int TitleBar_TopMargin = 2;

@@ -889,7 +889,7 @@ std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(c
 
 void Decoration::setScaledCornerRadius()
 {
-    m_scaledCornerRadius = Metrics::Frame_FrameRadius * settings()->smallSpacing();
+    m_scaledCornerRadius = Metrics::Frame_FrameRadius;
 }
 } // namespace
 
