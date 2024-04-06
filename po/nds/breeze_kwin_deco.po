@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kwin_clients\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-04 02:12+0000\n"
+"POT-Creation-Date: 2024-04-06 00:39+0000\n"
 "PO-Revision-Date: 2014-02-17 11:58+0100\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -85,49 +85,49 @@ msgid "Enable/disable this exception"
 msgstr "Disse Utnahm an- oder utmaken"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
-#: config/ui/breezeconfigurationui.ui:33
+#: config/ui/breezeconfigurationui.ui:36
 #, kde-format
 msgid "General"
 msgstr "Allmeen"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
-#: config/ui/breezeconfigurationui.ui:39
+#: config/ui/breezeconfigurationui.ui:42
 #, kde-format
 msgid "Tit&le alignment:"
 msgstr "Tite&lutrichten:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
-#: config/ui/breezeconfigurationui.ui:53
+#: config/ui/breezeconfigurationui.ui:56
 #, kde-format
 msgid "Left"
 msgstr "Links"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
-#: config/ui/breezeconfigurationui.ui:58
+#: config/ui/breezeconfigurationui.ui:61
 #, kde-format
 msgid "Center"
 msgstr "Merrn"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
-#: config/ui/breezeconfigurationui.ui:63
+#: config/ui/breezeconfigurationui.ui:66
 #, kde-format
 msgid "Center (Full Width)"
 msgstr "Merrn (Heel Breed)"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
-#: config/ui/breezeconfigurationui.ui:68
+#: config/ui/breezeconfigurationui.ui:71
 #, kde-format
 msgid "Right"
 msgstr "Rechts"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
-#: config/ui/breezeconfigurationui.ui:89
+#: config/ui/breezeconfigurationui.ui:92
 #, kde-format
 msgid "B&utton size:"
 msgstr "Kn&oopgrött:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
-#: config/ui/breezeconfigurationui.ui:103
+#: config/ui/breezeconfigurationui.ui:106
 #, fuzzy, kde-format
 #| msgctxt "@item:inlistbox Border size:"
 #| msgid "Tiny"
@@ -136,8 +136,8 @@ msgstr "Lierlütt"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
-#: config/ui/breezeconfigurationui.ui:108
-#: config/ui/breezeconfigurationui.ui:221
+#: config/ui/breezeconfigurationui.ui:111
+#: config/ui/breezeconfigurationui.ui:224
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Small"
@@ -145,8 +145,8 @@ msgstr "Lütt"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
-#: config/ui/breezeconfigurationui.ui:113
-#: config/ui/breezeconfigurationui.ui:226
+#: config/ui/breezeconfigurationui.ui:116
+#: config/ui/breezeconfigurationui.ui:229
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Medium"
@@ -154,8 +154,8 @@ msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
-#: config/ui/breezeconfigurationui.ui:118
-#: config/ui/breezeconfigurationui.ui:231
+#: config/ui/breezeconfigurationui.ui:121
+#: config/ui/breezeconfigurationui.ui:234
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Large"
@@ -163,28 +163,28 @@ msgstr "Groot"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
-#: config/ui/breezeconfigurationui.ui:123
-#: config/ui/breezeconfigurationui.ui:236
+#: config/ui/breezeconfigurationui.ui:126
+#: config/ui/breezeconfigurationui.ui:239
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Very Large"
 msgstr "Bannig groot"
 
 #. i18n: ectx: property (text), widget (QCheckBox, outlineCloseButton)
-#: config/ui/breezeconfigurationui.ui:131
+#: config/ui/breezeconfigurationui.ui:134
 #, kde-format
 msgid "Draw a circle around close button"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBorderOnMaximizedWindows)
-#: config/ui/breezeconfigurationui.ui:138
+#: config/ui/breezeconfigurationui.ui:141
 #, fuzzy, kde-format
 #| msgid "Display window borders for maximized windows"
 msgid "Draw border on maximized and tiled windows"
 msgstr "Bi maximeert Finstern Rahmen wiesen"
 
 #. i18n: ectx: property (text), widget (QLabel, drawBorderOnMaximizedWindowsHelpLabel)
-#: config/ui/breezeconfigurationui.ui:163
+#: config/ui/breezeconfigurationui.ui:166
 #, kde-format
 msgid ""
 "This setting will allow you to resize from window edges touching screen "
@@ -193,34 +193,34 @@ msgid ""
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
-#: config/ui/breezeconfigurationui.ui:175
+#: config/ui/breezeconfigurationui.ui:178
 #, fuzzy, kde-format
 #| msgid "Draw window background"
 msgid "Draw titlebar background gradient"
 msgstr "Finsterachtergrund wiesen"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
-#: config/ui/breezeconfigurationui.ui:196
+#: config/ui/breezeconfigurationui.ui:199
 #, kde-format
 msgid "Shadows and Outline"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezeconfigurationui.ui:202
+#: config/ui/breezeconfigurationui.ui:205
 #, fuzzy, kde-format
 #| msgid "Shadows"
 msgid "Shadow size:"
 msgstr "Schaddens"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
-#: config/ui/breezeconfigurationui.ui:216
+#: config/ui/breezeconfigurationui.ui:219
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "None"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezeconfigurationui.ui:244
+#: config/ui/breezeconfigurationui.ui:247
 #, fuzzy, kde-format
 #| msgid "Shadows"
 msgctxt "strength of the shadow (from transparent to opaque)"
@@ -228,20 +228,20 @@ msgid "Shadow strength:"
 msgstr "Schaddens"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
-#: config/ui/breezeconfigurationui.ui:257
+#: config/ui/breezeconfigurationui.ui:260
 #, no-c-format, kde-format
 msgid "%"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: config/ui/breezeconfigurationui.ui:283
+#: config/ui/breezeconfigurationui.ui:286
 #, fuzzy, kde-format
 #| msgid "Shadows"
 msgid "Shadow color:"
 msgstr "Schaddens"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
-#: config/ui/breezeconfigurationui.ui:296
+#: config/ui/breezeconfigurationui.ui:299
 #, fuzzy, kde-format
 #| msgid "Outline active window title:"
 msgctxt "outline intensity"
@@ -249,35 +249,35 @@ msgid "Outline intensity:"
 msgstr "Ümreet för aktiev Finstertitel:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:310
+#: config/ui/breezeconfigurationui.ui:313
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Off"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:315
+#: config/ui/breezeconfigurationui.ui:318
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Low"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:320
+#: config/ui/breezeconfigurationui.ui:323
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Medium"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:325
+#: config/ui/breezeconfigurationui.ui:328
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "High"
 msgstr ""
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:330
+#: config/ui/breezeconfigurationui.ui:333
 #, fuzzy, kde-format
 #| msgid "Maximize"
 msgctxt "@item:inlistbox Outline intensity:"
@@ -285,7 +285,7 @@ msgid "Maximum"
 msgstr "Maximeren"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: config/ui/breezeconfigurationui.ui:352
+#: config/ui/breezeconfigurationui.ui:355
 #, kde-format
 msgid "Window-Specific Overrides"
 msgstr "Besünner Instellen för enkelte Finstern"
