@@ -24,7 +24,9 @@ namespace Metrics
 //* corner radius, in units of small spacing
 // Keep this value in sync with Bias_Default in
 // kstyle/breezemetrics.h
-static constexpr qreal Frame_FrameRadius = 5;
+// NOTE: this value is multiplied by settings()->smallSpacing()
+// which is always 2 on wayland, but can be something else on X11
+static constexpr qreal Frame_FrameRadius = 2.5;
 
 //* titlebar metrics, in units of small spacing
 static constexpr int TitleBar_TopMargin = 2;

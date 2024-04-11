@@ -889,7 +889,10 @@ std::shared_ptr<KDecoration2::DecorationShadow> Decoration::createShadowObject(c
 
 void Decoration::setScaledCornerRadius()
 {
-    m_scaledCornerRadius = Metrics::Frame_FrameRadius;
+    // On X11, the smallSpacing value is used for scaling.
+    // On Wayland, this value has constant factor of 2.
+    // Removing it will break radius scaling on X11.
+    m_scaledCornerRadius = Metrics::Frame_FrameRadius * settings()->smallSpacing();
 }
 } // namespace
 
