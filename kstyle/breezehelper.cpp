@@ -671,7 +671,7 @@ void Helper::renderButtonFrame(QPainter *painter,
             bgBrush = alphaColor(highlightColor, 0.125);
             penBrush = KColorUtils::mix(highlightColor, KColorUtils::mix(palette.button().color(), palette.buttonText().color(), Metrics::Bias_Default), 0.5);
         } else {
-            bgBrush = palette.window().color();
+            bgBrush = alphaColor(KColorUtils::mix(palette.button().color(), palette.buttonText().color(), Metrics::Bias_Default), 0.15);
             penBrush = hasNeutralHighlight ? neutralText(palette) : bgBrush;
         }
     } else {
