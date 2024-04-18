@@ -16,6 +16,7 @@
 #include "breezeboxshadowrenderer.h"
 
 #include <KDecoration2/DecorationButtonGroup>
+#include <KDecoration2/DecorationMetrics>
 #include <KDecoration2/DecorationShadow>
 
 #include <KColorUtils>
@@ -305,11 +306,12 @@ void Decoration::updateTitleBar()
     // The titlebar rect has margins around it so the window can be resized by dragging a decoration edge.
     auto s = settings();
     const auto c = client();
+    const auto metrics = c->metrics();
     const bool maximized = isMaximized();
-    const int width = maximized ? c->width() : c->width() - 2 * s->smallSpacing() * Metrics::TitleBar_SideMargin;
-    const int height = maximized ? borderTop() : borderTop() - s->smallSpacing() * Metrics::TitleBar_TopMargin;
-    const int x = maximized ? 0 : s->smallSpacing() * Metrics::TitleBar_SideMargin;
-    const int y = maximized ? 0 : s->smallSpacing() * Metrics::TitleBar_TopMargin;
+    const int width = maximized ? c->width() : c->width() - 2 * metrics.smallSpacing() * Metrics::TitleBar_SideMargin;
+    const int height = maximized ? borderTop() : borderTop() - metrics.smallSpacing() * Metrics::TitleBar_TopMargin;
+    const int x = maximized ? 0 : metrics.smallSpacing() * Metrics::TitleBar_SideMargin;
+    const int y = maximized ? 0 : metrics.smallSpacing() * Metrics::TitleBar_TopMargin;
     setTitleBar(QRect(x, y, width, height));
 }
 
@@ -343,7 +345,7 @@ void Decoration::updateAnimationState()
 //________________________________________________________________
 int Decoration::borderSize(bool bottom) const
 {
-    const int baseSize = settings()->smallSpacing();
+    const int baseSize = client()->metrics().smallSpacing();
     if (m_internalSettings && (m_internalSettings->mask() & BorderSize)) {
         switch (m_internalSettings->borderSize()) {
         case InternalSettings::BorderNone:
@@ -424,6 +426,7 @@ void Decoration::recalculateBorders()
 {
     const auto c = client();
     auto s = settings();
+    const auto metrics = client()->metrics();
 
     // left, right and bottom borders
     const int left = isLeftEdge() ? 0 : borderSize();
@@ -435,10 +438,10 @@ void Decoration::recalculateBorders()
         top = bottom;
     } else {
         QFontMetrics fm(s->font());
-        top += qMax(fm.height(), buttonSize());
+        top += qMax(metrics.map(fm.height()), buttonSize());
 
         // padding below
-        const int baseSize = s->smallSpacing();
+        const int baseSize = metrics.smallSpacing();
         top += baseSize * Metrics::TitleBar_BottomMargin;
 
         // padding above
@@ -448,7 +451,7 @@ void Decoration::recalculateBorders()
     setBorders(QMargins(left, top, right, bottom));
 
     // extended sizes
-    const int extSize = s->largeSpacing();
+    const int extSize = metrics.largeSpacing();
     int extSides = 0;
     int extBottom = 0;
     if (hasNoBorders()) {
@@ -484,13 +487,14 @@ void Decoration::updateButtonsGeometryDelayed()
 void Decoration::updateButtonsGeometry()
 {
     const auto s = settings();
+    const auto metrics = client()->metrics();
 
     // adjust button position
     const auto buttonList = m_leftButtons->buttons() + m_rightButtons->buttons();
     for (const QPointer<KDecoration2::DecorationButton> &button : buttonList) {
         auto btn = static_cast<Button *>(button.get());
 
-        const int verticalOffset = (isTopEdge() ? s->smallSpacing() * Metrics::TitleBar_TopMargin : 0);
+        const int verticalOffset = (isTopEdge() ? metrics.smallSpacing() * Metrics::TitleBar_TopMargin : 0);
 
         const QSizeF preferredSize = btn->preferredSize();
         const int bHeight = preferredSize.height() + verticalOffset;
@@ -503,11 +507,11 @@ void Decoration::updateButtonsGeometry()
     // left buttons
     if (!m_leftButtons->buttons().isEmpty()) {
         // spacing
-        m_leftButtons->setSpacing(s->smallSpacing() * Metrics::TitleBar_ButtonSpacing);
+        m_leftButtons->setSpacing(metrics.smallSpacing() * Metrics::TitleBar_ButtonSpacing);
 
         // padding
-        const int vPadding = isTopEdge() ? 0 : s->smallSpacing() * Metrics::TitleBar_TopMargin;
-        const int hPadding = s->smallSpacing() * Metrics::TitleBar_SideMargin;
+        const int vPadding = isTopEdge() ? 0 : metrics.smallSpacing() * Metrics::TitleBar_TopMargin;
+        const int hPadding = metrics.smallSpacing() * Metrics::TitleBar_SideMargin;
         if (isLeftEdge()) {
             // add offsets on the side buttons, to preserve padding, but satisfy Fitts law
             auto button = static_cast<Button *>(m_leftButtons->buttons().front());
@@ -527,11 +531,11 @@ void Decoration::updateButtonsGeometry()
     // right buttons
     if (!m_rightButtons->buttons().isEmpty()) {
         // spacing
-        m_rightButtons->setSpacing(s->smallSpacing() * Metrics::TitleBar_ButtonSpacing);
+        m_rightButtons->setSpacing(metrics.smallSpacing() * Metrics::TitleBar_ButtonSpacing);
 
         // padding
-        const int vPadding = isTopEdge() ? 0 : s->smallSpacing() * Metrics::TitleBar_TopMargin;
-        const int hPadding = s->smallSpacing() * Metrics::TitleBar_SideMargin;
+        const int vPadding = isTopEdge() ? 0 : metrics.smallSpacing() * Metrics::TitleBar_TopMargin;
+        const int hPadding = metrics.smallSpacing() * Metrics::TitleBar_SideMargin;
         if (isRightEdge()) {
             auto button = static_cast<Button *>(m_rightButtons->buttons().back());
 
@@ -556,6 +560,8 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
     // TODO: optimize based on repaintRegion
     auto c = client();
     auto s = settings();
+    auto metrics = c->metrics();
+
     // paint background
     if (!c->isShaded()) {
         painter->fillRect(rect(), Qt::transparent);
@@ -623,7 +629,7 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
 
         painter->fillPath(outlinePath.simplified(), Qt::transparent);
         painter->save();
-        painter->setPen(QPen(outlineColor, 2));
+        painter->setPen(QPen(outlineColor, 2 * metrics.pixelUnit()));
         painter->setBrush(Qt::NoBrush);
         painter->setRenderHint(QPainter::Antialiasing);
         painter->setCompositionMode(QPainter::CompositionMode_SourceAtop);
@@ -715,7 +721,7 @@ void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
 //________________________________________________________________
 int Decoration::buttonSize() const
 {
-    const int baseSize = m_tabletMode ? settings()->gridUnit() * 2 : settings()->gridUnit();
+    const int baseSize = m_tabletMode ? client()->metrics().gridUnit() * 2 : client()->metrics().gridUnit();
     switch (m_internalSettings->buttonSize()) {
     case InternalSettings::ButtonTiny:
         return baseSize;
@@ -743,7 +749,7 @@ void Decoration::onTabletModeChanged(bool mode)
 //________________________________________________________________
 int Decoration::captionHeight() const
 {
-    return hideTitleBar() ? borderTop() : borderTop() - settings()->smallSpacing() * (Metrics::TitleBar_BottomMargin + Metrics::TitleBar_TopMargin) - 1;
+    return hideTitleBar() ? borderTop() : borderTop() - client()->metrics().smallSpacing() * (Metrics::TitleBar_BottomMargin + Metrics::TitleBar_TopMargin) - 1;
 }
 
 //________________________________________________________________
@@ -753,15 +759,17 @@ QPair<QRect, Qt::Alignment> Decoration::captionRect() const
         return qMakePair(QRect(), Qt::AlignCenter);
     } else {
         auto c = client();
+        const auto metrics = client()->metrics();
+
         const int leftOffset = m_leftButtons->buttons().isEmpty()
-            ? Metrics::TitleBar_SideMargin * settings()->smallSpacing()
-            : m_leftButtons->geometry().x() + m_leftButtons->geometry().width() + Metrics::TitleBar_SideMargin * settings()->smallSpacing();
+            ? Metrics::TitleBar_SideMargin * metrics.smallSpacing()
+            : m_leftButtons->geometry().x() + m_leftButtons->geometry().width() + Metrics::TitleBar_SideMargin * metrics.smallSpacing();
 
         const int rightOffset = m_rightButtons->buttons().isEmpty()
-            ? Metrics::TitleBar_SideMargin * settings()->smallSpacing()
-            : size().width() - m_rightButtons->geometry().x() + Metrics::TitleBar_SideMargin * settings()->smallSpacing();
+            ? Metrics::TitleBar_SideMargin * metrics.smallSpacing()
+            : size().width() - m_rightButtons->geometry().x() + Metrics::TitleBar_SideMargin * metrics.smallSpacing();
 
-        const int yOffset = settings()->smallSpacing() * Metrics::TitleBar_TopMargin;
+        const int yOffset = client()->metrics().smallSpacing() * Metrics::TitleBar_TopMargin;
         const QRect maxRect(leftOffset, yOffset, size().width() - leftOffset - rightOffset, captionHeight());
 
         switch (m_internalSettings->titleAlignment()) {
@@ -778,7 +786,7 @@ QPair<QRect, Qt::Alignment> Decoration::captionRect() const
         case InternalSettings::AlignCenterFullWidth: {
             // full caption rect
             const QRect fullRect = QRect(0, yOffset, size().width(), captionHeight());
-            QRect boundingRect(settings()->fontMetrics().boundingRect(c->caption()).toRect());
+            QRect boundingRect = metrics.map(settings()->fontMetrics().boundingRect(c->caption()).toRect());
 
             // text bounding rect
             boundingRect.setTop(yOffset);
@@ -892,7 +900,7 @@ void Decoration::setScaledCornerRadius()
     // On X11, the smallSpacing value is used for scaling.
     // On Wayland, this value has constant factor of 2.
     // Removing it will break radius scaling on X11.
-    m_scaledCornerRadius = Metrics::Frame_FrameRadius * settings()->smallSpacing();
+    m_scaledCornerRadius = Metrics::Frame_FrameRadius * client()->metrics().smallSpacing();
 }
 } // namespace
 
