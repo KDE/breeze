@@ -28,7 +28,7 @@ class BlurHelper : public QObject
 
 public:
     //! constructor
-    explicit BlurHelper();
+    explicit BlurHelper(const std::shared_ptr<Helper> &helper);
 
     //! register widget
     void registerWidget(QWidget *);
@@ -49,6 +49,9 @@ protected:
 
     //! update blur regions for given widget
     void update(QWidget *) const;
+
+private:
+    std::shared_ptr<Helper> _helper;
 };
 
 }
