@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Volkan Gezer <volkangezer@gmail.com>, 2015, 2017.
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-25 00:45+0000\n"
-"PO-Revision-Date: 2023-03-28 17:50+0300\n"
+"PO-Revision-Date: 2024-04-23 00:35+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.07.70\n"
 
 #: main.cpp:25 main.cpp:29
 #, kde-format
@@ -100,7 +100,7 @@ msgstr "Araç çubuğu öge ayraçlarını çiz"
 #: ui/breezestyleconfig.ui:162
 #, kde-format
 msgid "Draw slider tick marks"
-msgstr "Kaydırıcı onay imlerini çiz"
+msgstr "Sürgü onay imlerini çiz"
 
 #. i18n: ectx: property (text), widget (QCheckBox, _splitterProxyEnabled)
 #: ui/breezestyleconfig.ui:169
