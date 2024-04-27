@@ -15,9 +15,8 @@ const char *colorProperty = "KDE_COLOR_SCHEME_PATH";
 
 namespace Breeze
 {
-ToolsAreaManager::ToolsAreaManager(Helper *helper, QObject *parent)
+ToolsAreaManager::ToolsAreaManager(QObject *parent)
     : QObject(parent)
-    , _helper(helper)
 {
     if (qApp && qApp->property(colorProperty).isValid()) {
         auto path = qApp->property(colorProperty).toString();

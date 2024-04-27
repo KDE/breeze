@@ -1,6 +1,5 @@
 #pragma once
 
-#include "breezehelper.h"
 #include "breezestyle.h"
 #include <KConfigWatcher>
 #include <KSharedConfig>
@@ -31,7 +30,6 @@ class ToolsAreaManager : public QObject
     Q_OBJECT
 
 private:
-    Helper *_helper;
     QHash<const QMainWindow *, QVector<QPointer<QToolBar>>> _windows;
     KSharedConfigPtr _config;
     KConfigWatcher::Ptr _watcher;
@@ -47,7 +45,7 @@ protected:
     void configUpdated();
 
 public:
-    explicit ToolsAreaManager(Helper *helper, QObject *parent = nullptr);
+    explicit ToolsAreaManager(QObject *parent = nullptr);
     ~ToolsAreaManager();
 
     bool eventFilter(QObject *watched, QEvent *event) override;

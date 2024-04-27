@@ -264,7 +264,7 @@ Style::Style()
     , _frameShadowFactory(new FrameShadowFactory(this))
     , _mdiWindowShadowFactory(new MdiWindowShadowFactory(this))
     , _splitterFactory(new SplitterFactory(this))
-    , _toolsAreaManager(new ToolsAreaManager(_helper, this))
+    , _toolsAreaManager(new ToolsAreaManager(this))
     , _widgetExplorer(new WidgetExplorer(this))
     , _tabBarData(new BreezePrivate::TabBarData(this))
 #if BREEZE_HAVE_KSTYLE
