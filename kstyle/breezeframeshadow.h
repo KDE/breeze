@@ -27,13 +27,10 @@ class FrameShadowFactory : public QObject
 
 public:
     //* constructor
-    explicit FrameShadowFactory(QObject *parent)
-        : QObject(parent)
-    {
-    }
+    explicit FrameShadowFactory(QObject *parent = nullptr);
 
     //* register widget
-    bool registerWidget(QWidget *, Helper &);
+    bool registerWidget(QWidget *, const std::shared_ptr<Helper> &helper);
 
     //* unregister
     void unregisterWidget(QWidget *);
@@ -55,7 +52,7 @@ public:
 
 protected:
     //* install shadows on given widget
-    void installShadows(QWidget *, Helper &);
+    void installShadows(QWidget *, const std::shared_ptr<Helper> &helper);
 
     //* remove shadows from widget
     void removeShadows(QWidget *);
@@ -67,7 +64,7 @@ protected:
     void update(QObject *) const;
 
     //* install shadow on given side
-    void installShadow(QWidget *, Helper &, Side) const;
+    void installShadow(QWidget *, const std::shared_ptr<Helper> &helper, Side area) const;
 
 protected Q_SLOTS:
 
@@ -90,7 +87,7 @@ class FrameShadow : public QWidget
 
 public:
     //* constructor
-    FrameShadow(Side, Helper &);
+    FrameShadow(Side, const std::shared_ptr<Helper> &helper);
 
     //* update geometry
     virtual void updateGeometry(QRect);
@@ -107,7 +104,7 @@ protected:
 
 private:
     //* helper
-    Helper &_helper;
+    std::shared_ptr<Helper> _helper;
 
     //* shadow area
     Side _area;

@@ -25,13 +25,15 @@
 
 namespace Breeze
 {
+class AppEventFilter;
+
 class WindowManager : public QObject
 {
     Q_OBJECT
 
 public:
     //* constructor
-    explicit WindowManager(QObject *);
+    explicit WindowManager(QObject *parent = nullptr);
 
     //* initialize
     /** read relevant options from config */
@@ -269,8 +271,9 @@ private:
      **/
     bool _eventInQQuickWidget = false;
 
+    // lifetime: parented to this
     //* application event filter
-    QObject *_appEventFilter = nullptr;
+    AppEventFilter *_appEventFilter = nullptr;
 
     //* allow access of all private members to the app event filter
     friend class AppEventFilter;

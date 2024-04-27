@@ -25,6 +25,7 @@ class AppListener : public QObject
     friend class ToolsAreaManager;
 };
 
+//* signal manager for the tools area
 class ToolsAreaManager : public QObject
 {
     Q_OBJECT

@@ -428,6 +428,7 @@ protected:
     bool eventFilter(QObject *watched, QEvent *event) override;
 
 private:
-    Helper *_helper;
+    // lifetime: helper IS the parent QObject. When it is destructed, so is the filter.
+    Helper *_helper = nullptr;
 };
 }

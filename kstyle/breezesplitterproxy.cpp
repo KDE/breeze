@@ -36,6 +36,12 @@
 
 namespace Breeze
 {
+SplitterFactory::SplitterFactory(QObject *parent)
+    : QObject(parent)
+    , _enabled(false)
+{
+}
+
 //____________________________________________________________________
 void SplitterFactory::setEnabled(bool value)
 {

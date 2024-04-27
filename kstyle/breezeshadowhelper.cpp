@@ -66,10 +66,11 @@ CompositeShadowParams ShadowHelper::lookupShadowParams(int shadowSizeEnum)
 }
 
 //_____________________________________________________
-ShadowHelper::ShadowHelper(Helper &helper, QObject *parent)
+ShadowHelper::ShadowHelper(const std::shared_ptr<Helper> &helper, QObject *parent)
     : QObject(parent)
     , _helper(helper)
 {
+    Q_ASSERT(helper);
 }
 
 //_______________________________________________________
@@ -201,7 +202,7 @@ TileSet ShadowHelper::shadowTiles(QWidget *widget)
     const QSize boxSize =
         BoxShadowRenderer::calculateMinimumBoxSize(params.shadow1.radius).expandedTo(BoxShadowRenderer::calculateMinimumBoxSize(params.shadow2.radius));
 
-    const qreal frameRadius = _helper.frameRadius();
+    const qreal frameRadius = _helper->frameRadius();
 
     BoxShadowRenderer shadowRenderer;
     shadowRenderer.setBorderRadius(frameRadius);

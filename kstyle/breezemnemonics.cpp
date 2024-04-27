@@ -11,6 +11,11 @@
 
 namespace Breeze
 {
+Mnemonics::Mnemonics(QObject *parent)
+    : QObject(parent)
+{
+}
+
 //____________________________________________________
 void Mnemonics::setMode(int mode)
 {

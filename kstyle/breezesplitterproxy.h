@@ -21,18 +21,14 @@ namespace Breeze
 {
 class SplitterProxy;
 
-//* factory
+//* Factory for SplitterProxy widgets
 class SplitterFactory : public QObject
 {
     Q_OBJECT
 
 public:
     //* constructor
-    explicit SplitterFactory(QObject *parent)
-        : QObject(parent)
-        , _enabled(false)
-    {
-    }
+    explicit SplitterFactory(QObject *parent = nullptr);
 
     //* enabled state
     void setEnabled(bool);
