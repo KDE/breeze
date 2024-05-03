@@ -113,8 +113,8 @@ class TabBarData : public QObject
 {
 public:
     //* constructor
-    explicit TabBarData(QObject *parent = nullptr)
-        : QObject(parent)
+    explicit TabBarData()
+        : QObject()
     {
     }
 
