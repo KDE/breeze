@@ -112,8 +112,8 @@ void MdiWindowShadow::paintEvent(QPaintEvent *event)
 }
 
 //____________________________________________________________________
-MdiWindowShadowFactory::MdiWindowShadowFactory(QObject *parent)
-    : QObject(parent)
+MdiWindowShadowFactory::MdiWindowShadowFactory()
+    : QObject()
 {
 }
 

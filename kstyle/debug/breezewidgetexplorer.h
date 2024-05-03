@@ -21,7 +21,7 @@ class WidgetExplorer : public QObject
 
 public:
     //* constructor
-    explicit WidgetExplorer(QObject *parent = nullptr);
+    explicit WidgetExplorer();
 
     //* enable
     bool enabled() const;

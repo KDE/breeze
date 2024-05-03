@@ -69,8 +69,8 @@ bool PaletteChangedEventFilter::eventFilter(QObject *watched, QEvent *event)
 }
 
 //____________________________________________________________________
-Helper::Helper(KSharedConfig::Ptr config, QObject *parent)
-    : QObject(parent)
+Helper::Helper(KSharedConfig::Ptr config)
+    : QObject()
     , _config(std::move(config))
     , _kwinConfig(KSharedConfig::openConfig("kwinrc"))
     , _decorationConfig(new InternalSettings())

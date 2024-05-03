@@ -46,7 +46,7 @@ protected:
     void configUpdated();
 
 public:
-    explicit ToolsAreaManager(QObject *parent = nullptr);
+    explicit ToolsAreaManager();
     ~ToolsAreaManager();
 
     bool eventFilter(QObject *watched, QEvent *event) override;
