@@ -5270,7 +5270,7 @@ bool Style::drawToolButtonLabelControl(const QStyleOption *option, QPainter *pai
     const QSize &availableSize = contentsRect.size();
     const QSize &iconSize = toolButtonOption->iconSize;
     int textFlags(_mnemonics->textFlags());
-    const QSize textSize(option->fontMetrics.size(textFlags, toolButtonOption->text));
+    const QSize textSize(option->fontMetrics.size(textFlags, toolButtonOption->text) + QSize(10, 0));
 
     // adjust text and icon rect based on options
     QRect iconRect;
