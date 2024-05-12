@@ -1274,6 +1274,14 @@ bool Style::drawWidgetPrimitive(const QStyleOption *option, QPainter *painter, c
 
         auto rect = _toolsAreaManager->toolsAreaRect(mw);
 
+        if (!_toolsAreaManager->previousRects.contains(mw)) {
+            _toolsAreaManager->previousRects[mw] = rect;
+        }
+        if (_toolsAreaManager->previousRects[mw] != rect) {
+            const_cast<QWidget *>(widget)->update(rect);
+        }
+        _toolsAreaManager->previousRects[mw] = rect;
+
         if (rect.height() == 0) {
             if (mw->property(PropertyNames::noSeparator).toBool() || mw->isFullScreen()) {
                 painter->restore();
