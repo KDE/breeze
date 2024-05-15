@@ -39,6 +39,7 @@ include(GtkUpdateIconCache)
 
 option(BUILD_QT5 "Build Qt5 style" ON)
 option(BUILD_QT6 "Build with Qt6" ON)
+option(BUILD_TEST "Build test application" ON)
 
 set(QT_NO_CREATE_VERSIONLESS_TARGETS ON)
 set(QT_NO_CREATE_VERSIONLESS_FUNCTIONS ON)
@@ -94,6 +95,12 @@ function(build_Qt5)
 
     add_subdirectory(kstyle kstyle5)
     add_subdirectory(libbreezecommon libbreezecommon5)
+
+    if(BUILD_TEST)
+        find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
+            Completion)
+        add_subdirectory(test test5)
+    endif()
 
     unset(QUERY_EXECUTABLE CACHE)
 endfunction()
@@ -154,6 +161,11 @@ function(build_Qt6)
     add_subdirectory(kstyle kstyle6)
     add_subdirectory(libbreezecommon libbreezecommon6)
     add_subdirectory(misc)
+    if(BUILD_TEST)
+        find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
+            Completion)
+        add_subdirectory(test test6)
+    endif()
 
     if(WITH_DECORATIONS)
         find_package(KDecoration2 REQUIRED)

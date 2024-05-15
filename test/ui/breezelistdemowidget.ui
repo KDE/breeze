@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ListDemoWidget</class>
+ <widget class="QWidget" name="ListDemoWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>407</width>
+    <height>511</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QSplitter" name="splitter">
+     <property name="lineWidth">
+      <number>0</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <widget class="QListWidget" name="listWidget">
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <item>
+       <property name="text">
+        <string>First Item</string>
+       </property>
+       <property name="checkState">
+        <enum>Checked</enum>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Second Item</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Third Item</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+     </widget>
+     <widget class="QTreeWidget" name="treeWidget">
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <column>
+       <property name="text">
+        <string>Title</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Description</string>
+       </property>
+      </column>
+      <item>
+       <property name="text">
+        <string>Third Item</string>
+       </property>
+       <property name="text">
+        <string>Third Description</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Third Subitem</string>
+        </property>
+        <property name="text">
+         <string>Third Subitem Description</string>
+        </property>
+       </item>
+      </item>
+      <item>
+       <property name="text">
+        <string>Second Item</string>
+       </property>
+       <property name="text">
+        <string>Second Description</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Second Subitem</string>
+        </property>
+        <property name="text">
+         <string>Second Subitem Description</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>First Subitem</string>
+        </property>
+        <property name="text">
+         <string>First Subitem Description</string>
+        </property>
+       </item>
+      </item>
+      <item>
+       <property name="text">
+        <string>First Item</string>
+       </property>
+       <property name="text">
+        <string>First Description</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QTableWidget" name="tableWidget">
+      <property name="sortingEnabled">
+       <bool>true</bool>
+      </property>
+      <row>
+       <property name="text">
+        <string>New Row</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>First Row</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>Third Row</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>First Column</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Second Column</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Third Column</string>
+       </property>
+      </column>
+      <item row="0" column="0">
+       <property name="text">
+        <string>Top-left</string>
+       </property>
+      </item>
+      <item row="0" column="1">
+       <property name="text">
+        <string>Top</string>
+       </property>
+      </item>
+      <item row="0" column="2">
+       <property name="text">
+        <string>Top-right</string>
+       </property>
+      </item>
+      <item row="1" column="0">
+       <property name="text">
+        <string>Left </string>
+       </property>
+      </item>
+      <item row="1" column="1">
+       <property name="text">
+        <string>Center</string>
+       </property>
+      </item>
+      <item row="1" column="2">
+       <property name="text">
+        <string>Right</string>
+       </property>
+      </item>
+      <item row="2" column="0">
+       <property name="text">
+        <string>Bottom-left</string>
+       </property>
+      </item>
+      <item row="2" column="1">
+       <property name="text">
+        <string>Bottom</string>
+       </property>
+      </item>
+      <item row="2" column="2">
+       <property name="text">
+        <string>Bottom-right</string>
+       </property>
+      </item>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
