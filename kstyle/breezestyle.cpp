@@ -28,7 +28,6 @@
 #include <QBitmap>
 #include <QCheckBox>
 #include <QComboBox>
-#include <QDBusConnection>
 #include <QDial>
 #include <QDialog>
 #include <QDialogButtonBox>
@@ -56,6 +55,10 @@
 #include <QToolButton>
 #include <QTreeView>
 #include <QWidgetAction>
+
+#ifdef WITH_QTDBUS
+#include <QDBusConnection>
+#endif
 
 #if BREEZE_HAVE_QTQUICK
 #include <KCoreAddons>
@@ -270,6 +273,7 @@ Style::Style()
     , CE_CapacityBar(newControlElement(QStringLiteral("CE_CapacityBar")))
 #endif
 {
+#ifdef WITH_QTDBUS
     // use DBus connection to update on breeze configuration change
     auto dbus = QDBusConnection::sessionBus();
     dbus.connect(QString(),
@@ -294,6 +298,7 @@ Style::Style()
                  SLOT(configurationChanged()));
 
     dbus.connect(QString(), QStringLiteral("/KWin"), QStringLiteral("org.kde.KWin"), QStringLiteral("reloadConfig"), this, SLOT(configurationChanged()));
+#endif
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     qApp->installEventFilter(this);

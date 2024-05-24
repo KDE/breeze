@@ -10,8 +10,10 @@
 #include "../config-breeze.h"
 #include "breezestyleconfigdata.h"
 
+#ifdef WITH_QTDBUS
 #include <QDBusConnection>
 #include <QDBusMessage>
+#endif
 
 extern "C" {
 Q_DECL_EXPORT QWidget *allocate_kstyle_config(QWidget *parent)
@@ -65,10 +67,12 @@ void StyleConfig::save()
 
     StyleConfigData::self()->save();
 
+#ifdef WITH_QTDBUS
     // emit dbus signal
     QDBusMessage message(
         QDBusMessage::createSignal(QStringLiteral("/BreezeStyle"), QStringLiteral("org.kde.Breeze.Style"), QStringLiteral("reparseConfiguration")));
     QDBusConnection::sessionBus().send(message);
+#endif
 }
 
 //__________________________________________________________________

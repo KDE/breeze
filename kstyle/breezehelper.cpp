@@ -19,7 +19,6 @@
 #endif
 
 #include <QApplication>
-#include <QDBusConnection>
 #include <QDockWidget>
 #include <QFileInfo>
 #include <QMainWindow>
