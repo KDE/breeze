@@ -56,7 +56,7 @@
 #include <QTreeView>
 #include <QWidgetAction>
 
-#ifdef WITH_QTDBUS
+#if HAVE_QTDBUS
 #include <QDBusConnection>
 #endif
 
@@ -273,7 +273,7 @@ Style::Style()
     , CE_CapacityBar(newControlElement(QStringLiteral("CE_CapacityBar")))
 #endif
 {
-#ifdef WITH_QTDBUS
+#if HAVE_QTDBUS
     // use DBus connection to update on breeze configuration change
     auto dbus = QDBusConnection::sessionBus();
     dbus.connect(QString(),
