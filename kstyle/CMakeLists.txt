@@ -77,7 +77,7 @@ target_link_libraries(breeze${QT_MAJOR_VERSION}
     Qt${QT_MAJOR_VERSION}::Widgets
 )
 
-if(HAVE_DBUS)
+if(HAVE_QTDBUS)
     target_link_libraries(breeze${QT_MAJOR_VERSION}
         Qt${QT_MAJOR_VERSION}::DBus
     )

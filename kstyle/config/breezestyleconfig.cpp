@@ -10,7 +10,7 @@
 #include "../config-breeze.h"
 #include "breezestyleconfigdata.h"
 
-#ifdef WITH_QTDBUS
+#if HAVE_QTDBUS
 #include <QDBusConnection>
 #include <QDBusMessage>
 #endif
@@ -67,7 +67,7 @@ void StyleConfig::save()
 
     StyleConfigData::self()->save();
 
-#ifdef WITH_QTDBUS
+#if HAVE_QTDBUS
     // emit dbus signal
     QDBusMessage message(
         QDBusMessage::createSignal(QStringLiteral("/BreezeStyle"), QStringLiteral("org.kde.Breeze.Style"), QStringLiteral("reparseConfiguration")));
