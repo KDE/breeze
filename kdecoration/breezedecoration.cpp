@@ -149,6 +149,7 @@ Decoration::Decoration(QObject *parent, const QVariantList &args)
     , m_shadowAnimation(new QVariantAnimation(this))
 {
     g_sDecoCount++;
+    setDecorationName("breeze");
 }
 
 //________________________________________________________________
@@ -426,9 +427,12 @@ void Decoration::recalculateBorders()
     auto s = settings();
 
     // left, right and bottom borders
+    // HACK: for fractional scaling issues, this makes the borders slightly bigger
+    // on bottom and right side, which is then pushed under the window in kdecoration
+    const int fractionalScalingHack = outlinesEnabled() ? 1 : 0;
     const int left = isLeftEdge() ? 0 : borderSize();
-    const int right = isRightEdge() ? 0 : borderSize();
-    const int bottom = (c->isShaded() || isBottomEdge()) ? 0 : borderSize(true);
+    const int right = isRightEdge() ? 0 : borderSize() + fractionalScalingHack;
+    const int bottom = (c->isShaded() || isBottomEdge()) ? 0 : borderSize(true) + fractionalScalingHack;
 
     int top = 0;
     if (hideTitleBar()) {
@@ -534,13 +538,14 @@ void Decoration::updateButtonsGeometry()
         const int hPadding = s->smallSpacing() * Metrics::TitleBar_SideMargin;
         if (isRightEdge()) {
             auto button = static_cast<Button *>(m_rightButtons->buttons().back());
-
-            QRectF geometry = button->geometry();
-            geometry.adjust(0, 0, hPadding, 0);
-            button->setGeometry(geometry);
-            button->setRightPadding(hPadding);
-
-            m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width(), vPadding));
+            const int verticalOffset = (isTopEdge() ? s->smallSpacing() * Metrics::TitleBar_TopMargin : 0);
+            const QSizeF preferredSize = button->preferredSize();
+            const int bHeight = preferredSize.height() + verticalOffset;
+            const int bWidth = preferredSize.width();
+            button->setGeometry(QRectF(QPoint(0, 0), QSizeF(bWidth + hPadding, bHeight)));
+            // HACK: Add +1 to xpos because of the fractional scaling hack
+            // BUG: 481857
+            m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width() + 1, vPadding));
 
         } else {
             m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width() - hPadding - borderRight(), vPadding));
