@@ -16,7 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.12.3\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -280,7 +279,7 @@ msgstr "Największe"
 #: config/ui/breezeconfigurationui.ui:355
 #, kde-format
 msgid "Window-Specific Overrides"
-msgstr "Odstępstwa dla wybranych okien"
+msgstr "Wymuszenia dla określonych okien"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
 #: config/ui/breezeexceptiondialog.ui:14
