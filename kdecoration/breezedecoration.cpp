@@ -538,14 +538,13 @@ void Decoration::updateButtonsGeometry()
         const int hPadding = s->smallSpacing() * Metrics::TitleBar_SideMargin;
         if (isRightEdge()) {
             auto button = static_cast<Button *>(m_rightButtons->buttons().back());
-            const int verticalOffset = (isTopEdge() ? s->smallSpacing() * Metrics::TitleBar_TopMargin : 0);
-            const QSizeF preferredSize = button->preferredSize();
-            const int bHeight = preferredSize.height() + verticalOffset;
-            const int bWidth = preferredSize.width();
-            button->setGeometry(QRectF(QPoint(0, 0), QSizeF(bWidth + hPadding, bHeight)));
-            // HACK: Add +1 to xpos because of the fractional scaling hack
-            // BUG: 481857
-            m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width() + 1, vPadding));
+
+            QRectF geometry = button->geometry();
+            geometry.adjust(0, 0, hPadding, 0);
+            button->setGeometry(geometry);
+            button->setRightPadding(hPadding);
+
+            m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width(), vPadding));
 
         } else {
             m_rightButtons->setPos(QPointF(size().width() - m_rightButtons->geometry().width() - hPadding - borderRight(), vPadding));
