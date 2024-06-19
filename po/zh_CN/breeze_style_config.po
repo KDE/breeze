@@ -92,7 +92,7 @@ msgstr "居中标签页栏的标签页"
 #: ui/breezestyleconfig.ui:155
 #, kde-format
 msgid "Draw toolbar item separators"
-msgstr "绘制工具栏项目分隔符"
+msgstr "绘制工具栏项目分隔线"
 
 #. i18n: ectx: property (text), widget (QCheckBox, _sliderDrawTickMarks)
 #: ui/breezestyleconfig.ui:162
