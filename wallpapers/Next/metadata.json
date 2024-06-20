@@ -4,27 +4,33 @@
             {
                 "Email": "bluepancake72@gmail.com",
                 "Name": "axo1otl (with edits by Felix Ernst)",
+                "Name[ca@valencia]": "axo1otl (amb edicions de Felix Ernst)",
                 "Name[ca]": "axo1otl (amb edicions de Felix Ernst)",
                 "Name[es]": "axo1otl (con modificaciones de Felix Ernst)",
+                "Name[he]": "אקס1לוטל (עם שינויים של פליקס ארנסט)",
                 "Name[ka]": "axo1otl (ფელიქს ერნსტის ჩასწორებებით)",
                 "Name[sl]": "axo1otl (z urejanjem Felix Ernst)",
                 "Name[sv]": "axo1otl (med redigeringar av Felix Ernst)",
                 "Name[tr]": "axo1otl (Felix Ernst tarafından düzenlemelerle)",
                 "Name[uk]": "axo1otl (зі змінами від Фелікса Ернста)",
-                "Name[x-test]": "xxaxo1otl (with edits by Felix Ernst)xx"
+                "Name[x-test]": "xxaxo1otl (with edits by Felix Ernst)xx",
+                "Name[zh_TW]": "axo1otl（包含 Felix Ernst 的編輯）"
             }
         ],
         "Id": "Next",
         "License": "CC-BY-SA-4.0",
         "Name": "Reef",
+        "Name[ca@valencia]": "Reef",
         "Name[ca]": "Reef",
         "Name[cs]": "Útes",
         "Name[es]": "Arrecife",
+        "Name[he]": "שונית",
         "Name[ka]": "რიფი",
         "Name[sl]": "Greben",
         "Name[sv]": "Reef",
         "Name[tr]": "Resif",
         "Name[uk]": "Reef",
-        "Name[x-test]": "xxReefxx"
+        "Name[x-test]": "xxReefxx",
+        "Name[zh_TW]": "Reef"
     }
 }
