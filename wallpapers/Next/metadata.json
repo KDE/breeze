@@ -6,8 +6,11 @@
                 "Name": "axo1otl (with edits by Felix Ernst)",
                 "Name[ca@valencia]": "axo1otl (amb edicions de Felix Ernst)",
                 "Name[ca]": "axo1otl (amb edicions de Felix Ernst)",
+                "Name[eo]": "axo1otl (kun redakteroj de Felix Ernst)",
                 "Name[es]": "axo1otl (con modificaciones de Felix Ernst)",
+                "Name[fr]": "axo1otl (Avec des modifications de Felix Ernst)",
                 "Name[he]": "אקס1לוטל (עם שינויים של פליקס ארנסט)",
+                "Name[it]": "axo1otl (con modifiche di Felix Ernst)",
                 "Name[ka]": "axo1otl (ფელიქს ერნსტის ჩასწორებებით)",
                 "Name[nl]": "axo1otl (met bewerkingen door Felix Ernst)",
                 "Name[sl]": "axo1otl (z urejanjem Felix Ernst)",
@@ -15,6 +18,7 @@
                 "Name[tr]": "axo1otl (Felix Ernst tarafından düzenlemelerle)",
                 "Name[uk]": "axo1otl (зі змінами від Фелікса Ернста)",
                 "Name[x-test]": "xxaxo1otl (with edits by Felix Ernst)xx",
+                "Name[zh_CN]": "axo1otl (含 Felix Ernst 的编辑)",
                 "Name[zh_TW]": "axo1otl（包含 Felix Ernst 的編輯）"
             }
         ],
@@ -24,8 +28,11 @@
         "Name[ca@valencia]": "Reef",
         "Name[ca]": "Reef",
         "Name[cs]": "Útes",
+        "Name[eo]": "Rifo",
         "Name[es]": "Arrecife",
+        "Name[fr]": "Reef",
         "Name[he]": "שונית",
+        "Name[it]": "Barriera corallina",
         "Name[ka]": "რიფი",
         "Name[nl]": "Rif",
         "Name[sl]": "Greben",
@@ -33,6 +40,7 @@
         "Name[tr]": "Resif",
         "Name[uk]": "Reef",
         "Name[x-test]": "xxReefxx",
+        "Name[zh_CN]": "Reef 暗礁",
         "Name[zh_TW]": "Reef"
     }
 }
