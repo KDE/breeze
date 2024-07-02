@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+
+import sys
+import math
+from pathlib import Path
+from PySide6.QtSvg import QSvgRenderer
+
+# Displace the hotspot to the right and down by 1/100th of a pixel, then
+# floor. So if by some float error the hotspot is at 4.995, it will be
+# displaced to 5.005, then floored to 5. This is to prevent the hotspot
+# from potential off-by-one errors when the cursor is scaled.
+HOTSPOT_DISPLACE = 1
+
+if len(sys.argv) < 5:
+    print("Usage: " + sys.argv[0] + " <cursor svg file> <base size> <animation frame time> <scales>")
+    sys.exit(1)
+
+svg_path = Path(sys.argv[1])
+basename = svg_path.stem
+nominal_size = int(sys.argv[2])
+frame_time = int(sys.argv[3])
+scales = [int(i) for i in sys.argv[4:]]
+
+svg = QSvgRenderer(str(svg_path))
+hotspot = svg.transformForElement('hotspot').map(svg.boundsOnElement('hotspot')).boundingRect().topLeft()
+
+# Animated?
+frames = [i.stem for i in svg_path.parent.glob(basename + '-[0-9]*.svg')]
+frames.sort()
+
+
+for scale in scales:
+    size = math.floor(nominal_size * scale / 100)
+    hotspot_x = math.floor((hotspot.x() * scale + HOTSPOT_DISPLACE) / 100)
+    hotspot_y = math.floor((hotspot.y() * scale + HOTSPOT_DISPLACE) / 100)
+
+    if len(list(frames)) == 0:
+        print(f"{size} {hotspot_x} {hotspot_y} x{scale}/{basename}.png")
+    else:
+        for i in frames:
+            print(f"{size} {hotspot_x} {hotspot_y} x{scale}/{i}.png {frame_time}")

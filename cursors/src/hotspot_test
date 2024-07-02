@@ -1,0 +1,21 @@
+#!/usr/bin/python3
+# Print the hotspot of a cursor SVG file at default size
+# Usage: ./hotspot_test.py <svg file>
+
+from PySide6.QtSvg import QSvgRenderer
+import sys
+import math
+
+# Displace the hotspot to the right and down by 1/100th of a pixel, then
+# floor. So if by some float error the hotspot is at 4.995, it will be
+# displaced to 5.005, then floored to 5. This is to prevent the hotspot
+# from potential off-by-one errors when the cursor is scaled.
+HOTSPOT_DISPLACE = 1
+
+svg = QSvgRenderer(sys.argv[1])
+scale = 100
+hotspot = svg.transformForElement('hotspot').map(svg.boundsOnElement('hotspot')).boundingRect().topLeft()
+#print(hotspot.x(), hotspot.y())
+hotspot_x = math.floor((hotspot.x() * scale + HOTSPOT_DISPLACE) / 100)
+hotspot_y = math.floor((hotspot.y() * scale + HOTSPOT_DISPLACE) / 100)
+print(hotspot_x, hotspot_y)

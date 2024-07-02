@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" id="svg11024" width="32" height="32">
+    <defs>
+        <filter id="filter7078" color-interpolation-filters="sRGB">
+            <feGaussianBlur id="feGaussianBlur7080" stdDeviation=".657"/>
+        </filter>
+    </defs>
+    <g id="g44435" style="display:inline" transform="translate(-320 -791.362)">
+        <path id="path44421" d="M336.125 796.337c-6.075 0-11 4.925-11 11s4.925 11 11 11 11-4.924 11-11-4.925-11-11-11" style="color:#000;font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;opacity:.2;fill:#000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;filter:url(#filter7078);enable-background:accumulate"/>
+        <circle id="circle44423" cx="336" cy="806.362" r="11" style="opacity:.6;fill:#000;fill-opacity:1;stroke:none;stroke-width:1.04762"/>
+        <g id="g44433" transform="rotate(-30 336 806.362)">
+            <circle id="circle44425" cx="336" cy="806.362" r="10" style="display:inline;opacity:1;fill:#fff;fill-opacity:1;stroke:none;stroke-width:.952382"/>
+            <g id="g44431" style="display:inline" transform="matrix(.9 0 0 .9 33.488 80.659)">
+                <path id="path44427" d="M326.875 802.494c-.49 1.18-.75 2.487-.75 3.843 0 5.523 4.477 10 10 10 3.756 0 7.01-2.062 8.719-5.125l-1.282-1.906a7.995 7.995 0 0 1-7.437 5.031 8.02 8.02 0 0 1-7.594-5.406l1.594-1.594z" style="fill:#46a7ac;fill-opacity:1;stroke:none"/>
+                <path id="path44429" d="M345.375 810.181c.49-1.18.75-2.487.75-3.844 0-5.522-4.477-10-10-10-3.756 0-7.01 2.063-8.719 5.125l1.281 1.907a7.995 7.995 0 0 1 7.438-5.032 8.02 8.02 0 0 1 7.594 5.407l-1.594 1.593z" style="fill:#d4497f;fill-opacity:1;stroke:none"/>
+            </g>
+        </g>
+    </g>
+    <path id="hotspot" d="M15-17h1v1h-1z" style="display:none;fill:#333;stroke-width:1.07568" transform="rotate(90)"/>
+</svg>

@@ -1,0 +1,69 @@
+#!/bin/bash
+# This script splits the monolithic cursors.svg into individual SVGs for each cursor.
+# Run in Breeze/. Results are in Breeze/src/svg.
+
+set -euo pipefail
+
+RAWSVG="src/cursors.svg"
+BINDIR="$( dirname "${BASH_SOURCE[0]}" )"
+
+echo -ne "Checking Requirements...\\r"
+if [[ ! -f "${RAWSVG}" ]]; then
+	echo -e "\\nFAIL: '${RAWSVG}' missing"
+	exit 1
+fi
+
+if ! command -v inkscape > /dev/null ; then
+	echo -e "\\nFAIL: inkscape must be installed"
+	exit 1
+fi
+echo "Checking Requirements... DONE"
+
+echo "Splitting..."
+DIR="src/svg"
+mkdir -p $DIR
+
+for CUR in src/config/*.cursor; do
+	BASENAME=${CUR##*/}
+	BASENAME=${BASENAME%.*}
+	
+	echo -ne "$BASENAME...\\r"	
+	
+	if [[ "${DIR}/${BASENAME}.svg" -ot ${RAWSVG} ]]; then
+		# Set viewbox around the cursor
+		inkscape $RAWSVG -i $BASENAME -o /tmp/"$BASENAME".svg >/dev/null
+		# Remove everything except the cursor
+		$BINDIR/clean_svg /tmp/"$BASENAME".svg /tmp/"$BASENAME"-cleaned.svg "$BASENAME"
+		# Remove groups in the middle, and remove Inkscape-specific attributes
+		inkscape /tmp/"$BASENAME"-cleaned.svg -o $DIR/"$BASENAME".svg --actions 'select-all:groups;selection-ungroup;select-all:groups;selection-ungroup;select-all:groups;selection-ungroup' -l > /dev/null
+
+		rm /tmp/"$BASENAME".svg /tmp/"$BASENAME"-cleaned.svg
+	fi
+
+	echo "$BASENAME... DONE"	
+done
+
+
+for CUR in progress wait; do
+	for i in {01..23}; do
+		BASENAME="${CUR}-${i}"
+		
+		echo -ne "$BASENAME...\\r"	
+		
+		if [[ "${DIR}/${BASENAME}.svg" -ot ${RAWSVG} ]]; then
+		
+			# Set viewbox around the cursor
+			inkscape $RAWSVG -i $BASENAME -o /tmp/"$BASENAME".svg >/dev/null
+			# Remove everything except the cursor
+			$BINDIR/clean_svg /tmp/"$BASENAME".svg /tmp/"$BASENAME"-cleaned.svg "$BASENAME"
+			# Remove groups in the middle, and remove Inkscape-specific attributes
+			inkscape /tmp/"$BASENAME"-cleaned.svg -o $DIR/"$BASENAME".svg --actions 'select-all:groups;selection-ungroup;select-all:groups;selection-ungroup' -l > /dev/null
+
+			rm /tmp/"$BASENAME".svg /tmp/"$BASENAME"-cleaned.svg
+		fi
+
+		echo "$BASENAME... DONE"
+	done
+done
+
+echo "COMPLETE!"
