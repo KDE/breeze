@@ -1,0 +1,16 @@
+#!/bin/bash
+# Compare generated pixmaps with the old 
+# Place the old pixmaps in Breeze/build.old, the new ones in Breeze/build, and run this script
+# in Breeze/
+
+for i in build/x*; do
+    echo $i
+    DIR=`basename $i`
+    mkdir -p diff/$DIR
+    for FILE in build/$DIR/*; do
+        BASENAME=`basename $FILE`
+        magick compare -metric mae {build.old,build,diff}/$DIR/$BASENAME
+        echo " $BASENAME"
+    done
+    echo
+done

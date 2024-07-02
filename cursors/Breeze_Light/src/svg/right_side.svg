@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" id="svg11024" width="32" height="32">
+    <defs>
+        <filter id="filter7078" color-interpolation-filters="sRGB">
+            <feGaussianBlur id="feGaussianBlur7080" stdDeviation=".657"/>
+        </filter>
+    </defs>
+    <g id="g58843" transform="rotate(90 574.181 449.181)">
+        <path id="path62798" d="M133.5 994.362a1.5 1.5 0 1 0 0 3h16a1.5 1.5 0 1 0 0-3z" style="display:inline;opacity:.2;fill:#000;fill-opacity:1;stroke:none;stroke-width:.991771;filter:url(#filter7078)"/>
+        <path id="path58839" d="M-994.362 132.5a1.5 1.5 0 1 0-3 0v16a1.5 1.5 0 1 0 3 0z" style="display:inline;opacity:.6;fill:#000;fill-opacity:1;stroke:none;stroke-width:.991771" transform="rotate(-90)"/>
+        <path id="path58841" d="M-995.362 132.75a.5.5 0 0 0-1 0v15.5a.5.5 0 0 0 1 0z" style="fill:#fff;fill-opacity:1" transform="rotate(-90)"/>
+    </g>
+    <g id="g58849" style="display:inline" transform="rotate(90 525.703 500.703)">
+        <path id="path61810" d="M41.5 1001.406c-.373 0-.746.22-.906.563l-3.028 6.054a.85.85 0 0 0-.076.383 1 1 0 0 0 1 1H40v2.5a1.5 1.5 0 0 0 3 0v-2.5h1.51a1 1 0 0 0 1-1 .85.85 0 0 0-.076-.383l-3.028-6.054a1.01 1.01 0 0 0-.906-.563" style="color:#000;font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;opacity:.2;fill:#000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;filter:url(#filter7078);enable-background:accumulate"/>
+        <path id="path58845" d="M40.5 1001.406c-.373 0-.746.22-.906.563l-3.027 6.054a.85.85 0 0 0-.077.383 1 1 0 0 0 1 1H39v2.5a1.5 1.5 0 0 0 3 0v-2.5h1.51a1 1 0 0 0 1-1 .85.85 0 0 0-.076-.383l-3.028-6.054a1.01 1.01 0 0 0-.906-.563" style="color:#000;font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;opacity:.6;fill:#000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;enable-background:accumulate"/>
+        <path id="path58847" d="m40.5 1002.656-3 5.75h2.25v3a.75.75 0 0 0 .75.75.75.75 0 0 0 .75-.75v-3h2.25z" style="color:#000;font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#fff;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"/>
+    </g>
+    <path id="hotspot" d="M-28.5-16.5h1v1h-1z" style="display:none;fill:#333;stroke-width:1.07568" transform="scale(-1)"/>
+</svg>
