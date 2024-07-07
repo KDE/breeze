@@ -1,3 +1,11 @@
+# SPDX-FileCopyrightText: Andrew Lake <jamboarder@gmail.com>
+# SPDX-FileCopyrightText: Marco Martin <notmart@gmail.com>
+# SPDX-FileCopyrightText: Nate Graham <nate@kde.org>
+# SPDX-FileCopyrightText: Noah Davis <noahadvs@gmail.com>
+# SPDX-FileCopyrightText: Neal Gompa <ngompa@kde.org>
+# SPDX-FileCopyrightText: David Redondo <kde@david-redondo.de>
+# SPDX-License-Identifier: LGPL-2.0-or-later
+
 [ColorEffects:Disabled]
 Color=56,56,56
 ColorAmount=0
