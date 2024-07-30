@@ -1,18 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" id="svg11024" width="32" height="32">
-    <defs>
-        <filter id="filter7078" color-interpolation-filters="sRGB">
-            <feGaussianBlur id="feGaussianBlur7080" stdDeviation=".657"/>
-        </filter>
-    </defs>
-    <g id="g40614" transform="translate(-329 -996.362)">
-        <path id="path80706" d="M334.5 1000.362a1.5 1.5 0 0 0-1.5 1.5v10a1.5 1.5 0 0 0 3 0v-8.5h8.5a1.5 1.5 0 0 0 0-3z" style="display:inline;opacity:.2;fill:#000;fill-opacity:1;stroke:none;filter:url(#filter7078)"/>
-        <path id="rect5654-8-5-0-0" d="M334.5 999.362a1.5 1.5 0 0 0-1.5 1.5v10a1.5 1.5 0 0 0 3 0v-8.5h8.5a1.5 1.5 0 0 0 0-3z" style="display:inline;opacity:.6;fill:#000;fill-opacity:1;stroke:none"/>
-        <path id="rect5654-9-4-00" d="M334.5 1000.362a.5.5 0 0 0-.5.5v9.776a.501.501 0 0 0 1-.004v-9.272h9.275a.5.5 0 0 0-.004-1H335Z" style="display:inline;fill:#fff;fill-opacity:1;stroke:none"/>
-    </g>
-    <g id="g63793" style="display:inline" transform="rotate(-45 -1173.89 542.517)">
-        <path id="path81694" d="M39.793 1002.113c-.373 0-.746.22-.906.563l-3.027 6.054a.85.85 0 0 0-.077.383 1 1 0 0 0 1 1h1.51v2.5a1.5 1.5 0 0 0 3 0v-2.5h1.51a1 1 0 0 0 1-1 .85.85 0 0 0-.076-.383l-3.028-6.054a1.01 1.01 0 0 0-.906-.563" style="color:#000;font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;opacity:.2;fill:#000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;filter:url(#filter7078);enable-background:accumulate"/>
-        <path id="path63789" d="M40.5 1001.406c-.373 0-.746.22-.906.563l-3.027 6.054a.85.85 0 0 0-.077.383 1 1 0 0 0 1 1H39v2.5a1.5 1.5 0 0 0 3 0v-2.5h1.51a1 1 0 0 0 1-1 .85.85 0 0 0-.076-.383l-3.028-6.054a1.01 1.01 0 0 0-.906-.563" style="color:#000;font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;opacity:.6;fill:#000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2;marker:none;enable-background:accumulate"/>
-        <path id="path63791" d="m40.5 1002.656-3 5.75h2.25v3a.75.75 0 0 0 .75.75.75.75 0 0 0 .75-.75v-3h2.25z" style="color:#000;font-style:normal;font-variant:normal;font-weight:400;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#fff;fill-opacity:1;stroke:none;stroke-width:1px;marker:none;enable-background:accumulate"/>
-    </g>
-    <path id="hotspot" d="M-5.5 5.5h1v1h-1z" style="display:none;fill:#333;stroke-width:1.07568" transform="rotate(-90)"/>
+<svg id="svg11024" height="32" width="32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <filter id="filter7078" color-interpolation-filters="sRGB">
+    <feGaussianBlur id="feGaussianBlur7080" stdDeviation=".657"/>
+  </filter>
+  <g id="g40614" transform="translate(-329 -996.362)">
+    <path id="path80706" d="m334.5 1000.362a1.5 1.5 0 0 0 -1.5 1.5v10a1.5 1.5 0 0 0 3 0v-8.5h8.5a1.5 1.5 0 0 0 0-3z" filter="url(#filter7078)" opacity=".2"/>
+    <path id="rect5654-8-5-0-0" d="m334.5 999.362a1.5 1.5 0 0 0 -1.5 1.5v10a1.5 1.5 0 0 0 3 0v-8.5h8.5a1.5 1.5 0 0 0 0-3z" opacity=".6"/>
+    <path id="rect5654-9-4-00" d="m334.5 1000.362a.5.5 0 0 0 -.5.5v9.776a.501.501 0 0 0 1-.004v-9.272h9.275a.5.5 0 0 0 -.004-1h-9.271z" fill="#fff"/>
+  </g>
+  <g id="g63793" transform="matrix(.70710678 -.70710678 .70710678 .70710678 -727.44187 -671.166029)">
+    <path id="path81694" d="m39.793 1002.113c-.373 0-.746.22-.906.563l-3.027 6.054a.85.85 0 0 0 -.077.383 1 1 0 0 0 1 1h1.51v2.5a1.5 1.5 0 0 0 3 0v-2.5h1.51a1 1 0 0 0 1-1 .85.85 0 0 0 -.076-.383l-3.028-6.054a1.01 1.01 0 0 0 -.906-.563" filter="url(#filter7078)" opacity=".2"/>
+    <path id="path63789" d="m40.5 1001.406c-.373 0-.746.22-.906.563l-3.027 6.054a.85.85 0 0 0 -.077.383 1 1 0 0 0 1 1h1.51v2.5a1.5 1.5 0 0 0 3 0v-2.5h1.51a1 1 0 0 0 1-1 .85.85 0 0 0 -.076-.383l-3.028-6.054a1.01 1.01 0 0 0 -.906-.563" opacity=".6"/>
+    <path id="path63791" d="m40.5 1002.656-3 5.75h2.25v3a.75.75 0 0 0 .75.75.75.75 0 0 0 .75-.75v-3h2.25z" fill="#fff"/>
+  </g>
+  <path id="hotspot" d="m-5.5 5.5h1v1h-1z" display="none" fill="#333" stroke-width="1.07568" transform="rotate(-90)"/>
 </svg>
