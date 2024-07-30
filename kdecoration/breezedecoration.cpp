@@ -283,6 +283,7 @@ void Decoration::init()
     });
 
     connect(c, &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::updateAnimationState);
+    connect(c, &KDecoration2::DecoratedClient::adjacentScreenEdgesChanged, this, &Decoration::updateTitleBar);
     connect(c, &KDecoration2::DecoratedClient::widthChanged, this, &Decoration::updateTitleBar);
     connect(c, &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::updateTitleBar);
     connect(c, &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::setOpaque);
@@ -307,9 +308,9 @@ void Decoration::updateTitleBar()
     const auto c = client();
     const bool maximized = isMaximized();
     const int width = maximized ? c->width() : c->width() - 2 * s->smallSpacing() * Metrics::TitleBar_SideMargin;
-    const int height = maximized ? borderTop() : borderTop() - s->smallSpacing() * Metrics::TitleBar_TopMargin;
+    const int height = (maximized || isTopEdge()) ? borderTop() : borderTop() - s->smallSpacing() * Metrics::TitleBar_TopMargin;
     const int x = maximized ? 0 : s->smallSpacing() * Metrics::TitleBar_SideMargin;
-    const int y = maximized ? 0 : s->smallSpacing() * Metrics::TitleBar_TopMargin;
+    const int y = (maximized || isTopEdge()) ? 0 : s->smallSpacing() * Metrics::TitleBar_TopMargin;
     setTitleBar(QRect(x, y, width, height));
 }
 
