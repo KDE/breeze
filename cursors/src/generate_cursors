@@ -24,7 +24,7 @@ pixmap_dir = Path(sys.argv[2])
 xcursor_output_dir = Path(sys.argv[3])
 svg_cursor_output_dir = Path(sys.argv[4])
 nominal_size = int(sys.argv[5])
-frame_time = int(sys.argv[6])
+frametime = int(sys.argv[6])
 scales = [int(i) for i in sys.argv[7:]]
 
 svg_files = list(svg_dir.glob("*.svg"))
@@ -62,7 +62,7 @@ for svg_file in svg_files:
             else:
                 for i in frames:
                     t = i.stem
-                    print(f"{size} {hotspot_x} {hotspot_y} x{scale}/{t}.png {frame_time}", file=config)
+                    print(f"{size} {hotspot_x} {hotspot_y} x{scale}/{t}.png {frametime}", file=config)
 
     subprocess.run(["xcursorgen", "-p", pixmap_dir, xcursor_config_path, xcursor_output_dir / basename], check=True)
 
@@ -90,6 +90,6 @@ for svg_file in svg_files:
                     "filename": filename,
                     "hotspot_x": hotspot_x,
                     "hotspot_y": hotspot_y,
-                    "frame_time": frame_time
+                    "frametime": frametime
                 })
             json.dump(l, metadata)
