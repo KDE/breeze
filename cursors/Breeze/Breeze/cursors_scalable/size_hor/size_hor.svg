@@ -1,0 +1,10 @@
+<svg id="svg11024" height="32" width="32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <filter id="filter7078" color-interpolation-filters="sRGB">
+    <feGaussianBlur id="feGaussianBlur7080" stdDeviation=".657"/>
+  </filter>
+  <path id="path8232" d="m41.55 948.364a1 1 0 0 0 -.867.504l-3.494 6.053a1 1 0 0 0 .861 1.508h7a1 1 0 0 0 .861-1.508l-3.494-6.053a1 1 0 0 0 -.867-.504m0 10.065a3.515 3.515 0 0 0 -3.5 3.5c0 1.921 1.579 3.5 3.5 3.5s3.5-1.579 3.5-3.5-1.579-3.5-3.5-3.5m-3.5 9a1 1 0 0 0 -.861 1.508l3.494 6.052a1 1 0 0 0 1.734 0l3.494-6.052a1 1 0 0 0 -.86-1.508z" filter="url(#filter7078)" opacity=".2" transform="matrix(0 1 -1 0 978.43 -25.05)"/>
+  <path id="path6249" d="m30.064 15.5a1 1 0 0 0 -.503-.867l-6.053-3.494a1 1 0 0 0 -1.508.861v7a1 1 0 0 0 1.508.861l6.053-3.494a1 1 0 0 0 .503-.867m-10.064 0c0-1.921-1.579-3.5-3.5-3.5a3.515 3.515 0 0 0 -3.5 3.5c0 1.921 1.579 3.5 3.5 3.5s3.5-1.579 3.5-3.5m-9-3.5a1 1 0 0 0 -1.508-.861l-6.052 3.494a1 1 0 0 0 0 1.734l6.053 3.494a1 1 0 0 0 1.507-.861z" fill="#fff"/>
+  <path id="path6251" d="m29.064 15.5-6.064-3.5v7zm-19.064-3.5-6.064 3.5 6.064 3.5z" fill="#0d0d0d"/>
+  <circle id="circle6253" cx="-15.5" cy="-16.5" fill="#46a7ac" r="2.5" transform="matrix(0 -1 -1 0 0 0)"/>
+  <path id="hotspot" d="m-17.5 15.5h1v1h-1z" display="none" fill="#333" stroke-width="1.07568" transform="scale(-1 1)"/>
+</svg>
