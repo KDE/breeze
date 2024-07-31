@@ -2,9 +2,10 @@
 
 ## Editing the SVGs
 
-SVG cursors are individual ".svg" files in the "src/svg" directory.
+SVG cursors are individual ".svg" files in the "{Breeze,Breeze_Light}/src/svg" directory.
 
-The canvas size should be 32x32. 
+The canvas size should be 32x32. The corresponding nominal size (reported to apps,
+and shown in the cursor KCM) is 24.
 
 Each SVG must contain an invisible rectangle with the id `hotspot`. The top-left
 corner of the rectangle defines the hotspot of the cursor. It doesn't have to be
@@ -13,8 +14,17 @@ will be rounded to the floor.
 
 ## Building the Cursors
 
-1. Ensure you have inkscape and xcursorgen installed.
-2. "cd" into the "Breeze" directory and run "../src/build.sh" script.
+Because building cursors requires `Inkscape`, it's not integrated into the normal `cmake`
+build. After making changes to the SVGs, you should manually build the cursor theme:
 
-The script will first generate PNGs in the "build" directory, and then use xcursorgen
-to generate the X11 cursor theme in the "Breeze" directory.
+1. Ensure you have `Inkscape` and `xcursorgen` installed.
+2. "cd" into the "Breeze" and "Breeze_Light" directory and run "../src/build.sh" script.
+   The script will first use `Inkscape` to render SVGs into PNGs in the "build" directory,
+   then use `xcursorgen` to generate the X11 cursor theme in the "Breeze/Breeze" or
+   "Breeze_Light/Breeze_Light" directory.
+3. Commit changes in the theme directories to git.
+
+## SVG cursor format
+
+In addition to the standard XCursor format in "cursors" directory, the original SVGs are also
+deployed in the "cursors_scalable" directory. See "cursors_scalable.md" for the spec.
