@@ -4693,7 +4693,11 @@ bool Style::drawPanelItemViewItemPrimitive(const QStyleOption *option, QPainter 
     }
 
     // render
-    _helper->renderSelection(painter, rect, color);
+    if (widget && widget->inherits("KFilePlacesView")) {
+        _helper->renderRoundedSelection(painter, rect, color, palette.color(colorGroup, HighlightColor));
+    } else {
+        _helper->renderSelection(painter, rect, color);
+    }
 
     return true;
 }

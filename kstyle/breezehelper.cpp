@@ -835,6 +835,15 @@ void Helper::renderSelection(QPainter *painter, const QRectF &rect, const QColor
     painter->drawRect(rect);
 }
 
+void Helper::renderRoundedSelection(QPainter *painter, const QRectF &rect, const QColor &backgroundColor, const QColor &borderColor) const
+{
+    painter->setRenderHint(QPainter::Antialiasing);
+    painter->setPen(borderColor);
+    painter->setBrush(backgroundColor);
+    auto radius = Metrics::Frame_FrameRadius - (0.5 * PenWidth::Frame);
+    painter->drawRoundedRect(rect.adjusted(4.5, 2.5, -4.5, -2.5), radius, radius);
+}
+
 //______________________________________________________________________________
 void Helper::renderSeparator(QPainter *painter, const QRectF &rect, const QColor &color, bool vertical) const
 {

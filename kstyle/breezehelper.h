@@ -229,6 +229,9 @@ public:
     //* selection frame
     void renderSelection(QPainter *, const QRectF &, const QColor &) const;
 
+    //* rounded selection frame
+    void renderRoundedSelection(QPainter *, const QRectF &, const QColor &, const QColor &) const;
+
     //* separator
     void renderSeparator(QPainter *, const QRectF &, const QColor &, bool vertical = false) const;
 
