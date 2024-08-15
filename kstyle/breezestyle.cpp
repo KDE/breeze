@@ -1997,7 +1997,7 @@ void Style::drawToolsAreaBackgroundAndSeparator(QPainter *painter, const QWidget
 //____________________________________________________________________________
 bool Style::eventFilterDockWidget(QDockWidget *dockWidget, QEvent *event)
 {
-    if (event->type() == QEvent::Paint) {
+    if (event->type() == QEvent::Paint && dockWidget->isFloating()) {
         // create painter and clip
         QPainter painter(dockWidget);
         QPaintEvent *paintEvent = static_cast<QPaintEvent *>(event);
@@ -2012,9 +2012,7 @@ bool Style::eventFilterDockWidget(QDockWidget *dockWidget, QEvent *event)
         const auto rect(dockWidget->rect());
 
         // render
-        if (dockWidget->isFloating()) {
-            _helper->renderMenuFrame(&painter, rect, background, outline, false);
-        }
+        _helper->renderMenuFrame(&painter, rect, background, outline, false);
     }
 
     return false;
