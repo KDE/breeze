@@ -3850,6 +3850,9 @@ QSize Style::tabBarTabSizeFromContents(const QStyleOption *option, const QSize &
 
     // add margins
     QSize size(contentsSize);
+    if (!(tabOption->features & QStyleOptionTab::MeasuringMinimum)) {
+        size = size.expandedTo({Metrics::TabBar_TabNaturalSize, 0});
+    }
 
     if (verticalTabs) {
         size.rheight() += widthIncrement;

@@ -128,6 +128,7 @@ struct Metrics {
     // tabbar
     static constexpr int TabBar_TabMarginHeight = 4;
     static constexpr int TabBar_TabMarginWidth = 8;
+    static constexpr int TabBar_TabNaturalSize = 200;
     static constexpr int TabBar_TabMinWidth = 80;
     static constexpr int TabBar_TabMinHeight = 30;
     static constexpr int TabBar_StaticTabMinHeight = 34;
