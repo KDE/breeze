@@ -1,1 +1,7 @@
-{"filename": "pirate.svg", "hotspot_x": 15.0, "hotspot_y": 15.0}
+[
+    {
+        "filename": "pirate.svg",
+        "hotspot_x": 15,
+        "hotspot_y": 15
+    }
+]

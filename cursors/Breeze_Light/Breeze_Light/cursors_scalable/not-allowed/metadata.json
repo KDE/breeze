@@ -1,1 +1,7 @@
-{"filename": "not-allowed.svg", "hotspot_x": 16.0, "hotspot_y": 15.0}
+[
+    {
+        "filename": "not-allowed.svg",
+        "hotspot_x": 16,
+        "hotspot_y": 15
+    }
+]
