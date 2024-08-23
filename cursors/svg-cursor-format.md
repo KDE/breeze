@@ -36,7 +36,9 @@ There's no requirement on the canvas size of the SVG file. You must specify a co
 
 ## `metadata.json` format
 
-The `metadata.json` file contains metadata for the cursor. The format is as follows:
+The `metadata.json` file contains metadata for the cursor. The format is formally
+defined as a [JSON Schema](https://json-schema.org/) in
+[`svg-cursor-format.schema.json`](svg-cursor-format.schema.json).
 
 For static cursor:
 
