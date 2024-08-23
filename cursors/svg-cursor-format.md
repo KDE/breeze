@@ -39,7 +39,7 @@ The `metadata.json` file contains metadata for the cursor. The format is as foll
 
 For static cursor:
 
-```json
+```js
 [
 {
     "filename": "default.svg", // String. The filename of the SVG file.
@@ -51,7 +51,7 @@ For static cursor:
 
 For animated cursor:
 
-```json
+```js
 [
     { // frame 1
         "filename": "wait-01.svg", // String. The filename of the SVG file.
