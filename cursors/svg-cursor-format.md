@@ -44,7 +44,7 @@ For static cursor:
 {
     "filename": "default.svg", // String. The filename of the SVG file.
     "hotspot_x": 3.5, // Number. The x-coordinate of the hotspot when nominal size is 24.
-    "hotspot_y": 4.5, // Number. The y-coordinate of the hotspot when nominal size is 24.
+    "hotspot_y": 4.5 // Number. The y-coordinate of the hotspot when nominal size is 24.
 }
 ]
 ```
