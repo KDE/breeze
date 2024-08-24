@@ -3,138 +3,161 @@
         "filename": "wait-01.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-02.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-03.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-04.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-05.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-06.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-07.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-08.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-09.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-10.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-11.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-12.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-13.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-14.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-15.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-16.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-17.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-18.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-19.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-20.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-21.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-22.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     },
     {
         "filename": "wait-23.svg",
         "frametime": 30,
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     }
 ]

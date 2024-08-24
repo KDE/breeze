@@ -2,6 +2,7 @@
     {
         "filename": "openhand.svg",
         "hotspot_x": 16,
-        "hotspot_y": 16
+        "hotspot_y": 16,
+        "nominal_size": 24
     }
 ]

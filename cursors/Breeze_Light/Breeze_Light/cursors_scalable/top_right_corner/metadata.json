@@ -2,6 +2,7 @@
     {
         "filename": "top_right_corner.svg",
         "hotspot_x": 26.5,
-        "hotspot_y": 4.5
+        "hotspot_y": 4.5,
+        "nominal_size": 24
     }
 ]

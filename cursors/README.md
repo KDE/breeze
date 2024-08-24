@@ -4,8 +4,8 @@
 
 SVG cursors are individual ".svg" files in the "{Breeze,Breeze_Light}/src/svg" directory.
 
-The canvas size should be 32x32. The corresponding nominal size (reported to apps,
-and shown in the cursor KCM) is 24.
+The canvas size should correspond to a nominal size (reported to apps, and shown in the
+cursor KCM) of 24.
 
 Each SVG must contain an invisible rectangle with the id `hotspot`. The top-left
 corner of the rectangle defines the hotspot of the cursor. It doesn't have to be

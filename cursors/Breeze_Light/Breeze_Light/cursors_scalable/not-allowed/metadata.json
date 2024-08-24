@@ -2,6 +2,7 @@
     {
         "filename": "not-allowed.svg",
         "hotspot_x": 16,
-        "hotspot_y": 15
+        "hotspot_y": 15,
+        "nominal_size": 24
     }
 ]
