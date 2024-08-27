@@ -75,11 +75,11 @@ for svg_file in svg_files:
         if len(frames) == 0:
             filename = svg_file.name
             shutil.copyfile(svg_file, output_dir / filename)
-            json.dump({
-                "filename": filename,
-                "hotspot_x": hotspot_x,
-                "hotspot_y": hotspot_y
-                },
+            json.dump([{
+                    "filename": filename,
+                    "hotspot_x": hotspot_x,
+                    "hotspot_y": hotspot_y
+                }],
                 metadata)
         else:
             l = []
