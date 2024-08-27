@@ -60,7 +60,7 @@ For animated cursor:
         "nominal_size": 24, // Number. The nominal size of the cursor.
         "hotspot_x": 3.5, // Number. The x-coordinate of the hotspot in the nominal size.
         "hotspot_y": 4.5, // Number. The y-coordinate of the hotspot in the nominal size.
-        "frametime": 30 // Number. The duration of the frame in milliseconds.
+        "delay": 30 // Number. The animation delay to the next frame in milliseconds.
     },
     { // frame 2
         "filename": "wait-02.svg", // String. The filename of the SVG file.
