@@ -1,9 +1,0 @@
-<svg id="svg11024" height="32" width="32" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <filter id="filter7078" color-interpolation-filters="sRGB">
-    <feGaussianBlur id="feGaussianBlur7080" stdDeviation=".657"/>
-  </filter>
-  <path id="path44021-5" d="m15.5 4c-.373 0-.746.22-.906.563l-3.028 6.054a.85.85 0 0 0 -.076.383 1 1 0 0 0 1 1h1.51v10.5a1.5 1.5 0 0 0 3 0v-10.5h1.51a1 1 0 0 0 1-1 .85.85 0 0 0 -.076-.383l-3.028-6.055a1.01 1.01 0 0 0 -.906-.562" filter="url(#filter7078)" opacity=".2"/>
-  <path id="path24882-3" d="m15.5 3c-.373 0-.746.22-.906.563l-3.028 6.054a.85.85 0 0 0 -.076.383 1 1 0 0 0 1 1h1.51v10.5a1.5 1.5 0 0 0 3 0v-10.5h1.51a1 1 0 0 0 1-1 .85.85 0 0 0 -.076-.383l-3.028-6.055a1.01 1.01 0 0 0 -.906-.562" fill="#fff"/>
-  <path id="path24884-5" d="m15.5 4.25-3 5.75h2.25v11a.75.75 0 1 0 1.5-.037v-10.963h2.25z"/>
-  <path id="hotspot" d="m4.5-16.5h1v1h-1z" display="none" fill="#333" stroke-width="1.07568" transform="rotate(90)"/>
-</svg>
