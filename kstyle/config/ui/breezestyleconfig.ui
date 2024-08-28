@@ -261,17 +261,17 @@
         <widget class="QComboBox" name="_scrollBarSubLineButtons">
          <item>
           <property name="text">
-           <string>No Buttons</string>
+           <string>No buttons</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>One Button</string>
+           <string>One button</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Two Buttons</string>
+           <string>Two buttons</string>
           </property>
          </item>
         </widget>
@@ -280,17 +280,17 @@
         <widget class="QComboBox" name="_scrollBarAddLineButtons">
          <item>
           <property name="text">
-           <string>No Buttons</string>
+           <string>No buttons</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>One Button</string>
+           <string>One button</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Two Buttons</string>
+           <string>Two buttons</string>
           </property>
          </item>
         </widget>
