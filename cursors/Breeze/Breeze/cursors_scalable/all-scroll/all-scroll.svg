@@ -7,6 +7,5 @@
   <path id="path19725" d="m15.5 2.935-3.5 6.065h7zm-6.5 9.065-6.064 3.5 6.064 3.5zm13 0v7l6.064-3.5zm-10 10 3.5 6.064 3.5-6.064z" fill="#0d0d0d"/>
   <g transform="scale(-1 1)">
     <circle id="circle19727" cx="-15.5" cy="15.5" fill="#d4497f" r="2.5"/>
-    <path id="hotspot" d="m-16.5 15.5h1v1h-1z" display="none" fill="#333" stroke-width="1.18965"/>
   </g>
 </svg>

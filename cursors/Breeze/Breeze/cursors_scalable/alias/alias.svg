@@ -13,5 +13,4 @@
     <path id="path4169-06-0" d="m239.938 808.375c-2.774.282-4.938 2.652-4.938 5.5a5.5 5.5 0 1 0 5.5-5.5c-.19 0-.378-.019-.562 0" fill="#18c087"/>
     <path id="path6742" d="m238 818.362v-2c0-1 1-1 1-1h2v2.5l4.5-4-4.5-4v2.5h-2c-2 0-4 4-1 6" fill="#fff"/>
   </g>
-  <path id="hotspot" d="m4-5h1v1h-1z" display="none" transform="rotate(90)"/>
 </svg>
