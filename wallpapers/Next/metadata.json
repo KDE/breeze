@@ -3,11 +3,33 @@
         "Authors": [
             {
                 "Email": "krystian.zajdel@gmail.com",
-                "Name": "Krystian Zajdel"
+                "Name": "Krystian Zajdel",
+                "Name[ca]": "Krystian Zajdel",
+                "Name[de]": "Krystian Zajdel",
+                "Name[es]": "Krystian Zajdel",
+                "Name[he]": "כריסטיאן זיידל",
+                "Name[ka]": "Krystian Zajdel",
+                "Name[nl]": "Krystian Zajdel",
+                "Name[sl]": "Krystian Zajdel",
+                "Name[sv]": "Krystian Zajdel",
+                "Name[tr]": "Krystian Zajdel",
+                "Name[uk]": "Krystian Zajdel",
+                "Name[x-test]": "xxKrystian Zajdelxx"
             }
         ],
         "Id": "Next",
         "License": "CC-BY-SA-4.0",
-        "Name": "Nexus"
+        "Name": "Nexus",
+        "Name[ca]": "Nexus",
+        "Name[de]": "Nexus",
+        "Name[es]": "Nexus",
+        "Name[he]": "נקסוס",
+        "Name[ka]": "Nexus",
+        "Name[nl]": "Nexus",
+        "Name[sl]": "Nexus",
+        "Name[sv]": "Nexus",
+        "Name[tr]": "Nexus",
+        "Name[uk]": "Nexus",
+        "Name[x-test]": "xxNexusxx"
     }
 }
