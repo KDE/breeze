@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-29 00:40+0000\n"
-"PO-Revision-Date: 2024-04-23 00:35+0300\n"
+"PO-Revision-Date: 2024-08-29 13:55+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.07.70\n"
+"X-Generator: Lokalize 24.11.70\n"
 
 #: main.cpp:25 main.cpp:29
 #, kde-format
@@ -153,26 +153,23 @@ msgstr "&Yukarı ok düğmesi türü:"
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
 #: ui/breezestyleconfig.ui:264 ui/breezestyleconfig.ui:283
-#, fuzzy, kde-format
-#| msgid "No Buttons"
+#, kde-format
 msgid "No buttons"
-msgstr "Düğme Yok"
+msgstr "Düğme yok"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
 #: ui/breezestyleconfig.ui:269 ui/breezestyleconfig.ui:288
-#, fuzzy, kde-format
-#| msgid "One Button"
+#, kde-format
 msgid "One button"
-msgstr "Tek Düğme"
+msgstr "Tek düğme"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
 #: ui/breezestyleconfig.ui:274 ui/breezestyleconfig.ui:293
-#, fuzzy, kde-format
-#| msgid "Two Buttons"
+#, kde-format
 msgid "Two buttons"
-msgstr "İki Düğme"
+msgstr "İki düğme"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_5)
 #: ui/breezestyleconfig.ui:315
