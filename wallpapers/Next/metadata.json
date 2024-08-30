@@ -7,6 +7,7 @@
                 "Name[ca]": "Krystian Zajdel",
                 "Name[de]": "Krystian Zajdel",
                 "Name[es]": "Krystian Zajdel",
+                "Name[gl]": "Krystian Zajdel",
                 "Name[he]": "כריסטיאן זיידל",
                 "Name[ka]": "Krystian Zajdel",
                 "Name[nl]": "Krystian Zajdel",
@@ -14,7 +15,8 @@
                 "Name[sv]": "Krystian Zajdel",
                 "Name[tr]": "Krystian Zajdel",
                 "Name[uk]": "Krystian Zajdel",
-                "Name[x-test]": "xxKrystian Zajdelxx"
+                "Name[x-test]": "xxKrystian Zajdelxx",
+                "Name[zh_CN]": "Krystian Zajdel"
             }
         ],
         "Id": "Next",
@@ -23,6 +25,7 @@
         "Name[ca]": "Nexus",
         "Name[de]": "Nexus",
         "Name[es]": "Nexus",
+        "Name[gl]": "Nexo",
         "Name[he]": "נקסוס",
         "Name[ka]": "Nexus",
         "Name[nl]": "Nexus",
@@ -30,6 +33,7 @@
         "Name[sv]": "Nexus",
         "Name[tr]": "Nexus",
         "Name[uk]": "Nexus",
-        "Name[x-test]": "xxNexusxx"
+        "Name[x-test]": "xxNexusxx",
+        "Name[zh_CN]": "Nexus 纽带"
     }
 }
