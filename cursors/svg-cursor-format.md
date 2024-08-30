@@ -25,6 +25,8 @@ breeze_cursors/
 Each cursor is in its own sub-directory, named after the cursor name. The sub-directory
 contains one `metadata.json` file and one SVG file (or multiple SVG files for an animated cursor).
 
+Cursor names should follow the [W3C CSS specification](https://w3c.github.io/csswg-drafts/css-ui/#cursor).
+
 Aliases are symlinks to the original cursor directory.
 
 ## SVG format
