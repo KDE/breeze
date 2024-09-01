@@ -153,21 +153,21 @@ msgstr "顶部箭头按钮类型(&T)："
 #: ui/breezestyleconfig.ui:264 ui/breezestyleconfig.ui:283
 #, kde-format
 msgid "No buttons"
-msgstr ""
+msgstr "无按钮"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
 #: ui/breezestyleconfig.ui:269 ui/breezestyleconfig.ui:288
 #, kde-format
 msgid "One button"
-msgstr ""
+msgstr "一个按钮"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
 #: ui/breezestyleconfig.ui:274 ui/breezestyleconfig.ui:293
 #, kde-format
 msgid "Two buttons"
-msgstr ""
+msgstr "两个按钮"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_5)
 #: ui/breezestyleconfig.ui:315
