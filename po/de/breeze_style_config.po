@@ -1,3 +1,4 @@
+# SPDX-FileCopyrightText: 2024 Johannes Obermayr <johannesobermayr@gmx.de>
 # Burkhard Lück <lueck@hube-lueck.de>, 2014, 2015, 2016, 2017, 2021.
 # Frederik Schwarzer <schwarzer@kde.org>, 2018, 2022.
 # Frank Steinmetzger <dev-kde@felsenfleischer.de>, 2022.
@@ -14,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 24.11.70\n"
 
 #: main.cpp:25 main.cpp:29
 #, kde-format
