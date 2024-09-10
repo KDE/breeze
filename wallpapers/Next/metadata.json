@@ -28,7 +28,8 @@
                 "Name[tr]": "Krystian Zajdel",
                 "Name[uk]": "Krystian Zajdel",
                 "Name[x-test]": "xxKrystian Zajdelxx",
-                "Name[zh_CN]": "Krystian Zajdel"
+                "Name[zh_CN]": "Krystian Zajdel",
+                "Name[zh_TW]": "Krystian Zajdel"
             }
         ],
         "Id": "Next",
@@ -58,6 +59,7 @@
         "Name[tr]": "Nexus",
         "Name[uk]": "Nexus",
         "Name[x-test]": "xxNexusxx",
-        "Name[zh_CN]": "Nexus 纽带"
+        "Name[zh_CN]": "Nexus 纽带",
+        "Name[zh_TW]": "Nexus"
     }
 }
