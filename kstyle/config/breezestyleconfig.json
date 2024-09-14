@@ -76,6 +76,7 @@
         ]
     },
     "X-KDE-Keywords": "breeze,widget,style",
+    "X-KDE-Keywords[x-test]": "xxbreezexx,xxwidgetxx,xxstylexx",
     "X-KDE-ParentApp": "kcontrol",
     "X-KDE-Weight": 50
 }
