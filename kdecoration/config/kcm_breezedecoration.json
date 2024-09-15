@@ -76,6 +76,11 @@
         ]
     },
     "X-KDE-Keywords": "breeze,decoration",
+    "X-KDE-Keywords[ca]": "brisa,decoració",
+    "X-KDE-Keywords[es]": "brisa,decoración",
+    "X-KDE-Keywords[nl]": "breeze,decoratie",
+    "X-KDE-Keywords[sl]": "sapica,dekoracija",
+    "X-KDE-Keywords[sv]": "breeze,dekoration",
     "X-KDE-Keywords[x-test]": "xxbreezexx,xxdecorationxx",
     "X-KDE-ParentApp": "kcontrol",
     "X-KDE-Weight": 60
