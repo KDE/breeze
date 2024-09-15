@@ -88,6 +88,11 @@
         ]
     },
     "X-KDE-Keywords": "breeze,widget,style",
+    "X-KDE-Keywords[ca]": "brisa,giny,estil",
+    "X-KDE-Keywords[ru]": "breeze,widget,style,виджет,стиль",
+    "X-KDE-Keywords[sl]": "sapica,gradnik,slog",
+    "X-KDE-Keywords[sv]": "breeze,grafisk komponent,stil",
+    "X-KDE-Keywords[tr]": "esinti,breeze,araç takımı,biçem,stil",
     "X-KDE-ParentApp": "kcontrol",
     "X-KDE-Weight": 50
 }
