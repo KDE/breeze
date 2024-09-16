@@ -155,24 +155,21 @@ msgstr "Τύπος για το κουμπί &πάνω βέλους:"
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
 #: ui/breezestyleconfig.ui:264 ui/breezestyleconfig.ui:283
-#, fuzzy, kde-format
-#| msgid "No Buttons"
+#, kde-format
 msgid "No buttons"
 msgstr "Χωρίς κουμπιά"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
 #: ui/breezestyleconfig.ui:269 ui/breezestyleconfig.ui:288
-#, fuzzy, kde-format
-#| msgid "One Button"
+#, kde-format
 msgid "One button"
 msgstr "Ένα κουμπί"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
 #: ui/breezestyleconfig.ui:274 ui/breezestyleconfig.ui:293
-#, fuzzy, kde-format
-#| msgid "Two Buttons"
+#, kde-format
 msgid "Two buttons"
 msgstr "Δύο κουμπιά"
 
