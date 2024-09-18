@@ -90,11 +90,13 @@
     "X-KDE-Keywords": "breeze,widget,style",
     "X-KDE-Keywords[ca@valencia]": "brisa,giny,estil",
     "X-KDE-Keywords[ca]": "brisa,giny,estil",
+    "X-KDE-Keywords[cs]": "breeze,widget,styl",
     "X-KDE-Keywords[en_GB]": "breeze,widget,style",
     "X-KDE-Keywords[es]": "brisa,widget,estilo",
     "X-KDE-Keywords[fr]": "breeze, composant graphique, style",
     "X-KDE-Keywords[gl]": "breeze,trebello,trebello,estilo",
     "X-KDE-Keywords[he]": "בריזה,וידג׳ט,סגנון",
+    "X-KDE-Keywords[ia]": "breeze,widget,style",
     "X-KDE-Keywords[it]": "brezza,oggetto,stile",
     "X-KDE-Keywords[ka]": "breeze,widget,style,ვიჯეტი,სტილი",
     "X-KDE-Keywords[lt]": "breeze,valdiklių,valdikliu,valdikliaus,valdiklio,stilius",
@@ -103,6 +105,7 @@
     "X-KDE-Keywords[sl]": "sapica,gradnik,slog",
     "X-KDE-Keywords[sv]": "breeze,grafisk komponent,stil",
     "X-KDE-Keywords[tr]": "esinti,breeze,araç takımı,biçem,stil",
+    "X-KDE-Keywords[zh_TW]": "breeze,元件,風格,樣式",
     "X-KDE-ParentApp": "kcontrol",
     "X-KDE-Weight": 50
 }

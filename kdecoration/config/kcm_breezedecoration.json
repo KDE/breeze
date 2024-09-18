@@ -90,11 +90,13 @@
     "X-KDE-Keywords": "breeze,decoration",
     "X-KDE-Keywords[ca@valencia]": "brisa,decoració",
     "X-KDE-Keywords[ca]": "brisa,decoració",
+    "X-KDE-Keywords[cs]": "breeze,dekorace",
     "X-KDE-Keywords[en_GB]": "breeze,decoration",
     "X-KDE-Keywords[es]": "brisa,decoración de ventanas",
     "X-KDE-Keywords[fr]": "breeze, décoration",
     "X-KDE-Keywords[gl]": "breeze,decoración",
     "X-KDE-Keywords[he]": "בריזה,עיטור",
+    "X-KDE-Keywords[ia]": "breeze,decoration",
     "X-KDE-Keywords[it]": "brezza,decorazione",
     "X-KDE-Keywords[ka]": "breeze,decoration",
     "X-KDE-Keywords[lt]": "breeze,dekoracijos,dekoracija",
@@ -103,6 +105,7 @@
     "X-KDE-Keywords[sl]": "sapica,dekoracija",
     "X-KDE-Keywords[sv]": "breeze,dekoration",
     "X-KDE-Keywords[tr]": "breeze,esinti,dekorasyon",
+    "X-KDE-Keywords[zh_TW]": "breeze,裝飾",
     "X-KDE-ParentApp": "kcontrol",
     "X-KDE-Weight": 60
 }
