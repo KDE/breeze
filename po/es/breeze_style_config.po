@@ -1,6 +1,6 @@
 # Spanish translations for breeze_style_config.po package.
 # Copyright (C) 2014 This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the breeze package.
 #
 # Automatically generated, 2014.
 # SPDX-FileCopyrightText: 2014, 2015, 2016, 2017, 2018, 2022, 2024 Eloy Cuadra <ecuadra@eloihr.net>
