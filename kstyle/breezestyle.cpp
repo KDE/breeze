@@ -8238,7 +8238,7 @@ void Style::setTranslucentBackground(QWidget *widget) const
 {
     widget->setAttribute(Qt::WA_TranslucentBackground);
 
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN
     // FramelessWindowHint is needed on windows to make WA_TranslucentBackground work properly
     widget->setWindowFlags(widget->windowFlags() | Qt::FramelessWindowHint);
 #endif
