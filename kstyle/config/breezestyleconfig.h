@@ -54,6 +54,8 @@ protected Q_SLOTS:
 
     void kPageWidgetChanged(KPageWidgetItem *current, KPageWidgetItem *before);
 
+    void setFrameCustomCornerRadiusVisible();
+
     //* enable/disable _autoHideArrows checkbox depending on if scrollbar arrow button type is selected
     void setEnabledAutoHideArrows();
 
