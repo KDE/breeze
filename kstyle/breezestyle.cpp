@@ -8097,14 +8097,16 @@ bool Style::drawScrollBarComplexControl(const QStyleOptionComplex *option, QPain
         opacity = 1;
     }
 
-    QRect separatorRect;
-    if (option->state & State_Horizontal) {
-        separatorRect = QRect(0, 0, option->rect.width(), PenWidth::Frame);
-    } else {
-        separatorRect = alignedRect(option->direction, Qt::AlignLeft, QSize(PenWidth::Frame, option->rect.height()), option->rect);
-    }
+    if (StyleConfigData::scrollBarSeparator()) {
+        QRect separatorRect;
+        if (option->state & State_Horizontal) {
+            separatorRect = QRect(0, 0, option->rect.width(), PenWidth::Frame);
+        } else {
+            separatorRect = alignedRect(option->direction, Qt::AlignLeft, QSize(PenWidth::Frame, option->rect.height()), option->rect);
+        }
 
-    _helper->renderScrollBarBorder(painter, separatorRect, _helper->alphaColor(option->palette.color(QPalette::Text), Metrics::Bias_Default));
+        _helper->renderScrollBarBorder(painter, separatorRect, _helper->alphaColor(option->palette.color(QPalette::Text), Metrics::Bias_Default));
+    }
 
     // render full groove directly, rather than using the addPage and subPage control element methods
     if ((!StyleConfigData::animationsEnabled() || mouseOver || animated) && option->subControls & SC_ScrollBarGroove) {

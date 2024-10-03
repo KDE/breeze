@@ -52,6 +52,10 @@
 
     <!-- scrollbar -->
     
+    <entry name="ScrollBarSeparator" type="Bool">
+      <default>false</default>
+    </entry>
+
     <entry name="ScrollBarTopBottomMargins" type = "Int">
        <default>4</default>
        <min>0</min>

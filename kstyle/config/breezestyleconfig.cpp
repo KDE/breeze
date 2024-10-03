@@ -86,6 +86,7 @@ StyleConfig::StyleConfig(QWidget *parent)
     connect(_sliderDrawTickMarks, &QAbstractButton::toggled, this, &StyleConfig::updateChanged);
     connect(_splitterProxyEnabled, &QAbstractButton::toggled, this, &StyleConfig::updateChanged);
     connect(_mnemonicsMode, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()));
+    connect(_scrollBarSeparator, &QAbstractButton::toggled, this, &StyleConfig::updateChanged);
     connect(_scrollBarTopBottomMargins, SIGNAL(valueChanged(int)), SLOT(updateChanged()));
     connect(_scrollBarAddLineButtons, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()));
     connect(_scrollBarSubLineButtons, SIGNAL(currentIndexChanged(int)), SLOT(updateChanged()));
@@ -122,6 +123,7 @@ void StyleConfig::save()
     StyleConfigData::setSliderDrawTickMarks(_sliderDrawTickMarks->isChecked());
     StyleConfigData::setSplitterProxyEnabled(_splitterProxyEnabled->isChecked());
     StyleConfigData::setMnemonicsMode(_mnemonicsMode->currentIndex());
+    StyleConfigData::setScrollBarSeparator(_scrollBarSeparator->isChecked());
     StyleConfigData::setScrollBarTopBottomMargins(_scrollBarTopBottomMargins->value());
     StyleConfigData::setScrollBarAddLineButtons(_scrollBarAddLineButtons->currentIndex());
     StyleConfigData::setScrollBarSubLineButtons(_scrollBarSubLineButtons->currentIndex());
@@ -208,6 +210,8 @@ void StyleConfig::updateChanged()
         modified = true;
     else if (_autoHideArrows->isChecked() != StyleConfigData::scrollBarAutoHideArrows())
         modified = true;
+    else if (_scrollBarSeparator->isChecked() != StyleConfigData::scrollBarSeparator())
+        modified = true;
     else if (_scrollBarTopBottomMargins->value() != StyleConfigData::scrollBarTopBottomMargins())
         modified = true;
     else if (_scrollBarAddLineButtons->currentIndex() != StyleConfigData::scrollBarAddLineButtons())
@@ -256,6 +260,7 @@ void StyleConfig::load()
     _sliderDrawTickMarks->setChecked(StyleConfigData::sliderDrawTickMarks());
     _mnemonicsMode->setCurrentIndex(StyleConfigData::mnemonicsMode());
     _splitterProxyEnabled->setChecked(StyleConfigData::splitterProxyEnabled());
+    _scrollBarSeparator->setChecked(StyleConfigData::scrollBarSeparator());
     _scrollBarTopBottomMargins->setValue(StyleConfigData::scrollBarTopBottomMargins());
     _scrollBarAddLineButtons->setCurrentIndex(StyleConfigData::scrollBarAddLineButtons());
     _scrollBarSubLineButtons->setCurrentIndex(StyleConfigData::scrollBarSubLineButtons());
