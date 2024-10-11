@@ -38,6 +38,8 @@ private:
     AppListener *_listener;
     bool _colorSchemeHasHeaderColor;
 
+    void recreateConfigWatcher(const QString &path);
+
     friend class AppListener;
 
 protected:

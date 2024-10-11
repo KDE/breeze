@@ -18,19 +18,27 @@ namespace Breeze
 ToolsAreaManager::ToolsAreaManager()
     : QObject()
 {
+    QString path;
     if (qApp && qApp->property(colorProperty).isValid()) {
-        auto path = qApp->property(colorProperty).toString();
-        _config = KSharedConfig::openConfig(path);
-    } else {
-        _config = KSharedConfig::openConfig();
+        path = qApp->property(colorProperty).toString();
     }
-    _watcher = KConfigWatcher::create(_config);
-    connect(_watcher.data(), &KConfigWatcher::configChanged, this, &ToolsAreaManager::configUpdated);
+    recreateConfigWatcher(path);
     configUpdated();
 }
 
 ToolsAreaManager::~ToolsAreaManager()
 {
+}
+
+void ToolsAreaManager::recreateConfigWatcher(const QString &path)
+{
+    _config = KSharedConfig::openConfig(path);
+    if (!path.startsWith(QLatin1Char('/'))) {
+        _watcher = KConfigWatcher::create(_config);
+        connect(_watcher.data(), &KConfigWatcher::configChanged, this, &ToolsAreaManager::configUpdated);
+    } else {
+        _watcher.reset();
+    }
 }
 
 template<class T1, class T2>
@@ -50,9 +58,7 @@ void ToolsAreaManager::registerApplication(QApplication *application)
     _listener->manager = this;
     if (application->property(colorProperty).isValid()) {
         auto path = application->property(colorProperty).toString();
-        _config = KSharedConfig::openConfig(path);
-        _watcher = KConfigWatcher::create(_config);
-        connect(_watcher.data(), &KConfigWatcher::configChanged, this, &ToolsAreaManager::configUpdated);
+        recreateConfigWatcher(path);
     }
     application->installEventFilter(_listener);
     configUpdated();
@@ -149,14 +155,11 @@ bool AppListener::eventFilter(QObject *watched, QEvent *event)
         }
         auto ev = static_cast<QDynamicPropertyChangeEvent *>(event);
         if (ev->propertyName() == colorProperty) {
+            QString path;
             if (qApp && qApp->property(colorProperty).isValid()) {
                 auto path = qApp->property(colorProperty).toString();
-                manager->_config = KSharedConfig::openConfig(path);
-            } else {
-                manager->_config = KSharedConfig::openConfig();
             }
-            manager->_watcher = KConfigWatcher::create(manager->_config);
-            connect(manager->_watcher.data(), &KConfigWatcher::configChanged, manager, &ToolsAreaManager::configUpdated);
+            manager->recreateConfigWatcher(path);
             manager->configUpdated();
         }
     }
