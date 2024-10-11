@@ -488,8 +488,8 @@ void Decoration::updateButtonsGeometry()
 
     // adjust button position
     const auto buttonList = m_leftButtons->buttons() + m_rightButtons->buttons();
-    for (const QPointer<KDecoration2::DecorationButton> &button : buttonList) {
-        auto btn = static_cast<Button *>(button.get());
+    for (KDecoration2::DecorationButton *button : buttonList) {
+        auto btn = static_cast<Button *>(button);
 
         const int verticalOffset = (isTopEdge() ? s->smallSpacing() * Metrics::TitleBar_TopMargin : 0);
 
@@ -682,7 +682,7 @@ void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
     } else {
         painter->setClipRect(backRect, Qt::IntersectClip);
 
-        auto drawThe = [=](const QRect &r) {
+        auto drawThe = [this, painter](const QRect &r) {
             // the rect is made a little bit larger to be able to clip away the rounded corners at the bottom and sides
             painter->drawRoundedRect(r.adjusted(isLeftEdge() ? -m_scaledCornerRadius : 0,
                                                 isTopEdge() ? -m_scaledCornerRadius : 0,
