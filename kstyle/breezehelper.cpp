@@ -29,7 +29,6 @@
 #include <memory>
 
 #include <QApplication>
-#include <QDBusConnection>
 #include <QDialog>
 #include <QDockWidget>
 #include <QFileInfo>

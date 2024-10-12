@@ -21,7 +21,6 @@
 #include "breezetoolsareamanager.h"
 #include "breezewidgetexplorer.h"
 #include "breezewindowmanager.h"
-#include "dbusupdatenotifier.h"
 #include "decorationcolors.h"
 
 #include <KColorUtils>
@@ -32,7 +31,6 @@
 #include <QBitmap>
 #include <QCheckBox>
 #include <QComboBox>
-#include <QDBusConnection>
 #include <QDial>
 #include <QDialog>
 #include <QDialogButtonBox>
@@ -61,6 +59,11 @@
 #include <QTreeView>
 #include <QWidgetAction>
 #include <memory>
+
+#if HAVE_QTDBUS
+#include "dbusupdatenotifier.h"
+#include <QDBusConnection>
+#endif
 
 #if BREEZE_HAVE_QTQUICK
 #include <KCoreAddons>
@@ -276,6 +279,7 @@ Style::Style()
     , CE_CapacityBar(newControlElement(QStringLiteral("CE_CapacityBar")))
 #endif
 {
+#if HAVE_QTDBUS
     // use DBus connection to update on breeze configuration change
     auto dbus = QDBusConnection::sessionBus();
     dbus.connect(QString(),
@@ -304,7 +308,7 @@ Style::Style()
     connect(&g_dBusUpdateNotifier, &DBusUpdateNotifier::decorationSettingsUpdate, this, &Style::generateDecorationColorsOnDecorationColorSettingsUpdate);
 
     // dbus.connect(QString(), QStringLiteral("/KWin"), QStringLiteral("org.kde.KWin"), QStringLiteral("reloadConfig"), this, SLOT(configurationChanged()));
-
+#endif
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     qApp->installEventFilter(this);
@@ -316,6 +320,7 @@ Style::Style()
     // need to be reset when the system palette changes
     loadConfiguration();
 
+#if HAVE_QTDBUS
     connect(&g_dBusUpdateNotifier,
             &DBusUpdateNotifier::systemIconsUpdate,
             this,
@@ -324,6 +329,7 @@ Style::Style()
                     loadConfiguration();
                 }
             });
+#endif
 }
 
 //______________________________________________________________
