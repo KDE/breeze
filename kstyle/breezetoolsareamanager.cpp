@@ -157,7 +157,7 @@ bool AppListener::eventFilter(QObject *watched, QEvent *event)
         if (ev->propertyName() == colorProperty) {
             QString path;
             if (qApp && qApp->property(colorProperty).isValid()) {
-                auto path = qApp->property(colorProperty).toString();
+                path = qApp->property(colorProperty).toString();
             }
             manager->recreateConfigWatcher(path);
             manager->configUpdated();
