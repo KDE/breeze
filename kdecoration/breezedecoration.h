@@ -10,15 +10,15 @@
 #include "breeze.h"
 #include "breezesettings.h"
 
-#include <KDecoration2/DecoratedClient>
-#include <KDecoration2/Decoration>
-#include <KDecoration2/DecorationSettings>
+#include <KDecoration3/DecoratedClient>
+#include <KDecoration3/Decoration>
+#include <KDecoration3/DecorationSettings>
 
 #include <QPalette>
 #include <QVariant>
 #include <QVariantAnimation>
 
-namespace KDecoration2
+namespace KDecoration3
 {
 class DecorationButton;
 class DecorationButtonGroup;
@@ -26,7 +26,7 @@ class DecorationButtonGroup;
 
 namespace Breeze
 {
-class Decoration : public KDecoration2::Decoration
+class Decoration : public KDecoration3::Decoration
 {
     Q_OBJECT
 
@@ -114,7 +114,7 @@ private:
     void createButtons();
     void paintTitleBar(QPainter *painter, const QRect &repaintRegion);
     void updateShadow();
-    std::shared_ptr<KDecoration2::DecorationShadow> createShadowObject(const float strengthScale);
+    std::shared_ptr<KDecoration3::DecorationShadow> createShadowObject(const float strengthScale);
     void setScaledCornerRadius();
 
     //*@name border size
@@ -128,8 +128,8 @@ private:
     inline bool outlinesEnabled() const;
 
     InternalSettingsPtr m_internalSettings;
-    KDecoration2::DecorationButtonGroup *m_leftButtons = nullptr;
-    KDecoration2::DecorationButtonGroup *m_rightButtons = nullptr;
+    KDecoration3::DecorationButtonGroup *m_leftButtons = nullptr;
+    KDecoration3::DecorationButtonGroup *m_rightButtons = nullptr;
 
     //* active state change animation
     QVariantAnimation *m_animation;
@@ -150,7 +150,7 @@ bool Decoration::hasBorders() const
     if (m_internalSettings && m_internalSettings->mask() & BorderSize) {
         return m_internalSettings->borderSize() > InternalSettings::BorderNoSides;
     } else {
-        return settings()->borderSize() > KDecoration2::BorderSize::NoSides;
+        return settings()->borderSize() > KDecoration3::BorderSize::NoSides;
     }
 }
 
@@ -159,7 +159,7 @@ bool Decoration::hasNoBorders() const
     if (m_internalSettings && m_internalSettings->mask() & BorderSize) {
         return m_internalSettings->borderSize() == InternalSettings::BorderNone;
     } else {
-        return settings()->borderSize() == KDecoration2::BorderSize::None;
+        return settings()->borderSize() == KDecoration3::BorderSize::None;
     }
 }
 
@@ -168,7 +168,7 @@ bool Decoration::hasNoSideBorders() const
     if (m_internalSettings && m_internalSettings->mask() & BorderSize) {
         return m_internalSettings->borderSize() == InternalSettings::BorderNoSides;
     } else {
-        return settings()->borderSize() == KDecoration2::BorderSize::NoSides;
+        return settings()->borderSize() == KDecoration3::BorderSize::NoSides;
     }
 }
 

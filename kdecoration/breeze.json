@@ -110,7 +110,7 @@
         "Name[zh_TW]": "Breeze"
     },
     "X-KDE-ConfigModule": "kcm_breezedecoration",
-    "org.kde.kdecoration2": {
+    "org.kde.kdecoration3": {
         "blur": false,
         "recommendedBorderSize": "None"
     }
