@@ -174,24 +174,26 @@ void Decoration::setOpacity(qreal value)
 //________________________________________________________________
 QColor Decoration::titleBarColor() const
 {
-    const auto c = client();
     if (hideTitleBar()) {
-        return c->color(ColorGroup::Inactive, ColorRole::TitleBar);
+        return window()->color(ColorGroup::Inactive, ColorRole::TitleBar);
     } else if (m_animation->state() == QAbstractAnimation::Running) {
-        return KColorUtils::mix(c->color(ColorGroup::Inactive, ColorRole::TitleBar), c->color(ColorGroup::Active, ColorRole::TitleBar), m_opacity);
+        return KColorUtils::mix(window()->color(ColorGroup::Inactive, ColorRole::TitleBar),
+                                window()->color(ColorGroup::Active, ColorRole::TitleBar),
+                                m_opacity);
     } else {
-        return c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::TitleBar);
+        return window()->color(window()->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::TitleBar);
     }
 }
 
 //________________________________________________________________
 QColor Decoration::fontColor() const
 {
-    const auto c = client();
     if (m_animation->state() == QAbstractAnimation::Running) {
-        return KColorUtils::mix(c->color(ColorGroup::Inactive, ColorRole::Foreground), c->color(ColorGroup::Active, ColorRole::Foreground), m_opacity);
+        return KColorUtils::mix(window()->color(ColorGroup::Inactive, ColorRole::Foreground),
+                                window()->color(ColorGroup::Active, ColorRole::Foreground),
+                                m_opacity);
     } else {
-        return c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Foreground);
+        return window()->color(window()->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Foreground);
     }
 }
 
@@ -202,8 +204,6 @@ bool Decoration::init()
 void Decoration::init()
 #endif
 {
-    const auto c = client();
-
     // active state change animation
     // It is important start and end value are of the same type, hence 0.0 and not just 0
     m_animation->setStartValue(0.0);
@@ -273,25 +273,25 @@ void Decoration::init()
     connect(s.get(), &KDecoration3::DecorationSettings::reconfigured, SettingsProvider::self(), &SettingsProvider::reconfigure, Qt::UniqueConnection);
     connect(s.get(), &KDecoration3::DecorationSettings::reconfigured, this, &Decoration::updateButtonsGeometryDelayed);
 
-    connect(c, &KDecoration3::DecoratedClient::adjacentScreenEdgesChanged, this, &Decoration::recalculateBorders);
-    connect(c, &KDecoration3::DecoratedClient::maximizedHorizontallyChanged, this, &Decoration::recalculateBorders);
-    connect(c, &KDecoration3::DecoratedClient::maximizedVerticallyChanged, this, &Decoration::recalculateBorders);
-    connect(c, &KDecoration3::DecoratedClient::shadedChanged, this, &Decoration::recalculateBorders);
-    connect(c, &KDecoration3::DecoratedClient::captionChanged, this, [this]() {
+    connect(window(), &KDecoration3::DecoratedWindow::adjacentScreenEdgesChanged, this, &Decoration::recalculateBorders);
+    connect(window(), &KDecoration3::DecoratedWindow::maximizedHorizontallyChanged, this, &Decoration::recalculateBorders);
+    connect(window(), &KDecoration3::DecoratedWindow::maximizedVerticallyChanged, this, &Decoration::recalculateBorders);
+    connect(window(), &KDecoration3::DecoratedWindow::shadedChanged, this, &Decoration::recalculateBorders);
+    connect(window(), &KDecoration3::DecoratedWindow::captionChanged, this, [this]() {
         // update the caption area
         update(titleBar());
     });
 
-    connect(c, &KDecoration3::DecoratedClient::activeChanged, this, &Decoration::updateAnimationState);
-    connect(c, &KDecoration3::DecoratedClient::adjacentScreenEdgesChanged, this, &Decoration::updateTitleBar);
-    connect(c, &KDecoration3::DecoratedClient::widthChanged, this, &Decoration::updateTitleBar);
-    connect(c, &KDecoration3::DecoratedClient::maximizedChanged, this, &Decoration::updateTitleBar);
-    connect(c, &KDecoration3::DecoratedClient::maximizedChanged, this, &Decoration::setOpaque);
+    connect(window(), &KDecoration3::DecoratedWindow::activeChanged, this, &Decoration::updateAnimationState);
+    connect(window(), &KDecoration3::DecoratedWindow::adjacentScreenEdgesChanged, this, &Decoration::updateTitleBar);
+    connect(window(), &KDecoration3::DecoratedWindow::widthChanged, this, &Decoration::updateTitleBar);
+    connect(window(), &KDecoration3::DecoratedWindow::maximizedChanged, this, &Decoration::updateTitleBar);
+    connect(window(), &KDecoration3::DecoratedWindow::maximizedChanged, this, &Decoration::setOpaque);
 
-    connect(c, &KDecoration3::DecoratedClient::widthChanged, this, &Decoration::updateButtonsGeometry);
-    connect(c, &KDecoration3::DecoratedClient::maximizedChanged, this, &Decoration::updateButtonsGeometry);
-    connect(c, &KDecoration3::DecoratedClient::adjacentScreenEdgesChanged, this, &Decoration::updateButtonsGeometry);
-    connect(c, &KDecoration3::DecoratedClient::shadedChanged, this, &Decoration::updateButtonsGeometry);
+    connect(window(), &KDecoration3::DecoratedWindow::widthChanged, this, &Decoration::updateButtonsGeometry);
+    connect(window(), &KDecoration3::DecoratedWindow::maximizedChanged, this, &Decoration::updateButtonsGeometry);
+    connect(window(), &KDecoration3::DecoratedWindow::adjacentScreenEdgesChanged, this, &Decoration::updateButtonsGeometry);
+    connect(window(), &KDecoration3::DecoratedWindow::shadedChanged, this, &Decoration::updateButtonsGeometry);
 
     createButtons();
     updateShadow();
@@ -305,9 +305,8 @@ void Decoration::updateTitleBar()
 {
     // The titlebar rect has margins around it so the window can be resized by dragging a decoration edge.
     auto s = settings();
-    const auto c = client();
     const bool maximized = isMaximized();
-    const int width = maximized ? c->width() : c->width() - 2 * s->smallSpacing() * Metrics::TitleBar_SideMargin;
+    const int width = maximized ? window()->width() : window()->width() - 2 * s->smallSpacing() * Metrics::TitleBar_SideMargin;
     const int height = (maximized || isTopEdge()) ? borderTop() : borderTop() - s->smallSpacing() * Metrics::TitleBar_TopMargin;
     const int x = maximized ? 0 : s->smallSpacing() * Metrics::TitleBar_SideMargin;
     const int y = (maximized || isTopEdge()) ? 0 : s->smallSpacing() * Metrics::TitleBar_TopMargin;
@@ -318,9 +317,8 @@ void Decoration::updateTitleBar()
 void Decoration::updateAnimationState()
 {
     if (m_shadowAnimation->duration() > 0) {
-        const auto c = client();
-        m_shadowAnimation->setDirection(c->isActive() ? QAbstractAnimation::Forward : QAbstractAnimation::Backward);
-        m_shadowAnimation->setEasingCurve(c->isActive() ? QEasingCurve::OutCubic : QEasingCurve::InCubic);
+        m_shadowAnimation->setDirection(window()->isActive() ? QAbstractAnimation::Forward : QAbstractAnimation::Backward);
+        m_shadowAnimation->setEasingCurve(window()->isActive() ? QEasingCurve::OutCubic : QEasingCurve::InCubic);
         if (m_shadowAnimation->state() != QAbstractAnimation::Running) {
             m_shadowAnimation->start();
         }
@@ -330,8 +328,7 @@ void Decoration::updateAnimationState()
     }
 
     if (m_animation->duration() > 0) {
-        const auto c = client();
-        m_animation->setDirection(c->isActive() ? QAbstractAnimation::Forward : QAbstractAnimation::Backward);
+        m_animation->setDirection(window()->isActive() ? QAbstractAnimation::Forward : QAbstractAnimation::Backward);
         if (m_animation->state() != QAbstractAnimation::Running) {
             m_animation->start();
         }
@@ -423,13 +420,12 @@ void Decoration::reconfigure()
 //________________________________________________________________
 void Decoration::recalculateBorders()
 {
-    const auto c = client();
     auto s = settings();
 
     // left, right and bottom borders
     const int left = isLeftEdge() ? 0 : borderSize();
     const int right = isRightEdge() ? 0 : borderSize();
-    const int bottom = (c->isShaded() || isBottomEdge()) ? 0 : borderSize(true);
+    const int bottom = (window()->isShaded() || isBottomEdge()) ? 0 : borderSize(true);
 
     int top = 0;
     if (hideTitleBar()) {
@@ -555,15 +551,14 @@ void Decoration::updateButtonsGeometry()
 void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
 {
     // TODO: optimize based on repaintRegion
-    auto c = client();
     auto s = settings();
     // paint background
-    if (!c->isShaded()) {
+    if (!window()->isShaded()) {
         painter->fillRect(rect(), Qt::transparent);
         painter->save();
         painter->setRenderHint(QPainter::Antialiasing);
         painter->setPen(Qt::NoPen);
-        painter->setBrush(c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame));
+        painter->setBrush(window()->color(window()->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame));
 
         // clip away the top part
         if (!hideTitleBar()) {
@@ -591,14 +586,15 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
         painter->save();
         painter->setRenderHint(QPainter::Antialiasing, false);
         painter->setBrush(Qt::NoBrush);
-        painter->setPen(c->isActive() ? c->color(ColorGroup::Active, ColorRole::TitleBar) : c->color(ColorGroup::Inactive, ColorRole::Foreground));
+        painter->setPen(window()->isActive() ? window()->color(ColorGroup::Active, ColorRole::TitleBar)
+                                             : window()->color(ColorGroup::Inactive, ColorRole::Foreground));
 
         painter->drawRect(rect().adjusted(0, 0, -1, -1));
         painter->restore();
     }
     if (outlinesEnabled() && !isMaximized()) {
-        auto outlineColor = KColorUtils::mix(c->color(c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame),
-                                             c->palette().text().color(),
+        auto outlineColor = KColorUtils::mix(window()->color(window()->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame),
+                                             window()->palette().text().color(),
                                              lookupOutlineIntensity(m_internalSettings->outlineIntensity()));
 
         QRectF outlineRect = rect();
@@ -636,7 +632,6 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
 //________________________________________________________________
 void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
 {
-    const auto c = client();
     const QRect frontRect(QPoint(0, 0), QSize(size().width(), borderTop()));
     const QRect backRect(QPoint(0, 0), QSize(size().width(), borderTop()));
 
@@ -651,7 +646,7 @@ void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
     painter->setPen(Qt::NoPen);
 
     // render a linear gradient on title area
-    if (c->isActive() && m_internalSettings->drawBackgroundGradient()) {
+    if (window()->isActive() && m_internalSettings->drawBackgroundGradient()) {
         QLinearGradient gradient(0, 0, 0, frontRect.height());
         gradient.setColorAt(0.0, titleBarColor().lighter(120));
         gradient.setColorAt(0.8, titleBarColor());
@@ -672,7 +667,7 @@ void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
         painter->setBrush(frontBrush);
         painter->drawRect(frontRect);
 
-    } else if (c->isShaded()) {
+    } else if (window()->isShaded()) {
         painter->setBrush(backBrush);
         painter->drawRoundedRect(backRect, m_scaledCornerRadius, m_scaledCornerRadius);
 
@@ -705,7 +700,7 @@ void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
     painter->setFont(s->font());
     painter->setPen(fontColor());
     const auto cR = captionRect();
-    const QString caption = painter->fontMetrics().elidedText(c->caption(), Qt::ElideMiddle, cR.first.width());
+    const QString caption = painter->fontMetrics().elidedText(window()->caption(), Qt::ElideMiddle, cR.first.width());
     painter->drawText(cR.first, cR.second | Qt::TextSingleLine, caption);
 
     // draw all buttons
@@ -753,7 +748,6 @@ QPair<QRect, Qt::Alignment> Decoration::captionRect() const
     if (hideTitleBar()) {
         return qMakePair(QRect(), Qt::AlignCenter);
     } else {
-        auto c = client();
         const int leftOffset = m_leftButtons->buttons().isEmpty()
             ? Metrics::TitleBar_SideMargin * settings()->smallSpacing()
             : m_leftButtons->geometry().x() + m_leftButtons->geometry().width() + Metrics::TitleBar_SideMargin * settings()->smallSpacing();
@@ -779,7 +773,7 @@ QPair<QRect, Qt::Alignment> Decoration::captionRect() const
         case InternalSettings::AlignCenterFullWidth: {
             // full caption rect
             const QRect fullRect = QRect(0, yOffset, size().width(), captionHeight());
-            QRect boundingRect(settings()->fontMetrics().boundingRect(c->caption()).toRect());
+            QRect boundingRect(settings()->fontMetrics().boundingRect(window()->caption()).toRect());
 
             // text bounding rect
             boundingRect.setTop(yOffset);
@@ -802,7 +796,6 @@ QPair<QRect, Qt::Alignment> Decoration::captionRect() const
 void Decoration::updateShadow()
 {
     auto s = settings();
-    auto c = client();
 
     // Animated case, no cached shadow object
     if ((m_shadowAnimation->state() == QAbstractAnimation::Running) && (m_shadowOpacity != 0.0) && (m_shadowOpacity != 1.0)) {
@@ -819,7 +812,7 @@ void Decoration::updateShadow()
         g_shadowColor = m_internalSettings->shadowColor();
     }
 
-    auto &shadow = (c->isActive()) ? g_sShadow : g_sShadowInactive;
+    auto &shadow = (window()->isActive()) ? g_sShadow : g_sShadowInactive;
     if (!shadow || g_lastBorderSize != borderSize(true)) {
         // Update both active and inactive shadows so outline stays consistent between the two
         g_sShadow = createShadowObject(1.0);

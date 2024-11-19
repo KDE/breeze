@@ -60,9 +60,6 @@ InternalSettingsPtr SettingsProvider::internalSettings(Decoration *decoration) c
     QString windowTitle;
     QString windowClass;
 
-    // get the client
-    const auto client = decoration->client();
-
     for (auto internalSettings : std::as_const(m_exceptions)) {
         // discard disabled exceptions
         if (!internalSettings->enabled()) {
@@ -81,13 +78,13 @@ InternalSettingsPtr SettingsProvider::internalSettings(Decoration *decoration) c
         QString value;
         switch (internalSettings->exceptionType()) {
         case InternalSettings::ExceptionWindowTitle: {
-            value = windowTitle.isEmpty() ? (windowTitle = client->caption()) : windowTitle;
+            value = windowTitle.isEmpty() ? (windowTitle = decoration->window()->caption()) : windowTitle;
             break;
         }
 
         default:
         case InternalSettings::ExceptionWindowClassName: {
-            value = windowClass.isEmpty() ? (windowClass = client->windowClass()) : windowClass;
+            value = windowClass.isEmpty() ? (windowClass = decoration->window()->windowClass()) : windowClass;
             break;
         }
         }
