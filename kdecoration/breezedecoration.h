@@ -38,7 +38,7 @@ public:
     virtual ~Decoration();
 
     //* paint
-    void paint(QPainter *painter, const QRect &repaintRegion) override;
+    void paint(QPainter *painter, const QRectF &repaintRegion) override;
 
     //* internal settings
     InternalSettingsPtr internalSettings() const
@@ -112,7 +112,7 @@ private:
     QPair<QRect, Qt::Alignment> captionRect() const;
 
     void createButtons();
-    void paintTitleBar(QPainter *painter, const QRect &repaintRegion);
+    void paintTitleBar(QPainter *painter, const QRectF &repaintRegion);
     void updateShadow();
     std::shared_ptr<KDecoration3::DecorationShadow> createShadowObject(const float strengthScale);
     void setScaledCornerRadius();

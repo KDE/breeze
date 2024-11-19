@@ -548,7 +548,7 @@ void Decoration::updateButtonsGeometry()
 }
 
 //________________________________________________________________
-void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
+void Decoration::paint(QPainter *painter, const QRectF &repaintRegion)
 {
     // TODO: optimize based on repaintRegion
     auto s = settings();
@@ -630,7 +630,7 @@ void Decoration::paint(QPainter *painter, const QRect &repaintRegion)
 }
 
 //________________________________________________________________
-void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
+void Decoration::paintTitleBar(QPainter *painter, const QRectF &repaintRegion)
 {
     const QRect frontRect(QPoint(0, 0), QSize(size().width(), borderTop()));
     const QRect backRect(QPoint(0, 0), QSize(size().width(), borderTop()));
@@ -638,7 +638,7 @@ void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
     QBrush frontBrush;
     QBrush backBrush(this->titleBarColor());
 
-    if (!backRect.intersects(repaintRegion)) {
+    if (!QRectF(backRect).intersects(repaintRegion)) {
         return;
     }
 
