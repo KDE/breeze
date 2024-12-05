@@ -34,7 +34,6 @@ public:
     explicit Decoration(QObject *parent = nullptr, const QVariantList &args = QVariantList());
     ~Decoration() override;
 
-    QMarginsF bordersFor(double scale) const override;
     void paint(QPainter *painter, const QRectF &repaintRegion) override;
 
     //* internal settings
@@ -121,6 +120,7 @@ private:
     inline bool hasBorders() const;
     inline bool hasNoBorders() const;
     inline bool hasNoSideBorders() const;
+    QMarginsF bordersFor(double scale) const;
     //@}
 
     inline bool outlinesEnabled() const;
