@@ -294,6 +294,8 @@ void Decoration::init()
     connect(window(), &KDecoration3::DecoratedWindow::adjacentScreenEdgesChanged, this, &Decoration::updateButtonsGeometry);
     connect(window(), &KDecoration3::DecoratedWindow::shadedChanged, this, &Decoration::updateButtonsGeometry);
 
+    connect(window(), &KDecoration3::DecoratedWindow::nextScaleChanged, this, &Decoration::updateScale);
+
     createButtons();
     updateShadow();
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
@@ -444,7 +446,7 @@ QMarginsF Decoration::bordersFor(double scale) const
 
 void Decoration::recalculateBorders()
 {
-    setBorders(bordersFor(window()->scale()));
+    setBorders(bordersFor(window()->nextScale()));
 
     // extended sizes
     const double extSize = window()->snapToPixelGrid(settings()->largeSpacing());
