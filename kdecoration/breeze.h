@@ -29,10 +29,10 @@ namespace Metrics
 static constexpr qreal Frame_FrameRadius = 2.5;
 
 //* titlebar metrics, in units of small spacing
-static constexpr int TitleBar_TopMargin = 2;
-static constexpr int TitleBar_BottomMargin = 2;
-static constexpr int TitleBar_SideMargin = 2;
-static constexpr int TitleBar_ButtonSpacing = 2;
+static constexpr qreal TitleBar_TopMargin = 3;
+static constexpr qreal TitleBar_BottomMargin = 3;
+static constexpr qreal TitleBar_SideMargin = 3.5;
+static constexpr qreal TitleBar_ButtonSpacing = 3.5;
 
 // shadow dimensions (pixels)
 static constexpr int Shadow_Overlap = 3;
