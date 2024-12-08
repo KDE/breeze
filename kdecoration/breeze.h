@@ -32,7 +32,7 @@ static constexpr qreal Frame_FrameRadius = 2.5;
 static constexpr qreal TitleBar_TopMargin = 2.5;
 static constexpr qreal TitleBar_BottomMargin = 2.5;
 static constexpr qreal TitleBar_SideMargin = 2.5;
-static constexpr qreal TitleBar_ButtonSpacing = 2.5;
+static constexpr qreal TitleBar_ButtonSpacing = 3.5;
 
 // shadow dimensions (pixels)
 static constexpr int Shadow_Overlap = 3;
