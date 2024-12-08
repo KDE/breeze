@@ -716,14 +716,14 @@ int Decoration::buttonSize() const
     case InternalSettings::ButtonTiny:
         return baseSize;
     case InternalSettings::ButtonSmall:
-        return baseSize * 1.5;
+        return baseSize * 1.7;
     default:
     case InternalSettings::ButtonDefault:
-        return baseSize * 2;
+        return baseSize * 2.2;
     case InternalSettings::ButtonLarge:
-        return baseSize * 2.5;
+        return baseSize * 2.7;
     case InternalSettings::ButtonVeryLarge:
-        return baseSize * 3.5;
+        return baseSize * 3.7;
     }
 }
 
@@ -739,7 +739,7 @@ void Decoration::onTabletModeChanged(bool mode)
 //________________________________________________________________
 int Decoration::captionHeight() const
 {
-    return hideTitleBar() ? borderTop() : borderTop() - settings()->smallSpacing() * (Metrics::TitleBar_BottomMargin + Metrics::TitleBar_TopMargin) - 1;
+    return hideTitleBar() ? borderTop() : borderTop() - settings()->smallSpacing() * (Metrics::TitleBar_BottomMargin + Metrics::TitleBar_TopMargin);
 }
 
 //________________________________________________________________
