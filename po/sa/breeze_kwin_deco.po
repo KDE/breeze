@@ -1,0 +1,418 @@
+# Sanskrit translations for breeze package.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the breeze package.
+# Kali <EMAIL@ADDRESS>, 2024.
+#
+# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: breeze\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-04-06 00:39+0000\n"
+"PO-Revision-Date: 2024-12-14 01:48+0530\n"
+"Last-Translator: kali <skkalwar999@gmail.com>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
+"Language: sa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 24.08.2\n"
+
+#: config/breezeexceptionlistwidget.cpp:88
+#, kde-format
+msgid "New Exception - Breeze Settings"
+msgstr "नवीनः अपवादः - Breeze Settings"
+
+#: config/breezeexceptionlistwidget.cpp:136
+#, kde-format
+msgid "Edit Exception - Breeze Settings"
+msgstr "अपवाद सम्पादयतु - Breeze Settings"
+
+#: config/breezeexceptionlistwidget.cpp:167
+#, kde-format
+msgid "Question - Breeze Settings"
+msgstr "प्रश्न - Breeze Settings"
+
+#: config/breezeexceptionlistwidget.cpp:168
+#, kde-format
+msgid "Remove selected exception?"
+msgstr "चयनितं अपवादं निष्कासयन्तु?"
+
+#. i18n: ectx: property (text), widget (QPushButton, removeButton)
+#: config/breezeexceptionlistwidget.cpp:170
+#: config/ui/breezeexceptionlistwidget.ui:91
+#, kde-format
+msgid "Remove"
+msgstr "अपाकरोति"
+
+#: config/breezeexceptionlistwidget.cpp:300
+#, kde-format
+msgid "Warning - Breeze Settings"
+msgstr "चेतावनी - वायु सेटिंग्स्"
+
+#: config/breezeexceptionlistwidget.cpp:300
+#, kde-format
+msgid "Regular Expression syntax is incorrect"
+msgstr "Regular Expression वाक्यविन्यासः अशुद्धः अस्ति"
+
+#: config/breezeexceptionmodel.cpp:17
+#, kde-format
+msgid "Exception Type"
+msgstr "अपवादप्रकारः"
+
+#: config/breezeexceptionmodel.cpp:17
+#, kde-format
+msgid "Regular Expression"
+msgstr "नियमित अभिव्यक्ति"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, exceptionType)
+#: config/breezeexceptionmodel.cpp:36 config/ui/breezeexceptiondialog.ui:72
+#, kde-format
+msgid "Window Title"
+msgstr "विण्डो शीर्षक"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, exceptionType)
+#: config/breezeexceptionmodel.cpp:40 config/ui/breezeexceptiondialog.ui:67
+#, kde-format
+msgid "Window Class Name"
+msgstr "विण्डो वर्ग नाम"
+
+#: config/breezeexceptionmodel.cpp:55
+#, kde-format
+msgid "Enable/disable this exception"
+msgstr "एतत् अपवादं सक्षमं/अक्षमं कुर्वन्तु"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: config/ui/breezeconfigurationui.ui:36
+#, kde-format
+msgid "General"
+msgstr "सामान्य"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: config/ui/breezeconfigurationui.ui:42
+#, kde-format
+msgid "Tit&le alignment:"
+msgstr "शीर्षकम् & संरेखणम् : १."
+
+#. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
+#: config/ui/breezeconfigurationui.ui:56
+#, kde-format
+msgid "Left"
+msgstr "वामः"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
+#: config/ui/breezeconfigurationui.ui:61
+#, kde-format
+msgid "Center"
+msgstr "केंद्र"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
+#: config/ui/breezeconfigurationui.ui:66
+#, kde-format
+msgid "Center (Full Width)"
+msgstr "केन्द्र (पूर्ण चौड़ाई) २."
+
+#. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
+#: config/ui/breezeconfigurationui.ui:71
+#, kde-format
+msgid "Right"
+msgstr "दक्षिणः"
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: config/ui/breezeconfigurationui.ui:92
+#, kde-format
+msgid "B&utton size:"
+msgstr "B&utton आकारः : १."
+
+#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
+#: config/ui/breezeconfigurationui.ui:106
+#, kde-format
+msgid "Tiny"
+msgstr "तुच्छ"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
+#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
+#: config/ui/breezeconfigurationui.ui:111
+#: config/ui/breezeconfigurationui.ui:224
+#, kde-format
+msgctxt "@item:inlistbox Button size:"
+msgid "Small"
+msgstr "लघु"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
+#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
+#: config/ui/breezeconfigurationui.ui:116
+#: config/ui/breezeconfigurationui.ui:229
+#, kde-format
+msgctxt "@item:inlistbox Button size:"
+msgid "Medium"
+msgstr "मध्यम"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
+#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
+#: config/ui/breezeconfigurationui.ui:121
+#: config/ui/breezeconfigurationui.ui:234
+#, kde-format
+msgctxt "@item:inlistbox Button size:"
+msgid "Large"
+msgstr "बृहत्‌"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
+#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
+#: config/ui/breezeconfigurationui.ui:126
+#: config/ui/breezeconfigurationui.ui:239
+#, kde-format
+msgctxt "@item:inlistbox Button size:"
+msgid "Very Large"
+msgstr "अतीव विशालः"
+
+#. i18n: ectx: property (text), widget (QCheckBox, outlineCloseButton)
+#: config/ui/breezeconfigurationui.ui:134
+#, kde-format
+msgid "Draw a circle around close button"
+msgstr "close बटनस्य परितः वृत्तं आकर्षयन्तु"
+
+#. i18n: ectx: property (text), widget (QCheckBox, drawBorderOnMaximizedWindows)
+#: config/ui/breezeconfigurationui.ui:141
+#, kde-format
+msgid "Draw border on maximized and tiled windows"
+msgstr "अधिकतमकृतेषु टाइल्-युक्तेषु च खिडकेषु सीमां आकर्षयन्तु"
+
+#. i18n: ectx: property (text), widget (QLabel, drawBorderOnMaximizedWindowsHelpLabel)
+#: config/ui/breezeconfigurationui.ui:166
+#, kde-format
+msgid ""
+"This setting will allow you to resize from window edges touching screen "
+"edges. Scrollbars and window close buttons will shift positions and will not "
+"touch screen edges."
+msgstr ""
+"एतत् सेटिङ्ग् भवन्तं विण्डो एज्स् तः स्क्रीन एज्स् स्पृशन् आकारं परिवर्तयितुं शक्नोति । स्क्रॉलबार्स् "
+"तथा विण्डो क्लोज् बटन्स् स्थानानि शिफ्ट् करिष्यन्ति तथा च स्क्रीन एज्स् न स्पृशन्ति ।"
+
+#. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
+#: config/ui/breezeconfigurationui.ui:178
+#, kde-format
+msgid "Draw titlebar background gradient"
+msgstr "शीर्षकपट्टिका पृष्ठभूमि ढाल आकर्षित करें"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_4)
+#: config/ui/breezeconfigurationui.ui:199
+#, kde-format
+msgid "Shadows and Outline"
+msgstr "छायाः रूपरेखा च"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: config/ui/breezeconfigurationui.ui:205
+#, kde-format
+msgid "Shadow size:"
+msgstr "छाया आकारः : १."
+
+#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
+#: config/ui/breezeconfigurationui.ui:219
+#, kde-format
+msgctxt "@item:inlistbox Button size:"
+msgid "None"
+msgstr "न कश्चित्"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: config/ui/breezeconfigurationui.ui:247
+#, kde-format
+msgctxt "strength of the shadow (from transparent to opaque)"
+msgid "Shadow strength:"
+msgstr "छायाबलम् : १."
+
+#. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
+#: config/ui/breezeconfigurationui.ui:260
+#, no-c-format, kde-format
+msgid "%"
+msgstr "% ."
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: config/ui/breezeconfigurationui.ui:286
+#, kde-format
+msgid "Shadow color:"
+msgstr "छायावर्णः : १."
+
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#: config/ui/breezeconfigurationui.ui:299
+#, kde-format
+msgctxt "outline intensity"
+msgid "Outline intensity:"
+msgstr "रूपरेखा तीव्रता : १."
+
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:313
+#, kde-format
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "Off"
+msgstr "दूरे"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:318
+#, kde-format
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "Low"
+msgstr "न्यूनम्‌"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:323
+#, kde-format
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "Medium"
+msgstr "मध्यम"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:328
+#, kde-format
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "High"
+msgstr "उच्चैः"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
+#: config/ui/breezeconfigurationui.ui:333
+#, kde-format
+msgctxt "@item:inlistbox Outline intensity:"
+msgid "Maximum"
+msgstr "अधिकतम"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_3)
+#: config/ui/breezeconfigurationui.ui:355
+#, kde-format
+msgid "Window-Specific Overrides"
+msgstr "विण्डो-विशिष्टं अधिलिखितम्"
+
+#. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
+#: config/ui/breezeexceptiondialog.ui:14
+#, kde-format
+msgid "Dialog"
+msgstr "संवादः"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: config/ui/breezeexceptiondialog.ui:20
+#, kde-format
+msgid "Window Identification"
+msgstr "खिडकी पहिचान"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: config/ui/breezeexceptiondialog.ui:26
+#, kde-format
+msgid "&Matching window property: "
+msgstr "&मेलनं विण्डो गुणः: "
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: config/ui/breezeexceptiondialog.ui:39
+#, kde-format
+msgid "Regular expression &to match: "
+msgstr "नियमित अभिव्यक्ति &मेलनं कर्तुं : १. "
+
+#. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
+#: config/ui/breezeexceptiondialog.ui:52
+#, kde-format
+msgid "Detect Window Properties…"
+msgstr "विण्डो गुणानाम् अन्वेषणं कुर्वन्तु…"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: config/ui/breezeexceptiondialog.ui:83
+#, kde-format
+msgid "Decoration Options"
+msgstr "अलङ्कारविकल्पाः"
+
+#. i18n: ectx: property (text), widget (QCheckBox, borderSizeCheckBox)
+#: config/ui/breezeexceptiondialog.ui:89
+#, kde-format
+msgid "Border size:"
+msgstr "सीमायाः आकारः : १."
+
+#. i18n: ectx: property (text), widget (QCheckBox, hideTitleBar)
+#: config/ui/breezeexceptiondialog.ui:96
+#, kde-format
+msgid "Hide window title bar"
+msgstr "विण्डो शीर्षकपट्टिकां गोपयन्तु"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:107
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "No Border"
+msgstr "न सीमा"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:112
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "No Side Borders"
+msgstr "न पार्श्वसीमाः"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:117
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Tiny"
+msgstr "तुच्छ"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:122
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Normal"
+msgstr "सामान्य"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:127
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Large"
+msgstr "बृहत्‌"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:132
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Very Large"
+msgstr "अतीव विशालः"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:137
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Huge"
+msgstr "विशालः"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:142
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Very Huge"
+msgstr "अतीव विशालः"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:147
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Oversized"
+msgstr "अतिप्रमाणम्"
+
+#. i18n: ectx: property (text), widget (QPushButton, moveUpButton)
+#: config/ui/breezeexceptionlistwidget.ui:70
+#, kde-format
+msgid "Move Up"
+msgstr "उपरि गच्छतु"
+
+#. i18n: ectx: property (text), widget (QPushButton, moveDownButton)
+#: config/ui/breezeexceptionlistwidget.ui:77
+#, kde-format
+msgid "Move Down"
+msgstr "अधः गच्छतु"
+
+#. i18n: ectx: property (text), widget (QPushButton, addButton)
+#: config/ui/breezeexceptionlistwidget.ui:84
+#, kde-format
+msgid "Add"
+msgstr "संयोजयति"
+
+#. i18n: ectx: property (text), widget (QPushButton, editButton)
+#: config/ui/breezeexceptionlistwidget.ui:98
+#, kde-format
+msgid "Edit"
+msgstr "सम्पादन"
