@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-06 00:39+0000\n"
-"PO-Revision-Date: 2024-12-14 01:48+0530\n"
+"PO-Revision-Date: 2024-12-19 21:41+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -304,7 +304,7 @@ msgstr "&मेलनं विण्डो गुणः: "
 #: config/ui/breezeexceptiondialog.ui:39
 #, kde-format
 msgid "Regular expression &to match: "
-msgstr "नियमित अभिव्यक्ति &मेलनं कर्तुं : १. "
+msgstr "नियमित अभिव्यक्ति &मेलनं कर्तुं : "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
