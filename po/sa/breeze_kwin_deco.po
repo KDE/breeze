@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-06 00:39+0000\n"
-"PO-Revision-Date: 2024-12-19 21:41+0530\n"
+"PO-Revision-Date: 2024-12-20 21:51+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -93,7 +93,7 @@ msgstr "सामान्य"
 #: config/ui/breezeconfigurationui.ui:42
 #, kde-format
 msgid "Tit&le alignment:"
-msgstr "शीर्षकम् & संरेखणम् : १."
+msgstr "शीर्षकम् & संरेखणम् :"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
 #: config/ui/breezeconfigurationui.ui:56
@@ -111,7 +111,7 @@ msgstr "केंद्र"
 #: config/ui/breezeconfigurationui.ui:66
 #, kde-format
 msgid "Center (Full Width)"
-msgstr "केन्द्र (पूर्ण चौड़ाई) २."
+msgstr "केन्द्र (पूर्ण चौड़ाई)"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
 #: config/ui/breezeconfigurationui.ui:71
@@ -123,7 +123,7 @@ msgstr "दक्षिणः"
 #: config/ui/breezeconfigurationui.ui:92
 #, kde-format
 msgid "B&utton size:"
-msgstr "B&utton आकारः : १."
+msgstr "B&utton आकारः :"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #: config/ui/breezeconfigurationui.ui:106
@@ -206,7 +206,7 @@ msgstr "छायाः रूपरेखा च"
 #: config/ui/breezeconfigurationui.ui:205
 #, kde-format
 msgid "Shadow size:"
-msgstr "छाया आकारः : १."
+msgstr "छाया आकारः :"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:219
@@ -220,7 +220,7 @@ msgstr "न कश्चित्"
 #, kde-format
 msgctxt "strength of the shadow (from transparent to opaque)"
 msgid "Shadow strength:"
-msgstr "छायाबलम् : १."
+msgstr "छायाबलम् :"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
 #: config/ui/breezeconfigurationui.ui:260
@@ -232,14 +232,14 @@ msgstr "% ."
 #: config/ui/breezeconfigurationui.ui:286
 #, kde-format
 msgid "Shadow color:"
-msgstr "छायावर्णः : १."
+msgstr "छायावर्णः :"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: config/ui/breezeconfigurationui.ui:299
 #, kde-format
 msgctxt "outline intensity"
 msgid "Outline intensity:"
-msgstr "रूपरेखा तीव्रता : १."
+msgstr "रूपरेखा तीव्रता :"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
 #: config/ui/breezeconfigurationui.ui:313
@@ -322,7 +322,7 @@ msgstr "अलङ्कारविकल्पाः"
 #: config/ui/breezeexceptiondialog.ui:89
 #, kde-format
 msgid "Border size:"
-msgstr "सीमायाः आकारः : १."
+msgstr "सीमायाः आकारः :"
 
 #. i18n: ectx: property (text), widget (QCheckBox, hideTitleBar)
 #: config/ui/breezeexceptiondialog.ui:96

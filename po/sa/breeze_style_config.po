@@ -3,19 +3,21 @@
 # This file is distributed under the same license as the breeze package.
 # Kali <EMAIL@ADDRESS>, 2024.
 #
+# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-29 00:40+0000\n"
-"PO-Revision-Date: 2024-12-13 19:10+0530\n"
-"Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
+"PO-Revision-Date: 2024-12-20 21:51+0530\n"
+"Last-Translator: kali <skkalwar999@gmail.com>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n>2);\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: main.cpp:25 main.cpp:29
 #, kde-format
@@ -32,7 +34,7 @@ msgstr "सामान्य"
 #: ui/breezestyleconfig.ui:51
 #, kde-format
 msgid "W&indows' drag mode:"
-msgstr "W&indows इत्यस्य कर्षणविधिः : १."
+msgstr "W&indows इत्यस्य कर्षणविधिः :"
 
 #. i18n: ectx: property (text), widget (QCheckBox, _viewDrawFocusIndicator)
 #: ui/breezestyleconfig.ui:64
@@ -44,7 +46,7 @@ msgstr "सूचीषु फोकस सूचकं आकर्षयन्
 #: ui/breezestyleconfig.ui:71
 #, kde-format
 msgid "&Keyboard accelerators visibility:"
-msgstr "&कीबोर्ड त्वरक दृश्यता : १."
+msgstr "&कीबोर्ड त्वरक दृश्यता :"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
 #: ui/breezestyleconfig.ui:85
@@ -146,7 +148,7 @@ msgstr "तल बाण बटन t&ype:"
 #: ui/breezestyleconfig.ui:250
 #, kde-format
 msgid "&Top arrow button type:"
-msgstr "&शीर्षबाणबटनप्रकारः : १."
+msgstr "&शीर्षबाणबटनप्रकारः :"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
@@ -191,4 +193,4 @@ msgstr "अपारदर्शी"
 #: ui/breezestyleconfig.ui:373
 #, kde-format
 msgid "Menu:"
-msgstr "मेनू : १."
+msgstr "मेनू :"
