@@ -45,6 +45,10 @@
       </choices>
       <default>OutlineMedium</default>
     </entry>
+
+    <entry name="RoundedCorners" type = "Bool">
+      <default>false</default>
+    </entry>
   </group>
 
   <group name="Windeco">

@@ -347,7 +347,8 @@ qreal Decoration::borderSize(bool bottom, qreal scale) const
     const qreal pixelSize = KDecoration3::pixelSize(scale);
     const qreal baseSize = std::max<qreal>(pixelSize, KDecoration3::snapToPixelGrid(settings()->smallSpacing(), scale));
     if (m_internalSettings && (m_internalSettings->mask() & BorderSize)) {
-        switch (m_internalSettings->borderSize()) {
+        const auto borderSize = m_internalSettings->roundedCorners() ? InternalSettings::BorderNone : m_internalSettings->borderSize();
+        switch (borderSize) {
         case InternalSettings::BorderNone:
             return outlinesEnabled() ? std::max<qreal>(pixelSize, KDecoration3::snapToPixelGrid(1, scale)) : 0;
         case InternalSettings::BorderNoSides:
@@ -377,7 +378,8 @@ qreal Decoration::borderSize(bool bottom, qreal scale) const
             return baseSize * 10;
         }
     } else {
-        switch (settings()->borderSize()) {
+        const auto borderSize = m_internalSettings->roundedCorners() ? KDecoration3::BorderSize::None : settings()->borderSize();
+        switch (borderSize) {
         case KDecoration3::BorderSize::None:
             return outlinesEnabled() ? std::max<qreal>(pixelSize, KDecoration3::snapToPixelGrid(1, scale)) : 0;
         case KDecoration3::BorderSize::NoSides:
@@ -480,6 +482,20 @@ void Decoration::recalculateBorders()
     }
 
     setResizeOnlyBorders(QMarginsF(extSides, 0, extSides, extBottom));
+
+    qreal bottomLeftRadius = 0;
+    qreal bottomRightRadius = 0;
+    if (m_internalSettings->roundedCorners()) {
+        if (!isBottomEdge()) {
+            if (!isLeftEdge()) {
+                bottomLeftRadius = m_scaledCornerRadius;
+            }
+            if (!isRightEdge()) {
+                bottomRightRadius = m_scaledCornerRadius;
+            }
+        }
+    }
+    setBorderRadius(KDecoration3::BorderRadius(0, 0, bottomRightRadius, bottomLeftRadius));
 }
 
 //________________________________________________________________
