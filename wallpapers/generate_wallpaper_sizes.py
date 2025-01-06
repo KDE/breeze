@@ -3,9 +3,19 @@
 import logging
 from multiprocessing import cpu_count
 from multiprocessing.pool import Pool
+from subprocess import check_output, run
 from pathlib import Path
 from itertools import chain
 from typing import Final
+
+def is_oxipng_installed():
+    try:
+        # Run 'oxipng --version' to check if installed
+        run(["oxipng", "--version"], check=True)
+        return True
+    except FileNotFoundError:
+        # Command not found, oxipng is not installed
+        return False
 
 try:
 	import PIL
@@ -56,9 +66,13 @@ def resize_and_save_image(file: Path, image: Image, width: int, height: int) -> 
 	else:
 		resized_image = image.resize((width, height), Image.LANCZOS, box)
 
-	resized_image.save(base_dir / f'{width}x{height}{extension}',
-					  quality=90, optimize=True, subsampling=1)
-
+	if extension.lower() ==  ".png":
+		target = base_dir / f'{width}x{height}{extension}'
+		resized_image.save(target, compress_level=0)
+		run(["oxipng", str(base_dir / f'{width}x{height}{extension}')])
+	else:
+		resized_image.save(base_dir / f'{width}x{height}{extension}',
+						quality=90, optimize=True, subsampling=1)
 
 argument_list: list[tuple] = []
 
@@ -68,6 +82,9 @@ for orientation in ('horizontal', 'vertical'):
 		image.load()
 		for width, height in sizes[orientation]:
 			argument_list.append((file, image, width, height))
+		if file.suffix.lower() == ".png" and not is_oxipng_installed():
+			logging.critical("Please install 'oxipng', which is required to compress the png images.")
+			exit()
 
 with Pool(processes=cpu_count()) as pool:
 	pool.starmap(resize_and_save_image, argument_list)
