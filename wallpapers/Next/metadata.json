@@ -41,6 +41,17 @@
         ],
         "Id": "Next",
         "License": "CC-BY-SA-4.0",
-        "Name": "Nuvole"
+        "Name": "Nuvole",
+        "Name[ca@valencia]": "Nuvole",
+        "Name[ca]": "Nuvole",
+        "Name[es]": "Nuvole",
+        "Name[eu]": "Nuvole",
+        "Name[he]": "חדשני",
+        "Name[ka]": "Nuvole",
+        "Name[nl]": "Nuvole",
+        "Name[sl]": "Nuvole",
+        "Name[tr]": "Nuvole",
+        "Name[uk]": "Nuvole",
+        "Name[x-test]": "xxNuvolexx"
     }
 }
