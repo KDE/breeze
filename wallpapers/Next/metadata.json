@@ -46,12 +46,14 @@
         "Name[ca]": "Nuvole",
         "Name[es]": "Nuvole",
         "Name[eu]": "Nuvole",
+        "Name[gl]": "Nuvole",
         "Name[he]": "חדשני",
         "Name[ka]": "Nuvole",
         "Name[nl]": "Nuvole",
         "Name[sl]": "Nuvole",
         "Name[tr]": "Nuvole",
         "Name[uk]": "Nuvole",
-        "Name[x-test]": "xxNuvolexx"
+        "Name[x-test]": "xxNuvolexx",
+        "Name[zh_CN]": "Nuvole 星云"
     }
 }
