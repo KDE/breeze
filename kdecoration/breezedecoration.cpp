@@ -463,7 +463,7 @@ void Decoration::recalculateBorders()
     setBorders(bordersFor(window()->nextScale()));
 
     // extended sizes
-    const qreal extSize = window()->snapToPixelGrid(settings()->largeSpacing());
+    const qreal extSize = KDecoration3::snapToPixelGrid(settings()->largeSpacing(), window()->nextScale());
     qreal extSides = 0;
     qreal extBottom = 0;
     if (hasNoBorders()) {
@@ -615,7 +615,7 @@ void Decoration::paint(QPainter *painter, const QRectF &repaintRegion)
                                              window()->palette().text().color(),
                                              lookupOutlineIntensity(m_internalSettings->outlineIntensity()));
 
-        const qreal lineWidth = std::max(window()->pixelSize(), window()->snapToPixelGrid(1));
+        const qreal lineWidth = std::max(KDecoration3::pixelSize(window()->scale()), KDecoration3::snapToPixelGrid(1, window()->scale()));
         QRectF outlineRect = rect();
         // this is necessary to paint exactly in the center of the intended line
         // otherwise anti aliasing kicks in and ruins the day
@@ -653,7 +653,7 @@ void Decoration::paint(QPainter *painter, const QRectF &repaintRegion)
 //________________________________________________________________
 void Decoration::paintTitleBar(QPainter *painter, const QRectF &repaintRegion)
 {
-    const qreal halfAPixel = 0.5 * window()->pixelSize();
+    const qreal halfAPixel = 0.5 * KDecoration3::pixelSize(window()->scale());
     QRectF rect(QPointF(0, 0), QSizeF(size().width(), borderTop()));
     const bool noOutlines = isMaximized() || !settings()->isAlphaChannelSupported();
     const bool bottomOutline = window()->isShaded();
@@ -770,15 +770,17 @@ QPair<QRectF, Qt::Alignment> Decoration::captionRect() const
         return qMakePair(QRectF(), Qt::AlignCenter);
     } else {
         const qreal leftOffset =
-            window()->snapToPixelGrid(m_leftButtons->buttons().isEmpty() ? Metrics::TitleBar_SideMargin * settings()->smallSpacing()
-                                                                         : m_leftButtons->geometry().x() + m_leftButtons->geometry().width()
-                                              + Metrics::TitleBar_SideMargin * settings()->smallSpacing());
+            KDecoration3::snapToPixelGrid(m_leftButtons->buttons().isEmpty() ? Metrics::TitleBar_SideMargin * settings()->smallSpacing()
+                                                                             : m_leftButtons->geometry().x() + m_leftButtons->geometry().width()
+                                                  + Metrics::TitleBar_SideMargin * settings()->smallSpacing(),
+                                          window()->scale());
 
-        const qreal rightOffset = window()->snapToPixelGrid(m_rightButtons->buttons().isEmpty() ? Metrics::TitleBar_SideMargin * settings()->smallSpacing()
-                                                                                                : size().width() - m_rightButtons->geometry().x()
-                                                                    + Metrics::TitleBar_SideMargin * settings()->smallSpacing());
+        const qreal rightOffset = KDecoration3::snapToPixelGrid(m_rightButtons->buttons().isEmpty() ? Metrics::TitleBar_SideMargin * settings()->smallSpacing()
+                                                                                                    : size().width() - m_rightButtons->geometry().x()
+                                                                        + Metrics::TitleBar_SideMargin * settings()->smallSpacing(),
+                                                                window()->scale());
 
-        const qreal yOffset = window()->snapToPixelGrid(settings()->smallSpacing() * Metrics::TitleBar_TopMargin);
+        const qreal yOffset = KDecoration3::snapToPixelGrid(settings()->smallSpacing() * Metrics::TitleBar_TopMargin, window()->scale());
         const QRectF maxRect(leftOffset, yOffset, size().width() - leftOffset - rightOffset, captionHeight());
 
         switch (m_internalSettings->titleAlignment()) {
@@ -908,7 +910,7 @@ void Decoration::setScaledCornerRadius()
     // On X11, the smallSpacing value is used for scaling.
     // On Wayland, this value has constant factor of 2.
     // Removing it will break radius scaling on X11.
-    m_scaledCornerRadius = window()->snapToPixelGrid(Metrics::Frame_FrameRadius * settings()->smallSpacing());
+    m_scaledCornerRadius = KDecoration3::snapToPixelGrid(Metrics::Frame_FrameRadius * settings()->smallSpacing(), window()->nextScale());
 }
 
 void Decoration::updateScale()
