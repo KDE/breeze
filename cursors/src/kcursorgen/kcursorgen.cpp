@@ -7,6 +7,7 @@
 #include "options.h"
 
 #include <QCollator>
+#include <QDebug>
 #include <QDir>
 #include <QImage>
 #include <QJsonArray>
