@@ -36,6 +36,10 @@ include(KDEGitCommitHooks)
 
 include(GtkUpdateIconCache)
 
+option(WITH_X11 "Whether to build with X11." ON)
+if(WITH_X11)
+    set(HAVE_X11 ON)
+endif()
 
 option(BUILD_QT5 "Build Qt5 style" ON)
 option(BUILD_QT6 "Build with Qt6" ON)
