@@ -1,5 +1,4 @@
 include(ECMMarkNonGuiExecutable)
-find_package(Qt6 ${REQUIRED_QT_VERSION} REQUIRED NO_MODULE COMPONENTS Core Svg)
 
 set(CMAKE_AUTOMOC ON)
 

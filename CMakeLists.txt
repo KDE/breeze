@@ -133,7 +133,7 @@ function(build_Qt6)
         set(WITH_WALLPAPERS OFF)
     endif()
 
-    find_package(Qt6 ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS Widgets)
+    find_package(Qt6 ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS Widgets Core Svg)
 
     find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
         CoreAddons
