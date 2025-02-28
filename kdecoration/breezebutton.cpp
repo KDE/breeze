@@ -20,9 +20,14 @@ using KDecoration3::ColorGroup;
 using KDecoration3::ColorRole;
 using KDecoration3::DecorationButtonType;
 
+Button::Button(KDecoration3::DecorationButtonType type, KDecoration3::Decoration *decoration, QObject *parent)
+    : KDecoration3::DecorationButton(type, decoration, parent)
+{
+}
+
 //__________________________________________________________________
-Button::Button(DecorationButtonType type, Decoration *decoration, QObject *parent)
-    : DecorationButton(type, decoration, parent)
+IconButton::IconButton(DecorationButtonType type, Decoration *decoration, QObject *parent)
+    : Button(type, decoration, parent)
     , m_animation(new QVariantAnimation(this))
 {
     // setup animation
@@ -35,51 +40,51 @@ Button::Button(DecorationButtonType type, Decoration *decoration, QObject *paren
     });
 
     // connections
-    connect(decoration, &Decoration::tabletModeChanged, this, &Button::reconfigure);
+    connect(decoration, &Decoration::tabletModeChanged, this, &IconButton::reconfigure);
     connect(decoration->window(), SIGNAL(iconChanged(QIcon)), this, SLOT(update()));
-    connect(decoration->settings().get(), &KDecoration3::DecorationSettings::reconfigured, this, &Button::reconfigure);
-    connect(this, &KDecoration3::DecorationButton::hoveredChanged, this, &Button::updateAnimationState);
+    connect(decoration->settings().get(), &KDecoration3::DecorationSettings::reconfigured, this, &IconButton::reconfigure);
+    connect(this, &KDecoration3::DecorationButton::hoveredChanged, this, &IconButton::updateAnimationState);
 
     reconfigure();
 }
 
 //__________________________________________________________________
-Button::Button(QObject *parent, const QVariantList &args)
-    : Button(args.at(0).value<DecorationButtonType>(), args.at(1).value<Decoration *>(), parent)
+IconButton::IconButton(QObject *parent, const QVariantList &args)
+    : IconButton(args.at(0).value<DecorationButtonType>(), args.at(1).value<Decoration *>(), parent)
 {
     setGeometry(QRectF(QPointF(0, 0), preferredSize()));
 }
 
 //__________________________________________________________________
-Button *Button::create(DecorationButtonType type, KDecoration3::Decoration *decoration, QObject *parent)
+IconButton *IconButton::create(DecorationButtonType type, KDecoration3::Decoration *decoration, QObject *parent)
 {
     if (auto d = qobject_cast<Decoration *>(decoration)) {
-        Button *b = new Button(type, d, parent);
+        IconButton *b = new IconButton(type, d, parent);
         const auto c = d->window();
         switch (type) {
         case DecorationButtonType::Close:
             b->setVisible(c->isCloseable());
-            QObject::connect(c, &KDecoration3::DecoratedWindow::closeableChanged, b, &Breeze::Button::setVisible);
+            QObject::connect(c, &KDecoration3::DecoratedWindow::closeableChanged, b, &Breeze::IconButton::setVisible);
             break;
 
         case DecorationButtonType::Maximize:
             b->setVisible(c->isMaximizeable());
-            QObject::connect(c, &KDecoration3::DecoratedWindow::maximizeableChanged, b, &Breeze::Button::setVisible);
+            QObject::connect(c, &KDecoration3::DecoratedWindow::maximizeableChanged, b, &Breeze::IconButton::setVisible);
             break;
 
         case DecorationButtonType::Minimize:
             b->setVisible(c->isMinimizeable());
-            QObject::connect(c, &KDecoration3::DecoratedWindow::minimizeableChanged, b, &Breeze::Button::setVisible);
+            QObject::connect(c, &KDecoration3::DecoratedWindow::minimizeableChanged, b, &Breeze::IconButton::setVisible);
             break;
 
         case DecorationButtonType::ContextHelp:
             b->setVisible(c->providesContextHelp());
-            QObject::connect(c, &KDecoration3::DecoratedWindow::providesContextHelpChanged, b, &Breeze::Button::setVisible);
+            QObject::connect(c, &KDecoration3::DecoratedWindow::providesContextHelpChanged, b, &Breeze::IconButton::setVisible);
             break;
 
         case DecorationButtonType::Shade:
             b->setVisible(c->isShadeable());
-            QObject::connect(c, &KDecoration3::DecoratedWindow::shadeableChanged, b, &Breeze::Button::setVisible);
+            QObject::connect(c, &KDecoration3::DecoratedWindow::shadeableChanged, b, &Breeze::IconButton::setVisible);
             break;
 
         case DecorationButtonType::Menu:
@@ -99,7 +104,7 @@ Button *Button::create(DecorationButtonType type, KDecoration3::Decoration *deco
 }
 
 //__________________________________________________________________
-void Button::paint(QPainter *painter, const QRectF &repaintRegion)
+void IconButton::paint(QPainter *painter, const QRectF &repaintRegion)
 {
     Q_UNUSED(repaintRegion)
 
@@ -138,7 +143,7 @@ void Button::paint(QPainter *painter, const QRectF &repaintRegion)
 }
 
 //__________________________________________________________________
-void Button::drawIcon(QPainter *painter) const
+void IconButton::drawIcon(QPainter *painter) const
 {
     painter->setRenderHints(QPainter::Antialiasing);
 
@@ -282,7 +287,7 @@ void Button::drawIcon(QPainter *painter) const
 }
 
 //__________________________________________________________________
-QColor Button::foregroundColor() const
+QColor IconButton::foregroundColor() const
 {
     auto d = qobject_cast<Decoration *>(decoration());
     if (!d) {
@@ -310,7 +315,7 @@ QColor Button::foregroundColor() const
 }
 
 //__________________________________________________________________
-QColor Button::backgroundColor() const
+QColor IconButton::backgroundColor() const
 {
     auto d = qobject_cast<Decoration *>(decoration());
     if (!d) {
@@ -364,7 +369,7 @@ QColor Button::backgroundColor() const
 }
 
 //________________________________________________________________
-void Button::reconfigure()
+void IconButton::reconfigure()
 {
     // animation
     auto d = qobject_cast<Decoration *>(decoration());
@@ -385,7 +390,7 @@ void Button::reconfigure()
 }
 
 //__________________________________________________________________
-void Button::updateAnimationState(bool hovered)
+void IconButton::updateAnimationState(bool hovered)
 {
     auto d = qobject_cast<Decoration *>(decoration());
     if (!(d && d->animationsDuration() > 0)) {

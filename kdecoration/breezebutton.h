@@ -17,22 +17,13 @@ class QVariantAnimation;
 
 namespace Breeze
 {
+
 class Button : public KDecoration3::DecorationButton
 {
     Q_OBJECT
 
 public:
-    //* constructor
-    explicit Button(QObject *parent, const QVariantList &args);
-
-    //* destructor
-    virtual ~Button() = default;
-
-    //* button creation
-    static Button *create(KDecoration3::DecorationButtonType type, KDecoration3::Decoration *decoration, QObject *parent);
-
-    //* render
-    void paint(QPainter *painter, const QRectF &repaintRegion) override;
+    explicit Button(KDecoration3::DecorationButtonType type, KDecoration3::Decoration *decoration, QObject *parent = nullptr);
 
     //* padding
     void setPadding(const QMargins &value)
@@ -72,13 +63,47 @@ public:
 
     void setPreferredSize(const QSizeF &size)
     {
-        m_preferredSize = size;
+        if (m_preferredSize != size) {
+            m_preferredSize = size;
+            Q_EMIT preferredSizeChanged();
+        }
     }
 
     QSizeF preferredSize() const
     {
         return m_preferredSize;
     }
+
+Q_SIGNALS:
+    void preferredSizeChanged();
+
+protected:
+    //* padding (for rendering)
+    QMargins m_padding;
+
+    //* implicit size
+    QSizeF m_preferredSize;
+
+    //* active state change opacity
+    qreal m_opacity = 0;
+};
+
+class IconButton : public Button
+{
+    Q_OBJECT
+
+public:
+    //* constructor
+    explicit IconButton(QObject *parent, const QVariantList &args);
+
+    //* destructor
+    virtual ~IconButton() = default;
+
+    //* button creation
+    static IconButton *create(KDecoration3::DecorationButtonType type, KDecoration3::Decoration *decoration, QObject *parent);
+
+    //* render
+    void paint(QPainter *painter, const QRectF &repaintRegion) override;
 
 private Q_SLOTS:
 
@@ -90,7 +115,7 @@ private Q_SLOTS:
 
 private:
     //* private constructor
-    explicit Button(KDecoration3::DecorationButtonType type, Decoration *decoration, QObject *parent = nullptr);
+    explicit IconButton(KDecoration3::DecorationButtonType type, Decoration *decoration, QObject *parent = nullptr);
 
     //* draw button icon
     void drawIcon(QPainter *) const;
@@ -103,15 +128,6 @@ private:
 
     //* active state change animation
     QVariantAnimation *m_animation;
-
-    //* padding (for rendering)
-    QMargins m_padding;
-
-    //* implicit size
-    QSizeF m_preferredSize;
-
-    //* active state change opacity
-    qreal m_opacity = 0;
 };
 
 } // namespace
