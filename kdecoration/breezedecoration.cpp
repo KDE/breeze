@@ -352,7 +352,7 @@ qreal Decoration::borderSize(bool bottom, qreal scale) const
             return outlinesEnabled() ? std::max<qreal>(pixelSize, KDecoration3::snapToPixelGrid(1, scale)) : 0;
         case InternalSettings::BorderNoSides:
             if (bottom) {
-                return KDecoration3::snapToPixelGrid(std::max(4.0, baseSize), scale);
+                return KDecoration3::snapToPixelGrid(std::max(4.0, baseSize + Metrics::Frame_FrameRadius), scale);
             } else {
                 return outlinesEnabled() ? std::max<qreal>(pixelSize, KDecoration3::snapToPixelGrid(1, scale)) : 0;
             }
@@ -382,7 +382,7 @@ qreal Decoration::borderSize(bool bottom, qreal scale) const
             return outlinesEnabled() ? std::max<qreal>(pixelSize, KDecoration3::snapToPixelGrid(1, scale)) : 0;
         case KDecoration3::BorderSize::NoSides:
             if (bottom) {
-                return KDecoration3::snapToPixelGrid(std::max(4.0, baseSize), scale);
+                return KDecoration3::snapToPixelGrid(std::max(4.0, baseSize + Metrics::Frame_FrameRadius), scale);
             } else {
                 return outlinesEnabled() ? std::max<qreal>(pixelSize, KDecoration3::snapToPixelGrid(1, scale)) : 0;
             }
