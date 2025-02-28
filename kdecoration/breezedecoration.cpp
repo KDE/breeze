@@ -11,6 +11,7 @@
 
 #include "breezesettingsprovider.h"
 
+#include "breezeapplicationmenu.h"
 #include "breezebutton.h"
 
 #include "breezeboxshadowrenderer.h"
@@ -34,7 +35,7 @@
 #include <QTextStream>
 #include <QTimer>
 
-K_PLUGIN_FACTORY_WITH_JSON(BreezeDecoFactory, "breeze.json", registerPlugin<Breeze::Decoration>(); registerPlugin<Breeze::Button>();)
+K_PLUGIN_FACTORY_WITH_JSON(BreezeDecoFactory, "breeze.json", registerPlugin<Breeze::Decoration>(); registerPlugin<Breeze::IconButton>();)
 
 namespace
 {
@@ -507,8 +508,21 @@ void Decoration::recalculateBorders()
 //________________________________________________________________
 void Decoration::createButtons()
 {
-    m_leftButtons = new KDecoration3::DecorationButtonGroup(KDecoration3::DecorationButtonGroup::Position::Left, this, &Button::create);
-    m_rightButtons = new KDecoration3::DecorationButtonGroup(KDecoration3::DecorationButtonGroup::Position::Right, this, &Button::create);
+    auto createButton = [this](KDecoration3::DecorationButtonType type, KDecoration3::Decoration *decoration, QObject *object) -> Button * {
+        Button *button;
+        switch (type) {
+        case KDecoration3::DecorationButtonType::LocallyIntegratedMenu:
+            button = new ApplicationMenuButton(decoration);
+            break;
+        default:
+            button = IconButton::create(type, decoration, object);
+            break;
+        }
+        connect(button, &Button::preferredSizeChanged, this, &Decoration::updateButtonsGeometry);
+        return button;
+    };
+    m_leftButtons = new KDecoration3::DecorationButtonGroup(KDecoration3::DecorationButtonGroup::Position::Left, this, createButton);
+    m_rightButtons = new KDecoration3::DecorationButtonGroup(KDecoration3::DecorationButtonGroup::Position::Right, this, createButton);
     updateButtonsGeometry();
 }
 
