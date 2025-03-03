@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-25 00:45+0000\n"
-"PO-Revision-Date: 2023-09-03 13:43+0200\n"
+"PO-Revision-Date: 2024-08-29 18:22+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -89,7 +89,7 @@ msgstr "Arrastrar as xanelas por calquera área baleira"
 #: ui/breezestyleconfig.ui:148
 #, kde-format
 msgid "Center tabbar tabs"
-msgstr "Centrar as lapelas na barra de lapelas"
+msgstr "Centrar as lapelas na barra de separadores"
 
 #. i18n: ectx: property (text), widget (QCheckBox, _toolBarDrawItemSeparator)
 #: ui/breezestyleconfig.ui:155
