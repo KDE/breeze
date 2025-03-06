@@ -32,7 +32,9 @@ ToolsAreaManager::~ToolsAreaManager()
 
 void ToolsAreaManager::recreateConfigWatcher(const QString &path)
 {
-    _config = KSharedConfig::openConfig(path);
+    const auto openFlags = path.isEmpty() ? KConfig::OpenFlag::FullConfig : KConfig::OpenFlag::NoGlobals;
+    _config = KSharedConfig::openConfig(path, openFlags);
+
     if (!path.startsWith(QLatin1Char('/'))) {
         _watcher = KConfigWatcher::create(_config);
         connect(_watcher.data(), &KConfigWatcher::configChanged, this, &ToolsAreaManager::configUpdated);
