@@ -129,11 +129,18 @@ void ToolsAreaManager::configUpdated()
     _palette.setBrush(QPalette::Inactive, QPalette::Window, inactive.background());
     _palette.setBrush(QPalette::Inactive, QPalette::WindowText, inactive.foreground());
 
-    for (auto window : _windows) {
-        for (auto toolbar : window) {
+    for (auto it = _windows.constBegin(); it != _windows.constEnd(); ++it) {
+        const QMainWindow *window = it.key();
+        const QVector<QPointer<QToolBar>> &toolbars = it.value();
+
+        for (const auto &toolbar : toolbars) {
             if (!toolbar.isNull()) {
                 toolbar->setPalette(_palette);
             }
+        }
+
+        if (QMenuBar *menuBar = window->menuBar()) {
+            menuBar->setPalette(_palette);
         }
     }
 
@@ -186,6 +193,13 @@ bool ToolsAreaManager::eventFilter(QObject *watched, QEvent *event)
         QChildEvent *ev = nullptr;
         if (event->type() == QEvent::ChildAdded || event->type() == QEvent::ChildRemoved) {
             ev = static_cast<QChildEvent *>(event);
+
+            if (event->type() == QEvent::ChildAdded) {
+                QChildEvent *childEvent = static_cast<QChildEvent *>(event);
+                if (QMenuBar *menuBar = qobject_cast<QMenuBar *>(childEvent->child())) {
+                    menuBar->setPalette(_palette);
+                }
+            }
         } else {
             return false;
         }
@@ -223,6 +237,11 @@ void ToolsAreaManager::registerWidget(QWidget *widget)
         for (auto *toolBar : toolBars) {
             tryRegisterToolBar(mainWindow, toolBar);
         }
+
+        if (QMenuBar *menuBar = mainWindow->menuBar()) {
+            menuBar->setPalette(_palette);
+        }
+
         return;
     }
 
