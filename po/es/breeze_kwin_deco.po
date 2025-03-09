@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: breeze_kwin_deco\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-06 00:39+0000\n"
-"PO-Revision-Date: 2025-02-17 22:46+0100\n"
+"PO-Revision-Date: 2025-03-09 01:27+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -418,63 +418,3 @@ msgstr "Añadir"
 #, kde-format
 msgid "Edit"
 msgstr "Editar"
-
-#~ msgid "Si&ze:"
-#~ msgstr "&Tamaño:"
-
-#~ msgid "Color:"
-#~ msgstr "Color:"
-
-#~ msgid "Add handle to resize windows with no border"
-#~ msgstr "Añadir un asa para cambiar el tamaño de las ventanas sin borde"
-
-#~ msgid "Information about Selected Window"
-#~ msgstr "Información sobre la ventana seleccionada"
-
-#~ msgid "Class: "
-#~ msgstr "Clase: "
-
-#~ msgid "Title: "
-#~ msgstr "Título: "
-
-#~ msgid "Window Property Selection"
-#~ msgstr "Selección de propiedad de la ventana"
-
-#~ msgid "Use window class (whole application)"
-#~ msgstr "Usar la clase de la ventana (aplicación completa)"
-
-#~ msgid "Use window title"
-#~ msgstr "Usar el título de la ventana"
-
-#~ msgid "Allow resizing maximized windows from window edges"
-#~ msgstr ""
-#~ "Permitir cambiar el tamaño de las ventanas maximizadas desde sus bordes"
-
-#~ msgid "Draw separator under active window's titlebar"
-#~ msgstr ""
-#~ "Dibujar un separador debajo de la barra de título de la ventana activa"
-
-#~ msgid "Animations"
-#~ msgstr "Animaciones"
-
-#~ msgid "Anima&tions duration:"
-#~ msgstr "&Duración de las animaciones:"
-
-#~ msgid " ms"
-#~ msgstr " ms"
-
-#~ msgid "Enable animations"
-#~ msgstr "Activar animaciones"
-
-#~ msgctxt "@item:inlistbox Button size:"
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgid "px"
-#~ msgstr "px"
-
-#~ msgid "S&ize:"
-#~ msgstr "&Tamaño:"
-
-#~ msgid "Form"
-#~ msgstr "Formulario"

@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the breeze package.
 #
 # Automatically generated, 2014.
-# SPDX-FileCopyrightText: 2014, 2015, 2016, 2017, 2018, 2022, 2024 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2014, 2015, 2016, 2017, 2018, 2022, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: breeze_style_config\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-29 00:40+0000\n"
-"PO-Revision-Date: 2024-08-30 00:56+0200\n"
+"PO-Revision-Date: 2025-03-09 01:27+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 24.12.2\n"
 
 #: main.cpp:25 main.cpp:29
 #, kde-format
@@ -198,61 +198,3 @@ msgstr "Opaco"
 #, kde-format
 msgid "Menu:"
 msgstr "Menú:"
-
-#~ msgid "Always Hide Keyboard Accelerators"
-#~ msgstr "Ocultar siempre los aceleradores de teclado"
-
-#~ msgid "Show Keyboard Accelerators When Needed"
-#~ msgstr "Mostrar los aceleradores de teclado cuando sea necesario"
-
-#~ msgid "Always Show Keyboard Accelerators"
-#~ msgstr "Mostrar siempre los aceleradores de teclado"
-
-#~ msgid "Draw frame around page titles"
-#~ msgstr "Dibujar un marco alrededor de los títulos de página"
-
-#~ msgid "Animations"
-#~ msgstr "Animaciones"
-
-#~ msgid "A&nimations duration:"
-#~ msgstr "Duración de las a&nimaciones:"
-
-#~ msgid " ms"
-#~ msgstr " ms"
-
-#~ msgid "Enable animations"
-#~ msgstr "Activar animaciones"
-
-#~ msgid "Only show full scrollbar on mouse over"
-#~ msgstr "Mostrar barrar de desplazamiento completa solo al mover el ratón"
-
-#~ msgid "Advanced"
-#~ msgstr "Avanzado"
-
-#~ msgid "Widget Style"
-#~ msgstr "Estilo de los elementos gráficos"
-
-#~ msgid "Modify the appearance of widgets"
-#~ msgstr "Modificar el aspecto de los elementos gráficos"
-
-#~ msgid "Window Decorations"
-#~ msgstr "Decoraciones de ventanas"
-
-#~ msgid "Modify the appearance of window decorations"
-#~ msgstr "Modificar el aspecto de las decoraciones de las ventanas"
-
-#~ msgid "Unable to find breeze style configuration plugin"
-#~ msgstr ""
-#~ "No ha sido posible encontrar el complemento de configuración del estilo "
-#~ "de Brisa"
-
-#~ msgid "Unable to find breeze decoration configuration plugin"
-#~ msgstr ""
-#~ "No ha sido posible encontrar el complemento de configuración de la "
-#~ "decoración de Brisa"
-
-#~ msgid "Dialog"
-#~ msgstr "Diálogo"
-
-#~ msgid "Form"
-#~ msgstr "Formulario"
