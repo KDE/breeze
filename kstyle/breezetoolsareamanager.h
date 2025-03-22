@@ -31,7 +31,7 @@ class ToolsAreaManager : public QObject
     Q_OBJECT
 
 private:
-    QHash<const QMainWindow *, QVector<QPointer<QToolBar>>> _windows;
+    QMap<QPointer<const QMainWindow>, QVector<QPointer<QToolBar>>> _windows;
     KSharedConfigPtr _config;
     KConfigWatcher::Ptr _watcher;
     QPalette _palette = QPalette();
@@ -43,8 +43,8 @@ private:
     friend class AppListener;
 
 protected:
-    bool tryRegisterToolBar(QPointer<QMainWindow> window, QPointer<QWidget> widget);
-    void tryUnregisterToolBar(QPointer<QMainWindow> window, QPointer<QWidget> widget);
+    bool tryRegisterToolBar(QPointer<const QMainWindow> window, QPointer<QWidget> widget);
+    void tryUnregisterToolBar(QPointer<const QMainWindow> window, QPointer<QWidget> widget);
     void configUpdated();
 
 public:
@@ -62,7 +62,7 @@ public:
     void registerWidget(QWidget *widget);
     void unregisterWidget(QWidget *widget);
 
-    QRect toolsAreaRect(const QMainWindow *window);
+    QRect toolsAreaRect(const QMainWindow &window) const;
 
     bool hasHeaderColors();
 };
