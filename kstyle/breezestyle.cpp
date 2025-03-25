@@ -1293,7 +1293,7 @@ bool Style::drawWidgetPrimitive(const QStyleOption *option, QPainter *painter, c
     if (mw && mw == mw->window()) {
         painter->save();
 
-        auto rect = _toolsAreaManager->toolsAreaRect(mw);
+        auto rect = _toolsAreaManager->toolsAreaRect(*mw);
 
         if (rect.height() == 0) {
             if (mw->property(PropertyNames::noSeparator).toBool() || mw->isFullScreen()) {
