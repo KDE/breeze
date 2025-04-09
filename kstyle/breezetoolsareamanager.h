@@ -37,12 +37,17 @@ private:
     };
     std::vector<WindowToolBars> _windows;
     KSharedConfigPtr _config;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     KConfigWatcher::Ptr _watcher;
+#endif
     QPalette _palette = QPalette();
     AppListener *_listener;
     bool _colorSchemeHasHeaderColor;
 
+    void loadSchemeConfig(const QString &path);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     void recreateConfigWatcher(const QString &path);
+#endif
     void appendIfNotAlreadyExists(const QMainWindow *window, const QPointer<QToolBar> &toolBar);
     void removeWindowToolBar(const QMainWindow *window, const QPointer<QToolBar> &toolBar);
     void removeWindow(const QMainWindow *window);
