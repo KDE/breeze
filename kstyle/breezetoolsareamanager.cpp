@@ -18,11 +18,13 @@ namespace Breeze
 ToolsAreaManager::ToolsAreaManager()
     : QObject()
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QString path;
     if (qApp && qApp->property(colorProperty).isValid()) {
         path = qApp->property(colorProperty).toString();
     }
     recreateConfigWatcher(path);
+#endif
     configUpdated();
 }
 
@@ -30,11 +32,16 @@ ToolsAreaManager::~ToolsAreaManager()
 {
 }
 
-void ToolsAreaManager::recreateConfigWatcher(const QString &path)
+void ToolsAreaManager::loadSchemeConfig(const QString &path)
 {
     const auto openFlags = path.isEmpty() ? KConfig::OpenFlag::FullConfig : KConfig::OpenFlag::NoGlobals;
     _config = KSharedConfig::openConfig(path, openFlags);
+}
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+void ToolsAreaManager::recreateConfigWatcher(const QString &path)
+{
+    loadSchemeConfig(path);
     if (!path.startsWith(QLatin1Char('/'))) {
         _watcher = KConfigWatcher::create(_config);
         connect(_watcher.data(), &KConfigWatcher::configChanged, this, &ToolsAreaManager::configUpdated);
@@ -42,6 +49,7 @@ void ToolsAreaManager::recreateConfigWatcher(const QString &path)
         _watcher.reset();
     }
 }
+#endif
 
 void ToolsAreaManager::appendIfNotAlreadyExists(const QMainWindow *window, const QPointer<QToolBar> &toolBar)
 {
@@ -81,10 +89,12 @@ void ToolsAreaManager::registerApplication(QApplication *application)
 {
     _listener = new AppListener(this);
     _listener->manager = this;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     if (application->property(colorProperty).isValid()) {
         auto path = application->property(colorProperty).toString();
         recreateConfigWatcher(path);
     }
+#endif
     application->installEventFilter(_listener);
     configUpdated();
 }
@@ -144,11 +154,25 @@ void ToolsAreaManager::tryUnregisterToolBar(QPointer<const QMainWindow> window, 
 
 void ToolsAreaManager::configUpdated()
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    if (qApp->property(colorProperty).isValid()) {
+        const auto colorSchemePath = qApp->property(colorProperty).toString();
+        if (!_config || _config->name() != colorSchemePath) {
+            loadSchemeConfig(colorSchemePath);
+        }
+    } else {
+        loadSchemeConfig(QString{});
+    }
+#endif
     auto active = KColorScheme(QPalette::Active, KColorScheme::Header, _config);
     auto inactive = KColorScheme(QPalette::Inactive, KColorScheme::Header, _config);
     auto disabled = KColorScheme(QPalette::Disabled, KColorScheme::Header, _config);
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    _palette = qApp->palette();
+#else
     _palette = KColorScheme::createApplicationPalette(_config);
+#endif
 
     _palette.setBrush(QPalette::Active, QPalette::Window, active.background());
     _palette.setBrush(QPalette::Active, QPalette::WindowText, active.foreground());
@@ -169,7 +193,7 @@ void ToolsAreaManager::configUpdated()
         }
     }
 
-    _colorSchemeHasHeaderColor = KColorScheme::isColorSetSupported(_config, KColorScheme::Header);
+    _colorSchemeHasHeaderColor = _config ? KColorScheme::isColorSetSupported(_config, KColorScheme::Header) : false;
 }
 
 bool AppListener::eventFilter(QObject *watched, QEvent *event)
@@ -181,10 +205,12 @@ bool AppListener::eventFilter(QObject *watched, QEvent *event)
         return false;
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    if (event->type() == QEvent::ApplicationPaletteChange) {
+        manager->configUpdated();
+    }
+#else
     if (event->type() == QEvent::DynamicPropertyChange) {
-        if (watched != qApp) {
-            return false;
-        }
         auto ev = static_cast<QDynamicPropertyChangeEvent *>(event);
         if (ev->propertyName() == colorProperty) {
             QString path;
@@ -195,6 +221,7 @@ bool AppListener::eventFilter(QObject *watched, QEvent *event)
             manager->configUpdated();
         }
     }
+#endif
 
     return false;
 }
