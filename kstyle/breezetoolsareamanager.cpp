@@ -11,7 +11,23 @@
 
 #include <KColorUtils>
 
+#ifdef Q_OS_WIN
+#include "windows.h"
+#endif
+
 const char *colorProperty = "KDE_COLOR_SCHEME_PATH";
+
+#ifdef Q_OS_WIN
+static bool isHighContrastModeActive()
+{
+    HIGHCONTRAST result;
+    result.cbSize = sizeof(HIGHCONTRAST);
+    if (SystemParametersInfo(SPI_GETHIGHCONTRAST, result.cbSize, &result, 0)) {
+        return (result.dwFlags & HCF_HIGHCONTRASTON);
+    }
+    return false;
+}
+#endif
 
 namespace Breeze
 {
@@ -157,11 +173,27 @@ void ToolsAreaManager::configUpdated()
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     if (qApp->property(colorProperty).isValid()) {
         const auto colorSchemePath = qApp->property(colorProperty).toString();
-        if (!_config || _config->name() != colorSchemePath) {
-            loadSchemeConfig(colorSchemePath);
+#ifdef Q_OS_WIN
+        // If no color scheme is set and high-contrast is active then use the system colors
+        if (colorSchemePath.isEmpty() && isHighContrastModeActive()) {
+            _config.reset();
+        } else
+#endif
+        {
+            if (!_config || _config->name() != colorSchemePath) {
+                loadSchemeConfig(colorSchemePath);
+            }
         }
     } else {
-        loadSchemeConfig(QString{});
+#ifdef Q_OS_WIN
+        // If high-contrast is active then use the system colors
+        if (isHighContrastModeActive()) {
+            _config.reset();
+        } else
+#endif
+        {
+            loadSchemeConfig(QString{});
+        }
     }
 #endif
     auto active = KColorScheme(QPalette::Active, KColorScheme::Header, _config);
