@@ -1,6 +1,6 @@
 # Breeze
 
-Breeze is the default style for [Plasma](https://kde.org/plasma-desktop/). This repository contains some parts of Breeze such as the cursors, wallpapers, and the application style.
+Breeze is the default application style for apps run in [Plasma](https://kde.org/plasma-desktop/).
 
 ## Components
 
@@ -10,7 +10,6 @@ This repository contains many parts of Breeze, such as:
 * Cursors, located under [/cursors](/cursors).
 * Window decorations, located under [/kdecoration](/kdecoration).
 * Application style, located under [/kstyle](/kstyle).
-* Wallpapers, located under [/wallpapers](/wallpapers).
 
 ### See Also
 

@@ -112,7 +112,6 @@ function(build_Qt6)
         set(HAVE_QTDBUS ${Qt6DBus_FOUND})
 
         option(WITH_DECORATIONS "Build Breeze window decorations for KWin" ON)
-        option(WITH_WALLPAPERS "Install Breeze default wallpapers" ON)
 
         find_package(KF6FrameworkIntegration ${KF6_MIN_VERSION} CONFIG )
         set_package_properties(KF${QT_MAJOR_VERSION}FrameworkIntegration PROPERTIES
@@ -129,7 +128,6 @@ function(build_Qt6)
         )
     else()
         set(WITH_DECORATIONS OFF)
-        set(WITH_WALLPAPERS OFF)
     endif()
 
     find_package(Qt6 ${QT_MIN_VERSION} REQUIRED CONFIG COMPONENTS Widgets Core Svg)
@@ -167,9 +165,6 @@ function(build_Qt6)
     if(WITH_DECORATIONS)
         find_package(KDecoration3 REQUIRED)
         add_subdirectory(kdecoration)
-    endif()
-    if (WITH_WALLPAPERS)
-        add_subdirectory(wallpapers)
     endif()
 
     ki18n_install(po)
