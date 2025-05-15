@@ -42,6 +42,15 @@
         ],
         "Id": "Next",
         "License": "CC-BY-SA-4.0",
-        "Name": "Coast"
+        "Name": "Coast",
+        "Name[ar]": "الساحل",
+        "Name[bg]": "Бряг",
+        "Name[ca]": "Coast",
+        "Name[ia]": "Costa (Coast)",
+        "Name[ka]": "სანაპირო",
+        "Name[nl]": "Kust",
+        "Name[sl]": "Obala",
+        "Name[uk]": "Берег",
+        "Name[x-test]": "xxCoastxx"
     }
 }
