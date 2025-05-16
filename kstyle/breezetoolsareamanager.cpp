@@ -184,6 +184,8 @@ void ToolsAreaManager::configUpdated()
                 loadSchemeConfig(colorSchemePath);
             }
         }
+    } else {
+        loadSchemeConfig(QString{});
     }
 #endif
     auto active = KColorScheme(QPalette::Active, KColorScheme::Header, _config);
