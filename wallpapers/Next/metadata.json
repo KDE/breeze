@@ -46,11 +46,14 @@
         "Name[ar]": "الساحل",
         "Name[bg]": "Бряг",
         "Name[ca]": "Coast",
+        "Name[es]": "Costa",
         "Name[ia]": "Costa (Coast)",
         "Name[ka]": "სანაპირო",
         "Name[nl]": "Kust",
         "Name[sl]": "Obala",
+        "Name[tr]": "Sahil",
         "Name[uk]": "Берег",
-        "Name[x-test]": "xxCoastxx"
+        "Name[x-test]": "xxCoastxx",
+        "Name[zh_CN]": "Coast 海岸"
     }
 }
