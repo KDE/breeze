@@ -47,6 +47,8 @@
         "Name[bg]": "Бряг",
         "Name[ca]": "Coast",
         "Name[es]": "Costa",
+        "Name[fr]": "Littoral",
+        "Name[gl]": "Costa",
         "Name[ia]": "Costa (Coast)",
         "Name[ka]": "სანაპირო",
         "Name[nl]": "Kust",
@@ -54,6 +56,7 @@
         "Name[tr]": "Sahil",
         "Name[uk]": "Берег",
         "Name[x-test]": "xxCoastxx",
-        "Name[zh_CN]": "Coast 海岸"
+        "Name[zh_CN]": "Coast 海岸",
+        "Name[zh_TW]": "海岸"
     }
 }
