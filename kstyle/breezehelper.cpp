@@ -1109,7 +1109,7 @@ void Helper::renderRadioButton(QPainter *painter,
 
         break;
     case RadioAnimated:
-        adjustFactor = markerRect.height() * (1 - animation);
+        adjustFactor = markerRect.height() * (1 - animation) / 2.0;
         markerRect.adjust(adjustFactor, adjustFactor, -adjustFactor, -adjustFactor);
         painter->drawEllipse(markerRect);
 
