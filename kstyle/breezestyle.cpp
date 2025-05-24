@@ -4739,6 +4739,7 @@ bool Style::drawPanelItemViewItemPrimitive(const QStyleOption *option, QPainter 
 bool Style::drawIndicatorCheckBoxPrimitive(const QStyleOption *option, QPainter *painter, const QWidget *widget) const
 {
     const QObject *styleObject = widget ? widget : option->styleObject;
+    isQtQuickControl(option, widget); // registers it with widgetStateEngine.
 
     // copy rect and palette
     const auto &rect(option->rect);
@@ -4780,6 +4781,7 @@ bool Style::drawIndicatorCheckBoxPrimitive(const QStyleOption *option, QPainter 
 bool Style::drawIndicatorRadioButtonPrimitive(const QStyleOption *option, QPainter *painter, const QWidget *widget) const
 {
     const QObject *styleObject = widget ? widget : option->styleObject;
+    isQtQuickControl(option, widget); // registers it with widgetStateEngine.
 
     // copy rect and palette
     const auto &rect(option->rect);
@@ -5463,6 +5465,7 @@ bool Style::drawCheckBoxLabelControl(const QStyleOption *option, QPainter *paint
     }
 
     const QObject *styleObject = widget ? widget : option->styleObject;
+    isQtQuickControl(option, widget); // registers it with widgetStateEngine.
 
     // copy palette and rect
     const auto &palette(option->palette);
@@ -8460,6 +8463,7 @@ bool Style::isQtQuickControl(const QStyleOption *option, const QWidget *widget) 
     if (!widget && option) {
         if (const auto item = qobject_cast<QQuickItem *>(option->styleObject)) {
             _windowManager->registerQuickItem(item);
+            _animations->registerWidget(item);
             return true;
         }
     }
