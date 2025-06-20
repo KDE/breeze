@@ -4437,6 +4437,10 @@ bool Style::drawPanelButtonCommandPrimitive(const QStyleOption *option, QPainter
     // Use to determine if this button is a default button.
     bool defaultButton = false;
     bool hasNeutralHighlight = hasHighlightNeutral(widget, option);
+    bool roundButton = widget ? widget->property(PropertyNames::roundButton).toBool() : false;
+    if (!roundButton && option->styleObject) {
+        roundButton = option->styleObject->property(PropertyNames::roundButton).toBool();
+    }
 
     const auto buttonOption = qstyleoption_cast<const QStyleOptionButton *>(option);
     if (buttonOption) {
@@ -4470,6 +4474,7 @@ bool Style::drawPanelButtonCommandPrimitive(const QStyleOption *option, QPainter
     stateProperties["defaultButton"] = defaultButton;
     stateProperties["hasNeutralHighlight"] = hasNeutralHighlight;
     stateProperties["isActiveWindow"] = widget ? widget->isActiveWindow() : true;
+    stateProperties["roundButton"] = roundButton;
 
     _helper->renderButtonFrame(painter, option->rect, option->palette, stateProperties, bgAnimation, penAnimation);
 

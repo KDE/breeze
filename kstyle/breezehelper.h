@@ -327,7 +327,7 @@ public:
     void renderDecorationButton(QPainter *, const QRectF &, const QColor &, ButtonType, bool inverted) const;
 
     //* generic shadow for rounded rectangles
-    void renderRoundedRectShadow(QPainter *, const QRectF &, const QColor &, qreal radius = Metrics::Frame_FrameRadius - PenWidth::Shadow / 2) const;
+    void renderRoundedRectShadow(QPainter *, const QRectF &, const QColor &, qreal radius) const;
 
     //* generic shadow for ellipses
     void renderEllipseShadow(QPainter *, const QRectF &, const QColor &) const;
