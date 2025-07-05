@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2022-05-20 17:53+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -25,90 +25,176 @@ msgstr ""
 msgid "Breeze Settings"
 msgstr "Настройка Breeze"
 
-#~ msgid "General"
-#~ msgstr "Основное"
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: ui/breezestyleconfig.ui:39
+#, kde-format
+msgid "General"
+msgstr "Основное"
 
-#~ msgid "W&indows' drag mode:"
-#~ msgstr "П&еретаскивание окон:"
+#. i18n: ectx: property (text), widget (QLabel, _windowDragLabel)
+#: ui/breezestyleconfig.ui:51
+#, kde-format
+msgid "W&indows' drag mode:"
+msgstr "П&еретаскивание окон:"
 
-#~ msgid "Draw focus indicator in lists"
-#~ msgstr "Показывать индикатор фокуса в списках"
+#. i18n: ectx: property (text), widget (QCheckBox, _viewDrawFocusIndicator)
+#: ui/breezestyleconfig.ui:64
+#, kde-format
+msgid "Draw focus indicator in lists"
+msgstr "Показывать индикатор фокуса в списках"
 
-#~ msgid "&Keyboard accelerators visibility:"
-#~ msgstr "&Видимость клавиш быстрого доступа:"
+#. i18n: ectx: property (text), widget (QLabel, _mnemonicsLabel)
+#: ui/breezestyleconfig.ui:71
+#, kde-format
+msgid "&Keyboard accelerators visibility:"
+msgstr "&Видимость клавиш быстрого доступа:"
 
-#~ msgid "Always hide"
-#~ msgstr "Скрывать всегда"
+#. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
+#: ui/breezestyleconfig.ui:85
+#, kde-format
+msgid "Always hide"
+msgstr "Скрывать всегда"
 
-#~ msgid "Show when Alt key is pressed"
-#~ msgstr "Показывать при нажатии клавиши Alt"
+#. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
+#: ui/breezestyleconfig.ui:90
+#, kde-format
+msgid "Show when Alt key is pressed"
+msgstr "Показывать при нажатии клавиши Alt"
 
-#~ msgid "Always show"
-#~ msgstr "Показывать всегда"
+#. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
+#: ui/breezestyleconfig.ui:95
+#, kde-format
+msgid "Always show"
+msgstr "Показывать всегда"
 
-#~ msgid "Drag windows from titlebar only"
-#~ msgstr "Перетаскивание только за заголовок окна"
+#. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
+#: ui/breezestyleconfig.ui:117
+#, kde-format
+msgid "Drag windows from titlebar only"
+msgstr "Перетаскивание только за заголовок окна"
 
-#~ msgid "Drag windows from titlebar, menubar and toolbars"
-#~ msgstr "Перетаскивание за заголовок, строку меню и панели инструментов"
+#. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
+#: ui/breezestyleconfig.ui:122
+#, kde-format
+msgid "Drag windows from titlebar, menubar and toolbars"
+msgstr "Перетаскивание за заголовок, строку меню и панели инструментов"
 
-#~ msgid "Drag windows from all empty areas"
-#~ msgstr "Перетаскивание за все пустые области окна"
+#. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
+#: ui/breezestyleconfig.ui:127
+#, kde-format
+msgid "Drag windows from all empty areas"
+msgstr "Перетаскивание за все пустые области окна"
 
-#~ msgid "Center tabbar tabs"
-#~ msgstr "Выравнивать заголовки вкладок по центру"
+#. i18n: ectx: property (text), widget (QCheckBox, _tabBarDrawCenteredTabs)
+#: ui/breezestyleconfig.ui:148
+#, kde-format
+msgid "Center tabbar tabs"
+msgstr "Выравнивать заголовки вкладок по центру"
 
-#~ msgid "Draw toolbar item separators"
-#~ msgstr "Показывать разделители элементов панели инструментов"
+#. i18n: ectx: property (text), widget (QCheckBox, _toolBarDrawItemSeparator)
+#: ui/breezestyleconfig.ui:155
+#, kde-format
+msgid "Draw toolbar item separators"
+msgstr "Показывать разделители элементов панели инструментов"
 
-#~ msgid "Draw slider tick marks"
-#~ msgstr "Показывать деления на ползунках"
+#. i18n: ectx: property (text), widget (QCheckBox, _sliderDrawTickMarks)
+#: ui/breezestyleconfig.ui:162
+#, kde-format
+msgid "Draw slider tick marks"
+msgstr "Показывать деления на ползунках"
 
-#~ msgid "Enable extended resize handles"
-#~ msgstr "Использовать расширенные элементы управления размером"
+#. i18n: ectx: property (text), widget (QCheckBox, _splitterProxyEnabled)
+#: ui/breezestyleconfig.ui:169
+#, kde-format
+msgid "Enable extended resize handles"
+msgstr "Использовать расширенные элементы управления размером"
 
-#~ msgid "Frames"
-#~ msgstr "Рамки"
+#. i18n: ectx: attribute (title), widget (QWidget, tab_3)
+#: ui/breezestyleconfig.ui:177
+#, kde-format
+msgid "Frames"
+msgstr "Рамки"
 
-#~ msgid "Draw frame around dockable panels"
-#~ msgstr "Показывать рамки вокруг перемещаемых панелей"
+#. i18n: ectx: property (text), widget (QCheckBox, _dockWidgetDrawFrame)
+#: ui/breezestyleconfig.ui:183
+#, kde-format
+msgid "Draw frame around dockable panels"
+msgstr "Показывать рамки вокруг перемещаемых панелей"
 
-#~ msgid "Draw frame around side panels"
-#~ msgstr "Показывать рамки вокруг боковых панелей"
+#. i18n: ectx: property (text), widget (QCheckBox, _sidePanelDrawFrame)
+#: ui/breezestyleconfig.ui:190
+#, kde-format
+msgid "Draw frame around side panels"
+msgstr "Показывать рамки вокруг боковых панелей"
 
-#~ msgid "Draw a thin line to indicate focus in menus and menubars"
-#~ msgstr ""
-#~ "Использовать тонкую линию для выделения фокуса в меню и в строке меню"
+#. i18n: ectx: property (text), widget (QCheckBox, _menuItemDrawThinFocus)
+#: ui/breezestyleconfig.ui:197
+#, kde-format
+msgid "Draw a thin line to indicate focus in menus and menubars"
+msgstr "Использовать тонкую линию для выделения фокуса в меню и в строке меню"
 
-#~ msgid "Scrollbars"
-#~ msgstr "Полосы прокрутки"
+#. i18n: ectx: attribute (title), widget (QWidget, tab_4)
+#: ui/breezestyleconfig.ui:218
+#, kde-format
+msgid "Scrollbars"
+msgstr "Полосы прокрутки"
 
-#~ msgid "Bottom arrow button t&ype:"
-#~ msgstr "Кнопки с&низу:"
+#. i18n: ectx: property (text), widget (QLabel, _scrollBarAddLineLabel)
+#: ui/breezestyleconfig.ui:237
+#, kde-format
+msgid "Bottom arrow button t&ype:"
+msgstr "Кнопки с&низу:"
 
-#~ msgid "&Top arrow button type:"
-#~ msgstr "Кнопки с&верху:"
+#. i18n: ectx: property (text), widget (QLabel, _scrollBarSubLineLabel)
+#: ui/breezestyleconfig.ui:250
+#, kde-format
+msgid "&Top arrow button type:"
+msgstr "Кнопки с&верху:"
 
-#~ msgid "No Buttons"
-#~ msgstr "Нет кнопок"
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
+#: ui/breezestyleconfig.ui:264 ui/breezestyleconfig.ui:283
+#, kde-format
+msgid "No Buttons"
+msgstr "Нет кнопок"
 
-#~ msgid "One Button"
-#~ msgstr "Одна кнопка"
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
+#: ui/breezestyleconfig.ui:269 ui/breezestyleconfig.ui:288
+#, kde-format
+msgid "One Button"
+msgstr "Одна кнопка"
 
-#~ msgid "Two Buttons"
-#~ msgstr "Две кнопки"
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
+#: ui/breezestyleconfig.ui:274 ui/breezestyleconfig.ui:293
+#, kde-format
+msgid "Two Buttons"
+msgstr "Две кнопки"
 
-#~ msgid "Transparency"
-#~ msgstr "Прозрачность"
+#. i18n: ectx: attribute (title), widget (QWidget, tab_5)
+#: ui/breezestyleconfig.ui:315
+#, kde-format
+msgid "Transparency"
+msgstr "Прозрачность"
 
-#~ msgid "Transparent"
-#~ msgstr "Прозрачно"
+#. i18n: ectx: property (text), widget (QLabel, _menuOpacityTransparentLabel)
+#: ui/breezestyleconfig.ui:336
+#, kde-format
+msgid "Transparent"
+msgstr "Прозрачно"
 
-#~ msgid "Opaque"
-#~ msgstr "Непрозрачно"
+#. i18n: ectx: property (text), widget (QLabel, _menuOpacityOpaqueLabel)
+#: ui/breezestyleconfig.ui:362
+#, kde-format
+msgid "Opaque"
+msgstr "Непрозрачно"
 
-#~ msgid "Menu:"
-#~ msgstr "Меню:"
+#. i18n: ectx: property (text), widget (QLabel, _menuGroupDescription)
+#: ui/breezestyleconfig.ui:373
+#, kde-format
+msgid "Menu:"
+msgstr "Меню:"
 
 #~ msgid "Always Hide Keyboard Accelerators"
 #~ msgstr "Всегда скрывать"

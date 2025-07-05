@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2020-12-19 13:38+0100\n"
 "Last-Translator: Kristóf Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -38,7 +38,9 @@ msgstr "Kérdés - Breeze beállítások"
 msgid "Remove selected exception?"
 msgstr "Eltávolítja a kijelölt kivételt?"
 
+#. i18n: ectx: property (text), widget (QPushButton, removeButton)
 #: config/breezeexceptionlistwidget.cpp:170
+#: config/ui/breezeexceptionlistwidget.ui:91
 #, kde-format
 msgid "Remove"
 msgstr "Eltávolítás"
@@ -63,12 +65,14 @@ msgstr "Kivételtípus"
 msgid "Regular Expression"
 msgstr "Reguláris kifejezés"
 
-#: config/breezeexceptionmodel.cpp:36
+#. i18n: ectx: property (text), item, widget (QComboBox, exceptionType)
+#: config/breezeexceptionmodel.cpp:36 config/ui/breezeexceptiondialog.ui:72
 #, kde-format
 msgid "Window Title"
 msgstr "Ablakcím"
 
-#: config/breezeexceptionmodel.cpp:40
+#. i18n: ectx: property (text), item, widget (QComboBox, exceptionType)
+#: config/breezeexceptionmodel.cpp:40 config/ui/breezeexceptiondialog.ui:67
 #, kde-format
 msgid "Window Class Name"
 msgstr "Ablakosztály neve"
@@ -78,153 +82,297 @@ msgstr "Ablakosztály neve"
 msgid "Enable/disable this exception"
 msgstr "Ezen kivétel engedélyezése/tiltása"
 
-#~ msgid "General"
-#~ msgstr "Általános"
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: config/ui/breezeconfigurationui.ui:33
+#, kde-format
+msgid "General"
+msgstr "Általános"
 
-#~ msgid "Tit&le alignment:"
-#~ msgstr "&Címsorigazítás:"
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: config/ui/breezeconfigurationui.ui:39
+#, kde-format
+msgid "Tit&le alignment:"
+msgstr "&Címsorigazítás:"
 
-#~ msgid "Left"
-#~ msgstr "Balra"
+#. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
+#: config/ui/breezeconfigurationui.ui:53
+#, kde-format
+msgid "Left"
+msgstr "Balra"
 
-#~ msgid "Center"
-#~ msgstr "Középre"
+#. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
+#: config/ui/breezeconfigurationui.ui:58
+#, kde-format
+msgid "Center"
+msgstr "Középre"
 
-#~ msgid "Center (Full Width)"
-#~ msgstr "Középre, teljes szélességgel"
+#. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
+#: config/ui/breezeconfigurationui.ui:63
+#, kde-format
+msgid "Center (Full Width)"
+msgstr "Középre, teljes szélességgel"
 
-#~ msgid "Right"
-#~ msgstr "Jobbra"
+#. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
+#: config/ui/breezeconfigurationui.ui:68
+#, kde-format
+msgid "Right"
+msgstr "Jobbra"
 
-#~ msgid "B&utton size:"
-#~ msgstr "&Gombméret:"
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: config/ui/breezeconfigurationui.ui:89
+#, kde-format
+msgid "B&utton size:"
+msgstr "&Gombméret:"
 
-#~ msgid "Tiny"
-#~ msgstr "Apró"
+#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
+#: config/ui/breezeconfigurationui.ui:103
+#, kde-format
+msgid "Tiny"
+msgstr "Apró"
 
-#~ msgctxt "@item:inlistbox Button size:"
-#~ msgid "Small"
-#~ msgstr "Kicsi"
+#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
+#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
+#: config/ui/breezeconfigurationui.ui:108
+#: config/ui/breezeconfigurationui.ui:221
+#, kde-format
+msgctxt "@item:inlistbox Button size:"
+msgid "Small"
+msgstr "Kicsi"
 
-#~ msgctxt "@item:inlistbox Button size:"
-#~ msgid "Medium"
-#~ msgstr "Közepes"
+#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
+#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
+#: config/ui/breezeconfigurationui.ui:113
+#: config/ui/breezeconfigurationui.ui:226
+#, kde-format
+msgctxt "@item:inlistbox Button size:"
+msgid "Medium"
+msgstr "Közepes"
 
-#~ msgctxt "@item:inlistbox Button size:"
-#~ msgid "Large"
-#~ msgstr "Nagy"
+#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
+#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
+#: config/ui/breezeconfigurationui.ui:118
+#: config/ui/breezeconfigurationui.ui:231
+#, kde-format
+msgctxt "@item:inlistbox Button size:"
+msgid "Large"
+msgstr "Nagy"
 
-#~ msgctxt "@item:inlistbox Button size:"
-#~ msgid "Very Large"
-#~ msgstr "Nagyon nagy"
+#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
+#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
+#: config/ui/breezeconfigurationui.ui:123
+#: config/ui/breezeconfigurationui.ui:236
+#, kde-format
+msgctxt "@item:inlistbox Button size:"
+msgid "Very Large"
+msgstr "Nagyon nagy"
 
-#~ msgid "Draw a circle around close button"
-#~ msgstr "Kör rajzolása a bezárás gomb körül"
+#. i18n: ectx: property (text), widget (QCheckBox, outlineCloseButton)
+#: config/ui/breezeconfigurationui.ui:131
+#, kde-format
+msgid "Draw a circle around close button"
+msgstr "Kör rajzolása a bezárás gomb körül"
 
-#, fuzzy
-#~| msgid "Display window borders for maximized windows"
-#~ msgid "Draw border on maximized and tiled windows"
-#~ msgstr "Ablakkeretek megjelenítése maximalizált ablakoknál"
+#. i18n: ectx: property (text), widget (QCheckBox, drawBorderOnMaximizedWindows)
+#: config/ui/breezeconfigurationui.ui:138
+#, fuzzy, kde-format
+#| msgid "Display window borders for maximized windows"
+msgid "Draw border on maximized and tiled windows"
+msgstr "Ablakkeretek megjelenítése maximalizált ablakoknál"
 
-#~ msgid "Draw titlebar background gradient"
-#~ msgstr "Színátmenetes ablakháttér rajzolása"
+#. i18n: ectx: property (text), widget (QLabel, drawBorderOnMaximizedWindowsHelpLabel)
+#: config/ui/breezeconfigurationui.ui:163
+#, kde-format
+msgid ""
+"This setting will allow you to resize from window edges touching screen "
+"edges. Scrollbars and window close buttons will shift positions and will not "
+"touch screen edges."
+msgstr ""
 
-#~ msgid "Shadows"
-#~ msgstr "Árnyékok"
+#. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
+#: config/ui/breezeconfigurationui.ui:175
+#, kde-format
+msgid "Draw titlebar background gradient"
+msgstr "Színátmenetes ablakháttér rajzolása"
 
-#~ msgid "Si&ze:"
-#~ msgstr "Mé&ret:"
+#. i18n: ectx: attribute (title), widget (QWidget, tab_4)
+#: config/ui/breezeconfigurationui.ui:196
+#, kde-format
+msgid "Shadows"
+msgstr "Árnyékok"
 
-#~ msgctxt "@item:inlistbox Button size:"
-#~ msgid "None"
-#~ msgstr "Nincs"
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: config/ui/breezeconfigurationui.ui:202
+#, kde-format
+msgid "Si&ze:"
+msgstr "Mé&ret:"
 
-#~ msgctxt "strength of the shadow (from transparent to opaque)"
-#~ msgid "S&trength:"
-#~ msgstr "E&rősség:"
+#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
+#: config/ui/breezeconfigurationui.ui:216
+#, kde-format
+msgctxt "@item:inlistbox Button size:"
+msgid "None"
+msgstr "Nincs"
 
-#~ msgid "%"
-#~ msgstr "%"
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: config/ui/breezeconfigurationui.ui:244
+#, kde-format
+msgctxt "strength of the shadow (from transparent to opaque)"
+msgid "S&trength:"
+msgstr "E&rősség:"
 
-#~ msgid "Color:"
-#~ msgstr "Szín:"
+#. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
+#: config/ui/breezeconfigurationui.ui:257
+#, no-c-format, kde-format
+msgid "%"
+msgstr "%"
 
-#~ msgid "Window-Specific Overrides"
-#~ msgstr "Ablakspecifikus felülbírálás"
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: config/ui/breezeconfigurationui.ui:283
+#, kde-format
+msgid "Color:"
+msgstr "Szín:"
 
-#~ msgid "Dialog"
-#~ msgstr "Párbeszédablak"
+#. i18n: ectx: attribute (title), widget (QWidget, tab_3)
+#: config/ui/breezeconfigurationui.ui:310
+#, kde-format
+msgid "Window-Specific Overrides"
+msgstr "Ablakspecifikus felülbírálás"
 
-#~ msgid "Window Identification"
-#~ msgstr "Azonosító"
+#. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
+#: config/ui/breezeexceptiondialog.ui:14
+#, kde-format
+msgid "Dialog"
+msgstr "Párbeszédablak"
 
-#~ msgid "&Matching window property: "
-#~ msgstr "Ablaktulajdonság ill&esztése: "
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: config/ui/breezeexceptiondialog.ui:20
+#, kde-format
+msgid "Window Identification"
+msgstr "Azonosító"
 
-#~ msgid "Regular expression &to match: "
-#~ msgstr "Az illesz&tendő reguláris kifejezés: "
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: config/ui/breezeexceptiondialog.ui:26
+#, kde-format
+msgid "&Matching window property: "
+msgstr "Ablaktulajdonság ill&esztése: "
 
-#, fuzzy
-#~| msgid "Detect Window Properties"
-#~ msgid "Detect Window Properties…"
-#~ msgstr "Ablaktulajdonságok felismerése"
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: config/ui/breezeexceptiondialog.ui:39
+#, kde-format
+msgid "Regular expression &to match: "
+msgstr "Az illesz&tendő reguláris kifejezés: "
 
-#~ msgid "Decoration Options"
-#~ msgstr "Ablakkeret-megjelenítési beállítások"
+#. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
+#: config/ui/breezeexceptiondialog.ui:52
+#, fuzzy, kde-format
+#| msgid "Detect Window Properties"
+msgid "Detect Window Properties…"
+msgstr "Ablaktulajdonságok felismerése"
 
-#~ msgid "Border size:"
-#~ msgstr "Szegélyméret:"
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: config/ui/breezeexceptiondialog.ui:83
+#, kde-format
+msgid "Decoration Options"
+msgstr "Ablakkeret-megjelenítési beállítások"
 
-#~ msgid "Hide window title bar"
-#~ msgstr "Ablak címsorának elrejtése"
+#. i18n: ectx: property (text), widget (QCheckBox, borderSizeCheckBox)
+#: config/ui/breezeexceptiondialog.ui:89
+#, kde-format
+msgid "Border size:"
+msgstr "Szegélyméret:"
 
-#~ msgctxt "@item:inlistbox Border size:"
-#~ msgid "No Border"
-#~ msgstr "Nincs keret"
+#. i18n: ectx: property (text), widget (QCheckBox, hideTitleBar)
+#: config/ui/breezeexceptiondialog.ui:96
+#, kde-format
+msgid "Hide window title bar"
+msgstr "Ablak címsorának elrejtése"
 
-#~ msgctxt "@item:inlistbox Border size:"
-#~ msgid "No Side Borders"
-#~ msgstr "Nincsenek oldalszegélyek"
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:107
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "No Border"
+msgstr "Nincs keret"
 
-#~ msgctxt "@item:inlistbox Border size:"
-#~ msgid "Tiny"
-#~ msgstr "Apró"
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:112
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "No Side Borders"
+msgstr "Nincsenek oldalszegélyek"
 
-#~ msgctxt "@item:inlistbox Border size:"
-#~ msgid "Normal"
-#~ msgstr "Normál"
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:117
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Tiny"
+msgstr "Apró"
 
-#~ msgctxt "@item:inlistbox Border size:"
-#~ msgid "Large"
-#~ msgstr "Nagy"
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:122
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Normal"
+msgstr "Normál"
 
-#~ msgctxt "@item:inlistbox Border size:"
-#~ msgid "Very Large"
-#~ msgstr "Nagyon nagy"
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:127
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Large"
+msgstr "Nagy"
 
-#~ msgctxt "@item:inlistbox Border size:"
-#~ msgid "Huge"
-#~ msgstr "Hatalmas"
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:132
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Very Large"
+msgstr "Nagyon nagy"
 
-#~ msgctxt "@item:inlistbox Border size:"
-#~ msgid "Very Huge"
-#~ msgstr "Óriási"
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:137
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Huge"
+msgstr "Hatalmas"
 
-#~ msgctxt "@item:inlistbox Border size:"
-#~ msgid "Oversized"
-#~ msgstr "Túlméretezett"
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:142
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Very Huge"
+msgstr "Óriási"
 
-#~ msgid "Move Up"
-#~ msgstr "Fel"
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:147
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Oversized"
+msgstr "Túlméretezett"
 
-#~ msgid "Move Down"
-#~ msgstr "Le"
+#. i18n: ectx: property (text), widget (QPushButton, moveUpButton)
+#: config/ui/breezeexceptionlistwidget.ui:70
+#, kde-format
+msgid "Move Up"
+msgstr "Fel"
 
-#~ msgid "Add"
-#~ msgstr "Hozzáadás"
+#. i18n: ectx: property (text), widget (QPushButton, moveDownButton)
+#: config/ui/breezeexceptionlistwidget.ui:77
+#, kde-format
+msgid "Move Down"
+msgstr "Le"
 
-#~ msgid "Edit"
-#~ msgstr "Szerkesztés"
+#. i18n: ectx: property (text), widget (QPushButton, addButton)
+#: config/ui/breezeexceptionlistwidget.ui:84
+#, kde-format
+msgid "Add"
+msgstr "Hozzáadás"
+
+#. i18n: ectx: property (text), widget (QPushButton, editButton)
+#: config/ui/breezeexceptionlistwidget.ui:98
+#, kde-format
+msgid "Edit"
+msgstr "Szerkesztés"
 
 #~ msgid "Add handle to resize windows with no border"
 #~ msgstr "Fogantyú hozzáadása a szegély nélküli ablakok átméretezéséhez"

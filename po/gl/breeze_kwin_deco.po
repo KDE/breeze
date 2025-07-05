@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2023-06-24 11:13+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -38,7 +38,9 @@ msgstr "Pregunta — Configuración de Brisa"
 msgid "Remove selected exception?"
 msgstr "Quere retirar a excepción escollida?"
 
+#. i18n: ectx: property (text), widget (QPushButton, removeButton)
 #: config/breezeexceptionlistwidget.cpp:170
+#: config/ui/breezeexceptionlistwidget.ui:91
 #, kde-format
 msgid "Remove"
 msgstr "Retirar"
@@ -63,12 +65,14 @@ msgstr "Tipo da excepción"
 msgid "Regular Expression"
 msgstr "Expresión regular"
 
-#: config/breezeexceptionmodel.cpp:36
+#. i18n: ectx: property (text), item, widget (QComboBox, exceptionType)
+#: config/breezeexceptionmodel.cpp:36 config/ui/breezeexceptiondialog.ui:72
 #, kde-format
 msgid "Window Title"
 msgstr "Título da xanela"
 
-#: config/breezeexceptionmodel.cpp:40
+#. i18n: ectx: property (text), item, widget (QComboBox, exceptionType)
+#: config/breezeexceptionmodel.cpp:40 config/ui/breezeexceptiondialog.ui:67
 #, kde-format
 msgid "Window Class Name"
 msgstr "Nome da clase da xanela"
@@ -78,159 +82,299 @@ msgstr "Nome da clase da xanela"
 msgid "Enable/disable this exception"
 msgstr "Activar ou desactivar esta excepción"
 
-#~ msgid "General"
-#~ msgstr "Xeral"
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: config/ui/breezeconfigurationui.ui:33
+#, kde-format
+msgid "General"
+msgstr "Xeral"
 
-#~ msgid "Tit&le alignment:"
-#~ msgstr "&Aliñamento do título:"
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: config/ui/breezeconfigurationui.ui:39
+#, kde-format
+msgid "Tit&le alignment:"
+msgstr "&Aliñamento do título:"
 
-#~ msgid "Left"
-#~ msgstr "Esquerda"
+#. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
+#: config/ui/breezeconfigurationui.ui:53
+#, kde-format
+msgid "Left"
+msgstr "Esquerda"
 
-#~ msgid "Center"
-#~ msgstr "Centro"
+#. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
+#: config/ui/breezeconfigurationui.ui:58
+#, kde-format
+msgid "Center"
+msgstr "Centro"
 
-#~ msgid "Center (Full Width)"
-#~ msgstr "Centrado (toda a anchura)"
+#. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
+#: config/ui/breezeconfigurationui.ui:63
+#, kde-format
+msgid "Center (Full Width)"
+msgstr "Centrado (toda a anchura)"
 
-#~ msgid "Right"
-#~ msgstr "Dereita"
+#. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
+#: config/ui/breezeconfigurationui.ui:68
+#, kde-format
+msgid "Right"
+msgstr "Dereita"
 
-#~ msgid "B&utton size:"
-#~ msgstr "Tamaño dos b&otóns:"
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: config/ui/breezeconfigurationui.ui:89
+#, kde-format
+msgid "B&utton size:"
+msgstr "Tamaño dos b&otóns:"
 
-#~ msgid "Tiny"
-#~ msgstr "Pequerrechos"
+#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
+#: config/ui/breezeconfigurationui.ui:103
+#, kde-format
+msgid "Tiny"
+msgstr "Pequerrechos"
 
-#~ msgctxt "@item:inlistbox Button size:"
-#~ msgid "Small"
-#~ msgstr "Pequenos"
+#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
+#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
+#: config/ui/breezeconfigurationui.ui:108
+#: config/ui/breezeconfigurationui.ui:221
+#, kde-format
+msgctxt "@item:inlistbox Button size:"
+msgid "Small"
+msgstr "Pequenos"
 
-#~ msgctxt "@item:inlistbox Button size:"
-#~ msgid "Medium"
-#~ msgstr "Medianos"
+#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
+#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
+#: config/ui/breezeconfigurationui.ui:113
+#: config/ui/breezeconfigurationui.ui:226
+#, kde-format
+msgctxt "@item:inlistbox Button size:"
+msgid "Medium"
+msgstr "Medianos"
 
-#~ msgctxt "@item:inlistbox Button size:"
-#~ msgid "Large"
-#~ msgstr "Grandes"
+#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
+#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
+#: config/ui/breezeconfigurationui.ui:118
+#: config/ui/breezeconfigurationui.ui:231
+#, kde-format
+msgctxt "@item:inlistbox Button size:"
+msgid "Large"
+msgstr "Grandes"
 
-#~ msgctxt "@item:inlistbox Button size:"
-#~ msgid "Very Large"
-#~ msgstr "Moi grandes"
+#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
+#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
+#: config/ui/breezeconfigurationui.ui:123
+#: config/ui/breezeconfigurationui.ui:236
+#, kde-format
+msgctxt "@item:inlistbox Button size:"
+msgid "Very Large"
+msgstr "Moi grandes"
 
-#~ msgid "Draw a circle around close button"
-#~ msgstr "Debuxar un círculo arredor do botón de pechar."
+#. i18n: ectx: property (text), widget (QCheckBox, outlineCloseButton)
+#: config/ui/breezeconfigurationui.ui:131
+#, kde-format
+msgid "Draw a circle around close button"
+msgstr "Debuxar un círculo arredor do botón de pechar."
 
-#~ msgid "Draw border on maximized and tiled windows"
-#~ msgstr "Debuxar un bordo nas xanelas maximizadas e teseladas"
+#. i18n: ectx: property (text), widget (QCheckBox, drawBorderOnMaximizedWindows)
+#: config/ui/breezeconfigurationui.ui:138
+#, kde-format
+msgid "Draw border on maximized and tiled windows"
+msgstr "Debuxar un bordo nas xanelas maximizadas e teseladas"
 
-#~ msgid ""
-#~ "This setting will allow you to resize from window edges touching screen "
-#~ "edges. Scrollbars and window close buttons will shift positions and will "
-#~ "not touch screen edges."
-#~ msgstr ""
-#~ "Esta opción permitiralle cambiar de tamaño desde os límites de xanelas "
-#~ "que tocan os límites da pantalla. Os botóns de pechar das barras de "
-#~ "desprazamento e das xanelas cambiarán de posición e non tocarán os "
-#~ "límites da pantalla."
+#. i18n: ectx: property (text), widget (QLabel, drawBorderOnMaximizedWindowsHelpLabel)
+#: config/ui/breezeconfigurationui.ui:163
+#, kde-format
+msgid ""
+"This setting will allow you to resize from window edges touching screen "
+"edges. Scrollbars and window close buttons will shift positions and will not "
+"touch screen edges."
+msgstr ""
+"Esta opción permitiralle cambiar de tamaño desde os límites de xanelas que "
+"tocan os límites da pantalla. Os botóns de pechar das barras de "
+"desprazamento e das xanelas cambiarán de posición e non tocarán os límites "
+"da pantalla."
 
-#~ msgid "Draw titlebar background gradient"
-#~ msgstr "Debuxar o fondo da barra de título cunha gradación"
+#. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
+#: config/ui/breezeconfigurationui.ui:175
+#, kde-format
+msgid "Draw titlebar background gradient"
+msgstr "Debuxar o fondo da barra de título cunha gradación"
 
-#~ msgid "Shadows"
-#~ msgstr "Sombras"
+#. i18n: ectx: attribute (title), widget (QWidget, tab_4)
+#: config/ui/breezeconfigurationui.ui:196
+#, kde-format
+msgid "Shadows"
+msgstr "Sombras"
 
-#~ msgid "Si&ze:"
-#~ msgstr "Tama&ño:"
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: config/ui/breezeconfigurationui.ui:202
+#, kde-format
+msgid "Si&ze:"
+msgstr "Tama&ño:"
 
-#~ msgctxt "@item:inlistbox Button size:"
-#~ msgid "None"
-#~ msgstr "Ningún"
+#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
+#: config/ui/breezeconfigurationui.ui:216
+#, kde-format
+msgctxt "@item:inlistbox Button size:"
+msgid "None"
+msgstr "Ningún"
 
-#~ msgctxt "strength of the shadow (from transparent to opaque)"
-#~ msgid "S&trength:"
-#~ msgstr "&Forza:"
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: config/ui/breezeconfigurationui.ui:244
+#, kde-format
+msgctxt "strength of the shadow (from transparent to opaque)"
+msgid "S&trength:"
+msgstr "&Forza:"
 
-#~ msgid "%"
-#~ msgstr "%"
+#. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
+#: config/ui/breezeconfigurationui.ui:257
+#, no-c-format, kde-format
+msgid "%"
+msgstr "%"
 
-#~ msgid "Color:"
-#~ msgstr "Cor:"
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: config/ui/breezeconfigurationui.ui:283
+#, kde-format
+msgid "Color:"
+msgstr "Cor:"
 
-#~ msgid "Window-Specific Overrides"
-#~ msgstr "Sobredefinicións específicas da xanela"
+#. i18n: ectx: attribute (title), widget (QWidget, tab_3)
+#: config/ui/breezeconfigurationui.ui:310
+#, kde-format
+msgid "Window-Specific Overrides"
+msgstr "Sobredefinicións específicas da xanela"
 
-#~ msgid "Dialog"
-#~ msgstr "Diálogo"
+#. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
+#: config/ui/breezeexceptiondialog.ui:14
+#, kde-format
+msgid "Dialog"
+msgstr "Diálogo"
 
-#~ msgid "Window Identification"
-#~ msgstr "Identificación da xanela"
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: config/ui/breezeexceptiondialog.ui:20
+#, kde-format
+msgid "Window Identification"
+msgstr "Identificación da xanela"
 
-#~ msgid "&Matching window property: "
-#~ msgstr "&Propiedade da xanela a casar: "
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: config/ui/breezeexceptiondialog.ui:26
+#, kde-format
+msgid "&Matching window property: "
+msgstr "&Propiedade da xanela a casar: "
 
-#~ msgid "Regular expression &to match: "
-#~ msgstr "Expresión &regular para atopar coincidencias: "
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: config/ui/breezeexceptiondialog.ui:39
+#, kde-format
+msgid "Regular expression &to match: "
+msgstr "Expresión &regular para atopar coincidencias: "
 
-#~ msgid "Detect Window Properties…"
-#~ msgstr "Detectar as propiedades da xanela…"
+#. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
+#: config/ui/breezeexceptiondialog.ui:52
+#, kde-format
+msgid "Detect Window Properties…"
+msgstr "Detectar as propiedades da xanela…"
 
-#~ msgid "Decoration Options"
-#~ msgstr "Opcións da decoración"
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
+#: config/ui/breezeexceptiondialog.ui:83
+#, kde-format
+msgid "Decoration Options"
+msgstr "Opcións da decoración"
 
-#~ msgid "Border size:"
-#~ msgstr "Tamaño da moldura:"
+#. i18n: ectx: property (text), widget (QCheckBox, borderSizeCheckBox)
+#: config/ui/breezeexceptiondialog.ui:89
+#, kde-format
+msgid "Border size:"
+msgstr "Tamaño da moldura:"
 
-#~ msgid "Hide window title bar"
-#~ msgstr "Agochar a barra de título da xanela"
+#. i18n: ectx: property (text), widget (QCheckBox, hideTitleBar)
+#: config/ui/breezeexceptiondialog.ui:96
+#, kde-format
+msgid "Hide window title bar"
+msgstr "Agochar a barra de título da xanela"
 
-#~ msgctxt "@item:inlistbox Border size:"
-#~ msgid "No Border"
-#~ msgstr "Sen moldura"
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:107
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "No Border"
+msgstr "Sen moldura"
 
-#~ msgctxt "@item:inlistbox Border size:"
-#~ msgid "No Side Borders"
-#~ msgstr "Sen moldura lateral"
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:112
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "No Side Borders"
+msgstr "Sen moldura lateral"
 
-#~ msgctxt "@item:inlistbox Border size:"
-#~ msgid "Tiny"
-#~ msgstr "Pequerrecha"
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:117
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Tiny"
+msgstr "Pequerrecha"
 
-#~ msgctxt "@item:inlistbox Border size:"
-#~ msgid "Normal"
-#~ msgstr "Normal"
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:122
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Normal"
+msgstr "Normal"
 
-#~ msgctxt "@item:inlistbox Border size:"
-#~ msgid "Large"
-#~ msgstr "Grande"
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:127
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Large"
+msgstr "Grande"
 
-#~ msgctxt "@item:inlistbox Border size:"
-#~ msgid "Very Large"
-#~ msgstr "Moi grande"
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:132
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Very Large"
+msgstr "Moi grande"
 
-#~ msgctxt "@item:inlistbox Border size:"
-#~ msgid "Huge"
-#~ msgstr "Enorme"
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:137
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Huge"
+msgstr "Enorme"
 
-#~ msgctxt "@item:inlistbox Border size:"
-#~ msgid "Very Huge"
-#~ msgstr "Descomunal"
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:142
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Very Huge"
+msgstr "Descomunal"
 
-#~ msgctxt "@item:inlistbox Border size:"
-#~ msgid "Oversized"
-#~ msgstr "Sobredimensionada"
+#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
+#: config/ui/breezeexceptiondialog.ui:147
+#, kde-format
+msgctxt "@item:inlistbox Border size:"
+msgid "Oversized"
+msgstr "Sobredimensionada"
 
-#~ msgid "Move Up"
-#~ msgstr "Subir"
+#. i18n: ectx: property (text), widget (QPushButton, moveUpButton)
+#: config/ui/breezeexceptionlistwidget.ui:70
+#, kde-format
+msgid "Move Up"
+msgstr "Subir"
 
-#~ msgid "Move Down"
-#~ msgstr "Baixar"
+#. i18n: ectx: property (text), widget (QPushButton, moveDownButton)
+#: config/ui/breezeexceptionlistwidget.ui:77
+#, kde-format
+msgid "Move Down"
+msgstr "Baixar"
 
-#~ msgid "Add"
-#~ msgstr "Engadir"
+#. i18n: ectx: property (text), widget (QPushButton, addButton)
+#: config/ui/breezeexceptionlistwidget.ui:84
+#, kde-format
+msgid "Add"
+msgstr "Engadir"
 
-#~ msgid "Edit"
-#~ msgstr "Editar"
+#. i18n: ectx: property (text), widget (QPushButton, editButton)
+#: config/ui/breezeexceptionlistwidget.ui:98
+#, kde-format
+msgid "Edit"
+msgstr "Editar"
 
 #~ msgid "Add handle to resize windows with no border"
 #~ msgstr "Engadir unha asa para cambiar o tamaño das xanelas sen moldura"

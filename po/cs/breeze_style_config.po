@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2022-02-08 14:49+0100\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -25,90 +25,177 @@ msgstr ""
 msgid "Breeze Settings"
 msgstr "Nastavení Breeze"
 
-#~ msgid "General"
-#~ msgstr "Obecné"
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: ui/breezestyleconfig.ui:39
+#, kde-format
+msgid "General"
+msgstr "Obecné"
 
-#~ msgid "W&indows' drag mode:"
-#~ msgstr "Rež&im přesouvání oken:"
+#. i18n: ectx: property (text), widget (QLabel, _windowDragLabel)
+#: ui/breezestyleconfig.ui:51
+#, kde-format
+msgid "W&indows' drag mode:"
+msgstr "Rež&im přesouvání oken:"
 
-#~ msgid "Draw focus indicator in lists"
-#~ msgstr "Vykreslovat v seznamech ukazatel zaměření"
+#. i18n: ectx: property (text), widget (QCheckBox, _viewDrawFocusIndicator)
+#: ui/breezestyleconfig.ui:64
+#, kde-format
+msgid "Draw focus indicator in lists"
+msgstr "Vykreslovat v seznamech ukazatel zaměření"
 
-#~ msgid "&Keyboard accelerators visibility:"
-#~ msgstr "&Viditelnost akcelerátorů klávesnice:"
+#. i18n: ectx: property (text), widget (QLabel, _mnemonicsLabel)
+#: ui/breezestyleconfig.ui:71
+#, kde-format
+msgid "&Keyboard accelerators visibility:"
+msgstr "&Viditelnost akcelerátorů klávesnice:"
 
-#~ msgid "Always hide"
-#~ msgstr "Vždy skrýt"
+#. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
+#: ui/breezestyleconfig.ui:85
+#, kde-format
+msgid "Always hide"
+msgstr "Vždy skrýt"
 
-#~ msgid "Show when Alt key is pressed"
-#~ msgstr "Zobrazit pokud je stisknuta klávesa Alt"
+#. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
+#: ui/breezestyleconfig.ui:90
+#, kde-format
+msgid "Show when Alt key is pressed"
+msgstr "Zobrazit pokud je stisknuta klávesa Alt"
 
-#~ msgid "Always show"
-#~ msgstr "Vždy zobrazovat"
+#. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
+#: ui/breezestyleconfig.ui:95
+#, kde-format
+msgid "Always show"
+msgstr "Vždy zobrazovat"
 
-#~ msgid "Drag windows from titlebar only"
-#~ msgstr "Přesouvat okna pouze z pruhu titulku"
+#. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
+#: ui/breezestyleconfig.ui:117
+#, kde-format
+msgid "Drag windows from titlebar only"
+msgstr "Přesouvat okna pouze z pruhu titulku"
 
-#~ msgid "Drag windows from titlebar, menubar and toolbars"
-#~ msgstr "Přesouvat okna z pruhu titulku, panelu nabídky a panelu nástrojů"
+#. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
+#: ui/breezestyleconfig.ui:122
+#, kde-format
+msgid "Drag windows from titlebar, menubar and toolbars"
+msgstr "Přesouvat okna z pruhu titulku, panelu nabídky a panelu nástrojů"
 
-#~ msgid "Drag windows from all empty areas"
-#~ msgstr "Přesouvat okna ze všech prázdných míst"
+#. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
+#: ui/breezestyleconfig.ui:127
+#, kde-format
+msgid "Drag windows from all empty areas"
+msgstr "Přesouvat okna ze všech prázdných míst"
 
-#~ msgid "Center tabbar tabs"
-#~ msgstr "Vystředit karty"
+#. i18n: ectx: property (text), widget (QCheckBox, _tabBarDrawCenteredTabs)
+#: ui/breezestyleconfig.ui:148
+#, kde-format
+msgid "Center tabbar tabs"
+msgstr "Vystředit karty"
 
-#~ msgid "Draw toolbar item separators"
-#~ msgstr "Kreslit oddělovače položek panelu nástrojů"
+#. i18n: ectx: property (text), widget (QCheckBox, _toolBarDrawItemSeparator)
+#: ui/breezestyleconfig.ui:155
+#, kde-format
+msgid "Draw toolbar item separators"
+msgstr "Kreslit oddělovače položek panelu nástrojů"
 
-#~ msgid "Draw slider tick marks"
-#~ msgstr "Kreslit značky na posuvníku"
+#. i18n: ectx: property (text), widget (QCheckBox, _sliderDrawTickMarks)
+#: ui/breezestyleconfig.ui:162
+#, kde-format
+msgid "Draw slider tick marks"
+msgstr "Kreslit značky na posuvníku"
 
-#~ msgid "Enable extended resize handles"
-#~ msgstr "Povolit rozšířené úchytky změny velikosti"
+#. i18n: ectx: property (text), widget (QCheckBox, _splitterProxyEnabled)
+#: ui/breezestyleconfig.ui:169
+#, kde-format
+msgid "Enable extended resize handles"
+msgstr "Povolit rozšířené úchytky změny velikosti"
 
-#~ msgid "Frames"
-#~ msgstr "Rámečky"
+#. i18n: ectx: attribute (title), widget (QWidget, tab_3)
+#: ui/breezestyleconfig.ui:177
+#, kde-format
+msgid "Frames"
+msgstr "Rámečky"
 
-#~ msgid "Draw frame around dockable panels"
-#~ msgstr "Kreslit rámeček okolo ukotvitelných panelů"
+#. i18n: ectx: property (text), widget (QCheckBox, _dockWidgetDrawFrame)
+#: ui/breezestyleconfig.ui:183
+#, kde-format
+msgid "Draw frame around dockable panels"
+msgstr "Kreslit rámeček okolo ukotvitelných panelů"
 
-#~ msgid "Draw frame around side panels"
-#~ msgstr "Kreslit rámečky okolo postranních panelů"
+#. i18n: ectx: property (text), widget (QCheckBox, _sidePanelDrawFrame)
+#: ui/breezestyleconfig.ui:190
+#, kde-format
+msgid "Draw frame around side panels"
+msgstr "Kreslit rámečky okolo postranních panelů"
 
-#~ msgid "Draw a thin line to indicate focus in menus and menubars"
-#~ msgstr ""
-#~ "Kreslit tenkou čáru pro indikování zaměření v nabídkách a panelech nabídky"
+#. i18n: ectx: property (text), widget (QCheckBox, _menuItemDrawThinFocus)
+#: ui/breezestyleconfig.ui:197
+#, kde-format
+msgid "Draw a thin line to indicate focus in menus and menubars"
+msgstr ""
+"Kreslit tenkou čáru pro indikování zaměření v nabídkách a panelech nabídky"
 
-#~ msgid "Scrollbars"
-#~ msgstr "Posuvníky"
+#. i18n: ectx: attribute (title), widget (QWidget, tab_4)
+#: ui/breezestyleconfig.ui:218
+#, kde-format
+msgid "Scrollbars"
+msgstr "Posuvníky"
 
-#~ msgid "Bottom arrow button t&ype:"
-#~ msgstr "T&yp tlačítka šipky dolů:"
+#. i18n: ectx: property (text), widget (QLabel, _scrollBarAddLineLabel)
+#: ui/breezestyleconfig.ui:237
+#, kde-format
+msgid "Bottom arrow button t&ype:"
+msgstr "T&yp tlačítka šipky dolů:"
 
-#~ msgid "&Top arrow button type:"
-#~ msgstr "&Typ horního tlačítka:"
+#. i18n: ectx: property (text), widget (QLabel, _scrollBarSubLineLabel)
+#: ui/breezestyleconfig.ui:250
+#, kde-format
+msgid "&Top arrow button type:"
+msgstr "&Typ horního tlačítka:"
 
-#~ msgid "No Buttons"
-#~ msgstr "Žádná tlačítka"
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
+#: ui/breezestyleconfig.ui:264 ui/breezestyleconfig.ui:283
+#, kde-format
+msgid "No Buttons"
+msgstr "Žádná tlačítka"
 
-#~ msgid "One Button"
-#~ msgstr "Jedno tlačítko"
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
+#: ui/breezestyleconfig.ui:269 ui/breezestyleconfig.ui:288
+#, kde-format
+msgid "One Button"
+msgstr "Jedno tlačítko"
 
-#~ msgid "Two Buttons"
-#~ msgstr "Dvě tlačítka"
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
+#: ui/breezestyleconfig.ui:274 ui/breezestyleconfig.ui:293
+#, kde-format
+msgid "Two Buttons"
+msgstr "Dvě tlačítka"
 
 # Přechod sklouznutí má posunovače, kde vlevo (žádný výběr) znamená průhlednost a vpravo (výběr 100 %) znamená neprůhlednost.
 #
 # Opačně to nedává smysl.
-#~ msgid "Transparency"
-#~ msgstr "Průhlednost"
+#. i18n: ectx: attribute (title), widget (QWidget, tab_5)
+#: ui/breezestyleconfig.ui:315
+#, kde-format
+msgid "Transparency"
+msgstr "Průhlednost"
 
-#~ msgid "Transparent"
-#~ msgstr "Průhledný"
+#. i18n: ectx: property (text), widget (QLabel, _menuOpacityTransparentLabel)
+#: ui/breezestyleconfig.ui:336
+#, kde-format
+msgid "Transparent"
+msgstr "Průhledný"
 
-#~ msgid "Opaque"
-#~ msgstr "Neprůhledné"
+#. i18n: ectx: property (text), widget (QLabel, _menuOpacityOpaqueLabel)
+#: ui/breezestyleconfig.ui:362
+#, kde-format
+msgid "Opaque"
+msgstr "Neprůhledné"
 
-#~ msgid "Menu:"
-#~ msgstr "Nabídka:"
+#. i18n: ectx: property (text), widget (QLabel, _menuGroupDescription)
+#: ui/breezestyleconfig.ui:373
+#, kde-format
+msgid "Menu:"
+msgstr "Nabídka:"

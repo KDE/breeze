@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2022-02-08 20:22+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -25,90 +25,177 @@ msgstr ""
 msgid "Breeze Settings"
 msgstr "Nastavitve Sapice"
 
-#~ msgid "General"
-#~ msgstr "Splošno"
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: ui/breezestyleconfig.ui:39
+#, kde-format
+msgid "General"
+msgstr "Splošno"
 
-#~ msgid "W&indows' drag mode:"
-#~ msgstr "Nač&in vleke oken:"
+#. i18n: ectx: property (text), widget (QLabel, _windowDragLabel)
+#: ui/breezestyleconfig.ui:51
+#, kde-format
+msgid "W&indows' drag mode:"
+msgstr "Nač&in vleke oken:"
 
-#~ msgid "Draw focus indicator in lists"
-#~ msgstr "Izriši kazalnik žarišča v seznamih"
+#. i18n: ectx: property (text), widget (QCheckBox, _viewDrawFocusIndicator)
+#: ui/breezestyleconfig.ui:64
+#, kde-format
+msgid "Draw focus indicator in lists"
+msgstr "Izriši kazalnik žarišča v seznamih"
 
-#~ msgid "&Keyboard accelerators visibility:"
-#~ msgstr "Vidljivost tip&kovnih pospeševalnikov:"
+#. i18n: ectx: property (text), widget (QLabel, _mnemonicsLabel)
+#: ui/breezestyleconfig.ui:71
+#, kde-format
+msgid "&Keyboard accelerators visibility:"
+msgstr "Vidljivost tip&kovnih pospeševalnikov:"
 
-#~ msgid "Always hide"
-#~ msgstr "Vedno skrivaj"
+#. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
+#: ui/breezestyleconfig.ui:85
+#, kde-format
+msgid "Always hide"
+msgstr "Vedno skrivaj"
 
-#~ msgid "Show when Alt key is pressed"
-#~ msgstr "Prikaži kadar sta pritisnjeni Alt + tipka"
+#. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
+#: ui/breezestyleconfig.ui:90
+#, kde-format
+msgid "Show when Alt key is pressed"
+msgstr "Prikaži kadar sta pritisnjeni Alt + tipka"
 
-#~ msgid "Always show"
-#~ msgstr "Vedno kaži"
+#. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
+#: ui/breezestyleconfig.ui:95
+#, kde-format
+msgid "Always show"
+msgstr "Vedno kaži"
 
-#~ msgid "Drag windows from titlebar only"
-#~ msgstr "Okna vleči samo z naslovno vrstico"
+#. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
+#: ui/breezestyleconfig.ui:117
+#, kde-format
+msgid "Drag windows from titlebar only"
+msgstr "Okna vleči samo z naslovno vrstico"
 
-#~ msgid "Drag windows from titlebar, menubar and toolbars"
-#~ msgstr "Vleci okna z naslovne vrstice, menijske vrstice in orodnih vrstic"
+#. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
+#: ui/breezestyleconfig.ui:122
+#, kde-format
+msgid "Drag windows from titlebar, menubar and toolbars"
+msgstr "Vleci okna z naslovne vrstice, menijske vrstice in orodnih vrstic"
 
-#~ msgid "Drag windows from all empty areas"
-#~ msgstr "Okna vleči z vsemi praznimi območji"
+#. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
+#: ui/breezestyleconfig.ui:127
+#, kde-format
+msgid "Drag windows from all empty areas"
+msgstr "Okna vleči z vsemi praznimi območji"
 
-#~ msgid "Center tabbar tabs"
-#~ msgstr "Usredini zavihke vrstice z zavihki"
+#. i18n: ectx: property (text), widget (QCheckBox, _tabBarDrawCenteredTabs)
+#: ui/breezestyleconfig.ui:148
+#, kde-format
+msgid "Center tabbar tabs"
+msgstr "Usredini zavihke vrstice z zavihki"
 
-#~ msgid "Draw toolbar item separators"
-#~ msgstr "Izriši ločilnike predmetov orodne vrstice"
+#. i18n: ectx: property (text), widget (QCheckBox, _toolBarDrawItemSeparator)
+#: ui/breezestyleconfig.ui:155
+#, kde-format
+msgid "Draw toolbar item separators"
+msgstr "Izriši ločilnike predmetov orodne vrstice"
 
-#~ msgid "Draw slider tick marks"
-#~ msgstr "Izriši črtne oznake drsnika"
+#. i18n: ectx: property (text), widget (QCheckBox, _sliderDrawTickMarks)
+#: ui/breezestyleconfig.ui:162
+#, kde-format
+msgid "Draw slider tick marks"
+msgstr "Izriši črtne oznake drsnika"
 
-#~ msgid "Enable extended resize handles"
-#~ msgstr "Omogoči razširjene ročice za spreminjanje velikosti"
+#. i18n: ectx: property (text), widget (QCheckBox, _splitterProxyEnabled)
+#: ui/breezestyleconfig.ui:169
+#, kde-format
+msgid "Enable extended resize handles"
+msgstr "Omogoči razširjene ročice za spreminjanje velikosti"
 
-#~ msgid "Frames"
-#~ msgstr "Okvirji"
+#. i18n: ectx: attribute (title), widget (QWidget, tab_3)
+#: ui/breezestyleconfig.ui:177
+#, kde-format
+msgid "Frames"
+msgstr "Okvirji"
 
-#~ msgid "Draw frame around dockable panels"
-#~ msgstr "Izriši okvir okrog pultov, ki jih je mogoče zasidrati"
+#. i18n: ectx: property (text), widget (QCheckBox, _dockWidgetDrawFrame)
+#: ui/breezestyleconfig.ui:183
+#, kde-format
+msgid "Draw frame around dockable panels"
+msgstr "Izriši okvir okrog pultov, ki jih je mogoče zasidrati"
 
-#~ msgid "Draw frame around side panels"
-#~ msgstr "Izriši okvir okrog stranskih pultov"
+#. i18n: ectx: property (text), widget (QCheckBox, _sidePanelDrawFrame)
+#: ui/breezestyleconfig.ui:190
+#, kde-format
+msgid "Draw frame around side panels"
+msgstr "Izriši okvir okrog stranskih pultov"
 
-#~ msgid "Draw a thin line to indicate focus in menus and menubars"
-#~ msgstr ""
-#~ "Izriši tanko črto, da se poudari žarišče v menijih in menijskih vrsticah"
+#. i18n: ectx: property (text), widget (QCheckBox, _menuItemDrawThinFocus)
+#: ui/breezestyleconfig.ui:197
+#, kde-format
+msgid "Draw a thin line to indicate focus in menus and menubars"
+msgstr ""
+"Izriši tanko črto, da se poudari žarišče v menijih in menijskih vrsticah"
 
-#~ msgid "Scrollbars"
-#~ msgstr "Drsniki"
+#. i18n: ectx: attribute (title), widget (QWidget, tab_4)
+#: ui/breezestyleconfig.ui:218
+#, kde-format
+msgid "Scrollbars"
+msgstr "Drsniki"
 
-#~ msgid "Bottom arrow button t&ype:"
-#~ msgstr "Vrsta gumba za puščico dol:"
+#. i18n: ectx: property (text), widget (QLabel, _scrollBarAddLineLabel)
+#: ui/breezestyleconfig.ui:237
+#, kde-format
+msgid "Bottom arrow button t&ype:"
+msgstr "Vrsta gumba za puščico dol:"
 
-#~ msgid "&Top arrow button type:"
-#~ msgstr "Vrs&ta gumba za puščico gor:"
+#. i18n: ectx: property (text), widget (QLabel, _scrollBarSubLineLabel)
+#: ui/breezestyleconfig.ui:250
+#, kde-format
+msgid "&Top arrow button type:"
+msgstr "Vrs&ta gumba za puščico gor:"
 
-#~ msgid "No Buttons"
-#~ msgstr "Brez gumbov"
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
+#: ui/breezestyleconfig.ui:264 ui/breezestyleconfig.ui:283
+#, kde-format
+msgid "No Buttons"
+msgstr "Brez gumbov"
 
-#~ msgid "One Button"
-#~ msgstr "En gumb"
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
+#: ui/breezestyleconfig.ui:269 ui/breezestyleconfig.ui:288
+#, kde-format
+msgid "One Button"
+msgstr "En gumb"
 
-#~ msgid "Two Buttons"
-#~ msgstr "Dva gumba"
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
+#: ui/breezestyleconfig.ui:274 ui/breezestyleconfig.ui:293
+#, kde-format
+msgid "Two Buttons"
+msgstr "Dva gumba"
 
-#~ msgid "Transparency"
-#~ msgstr "Prosojnost"
+#. i18n: ectx: attribute (title), widget (QWidget, tab_5)
+#: ui/breezestyleconfig.ui:315
+#, kde-format
+msgid "Transparency"
+msgstr "Prosojnost"
 
-#~ msgid "Transparent"
-#~ msgstr "Prosojen"
+#. i18n: ectx: property (text), widget (QLabel, _menuOpacityTransparentLabel)
+#: ui/breezestyleconfig.ui:336
+#, kde-format
+msgid "Transparent"
+msgstr "Prosojen"
 
-#~ msgid "Opaque"
-#~ msgstr "Neprozoren"
+#. i18n: ectx: property (text), widget (QLabel, _menuOpacityOpaqueLabel)
+#: ui/breezestyleconfig.ui:362
+#, kde-format
+msgid "Opaque"
+msgstr "Neprozoren"
 
-#~ msgid "Menu:"
-#~ msgstr "Meni:"
+#. i18n: ectx: property (text), widget (QLabel, _menuGroupDescription)
+#: ui/breezestyleconfig.ui:373
+#, kde-format
+msgid "Menu:"
+msgstr "Meni:"
 
 #~ msgid "Always Hide Keyboard Accelerators"
 #~ msgstr "Vedno skrij tipkovne pospeševalnike"
