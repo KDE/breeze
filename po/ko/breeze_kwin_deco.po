@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kwin_clients\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-07 00:48+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2023-03-01 00:45+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -38,9 +38,7 @@ msgstr "질문 - Breeze 설정"
 msgid "Remove selected exception?"
 msgstr "선택한 예외를 삭제하시겠습니까?"
 
-#. i18n: ectx: property (text), widget (QPushButton, removeButton)
 #: config/breezeexceptionlistwidget.cpp:170
-#: config/ui/breezeexceptionlistwidget.ui:91
 #, kde-format
 msgid "Remove"
 msgstr "삭제"
@@ -65,14 +63,12 @@ msgstr "예외 종류"
 msgid "Regular Expression"
 msgstr "정규 표현식"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, exceptionType)
-#: config/breezeexceptionmodel.cpp:36 config/ui/breezeexceptiondialog.ui:72
+#: config/breezeexceptionmodel.cpp:36
 #, kde-format
 msgid "Window Title"
 msgstr "창 제목"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, exceptionType)
-#: config/breezeexceptionmodel.cpp:40 config/ui/breezeexceptiondialog.ui:67
+#: config/breezeexceptionmodel.cpp:40
 #, kde-format
 msgid "Window Class Name"
 msgstr "창 클래스 이름"
@@ -82,297 +78,158 @@ msgstr "창 클래스 이름"
 msgid "Enable/disable this exception"
 msgstr "이 예외 활성/비활성화"
 
-#. i18n: ectx: attribute (title), widget (QWidget, tab)
-#: config/ui/breezeconfigurationui.ui:33
-#, kde-format
-msgid "General"
-msgstr "일반"
+#~ msgid "General"
+#~ msgstr "일반"
 
-#. i18n: ectx: property (text), widget (QLabel, label_3)
-#: config/ui/breezeconfigurationui.ui:39
-#, kde-format
-msgid "Tit&le alignment:"
-msgstr "제목 표시줄 정렬(&L):"
+#~ msgid "Tit&le alignment:"
+#~ msgstr "제목 표시줄 정렬(&L):"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
-#: config/ui/breezeconfigurationui.ui:53
-#, kde-format
-msgid "Left"
-msgstr "왼쪽"
+#~ msgid "Left"
+#~ msgstr "왼쪽"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
-#: config/ui/breezeconfigurationui.ui:58
-#, kde-format
-msgid "Center"
-msgstr "가운데"
+#~ msgid "Center"
+#~ msgstr "가운데"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
-#: config/ui/breezeconfigurationui.ui:63
-#, kde-format
-msgid "Center (Full Width)"
-msgstr "가운데 (전체 너비)"
+#~ msgid "Center (Full Width)"
+#~ msgstr "가운데 (전체 너비)"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
-#: config/ui/breezeconfigurationui.ui:68
-#, kde-format
-msgid "Right"
-msgstr "오른쪽"
+#~ msgid "Right"
+#~ msgstr "오른쪽"
 
-#. i18n: ectx: property (text), widget (QLabel, label_4)
-#: config/ui/breezeconfigurationui.ui:89
-#, kde-format
-msgid "B&utton size:"
-msgstr "단추 크기(&U):"
+#~ msgid "B&utton size:"
+#~ msgstr "단추 크기(&U):"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
-#: config/ui/breezeconfigurationui.ui:103
-#, kde-format
-msgid "Tiny"
-msgstr "매우 작게"
+#~ msgid "Tiny"
+#~ msgstr "매우 작게"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
-#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
-#: config/ui/breezeconfigurationui.ui:108
-#: config/ui/breezeconfigurationui.ui:221
-#, kde-format
-msgctxt "@item:inlistbox Button size:"
-msgid "Small"
-msgstr "작게"
+#~ msgctxt "@item:inlistbox Button size:"
+#~ msgid "Small"
+#~ msgstr "작게"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
-#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
-#: config/ui/breezeconfigurationui.ui:113
-#: config/ui/breezeconfigurationui.ui:226
-#, kde-format
-msgctxt "@item:inlistbox Button size:"
-msgid "Medium"
-msgstr "중간"
+#~ msgctxt "@item:inlistbox Button size:"
+#~ msgid "Medium"
+#~ msgstr "중간"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
-#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
-#: config/ui/breezeconfigurationui.ui:118
-#: config/ui/breezeconfigurationui.ui:231
-#, kde-format
-msgctxt "@item:inlistbox Button size:"
-msgid "Large"
-msgstr "크게"
+#~ msgctxt "@item:inlistbox Button size:"
+#~ msgid "Large"
+#~ msgstr "크게"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
-#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
-#: config/ui/breezeconfigurationui.ui:123
-#: config/ui/breezeconfigurationui.ui:236
-#, kde-format
-msgctxt "@item:inlistbox Button size:"
-msgid "Very Large"
-msgstr "매우 크게"
+#~ msgctxt "@item:inlistbox Button size:"
+#~ msgid "Very Large"
+#~ msgstr "매우 크게"
 
-#. i18n: ectx: property (text), widget (QCheckBox, outlineCloseButton)
-#: config/ui/breezeconfigurationui.ui:131
-#, kde-format
-msgid "Draw a circle around close button"
-msgstr "닫기 단추 주위에 원 그리기"
+#~ msgid "Draw a circle around close button"
+#~ msgstr "닫기 단추 주위에 원 그리기"
 
-#. i18n: ectx: property (text), widget (QCheckBox, drawBorderOnMaximizedWindows)
-#: config/ui/breezeconfigurationui.ui:138
-#, kde-format
-msgid "Draw border on maximized and tiled windows"
-msgstr "최대화거나 바둑판식 배열된 창의 테두리 그리기"
+#~ msgid "Draw border on maximized and tiled windows"
+#~ msgstr "최대화거나 바둑판식 배열된 창의 테두리 그리기"
 
-#. i18n: ectx: property (text), widget (QLabel, drawBorderOnMaximizedWindowsHelpLabel)
-#: config/ui/breezeconfigurationui.ui:163
-#, kde-format
-msgid ""
-"This setting will allow you to resize from window edges touching screen "
-"edges. Scrollbars and window close buttons will shift positions and will not "
-"touch screen edges."
-msgstr ""
-"이 설정을 사용하면 화면 경계를 터치하여 크기를 조정할 수 있습니다. 스크롤바"
-"와 창 닫기 단추의 위치가 조정되어 화면 경계에 더 이상 인접하지 않게 됩니다."
+#~ msgid ""
+#~ "This setting will allow you to resize from window edges touching screen "
+#~ "edges. Scrollbars and window close buttons will shift positions and will "
+#~ "not touch screen edges."
+#~ msgstr ""
+#~ "이 설정을 사용하면 화면 경계를 터치하여 크기를 조정할 수 있습니다. 스크롤"
+#~ "바와 창 닫기 단추의 위치가 조정되어 화면 경계에 더 이상 인접하지 않게 됩니"
+#~ "다."
 
-#. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
-#: config/ui/breezeconfigurationui.ui:175
-#, kde-format
-msgid "Draw titlebar background gradient"
-msgstr "창 배경 그라디언트 그리기"
+#~ msgid "Draw titlebar background gradient"
+#~ msgstr "창 배경 그라디언트 그리기"
 
-#. i18n: ectx: attribute (title), widget (QWidget, tab_4)
-#: config/ui/breezeconfigurationui.ui:196
-#, kde-format
-msgid "Shadows"
-msgstr "그림자"
+#~ msgid "Shadows"
+#~ msgstr "그림자"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezeconfigurationui.ui:202
-#, kde-format
-msgid "Si&ze:"
-msgstr "크기(&Z):"
+#~ msgid "Si&ze:"
+#~ msgstr "크기(&Z):"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
-#: config/ui/breezeconfigurationui.ui:216
-#, kde-format
-msgctxt "@item:inlistbox Button size:"
-msgid "None"
-msgstr "없음"
+#~ msgctxt "@item:inlistbox Button size:"
+#~ msgid "None"
+#~ msgstr "없음"
 
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezeconfigurationui.ui:244
-#, kde-format
-msgctxt "strength of the shadow (from transparent to opaque)"
-msgid "S&trength:"
-msgstr "강도(&T):"
+#~ msgctxt "strength of the shadow (from transparent to opaque)"
+#~ msgid "S&trength:"
+#~ msgstr "강도(&T):"
 
-#. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
-#: config/ui/breezeconfigurationui.ui:257
-#, no-c-format, kde-format
-msgid "%"
-msgstr "%"
+#~ msgid "%"
+#~ msgstr "%"
 
-#. i18n: ectx: property (text), widget (QLabel, label_5)
-#: config/ui/breezeconfigurationui.ui:283
-#, kde-format
-msgid "Color:"
-msgstr "색:"
+#~ msgid "Color:"
+#~ msgstr "색:"
 
-#. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: config/ui/breezeconfigurationui.ui:310
-#, kde-format
-msgid "Window-Specific Overrides"
-msgstr "창 지정 설정"
+#~ msgid "Window-Specific Overrides"
+#~ msgstr "창 지정 설정"
 
-#. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
-#: config/ui/breezeexceptiondialog.ui:14
-#, kde-format
-msgid "Dialog"
-msgstr "대화 상자"
+#~ msgid "Dialog"
+#~ msgstr "대화 상자"
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: config/ui/breezeexceptiondialog.ui:20
-#, kde-format
-msgid "Window Identification"
-msgstr "창 식별"
+#~ msgid "Window Identification"
+#~ msgstr "창 식별"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezeexceptiondialog.ui:26
-#, kde-format
-msgid "&Matching window property: "
-msgstr "일치하는 창 속성(&M): "
+#~ msgid "&Matching window property: "
+#~ msgstr "일치하는 창 속성(&M): "
 
-#. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezeexceptiondialog.ui:39
-#, kde-format
-msgid "Regular expression &to match: "
-msgstr "일치하는 정규 표현식(&T): "
+#~ msgid "Regular expression &to match: "
+#~ msgstr "일치하는 정규 표현식(&T): "
 
-#. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
-#: config/ui/breezeexceptiondialog.ui:52
-#, kde-format
-msgid "Detect Window Properties…"
-msgstr "창 속성 감지…"
+#~ msgid "Detect Window Properties…"
+#~ msgstr "창 속성 감지…"
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
-#: config/ui/breezeexceptiondialog.ui:83
-#, kde-format
-msgid "Decoration Options"
-msgstr "장식 설정"
+#~ msgid "Decoration Options"
+#~ msgstr "장식 설정"
 
-#. i18n: ectx: property (text), widget (QCheckBox, borderSizeCheckBox)
-#: config/ui/breezeexceptiondialog.ui:89
-#, kde-format
-msgid "Border size:"
-msgstr "경계 크기:"
+#~ msgid "Border size:"
+#~ msgstr "경계 크기:"
 
-#. i18n: ectx: property (text), widget (QCheckBox, hideTitleBar)
-#: config/ui/breezeexceptiondialog.ui:96
-#, kde-format
-msgid "Hide window title bar"
-msgstr "창 제목 표시줄 숨기기"
+#~ msgid "Hide window title bar"
+#~ msgstr "창 제목 표시줄 숨기기"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
-#: config/ui/breezeexceptiondialog.ui:107
-#, kde-format
-msgctxt "@item:inlistbox Border size:"
-msgid "No Border"
-msgstr "경계선 없음"
+#~ msgctxt "@item:inlistbox Border size:"
+#~ msgid "No Border"
+#~ msgstr "경계선 없음"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
-#: config/ui/breezeexceptiondialog.ui:112
-#, kde-format
-msgctxt "@item:inlistbox Border size:"
-msgid "No Side Borders"
-msgstr "옆쪽 경계선 없음"
+#~ msgctxt "@item:inlistbox Border size:"
+#~ msgid "No Side Borders"
+#~ msgstr "옆쪽 경계선 없음"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
-#: config/ui/breezeexceptiondialog.ui:117
-#, kde-format
-msgctxt "@item:inlistbox Border size:"
-msgid "Tiny"
-msgstr "작게"
+#~ msgctxt "@item:inlistbox Border size:"
+#~ msgid "Tiny"
+#~ msgstr "작게"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
-#: config/ui/breezeexceptiondialog.ui:122
-#, kde-format
-msgctxt "@item:inlistbox Border size:"
-msgid "Normal"
-msgstr "일반"
+#~ msgctxt "@item:inlistbox Border size:"
+#~ msgid "Normal"
+#~ msgstr "일반"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
-#: config/ui/breezeexceptiondialog.ui:127
-#, kde-format
-msgctxt "@item:inlistbox Border size:"
-msgid "Large"
-msgstr "크게"
+#~ msgctxt "@item:inlistbox Border size:"
+#~ msgid "Large"
+#~ msgstr "크게"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
-#: config/ui/breezeexceptiondialog.ui:132
-#, kde-format
-msgctxt "@item:inlistbox Border size:"
-msgid "Very Large"
-msgstr "매우 매우 크게"
+#~ msgctxt "@item:inlistbox Border size:"
+#~ msgid "Very Large"
+#~ msgstr "매우 매우 크게"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
-#: config/ui/breezeexceptiondialog.ui:137
-#, kde-format
-msgctxt "@item:inlistbox Border size:"
-msgid "Huge"
-msgstr "매우 크게"
+#~ msgctxt "@item:inlistbox Border size:"
+#~ msgid "Huge"
+#~ msgstr "매우 크게"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
-#: config/ui/breezeexceptiondialog.ui:142
-#, kde-format
-msgctxt "@item:inlistbox Border size:"
-msgid "Very Huge"
-msgstr "매우 매우 매우 크게"
+#~ msgctxt "@item:inlistbox Border size:"
+#~ msgid "Very Huge"
+#~ msgstr "매우 매우 매우 크게"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
-#: config/ui/breezeexceptiondialog.ui:147
-#, kde-format
-msgctxt "@item:inlistbox Border size:"
-msgid "Oversized"
-msgstr "과다하게 크게"
+#~ msgctxt "@item:inlistbox Border size:"
+#~ msgid "Oversized"
+#~ msgstr "과다하게 크게"
 
-#. i18n: ectx: property (text), widget (QPushButton, moveUpButton)
-#: config/ui/breezeexceptionlistwidget.ui:70
-#, kde-format
-msgid "Move Up"
-msgstr "위로 이동"
+#~ msgid "Move Up"
+#~ msgstr "위로 이동"
 
-#. i18n: ectx: property (text), widget (QPushButton, moveDownButton)
-#: config/ui/breezeexceptionlistwidget.ui:77
-#, kde-format
-msgid "Move Down"
-msgstr "아래로 이동"
+#~ msgid "Move Down"
+#~ msgstr "아래로 이동"
 
-#. i18n: ectx: property (text), widget (QPushButton, addButton)
-#: config/ui/breezeexceptionlistwidget.ui:84
-#, kde-format
-msgid "Add"
-msgstr "추가"
+#~ msgid "Add"
+#~ msgstr "추가"
 
-#. i18n: ectx: property (text), widget (QPushButton, editButton)
-#: config/ui/breezeexceptionlistwidget.ui:98
-#, kde-format
-msgid "Edit"
-msgstr "편집"
+#~ msgid "Edit"
+#~ msgstr "편집"
 
 #~ msgid "Add handle to resize windows with no border"
 #~ msgstr "경계선이 없는 창에 크기 조절 핸들 추가"

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: breeze_style_config\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-25 00:45+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2017-05-23 06:19-0400\n"
 "Last-Translator: Elkana Bardugo <ttv200@gmail.com>\n"
 "Language-Team: Hebrew\n"
@@ -19,176 +19,68 @@ msgstr ""
 msgid "Breeze Settings"
 msgstr "הגדרות Breeze"
 
-#. i18n: ectx: attribute (title), widget (QWidget, tab)
-#: ui/breezestyleconfig.ui:39
-#, kde-format
-msgid "General"
-msgstr "כללי"
+#~ msgid "General"
+#~ msgstr "כללי"
 
-#. i18n: ectx: property (text), widget (QLabel, _windowDragLabel)
-#: ui/breezestyleconfig.ui:51
-#, kde-format
-msgid "W&indows' drag mode:"
-msgstr "מצב &גרירת חלונות"
+#~ msgid "W&indows' drag mode:"
+#~ msgstr "מצב &גרירת חלונות"
 
-#. i18n: ectx: property (text), widget (QCheckBox, _viewDrawFocusIndicator)
-#: ui/breezestyleconfig.ui:64
-#, kde-format
-msgid "Draw focus indicator in lists"
-msgstr "הראה מחוון מיקוד ברשימות"
+#~ msgid "Draw focus indicator in lists"
+#~ msgstr "הראה מחוון מיקוד ברשימות"
 
-#. i18n: ectx: property (text), widget (QLabel, _mnemonicsLabel)
-#: ui/breezestyleconfig.ui:71
-#, kde-format
-msgid "&Keyboard accelerators visibility:"
-msgstr "נראות סמני קיצורי מ&קלדת:"
+#~ msgid "&Keyboard accelerators visibility:"
+#~ msgstr "נראות סמני קיצורי מ&קלדת:"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
-#: ui/breezestyleconfig.ui:85
-#, kde-format
-msgid "Always hide"
-msgstr ""
+#~ msgid "Drag windows from titlebar only"
+#~ msgstr "דרוג חלונות משורת הכותרת בלבד"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
-#: ui/breezestyleconfig.ui:90
-#, kde-format
-msgid "Show when Alt key is pressed"
-msgstr ""
+#~ msgid "Drag windows from titlebar, menubar and toolbars"
+#~ msgstr "דרוג חלונות משורת הכותרת, שורות תפריטים וסרגלי גלים"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
-#: ui/breezestyleconfig.ui:95
-#, kde-format
-msgid "Always show"
-msgstr ""
+#~ msgid "Drag windows from all empty areas"
+#~ msgstr "דרוג חלונות מכל האיזורים הריקים"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
-#: ui/breezestyleconfig.ui:117
-#, kde-format
-msgid "Drag windows from titlebar only"
-msgstr "דרוג חלונות משורת הכותרת בלבד"
+#~ msgid "Center tabbar tabs"
+#~ msgstr "מרכז כרטיסיות בסרגל כרטיסיות"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
-#: ui/breezestyleconfig.ui:122
-#, kde-format
-msgid "Drag windows from titlebar, menubar and toolbars"
-msgstr "דרוג חלונות משורת הכותרת, שורות תפריטים וסרגלי גלים"
+#~ msgid "Draw toolbar item separators"
+#~ msgstr "הצג מפרידים בין פריטים בסרגלי כלים"
 
-#. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
-#: ui/breezestyleconfig.ui:127
-#, kde-format
-msgid "Drag windows from all empty areas"
-msgstr "דרוג חלונות מכל האיזורים הריקים"
+#~ msgid "Draw slider tick marks"
+#~ msgstr "צייר סמן על פס הגלילה"
 
-#. i18n: ectx: property (text), widget (QCheckBox, _tabBarDrawCenteredTabs)
-#: ui/breezestyleconfig.ui:148
-#, kde-format
-msgid "Center tabbar tabs"
-msgstr "מרכז כרטיסיות בסרגל כרטיסיות"
+#~ msgid "Enable extended resize handles"
+#~ msgstr "אפשר הרחבה של אזור אחיזה לשינוי גודל"
 
-#. i18n: ectx: property (text), widget (QCheckBox, _toolBarDrawItemSeparator)
-#: ui/breezestyleconfig.ui:155
-#, kde-format
-msgid "Draw toolbar item separators"
-msgstr "הצג מפרידים בין פריטים בסרגלי כלים"
+#~ msgid "Frames"
+#~ msgstr "מסגרות"
 
-#. i18n: ectx: property (text), widget (QCheckBox, _sliderDrawTickMarks)
-#: ui/breezestyleconfig.ui:162
-#, kde-format
-msgid "Draw slider tick marks"
-msgstr "צייר סמן על פס הגלילה"
+#~ msgid "Draw frame around dockable panels"
+#~ msgstr "ציור מסגרת מסביב ללוחות הניתנים לעגינה"
 
-#. i18n: ectx: property (text), widget (QCheckBox, _splitterProxyEnabled)
-#: ui/breezestyleconfig.ui:169
-#, kde-format
-msgid "Enable extended resize handles"
-msgstr "אפשר הרחבה של אזור אחיזה לשינוי גודל"
+#~ msgid "Draw frame around side panels"
+#~ msgstr "ציור מסגרת מסביב ללוחות צדדיים"
 
-#. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: ui/breezestyleconfig.ui:177
-#, kde-format
-msgid "Frames"
-msgstr "מסגרות"
+#~ msgid "Draw a thin line to indicate focus in menus and menubars"
+#~ msgstr "צייר קו דק לפריטים בפוקוס בתפריטים ובשורות תפריטים"
 
-#. i18n: ectx: property (text), widget (QCheckBox, _dockWidgetDrawFrame)
-#: ui/breezestyleconfig.ui:183
-#, kde-format
-msgid "Draw frame around dockable panels"
-msgstr "ציור מסגרת מסביב ללוחות הניתנים לעגינה"
+#~ msgid "Scrollbars"
+#~ msgstr "סרגלי גלילה"
 
-#. i18n: ectx: property (text), widget (QCheckBox, _sidePanelDrawFrame)
-#: ui/breezestyleconfig.ui:190
-#, kde-format
-msgid "Draw frame around side panels"
-msgstr "ציור מסגרת מסביב ללוחות צדדיים"
+#~ msgid "Bottom arrow button t&ype:"
+#~ msgstr "סוג כפתור גלילה &תחתון"
 
-#. i18n: ectx: property (text), widget (QCheckBox, _menuItemDrawThinFocus)
-#: ui/breezestyleconfig.ui:197
-#, kde-format
-msgid "Draw a thin line to indicate focus in menus and menubars"
-msgstr "צייר קו דק לפריטים בפוקוס בתפריטים ובשורות תפריטים"
+#~ msgid "&Top arrow button type:"
+#~ msgstr "סוג כפתור גלילה &עליון"
 
-#. i18n: ectx: attribute (title), widget (QWidget, tab_4)
-#: ui/breezestyleconfig.ui:218
-#, kde-format
-msgid "Scrollbars"
-msgstr "סרגלי גלילה"
+#~ msgid "No Buttons"
+#~ msgstr "ללא כפתורים"
 
-#. i18n: ectx: property (text), widget (QLabel, _scrollBarAddLineLabel)
-#: ui/breezestyleconfig.ui:237
-#, kde-format
-msgid "Bottom arrow button t&ype:"
-msgstr "סוג כפתור גלילה &תחתון"
+#~ msgid "One Button"
+#~ msgstr "כפתור אחד"
 
-#. i18n: ectx: property (text), widget (QLabel, _scrollBarSubLineLabel)
-#: ui/breezestyleconfig.ui:250
-#, kde-format
-msgid "&Top arrow button type:"
-msgstr "סוג כפתור גלילה &עליון"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
-#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
-#: ui/breezestyleconfig.ui:264 ui/breezestyleconfig.ui:283
-#, kde-format
-msgid "No Buttons"
-msgstr "ללא כפתורים"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
-#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
-#: ui/breezestyleconfig.ui:269 ui/breezestyleconfig.ui:288
-#, kde-format
-msgid "One Button"
-msgstr "כפתור אחד"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
-#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
-#: ui/breezestyleconfig.ui:274 ui/breezestyleconfig.ui:293
-#, kde-format
-msgid "Two Buttons"
-msgstr "שני כפתורים"
-
-#. i18n: ectx: attribute (title), widget (QWidget, tab_5)
-#: ui/breezestyleconfig.ui:315
-#, kde-format
-msgid "Transparency"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, _menuOpacityTransparentLabel)
-#: ui/breezestyleconfig.ui:336
-#, kde-format
-msgid "Transparent"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, _menuOpacityOpaqueLabel)
-#: ui/breezestyleconfig.ui:362
-#, kde-format
-msgid "Opaque"
-msgstr ""
-
-#. i18n: ectx: property (text), widget (QLabel, _menuGroupDescription)
-#: ui/breezestyleconfig.ui:373
-#, kde-format
-msgid "Menu:"
-msgstr ""
+#~ msgid "Two Buttons"
+#~ msgstr "שני כפתורים"
 
 #~ msgid "Always Hide Keyboard Accelerators"
 #~ msgstr "תמיד הסתר את סימני קיצורי מקלדת"
