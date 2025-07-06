@@ -273,6 +273,7 @@ void Decoration::init()
     connect(s.get(), &KDecoration3::DecorationSettings::reconfigured, SettingsProvider::self(), &SettingsProvider::reconfigure, Qt::UniqueConnection);
     connect(s.get(), &KDecoration3::DecorationSettings::reconfigured, this, &Decoration::updateButtonsGeometryDelayed);
 
+    connect(window(), &KDecoration3::DecoratedWindow::activeChanged, this, &Decoration::recalculateBorders);
     connect(window(), &KDecoration3::DecoratedWindow::adjacentScreenEdgesChanged, this, &Decoration::recalculateBorders);
     connect(window(), &KDecoration3::DecoratedWindow::maximizedHorizontallyChanged, this, &Decoration::recalculateBorders);
     connect(window(), &KDecoration3::DecoratedWindow::maximizedVerticallyChanged, this, &Decoration::recalculateBorders);
@@ -350,12 +351,12 @@ qreal Decoration::borderSize(bool bottom, qreal scale) const
         const auto borderSize = m_internalSettings->roundedCorners() ? InternalSettings::BorderNone : m_internalSettings->borderSize();
         switch (borderSize) {
         case InternalSettings::BorderNone:
-            return outlinesEnabled() ? std::max<qreal>(pixelSize, KDecoration3::snapToPixelGrid(1, scale)) : 0;
+            return 0;
         case InternalSettings::BorderNoSides:
             if (bottom) {
                 return KDecoration3::snapToPixelGrid(std::max(4.0, baseSize + Metrics::Frame_FrameRadius), scale);
             } else {
-                return outlinesEnabled() ? std::max<qreal>(pixelSize, KDecoration3::snapToPixelGrid(1, scale)) : 0;
+                return 0;
             }
         default:
         case InternalSettings::BorderTiny:
@@ -381,12 +382,12 @@ qreal Decoration::borderSize(bool bottom, qreal scale) const
         const auto borderSize = m_internalSettings->roundedCorners() ? KDecoration3::BorderSize::None : settings()->borderSize();
         switch (borderSize) {
         case KDecoration3::BorderSize::None:
-            return outlinesEnabled() ? std::max<qreal>(pixelSize, KDecoration3::snapToPixelGrid(1, scale)) : 0;
+            return 0;
         case KDecoration3::BorderSize::NoSides:
             if (bottom) {
                 return KDecoration3::snapToPixelGrid(std::max(4.0, baseSize + Metrics::Frame_FrameRadius), scale);
             } else {
-                return outlinesEnabled() ? std::max<qreal>(pixelSize, KDecoration3::snapToPixelGrid(1, scale)) : 0;
+                return 0;
             }
         default:
         case KDecoration3::BorderSize::Tiny:
@@ -496,6 +497,25 @@ void Decoration::recalculateBorders()
         }
     }
     setBorderRadius(KDecoration3::BorderRadius(0, 0, bottomRightRadius, bottomLeftRadius));
+
+    if (isMaximized() || !outlinesEnabled()) {
+        setBorderOutline(KDecoration3::BorderOutline());
+    } else {
+        const auto color = KColorUtils::mix(window()->color(window()->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame),
+                                            window()->palette().text().color(),
+                                            lookupOutlineIntensity(m_internalSettings->outlineIntensity()));
+        const qreal thickness = std::max(KDecoration3::pixelSize(window()->scale()), KDecoration3::snapToPixelGrid(1, window()->scale()));
+
+        qreal bottomLeftRadius = 0;
+        qreal bottomRightRadius = 0;
+        if (!hasNoBorders() || m_internalSettings->roundedCorners()) {
+            bottomLeftRadius = m_scaledCornerRadius;
+            bottomRightRadius = m_scaledCornerRadius;
+        }
+
+        const auto radius = KDecoration3::BorderRadius(m_scaledCornerRadius, m_scaledCornerRadius, bottomRightRadius, bottomLeftRadius);
+        setBorderOutline(KDecoration3::BorderOutline(thickness, color, radius));
+    }
 }
 
 //________________________________________________________________
@@ -627,58 +647,12 @@ void Decoration::paint(QPainter *painter, const QRectF &repaintRegion)
         painter->drawRect(rect().adjusted(0, 0, -1, -1));
         painter->restore();
     }
-    if (outlinesEnabled() && !isMaximized()) {
-        auto outlineColor = KColorUtils::mix(window()->color(window()->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame),
-                                             window()->palette().text().color(),
-                                             lookupOutlineIntensity(m_internalSettings->outlineIntensity()));
-
-        const qreal lineWidth = std::max(KDecoration3::pixelSize(window()->scale()), KDecoration3::snapToPixelGrid(1, window()->scale()));
-        QRectF outlineRect = rect();
-        // this is necessary to paint exactly in the center of the intended line
-        // otherwise anti aliasing kicks in and ruins the day
-        outlineRect.adjust(lineWidth / 2, lineWidth / 2, -lineWidth / 2, -lineWidth / 2);
-
-        qreal cornerSize = m_scaledCornerRadius * 2.0;
-        QRectF cornerRect(outlineRect.x(), outlineRect.y(), cornerSize, cornerSize);
-
-        QPainterPath outlinePath;
-        outlinePath.arcMoveTo(cornerRect, 180);
-        outlinePath.arcTo(cornerRect, 180, -90);
-        cornerRect.moveTopRight(outlineRect.topRight());
-        outlinePath.arcTo(cornerRect, 90, -90);
-        // Check if border size is "no borders" or "no side-borders"
-        if (hasNoBorders()) {
-            outlinePath.lineTo(outlineRect.bottomRight());
-            outlinePath.lineTo(outlineRect.bottomLeft());
-        } else {
-            cornerRect.moveBottomRight(outlineRect.bottomRight());
-            outlinePath.arcTo(cornerRect, 0, -90);
-            cornerRect.moveBottomLeft(outlineRect.bottomLeft());
-            outlinePath.arcTo(cornerRect, 270, -90);
-        }
-        outlinePath.closeSubpath();
-
-        painter->save();
-        painter->setPen(QPen(outlineColor, lineWidth));
-        painter->setBrush(Qt::NoBrush);
-        painter->setRenderHint(QPainter::Antialiasing);
-        painter->drawPath(outlinePath.simplified());
-        painter->restore();
-    }
 }
 
 //________________________________________________________________
 void Decoration::paintTitleBar(QPainter *painter, const QRectF &repaintRegion)
 {
-    const qreal halfAPixel = 0.5 * KDecoration3::pixelSize(window()->scale());
     QRectF rect(QPointF(0, 0), QSizeF(size().width(), borderTop()));
-    const bool noOutlines = isMaximized() || !settings()->isAlphaChannelSupported();
-    const bool bottomOutline = window()->isShaded();
-    if (!noOutlines && outlinesEnabled()) {
-        // this is needed to match the corner radius with the outline
-        rect.adjust(halfAPixel, halfAPixel, -halfAPixel, bottomOutline ? -halfAPixel : 0);
-    }
-
     QBrush frontBrush;
     QBrush backBrush(this->titleBarColor());
 
@@ -703,13 +677,13 @@ void Decoration::paintTitleBar(QPainter *painter, const QRectF &repaintRegion)
         painter->setBrush(titleBarColor());
     }
 
-    if (noOutlines) {
+    if (isMaximized() || !settings()->isAlphaChannelSupported()) {
         painter->setBrush(backBrush);
         painter->drawRect(rect);
 
         painter->setBrush(frontBrush);
         painter->drawRect(rect);
-    } else if (bottomOutline) {
+    } else if (window()->isShaded()) {
         painter->setBrush(backBrush);
         painter->drawRoundedRect(rect, m_scaledCornerRadius, m_scaledCornerRadius);
 
@@ -855,7 +829,6 @@ void Decoration::updateShadow()
 
     auto &shadow = (window()->isActive()) ? g_sShadow : g_sShadowInactive;
     if (!shadow) {
-        // Update both active and inactive shadows so outline stays consistent between the two
         g_sShadow = createShadowObject(1.0);
         g_sShadowInactive = createShadowObject(0.5);
     }
