@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-06 00:39+0000\n"
+"POT-Creation-Date: 2025-07-19 05:22+0000\n"
 "PO-Revision-Date: 2024-05-19 23:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -133,7 +133,7 @@ msgstr "Minik"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:111
-#: config/ui/breezeconfigurationui.ui:224
+#: config/ui/breezeconfigurationui.ui:231
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Small"
@@ -142,7 +142,7 @@ msgstr "Küçük"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:116
-#: config/ui/breezeconfigurationui.ui:229
+#: config/ui/breezeconfigurationui.ui:236
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Medium"
@@ -151,7 +151,7 @@ msgstr "Orta"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:121
-#: config/ui/breezeconfigurationui.ui:234
+#: config/ui/breezeconfigurationui.ui:241
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Large"
@@ -160,7 +160,7 @@ msgstr "Büyük"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:126
-#: config/ui/breezeconfigurationui.ui:239
+#: config/ui/breezeconfigurationui.ui:246
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Very Large"
@@ -196,88 +196,94 @@ msgstr ""
 msgid "Draw titlebar background gradient"
 msgstr "Başlık çubuğu arka plan geçişini çiz"
 
+#. i18n: ectx: property (text), widget (QCheckBox, roundedCorners)
+#: config/ui/breezeconfigurationui.ui:185
+#, kde-format
+msgid "Round bottom corners"
+msgstr ""
+
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
-#: config/ui/breezeconfigurationui.ui:199
+#: config/ui/breezeconfigurationui.ui:206
 #, kde-format
 msgid "Shadows and Outline"
 msgstr "Gölgeler ve Dış Hat"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezeconfigurationui.ui:205
+#: config/ui/breezeconfigurationui.ui:212
 #, kde-format
 msgid "Shadow size:"
 msgstr "Gölge boyutu:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
-#: config/ui/breezeconfigurationui.ui:219
+#: config/ui/breezeconfigurationui.ui:226
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "None"
 msgstr "Yok"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezeconfigurationui.ui:247
+#: config/ui/breezeconfigurationui.ui:254
 #, kde-format
 msgctxt "strength of the shadow (from transparent to opaque)"
 msgid "Shadow strength:"
 msgstr "Gölge sertliği:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
-#: config/ui/breezeconfigurationui.ui:260
+#: config/ui/breezeconfigurationui.ui:267
 #, no-c-format, kde-format
 msgid "%"
 msgstr "%"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: config/ui/breezeconfigurationui.ui:286
+#: config/ui/breezeconfigurationui.ui:293
 #, kde-format
 msgid "Shadow color:"
 msgstr "Gölge rengi:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
-#: config/ui/breezeconfigurationui.ui:299
+#: config/ui/breezeconfigurationui.ui:306
 #, kde-format
 msgctxt "outline intensity"
 msgid "Outline intensity:"
 msgstr "Dış hat yoğunluğu:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:313
+#: config/ui/breezeconfigurationui.ui:320
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Off"
 msgstr "Kapalı"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:318
+#: config/ui/breezeconfigurationui.ui:325
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Low"
 msgstr "Düşük"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:323
+#: config/ui/breezeconfigurationui.ui:330
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Medium"
 msgstr "Orta"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:328
+#: config/ui/breezeconfigurationui.ui:335
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "High"
 msgstr "Yüksek"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:333
+#: config/ui/breezeconfigurationui.ui:340
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Maximum"
 msgstr "En Yüksek"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: config/ui/breezeconfigurationui.ui:355
+#: config/ui/breezeconfigurationui.ui:362
 #, kde-format
 msgid "Window-Specific Overrides"
 msgstr "Pencereye Özgü Geçersiz Kılmalar"

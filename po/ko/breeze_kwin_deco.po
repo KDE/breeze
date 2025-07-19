@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kwin_clients\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-06 00:39+0000\n"
+"POT-Creation-Date: 2025-07-19 05:22+0000\n"
 "PO-Revision-Date: 2023-04-21 23:30+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -133,7 +133,7 @@ msgstr "매우 작게"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:111
-#: config/ui/breezeconfigurationui.ui:224
+#: config/ui/breezeconfigurationui.ui:231
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Small"
@@ -142,7 +142,7 @@ msgstr "작게"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:116
-#: config/ui/breezeconfigurationui.ui:229
+#: config/ui/breezeconfigurationui.ui:236
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Medium"
@@ -151,7 +151,7 @@ msgstr "중간"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:121
-#: config/ui/breezeconfigurationui.ui:234
+#: config/ui/breezeconfigurationui.ui:241
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Large"
@@ -160,7 +160,7 @@ msgstr "크게"
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:126
-#: config/ui/breezeconfigurationui.ui:239
+#: config/ui/breezeconfigurationui.ui:246
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Very Large"
@@ -195,88 +195,94 @@ msgstr ""
 msgid "Draw titlebar background gradient"
 msgstr "창 배경 그라디언트 그리기"
 
+#. i18n: ectx: property (text), widget (QCheckBox, roundedCorners)
+#: config/ui/breezeconfigurationui.ui:185
+#, kde-format
+msgid "Round bottom corners"
+msgstr ""
+
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
-#: config/ui/breezeconfigurationui.ui:199
+#: config/ui/breezeconfigurationui.ui:206
 #, kde-format
 msgid "Shadows and Outline"
 msgstr "그림자와 외곽선"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
-#: config/ui/breezeconfigurationui.ui:205
+#: config/ui/breezeconfigurationui.ui:212
 #, kde-format
 msgid "Shadow size:"
 msgstr "그림자 크기:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
-#: config/ui/breezeconfigurationui.ui:219
+#: config/ui/breezeconfigurationui.ui:226
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "None"
 msgstr "없음"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
-#: config/ui/breezeconfigurationui.ui:247
+#: config/ui/breezeconfigurationui.ui:254
 #, kde-format
 msgctxt "strength of the shadow (from transparent to opaque)"
 msgid "Shadow strength:"
 msgstr "그림자 강도:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
-#: config/ui/breezeconfigurationui.ui:260
+#: config/ui/breezeconfigurationui.ui:267
 #, no-c-format, kde-format
 msgid "%"
 msgstr "%"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
-#: config/ui/breezeconfigurationui.ui:286
+#: config/ui/breezeconfigurationui.ui:293
 #, kde-format
 msgid "Shadow color:"
 msgstr "그림자 색상:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
-#: config/ui/breezeconfigurationui.ui:299
+#: config/ui/breezeconfigurationui.ui:306
 #, kde-format
 msgctxt "outline intensity"
 msgid "Outline intensity:"
 msgstr "외곽선 강도:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:313
+#: config/ui/breezeconfigurationui.ui:320
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Off"
 msgstr "끔"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:318
+#: config/ui/breezeconfigurationui.ui:325
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Low"
 msgstr "낮음"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:323
+#: config/ui/breezeconfigurationui.ui:330
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Medium"
 msgstr "중간"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:328
+#: config/ui/breezeconfigurationui.ui:335
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "High"
 msgstr "높음"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:333
+#: config/ui/breezeconfigurationui.ui:340
 #, kde-format
 msgctxt "@item:inlistbox Outline intensity:"
 msgid "Maximum"
 msgstr "최대"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: config/ui/breezeconfigurationui.ui:355
+#: config/ui/breezeconfigurationui.ui:362
 #, kde-format
 msgid "Window-Specific Overrides"
 msgstr "창 지정 설정"
