@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-19 05:22+0000\n"
-"PO-Revision-Date: 2023-03-05 04:19+0100\n"
+"PO-Revision-Date: 2025-07-20 04:13+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -200,7 +200,7 @@ msgstr "სათაურის ზოლზე ფონის გრადი
 #: config/ui/breezeconfigurationui.ui:185
 #, kde-format
 msgid "Round bottom corners"
-msgstr ""
+msgstr "მრგვალი ქვედა კუთხეები"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: config/ui/breezeconfigurationui.ui:206
