@@ -198,7 +198,7 @@ msgstr "绘制标题栏背景色渐变"
 #: config/ui/breezeconfigurationui.ui:185
 #, kde-format
 msgid "Round bottom corners"
-msgstr ""
+msgstr "圆底边角"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: config/ui/breezeconfigurationui.ui:206
