@@ -1,14 +1,14 @@
 # translation of kwin_clients.po to Italian
+# SPDX-FileCopyrightText: 2015, 2017, 2018, 2020, 2022, 2023, 2025 Vincenzo Reale <smart2128vr@gmail.com>
 # Andrea Rizzi <rizzi@kde.org>, 2004, 2005.
 # Luciano Montanaro <mikelima@cirulla.net>, 2007, 2008, 2009, 2010, 2011, 2012.
 # Andrea Rizzi <rizzi@sns.it>, 2007.
-# Vincenzo Reale <smart2128vr@gmail.com>, 2015, 2017, 2018, 2020, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kwin_clients\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-19 05:22+0000\n"
-"PO-Revision-Date: 2023-03-05 10:38+0100\n"
+"PO-Revision-Date: 2025-07-21 08:46+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.11.70\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -201,7 +201,7 @@ msgstr "Disegna la sfumatura di sfondo della barra del titolo"
 #: config/ui/breezeconfigurationui.ui:185
 #, kde-format
 msgid "Round bottom corners"
-msgstr ""
+msgstr "Angoli inferiori arrotondati"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: config/ui/breezeconfigurationui.ui:206
