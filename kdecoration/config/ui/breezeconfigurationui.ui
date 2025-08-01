@@ -182,7 +182,7 @@
        <item row="6" column="0" colspan="3">
         <widget class="QCheckBox" name="roundedCorners">
          <property name="text">
-          <string>Round bottom corners</string>
+          <string>Round bottom corners of windows with no borders</string>
          </property>
         </widget>
        </item>
