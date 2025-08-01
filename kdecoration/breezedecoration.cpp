@@ -348,8 +348,7 @@ qreal Decoration::borderSize(bool bottom, qreal scale) const
     const qreal pixelSize = KDecoration3::pixelSize(scale);
     const qreal baseSize = std::max<qreal>(pixelSize, KDecoration3::snapToPixelGrid(settings()->smallSpacing(), scale));
     if (m_internalSettings && (m_internalSettings->mask() & BorderSize)) {
-        const auto borderSize = m_internalSettings->roundedCorners() ? InternalSettings::BorderNone : m_internalSettings->borderSize();
-        switch (borderSize) {
+        switch (m_internalSettings->borderSize()) {
         case InternalSettings::BorderNone:
             return 0;
         case InternalSettings::BorderNoSides:
@@ -379,8 +378,7 @@ qreal Decoration::borderSize(bool bottom, qreal scale) const
             return baseSize * 10;
         }
     } else {
-        const auto borderSize = m_internalSettings->roundedCorners() ? KDecoration3::BorderSize::None : settings()->borderSize();
-        switch (borderSize) {
+        switch (settings()->borderSize()) {
         case KDecoration3::BorderSize::None:
             return 0;
         case KDecoration3::BorderSize::NoSides:
@@ -486,7 +484,7 @@ void Decoration::recalculateBorders()
 
     qreal bottomLeftRadius = 0;
     qreal bottomRightRadius = 0;
-    if (m_internalSettings->roundedCorners()) {
+    if (hasNoBorders() && m_internalSettings->roundedCorners()) {
         if (!isBottomEdge()) {
             if (!isLeftEdge()) {
                 bottomLeftRadius = m_scaledCornerRadius;
