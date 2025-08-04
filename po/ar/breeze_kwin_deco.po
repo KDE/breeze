@@ -1,16 +1,16 @@
 # oxygen_kwin_deco.po
 # Copyright (C) 2014 This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
+# Safa Alfulaij <safa1996alfulaij@gmail.com>, 2015, 2016.
+# SPDX-FileCopyrightText: 2021, 2022, 2023, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
 # Abd_Allatif, 2014.
-# Safa Alfulaij <safa1996alfulaij@gmail.com>, 2015, 2016.
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-19 05:22+0000\n"
-"PO-Revision-Date: 2023-03-16 11:40+0400\n"
+"PO-Revision-Date: 2025-08-03 16:06+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -19,6 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -201,7 +202,7 @@ msgstr "ارسم تدرّج خلفيّة لشريط العنوان"
 #: config/ui/breezeconfigurationui.ui:185
 #, kde-format
 msgid "Round bottom corners"
-msgstr ""
+msgstr "حواف سفلية مستديرة"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: config/ui/breezeconfigurationui.ui:206
@@ -220,7 +221,7 @@ msgstr "حجم الظل:"
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "None"
-msgstr "بلا"
+msgstr "لا شيء"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: config/ui/breezeconfigurationui.ui:254
