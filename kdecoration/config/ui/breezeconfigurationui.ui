@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>428</width>
+    <width>469</width>
     <height>418</height>
    </rect>
   </property>
@@ -35,14 +35,17 @@
       <attribute name="title">
        <string>General</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_4">
+      <layout class="QFormLayout" name="formLayout_3">
+       <property name="formAlignment">
+        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+       </property>
        <item row="0" column="0">
         <widget class="QLabel" name="label_3">
          <property name="text">
           <string>Tit&amp;le alignment:</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
          <property name="buddy">
           <cstring>titleAlignment</cstring>
@@ -73,26 +76,13 @@
          </item>
         </widget>
        </item>
-       <item row="0" column="2">
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_4">
          <property name="text">
           <string>B&amp;utton size:</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
          <property name="buddy">
           <cstring>buttonSize</cstring>
@@ -128,29 +118,29 @@
          </item>
         </widget>
        </item>
-       <item row="2" column="0" colspan="3">
+       <item row="2" column="1">
         <widget class="QCheckBox" name="outlineCloseButton">
          <property name="text">
           <string>Draw a circle around close button</string>
          </property>
         </widget>
        </item>
-       <item row="3" column="0" colspan="3">
+       <item row="3" column="1">
         <widget class="QCheckBox" name="drawBorderOnMaximizedWindows">
          <property name="text">
           <string>Draw border on maximized and tiled windows</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="0" colspan="3">
+       <item row="4" column="1">
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <spacer name="horizontalSpacer_2">
            <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+            <enum>Qt::Orientation::Horizontal</enum>
            </property>
            <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
+            <enum>QSizePolicy::Policy::Fixed</enum>
            </property>
            <property name="sizeHint" stdset="0">
             <size>
@@ -172,32 +162,19 @@
          </item>
         </layout>
        </item>
-       <item row="5" column="0" colspan="3">
+       <item row="5" column="1">
         <widget class="QCheckBox" name="drawBackgroundGradient">
          <property name="text">
           <string>Draw titlebar background gradient</string>
          </property>
         </widget>
        </item>
-       <item row="6" column="0" colspan="3">
+       <item row="6" column="1">
         <widget class="QCheckBox" name="roundedCorners">
          <property name="text">
           <string>Round bottom corners of windows with no borders</string>
          </property>
         </widget>
-       </item>
-       <item row="7" column="0" colspan="3">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
        </item>
       </layout>
      </widget>
@@ -205,14 +182,17 @@
       <attribute name="title">
        <string>Shadows and Outline</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout">
+      <layout class="QFormLayout" name="formLayout">
+       <property name="formAlignment">
+        <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+       </property>
        <item row="0" column="0">
         <widget class="QLabel" name="label">
          <property name="text">
           <string>Shadow size:</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
          <property name="buddy">
           <cstring>shadowSize</cstring>
@@ -254,7 +234,7 @@
           <string comment="strength of the shadow (from transparent to opaque)">Shadow strength:</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
          <property name="buddy">
           <cstring>shadowStrength</cstring>
@@ -274,26 +254,13 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="2">
-        <spacer name="horizontalSpacer_5">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_5">
          <property name="text">
           <string>Shadow color:</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -306,7 +273,7 @@
           <string comment="outline intensity">Outline intensity:</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
          <property name="buddy">
           <cstring>outlineIntensity</cstring>
@@ -341,19 +308,6 @@
           </property>
          </item>
         </widget>
-       </item>
-       <item row="4" column="0" colspan="3">
-        <spacer name="verticalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
        </item>
       </layout>
      </widget>
@@ -391,17 +345,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <tabstops>
-  <tabstop>tabWidget</tabstop>
-  <tabstop>titleAlignment</tabstop>
-  <tabstop>buttonSize</tabstop>
-  <tabstop>outlineCloseButton</tabstop>
-  <tabstop>drawBorderOnMaximizedWindows</tabstop>
-  <tabstop>drawBackgroundGradient</tabstop>
-  <tabstop>shadowSize</tabstop>
-  <tabstop>shadowStrength</tabstop>
-  <tabstop>shadowColor</tabstop>
- </tabstops>
  <resources/>
  <connections/>
 </ui>
