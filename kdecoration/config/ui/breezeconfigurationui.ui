@@ -44,9 +44,6 @@
          <property name="text">
           <string>Tit&amp;le alignment:</string>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-         </property>
          <property name="buddy">
           <cstring>titleAlignment</cstring>
          </property>
@@ -80,9 +77,6 @@
         <widget class="QLabel" name="label_4">
          <property name="text">
           <string>B&amp;utton size:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
          <property name="buddy">
           <cstring>buttonSize</cstring>
@@ -191,9 +185,6 @@
          <property name="text">
           <string>Shadow size:</string>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-         </property>
          <property name="buddy">
           <cstring>shadowSize</cstring>
          </property>
@@ -233,9 +224,6 @@
          <property name="text">
           <string comment="strength of the shadow (from transparent to opaque)">Shadow strength:</string>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-         </property>
          <property name="buddy">
           <cstring>shadowStrength</cstring>
          </property>
@@ -259,9 +247,6 @@
          <property name="text">
           <string>Shadow color:</string>
          </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-         </property>
         </widget>
        </item>
        <item row="2" column="1">
@@ -271,9 +256,6 @@
         <widget class="QLabel" name="label_6">
          <property name="text">
           <string comment="outline intensity">Outline intensity:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
          </property>
          <property name="buddy">
           <cstring>outlineIntensity</cstring>
