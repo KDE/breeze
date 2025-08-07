@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: breeze_kwin_deco\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-06 00:45+0000\n"
-"PO-Revision-Date: 2025-07-23 01:13-0300\n"
+"PO-Revision-Date: 2025-08-07 08:20-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -199,10 +199,9 @@ msgstr "Desenhar um gradiente no fundo da barra de título"
 
 #. i18n: ectx: property (text), widget (QCheckBox, roundedCorners)
 #: config/ui/breezeconfigurationui.ui:169
-#, fuzzy, kde-format
-#| msgid "Add handle to resize windows with no border"
+#, kde-format
 msgid "Round bottom corners of windows with no borders"
-msgstr "Adicionar alça para redimensionar as janelas sem borda"
+msgstr "Cantos inferiores arredondados de janelas sem bordas"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: config/ui/breezeconfigurationui.ui:177
