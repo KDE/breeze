@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: breeze_kwin_deco\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-05 05:54+0000\n"
-"PO-Revision-Date: 2025-07-13 10:43+0300\n"
+"PO-Revision-Date: 2025-08-06 10:11+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -44,7 +44,7 @@ msgstr "להסיר את החריגה הנבחרת"
 #: config/ui/breezeexceptionlistwidget.ui:91
 #, kde-format
 msgid "Remove"
-msgstr "הסר"
+msgstr "הסרה"
 
 #: config/breezeexceptionlistwidget.cpp:300
 #, kde-format
@@ -355,13 +355,13 @@ msgstr "גדול מדי"
 #: config/ui/breezeexceptionlistwidget.ui:70
 #, kde-format
 msgid "Move Up"
-msgstr "הזז למעלה"
+msgstr "העלאה למעלה"
 
 #. i18n: ectx: property (text), widget (QPushButton, moveDownButton)
 #: config/ui/breezeexceptionlistwidget.ui:77
 #, kde-format
 msgid "Move Down"
-msgstr "הזז למטה"
+msgstr "הורדה למטה"
 
 #. i18n: ectx: property (text), widget (QPushButton, addButton)
 #: config/ui/breezeexceptionlistwidget.ui:84
