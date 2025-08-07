@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-06 00:45+0000\n"
-"PO-Revision-Date: 2025-07-19 11:43+0200\n"
+"PO-Revision-Date: 2025-08-06 09:07+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -199,10 +199,9 @@ msgstr "Kleurverloop van titelachtergrond tekenen"
 
 #. i18n: ectx: property (text), widget (QCheckBox, roundedCorners)
 #: config/ui/breezeconfigurationui.ui:169
-#, fuzzy, kde-format
-#| msgid "Add handle to resize windows with no border"
+#, kde-format
 msgid "Round bottom corners of windows with no borders"
-msgstr "Voeg handvat toe om vensters zonder rand van grootte te laten wijzigen"
+msgstr "Onderhoeken van vensters zonder rand afronden"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: config/ui/breezeconfigurationui.ui:177

@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-06 00:45+0000\n"
-"PO-Revision-Date: 2025-07-19 18:38+0200\n"
+"PO-Revision-Date: 2025-08-06 08:35+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -205,7 +205,7 @@ msgstr "Dibuixa el degradat del fons de la barra de títol"
 #: config/ui/breezeconfigurationui.ui:169
 #, kde-format
 msgid "Round bottom corners of windows with no borders"
-msgstr ""
+msgstr "Cantons inferiors arredonits de les finestres sense vores"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: config/ui/breezeconfigurationui.ui:177
@@ -427,6 +427,3 @@ msgstr "Afig"
 #, kde-format
 msgid "Edit"
 msgstr "Edita"
-
-#~ msgid "Round bottom corners"
-#~ msgstr "Cantons inferiors arredonits"

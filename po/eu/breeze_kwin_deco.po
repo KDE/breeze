@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-06 00:45+0000\n"
-"PO-Revision-Date: 2025-07-21 18:56+0200\n"
+"PO-Revision-Date: 2025-08-06 09:27+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -199,10 +199,9 @@ msgstr "Marraztu titulu-barrako atzealdeko gradientea"
 
 #. i18n: ectx: property (text), widget (QCheckBox, roundedCorners)
 #: config/ui/breezeconfigurationui.ui:169
-#, fuzzy, kde-format
-#| msgid "Add handle to resize windows with no border"
+#, kde-format
 msgid "Round bottom corners of windows with no borders"
-msgstr "Erantsi heldulekua ertzik gabeko leihoen neurria aldatzeko"
+msgstr "Biribildu ertzik gabeko leihoen beheko izkinak"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: config/ui/breezeconfigurationui.ui:177
