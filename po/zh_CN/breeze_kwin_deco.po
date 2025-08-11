@@ -419,6 +419,3 @@ msgstr "添加"
 #, kde-format
 msgid "Edit"
 msgstr "编辑"
-
-#~ msgid "Round bottom corners"
-#~ msgstr "圆底边角"
