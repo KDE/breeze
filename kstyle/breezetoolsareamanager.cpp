@@ -185,7 +185,15 @@ void ToolsAreaManager::configUpdated()
             }
         }
     } else {
-        loadSchemeConfig(QString{});
+#ifdef Q_OS_WIN
+        // If high-contrast is active then use the system colors
+        if (isHighContrastModeActive()) {
+            _config.reset();
+        } else
+#endif
+        {
+            loadSchemeConfig(QString{});
+        }
     }
 #endif
     auto active = KColorScheme(QPalette::Active, KColorScheme::Header, _config);
