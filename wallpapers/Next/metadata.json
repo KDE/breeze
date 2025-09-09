@@ -33,7 +33,6 @@
                 "Name[sv]": "Andy Betts",
                 "Name[tr]": "Andy Betts",
                 "Name[uk]": "Andy Betts",
-                "Name[x-test]": "xxAndy Bettsxx",
                 "Name[zh_CN]": "Andy Betts"
             }
         ],
@@ -69,7 +68,6 @@
         "Name[sv]": "Berg",
         "Name[tr]": "Dağ",
         "Name[uk]": "Гора",
-        "Name[x-test]": "xxMountainxx",
         "Name[zh_CN]": "Mountain 雪峰"
     },
     "X-KDE-PlasmaImageWallpaper-AccentColor": {

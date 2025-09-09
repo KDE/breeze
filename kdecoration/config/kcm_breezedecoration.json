@@ -33,7 +33,6 @@
         "Description[sv]": "Ändra utseendet hos fönsterdekorationer",
         "Description[tr]": "Pencere dekorasyonlarının görünüşünü değiştirin",
         "Description[uk]": "Внесення змін до обрамлення вікон",
-        "Description[x-test]": "xxModify the appearance of window decorationsxx",
         "Description[zh_CN]": "调整窗口装饰外观",
         "Description[zh_TW]": "修改視窗裝飾的外觀",
         "Icon": "preferences-system-windows",
@@ -70,7 +69,6 @@
         "Name[sv]": "Breeze fönsterdekoration",
         "Name[tr]": "Esinti Pencere Dekorasyonu",
         "Name[uk]": "Обрамлення вікон Breeze",
-        "Name[x-test]": "xxBreeze Window Decorationxx",
         "Name[zh_CN]": "Breeze 微风窗口装饰",
         "Name[zh_TW]": "Breeze 視窗裝飾",
         "ServiceTypes": [
@@ -102,7 +100,6 @@
     "X-KDE-Keywords[sl]": "sapica,dekoracija",
     "X-KDE-Keywords[sv]": "breeze,dekoration",
     "X-KDE-Keywords[uk]": "breeze,decoration,бриз,декорації,декорація,обрамлення",
-    "X-KDE-Keywords[x-test]": "xxbreezexx,xxdecorationxx",
     "X-KDE-ParentApp": "kcontrol",
     "X-KDE-Weight": 60
 }
