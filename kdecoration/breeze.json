@@ -51,7 +51,6 @@
         "Description[tg]": "Ороиши равзана бо истифодаи услуби намоёнии Насим барои мизи кории Plasma",
         "Description[tr]": "Plasma Masaüstü için Esinti görsel biçemini kullanan pencere dekorasyonu",
         "Description[uk]": "Обрамлення вікон з використанням візуального стилю Breeze для стільничного середовища Плазми",
-        "Description[x-test]": "xxWindow decoration using the Breeze visual style for the Plasma Desktopxx",
         "Description[zh_CN]": "Breeze 微风外观样式的 Plasma 桌面窗口装饰",
         "Description[zh_TW]": "使用 Plasma 桌面 Breeze 視覺樣式的視窗裝飾",
         "EnabledByDefault": true,
@@ -107,7 +106,6 @@
         "Name[tg]": "Насим",
         "Name[tr]": "Esinti",
         "Name[uk]": "Breeze",
-        "Name[x-test]": "xxBreezexx",
         "Name[zh_CN]": "Breeze 微风",
         "Name[zh_TW]": "Breeze"
     },
