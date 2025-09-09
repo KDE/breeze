@@ -39,7 +39,6 @@
         "Description[sv]": "Ändra utseende hos grafiska komponenter",
         "Description[tr]": "Araç takımlarının görünüşünü değiştirin",
         "Description[uk]": "Внесення змін до вигляду віджетів",
-        "Description[x-test]": "xxModify the appearance of widgetsxx",
         "Description[zh_CN]": "调整窗口部件外观",
         "Description[zh_TW]": "修改元件的外觀",
         "Icon": "preferences-desktop-theme",
@@ -82,7 +81,6 @@
         "Name[sv]": "Breeze stil för grafiska komponenter",
         "Name[tr]": "Esinti Araç Takımı Biçemi",
         "Name[uk]": "Стиль віджетів Breeze",
-        "Name[x-test]": "xxBreeze Widget Stylexx",
         "Name[zh_CN]": "Breeze 微风窗口部件风格",
         "Name[zh_TW]": "Breeze 元件樣式",
         "ServiceTypes": [
@@ -122,7 +120,6 @@
     "X-KDE-Keywords[sv]": "breeze,grafisk komponent,stil",
     "X-KDE-Keywords[tr]": "esinti,breeze,araç takımı,biçem,stil",
     "X-KDE-Keywords[uk]": "breeze,widget,style,бриз,віджет,стиль,вигляд",
-    "X-KDE-Keywords[x-test]": "xxbreezexx,xxwidgetxx,xxstylexx",
     "X-KDE-Keywords[zh_CN]": "breeze,weifeng,chuangkoubujian,yangshi,fengge,shijuefengge,微风,窗口部件,样式,风格,视觉风格",
     "X-KDE-Keywords[zh_TW]": "breeze,元件,風格,樣式",
     "X-KDE-ParentApp": "kcontrol",
