@@ -1,3 +1,4 @@
+# SPDX-FileCopyrightText: 2025 Yuma Kakei <yumasansansan@gmail.com>
 # 百武 朋大 <tomhioo@outlook.jp>, 2019.
 # Fumiaki Okushi <fumiaki.okushi@gmail.com>, 2019.
 # R.Suga <21r.suga@gmail.com>, 2022.
@@ -16,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: main.cpp:25 main.cpp:29
 #, kde-format

@@ -1,4 +1,5 @@
 # Translation of kwin_clients into Japanese.
+# SPDX-FileCopyrightText: 2025 Yuma Kakei <yumasansansan@gmail.com>
 # This file is distributed under the same license as the kdebase package.
 # Shinichi Tsunoda <tsuno@ngy.1st.ne.jp>, 2005.
 # Yukiko Bando <ybando@k6.dion.ne.jp>, 2006, 2007, 2008, 2009, 2010.
@@ -11,14 +12,14 @@ msgstr ""
 "Project-Id-Version: kwin_clients\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-05 05:54+0000\n"
-"PO-Revision-Date: 2022-02-23 15:13+0900\n"
-"Last-Translator: R.Suga <21r.suga@gmail.com>\n"
+"PO-Revision-Date: 2025-09-23 23:33+0900\n"
+"Last-Translator: Yuma Kakei <yumasansansan@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 25.08.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -115,7 +116,7 @@ msgstr "中央"
 #: config/ui/breezeconfigurationui.ui:63
 #, kde-format
 msgid "Center (Full Width)"
-msgstr "中央(幅に合わせる)"
+msgstr "中央 (幅に合わせる)"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
 #: config/ui/breezeconfigurationui.ui:68
@@ -181,7 +182,7 @@ msgstr "閉じるボタンの周りに円を表示"
 #: config/ui/breezeconfigurationui.ui:138
 #, kde-format
 msgid "Draw border on maximized and tiled windows"
-msgstr ""
+msgstr "最大化またはタイル化されたウィンドウに境界線を描画する"
 
 #. i18n: ectx: property (text), widget (QLabel, drawBorderOnMaximizedWindowsHelpLabel)
 #: config/ui/breezeconfigurationui.ui:163
@@ -191,6 +192,9 @@ msgid ""
 "edges. Scrollbars and window close buttons will shift positions and will not "
 "touch screen edges."
 msgstr ""
+"この設定を有効にすると、スクリーンの端に接しているウィンドウの縁からでもリサ"
+"イズできるようになります。スクロールバーとウィンドウの「閉じる」ボタンは位置"
+"がずれて、スクリーンの端に触れなくなります。"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
 #: config/ui/breezeconfigurationui.ui:175
@@ -268,10 +272,9 @@ msgstr "マッチさせる正規表現(&T): "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, fuzzy, kde-format
-#| msgid "Detect Window Properties"
+#, kde-format
 msgid "Detect Window Properties…"
-msgstr "ウィンドウのプロパティを検出"
+msgstr "ウィンドウのプロパティを検出…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: config/ui/breezeexceptiondialog.ui:83
