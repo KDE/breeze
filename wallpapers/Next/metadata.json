@@ -42,6 +42,13 @@
         ],
         "Id": "Next",
         "License": "CC-BY-SA-4.0",
-        "Name": "Orionids"
+        "Name": "Orionids",
+        "Name[ca@valencia]": "Orionids",
+        "Name[ca]": "Orionids",
+        "Name[es]": "Oriónidas",
+        "Name[nl]": "Orionids",
+        "Name[pt_BR]": "Orionídeos",
+        "Name[sl]": "Orionidi",
+        "Name[zh_TW]": "Orionids"
     }
 }
