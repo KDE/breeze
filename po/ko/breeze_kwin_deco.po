@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kwin_clients\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-06 00:45+0000\n"
-"PO-Revision-Date: 2025-07-20 00:50+0200\n"
+"PO-Revision-Date: 2025-10-09 00:08+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -196,10 +196,9 @@ msgstr "창 배경 그라디언트 그리기"
 
 #. i18n: ectx: property (text), widget (QCheckBox, roundedCorners)
 #: config/ui/breezeconfigurationui.ui:169
-#, fuzzy, kde-format
-#| msgid "Add handle to resize windows with no border"
+#, kde-format
 msgid "Round bottom corners of windows with no borders"
-msgstr "경계선이 없는 창에 크기 조절 핸들 추가"
+msgstr "경계선이 없는 창의 아래쪽 모서리 둥글게"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: config/ui/breezeconfigurationui.ui:177
