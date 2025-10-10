@@ -108,25 +108,6 @@ inline CompositeShadowParams lookupShadowParams(int size)
         return s_shadowParams[3];
     }
 }
-
-inline qreal lookupOutlineIntensity(int intensity)
-{
-    switch (intensity) {
-    case Breeze::InternalSettings::OutlineOff:
-        return 0;
-    case Breeze::InternalSettings::OutlineLow:
-        return Breeze::Metrics::Bias_Default / 2;
-    case Breeze::InternalSettings::OutlineMedium:
-        return Breeze::Metrics::Bias_Default;
-    case Breeze::InternalSettings::OutlineHigh:
-        return Breeze::Metrics::Bias_Default * 2;
-    case Breeze::InternalSettings::OutlineMaximum:
-        return Breeze::Metrics::Bias_Default * 3;
-    default:
-        // Fallback to the Medium intensity.
-        return Breeze::Metrics::Bias_Default;
-    }
-}
 }
 
 namespace Breeze
@@ -430,6 +411,9 @@ void Decoration::reconfigure()
     // But the shadow is fine to animate like this!
     m_shadowAnimation->setDuration(cg.readEntry("AnimationDurationFactor", 1.0f) * 100.0f);
 
+    const KConfigGroup cgwm(config, QStringLiteral("WM"));
+    m_outlineContrast = cgwm.readEntry(QStringLiteral("separatorContrast"), Breeze::Metrics::Bias_Default);
+
     // borders
     recalculateBorders();
 
@@ -501,7 +485,7 @@ void Decoration::recalculateBorders()
     } else {
         const auto color = KColorUtils::mix(window()->color(window()->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame),
                                             window()->palette().text().color(),
-                                            lookupOutlineIntensity(m_internalSettings->outlineIntensity()));
+                                            m_outlineContrast);
         const qreal thickness = std::max(KDecoration3::pixelSize(window()->scale()), KDecoration3::snapToPixelGrid(1, window()->scale()));
 
         qreal bottomLeftRadius = 0;

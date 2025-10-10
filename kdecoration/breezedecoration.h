@@ -140,6 +140,8 @@ private:
     //*frame corner radius, scaled according to DPI
     qreal m_scaledCornerRadius = 3;
 
+    qreal m_outlineContrast = 0.2;
+
     bool m_tabletMode = false;
 };
 
