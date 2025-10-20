@@ -1,22 +1,22 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Sergiu Bivol <sergiu@cip.md>, 2015, 2020, 2022.
+# SPDX-FileCopyrightText: 2015, 2020, 2022, 2025 Sergiu Bivol <sergiu@cip.md>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-29 00:40+0000\n"
-"PO-Revision-Date: 2022-02-17 14:12+0000\n"
+"PO-Revision-Date: 2025-10-19 02:48+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
-"Language-Team: Romanian\n"
+"Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.12.2\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: main.cpp:25 main.cpp:29
 #, kde-format
@@ -153,24 +153,21 @@ msgstr "&Tip buton săgeată spre vârf:"
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
 #: ui/breezestyleconfig.ui:264 ui/breezestyleconfig.ui:283
-#, fuzzy, kde-format
-#| msgid "No Buttons"
+#, kde-format
 msgid "No buttons"
 msgstr "Fără butoane"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
 #: ui/breezestyleconfig.ui:269 ui/breezestyleconfig.ui:288
-#, fuzzy, kde-format
-#| msgid "One Button"
+#, kde-format
 msgid "One button"
 msgstr "Un buton"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
 #: ui/breezestyleconfig.ui:274 ui/breezestyleconfig.ui:293
-#, fuzzy, kde-format
-#| msgid "Two Buttons"
+#, kde-format
 msgid "Two buttons"
 msgstr "Două butoane"
 
