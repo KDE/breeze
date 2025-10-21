@@ -24,6 +24,7 @@
 #include <KPluginFactory>
 #include <KSharedConfig>
 
+#include <KColorScheme>
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <QDBusPendingCallWatcher>
@@ -411,9 +412,6 @@ void Decoration::reconfigure()
     // But the shadow is fine to animate like this!
     m_shadowAnimation->setDuration(cg.readEntry("AnimationDurationFactor", 1.0f) * 100.0f);
 
-    const KConfigGroup cgwm(config, QStringLiteral("WM"));
-    m_outlineContrast = cgwm.readEntry(QStringLiteral("frameContrast"), Breeze::Metrics::Bias_Default);
-
     // borders
     recalculateBorders();
 
@@ -485,7 +483,7 @@ void Decoration::recalculateBorders()
     } else {
         const auto color = KColorUtils::mix(window()->color(window()->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame),
                                             window()->palette().text().color(),
-                                            m_outlineContrast);
+                                            KColorScheme::frameContrast());
         const qreal thickness = std::max(KDecoration3::pixelSize(window()->scale()), KDecoration3::snapToPixelGrid(1, window()->scale()));
 
         qreal bottomLeftRadius = 0;

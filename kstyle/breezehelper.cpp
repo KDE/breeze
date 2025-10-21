@@ -110,7 +110,7 @@ void Helper::loadConfig()
     _activeTitleBarTextColor = globalGroup.readEntry("activeForeground", palette.color(QPalette::Active, QPalette::HighlightedText));
     _inactiveTitleBarColor = globalGroup.readEntry("inactiveBackground", palette.color(QPalette::Disabled, QPalette::Highlight));
     _inactiveTitleBarTextColor = globalGroup.readEntry("inactiveForeground", palette.color(QPalette::Disabled, QPalette::HighlightedText));
-    _contrastBias = globalGroup.readEntry("frameContrast", Metrics::Bias_Default);
+    _contrastBias = KColorScheme::frameContrast();
 
     if (const QString colorSchemePath = qApp->property("KDE_COLOR_SCHEME_PATH").toString(); !colorSchemePath.isEmpty()) {
         KConfig config(colorSchemePath, KConfig::SimpleConfig);
