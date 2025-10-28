@@ -24,6 +24,7 @@
 #include <KPluginFactory>
 #include <KSharedConfig>
 
+#include <KColorScheme>
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <QDBusPendingCallWatcher>
@@ -106,25 +107,6 @@ inline CompositeShadowParams lookupShadowParams(int size)
     default:
         // Fallback to the Large size.
         return s_shadowParams[3];
-    }
-}
-
-inline qreal lookupOutlineIntensity(int intensity)
-{
-    switch (intensity) {
-    case Breeze::InternalSettings::OutlineOff:
-        return 0;
-    case Breeze::InternalSettings::OutlineLow:
-        return Breeze::Metrics::Bias_Default / 2;
-    case Breeze::InternalSettings::OutlineMedium:
-        return Breeze::Metrics::Bias_Default;
-    case Breeze::InternalSettings::OutlineHigh:
-        return Breeze::Metrics::Bias_Default * 2;
-    case Breeze::InternalSettings::OutlineMaximum:
-        return Breeze::Metrics::Bias_Default * 3;
-    default:
-        // Fallback to the Medium intensity.
-        return Breeze::Metrics::Bias_Default;
     }
 }
 }
@@ -499,9 +481,15 @@ void Decoration::recalculateBorders()
     if (isMaximized() || !outlinesEnabled()) {
         setBorderOutline(KDecoration3::BorderOutline());
     } else {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         const auto color = KColorUtils::mix(window()->color(window()->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame),
                                             window()->palette().text().color(),
-                                            lookupOutlineIntensity(m_internalSettings->outlineIntensity()));
+                                            KColorScheme::frameContrast());
+#else
+        const auto color = KColorUtils::mix(window()->color(window()->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame),
+                                            window()->palette().text().color(),
+                                            0.2);
+#endif
         const qreal thickness = std::max(KDecoration3::pixelSize(window()->scale()), KDecoration3::snapToPixelGrid(1, window()->scale()));
 
         qreal bottomLeftRadius = 0;

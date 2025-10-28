@@ -110,6 +110,11 @@ void Helper::loadConfig()
     _activeTitleBarTextColor = globalGroup.readEntry("activeForeground", palette.color(QPalette::Active, QPalette::HighlightedText));
     _inactiveTitleBarColor = globalGroup.readEntry("inactiveBackground", palette.color(QPalette::Disabled, QPalette::Highlight));
     _inactiveTitleBarTextColor = globalGroup.readEntry("inactiveForeground", palette.color(QPalette::Disabled, QPalette::HighlightedText));
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    _contrastBias = KColorScheme::frameContrast();
+#else
+    _contrastBias = 0.2;
+#endif
 
     if (const QString colorSchemePath = qApp->property("KDE_COLOR_SCHEME_PATH").toString(); !colorSchemePath.isEmpty()) {
         KConfig config(colorSchemePath, KConfig::SimpleConfig);
@@ -145,7 +150,7 @@ QColor transparentize(const QColor &color, qreal amount)
 //____________________________________________________________________
 QColor Helper::frameOutlineColor(const QPalette &palette, bool mouseOver, bool hasFocus, qreal opacity, AnimationMode mode) const
 {
-    QColor outline(KColorUtils::mix(palette.color(QPalette::Window), palette.color(QPalette::WindowText), Metrics::Bias_Default));
+    QColor outline(KColorUtils::mix(palette.color(QPalette::Window), palette.color(QPalette::WindowText), frameIntensityBias()));
 
     // focus takes precedence over hover
     if (mode == AnimationFocus) {
@@ -263,7 +268,7 @@ QColor Helper::arrowColor(const QPalette &palette, bool mouseOver, bool hasFocus
 //____________________________________________________________________
 QColor Helper::sliderOutlineColor(const QPalette &palette, bool mouseOver, bool hasFocus, qreal opacity, AnimationMode mode) const
 {
-    QColor outline(KColorUtils::mix(palette.color(QPalette::Button), palette.color(QPalette::ButtonText), Metrics::Bias_Default));
+    QColor outline(KColorUtils::mix(palette.color(QPalette::Button), palette.color(QPalette::ButtonText), frameIntensityBias()));
 
     // hover takes precedence over focus
     if (mode == AnimationHover) {
@@ -344,7 +349,7 @@ QColor Helper::checkBoxIndicatorColor(const QPalette &palette, bool mouseOver, b
 //______________________________________________________________________________
 QColor Helper::separatorColor(const QPalette &palette) const
 {
-    return KColorUtils::mix(palette.color(QPalette::Window), palette.color(QPalette::WindowText), Metrics::Bias_Default);
+    return KColorUtils::mix(palette.color(QPalette::Window), palette.color(QPalette::WindowText), frameIntensityBias());
 }
 
 //______________________________________________________________________________
@@ -701,10 +706,10 @@ void Helper::renderButtonFrame(QPainter *painter,
         } else if (checked) {
             bgBrush = hasNeutralHighlight ? alphaColor(neutralText(palette), highlightBackgroundAlpha) : alphaColor(palette.buttonText().color(), 0.125);
             penBrush =
-                hasNeutralHighlight ? neutralText(palette) : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), Metrics::Bias_Default);
+                hasNeutralHighlight ? neutralText(palette) : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), frameIntensityBias());
         } else if (isActiveWindow && defaultButton) {
             bgBrush = alphaColor(highlightColor, 0.125);
-            penBrush = KColorUtils::mix(highlightColor, KColorUtils::mix(palette.button().color(), palette.buttonText().color(), Metrics::Bias_Default), 0.5);
+            penBrush = KColorUtils::mix(highlightColor, KColorUtils::mix(palette.button().color(), palette.buttonText().color(), frameIntensityBias()), 0.5);
         } else {
             bgBrush = alphaColor(highlightColor, 0);
             penBrush = hasNeutralHighlight ? neutralText(palette) : bgBrush;
@@ -716,14 +721,14 @@ void Helper::renderButtonFrame(QPainter *painter,
             bgBrush = hasNeutralHighlight ? KColorUtils::mix(palette.button().color(), neutralText(palette), 0.333)
                                           : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), 0.125);
             penBrush =
-                hasNeutralHighlight ? neutralText(palette) : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), Metrics::Bias_Default);
+                hasNeutralHighlight ? neutralText(palette) : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), frameIntensityBias());
         } else if (isActiveWindow && defaultButton) {
             bgBrush = KColorUtils::mix(palette.button().color(), highlightColor, 0.2);
-            penBrush = KColorUtils::mix(highlightColor, KColorUtils::mix(palette.button().color(), palette.buttonText().color(), Metrics::Bias_Default), 0.5);
+            penBrush = KColorUtils::mix(highlightColor, KColorUtils::mix(palette.button().color(), palette.buttonText().color(), frameIntensityBias()), 0.5);
         } else {
             bgBrush = palette.button().color();
             penBrush =
-                hasNeutralHighlight ? neutralText(palette) : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), Metrics::Bias_Default);
+                hasNeutralHighlight ? neutralText(palette) : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), frameIntensityBias());
         }
     }
 
@@ -1131,7 +1136,7 @@ void Helper::renderSliderGroove(QPainter *painter, const QRectF &rect, const QCo
     // content
     // content
     if (fg.isValid()) {
-        painter->setPen(QPen(transparentize(fg, Metrics::Bias_Default), PenWidth::Frame));
+        painter->setPen(QPen(transparentize(fg, frameIntensityBias()), PenWidth::Frame));
         painter->setBrush(KColorUtils::overlayColors(bg, alphaColor(fg, 0.7)));
         painter->drawRoundedRect(baseRect, radius, radius);
     }
@@ -1154,7 +1159,7 @@ void Helper::renderDialGroove(QPainter *painter, const QRectF &rect, const QColo
         const int angleStart(first * 180 * 16 / M_PI);
         const int angleSpan((last - first) * 180 * 16 / M_PI);
         const QPen bgPen(fg, penWidth, Qt::SolidLine, Qt::RoundCap);
-        const QPen fgPen(transparentize(KColorUtils::overlayColors(bg, alphaColor(fg, 0.5)), Metrics::Bias_Default), penWidth - 2, Qt::SolidLine, Qt::RoundCap);
+        const QPen fgPen(transparentize(KColorUtils::overlayColors(bg, alphaColor(fg, 0.5)), frameIntensityBias()), penWidth - 2, Qt::SolidLine, Qt::RoundCap);
 
         // setup pen
         if (angleSpan != 0) {
@@ -1253,7 +1258,7 @@ void Helper::renderProgressBarGroove(QPainter *painter, const QRectF &rect, cons
 
     // content
     if (fg.isValid()) {
-        painter->setPen(QPen(transparentize(fg, Metrics::Bias_Default), PenWidth::Frame));
+        painter->setPen(QPen(transparentize(fg, frameIntensityBias()), PenWidth::Frame));
         painter->setBrush(KColorUtils::overlayColors(bg, alphaColor(fg, 0.7)));
         painter->drawRoundedRect(baseRect, radius, radius);
     }
@@ -1321,7 +1326,7 @@ void Helper::renderScrollBarHandle(QPainter *painter, const QRectF &rect, const 
     const qreal radius(0.5 * std::min({baseRect.width(), baseRect.height(), (qreal)Metrics::ScrollBar_SliderWidth}));
 
     painter->setPen(Qt::NoPen);
-    painter->setPen(QPen(transparentize(fg, Metrics::Bias_Default), 1.001));
+    painter->setPen(QPen(transparentize(fg, frameIntensityBias()), 1.001));
     painter->setBrush(KColorUtils::overlayColors(bg, alphaColor(fg, 0.5)));
     painter->drawRoundedRect(strokedRect(baseRect), radius, radius);
 }
@@ -1374,12 +1379,12 @@ void Helper::renderStaticTabBarTab(QPainter *painter,
         painter->drawRect(frameRect);
 
         if (documentMode && !isQtQuickControl && !hasAlteredBackground) {
-            const auto highlightBackground = alphaColor(palette.color(QPalette::Highlight), Metrics::Bias_Default);
+            const auto highlightBackground = alphaColor(palette.color(QPalette::Highlight), frameIntensityBias());
             bgBrush = highlightBackground;
         } else {
             bgBrush = frameBackgroundColor(palette);
         }
-        QColor penBrush = KColorUtils::mix(bgBrush, palette.color(QPalette::WindowText), Metrics::Bias_Default);
+        QColor penBrush = KColorUtils::mix(bgBrush, palette.color(QPalette::WindowText), frameIntensityBias());
         painter->setBrush(bgBrush);
         painter->setPen(QPen(penBrush, PenWidth::Frame));
         QRectF highlightRect = frameRect;
@@ -1427,7 +1432,7 @@ void Helper::renderStaticTabBarTab(QPainter *painter,
             bgBrush = baseColor;
         }
 
-        const auto hover = alphaColor(hoverColor(palette), Metrics::Bias_Default);
+        const auto hover = alphaColor(hoverColor(palette), frameIntensityBias());
         if (animated) {
             bgBrush = KColorUtils::mix(bgBrush, hover, animation);
         } else if (enabled && hovered) {
@@ -1439,7 +1444,7 @@ void Helper::renderStaticTabBarTab(QPainter *painter,
     }
 
     if (!isRightOfSelected && !isFirst && (north || south)) {
-        auto penColor = KColorUtils::mix(baseColor, palette.color(QPalette::WindowText), 0.20);
+        auto penColor = KColorUtils::mix(baseColor, palette.color(QPalette::WindowText), frameIntensityBias());
         QRectF lineRect = frameRect;
         lineRect.setRight(lineRect.x() + 1);
         lineRect.adjust(0, 0, 0, -1);
@@ -1455,7 +1460,7 @@ void Helper::renderStaticTabBarTab(QPainter *painter,
         painter->setBrush(penColor);
         painter->drawRect(lineRect);
     } else if (!isRightOfSelected && !isFirst && (east || west)) {
-        auto penColor = KColorUtils::mix(baseColor, palette.color(QPalette::WindowText), 0.20);
+        auto penColor = KColorUtils::mix(baseColor, palette.color(QPalette::WindowText), frameIntensityBias());
         QRectF lineRect = frameRect;
         lineRect.setBottom(lineRect.y() - 1);
         lineRect.adjust(0, 0, -1, 0);
@@ -1510,7 +1515,7 @@ void Helper::renderTabBarTab(QPainter *painter,
         } else {
             bgBrush = frameBackgroundColor(palette);
         }
-        QColor penBrush = KColorUtils::mix(bgBrush, palette.color(QPalette::WindowText), Metrics::Bias_Default);
+        QColor penBrush = KColorUtils::mix(bgBrush, palette.color(QPalette::WindowText), frameIntensityBias());
         painter->setBrush(bgBrush);
         painter->setPen(QPen(penBrush, PenWidth::Frame));
         QRectF highlightRect = frameRect;

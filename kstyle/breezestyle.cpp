@@ -4651,7 +4651,7 @@ bool Style::drawPanelTipLabelPrimitive(const QStyleOption *option, QPainter *pai
 
     const auto &palette(option->palette);
     const auto &background = palette.color(QPalette::ToolTipBase);
-    const auto outline(KColorUtils::mix(palette.color(QPalette::ToolTipBase), palette.color(QPalette::ToolTipText), 0.25));
+    const auto outline(KColorUtils::mix(palette.color(QPalette::ToolTipBase), palette.color(QPalette::ToolTipText), _helper->frameIntensityBias()));
     const bool hasAlpha(_helper->hasAlphaChannel(widget));
 
     _helper->renderMenuFrame(painter, option->rect, background, outline, hasAlpha);
@@ -5836,7 +5836,7 @@ bool Style::drawMenuItemControl(const QStyleOption *option, QPainter *painter, c
                                          -Metrics::MenuItem_MarginWidth, 0);
         QColor separatorColor;
         if (StyleConfigData::menuOpacity() < 100) {
-            separatorColor = _helper->alphaColor(palette.color(QPalette::WindowText), Metrics::Bias_Default);
+            separatorColor = _helper->alphaColor(palette.color(QPalette::WindowText), _helper->frameIntensityBias());
         } else {
             separatorColor = _helper->separatorColor(palette);
         }
@@ -6697,7 +6697,7 @@ bool Style::drawHeaderSectionControl(const QStyleOption *option, QPainter *paint
 
     // outline
     painter->setBrush(Qt::NoBrush);
-    painter->setPen(_helper->alphaColor(palette.color(QPalette::WindowText), Metrics::Bias_Default));
+    painter->setPen(_helper->alphaColor(palette.color(QPalette::WindowText), _helper->frameIntensityBias()));
 
     if (isCorner) {
         if (reverseLayout) {
@@ -6718,7 +6718,7 @@ bool Style::drawHeaderSectionControl(const QStyleOption *option, QPainter *paint
     }
 
     // separators
-    painter->setPen(_helper->alphaColor(palette.color(QPalette::WindowText), Metrics::Bias_Default));
+    painter->setPen(_helper->alphaColor(palette.color(QPalette::WindowText), _helper->frameIntensityBias()));
 
     // If the separator is next to a "HeaderEmptyArea", skip it and let that draw
     // the separator instead. This means that those separators are only visible when necessary.
@@ -6775,7 +6775,7 @@ bool Style::drawHeaderEmptyAreaControl(const QStyleOption *option, QPainter *pai
     }
 
     // separators
-    painter->setPen(_helper->alphaColor(palette.color(QPalette::WindowText), 0.2));
+    painter->setPen(_helper->alphaColor(palette.color(QPalette::WindowText), _helper->frameIntensityBias()));
 
     if (horizontal) {
         // 26aa20407d in qtbase introduced a 1px empty area in reversed horizontal headers. Ignore it.
@@ -8075,7 +8075,7 @@ bool Style::drawScrollBarComplexControl(const QStyleOptionComplex *option, QPain
         separatorRect = alignedRect(option->direction, Qt::AlignLeft, QSize(PenWidth::Frame, option->rect.height()), option->rect);
     }
 
-    _helper->renderScrollBarBorder(painter, separatorRect, _helper->alphaColor(option->palette.color(QPalette::Text), Metrics::Bias_Default));
+    _helper->renderScrollBarBorder(painter, separatorRect, _helper->alphaColor(option->palette.color(QPalette::Text), _helper->frameIntensityBias()));
 
     // call base class primitive
     ParentStyleClass::drawComplexControl(CC_ScrollBar, option, painter, widget);

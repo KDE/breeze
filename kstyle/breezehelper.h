@@ -118,6 +118,11 @@ public:
         return active ? _activeTitleBarTextColor : _inactiveTitleBarTextColor;
     }
 
+    qreal frameIntensityBias() const
+    {
+        return _contrastBias;
+    }
+
     //* frame outline color, using animations
     QColor frameOutlineColor(const QPalette &,
                              bool mouseOver = false,
@@ -420,6 +425,8 @@ private:
     //@}
 
     mutable bool _cachedAutoValid = false;
+
+    qreal _contrastBias;
 
     friend class ToolsAreaManager;
     friend class PaletteChangedEventFilter;

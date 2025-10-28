@@ -35,15 +35,8 @@
         <default>false</default>
     </entry>
 
-    <entry name="OutlineIntensity" type = "Enum">
-      <choices>
-          <choice name="OutlineOff"/>
-          <choice name="OutlineLow"/>
-          <choice name="OutlineMedium"/>
-          <choice name="OutlineHigh"/>
-          <choice name="OutlineMaximum"/>
-      </choices>
-      <default>OutlineMedium</default>
+    <entry name="OutlineEnabled" type = "Bool">
+      <default>true</default>
     </entry>
 
     <entry name="RoundedCorners" type = "Bool">
