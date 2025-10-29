@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-06 00:45+0000\n"
+"POT-Creation-Date: 2025-10-29 00:45+0000\n"
 "PO-Revision-Date: 2021-07-13 11:32+0530\n"
 "Last-Translator: Raghavendra Kamath <raghu@raghukamath.com>\n"
 "Language-Team: kde-hindi\n"
@@ -240,52 +240,15 @@ msgstr "%"
 msgid "Shadow color:"
 msgstr "छायाएँ"
 
-#. i18n: ectx: property (text), widget (QLabel, label_6)
+#. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
-#, kde-format
-msgctxt "outline intensity"
-msgid "Outline intensity:"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:269
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Off"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:274
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Low"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:279
 #, fuzzy, kde-format
-#| msgctxt "@item:inlistbox Button size:"
-#| msgid "Medium"
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Medium"
-msgstr "मध्यम"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:284
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "High"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:289
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Maximum"
-msgstr ""
+#| msgid "Use window title"
+msgid "Draw window outline"
+msgstr "विंडो शीर्षक का उपयोग करें"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: config/ui/breezeconfigurationui.ui:298
+#: config/ui/breezeconfigurationui.ui:266
 #, kde-format
 msgid "Window-Specific Overrides"
 msgstr "विंडो-विशिष्ट अध्यारोहण"
@@ -426,6 +389,13 @@ msgstr "जोड़ें"
 msgid "Edit"
 msgstr "संपादित करें"
 
+#, fuzzy
+#~| msgctxt "@item:inlistbox Button size:"
+#~| msgid "Medium"
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Medium"
+#~ msgstr "मध्यम"
+
 #~ msgid "Si&ze:"
 #~ msgstr "आकार (&z) :"
 
@@ -446,9 +416,6 @@ msgstr "संपादित करें"
 
 #~ msgid "Use window class (whole application)"
 #~ msgstr "विंडो वर्ग (संपूर्ण अनुप्रयोग) का उपयोग करें"
-
-#~ msgid "Use window title"
-#~ msgstr "विंडो शीर्षक का उपयोग करें"
 
 #~ msgid "Allow resizing maximized windows from window edges"
 #~ msgstr "विंडो के किनारों से बडे किए गए विंडो का आकार बदलने की अनुमति दें"

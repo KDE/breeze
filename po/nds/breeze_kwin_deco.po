@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kwin_clients\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-06 00:45+0000\n"
+"POT-Creation-Date: 2025-10-29 00:45+0000\n"
 "PO-Revision-Date: 2014-02-17 11:58+0100\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -246,52 +246,15 @@ msgstr ""
 msgid "Shadow color:"
 msgstr "Schaddens"
 
-#. i18n: ectx: property (text), widget (QLabel, label_6)
+#. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
 #, fuzzy, kde-format
-#| msgid "Outline active window title:"
-msgctxt "outline intensity"
-msgid "Outline intensity:"
-msgstr "Ümreet för aktiev Finstertitel:"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:269
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Off"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:274
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Low"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:279
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Medium"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:284
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "High"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:289
-#, fuzzy, kde-format
-#| msgid "Maximize"
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Maximum"
-msgstr "Maximeren"
+#| msgid "Use window title"
+msgid "Draw window outline"
+msgstr "Finstertitel bruken"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: config/ui/breezeconfigurationui.ui:298
+#: config/ui/breezeconfigurationui.ui:266
 #, kde-format
 msgid "Window-Specific Overrides"
 msgstr "Besünner Instellen för enkelte Finstern"
@@ -434,6 +397,18 @@ msgstr "Tofögen"
 msgid "Edit"
 msgstr "Bewerken"
 
+#, fuzzy
+#~| msgid "Outline active window title:"
+#~ msgctxt "outline intensity"
+#~ msgid "Outline intensity:"
+#~ msgstr "Ümreet för aktiev Finstertitel:"
+
+#, fuzzy
+#~| msgid "Maximize"
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Maximum"
+#~ msgstr "Maximeren"
+
 #~ msgid "Information about Selected Window"
 #~ msgstr "Informatschoon över't utsöchte Finster"
 
@@ -448,9 +423,6 @@ msgstr "Bewerken"
 
 #~ msgid "Use window class (whole application)"
 #~ msgstr "Finsterklass bruken (heel Programm)"
-
-#~ msgid "Use window title"
-#~ msgstr "Finstertitel bruken"
 
 #, fuzzy
 #~| msgid "Draw Separator When Window is Active"

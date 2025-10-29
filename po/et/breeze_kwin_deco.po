@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-06 00:45+0000\n"
+"POT-Creation-Date: 2025-10-29 00:45+0000\n"
 "PO-Revision-Date: 2020-05-02 10:28+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -241,52 +241,15 @@ msgstr "%"
 msgid "Shadow color:"
 msgstr "Varjud"
 
-#. i18n: ectx: property (text), widget (QLabel, label_6)
+#. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
-#, kde-format
-msgctxt "outline intensity"
-msgid "Outline intensity:"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:269
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Off"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:274
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Low"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:279
 #, fuzzy, kde-format
-#| msgctxt "@item:inlistbox Button size:"
-#| msgid "Medium"
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Medium"
-msgstr "Keskmine"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:284
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "High"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:289
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Maximum"
-msgstr ""
+#| msgid "Use window title"
+msgid "Draw window outline"
+msgstr "Kasutatakse akna tiitlit"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: config/ui/breezeconfigurationui.ui:298
+#: config/ui/breezeconfigurationui.ui:266
 #, kde-format
 msgid "Window-Specific Overrides"
 msgstr "Akende spetsiifilised tühistavad sätted"
@@ -427,6 +390,13 @@ msgstr "Lisa"
 msgid "Edit"
 msgstr "Muuda"
 
+#, fuzzy
+#~| msgctxt "@item:inlistbox Button size:"
+#~| msgid "Medium"
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Medium"
+#~ msgstr "Keskmine"
+
 #~ msgid "Si&ze:"
 #~ msgstr "Suu&rus:"
 
@@ -447,9 +417,6 @@ msgstr "Muuda"
 
 #~ msgid "Use window class (whole application)"
 #~ msgstr "Kasutatakse akna klassi (kogu rakendus)"
-
-#~ msgid "Use window title"
-#~ msgstr "Kasutatakse akna tiitlit"
 
 #~ msgid "Allow resizing maximized windows from window edges"
 #~ msgstr "Maksimeeritud akende suuruse muutmise lubamine aknaservadest"

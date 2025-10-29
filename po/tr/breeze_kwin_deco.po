@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-06 00:45+0000\n"
+"POT-Creation-Date: 2025-10-29 00:45+0000\n"
 "PO-Revision-Date: 2025-08-06 22:48+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -239,50 +239,15 @@ msgstr "%"
 msgid "Shadow color:"
 msgstr "Gölge rengi:"
 
-#. i18n: ectx: property (text), widget (QLabel, label_6)
+#. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
-#, kde-format
-msgctxt "outline intensity"
-msgid "Outline intensity:"
-msgstr "Dış hat yoğunluğu:"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:269
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Off"
-msgstr "Kapalı"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:274
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Low"
-msgstr "Düşük"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:279
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Medium"
-msgstr "Orta"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:284
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "High"
-msgstr "Yüksek"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:289
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Maximum"
-msgstr "En Yüksek"
+#, fuzzy, kde-format
+#| msgid "Shadows and Outline"
+msgid "Draw window outline"
+msgstr "Gölgeler ve Dış Hat"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: config/ui/breezeconfigurationui.ui:298
+#: config/ui/breezeconfigurationui.ui:266
 #, kde-format
 msgid "Window-Specific Overrides"
 msgstr "Pencereye Özgü Geçersiz Kılmalar"
@@ -421,6 +386,30 @@ msgstr "Ekle"
 #, kde-format
 msgid "Edit"
 msgstr "Düzenle"
+
+#~ msgctxt "outline intensity"
+#~ msgid "Outline intensity:"
+#~ msgstr "Dış hat yoğunluğu:"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Off"
+#~ msgstr "Kapalı"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Low"
+#~ msgstr "Düşük"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Medium"
+#~ msgstr "Orta"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "High"
+#~ msgstr "Yüksek"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Maximum"
+#~ msgstr "En Yüksek"
 
 #~ msgid "Round bottom corners"
 #~ msgstr "Alt köşeleri yuvarla"

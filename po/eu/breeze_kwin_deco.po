@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-06 00:45+0000\n"
+"POT-Creation-Date: 2025-10-29 00:45+0000\n"
 "PO-Revision-Date: 2025-08-06 09:27+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -241,50 +241,15 @@ msgstr "%"
 msgid "Shadow color:"
 msgstr "Itzalaren kolorea:"
 
-#. i18n: ectx: property (text), widget (QLabel, label_6)
+#. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
-#, kde-format
-msgctxt "outline intensity"
-msgid "Outline intensity:"
-msgstr "Ingeradaren intentsitatea:"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:269
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Off"
-msgstr "Itzalita"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:274
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Low"
-msgstr "Baxua"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:279
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Medium"
-msgstr "Ertaina"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:284
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "High"
-msgstr "Altua"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:289
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Maximum"
-msgstr "Gehienekoa"
+#, fuzzy, kde-format
+#| msgid "Shadows and Outline"
+msgid "Draw window outline"
+msgstr "Itzalak eta ingerada"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: config/ui/breezeconfigurationui.ui:298
+#: config/ui/breezeconfigurationui.ui:266
 #, kde-format
 msgid "Window-Specific Overrides"
 msgstr "Leihoen berariazko gainezartzeak"
@@ -423,6 +388,30 @@ msgstr "Erantsi"
 #, kde-format
 msgid "Edit"
 msgstr "Editatu"
+
+#~ msgctxt "outline intensity"
+#~ msgid "Outline intensity:"
+#~ msgstr "Ingeradaren intentsitatea:"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Off"
+#~ msgstr "Itzalita"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Low"
+#~ msgstr "Baxua"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Medium"
+#~ msgstr "Ertaina"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "High"
+#~ msgstr "Altua"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Maximum"
+#~ msgstr "Gehienekoa"
 
 #~ msgid "Round bottom corners"
 #~ msgstr "Beheko izkina biribilduak"

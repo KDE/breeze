@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kwin_clients\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-06 00:45+0000\n"
+"POT-Creation-Date: 2025-10-29 00:45+0000\n"
 "PO-Revision-Date: 2025-10-09 00:08+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -238,50 +238,15 @@ msgstr "%"
 msgid "Shadow color:"
 msgstr "그림자 색상:"
 
-#. i18n: ectx: property (text), widget (QLabel, label_6)
+#. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
-#, kde-format
-msgctxt "outline intensity"
-msgid "Outline intensity:"
-msgstr "외곽선 강도:"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:269
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Off"
-msgstr "끔"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:274
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Low"
-msgstr "낮음"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:279
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Medium"
-msgstr "중간"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:284
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "High"
-msgstr "높음"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:289
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Maximum"
-msgstr "최대"
+#, fuzzy, kde-format
+#| msgid "Shadows and Outline"
+msgid "Draw window outline"
+msgstr "그림자와 외곽선"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: config/ui/breezeconfigurationui.ui:298
+#: config/ui/breezeconfigurationui.ui:266
 #, kde-format
 msgid "Window-Specific Overrides"
 msgstr "창 지정 설정"
@@ -420,6 +385,30 @@ msgstr "추가"
 #, kde-format
 msgid "Edit"
 msgstr "편집"
+
+#~ msgctxt "outline intensity"
+#~ msgid "Outline intensity:"
+#~ msgstr "외곽선 강도:"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Off"
+#~ msgstr "끔"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Low"
+#~ msgstr "낮음"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Medium"
+#~ msgstr "중간"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "High"
+#~ msgstr "높음"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Maximum"
+#~ msgstr "최대"
 
 #~ msgid "Round bottom corners"
 #~ msgstr "아래쪽 모서리 둥글게"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-06 00:45+0000\n"
+"POT-Creation-Date: 2025-10-29 00:45+0000\n"
 "PO-Revision-Date: 2025-09-03 20:48+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -240,50 +240,15 @@ msgstr "%"
 msgid "Shadow color:"
 msgstr "Árnyék színe:"
 
-#. i18n: ectx: property (text), widget (QLabel, label_6)
+#. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
-#, kde-format
-msgctxt "outline intensity"
-msgid "Outline intensity:"
-msgstr "Körvonal intenzitása:"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:269
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Off"
-msgstr "Ki"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:274
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Low"
-msgstr "Alacsony"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:279
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Medium"
-msgstr "Közepes"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:284
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "High"
-msgstr "Magas"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:289
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Maximum"
-msgstr "Maximum"
+#, fuzzy, kde-format
+#| msgid "Shadows and Outline"
+msgid "Draw window outline"
+msgstr "Árnyékok és körvonal"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: config/ui/breezeconfigurationui.ui:298
+#: config/ui/breezeconfigurationui.ui:266
 #, kde-format
 msgid "Window-Specific Overrides"
 msgstr "Ablakspecifikus felülbírálás"
@@ -422,6 +387,30 @@ msgstr "Hozzáadás"
 #, kde-format
 msgid "Edit"
 msgstr "Szerkesztés"
+
+#~ msgctxt "outline intensity"
+#~ msgid "Outline intensity:"
+#~ msgstr "Körvonal intenzitása:"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Off"
+#~ msgstr "Ki"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Low"
+#~ msgstr "Alacsony"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Medium"
+#~ msgstr "Közepes"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "High"
+#~ msgstr "Magas"
+
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Maximum"
+#~ msgstr "Maximum"
 
 #~ msgid "Round bottom corners"
 #~ msgstr "Kerekített alsó sarkok"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-06 00:45+0000\n"
+"POT-Creation-Date: 2025-10-29 00:45+0000\n"
 "PO-Revision-Date: 2022-12-01 21:53+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -242,52 +242,15 @@ msgstr "%"
 msgid "Shadow color:"
 msgstr "நிழல்கள்"
 
-#. i18n: ectx: property (text), widget (QLabel, label_6)
+#. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
-#, kde-format
-msgctxt "outline intensity"
-msgid "Outline intensity:"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:269
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Off"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:274
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Low"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:279
 #, fuzzy, kde-format
-#| msgctxt "@item:inlistbox Button size:"
-#| msgid "Medium"
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Medium"
-msgstr "நடுத்தரமானது"
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:284
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "High"
-msgstr ""
-
-#. i18n: ectx: property (text), item, widget (QComboBox, outlineIntensity)
-#: config/ui/breezeconfigurationui.ui:289
-#, kde-format
-msgctxt "@item:inlistbox Outline intensity:"
-msgid "Maximum"
-msgstr ""
+#| msgid "Use window title"
+msgid "Draw window outline"
+msgstr "சாளர தலைப்பை பயன்படுத்து"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
-#: config/ui/breezeconfigurationui.ui:298
+#: config/ui/breezeconfigurationui.ui:266
 #, kde-format
 msgid "Window-Specific Overrides"
 msgstr "தனிப்பட்ட சாளரங்களுக்கான அமைப்புகள்"
@@ -427,6 +390,13 @@ msgstr "சேர்"
 msgid "Edit"
 msgstr "திருத்து"
 
+#, fuzzy
+#~| msgctxt "@item:inlistbox Button size:"
+#~| msgid "Medium"
+#~ msgctxt "@item:inlistbox Outline intensity:"
+#~ msgid "Medium"
+#~ msgstr "நடுத்தரமானது"
+
 #~ msgid "Si&ze:"
 #~ msgstr "&அளவு:"
 
@@ -447,6 +417,3 @@ msgstr "திருத்து"
 
 #~ msgid "Use window class (whole application)"
 #~ msgstr "சாளர வகுப்பைப பயன்படுத்து (முழுச்செயலி)"
-
-#~ msgid "Use window title"
-#~ msgstr "சாளர தலைப்பை பயன்படுத்து"
