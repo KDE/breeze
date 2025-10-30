@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kwin_clients\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-29 00:45+0000\n"
-"PO-Revision-Date: 2025-08-07 07:28+0200\n"
+"PO-Revision-Date: 2025-10-29 14:10+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.11.70\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -242,10 +242,9 @@ msgstr "Colore dell'ombra"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
-#, fuzzy, kde-format
-#| msgid "Shadows and Outline"
+#, kde-format
 msgid "Draw window outline"
-msgstr "Ombre e bordatura"
+msgstr "Disegna il contorno della finestra"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:266

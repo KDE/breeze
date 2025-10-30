@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: breeze_kwin_deco\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-29 00:45+0000\n"
-"PO-Revision-Date: 2025-08-06 20:33+0300\n"
+"PO-Revision-Date: 2025-10-29 10:13+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -243,10 +243,9 @@ msgstr "Колір тіні:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
-#, fuzzy, kde-format
-#| msgid "Shadows and Outline"
+#, kde-format
 msgid "Draw window outline"
-msgstr "Тіні і контури"
+msgstr "Малювати контури вікон"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:266

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-29 00:45+0000\n"
-"PO-Revision-Date: 2025-08-06 22:48+0300\n"
+"PO-Revision-Date: 2025-10-29 08:38+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -16,17 +16,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.04.2\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
 msgid "New Exception - Breeze Settings"
-msgstr "Yeni İstisna - Esinti Ayarları"
+msgstr "Yeni İstisna — Esinti Ayarları"
 
 #: config/breezeexceptionlistwidget.cpp:136
 #, kde-format
 msgid "Edit Exception - Breeze Settings"
-msgstr "İstisnayı Düzenle - Esinti Ayarları"
+msgstr "İstisnayı Düzenle — Esinti Ayarları"
 
 #: config/breezeexceptionlistwidget.cpp:167
 #, kde-format
@@ -69,13 +69,13 @@ msgstr "Düzenli İfade"
 #: config/breezeexceptionmodel.cpp:36 config/ui/breezeexceptiondialog.ui:72
 #, kde-format
 msgid "Window Title"
-msgstr "Pencere Başlığı"
+msgstr "Pencere başlığı"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, exceptionType)
 #: config/breezeexceptionmodel.cpp:40 config/ui/breezeexceptiondialog.ui:67
 #, kde-format
 msgid "Window Class Name"
-msgstr "Pencere Sınıf Adı"
+msgstr "Pencere sınıfı adı"
 
 #: config/breezeexceptionmodel.cpp:55
 #, kde-format
@@ -163,7 +163,7 @@ msgstr "Büyük"
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Very Large"
-msgstr "Çok Büyük"
+msgstr "Çok büyük"
 
 #. i18n: ectx: property (text), widget (QCheckBox, outlineCloseButton)
 #: config/ui/breezeconfigurationui.ui:118
@@ -241,10 +241,9 @@ msgstr "Gölge rengi:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
-#, fuzzy, kde-format
-#| msgid "Shadows and Outline"
+#, kde-format
 msgid "Draw window outline"
-msgstr "Gölgeler ve Dış Hat"
+msgstr "Pencere ana hattını çiz"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:266
@@ -305,21 +304,21 @@ msgstr "Pencere başlık çubuğunu gizle"
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "No Border"
-msgstr "Kenarlık Yok"
+msgstr "Kenarlık yok"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:112
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "No Side Borders"
-msgstr "Kenarda Çizgiler Yok"
+msgstr "Kenarda çizgiler yok"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:117
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "Tiny"
-msgstr "Çok Küçük"
+msgstr "Çok küçük"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:122
@@ -340,7 +339,7 @@ msgstr "Büyük"
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "Very Large"
-msgstr "Çok Büyük"
+msgstr "Çok büyük"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:137
@@ -354,7 +353,7 @@ msgstr "Kocaman"
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "Very Huge"
-msgstr "En Büyük"
+msgstr "En büyük"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:147

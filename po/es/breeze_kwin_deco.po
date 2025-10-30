@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: breeze_kwin_deco\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-29 00:45+0000\n"
-"PO-Revision-Date: 2025-08-07 00:26+0100\n"
+"PO-Revision-Date: 2025-10-29 12:01+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -243,10 +243,9 @@ msgstr "Color de la sombra:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
-#, fuzzy, kde-format
-#| msgid "Shadows and Outline"
+#, kde-format
 msgid "Draw window outline"
-msgstr "Sombras y contorno"
+msgstr "Dibujar contorno de las ventanas"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:266
@@ -388,27 +387,3 @@ msgstr "Añadir"
 #, kde-format
 msgid "Edit"
 msgstr "Editar"
-
-#~ msgctxt "outline intensity"
-#~ msgid "Outline intensity:"
-#~ msgstr "Intensidad del contorno:"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Off"
-#~ msgstr "Desactivado"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Low"
-#~ msgstr "Baja"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Medium"
-#~ msgstr "Media"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "High"
-#~ msgstr "Alta"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Maximum"
-#~ msgstr "Máxima"
