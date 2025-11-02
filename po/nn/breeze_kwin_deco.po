@@ -389,27 +389,3 @@ msgstr "Legg til"
 #, kde-format
 msgid "Edit"
 msgstr "Rediger"
-
-#~ msgctxt "outline intensity"
-#~ msgid "Outline intensity:"
-#~ msgstr "Omrissintensitet:"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Off"
-#~ msgstr "Av"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Low"
-#~ msgstr "Låg"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Medium"
-#~ msgstr "Middels"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "High"
-#~ msgstr "Høg"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Maximum"
-#~ msgstr "Maksimum"
