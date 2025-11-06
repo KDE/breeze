@@ -145,6 +145,7 @@ bool ToolsAreaManager::tryRegisterToolBar(QPointer<const QMainWindow> window, QP
     }
 
     if (window->toolBarArea(toolbar) == Qt::TopToolBarArea) {
+        widget->setProperty("breeze_has_toolsarea_palette", true);
         widget->setPalette(palette());
         appendIfNotAlreadyExists(window, toolbar);
         return true;
@@ -163,6 +164,7 @@ void ToolsAreaManager::tryUnregisterToolBar(QPointer<const QMainWindow> window, 
     }
 
     if (window->toolBarArea(toolbar) != Qt::TopToolBarArea) {
+        widget->setProperty("breeze_has_toolsarea_palette", true);
         widget->setPalette(window->palette());
         removeWindowToolBar(window, toolbar);
     }
@@ -216,11 +218,13 @@ void ToolsAreaManager::configUpdated()
     for (const WindowToolBars &windowToolBars : _windows) {
         for (const auto &toolbar : windowToolBars.toolBars) {
             if (!toolbar.isNull()) {
+                toolbar->setProperty("breeze_has_toolsarea_palette", true);
                 toolbar->setPalette(_palette);
             }
         }
 
         if (QMenuBar *menuBar = windowToolBars.window->menuBar()) {
+            menuBar->setProperty("breeze_has_toolsarea_palette", true);
             menuBar->setPalette(_palette);
         }
     }
@@ -281,6 +285,7 @@ bool ToolsAreaManager::eventFilter(QObject *watched, QEvent *event)
             if (event->type() == QEvent::ChildAdded) {
                 QChildEvent *childEvent = static_cast<QChildEvent *>(event);
                 if (QMenuBar *menuBar = qobject_cast<QMenuBar *>(childEvent->child())) {
+                    menuBar->setProperty("breeze_has_toolsarea_palette", true);
                     menuBar->setPalette(_palette);
                 }
             }
@@ -323,6 +328,7 @@ void ToolsAreaManager::registerWidget(QWidget *widget)
         }
 
         if (QMenuBar *menuBar = mainWindow->menuBar()) {
+            menuBar->setProperty("breeze_has_toolsarea_palette", true);
             menuBar->setPalette(_palette);
         }
 
@@ -352,6 +358,11 @@ void ToolsAreaManager::registerWidget(QWidget *widget)
 void ToolsAreaManager::unregisterWidget(QWidget *widget)
 {
     Q_ASSERT(widget);
+
+    if (widget->property("breeze_has_toolsarea_palette").toBool()) {
+        widget->setPalette({});
+    }
+
     auto ptr = QPointer<QWidget>(widget);
 
     if (QPointer<const QMainWindow> window = qobject_cast<QMainWindow *>(ptr)) {
