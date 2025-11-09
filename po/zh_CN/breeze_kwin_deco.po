@@ -239,10 +239,9 @@ msgstr "阴影颜色："
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
-#, fuzzy, kde-format
-#| msgid "Shadows and Outline"
+#, kde-format
 msgid "Draw window outline"
-msgstr "阴影和外框"
+msgstr "绘制窗口轮廓"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:266
@@ -384,27 +383,3 @@ msgstr "添加"
 #, kde-format
 msgid "Edit"
 msgstr "编辑"
-
-#~ msgctxt "outline intensity"
-#~ msgid "Outline intensity:"
-#~ msgstr "外框亮度："
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Off"
-#~ msgstr "关闭"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Low"
-#~ msgstr "低"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Medium"
-#~ msgstr "中"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "High"
-#~ msgstr "高"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Maximum"
-#~ msgstr "最大"
