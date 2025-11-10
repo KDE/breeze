@@ -384,30 +384,3 @@ msgstr "Добавяне"
 #, kde-format
 msgid "Edit"
 msgstr "Редактиране"
-
-#~ msgctxt "outline intensity"
-#~ msgid "Outline intensity:"
-#~ msgstr "Интензитет на очертание:"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Off"
-#~ msgstr "Изкл."
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Low"
-#~ msgstr "Ниска"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Medium"
-#~ msgstr "Средна"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "High"
-#~ msgstr "Висока"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Maximum"
-#~ msgstr "Максимална"
-
-#~ msgid "Round bottom corners"
-#~ msgstr "Заоблени долни ъгли"
