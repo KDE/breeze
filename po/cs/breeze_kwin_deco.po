@@ -239,10 +239,9 @@ msgstr "Barva stínu:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
-#, fuzzy, kde-format
-#| msgid "Shadows and Outline"
+#, kde-format
 msgid "Draw window outline"
-msgstr "Stíny a obrys"
+msgstr ""
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:266
@@ -384,27 +383,3 @@ msgstr "Přidat"
 #, kde-format
 msgid "Edit"
 msgstr "Upravit"
-
-#~ msgctxt "outline intensity"
-#~ msgid "Outline intensity:"
-#~ msgstr "Intenzita obrysu:"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Off"
-#~ msgstr "Vypnuto"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Low"
-#~ msgstr "Nízká"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Medium"
-#~ msgstr "Střední"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "High"
-#~ msgstr "Vysoká"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Maximum"
-#~ msgstr "Maximum"
