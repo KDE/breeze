@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-29 00:45+0000\n"
-"PO-Revision-Date: 2025-08-08 01:46+0900\n"
+"PO-Revision-Date: 2025-11-13 21:52+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 25.07.70\n"
+"X-Generator: Lokalize 25.11.70\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -172,7 +172,7 @@ msgstr "非常大"
 #: config/ui/breezeconfigurationui.ui:118
 #, kde-format
 msgid "Draw a circle around close button"
-msgstr "在關閉按鈕外面畫一個圈"
+msgstr "在關閉按鈕周圍繪製圓圈"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBorderOnMaximizedWindows)
 #: config/ui/breezeconfigurationui.ui:125
@@ -243,10 +243,9 @@ msgstr "陰影色彩："
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
-#, fuzzy, kde-format
-#| msgid "Shadows and Outline"
+#, kde-format
 msgid "Draw window outline"
-msgstr "陰影與外框"
+msgstr "繪製視窗外框"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:266
