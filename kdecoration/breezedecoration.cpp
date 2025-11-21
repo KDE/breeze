@@ -476,7 +476,7 @@ void Decoration::recalculateBorders()
             }
         }
     }
-    setBorderRadius(KDecoration3::BorderRadius(0, 0, bottomRightRadius, bottomLeftRadius));
+    setBorderRadius(KDecoration3::BorderRadius(bottomRightRadius, bottomLeftRadius, bottomRightRadius, bottomLeftRadius));
 
     if (isMaximized() || !outlinesEnabled()) {
         setBorderOutline(KDecoration3::BorderOutline());

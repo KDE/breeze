@@ -210,6 +210,7 @@ bool Decoration::isBottomEdge() const
 
 bool Decoration::hideTitleBar() const
 {
+    return true;
     return m_internalSettings->hideTitleBar() && !window()->isShaded();
 }
 
