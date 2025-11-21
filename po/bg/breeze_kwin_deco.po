@@ -420,6 +420,3 @@ msgstr "Добавяне"
 #, kde-format
 msgid "Edit"
 msgstr "Редактиране"
-
-#~ msgid "Round bottom corners"
-#~ msgstr "Заоблени долни ъгли"
