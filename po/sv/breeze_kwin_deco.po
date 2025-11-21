@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2025-08-06 12:54+0200\n"
+"PO-Revision-Date: 2025-11-21 01:34+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -240,10 +240,9 @@ msgstr "Skuggfärg:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
-#, fuzzy, kde-format
-#| msgid "Shadows and Outline"
+#, kde-format
 msgid "Draw window outline"
-msgstr "Skuggor och kontur"
+msgstr "Rita fönsterkontur"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:266
