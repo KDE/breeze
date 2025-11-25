@@ -150,7 +150,7 @@ void WindowManager::initialize()
 //_____________________________________________________________
 void WindowManager::registerWidget(QWidget *widget)
 {
-    if (isBlackListed(widget) || isDragable(widget) || widget->inherits("QQuickWidget")) {
+    if (isBlackListed(widget) || isDraggable(widget) || widget->inherits("QQuickWidget")) {
         /*
         install filter for draggable widgets.
         also install filter for blacklisted widgets
@@ -441,7 +441,7 @@ bool WindowManager::mouseReleaseEvent(QObject *object, QEvent *event)
 }
 
 //_____________________________________________________________
-bool WindowManager::isDragable(QWidget *widget)
+bool WindowManager::isDraggable(QWidget *widget)
 {
     // check widget
     if (!widget) {
@@ -569,7 +569,7 @@ bool WindowManager::canDrag(QWidget *widget)
         return false;
     }
 
-    // assume isDragable widget is already passed
+    // assume isDraggable widget is already passed
     // check some special cases where drag should not be effective
 
     // check mouse grabber
