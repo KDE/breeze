@@ -624,14 +624,15 @@ void Decoration::paint(QPainter *painter, const QRectF &repaintRegion)
     }
 
     if (hasBorders() && !s->isAlphaChannelSupported()) {
-        painter->save();
-        painter->setRenderHint(QPainter::Antialiasing, false);
-        painter->setBrush(Qt::NoBrush);
-        painter->setPen(window()->isActive() ? window()->color(ColorGroup::Active, ColorRole::TitleBar)
-                                             : window()->color(ColorGroup::Inactive, ColorRole::Foreground));
-
-        painter->drawRect(rect().adjusted(0, 0, -1, -1));
-        painter->restore();
+        const QColor borderColor = borderOutline().color();
+        if (borderColor.alphaF() > 0) {
+            painter->save();
+            painter->setRenderHint(QPainter::Antialiasing, false);
+            painter->setBrush(Qt::NoBrush);
+            painter->setPen(borderColor);
+            painter->drawRect(rect().adjusted(0, 0, -1, -1));
+            painter->restore();
+        }
     }
 }
 
