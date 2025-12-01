@@ -427,6 +427,3 @@ msgstr "Afegeix"
 #, kde-format
 msgid "Edit"
 msgstr "Edita"
-
-#~ msgid "Round bottom corners"
-#~ msgstr "Cantonades inferiors arrodonides"
