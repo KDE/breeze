@@ -464,19 +464,26 @@ void Decoration::recalculateBorders()
 
     setResizeOnlyBorders(QMarginsF(extSides, 0, extSides, extBottom));
 
+    qreal topLeftRightRadius = 0;
     qreal bottomLeftRadius = 0;
     qreal bottomRightRadius = 0;
-    if (hasNoBorders() && m_internalSettings->roundedCorners()) {
-        if (!isBottomEdge()) {
-            if (!isLeftEdge()) {
-                bottomLeftRadius = m_scaledCornerRadius;
-            }
-            if (!isRightEdge()) {
-                bottomRightRadius = m_scaledCornerRadius;
+    if (m_internalSettings->roundedCorners()) {
+        if (hideTitleBar()) {
+            topLeftRightRadius = m_scaledCornerRadius;
+        }
+
+        if (hasNoBorders()) {
+            if (!isBottomEdge()) {
+                if (!isLeftEdge()) {
+                    bottomLeftRadius = m_scaledCornerRadius;
+                }
+                if (!isRightEdge()) {
+                    bottomRightRadius = m_scaledCornerRadius;
+                }
             }
         }
     }
-    setBorderRadius(KDecoration3::BorderRadius(0, 0, bottomRightRadius, bottomLeftRadius));
+    setBorderRadius(KDecoration3::BorderRadius(topLeftRightRadius, topLeftRightRadius, bottomRightRadius, bottomLeftRadius));
 
     if (isMaximized() || !outlinesEnabled()) {
         setBorderOutline(KDecoration3::BorderOutline());
