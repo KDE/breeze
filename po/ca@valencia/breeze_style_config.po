@@ -61,7 +61,7 @@ msgstr "Oculta sempre"
 #: ui/breezestyleconfig.ui:90
 #, kde-format
 msgid "Show when Alt key is pressed"
-msgstr "Mostra quan es prema la tecla Alt"
+msgstr "Mostra quan es prema la tecla «Alt»"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
 #: ui/breezestyleconfig.ui:95
