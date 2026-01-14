@@ -44,6 +44,9 @@
         ],
         "Id": "Next",
         "License": "CC-BY-SA-4.0",
-        "Name": "Sub-Arctic"
+        "Name": "Sub-Arctic",
+        "Name[ca]": "Sub-Arctic",
+        "Name[ia]": "Sub-Arctic",
+        "Name[pt_BR]": "Sub-Arctic"
     }
 }
