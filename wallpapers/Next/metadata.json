@@ -45,12 +45,17 @@
         "Id": "Next",
         "License": "CC-BY-SA-4.0",
         "Name": "Sub-Arctic",
+        "Name[ar]": "شبه القطبي",
         "Name[ca@valencia]": "Sub-Arctic",
         "Name[ca]": "Sub-Arctic",
+        "Name[es]": "Subártico",
         "Name[ia]": "Sub-Arctic",
+        "Name[ka]": "სუბარქტიკული",
+        "Name[nl]": "Sub-arctisch",
         "Name[pt_BR]": "Sub-Arctic",
         "Name[sl]": "Sub-Arctic",
         "Name[tr]": "Arktik Altı",
-        "Name[uk]": "Субарктичний"
+        "Name[uk]": "Субарктичний",
+        "Name[zh_TW]": "Sub-Arctic"
     }
 }
