@@ -5,7 +5,7 @@
 # Kim Enkovaara <kim.enkovaara@iki.fi>, 2005.
 # Teemu Rytilahti <teemu.rytilahti@kde-fi.org>, 2008.
 # Teemu Rytilahti <teemu.rytilahti@d5k.net>, 2008.
-# SPDX-FileCopyrightText: 2009, 2010, 2012, 2016, 2017, 2018, 2020, 2022, 2023, 2025 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2009, 2010, 2012, 2016, 2017, 2018, 2020, 2022, 2023, 2025, 2026 Tommi Nieminen <translator@legisign.org>
 # Lasse Liehu <lliehu@kolumbus.fi>, 2010, 2011, 2012, 2013, 2014, 2015.
 # Jorma Karvonen <karvonen.jorma@gmail.com>, 2011.
 #
@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kwin_clients\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2025-09-04 10:11+0300\n"
+"PO-Revision-Date: 2026-01-10 20:42+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -249,10 +249,9 @@ msgstr "Varjon väri:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
-#, fuzzy, kde-format
-#| msgid "Shadows and Outline"
+#, kde-format
 msgid "Draw window outline"
-msgstr "Varjot ja ääriviivat"
+msgstr "Piirrä ikkunan ääriviivat"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:266
