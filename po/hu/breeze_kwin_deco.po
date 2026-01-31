@@ -3,13 +3,13 @@
 #
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2014, 2015.
 # Kiszel Kristóf <kiszel.kristof@gmail.com>, 2017, 2018, 2020.
-# SPDX-FileCopyrightText: 2023, 2025 Kristof Kiszel <ulysses@fsf.hu>
+# SPDX-FileCopyrightText: 2023, 2025, 2026 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2025-09-03 20:48+0200\n"
+"PO-Revision-Date: 2026-01-30 21:07+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -242,10 +242,9 @@ msgstr "Árnyék színe:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
-#, fuzzy, kde-format
-#| msgid "Shadows and Outline"
+#, kde-format
 msgid "Draw window outline"
-msgstr "Árnyékok és körvonal"
+msgstr "Ablakkörvonal rajzolása"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:266
