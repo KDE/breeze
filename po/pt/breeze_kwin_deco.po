@@ -1,42 +1,42 @@
-# SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+# SPDX-FileCopyrightText: 2026 César A. P. Cláudio <cesarapclaudio@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: breeze_kwin_deco\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2022-11-28 18:21+0000\n"
-"Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
-"Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
+"PO-Revision-Date: 2026-02-01 20:20+0000\n"
+"Last-Translator: César A. P. Cláudio <cesarapclaudio@gmail.com>\n"
+"Language-Team: pt\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POFile-SpellExtra: ms Oxygen px\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
 msgid "New Exception - Breeze Settings"
-msgstr "Nova Excepção - Configuração da Brisa"
+msgstr "Nova exceção - Definições do Brisa"
 
 #: config/breezeexceptionlistwidget.cpp:136
 #, kde-format
 msgid "Edit Exception - Breeze Settings"
-msgstr "Editar a Excepção - Configuração da Brisa"
+msgstr "Editar exceção - Definições do Brisa"
 
 #: config/breezeexceptionlistwidget.cpp:167
 #, kde-format
 msgid "Question - Breeze Settings"
-msgstr "Pergunta - Configuração da Brisa"
+msgstr "Pergunta - Definições do Brisa"
 
 #: config/breezeexceptionlistwidget.cpp:168
 #, kde-format
 msgid "Remove selected exception?"
-msgstr "Deseja remover a excepção seleccionada?"
+msgstr "Remover exceção selecionada?"
 
 #. i18n: ectx: property (text), widget (QPushButton, removeButton)
 #: config/breezeexceptionlistwidget.cpp:170
@@ -48,39 +48,39 @@ msgstr "Remover"
 #: config/breezeexceptionlistwidget.cpp:300
 #, kde-format
 msgid "Warning - Breeze Settings"
-msgstr "Atenção - Configuração da Brisa"
+msgstr "Aviso - Definições do Brisa"
 
 #: config/breezeexceptionlistwidget.cpp:300
 #, kde-format
 msgid "Regular Expression syntax is incorrect"
-msgstr "A sintaxe da expressão regular está incorrecta"
+msgstr "A sintaxe da expressão regular está incorreta"
 
 #: config/breezeexceptionmodel.cpp:17
 #, kde-format
 msgid "Exception Type"
-msgstr "Tipo de Excepção"
+msgstr "Tipo de exceção"
 
 #: config/breezeexceptionmodel.cpp:17
 #, kde-format
 msgid "Regular Expression"
-msgstr "Expressão Regular"
+msgstr "Expressão regular"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, exceptionType)
 #: config/breezeexceptionmodel.cpp:36 config/ui/breezeexceptiondialog.ui:72
 #, kde-format
 msgid "Window Title"
-msgstr "Título da Janela"
+msgstr "Título de janela"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, exceptionType)
 #: config/breezeexceptionmodel.cpp:40 config/ui/breezeexceptiondialog.ui:67
 #, kde-format
 msgid "Window Class Name"
-msgstr "Nome da Classe da Janela"
+msgstr "Nome de classe de janela"
 
 #: config/breezeexceptionmodel.cpp:55
 #, kde-format
 msgid "Enable/disable this exception"
-msgstr "Activar/desactivar esta excepção"
+msgstr "Ativar/desativar esta exceção"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: config/ui/breezeconfigurationui.ui:36
@@ -92,7 +92,7 @@ msgstr "Geral"
 #: config/ui/breezeconfigurationui.ui:45
 #, kde-format
 msgid "Tit&le alignment:"
-msgstr "A&linhamento do título:"
+msgstr "A&linhamento de título:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
 #: config/ui/breezeconfigurationui.ui:56
@@ -110,7 +110,7 @@ msgstr "Centro"
 #: config/ui/breezeconfigurationui.ui:66
 #, kde-format
 msgid "Center (Full Width)"
-msgstr "Centro (Largura Total)"
+msgstr "Centro (Largura total)"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
 #: config/ui/breezeconfigurationui.ui:71
@@ -163,19 +163,19 @@ msgstr "Grande"
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Very Large"
-msgstr "Muito Grande"
+msgstr "Muito grande"
 
 #. i18n: ectx: property (text), widget (QCheckBox, outlineCloseButton)
 #: config/ui/breezeconfigurationui.ui:118
 #, kde-format
 msgid "Draw a circle around close button"
-msgstr "Desenhar um círculo em torno do botão de fecho"
+msgstr "Desenhar um círculo à volta do botão fechar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBorderOnMaximizedWindows)
 #: config/ui/breezeconfigurationui.ui:125
 #, kde-format
 msgid "Draw border on maximized and tiled windows"
-msgstr "Desenhar um contorno nas janelas maximizadas e lado-a-lado"
+msgstr "Desenhar borda em janelas maximizadas e organizadas"
 
 #. i18n: ectx: property (text), widget (QLabel, drawBorderOnMaximizedWindowsHelpLabel)
 #: config/ui/breezeconfigurationui.ui:150
@@ -185,34 +185,33 @@ msgid ""
 "edges. Scrollbars and window close buttons will shift positions and will not "
 "touch screen edges."
 msgstr ""
-"Esta configuração permitir-lhe-á dimensionar nos extremos das janelas que "
-"tocam nos extremos do ecrã. As barras de deslocamento e os botões de fecho "
-"das janelas irão mudar de posição e não irão tocar nos extremos do ecrã."
+"Esta definição permitirá-lhe redimensionar a partir das bordas das janelas "
+"que tocam os extremos do ecrã. As barras de deslocamento e os botões de "
+"fechar janelas mudarão de posição e não tocarão nos extremos do ecrã."
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
 #: config/ui/breezeconfigurationui.ui:162
 #, kde-format
 msgid "Draw titlebar background gradient"
-msgstr "Desenhar um gradiente no fundo do título"
+msgstr "Desenhar gradiente de fundo da barra de título"
 
 #. i18n: ectx: property (text), widget (QCheckBox, roundedCorners)
 #: config/ui/breezeconfigurationui.ui:169
 #, kde-format
 msgid "Round bottom corners of windows with no borders"
-msgstr ""
+msgstr "Arredondar os cantos inferiores das janelas sem bordas"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: config/ui/breezeconfigurationui.ui:177
 #, kde-format
 msgid "Shadows and Outline"
-msgstr ""
+msgstr "Sombras e Contorno"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: config/ui/breezeconfigurationui.ui:186
-#, fuzzy, kde-format
-#| msgid "Shadows"
+#, kde-format
 msgid "Shadow size:"
-msgstr "Sombras"
+msgstr "Tamanho da sombra:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:197
@@ -223,12 +222,10 @@ msgstr "Nenhum"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: config/ui/breezeconfigurationui.ui:225
-#, fuzzy, kde-format
-#| msgctxt "strength of the shadow (from transparent to opaque)"
-#| msgid "S&trength:"
+#, kde-format
 msgctxt "strength of the shadow (from transparent to opaque)"
 msgid "Shadow strength:"
-msgstr "Po&tência:"
+msgstr "Intensidade da sombra:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
 #: config/ui/breezeconfigurationui.ui:235
@@ -238,22 +235,21 @@ msgstr "%"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/ui/breezeconfigurationui.ui:248
-#, fuzzy, kde-format
-#| msgid "Shadows"
+#, kde-format
 msgid "Shadow color:"
-msgstr "Sombras"
+msgstr "Cor da sombra:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
 #, kde-format
 msgid "Draw window outline"
-msgstr ""
+msgstr "Desenhar contorno da janela"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:266
 #, kde-format
 msgid "Window-Specific Overrides"
-msgstr "Substituições Específicas da Janela"
+msgstr "Substituições específicas da janela"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
 #: config/ui/breezeexceptiondialog.ui:14
@@ -265,7 +261,7 @@ msgstr "Janela"
 #: config/ui/breezeexceptiondialog.ui:20
 #, kde-format
 msgid "Window Identification"
-msgstr "Identificação da Janela"
+msgstr "Identificação de janela"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: config/ui/breezeexceptiondialog.ui:26
@@ -283,39 +279,39 @@ msgstr "Expressão regular a &corresponder: "
 #: config/ui/breezeexceptiondialog.ui:52
 #, kde-format
 msgid "Detect Window Properties…"
-msgstr "Detectar as Propriedades da Janela…"
+msgstr "Detectar propriedades da janela…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: config/ui/breezeexceptiondialog.ui:83
 #, kde-format
 msgid "Decoration Options"
-msgstr "Opções de Decoração"
+msgstr "Opções de decoração"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderSizeCheckBox)
 #: config/ui/breezeexceptiondialog.ui:89
 #, kde-format
 msgid "Border size:"
-msgstr "Tamanho do contorno:"
+msgstr "Tamanho da borda:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, hideTitleBar)
 #: config/ui/breezeexceptiondialog.ui:96
 #, kde-format
 msgid "Hide window title bar"
-msgstr "Esconder a barra de título da janela"
+msgstr "Ocultar barra de título da janela"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:107
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "No Border"
-msgstr "Sem Contorno"
+msgstr "Sem borda"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:112
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "No Side Borders"
-msgstr "Sem Contornos Laterais"
+msgstr "Sem bordas laterais"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:117
@@ -357,14 +353,14 @@ msgstr "Enorme"
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "Very Huge"
-msgstr "Mais do que Enorme"
+msgstr "Gigante"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:147
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "Oversized"
-msgstr "Ainda Maior"
+msgstr "De tamanho exagerado"
 
 #. i18n: ectx: property (text), widget (QPushButton, moveUpButton)
 #: config/ui/breezeexceptionlistwidget.ui:70
