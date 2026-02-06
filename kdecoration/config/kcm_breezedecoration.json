@@ -2,6 +2,7 @@
     "KPlugin": {
         "Description": "Modify the appearance of window decorations",
         "Description[ar]": "عدّل مظهر زخرفات النّوافذ",
+        "Description[az]": "Pəncərə başlıqlarının görünüşünü dəyişmək",
         "Description[bg]": "Промяна на външния вид на декорацията на прозорците",
         "Description[ca@valencia]": "Modifica l'aparença de les decoracions de les finestres",
         "Description[ca]": "Modifica l'aparença de les decoracions de les finestres",
@@ -44,6 +45,7 @@
         "Icon": "preferences-system-windows",
         "Name": "Breeze Window Decoration",
         "Name[ar]": "زخرفة نوافذ نسيم",
+        "Name[az]": "Breeze pəncərə tərtibatı",
         "Name[bg]": "Декорации на прозорци Breeze",
         "Name[ca@valencia]": "Decoració Brisa de les finestres",
         "Name[ca]": "Decoració Brisa de les finestres",
@@ -91,6 +93,7 @@
     },
     "X-KDE-Keywords": "breeze,decoration",
     "X-KDE-Keywords[ar]": "زخرفة,نسيم",
+    "X-KDE-Keywords[az]": "breeze,decoration,tərtibat",
     "X-KDE-Keywords[bg]": "breeze,декорация",
     "X-KDE-Keywords[ca@valencia]": "brisa,decoració",
     "X-KDE-Keywords[ca]": "brisa,decoració",
