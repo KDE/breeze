@@ -4703,8 +4703,7 @@ bool Style::drawPanelItemViewItemPrimitive(const QStyleOption *option, QPainter 
     // render alternate background
     if (hasAlternateBackground) {
         painter->setPen(Qt::NoPen);
-        painter->setBrush(palette.brush(colorGroup, QPalette::AlternateBase));
-        _helper->renderViewItemPosition(painter, viewItemOption->viewItemPosition, rect);
+        _helper->renderViewItemPosition(painter, viewItemOption->viewItemPosition, rect, palette.color(colorGroup, QPalette::AlternateBase), QColor());
     }
 
     // stop here if no highlight is needed
@@ -4715,8 +4714,7 @@ bool Style::drawPanelItemViewItemPrimitive(const QStyleOption *option, QPainter 
     // render custom background
     if (hasCustomBackground && !hasSolidBackground) {
         painter->setBrushOrigin(viewItemOption->rect.topLeft());
-        painter->setPen(Qt::NoPen);
-        _helper->renderViewItemPosition(painter, viewItemOption->viewItemPosition, viewItemOption->rect);
+        _helper->renderViewItemPosition(painter, viewItemOption->viewItemPosition, viewItemOption->rect, viewItemOption->backgroundBrush.color(), QColor());
         return true;
     }
 
@@ -4732,21 +4730,24 @@ bool Style::drawPanelItemViewItemPrimitive(const QStyleOption *option, QPainter 
     // change color to implement mouse over
     if (mouseOver && !hasCustomBackground) {
         if (!selected) {
-            color.setAlphaF(0.2);
+            color.setAlphaF(0.4);
         } else {
             color = color.lighter(110);
         }
     }
 
+    // Focus decoration
+    QColor focusColor = color;
+    focusColor.setAlphaF(selected ? 1.0 : 0.8);
+
     // render
-    painter->setPen(Qt::NoPen);
     painter->setBrush(color);
     const auto isTable = qobject_cast<const QTableView *>(viewItemOption->widget);
     // We want table cells to not be rounded
     if (isTable) {
-        _helper->renderViewItemPosition(painter, QStyleOptionViewItem::ViewItemPosition::Invalid, rect);
+        _helper->renderViewItemPosition(painter, QStyleOptionViewItem::ViewItemPosition::Invalid, rect, color, focusColor);
     } else {
-        _helper->renderViewItemPosition(painter, viewItemOption->viewItemPosition, rect);
+        _helper->renderViewItemPosition(painter, viewItemOption->viewItemPosition, rect, color, focusColor);
     }
 
     return true;

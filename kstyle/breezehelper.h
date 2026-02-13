@@ -335,7 +335,11 @@ public:
     //* generic shadow for ellipses
     void renderEllipseShadow(QPainter *, const QRectF &, const QColor &) const;
 
-    void renderViewItemPosition(QPainter *painter, const QStyleOptionViewItem::ViewItemPosition &pos, const QRectF &rect) const;
+    void renderViewItemPosition(QPainter *painter,
+                                const QStyleOptionViewItem::ViewItemPosition &pos,
+                                const QRectF &rect,
+                                const QColor &bg,
+                                const QColor &outline) const;
 
     //@}
 
