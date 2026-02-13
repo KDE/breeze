@@ -161,7 +161,7 @@ public:
     explicit ComboBoxItemDelegate(QAbstractItemView *parent)
         : QItemDelegate(parent)
         , _proxy(parent->itemDelegate())
-        , _itemMargin(Breeze::Metrics::ItemView_ItemMarginWidth)
+        , _itemMargin(Breeze::Metrics::ComboBox_ItemMarginWidth)
     {
     }
 

@@ -61,6 +61,7 @@ struct Metrics {
 
     // combobox
     static constexpr int ComboBox_FrameWidth = 6;
+    static constexpr int ComboBox_ItemMarginWidth = 3;
 
     // spinbox
     static constexpr int SpinBox_FrameWidth = LineEdit_FrameWidth;
