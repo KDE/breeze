@@ -835,15 +835,6 @@ void Helper::renderTabWidgetFrame(QPainter *painter, const QRectF &rect, const Q
 }
 
 //______________________________________________________________________________
-void Helper::renderSelection(QPainter *painter, const QRectF &rect, const QColor &color) const
-{
-    painter->setRenderHint(QPainter::Antialiasing);
-    painter->setPen(Qt::NoPen);
-    painter->setBrush(color);
-    painter->drawRect(rect);
-}
-
-//______________________________________________________________________________
 void Helper::renderSeparator(QPainter *painter, const QRectF &rect, const QColor &color, bool vertical) const
 {
     painter->setRenderHint(QPainter::Antialiasing, false);
@@ -1723,6 +1714,37 @@ void Helper::renderEllipseShadow(QPainter *painter, const QRectF &rect, const QC
     painter->setBrush(Qt::NoBrush);
     painter->drawRoundedRect(shadowRect, radius, radius);
 
+    painter->restore();
+}
+
+void Helper::renderViewItemPosition(QPainter *painter, const QStyleOptionViewItem::ViewItemPosition &pos, const QRectF &rect) const
+{
+    painter->save();
+    painter->setRenderHint(QPainter::Antialiasing);
+    const QRectF beginningRect = rect.adjusted(0, 0, 5, 0);
+    const QRectF endingRect = rect.adjusted(-5, 0, 0, 0);
+
+    switch (pos) {
+    case QStyleOptionViewItem::Invalid:
+        painter->drawRect(rect);
+        break;
+    case QStyleOptionViewItem::Beginning:
+        painter->setClipping(true);
+        painter->setClipRect(rect);
+        painter->drawRoundedRect(beginningRect, 5, 5);
+        break;
+    case QStyleOptionViewItem::Middle:
+        painter->drawRect(rect);
+        break;
+    case QStyleOptionViewItem::End:
+        painter->setClipping(true);
+        painter->setClipRect(rect);
+        painter->drawRoundedRect(endingRect, 5, 5);
+        break;
+    case QStyleOptionViewItem::OnlyOne:
+        painter->drawRoundedRect(rect, 5, 5);
+        break;
+    }
     painter->restore();
 }
 

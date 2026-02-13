@@ -18,6 +18,7 @@
 
 #include <QIcon>
 #include <QPainterPath>
+#include <QStyleOptionViewItem>
 #include <QToolBar>
 #include <QWidget>
 #include <qpainter.h>
@@ -231,9 +232,6 @@ public:
     //* tab widget frame
     void renderTabWidgetFrame(QPainter *, const QRectF &, const QColor &color, const QColor &outline, Corners) const;
 
-    //* selection frame
-    void renderSelection(QPainter *, const QRectF &, const QColor &) const;
-
     //* separator
     void renderSeparator(QPainter *, const QRectF &, const QColor &, bool vertical = false) const;
 
@@ -336,6 +334,8 @@ public:
 
     //* generic shadow for ellipses
     void renderEllipseShadow(QPainter *, const QRectF &, const QColor &) const;
+
+    void renderViewItemPosition(QPainter *painter, const QStyleOptionViewItem::ViewItemPosition &pos, const QRectF &rect) const;
 
     //@}
 
