@@ -50,6 +50,7 @@
 #include <QScrollBar>
 #include <QSplitterHandle>
 #include <QStackedLayout>
+#include <QTableView>
 #include <QTextEdit>
 #include <QToolBar>
 #include <QToolBox>
@@ -4703,7 +4704,7 @@ bool Style::drawPanelItemViewItemPrimitive(const QStyleOption *option, QPainter 
     if (hasAlternateBackground) {
         painter->setPen(Qt::NoPen);
         painter->setBrush(palette.brush(colorGroup, QPalette::AlternateBase));
-        painter->drawRect(rect);
+        _helper->renderViewItemPosition(painter, viewItemOption->viewItemPosition, rect);
     }
 
     // stop here if no highlight is needed
@@ -4714,9 +4715,8 @@ bool Style::drawPanelItemViewItemPrimitive(const QStyleOption *option, QPainter 
     // render custom background
     if (hasCustomBackground && !hasSolidBackground) {
         painter->setBrushOrigin(viewItemOption->rect.topLeft());
-        painter->setBrush(viewItemOption->backgroundBrush);
         painter->setPen(Qt::NoPen);
-        painter->drawRect(viewItemOption->rect);
+        _helper->renderViewItemPosition(painter, viewItemOption->viewItemPosition, viewItemOption->rect);
         return true;
     }
 
@@ -4739,7 +4739,15 @@ bool Style::drawPanelItemViewItemPrimitive(const QStyleOption *option, QPainter 
     }
 
     // render
-    _helper->renderSelection(painter, rect, color);
+    painter->setPen(Qt::NoPen);
+    painter->setBrush(color);
+    const auto isTable = qobject_cast<const QTableView *>(viewItemOption->widget);
+    // We want table cells to not be rounded
+    if (isTable) {
+        _helper->renderViewItemPosition(painter, QStyleOptionViewItem::ViewItemPosition::Invalid, rect);
+    } else {
+        _helper->renderViewItemPosition(painter, viewItemOption->viewItemPosition, rect);
+    }
 
     return true;
 }
