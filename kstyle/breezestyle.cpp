@@ -1056,9 +1056,9 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
     case SE_ItemViewItemDecoration: {
         QRect baseRect = ParentStyleClass::subElementRect(element, option, widget);
         if (option->direction == Qt::RightToLeft) {
-            baseRect.moveRight(baseRect.right() - Metrics::ItemView_ItemPaddingWidth);
+            baseRect.moveRight(baseRect.right() - Metrics::ItemView_ItemMarginWidth - Metrics::ItemView_ItemPaddingWidth);
         } else {
-            baseRect.moveLeft(baseRect.left() + Metrics::ItemView_ItemPaddingWidth);
+            baseRect.moveLeft(baseRect.left() + Metrics::ItemView_ItemMarginWidth + Metrics::ItemView_ItemPaddingWidth);
         }
 
         return baseRect;
@@ -1066,9 +1066,9 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
     case SE_ItemViewItemText: {
         QRect rect = ParentStyleClass::subElementRect(element, option, widget);
         if (option->direction == Qt::RightToLeft) {
-            rect.setRight(rect.right() - Metrics::ItemView_ItemPaddingWidth);
+            rect.setRight(rect.right() - Metrics::ItemView_ItemMarginWidth - Metrics::ItemView_ItemPaddingWidth);
         } else {
-            rect.setLeft(rect.left() + Metrics::ItemView_ItemPaddingWidth);
+            rect.setLeft(rect.left() + Metrics::ItemView_ItemMarginWidth + Metrics::ItemView_ItemPaddingWidth);
         }
         return rect;
     }
