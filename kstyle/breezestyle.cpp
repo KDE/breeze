@@ -182,7 +182,7 @@ public:
             auto c = option.palette.brush((option.state & QStyle::State_Enabled) ? QPalette::Normal : QPalette::Disabled, HighlightColor).color();
 
             painter->setPen(c);
-            c.setAlphaF(c.alphaF() * 0.3);
+            c.setAlphaF(c.alphaF() * Metrics::Shared_Alpha);
             painter->setBrush(c);
             auto radius = Metrics::Frame_FrameRadius - (0.5 * PenWidth::Frame);
             painter->drawRoundedRect(QRectF(option.rect).adjusted(0.5, 0.5, -0.5, -0.5), radius, radius);
@@ -4763,7 +4763,7 @@ bool Style::drawPanelItemViewItemPrimitive(const QStyleOption *option, QPainter 
     // change color to implement mouse over
     if (mouseOver && !hasCustomBackground) {
         if (!selected) {
-            color.setAlphaF(0.4);
+            color.setAlphaF(Metrics::Shared_Alpha);
         } else {
             color = color.lighter(110);
         }
@@ -5920,7 +5920,7 @@ bool Style::drawMenuItemControl(const QStyleOption *option, QPainter *painter, c
     // render hover and focus
     if (useStrongFocus && (selected || sunken)) {
         auto color = _helper->focusColor(palette);
-        color = _helper->alphaColor(color, 0.3);
+        color = _helper->alphaColor(color, Metrics::Shared_Alpha);
         const auto outlineColor = _helper->focusOutlineColor(palette);
 
         Sides sides;
@@ -6294,7 +6294,7 @@ bool Style::drawScrollBarSliderControl(const QStyleOption *option, QPainter *pai
     const qreal opacity(_animations->scrollBarEngine().opacity(widget, SC_ScrollBarSlider));
     auto color = _helper->scrollBarHandleColor(palette, mouseOver, hasFocus, opacity, mode);
     if (StyleConfigData::animationsEnabled()) {
-        color.setAlphaF(color.alphaF() * (0.7 + 0.3 * grooveAnimationOpacity));
+        color.setAlphaF(color.alphaF() * (0.7 + Metrics::Shared_Alpha * grooveAnimationOpacity));
     }
 
     _helper->renderScrollBarHandle(painter, handleRect, color, palette.color(QPalette::Window));
@@ -6668,7 +6668,7 @@ bool Style::drawFocusFrame(const QStyleOption *option, QPainter *painter, const 
         focusFramePath.addRoundedRect(outerRect, outerRadius, outerRadius);
     }
 
-    auto outerColor = _helper->alphaColor(option->palette.highlight().color(), 0.33);
+    auto outerColor = _helper->alphaColor(option->palette.highlight().color(), Metrics::Shared_Alpha);
 
     painter->setRenderHint(QPainter::Antialiasing);
     painter->fillPath(focusFramePath, outerColor);

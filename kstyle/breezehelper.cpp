@@ -36,7 +36,7 @@ namespace Breeze
 //* contrast for arrow and treeline rendering
 static const qreal arrowShade = 0.15;
 
-static const qreal highlightBackgroundAlpha = 0.33;
+static const qreal highlightBackgroundAlpha = Metrics::Shared_Alpha;
 
 static const auto radioCheckSunkenDarkeningFactor = 110;
 
@@ -220,7 +220,7 @@ QColor Helper::sidePanelOutlineColor(const QPalette &palette, bool hasFocus, qre
 //____________________________________________________________________
 QColor Helper::frameBackgroundColor(const QPalette &palette, QPalette::ColorGroup group) const
 {
-    return KColorUtils::mix(palette.color(group, QPalette::Window), palette.color(group, QPalette::Base), 0.3);
+    return KColorUtils::mix(palette.color(group, QPalette::Window), palette.color(group, QPalette::Base), Metrics::Shared_Alpha);
 }
 
 //____________________________________________________________________
@@ -716,9 +716,9 @@ void Helper::renderButtonFrame(QPainter *painter,
         }
     } else {
         if (down && enabled) {
-            bgBrush = KColorUtils::mix(palette.button().color(), highlightColor, 0.333);
+            bgBrush = KColorUtils::mix(palette.button().color(), highlightColor, Metrics::Shared_Alpha);
         } else if (checked) {
-            bgBrush = hasNeutralHighlight ? KColorUtils::mix(palette.button().color(), neutralText(palette), 0.333)
+            bgBrush = hasNeutralHighlight ? KColorUtils::mix(palette.button().color(), neutralText(palette), Metrics::Shared_Alpha)
                                           : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), 0.125);
             penBrush =
                 hasNeutralHighlight ? neutralText(palette) : KColorUtils::mix(palette.button().color(), palette.buttonText().color(), frameIntensityBias());
@@ -739,7 +739,8 @@ void Helper::renderButtonFrame(QPainter *painter,
     // Animations
     if (bgAnimation != AnimationData::OpacityInvalid && enabled) {
         QColor color1 = bgBrush.color();
-        QColor color2 = flat ? alphaColor(highlightColor, highlightBackgroundAlpha) : KColorUtils::mix(palette.button().color(), highlightColor, 0.333);
+        QColor color2 =
+            flat ? alphaColor(highlightColor, highlightBackgroundAlpha) : KColorUtils::mix(palette.button().color(), highlightColor, Metrics::Shared_Alpha);
         bgBrush = KColorUtils::mix(color1, color2, bgAnimation);
     }
     if (penAnimation != AnimationData::OpacityInvalid && enabled) {

@@ -165,5 +165,8 @@ struct Metrics {
 
     // shadow dimensions
     static constexpr int Shadow_Overlap = 2;
+
+    // alpha levels
+    static constexpr qreal Shared_Alpha = 0.3;
 };
 }
