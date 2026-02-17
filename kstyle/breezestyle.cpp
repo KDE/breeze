@@ -4698,8 +4698,13 @@ bool Style::drawPanelItemViewItemPrimitive(const QStyleOption *option, QPainter 
     const auto &palette(option->palette);
     auto rect(option->rect);
     if (!qobject_cast<const QTreeView *>(widget)) {
+        // Only give top margin for the first item, rest have bottom margin only
+        int offset = 0;
+        if (viewItemOption && viewItemOption->index.row() == 0) {
+            offset = 1;
+        }
         rect = rect.marginsRemoved(QMargins(Metrics::ItemView_ItemMarginWidth,
-                                            Metrics::ItemView_ItemMarginHeight,
+                                            Metrics::ItemView_ItemMarginHeight + offset,
                                             Metrics::ItemView_ItemMarginWidth,
                                             Metrics::ItemView_ItemMarginHeight));
     }
