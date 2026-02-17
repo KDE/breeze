@@ -1052,6 +1052,26 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
         return tabWidgetCornerRect(SE_TabWidgetRightCorner, option, widget);
     case SE_ToolBoxTabContents:
         return toolBoxTabContentsRect(option, widget);
+    case SE_ItemViewItemCheckIndicator:
+    case SE_ItemViewItemDecoration: {
+        QRect baseRect = ParentStyleClass::subElementRect(element, option, widget);
+        if (option->direction == Qt::RightToLeft) {
+            baseRect.moveRight(baseRect.right() - Metrics::ItemView_ItemPaddingWidth);
+        } else {
+            baseRect.moveLeft(baseRect.left() + Metrics::ItemView_ItemPaddingWidth);
+        }
+
+        return baseRect;
+    }
+    case SE_ItemViewItemText: {
+        QRect rect = ParentStyleClass::subElementRect(element, option, widget);
+        if (option->direction == Qt::RightToLeft) {
+            rect.setRight(rect.right() - Metrics::ItemView_ItemPaddingWidth);
+        } else {
+            rect.setLeft(rect.left() + Metrics::ItemView_ItemPaddingWidth);
+        }
+        return rect;
+    }
 
     // fallback
     default:
@@ -3873,7 +3893,9 @@ QSize Style::itemViewItemSizeFromContents(const QStyleOption *option, const QSiz
 {
     // call base class
     const QSize size(ParentStyleClass::sizeFromContents(CT_ItemViewItem, option, contentsSize, widget));
-    return expandSize(size, Metrics::ItemView_ItemMarginWidth);
+    return expandSize(size,
+                      Metrics::ItemView_ItemMarginWidth + Metrics::ItemView_ItemPaddingWidth,
+                      Metrics::ItemView_ItemMarginHeight + Metrics::ItemView_ItemPaddingHeight);
 }
 
 //______________________________________________________________
@@ -4675,6 +4697,12 @@ bool Style::drawPanelItemViewItemPrimitive(const QStyleOption *option, QPainter 
     // store palette and rect
     const auto &palette(option->palette);
     auto rect(option->rect);
+    if (!qobject_cast<const QTreeView *>(widget)) {
+        rect = rect.marginsRemoved(QMargins(Metrics::ItemView_ItemMarginWidth,
+                                            Metrics::ItemView_ItemMarginHeight,
+                                            Metrics::ItemView_ItemMarginWidth,
+                                            Metrics::ItemView_ItemMarginHeight));
+    }
 
     // store flags
     const State &state(option->state);
