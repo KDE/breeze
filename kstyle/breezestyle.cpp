@@ -3893,9 +3893,12 @@ QSize Style::itemViewItemSizeFromContents(const QStyleOption *option, const QSiz
 {
     // call base class
     const QSize size(ParentStyleClass::sizeFromContents(CT_ItemViewItem, option, contentsSize, widget));
-    return expandSize(size,
-                      Metrics::ItemView_ItemMarginWidth + Metrics::ItemView_ItemPaddingWidth,
-                      Metrics::ItemView_ItemMarginHeight + Metrics::ItemView_ItemPaddingHeight);
+    if (!qobject_cast<const QTreeView *>(widget) || !qobject_cast<const QTableView *>(widget)) {
+        return expandSize(size,
+                          Metrics::ItemView_ItemMarginWidth + Metrics::ItemView_ItemPaddingWidth,
+                          Metrics::ItemView_ItemMarginHeight + Metrics::ItemView_ItemPaddingHeight);
+    }
+    return expandSize(size, Metrics::ItemView_ItemMarginWidth);
 }
 
 //______________________________________________________________
@@ -4697,7 +4700,7 @@ bool Style::drawPanelItemViewItemPrimitive(const QStyleOption *option, QPainter 
     // store palette and rect
     const auto &palette(option->palette);
     auto rect(option->rect);
-    if (!qobject_cast<const QTreeView *>(widget)) {
+    if (!qobject_cast<const QTreeView *>(widget) && !qobject_cast<const QTableView *>(widget)) {
         // Only give top margin for the first item, rest have bottom margin only
         int offset = 0;
         if (viewItemOption && viewItemOption->index.row() == 0) {
