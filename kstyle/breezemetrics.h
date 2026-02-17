@@ -154,10 +154,10 @@ struct Metrics {
 
     // tree view
     static constexpr int ItemView_ArrowSize = ArrowSize;
-    static constexpr int ItemView_ItemMarginWidth = 3;
-    static constexpr int ItemView_ItemMarginHeight = 3;
-    static constexpr int ItemView_ItemPaddingWidth = 3;
-    static constexpr int ItemView_ItemPaddingHeight = 3;
+    static constexpr int ItemView_ItemMarginWidth = 2;
+    static constexpr int ItemView_ItemMarginHeight = 1;
+    static constexpr int ItemView_ItemPaddingWidth = 2;
+    static constexpr int ItemView_ItemPaddingHeight = 2;
     static constexpr int SidePanel_ItemMarginWidth = 4;
 
     // splitter
