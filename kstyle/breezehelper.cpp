@@ -1783,6 +1783,33 @@ QRectF Helper::strokedRect(const QRectF &rect, const qreal penWidth) const
     return rect.adjusted(adjustment, adjustment, -adjustment, -adjustment);
 }
 
+QMargins Helper::itemViewItemMargins(const QStyleOptionViewItem *option) const
+{
+    QMargins margins(Metrics::ItemView_ItemMarginWidth,
+                     Metrics::ItemView_ItemMarginHeight,
+                     Metrics::ItemView_ItemMarginWidth,
+                     Metrics::ItemView_ItemMarginHeight);
+    if (!option) {
+        return margins;
+    }
+
+    const QFrame *frame = qobject_cast<const QFrame *>(option->widget);
+
+    const bool isFirst = option->index.row() == 0;
+    const bool hasFrame = frame && frame->frameShape() == QFrame::StyledPanel;
+
+    if (isFirst) {
+        margins.setTop(Metrics::ItemView_FirstItemTopMarginHeight);
+    }
+
+    // Breeze frame has one extra white pixel
+    if (hasFrame) {
+        margins -= {1, isFirst ? 1 : 0, 1, 0};
+    }
+
+    return margins;
+}
+
 //______________________________________________________________________________
 QPainterPath Helper::roundedPath(const QRectF &rect, Corners corners, qreal radius) const
 {

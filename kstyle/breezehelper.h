@@ -384,6 +384,8 @@ public:
         return rect.adjusted(shadowSize, shadowSize, -shadowSize, -shadowSize);
     }
 
+    QMargins itemViewItemMargins(const QStyleOptionViewItem *option) const;
+
     QPixmap coloredIcon(const QIcon &icon,
                         const QPalette &palette,
                         const QSize &size,

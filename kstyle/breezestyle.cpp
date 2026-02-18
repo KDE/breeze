@@ -1055,21 +1055,40 @@ QRect Style::subElementRect(SubElement element, const QStyleOption *option, cons
     case SE_ItemViewItemCheckIndicator:
     case SE_ItemViewItemDecoration: {
         QRect baseRect = ParentStyleClass::subElementRect(element, option, widget);
-        if (option->direction == Qt::RightToLeft) {
-            baseRect.moveRight(baseRect.right() - Metrics::ItemView_ItemMarginWidth - Metrics::ItemView_ItemPaddingWidth);
-        } else {
-            baseRect.moveLeft(baseRect.left() + Metrics::ItemView_ItemMarginWidth + Metrics::ItemView_ItemPaddingWidth);
+        const auto viewOption = qstyleoption_cast<const QStyleOptionViewItem *>(option);
+        const QMargins margins = _helper->itemViewItemMargins(viewOption);
+
+        // This counteracts a quirk of QCommonStyle: when the view has a frame, it adds an hardcoded one pixel to the subelementrect x
+        int marginAdjust = 0;
+        const auto frame = viewOption ? qobject_cast<const QFrame *>(viewOption->widget) : nullptr;
+        if (frame && frame->frameShape() == QFrame::StyledPanel) {
+            marginAdjust = 1;
         }
+
+        if (option->direction == Qt::RightToLeft) {
+            baseRect.moveRight(baseRect.right() - margins.right() - Metrics::ItemView_ItemPaddingWidth + marginAdjust);
+        } else {
+            baseRect.moveLeft(baseRect.left() + margins.left() + Metrics::ItemView_ItemPaddingWidth - marginAdjust);
+        }
+
+        // This will move it down by the difference of margins.top - margin.bottom
+        // Only the first item has a bigger top margin so will be moved down accordingly
+        baseRect.moveTop(baseRect.top() + margins.top() - margins.bottom());
 
         return baseRect;
     }
     case SE_ItemViewItemText: {
         QRect rect = ParentStyleClass::subElementRect(element, option, widget);
+        const QMargins margins = _helper->itemViewItemMargins(qstyleoption_cast<const QStyleOptionViewItem *>(option));
+
         if (option->direction == Qt::RightToLeft) {
-            rect.setRight(rect.right() - Metrics::ItemView_ItemMarginWidth - Metrics::ItemView_ItemPaddingWidth);
+            rect.setRight(rect.right() - margins.right() - Metrics::ItemView_ItemPaddingWidth);
         } else {
-            rect.setLeft(rect.left() + Metrics::ItemView_ItemMarginWidth + Metrics::ItemView_ItemPaddingWidth);
+            rect.setLeft(rect.left() + margins.left() + Metrics::ItemView_ItemPaddingWidth);
         }
+
+        rect.moveTop(rect.top() + margins.top() - margins.bottom());
+
         return rect;
     }
 
@@ -3893,10 +3912,12 @@ QSize Style::itemViewItemSizeFromContents(const QStyleOption *option, const QSiz
 {
     // call base class
     const QSize size(ParentStyleClass::sizeFromContents(CT_ItemViewItem, option, contentsSize, widget));
-    if (!qobject_cast<const QTreeView *>(widget) || !qobject_cast<const QTableView *>(widget)) {
-        return expandSize(size,
-                          Metrics::ItemView_ItemMarginWidth + Metrics::ItemView_ItemPaddingWidth,
-                          Metrics::ItemView_ItemMarginHeight + Metrics::ItemView_ItemPaddingHeight);
+    if (!qobject_cast<const QTreeView *>(widget) && !qobject_cast<const QTableView *>(widget)) {
+        const QMargins margins = _helper->itemViewItemMargins(qstyleoption_cast<const QStyleOptionViewItem *>(option));
+
+        return size
+            + QSize(margins.left() + margins.right() + Metrics::ItemView_ItemPaddingWidth * 2,
+                    margins.top() + margins.bottom() + Metrics::ItemView_ItemPaddingHeight * 2);
     }
     return expandSize(size, Metrics::ItemView_ItemMarginWidth);
 }
@@ -4701,15 +4722,7 @@ bool Style::drawPanelItemViewItemPrimitive(const QStyleOption *option, QPainter 
     const auto &palette(option->palette);
     auto rect(option->rect);
     if (!qobject_cast<const QTreeView *>(widget) && !qobject_cast<const QTableView *>(widget)) {
-        // Only give top margin for the first item, rest have bottom margin only
-        int offset = 0;
-        if (viewItemOption && viewItemOption->index.row() == 0) {
-            offset = 1;
-        }
-        rect = rect.marginsRemoved(QMargins(Metrics::ItemView_ItemMarginWidth,
-                                            Metrics::ItemView_ItemMarginHeight + offset,
-                                            Metrics::ItemView_ItemMarginWidth,
-                                            Metrics::ItemView_ItemMarginHeight));
+        rect = rect.marginsRemoved(_helper->itemViewItemMargins(viewItemOption));
     }
 
     // store flags
