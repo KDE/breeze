@@ -4715,13 +4715,18 @@ bool Style::drawPanelItemViewItemPrimitive(const QStyleOption *option, QPainter 
         return false;
     }
 
+    const QWidget *actualWidget = widget;
+    if (!actualWidget) {
+        actualWidget = viewItemOption->widget;
+    }
+
     // try cast widget
-    const auto abstractItemView = qobject_cast<const QAbstractItemView *>(widget);
+    const auto abstractItemView = qobject_cast<const QAbstractItemView *>(actualWidget);
 
     // store palette and rect
     const auto &palette(option->palette);
     auto rect(option->rect);
-    if (!qobject_cast<const QTreeView *>(widget) && !qobject_cast<const QTableView *>(widget)) {
+    if (!qobject_cast<const QTreeView *>(actualWidget) && !qobject_cast<const QTableView *>(actualWidget)) {
         rect = rect.marginsRemoved(_helper->itemViewItemMargins(viewItemOption));
     }
 
