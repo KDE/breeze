@@ -1807,6 +1807,14 @@ QMargins Helper::itemViewItemMargins(const QStyleOptionViewItem *option) const
         margins -= {1, isFirst ? 1 : 0, 1, 0};
     }
 
+    // TODO: fix RTL
+    if (option->viewItemPosition == QStyleOptionViewItem::Beginning || option->viewItemPosition == QStyleOptionViewItem::Middle) {
+        margins.setRight(0);
+    }
+    if (option->viewItemPosition == QStyleOptionViewItem::End || option->viewItemPosition == QStyleOptionViewItem::Middle) {
+        margins.setLeft(0);
+    }
+
     return margins;
 }
 

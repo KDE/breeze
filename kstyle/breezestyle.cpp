@@ -3912,7 +3912,7 @@ QSize Style::itemViewItemSizeFromContents(const QStyleOption *option, const QSiz
 {
     // call base class
     const QSize size(ParentStyleClass::sizeFromContents(CT_ItemViewItem, option, contentsSize, widget));
-    if (!qobject_cast<const QTreeView *>(widget) && !qobject_cast<const QTableView *>(widget)) {
+    if (!qobject_cast<const QTableView *>(widget)) {
         const QMargins margins = _helper->itemViewItemMargins(qstyleoption_cast<const QStyleOptionViewItem *>(option));
 
         return size
@@ -4726,8 +4726,23 @@ bool Style::drawPanelItemViewItemPrimitive(const QStyleOption *option, QPainter 
     // store palette and rect
     const auto &palette(option->palette);
     auto rect(option->rect);
-    if (!qobject_cast<const QTreeView *>(actualWidget) && !qobject_cast<const QTableView *>(actualWidget)) {
+    if (!qobject_cast<const QTableView *>(actualWidget)) {
         rect = rect.marginsRemoved(_helper->itemViewItemMargins(viewItemOption));
+    }
+
+    // TODO: fix RTL
+    const auto treeItemView = qobject_cast<const QTreeView *>(actualWidget);
+    if (treeItemView) {
+        // If the last column is very narrow, there won't be enough room to draw the rounded border,
+        // so in that case remove move everything in the second to last column
+        // TODO: same case for first column
+        if (treeItemView->columnWidth(viewItemOption->index.column()) < Metrics::Frame_FrameRadius) {
+            rect.setX(rect.x() - Metrics::Frame_FrameRadius);
+        }
+        if (viewItemOption->viewItemPosition != QStyleOptionViewItem::End
+            && treeItemView->columnWidth(viewItemOption->index.column() + 1) < Metrics::Frame_FrameRadius) {
+            rect.setWidth(rect.width() - Metrics::Frame_FrameRadius);
+        }
     }
 
     // store flags
