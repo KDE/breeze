@@ -38,6 +38,7 @@ include(GtkUpdateIconCache)
 
 option(BUILD_QT5 "Build Qt5 style" ON)
 option(BUILD_QT6 "Build with Qt6" ON)
+option(BUILD_CURSOR "Build Breeze Cursor" ON)
 option(BUILD_WITH_QTQUICK "Build with Qt Quick and Kirigami features enabled" ON)
 
 set(QT_NO_CREATE_VERSIONLESS_TARGETS ON)
@@ -201,7 +202,9 @@ function(build_colors_and_cursors)
     # only use ICONDIR and DATADIR which both do not depend on the version
     include(KDEInstallDirs)
     add_subdirectory(colors)
-    add_subdirectory(cursors)
+    if(BUILD_CURSOR)
+        add_subdirectory(cursors)
+    endif()
 endfunction()
 
 build_colors_and_cursors()
