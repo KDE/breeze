@@ -4731,8 +4731,18 @@ bool Style::drawPanelItemViewItemPrimitive(const QStyleOption *option, QPainter 
     const auto &palette(option->palette);
     auto rect(option->rect);
 
+    const auto delegate = abstractItemView->itemDelegate();
+    QSize delegateHint = rect.size();
+    if (delegate) {
+        delegateHint = abstractItemView->itemDelegate()->sizeHint(*viewItemOption, viewItemOption->index);
+    }
+
     if (!qobject_cast<const QTableView *>(actualWidget)) {
         rect = rect.marginsRemoved(_helper->itemViewItemMargins(viewItemOption));
+    }
+
+    if (delegateHint.height() > rect.height()) {
+        rect = option->rect;
     }
 
     const auto treeItemView = qobject_cast<const QTreeView *>(actualWidget);
