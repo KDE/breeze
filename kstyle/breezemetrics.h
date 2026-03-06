@@ -174,5 +174,7 @@ struct Metrics {
     // Value used to blend background and foreground,
     // used for hover effects and similar.
     static constexpr qreal Blend_Value = 0.3;
+
+    static constexpr qreal Focus_LightenColorValue = 110;
 };
 }
