@@ -4802,8 +4802,8 @@ bool Style::drawPanelItemViewItemPrimitive(const QStyleOption *option, QPainter 
         while (prevColumn > 0 && treeItemView->isColumnHidden(prevColumn)) {
             prevColumn--;
         }
-        const int count = treeItemView->header()->count();
-        while (prevColumn < count && treeItemView->isColumnHidden(nextColumn)) {
+        const int count = treeItemView->header()->count() - 1;
+        while (nextColumn < count && treeItemView->isColumnHidden(nextColumn)) {
             nextColumn++;
         }
 
