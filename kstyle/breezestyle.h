@@ -170,8 +170,6 @@ private:
     //* load configuration
     void loadConfiguration();
 
-    bool isTabletMode() const;
-
     //*@name subelementRect specialized functions
     //@{
 

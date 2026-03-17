@@ -213,29 +213,6 @@ void Decoration::init()
                  this,
                  SLOT(reconfigure()));
 
-    dbus.connect(QStringLiteral("org.kde.KWin"),
-                 QStringLiteral("/org/kde/KWin"),
-                 QStringLiteral("org.kde.KWin.TabletModeManager"),
-                 QStringLiteral("tabletModeChanged"),
-                 QStringLiteral("b"),
-                 this,
-                 SLOT(onTabletModeChanged(bool)));
-
-    auto message = QDBusMessage::createMethodCall(QStringLiteral("org.kde.KWin"),
-                                                  QStringLiteral("/org/kde/KWin"),
-                                                  QStringLiteral("org.freedesktop.DBus.Properties"),
-                                                  QStringLiteral("Get"));
-    message.setArguments({QStringLiteral("org.kde.KWin.TabletModeManager"), QStringLiteral("tabletMode")});
-    auto call = new QDBusPendingCallWatcher(dbus.asyncCall(message), this);
-    connect(call, &QDBusPendingCallWatcher::finished, this, [this, call]() {
-        QDBusPendingReply<QVariant> reply = *call;
-        if (!reply.isError()) {
-            onTabletModeChanged(reply.value().toBool());
-        }
-
-        call->deleteLater();
-    });
-
     reconfigure();
     updateTitleBar();
     auto s = settings();
@@ -717,7 +694,7 @@ void Decoration::paintTitleBar(QPainter *painter, const QRectF &repaintRegion)
 //________________________________________________________________
 int Decoration::buttonSize() const
 {
-    const int baseSize = m_tabletMode ? settings()->gridUnit() * 2 : settings()->gridUnit();
+    const int baseSize = settings()->gridUnit();
     switch (m_internalSettings->buttonSize()) {
     case InternalSettings::ButtonTiny:
         return baseSize;
@@ -731,15 +708,6 @@ int Decoration::buttonSize() const
     case InternalSettings::ButtonVeryLarge:
         return baseSize * 3.5;
     }
-}
-
-void Decoration::onTabletModeChanged(bool mode)
-{
-    m_tabletMode = mode;
-    Q_EMIT tabletModeChanged();
-
-    recalculateBorders();
-    updateButtonsGeometry();
 }
 
 //________________________________________________________________

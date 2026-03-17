@@ -35,7 +35,6 @@ Button::Button(DecorationButtonType type, Decoration *decoration, QObject *paren
     });
 
     // connections
-    connect(decoration, &Decoration::tabletModeChanged, this, &Button::reconfigure);
     connect(decoration->window(), SIGNAL(iconChanged(QIcon)), this, SLOT(update()));
     connect(decoration->settings().get(), &KDecoration3::DecorationSettings::reconfigured, this, &Button::reconfigure);
     connect(this, &KDecoration3::DecorationButton::hoveredChanged, this, &Button::updateAnimationState);
