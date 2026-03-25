@@ -51,6 +51,7 @@
 #include <QSplitterHandle>
 #include <QStackedLayout>
 #include <QTableView>
+#include <QTextBrowser>
 #include <QTextEdit>
 #include <QToolBar>
 #include <QToolBox>
@@ -745,7 +746,7 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
             }
         }
 
-        if (qobject_cast<const QTabWidget *>(widget)) {
+        if (qobject_cast<const QTabWidget *>(widget) || qobject_cast<const QTextBrowser *>(widget)) {
             return Metrics::Frame_FrameWidth;
         }
 
