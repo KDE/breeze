@@ -6044,8 +6044,13 @@ bool Style::drawMenuItemControl(const QStyleOption *option, QPainter *painter, c
     // render hover and focus
     if (useStrongFocus && (selected || sunken)) {
         auto color = _helper->focusColor(palette);
-        color = _helper->alphaColor(color, Metrics::Blend_Value);
-        const auto outlineColor = _helper->focusOutlineColor(palette);
+        // When clicking, use the same background color
+        auto outlineColor = color;
+        if (!sunken) {
+            // If not clicking, use the alphaColor
+            color = _helper->alphaColor(color, Metrics::Blend_Value);
+            outlineColor = _helper->focusOutlineColor(palette);
+        }
 
         Sides sides;
         if (!menuItemOption->menuRect.isNull()) {
@@ -6126,7 +6131,7 @@ bool Style::drawMenuItemControl(const QStyleOption *option, QPainter *painter, c
         // icon mode
         QIcon::Mode mode;
         if (enabled) {
-            mode = QIcon::Normal;
+            mode = sunken ? QIcon::Selected : QIcon::Normal;
         } else {
             mode = QIcon::Disabled;
         }
@@ -6153,7 +6158,7 @@ bool Style::drawMenuItemControl(const QStyleOption *option, QPainter *painter, c
         const ArrowOrientation orientation(reverseLayout ? ArrowLeft : ArrowRight);
 
         // color
-        const QColor arrowColor = _helper->arrowColor(palette, QPalette::WindowText);
+        const QColor arrowColor = _helper->arrowColor(palette, sunken ? QPalette::HighlightedText : QPalette::WindowText);
 
         // render
         _helper->renderArrow(painter, arrowRect, arrowColor, orientation);
@@ -6171,7 +6176,7 @@ bool Style::drawMenuItemControl(const QStyleOption *option, QPainter *painter, c
         painter->setFont(menuItemOption->font);
 
         // color role
-        const QPalette::ColorRole role = QPalette::WindowText;
+        QPalette::ColorRole role = sunken ? QPalette::HighlightedText : QPalette::WindowText;
 
         // locate accelerator and render
         const int tabPosition(text.indexOf(QLatin1Char('\t')));
