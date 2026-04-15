@@ -474,7 +474,7 @@ void Decoration::recalculateBorders()
                                             window()->palette().text().color(),
                                             0.2);
 #endif
-        const qreal thickness = std::max(KDecoration3::pixelSize(window()->scale()), KDecoration3::snapToPixelGrid(1, window()->scale()));
+        const qreal thickness = std::max(KDecoration3::pixelSize(window()->nextScale()), KDecoration3::snapToPixelGrid(1, window()->nextScale()));
 
         qreal bottomLeftRadius = 0;
         qreal bottomRightRadius = 0;
