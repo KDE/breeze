@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kwin_clients\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2026-04-18 16:04+0200\n"
+"PO-Revision-Date: 2026-04-21 19:22+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -201,7 +201,7 @@ msgstr "Teikn fargeovergang på tittellinja"
 #: config/ui/breezeconfigurationui.ui:169
 #, kde-format
 msgid "Round bottom corners of windows with no borders"
-msgstr ""
+msgstr "Runde botnhjørne på vindauge utan kantlinjer"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: config/ui/breezeconfigurationui.ui:177
