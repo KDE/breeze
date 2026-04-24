@@ -88,8 +88,6 @@ void Helper::loadConfig()
 {
     _viewFocusBrush = KStatefulBrush(KColorScheme::View, KColorScheme::FocusColor);
     _viewHoverBrush = KStatefulBrush(KColorScheme::View, KColorScheme::HoverColor);
-    _buttonFocusBrush = KStatefulBrush(KColorScheme::Button, KColorScheme::FocusColor);
-    _buttonHoverBrush = KStatefulBrush(KColorScheme::Button, KColorScheme::HoverColor);
     _viewNegativeTextBrush = KStatefulBrush(KColorScheme::View, KColorScheme::NegativeText);
     _viewNeutralTextBrush = KStatefulBrush(KColorScheme::View, KColorScheme::NeutralText);
 
@@ -180,18 +178,6 @@ QColor Helper::focusOutlineColor(const QPalette &palette) const
 QColor Helper::hoverOutlineColor(const QPalette &palette) const
 {
     return KColorUtils::mix(hoverColor(palette), palette.color(QPalette::WindowText), 0.15);
-}
-
-//____________________________________________________________________
-QColor Helper::buttonFocusOutlineColor(const QPalette &palette) const
-{
-    return KColorUtils::mix(buttonFocusColor(palette), palette.color(QPalette::ButtonText), 0.15);
-}
-
-//____________________________________________________________________
-QColor Helper::buttonHoverOutlineColor(const QPalette &palette) const
-{
-    return KColorUtils::mix(buttonHoverColor(palette), palette.color(QPalette::ButtonText), 0.15);
 }
 
 //____________________________________________________________________

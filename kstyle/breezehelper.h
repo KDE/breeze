@@ -72,18 +72,6 @@ public:
         return _viewFocusBrush.brush(palette).color();
     }
 
-    //* mouse over color for buttons
-    QColor buttonHoverColor(const QPalette &palette) const
-    {
-        return _buttonHoverBrush.brush(palette).color();
-    }
-
-    //* focus color for buttons
-    QColor buttonFocusColor(const QPalette &palette) const
-    {
-        return _buttonFocusBrush.brush(palette).color();
-    }
-
     //* negative text color (used for close button)
     QColor negativeText(const QPalette &palette) const
     {
@@ -131,12 +119,6 @@ public:
 
     //* hover outline color, using animations
     QColor hoverOutlineColor(const QPalette &) const;
-
-    //* focus outline color, using animations
-    QColor buttonFocusOutlineColor(const QPalette &) const;
-
-    //* hover outline color, using animations
-    QColor buttonHoverOutlineColor(const QPalette &) const;
 
     //* side panel outline color, using animations
     QColor sidePanelOutlineColor(const QPalette &, bool hasFocus = false, qreal opacity = AnimationData::OpacityInvalid, AnimationMode = AnimationNone) const;
@@ -409,8 +391,6 @@ private:
     //@{
     KStatefulBrush _viewFocusBrush;
     KStatefulBrush _viewHoverBrush;
-    KStatefulBrush _buttonFocusBrush;
-    KStatefulBrush _buttonHoverBrush;
     KStatefulBrush _viewNegativeTextBrush;
     KStatefulBrush _viewNeutralTextBrush;
     //@}
