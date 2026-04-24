@@ -9,8 +9,6 @@
 #include "breeze.h"
 #include "breezeanimationdata.h"
 #include "breezemetrics.h"
-#include "breezesettings.h"
-#include "config-breeze.h"
 
 #include <KConfigWatcher>
 #include <KSharedConfig>
@@ -49,9 +47,6 @@ public:
 
     //* pointer to shared config
     KSharedConfig::Ptr config() const;
-
-    //* pointer to kdecoration config
-    QSharedPointer<InternalSettings> decorationConfig() const;
 
     //* install event filter for palette change event
     void installEventFilter(QApplication *app) const;
@@ -406,9 +401,6 @@ private:
 
     //* KWin configuration
     KSharedConfig::Ptr _kwinConfig;
-
-    //* decoration configuration
-    QSharedPointer<InternalSettings> _decorationConfig;
 
     //* event filter
     PaletteChangedEventFilter *_eventFilter;

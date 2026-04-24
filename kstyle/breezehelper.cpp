@@ -73,7 +73,6 @@ Helper::Helper(KSharedConfig::Ptr config)
     : QObject()
     , _config(std::move(config))
     , _kwinConfig(KSharedConfig::openConfig("kwinrc"))
-    , _decorationConfig(new InternalSettings())
     , _eventFilter(new PaletteChangedEventFilter(this))
 {
 }
@@ -82,12 +81,6 @@ Helper::Helper(KSharedConfig::Ptr config)
 KSharedConfig::Ptr Helper::config() const
 {
     return _config;
-}
-
-//____________________________________________________________________
-QSharedPointer<InternalSettings> Helper::decorationConfig() const
-{
-    return _decorationConfig;
 }
 
 //____________________________________________________________________
@@ -104,7 +97,6 @@ void Helper::loadConfig()
     _config->reparseConfiguration();
     _kwinConfig->reparseConfiguration();
     _cachedAutoValid = false;
-    _decorationConfig->load();
 
     KConfigGroup globalGroup(_config->group(QStringLiteral("WM")));
     _activeTitleBarColor = globalGroup.readEntry("activeBackground", palette.color(QPalette::Active, QPalette::Highlight));
