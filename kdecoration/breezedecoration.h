@@ -200,7 +200,7 @@ bool Decoration::isBottomEdge() const
 
 bool Decoration::hideTitleBar() const
 {
-    return m_internalSettings->hideTitleBar() && !window()->isShaded();
+    return style() == KDecoration3::Style::Shadow || (m_internalSettings->hideTitleBar() && !window()->isShaded());
 }
 
 bool Decoration::outlinesEnabled() const
