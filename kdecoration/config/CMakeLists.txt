@@ -31,7 +31,7 @@ target_link_libraries(kcm_breezedecoration
 )
 kcmutils_generate_desktop_file(kcm_breezedecoration)
 
-add_test(NAME kcm_breezedecoration_smoketest COMMAND kcmshell6 --smoke-test ${KDECORATION_KCM_PLUGIN_DIR}/kcm_breezedecoration)
+add_test(NAME kcm_breezedecoration_smoketest COMMAND kcmshell6 -style Breeze --smoke-test ${KDECORATION_KCM_PLUGIN_DIR}/kcm_breezedecoration)
 set_tests_properties(kcm_breezedecoration_smoketest PROPERTIES
     ENVIRONMENT_MODIFICATION QT_PLUGIN_PATH=path_list_prepend:${CMAKE_BINARY_DIR}/bin
 )

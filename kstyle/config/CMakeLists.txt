@@ -57,7 +57,7 @@ ecm_install_icons(ICONS sc-apps-breeze-settings.svgz
     DESTINATION ${KDE_INSTALL_ICONDIR}
     THEME hicolor )
 
-add_test(NAME breezestyleconfig_smoketest COMMAND kcmshell6 --smoke-test kstyle_config/breezestyleconfig)
+add_test(NAME breezestyleconfig_smoketest COMMAND kcmshell6 -style Breeze --smoke-test kstyle_config/breezestyleconfig)
 set_tests_properties(breezestyleconfig_smoketest PROPERTIES
     ENVIRONMENT_MODIFICATION QT_PLUGIN_PATH=path_list_prepend:${CMAKE_BINARY_DIR}/bin
 )
