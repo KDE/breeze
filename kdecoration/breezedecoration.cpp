@@ -180,11 +180,7 @@ QColor Decoration::fontColor() const
 }
 
 //________________________________________________________________
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 bool Decoration::init()
-#else
-void Decoration::init()
-#endif
 {
     // active state change animation
     // It is important start and end value are of the same type, hence 0.0 and not just 0
@@ -258,9 +254,7 @@ void Decoration::init()
 
     createButtons();
     updateShadow();
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     return true;
-#endif
 }
 
 //________________________________________________________________
@@ -465,15 +459,9 @@ void Decoration::recalculateBorders()
     if (isMaximized() || !outlinesEnabled()) {
         setBorderOutline(KDecoration3::BorderOutline());
     } else {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
         const auto color = KColorUtils::mix(window()->color(window()->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame),
                                             window()->palette().text().color(),
                                             KColorScheme::frameContrast());
-#else
-        const auto color = KColorUtils::mix(window()->color(window()->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame),
-                                            window()->palette().text().color(),
-                                            0.2);
-#endif
         const qreal thickness = std::max(KDecoration3::pixelSize(window()->nextScale()), KDecoration3::snapToPixelGrid(1, window()->nextScale()));
 
         qreal topLeftRightRadius = 0;
