@@ -476,14 +476,18 @@ void Decoration::recalculateBorders()
 #endif
         const qreal thickness = std::max(KDecoration3::pixelSize(window()->nextScale()), KDecoration3::snapToPixelGrid(1, window()->nextScale()));
 
+        qreal topLeftRightRadius = 0;
         qreal bottomLeftRadius = 0;
         qreal bottomRightRadius = 0;
+        if (!hideTitleBar() || m_internalSettings->roundedCorners()) {
+            topLeftRightRadius = m_scaledCornerRadius;
+        }
         if (!hasNoBorders() || m_internalSettings->roundedCorners()) {
             bottomLeftRadius = m_scaledCornerRadius;
             bottomRightRadius = m_scaledCornerRadius;
         }
 
-        const auto radius = KDecoration3::BorderRadius(m_scaledCornerRadius, m_scaledCornerRadius, bottomRightRadius, bottomLeftRadius);
+        const auto radius = KDecoration3::BorderRadius(topLeftRightRadius, topLeftRightRadius, bottomRightRadius, bottomLeftRadius);
         setBorderOutline(KDecoration3::BorderOutline(thickness, color, radius));
     }
 }
