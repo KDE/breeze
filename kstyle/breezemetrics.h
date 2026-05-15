@@ -51,6 +51,7 @@ struct Metrics {
 
     // menu items
     static constexpr int Menu_FrameWidth = 0;
+    static constexpr int Menu_FrameRadius = Frame_FrameRadius + 4;
     static constexpr int MenuItem_MarginWidth = 4;
     static constexpr int MenuItem_HighlightGap = 4;
     static constexpr int MenuItem_ExtraLeftMargin = 4;

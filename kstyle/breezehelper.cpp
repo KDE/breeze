@@ -569,7 +569,7 @@ void Helper::renderMenuFrame(QPainter *painter, const QRectF &rect, const QColor
         painter->setRenderHint(QPainter::Antialiasing);
         QRectF frameRect(rect);
 
-        qreal radius(Metrics::Frame_FrameRadius);
+        qreal radius(Metrics::Menu_FrameRadius);
 
         frameRect.adjust( //
             seamlessEdges.testFlag(Qt::LeftEdge) ? -radius : 0,

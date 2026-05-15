@@ -202,7 +202,7 @@ TileSet ShadowHelper::shadowTiles(QWidget *widget)
     const QSize boxSize =
         BoxShadowRenderer::calculateMinimumBoxSize(params.shadow1.radius).expandedTo(BoxShadowRenderer::calculateMinimumBoxSize(params.shadow2.radius));
 
-    const qreal frameRadius = _helper->frameRadius();
+    const qreal frameRadius = Metrics::Menu_FrameRadius;
 
     BoxShadowRenderer shadowRenderer;
     shadowRenderer.setBorderRadius(frameRadius);
