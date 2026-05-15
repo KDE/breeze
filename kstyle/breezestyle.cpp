@@ -6038,7 +6038,8 @@ bool Style::drawMenuItemControl(const QStyleOption *option, QPainter *painter, c
             }
         }
 
-        _helper->renderFocusRect(painter, rect, color, outlineColor, SideTop | SideBottom | SideLeft | SideRight);
+        const qreal outerThickness = std::max(Metrics::MenuItem_MarginWidth, Metrics::MenuItem_MarginHeight);
+        _helper->renderFocusRect(painter, rect, color, outlineColor, SideTop | SideBottom | SideLeft | SideRight, outerThickness);
     }
 
     // get rect available for contents

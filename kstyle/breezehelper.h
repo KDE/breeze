@@ -171,7 +171,7 @@ public:
     void renderDebugFrame(QPainter *, const QRectF &) const;
 
     //* focus rect
-    void renderFocusRect(QPainter *, const QRectF &, const QColor &, const QColor &outline = QColor(), Sides = {}) const;
+    void renderFocusRect(QPainter *, const QRectF &, const QColor &, const QColor &outline = QColor(), Sides = {}, qreal outerThickness = 0) const;
 
     //* focus line
     void renderFocusLine(QPainter *, const QRectF &, const QColor &) const;
@@ -342,9 +342,9 @@ public:
     //@}
 
     //* frame radius
-    constexpr qreal frameRadius(const int penWidth = PenWidth::NoPen, const qreal bias = 0) const
+    constexpr qreal frameRadius(const int penWidth = PenWidth::NoPen, const qreal outerThickness = 0) const
     {
-        return qMax(Metrics::Frame_FrameRadius - (0.5 * penWidth) + bias, 0.0);
+        return qMax(Metrics::Frame_FrameRadius - 0.5 * (penWidth + outerThickness), 0.0);
     }
 
     //* frame radius with new pen width

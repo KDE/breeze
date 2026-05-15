@@ -366,7 +366,7 @@ void Helper::renderDebugFrame(QPainter *painter, const QRectF &rect) const
 }
 
 //______________________________________________________________________________
-void Helper::renderFocusRect(QPainter *painter, const QRectF &rect, const QColor &color, const QColor &outline, Sides sides) const
+void Helper::renderFocusRect(QPainter *painter, const QRectF &rect, const QColor &color, const QColor &outline, Sides sides, qreal outerThickness) const
 {
     if (!color.isValid()) {
         return;
@@ -385,7 +385,7 @@ void Helper::renderFocusRect(QPainter *painter, const QRectF &rect, const QColor
 
         QRectF copy(strokedRect(rect));
 
-        const qreal radius(frameRadius(PenWidth::Frame));
+        const qreal radius(frameRadius(PenWidth::Frame, outerThickness));
         if (!(sides & SideTop)) {
             copy.adjust(0, -radius, 0, 0);
         }
