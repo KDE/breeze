@@ -6,20 +6,21 @@
 # Taiki Komoda <kom@kde.gr.jp>, 2010.
 # Fumiaki Okushi <fumiaki.okushi@gmail.com>, 2004, 2005, 2010, 2015, 2021.
 # R.Suga <21r.suga@gmail.com>, 2022.
+# SPDX-FileCopyrightText: 2026 Mint <5602mint@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kwin_clients\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2025-09-23 23:33+0900\n"
-"Last-Translator: Yuma Kakei <yumasansansan@gmail.com>\n"
-"Language-Team: Japanese <kde-jp@kde.org>\n"
+"PO-Revision-Date: 2026-05-10 12:53+0900\n"
+"Last-Translator: Mint <5602mint@gmail.com>\n"
+"Language-Team: Japanese <kde-i18n-doc@kde.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 26.04.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -211,13 +212,13 @@ msgstr "枠がないウィンドウの下端の角を丸くする"
 #: config/ui/breezeconfigurationui.ui:177
 #, kde-format
 msgid "Shadows and Outline"
-msgstr "影と輪郭"
+msgstr "シャドーと輪郭"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: config/ui/breezeconfigurationui.ui:186
 #, kde-format
 msgid "Shadow size:"
-msgstr "影のサイズ:"
+msgstr "シャドーのサイズ:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:197
@@ -231,7 +232,7 @@ msgstr "なし"
 #, kde-format
 msgctxt "strength of the shadow (from transparent to opaque)"
 msgid "Shadow strength:"
-msgstr "影の強さ:"
+msgstr "シャドーの強さ:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
 #: config/ui/breezeconfigurationui.ui:235
@@ -243,14 +244,13 @@ msgstr "%"
 #: config/ui/breezeconfigurationui.ui:248
 #, kde-format
 msgid "Shadow color:"
-msgstr "影の色:"
+msgstr "シャドーの色:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
-#, fuzzy, kde-format
-#| msgid "Shadows and Outline"
+#, kde-format
 msgid "Draw window outline"
-msgstr "影と輪郭"
+msgstr "ウィンドウの輪郭を描画"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:266
@@ -274,7 +274,7 @@ msgstr "ウィンドウの識別"
 #: config/ui/breezeexceptiondialog.ui:26
 #, kde-format
 msgid "&Matching window property: "
-msgstr "識別に用いるウィンドウのプロパティ(&M): "
+msgstr "識別するウィンドウのプロパティ(&M): "
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: config/ui/breezeexceptiondialog.ui:39
@@ -298,7 +298,7 @@ msgstr "装飾オプション"
 #: config/ui/breezeexceptiondialog.ui:89
 #, kde-format
 msgid "Border size:"
-msgstr "枠サイズ:"
+msgstr "枠のサイズ:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, hideTitleBar)
 #: config/ui/breezeexceptiondialog.ui:96
@@ -392,27 +392,3 @@ msgstr "追加"
 #, kde-format
 msgid "Edit"
 msgstr "編集"
-
-#~ msgctxt "outline intensity"
-#~ msgid "Outline intensity:"
-#~ msgstr "輪郭の濃さ:"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Off"
-#~ msgstr "オフ"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Low"
-#~ msgstr "低"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Medium"
-#~ msgstr "中"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "High"
-#~ msgstr "高"
-
-#~ msgctxt "@item:inlistbox Outline intensity:"
-#~ msgid "Maximum"
-#~ msgstr "最大"
