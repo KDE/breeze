@@ -47,6 +47,17 @@
         ],
         "Id": "Next",
         "License": "CC-BY-SA-4.0",
-        "Name": "Waterfall"
+        "Name": "Waterfall",
+        "Name[ca@valencia]": "Waterfall",
+        "Name[ca]": "Waterfall",
+        "Name[es]": "Cascada",
+        "Name[he]": "מפל",
+        "Name[ka]": "ჩანჩქერი",
+        "Name[nl]": "Waterfall",
+        "Name[pt_BR]": "Cascata",
+        "Name[sk]": "Vodopád",
+        "Name[sl]": "Slap",
+        "Name[tr]": "Şelâle",
+        "Name[uk]": "Водоспад"
     }
 }
