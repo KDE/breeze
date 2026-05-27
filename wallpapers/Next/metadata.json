@@ -52,11 +52,14 @@
         "Name[ca]": "Waterfall",
         "Name[es]": "Cascada",
         "Name[he]": "מפל",
+        "Name[ko]": "폭포",
+        "Name[lt]": "Krioklys",
         "Name[nl]": "Waterfall",
         "Name[pt_BR]": "Cascata",
         "Name[sk]": "Vodopád",
         "Name[sl]": "Slap",
         "Name[tr]": "Şelâle",
-        "Name[uk]": "Водоспад"
+        "Name[uk]": "Водоспад",
+        "Name[zh_CN]": "Waterfall 飞瀑"
     }
 }
