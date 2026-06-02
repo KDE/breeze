@@ -1,0 +1,194 @@
+# Uyghur translation for breeze_style_config.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the breeze package.
+# Abduqadir Abliz <sahranbay@gmail.com>, 2026., YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: breeze\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"PO-Revision-Date: 2026-05-29 17:02-0400\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
+"Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
+"Language: ug\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+#: main.cpp:25 main.cpp:29
+#, kde-format
+msgid "Breeze Settings"
+msgstr ""
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab)
+#: ui/breezestyleconfig.ui:39
+#, kde-format
+msgid "General"
+msgstr "ئادەتتىكى"
+
+#. i18n: ectx: property (text), widget (QLabel, _windowDragLabel)
+#: ui/breezestyleconfig.ui:51
+#, kde-format
+msgid "W&indows' drag mode:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, _viewDrawFocusIndicator)
+#: ui/breezestyleconfig.ui:64
+#, kde-format
+msgid "Draw focus indicator in lists"
+msgstr "تىزىمدا فوكۇس كۆرسەتكۈچ سىز"
+
+#. i18n: ectx: property (text), widget (QLabel, _mnemonicsLabel)
+#: ui/breezestyleconfig.ui:71
+#, kde-format
+msgid "&Keyboard accelerators visibility:"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
+#: ui/breezestyleconfig.ui:85
+#, kde-format
+msgid "Always hide"
+msgstr "ھەمىشە يوشۇر"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
+#: ui/breezestyleconfig.ui:90
+#, kde-format
+msgid "Show when Alt key is pressed"
+msgstr "Alt كۇنۇپكىسى بېسىلغاندا كۆرسەت"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
+#: ui/breezestyleconfig.ui:95
+#, kde-format
+msgid "Always show"
+msgstr "ھەمىشە كۆرسەت"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
+#: ui/breezestyleconfig.ui:117
+#, kde-format
+msgid "Drag windows from titlebar only"
+msgstr "كۆزنەكنى ماۋزۇ بالدىقىدىنلا سۆرە"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
+#: ui/breezestyleconfig.ui:122
+#, kde-format
+msgid "Drag windows from titlebar, menubar and toolbars"
+msgstr "كۆزنەكنى ماۋزۇ بالدىقى، تىزىملىك بالدىقى ۋە قورال بالدىقىدىن سۆرە"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, _windowDragMode)
+#: ui/breezestyleconfig.ui:127
+#, kde-format
+msgid "Drag windows from all empty areas"
+msgstr "كۆزنەكنى بارلىق بوش رايوندىن سۆرە"
+
+#. i18n: ectx: property (text), widget (QCheckBox, _tabBarDrawCenteredTabs)
+#: ui/breezestyleconfig.ui:148
+#, kde-format
+msgid "Center tabbar tabs"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, _toolBarDrawItemSeparator)
+#: ui/breezestyleconfig.ui:155
+#, kde-format
+msgid "Draw toolbar item separators"
+msgstr "قورال بالداق تۈرلىرىنى ئايرىغۇچنى سىز"
+
+#. i18n: ectx: property (text), widget (QCheckBox, _sliderDrawTickMarks)
+#: ui/breezestyleconfig.ui:162
+#, kde-format
+msgid "Draw slider tick marks"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, _splitterProxyEnabled)
+#: ui/breezestyleconfig.ui:169
+#, kde-format
+msgid "Enable extended resize handles"
+msgstr "كېڭەيتىلگەن چوڭلۇقىنى ئۆزگەرتىپ بىر تەرەپ قىلىشنى قوزغىتىدۇ"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_3)
+#: ui/breezestyleconfig.ui:177
+#, kde-format
+msgid "Frames"
+msgstr "كاندۇك"
+
+#. i18n: ectx: property (text), widget (QCheckBox, _dockWidgetDrawFrame)
+#: ui/breezestyleconfig.ui:183
+#, kde-format
+msgid "Draw frame around dockable panels"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, _sidePanelDrawFrame)
+#: ui/breezestyleconfig.ui:190
+#, kde-format
+msgid "Draw frame around side panels"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QCheckBox, _menuItemDrawThinFocus)
+#: ui/breezestyleconfig.ui:197
+#, kde-format
+msgid "Draw a thin line to indicate focus in menus and menubars"
+msgstr ""
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_4)
+#: ui/breezestyleconfig.ui:218
+#, kde-format
+msgid "Scrollbars"
+msgstr "سىيرىغۇچ بالداق"
+
+#. i18n: ectx: property (text), widget (QLabel, _scrollBarAddLineLabel)
+#: ui/breezestyleconfig.ui:237
+#, kde-format
+msgid "Bottom arrow button t&ype:"
+msgstr ""
+
+#. i18n: ectx: property (text), widget (QLabel, _scrollBarSubLineLabel)
+#: ui/breezestyleconfig.ui:250
+#, kde-format
+msgid "&Top arrow button type:"
+msgstr ""
+
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
+#: ui/breezestyleconfig.ui:264 ui/breezestyleconfig.ui:283
+#, kde-format
+msgid "No buttons"
+msgstr "توپچە يوق"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
+#: ui/breezestyleconfig.ui:269 ui/breezestyleconfig.ui:288
+#, kde-format
+msgid "One button"
+msgstr "بىر توپچە"
+
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
+#. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
+#: ui/breezestyleconfig.ui:274 ui/breezestyleconfig.ui:293
+#, kde-format
+msgid "Two buttons"
+msgstr "ئىككى توپچە"
+
+#. i18n: ectx: attribute (title), widget (QWidget, tab_5)
+#: ui/breezestyleconfig.ui:315
+#, kde-format
+msgid "Transparency"
+msgstr "سۈزۈكلۈك"
+
+#. i18n: ectx: property (text), widget (QLabel, _menuOpacityTransparentLabel)
+#: ui/breezestyleconfig.ui:336
+#, kde-format
+msgid "Transparent"
+msgstr "سۈزۈك"
+
+#. i18n: ectx: property (text), widget (QLabel, _menuOpacityOpaqueLabel)
+#: ui/breezestyleconfig.ui:362
+#, kde-format
+msgid "Opaque"
+msgstr "تۇتۇق"
+
+#. i18n: ectx: property (text), widget (QLabel, _menuGroupDescription)
+#: ui/breezestyleconfig.ui:373
+#, kde-format
+msgid "Menu:"
+msgstr "تىزىملىك:"
