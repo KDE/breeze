@@ -419,6 +419,10 @@ void Decoration::recalculateBorders()
 
     // extended sizes
     const qreal extSize = KDecoration3::snapToPixelGrid(settings()->largeSpacing(), window()->nextScale());
+    qreal extTop = 0;
+    if (!isMaximizedVertically()) {
+        extTop = extSize;
+    }
     qreal extSides = 0;
     qreal extBottom = 0;
     if (hasNoBorders()) {
@@ -433,7 +437,7 @@ void Decoration::recalculateBorders()
         extSides = extSize;
     }
 
-    setResizeOnlyBorders(QMarginsF(extSides, 0, extSides, extBottom));
+    setResizeOnlyBorders(QMarginsF(extSides, extTop, extSides, extBottom));
 
     qreal topLeftRightRadius = 0;
     qreal bottomLeftRadius = 0;
