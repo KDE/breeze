@@ -1397,36 +1397,32 @@ void Helper::renderStaticTabBarTab(QPainter *painter,
         painter->drawRect(frameRect);
     }
 
-    if (!isRightOfSelected && !isFirst && (north || south)) {
+    if (!selected && !isRightOfSelected && !isFirst && (north || south)) {
         auto penColor = KColorUtils::mix(baseColor, palette.color(QPalette::WindowText), frameIntensityBias());
         QRectF lineRect = frameRect;
         lineRect.setRight(lineRect.x() + 1);
-        lineRect.adjust(0, 0, 0, -1);
 
-        // ensure the background is the right color
-        painter->setBrush(bgBrush);
+        // Back the separator with the plain tab background so neither the hover
+        // nor the active fill shows through beneath it.
+        painter->setBrush(baseColor);
         painter->drawRect(lineRect);
 
-        // draw separator
-        if (!isRightOfSelected && !selected) {
-            lineRect.adjust(0, 8, 0, -7);
-        }
+        // separator line, inset from the top and bottom
+        lineRect.adjust(0, 8, 0, -8);
         painter->setBrush(penColor);
         painter->drawRect(lineRect);
-    } else if (!isRightOfSelected && !isFirst && (east || west)) {
+    } else if (!selected && !isRightOfSelected && !isFirst && (east || west)) {
         auto penColor = KColorUtils::mix(baseColor, palette.color(QPalette::WindowText), frameIntensityBias());
         QRectF lineRect = frameRect;
-        lineRect.setBottom(lineRect.y() - 1);
-        lineRect.adjust(0, 0, -1, 0);
+        lineRect.setBottom(lineRect.y() + 1);
 
-        // ensure the background is the right color
-        painter->setBrush(bgBrush);
+        // Back the separator with the plain tab background so neither the hover
+        // nor the active fill shows through beneath it.
+        painter->setBrush(baseColor);
         painter->drawRect(lineRect);
 
-        // draw separator
-        if (!isRightOfSelected && !selected) {
-            lineRect.adjust(0, 8, 0, -7);
-        }
+        // separator line, inset from the left and right
+        lineRect.adjust(8, 0, -8, 0);
         painter->setBrush(penColor);
         painter->drawRect(lineRect);
     }
