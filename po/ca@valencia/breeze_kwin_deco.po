@@ -25,17 +25,17 @@ msgstr ""
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
 msgid "New Exception - Breeze Settings"
-msgstr "Excepció nova - Configuració de Brisa"
+msgstr "Excepció nova – Configuració de Brisa"
 
 #: config/breezeexceptionlistwidget.cpp:136
 #, kde-format
 msgid "Edit Exception - Breeze Settings"
-msgstr "Edita l'excepció - Configuració de Brisa"
+msgstr "Edita l'excepció – Configuració de Brisa"
 
 #: config/breezeexceptionlistwidget.cpp:167
 #, kde-format
 msgid "Question - Breeze Settings"
-msgstr "Pregunta - Configuració de Brisa"
+msgstr "Pregunta – Configuració de Brisa"
 
 #: config/breezeexceptionlistwidget.cpp:168
 #, kde-format
@@ -52,7 +52,7 @@ msgstr "Elimina"
 #: config/breezeexceptionlistwidget.cpp:300
 #, kde-format
 msgid "Warning - Breeze Settings"
-msgstr "Avís - Configuració de Brisa"
+msgstr "Avís – Configuració de Brisa"
 
 #: config/breezeexceptionlistwidget.cpp:300
 #, kde-format
