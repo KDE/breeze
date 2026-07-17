@@ -115,6 +115,9 @@
     "org.kde.kdecoration3": {
         "blur": false,
         "recommendedBorderSize": "None",
-        "styles": ["shadow", "titled"]
+        "styles": [
+            "shadow",
+            "titled"
+        ]
     }
 }
