@@ -156,15 +156,18 @@ void Decoration::setOpacity(qreal value)
 //________________________________________________________________
 QColor Decoration::titleBarColor() const
 {
+    QColor ret;
     if (hideTitleBar()) {
-        return window()->color(ColorGroup::Inactive, ColorRole::TitleBar);
+        ret = window()->color(ColorGroup::Inactive, ColorRole::TitleBar);
     } else if (m_animation->state() == QAbstractAnimation::Running) {
-        return KColorUtils::mix(window()->color(ColorGroup::Inactive, ColorRole::TitleBar),
-                                window()->color(ColorGroup::Active, ColorRole::TitleBar),
-                                m_opacity);
+        ret = KColorUtils::mix(window()->color(ColorGroup::Inactive, ColorRole::TitleBar), window()->color(ColorGroup::Active, ColorRole::TitleBar), m_opacity);
     } else {
-        return window()->color(window()->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::TitleBar);
+        ret = window()->color(window()->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::TitleBar);
     }
+    if (style() == KDecoration3::Style::Overlayed) {
+        ret = KColorUtils::mix(ret, QColor(0, 0, 0, 0), 0.8);
+    }
+    return ret;
 }
 
 //________________________________________________________________
@@ -456,7 +459,7 @@ void Decoration::recalculateBorders()
                 bottomRightRadius = m_scaledCornerRadius;
             }
         }
-        if (hideTitleBar()) {
+        if (hideTitleBar() || style() == KDecoration3::Style::Overlayed) {
             if (!isTopEdge()) {
                 if (!isLeftEdge()) {
                     topLeftRadius = m_scaledCornerRadius;
@@ -649,8 +652,6 @@ void Decoration::paintTitleBar(QPainter *painter, const QRectF &repaintRegion)
 
     } else {
         frontBrush = titleBarColor();
-
-        painter->setBrush(titleBarColor());
     }
 
     if (isMaximized() || !settings()->isAlphaChannelSupported()) {
@@ -670,9 +671,12 @@ void Decoration::paintTitleBar(QPainter *painter, const QRectF &repaintRegion)
         painter->setClipRect(rect, Qt::IntersectClip);
 
         auto drawThe = [this, painter](const QRectF &r) {
-            painter->drawRoundedRect(r, m_scaledCornerRadius, m_scaledCornerRadius);
+            QPainterPath path;
+            path.setFillRule(Qt::WindingFill);
+            path.addRoundedRect(r, m_scaledCornerRadius, m_scaledCornerRadius);
             // remove the rounding on the bottom
-            painter->drawRect(QRectF(r.bottomLeft() - QPointF(0, m_scaledCornerRadius), r.bottomRight()));
+            path.addRect(QRectF(r.bottomLeft() - QPointF(0, m_scaledCornerRadius), r.bottomRight()));
+            painter->drawPath(path.simplified());
         };
 
         painter->setBrush(backBrush);
