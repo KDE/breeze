@@ -120,7 +120,8 @@
         "recommendedBorderSize": "None",
         "styles": [
             "shadow",
-            "titled"
+            "titled",
+            "overlayed"
         ]
     }
 }
