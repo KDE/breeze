@@ -156,18 +156,24 @@ void Decoration::setOpacity(qreal value)
 //________________________________________________________________
 QColor Decoration::titleBarColor() const
 {
-    QColor ret;
-    if (hideTitleBar()) {
-        ret = window()->color(ColorGroup::Inactive, ColorRole::TitleBar);
-    } else if (m_animation->state() == QAbstractAnimation::Running) {
-        ret = KColorUtils::mix(window()->color(ColorGroup::Inactive, ColorRole::TitleBar), window()->color(ColorGroup::Active, ColorRole::TitleBar), m_opacity);
-    } else {
-        ret = window()->color(window()->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::TitleBar);
-    }
     if (style() == KDecoration3::Style::Overlayed) {
-        ret = KColorUtils::mix(ret, QColor(0, 0, 0, 0), 0.8);
+        return QColor(0, 0, 0, 0);
+    } else {
+        return titlebarButtonColor();
     }
-    return ret;
+}
+
+QColor Decoration::titlebarButtonColor() const
+{
+    if (hideTitleBar()) {
+        return window()->color(ColorGroup::Inactive, ColorRole::TitleBar);
+    } else if (m_animation->state() == QAbstractAnimation::Running) {
+        return KColorUtils::mix(window()->color(ColorGroup::Inactive, ColorRole::TitleBar),
+                                window()->color(ColorGroup::Active, ColorRole::TitleBar),
+                                m_opacity);
+    } else {
+        return window()->color(window()->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::TitleBar);
+    }
 }
 
 //________________________________________________________________
@@ -248,6 +254,8 @@ bool Decoration::init()
     connect(window(), &KDecoration3::DecoratedWindow::widthChanged, this, &Decoration::updateTitleBar);
     connect(window(), &KDecoration3::DecoratedWindow::maximizedChanged, this, &Decoration::updateTitleBar);
     connect(window(), &KDecoration3::DecoratedWindow::maximizedChanged, this, &Decoration::setOpaque);
+    connect(window(), &KDecoration3::DecoratedWindow::widthChanged, this, &Decoration::updateCutouts);
+    connect(window(), &KDecoration3::DecoratedWindow::heightChanged, this, &Decoration::updateCutouts);
 
     connect(window(), &KDecoration3::DecoratedWindow::widthChanged, this, &Decoration::updateButtonsGeometry);
     connect(window(), &KDecoration3::DecoratedWindow::maximizedChanged, this, &Decoration::updateButtonsGeometry);
@@ -258,6 +266,7 @@ bool Decoration::init()
 
     createButtons();
     updateShadow();
+    updateCutouts();
     return true;
 }
 
@@ -428,7 +437,7 @@ void Decoration::recalculateBorders()
     // extended sizes
     const qreal extSize = KDecoration3::snapToPixelGrid(settings()->largeSpacing(), window()->nextScale());
     qreal extTop = 0;
-    if (!isMaximizedVertically()) {
+    if (!isMaximizedVertically() && style() != KDecoration3::Style::Overlayed) {
         extTop = extSize;
     }
     qreal extSides = 0;
@@ -690,10 +699,22 @@ void Decoration::paintTitleBar(QPainter *painter, const QRectF &repaintRegion)
     painter->restore();
 
     // draw caption
-    painter->setFont(settings()->font());
-    painter->setPen(fontColor());
     const auto [captionRectangle, alignment] = captionRect();
     const QString caption = painter->fontMetrics().elidedText(window()->caption(), Qt::ElideMiddle, captionRectangle.width());
+    if (style() == KDecoration3::Style::Overlayed) {
+        // render a background, to make sure the text is still readable
+        QRectF boundingRect = painter->fontMetrics().boundingRect(captionRectangle.toRect(), alignment | Qt::TextSingleLine, caption);
+        boundingRect.translate(captionRectangle.x(), 0);
+        boundingRect.setHeight(captionRectangle.height());
+        const double width = std::min(boundingRect.width() + painter->fontMetrics().averageCharWidth(), captionRectangle.width());
+        const double padding = (width - boundingRect.width()) / 2.0;
+        boundingRect.adjust(-padding, 0, padding, 0);
+        painter->setPen(Qt::NoPen);
+        painter->setBrush(titlebarButtonColor());
+        painter->drawRoundedRect(boundingRect, boundingRect.height() / 2, boundingRect.height() / 2);
+    }
+    painter->setFont(settings()->font());
+    painter->setPen(fontColor());
     painter->drawText(captionRectangle, alignment | Qt::TextSingleLine, caption);
 
     // draw all buttons
@@ -879,6 +900,18 @@ void Decoration::updateScale()
 {
     setScaledCornerRadius();
     recalculateBorders();
+}
+
+void Decoration::updateCutouts()
+{
+    QList<QRectF> cutouts;
+    if (!m_leftButtons->geometry().isEmpty()) {
+        cutouts.push_back(m_leftButtons->geometry());
+    }
+    if (!m_rightButtons->geometry().isEmpty()) {
+        cutouts.push_back(m_rightButtons->geometry().translated(window()->width(), 0));
+    }
+    setCutouts(cutouts);
 }
 } // namespace
 
