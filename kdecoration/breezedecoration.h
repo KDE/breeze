@@ -67,6 +67,7 @@ public:
     //*@name colors
     //@{
     QColor titleBarColor() const;
+    QColor titlebarButtonColor() const;
     QColor fontColor() const;
     //@}
 
@@ -95,6 +96,7 @@ private Q_SLOTS:
     void updateTitleBar();
     void updateAnimationState();
     void updateScale();
+    void updateCutouts();
 
 private:
     //* return the rect in which caption will be drawn
