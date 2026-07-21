@@ -67,6 +67,7 @@ public:
     //*@name colors
     //@{
     QColor titleBarColor() const;
+    QColor titlebarButtonColor() const;
     QColor fontColor() const;
     //@}
 

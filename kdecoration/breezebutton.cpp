@@ -108,9 +108,17 @@ void Button::paint(QPainter *painter, const QRectF &repaintRegion)
 
     switch (type()) {
     case KDecoration3::DecorationButtonType::Menu: {
+        painter->save();
         const QRectF iconRect = geometry().marginsRemoved(m_padding);
         const auto c = decoration()->window();
         if (auto deco = qobject_cast<Decoration *>(decoration())) {
+            if (deco->style() == KDecoration3::Style::Overlayed) {
+                // render background
+                const QColor backgroundColor(deco->titlebarButtonColor());
+                painter->setPen(Qt::NoPen);
+                painter->setBrush(backgroundColor);
+                painter->drawEllipse(iconRect);
+            }
             const QPalette activePalette = KIconLoader::global()->customPalette();
             QPalette palette = c->palette();
             palette.setColor(QPalette::WindowText, deco->fontColor());
@@ -124,6 +132,7 @@ void Button::paint(QPainter *painter, const QRectF &repaintRegion)
         } else {
             c->icon().paint(painter, iconRect.toRect());
         }
+        painter->restore();
         break;
     }
     case KDecoration3::DecorationButtonType::Spacer:
@@ -310,21 +319,21 @@ QColor Button::foregroundColor() const
         return QColor();
 
     } else if (isPressed()) {
-        return d->titleBarColor();
+        return d->titlebarButtonColor();
 
     } else if (type() == DecorationButtonType::Close && d->internalSettings()->outlineCloseButton()) {
-        return d->titleBarColor();
+        return d->titlebarButtonColor();
 
     } else if ((type() == DecorationButtonType::KeepBelow || type() == DecorationButtonType::KeepAbove || type() == DecorationButtonType::Shade
                 || type() == DecorationButtonType::ExcludeFromCapture)
                && isChecked()) {
-        return d->titleBarColor();
+        return d->titlebarButtonColor();
 
     } else if (m_animation->state() == QAbstractAnimation::Running) {
-        return KColorUtils::mix(d->fontColor(), d->titleBarColor(), m_opacity);
+        return KColorUtils::mix(d->fontColor(), d->titlebarButtonColor(), m_opacity);
 
     } else if (isHovered()) {
-        return d->titleBarColor();
+        return d->titlebarButtonColor();
 
     } else {
         return d->fontColor();
@@ -380,7 +389,8 @@ QColor Button::backgroundColor() const
 
     } else if (type() == DecorationButtonType::Close && d->internalSettings()->outlineCloseButton()) {
         return c->isActive() ? redColor : d->fontColor();
-
+    } else if (d->style() == KDecoration3::Style::Overlayed) {
+        return d->titlebarButtonColor();
     } else {
         return QColor();
     }
