@@ -122,6 +122,7 @@ endif()
 ########### install files ###############
 install(TARGETS breeze${QT_MAJOR_VERSION}  DESTINATION ${KDE_INSTALL_QTPLUGINDIR}/styles/)
 install(FILES breeze.themerc  DESTINATION  ${KDE_INSTALL_DATADIR}/kstyle/themes)
+install(FILES breeze.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})
 
 ########### subdirectories ###############
 

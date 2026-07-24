@@ -37,6 +37,7 @@ target_link_libraries(breezedecoration
 )
 
 install(TARGETS breezedecoration DESTINATION ${KDE_INSTALL_PLUGINDIR}/${KDECORATION_PLUGIN_DIR})
+install(FILES breezesettingsdata.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR} RENAME breeze-decoration.kcfg)
 
 add_subdirectory(config)
 
