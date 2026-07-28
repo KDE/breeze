@@ -18,21 +18,21 @@ Dependencies:
 
  - 'on': ['Linux/Qt6', 'FreeBSD/Qt6', 'Windows/Qt6', 'Linux/Qt6Next']
    'require':
-    'frameworks/extra-cmake-modules': '@latest-kf6'
-    'frameworks/kconfig': '@latest-kf6'
-    'frameworks/kcoreaddons': '@latest-kf6'
-    'frameworks/kguiaddons': '@latest-kf6'
-    'frameworks/ki18n': '@latest-kf6'
-    'frameworks/kiconthemes': '@latest-kf6'
-    'frameworks/kirigami': '@latest-kf6'
-    'frameworks/kwindowsystem': '@latest-kf6'
-    'frameworks/kcolorscheme': '@latest-kf6'
+    'frameworks/extra-cmake-modules': 'Frameworks/6.24'
+    'frameworks/kconfig': 'Frameworks/6.24'
+    'frameworks/kcoreaddons': 'Frameworks/6.24'
+    'frameworks/kguiaddons': 'Frameworks/6.24'
+    'frameworks/ki18n': 'Frameworks/6.24'
+    'frameworks/kiconthemes': 'Frameworks/6.24'
+    'frameworks/kirigami': 'Frameworks/6.24'
+    'frameworks/kwindowsystem': 'Frameworks/6.24'
+    'frameworks/kcolorscheme': 'Frameworks/6.24'
 
  - 'on': ['Linux/Qt6', 'FreeBSD/Qt6', 'Linux/Qt6Next']
    'require':
     'plasma/kdecoration': '@same'
-    'frameworks/frameworkintegration': '@latest-kf6'
-    'frameworks/kcmutils': '@latest-kf6'
+    'frameworks/frameworkintegration': 'Frameworks/6.24'
+    'frameworks/kcmutils': 'Frameworks/6.24'
 
 Options:
  require-passing-tests-on: ['Linux', 'FreeBSD', 'Windows']
