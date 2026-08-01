@@ -2,7 +2,8 @@
 # SPDX-License-Identifier: CC0-1.0
 
 include:
-  - project: sysadmin/ci-utilities
+  - project: davidre/ci-utilities
+    ref: work/davidre/junitdirectly
     file:
       - /gitlab-templates/linux.yml
       - /gitlab-templates/linux-qt6.yml
