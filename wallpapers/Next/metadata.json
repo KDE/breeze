@@ -49,6 +49,15 @@
         ],
         "Id": "Next",
         "License": "CC-BY-SA-4.0",
-        "Name": "Hanabi"
+        "Name": "Hanabi",
+        "Name[ca@valencia]": "Hanabi",
+        "Name[ca]": "Hanabi",
+        "Name[cs]": "Hanabi",
+        "Name[ka]": "Hanabi",
+        "Name[nl]": "Hanabi",
+        "Name[pt_BR]": "Hanabi",
+        "Name[sl]": "Hanabi",
+        "Name[tr]": "Hanabi",
+        "Name[uk]": "Ганабі"
     }
 }
