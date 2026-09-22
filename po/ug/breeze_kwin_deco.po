@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2026-05-29 17:02-0400\n"
+"PO-Revision-Date: 2026-09-22 18:03+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
@@ -16,27 +16,26 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.9\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
 msgid "New Exception - Breeze Settings"
-msgstr ""
+msgstr "يېڭى مۇستەسنا - مەيىن شامال تەڭشىكى"
 
 #: config/breezeexceptionlistwidget.cpp:136
 #, kde-format
 msgid "Edit Exception - Breeze Settings"
-msgstr ""
+msgstr "مۇستەسنا تەھرىر - مەيىن شامال تەڭشىكى"
 
 #: config/breezeexceptionlistwidget.cpp:167
 #, kde-format
 msgid "Question - Breeze Settings"
-msgstr ""
+msgstr "سوئال - مەيىن شامال تەڭشىكى"
 
 #: config/breezeexceptionlistwidget.cpp:168
 #, kde-format
 msgid "Remove selected exception?"
-msgstr ""
+msgstr "تاللانغان مۇستەسنانى چىقىرىۋېتەمدۇ؟"
 
 #. i18n: ectx: property (text), widget (QPushButton, removeButton)
 #: config/breezeexceptionlistwidget.cpp:170
@@ -48,17 +47,17 @@ msgstr "چىقىرىۋەت"
 #: config/breezeexceptionlistwidget.cpp:300
 #, kde-format
 msgid "Warning - Breeze Settings"
-msgstr ""
+msgstr "ئاگاھلاندۇرۇش - مەيىن شامال تەڭشىكى"
 
 #: config/breezeexceptionlistwidget.cpp:300
 #, kde-format
 msgid "Regular Expression syntax is incorrect"
-msgstr ""
+msgstr "مۇنتىزىم ئىپادە تىلقۇرمىسى توغرا ئەمەس"
 
 #: config/breezeexceptionmodel.cpp:17
 #, kde-format
 msgid "Exception Type"
-msgstr ""
+msgstr "مۇستەسنا تۈرى"
 
 #: config/breezeexceptionmodel.cpp:17
 #, kde-format
@@ -75,12 +74,12 @@ msgstr "كۆزنەك ماۋزۇسى"
 #: config/breezeexceptionmodel.cpp:40 config/ui/breezeexceptiondialog.ui:67
 #, kde-format
 msgid "Window Class Name"
-msgstr ""
+msgstr "كۆزنەك تىپ ئاتى"
 
 #: config/breezeexceptionmodel.cpp:55
 #, kde-format
 msgid "Enable/disable this exception"
-msgstr ""
+msgstr "بۇ مۇستەسنانى قوزغات/چەكلە"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: config/ui/breezeconfigurationui.ui:36
@@ -92,7 +91,7 @@ msgstr "ئادەتتىكى"
 #: config/ui/breezeconfigurationui.ui:45
 #, kde-format
 msgid "Tit&le alignment:"
-msgstr ""
+msgstr "ماۋزۇ توغرىلىنىشى(&L):"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
 #: config/ui/breezeconfigurationui.ui:56
@@ -110,7 +109,7 @@ msgstr "ئوتتۇرا"
 #: config/ui/breezeconfigurationui.ui:66
 #, kde-format
 msgid "Center (Full Width)"
-msgstr ""
+msgstr "ئوتتۇرا (تولۇق كەڭلىك)"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
 #: config/ui/breezeconfigurationui.ui:71
@@ -122,7 +121,7 @@ msgstr "ئوڭ"
 #: config/ui/breezeconfigurationui.ui:79
 #, kde-format
 msgid "B&utton size:"
-msgstr ""
+msgstr "توپچە چوڭلۇقى(&U):"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #: config/ui/breezeconfigurationui.ui:90
@@ -169,13 +168,13 @@ msgstr "بەك چوڭ"
 #: config/ui/breezeconfigurationui.ui:118
 #, kde-format
 msgid "Draw a circle around close button"
-msgstr ""
+msgstr "ياپ توپچە ئەتراپىدا چەمبەر سىزىلىدۇ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBorderOnMaximizedWindows)
 #: config/ui/breezeconfigurationui.ui:125
 #, kde-format
 msgid "Draw border on maximized and tiled windows"
-msgstr ""
+msgstr "ئەڭ چوڭ قىلىنغان ۋە جىپسالانغان كۆزنەككە گىرۋەك سىزىدۇ"
 
 #. i18n: ectx: property (text), widget (QLabel, drawBorderOnMaximizedWindowsHelpLabel)
 #: config/ui/breezeconfigurationui.ui:150
@@ -190,25 +189,25 @@ msgstr ""
 #: config/ui/breezeconfigurationui.ui:162
 #, kde-format
 msgid "Draw titlebar background gradient"
-msgstr ""
+msgstr "ماۋزۇ بالداق تەگلىك رەڭ ئۆزگىرىشىنى سىزىدۇ"
 
 #. i18n: ectx: property (text), widget (QCheckBox, roundedCorners)
 #: config/ui/breezeconfigurationui.ui:169
 #, kde-format
 msgid "Round bottom corners of windows with no borders"
-msgstr ""
+msgstr "گىرۋىكى يوق كۆزنەكنىڭ ئاستى بۇلۇڭىنى يۇمىلاقلاشتۇرىدۇ"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: config/ui/breezeconfigurationui.ui:177
 #, kde-format
 msgid "Shadows and Outline"
-msgstr ""
+msgstr "كۆلەڭگە ۋە ئىزنا"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: config/ui/breezeconfigurationui.ui:186
 #, kde-format
 msgid "Shadow size:"
-msgstr ""
+msgstr "كۆلەڭگە چوڭلۇقى:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:197
@@ -222,31 +221,31 @@ msgstr "يوق"
 #, kde-format
 msgctxt "strength of the shadow (from transparent to opaque)"
 msgid "Shadow strength:"
-msgstr ""
+msgstr "كۆلەڭگە قېنىقلىقى:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
 #: config/ui/breezeconfigurationui.ui:235
 #, no-c-format, kde-format
 msgid "%"
-msgstr "%"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/ui/breezeconfigurationui.ui:248
 #, kde-format
 msgid "Shadow color:"
-msgstr ""
+msgstr "كۆلەڭگە رەڭگى:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
 #, kde-format
 msgid "Draw window outline"
-msgstr ""
+msgstr "كۆزنەك ئىزناسىنى سىز"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:266
 #, kde-format
 msgid "Window-Specific Overrides"
-msgstr ""
+msgstr "بەلگىلەنگەن كۆزنەك ئالدىنلىقى"
 
 #. i18n: ectx: property (windowTitle), widget (QDialog, BreezeExceptionDialog)
 #: config/ui/breezeexceptiondialog.ui:14
@@ -258,43 +257,43 @@ msgstr "سۆزلەشكۈ"
 #: config/ui/breezeexceptiondialog.ui:20
 #, kde-format
 msgid "Window Identification"
-msgstr ""
+msgstr "كۆزنەك كىملىكى"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: config/ui/breezeexceptiondialog.ui:26
 #, kde-format
 msgid "&Matching window property: "
-msgstr ""
+msgstr "ماس كەلگەن كۆزنەك خاسلىقى(&M): "
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: config/ui/breezeexceptiondialog.ui:39
 #, kde-format
 msgid "Regular expression &to match: "
-msgstr ""
+msgstr "ماس كەلگەن مۇنتىزىم ئىپادە(&T): "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
 #, kde-format
 msgid "Detect Window Properties…"
-msgstr ""
+msgstr "كۆزنەك خاسلىقىنى بايقا…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: config/ui/breezeexceptiondialog.ui:83
 #, kde-format
 msgid "Decoration Options"
-msgstr ""
+msgstr "بېزەش تاللانمىسى"
 
 #. i18n: ectx: property (text), widget (QCheckBox, borderSizeCheckBox)
 #: config/ui/breezeexceptiondialog.ui:89
 #, kde-format
 msgid "Border size:"
-msgstr ""
+msgstr "گىرۋەك چوڭلۇقى:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, hideTitleBar)
 #: config/ui/breezeexceptiondialog.ui:96
 #, kde-format
 msgid "Hide window title bar"
-msgstr ""
+msgstr "كۆزنەك ماۋزۇ بالدىقىنى يوشۇر"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:107
@@ -308,7 +307,7 @@ msgstr "گىرۋەكسىز"
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "No Side Borders"
-msgstr ""
+msgstr "يان گىرۋىكى يوق"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:117
@@ -350,14 +349,14 @@ msgstr "ئىنتايىن چوڭ"
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "Very Huge"
-msgstr ""
+msgstr "ئىنتايىن زور"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:147
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "Oversized"
-msgstr ""
+msgstr "ئالاھىدە چوڭ"
 
 #. i18n: ectx: property (text), widget (QPushButton, moveUpButton)
 #: config/ui/breezeexceptionlistwidget.ui:70

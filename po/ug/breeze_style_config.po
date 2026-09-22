@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2026-05-29 17:02-0400\n"
+"PO-Revision-Date: 2026-09-22 18:03+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
@@ -16,12 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.9\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: main.cpp:25 main.cpp:29
 #, kde-format
 msgid "Breeze Settings"
-msgstr ""
+msgstr "مەيىن شامال تەڭشىكى"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: ui/breezestyleconfig.ui:39
@@ -33,7 +32,7 @@ msgstr "ئادەتتىكى"
 #: ui/breezestyleconfig.ui:51
 #, kde-format
 msgid "W&indows' drag mode:"
-msgstr ""
+msgstr "كۆزنەكنىڭ سۆرەش ھالىتى(&I):"
 
 #. i18n: ectx: property (text), widget (QCheckBox, _viewDrawFocusIndicator)
 #: ui/breezestyleconfig.ui:64
@@ -45,7 +44,7 @@ msgstr "تىزىمدا فوكۇس كۆرسەتكۈچ سىز"
 #: ui/breezestyleconfig.ui:71
 #, kde-format
 msgid "&Keyboard accelerators visibility:"
-msgstr ""
+msgstr "ھەرپتاختا تېزلەتمىسىنىڭ كۆرۈنۈشچانلىقى(&K):"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
 #: ui/breezestyleconfig.ui:85
@@ -87,7 +86,7 @@ msgstr "كۆزنەكنى بارلىق بوش رايوندىن سۆرە"
 #: ui/breezestyleconfig.ui:148
 #, kde-format
 msgid "Center tabbar tabs"
-msgstr ""
+msgstr "ئوتتۇرا بەتكۈچ بالداقنىڭ بەتكۈچى"
 
 #. i18n: ectx: property (text), widget (QCheckBox, _toolBarDrawItemSeparator)
 #: ui/breezestyleconfig.ui:155
@@ -99,7 +98,7 @@ msgstr "قورال بالداق تۈرلىرىنى ئايرىغۇچنى سىز"
 #: ui/breezestyleconfig.ui:162
 #, kde-format
 msgid "Draw slider tick marks"
-msgstr ""
+msgstr "سىيرىغۇچ شىكالا بەلگىسىنى سىز"
 
 #. i18n: ectx: property (text), widget (QCheckBox, _splitterProxyEnabled)
 #: ui/breezestyleconfig.ui:169
@@ -117,19 +116,21 @@ msgstr "كاندۇك"
 #: ui/breezestyleconfig.ui:183
 #, kde-format
 msgid "Draw frame around dockable panels"
-msgstr ""
+msgstr "توختاشچان كۆزنەكچە ئەتراپىدا كاندۇك سىز"
 
 #. i18n: ectx: property (text), widget (QCheckBox, _sidePanelDrawFrame)
 #: ui/breezestyleconfig.ui:190
 #, kde-format
 msgid "Draw frame around side panels"
-msgstr ""
+msgstr "يان كۆزنەكچە ئەتراپىدا كاندۇك سىز"
 
 #. i18n: ectx: property (text), widget (QCheckBox, _menuItemDrawThinFocus)
 #: ui/breezestyleconfig.ui:197
 #, kde-format
 msgid "Draw a thin line to indicate focus in menus and menubars"
 msgstr ""
+"تىزىملىك ۋە تىزىملىك بالداق فوكۇسلىنىشىنى گەۋدىلەندۈرۈش ئۈچۈن ئىنچىكە سىزىق "
+"سىزىدۇ"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: ui/breezestyleconfig.ui:218
@@ -141,13 +142,13 @@ msgstr "سىيرىغۇچ بالداق"
 #: ui/breezestyleconfig.ui:237
 #, kde-format
 msgid "Bottom arrow button t&ype:"
-msgstr ""
+msgstr "ئاستى يا ئوق توپچە تۈرى(&Y):"
 
 #. i18n: ectx: property (text), widget (QLabel, _scrollBarSubLineLabel)
 #: ui/breezestyleconfig.ui:250
 #, kde-format
 msgid "&Top arrow button type:"
-msgstr ""
+msgstr "ئۈستى يا ئوق توپچە تۈرى(&T):"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
