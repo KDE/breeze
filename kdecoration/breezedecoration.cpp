@@ -587,6 +587,7 @@ void Decoration::updateButtonsGeometry()
         }
     }
 
+    updateCutouts();
     update();
 }
 
@@ -698,24 +699,26 @@ void Decoration::paintTitleBar(QPainter *painter, const QRectF &repaintRegion)
 
     painter->restore();
 
-    // draw caption
-    const auto [captionRectangle, alignment] = captionRect();
-    const QString caption = painter->fontMetrics().elidedText(window()->caption(), Qt::ElideMiddle, captionRectangle.width());
-    if (style() == KDecoration3::Style::Overlayed) {
-        // render a background, to make sure the text is still readable
-        QRectF boundingRect = painter->fontMetrics().boundingRect(captionRectangle.toRect(), alignment | Qt::TextSingleLine, caption);
-        boundingRect.translate(captionRectangle.x(), 0);
-        boundingRect.setHeight(captionRectangle.height());
-        const double width = std::min(boundingRect.width() + painter->fontMetrics().averageCharWidth(), captionRectangle.width());
-        const double padding = (width - boundingRect.width()) / 2.0;
-        boundingRect.adjust(-padding, 0, padding, 0);
-        painter->setPen(Qt::NoPen);
-        painter->setBrush(titlebarButtonColor());
-        painter->drawRoundedRect(boundingRect, boundingRect.height() / 2, boundingRect.height() / 2);
+    if (style() != KDecoration3::Style::Overlayed) {
+        // draw caption
+        const auto [captionRectangle, alignment] = captionRect();
+        const QString caption = painter->fontMetrics().elidedText(window()->caption(), Qt::ElideMiddle, captionRectangle.width());
+        if (style() == KDecoration3::Style::Overlayed) {
+            // render a background, to make sure the text is still readable
+            QRectF boundingRect = painter->fontMetrics().boundingRect(captionRectangle.toRect(), alignment | Qt::TextSingleLine, caption);
+            boundingRect.translate(captionRectangle.x(), 0);
+            boundingRect.setHeight(captionRectangle.height());
+            const double width = std::min(boundingRect.width() + painter->fontMetrics().averageCharWidth(), captionRectangle.width());
+            const double padding = (width - boundingRect.width()) / 2.0;
+            boundingRect.adjust(-padding, 0, padding, 0);
+            painter->setPen(Qt::NoPen);
+            painter->setBrush(titlebarButtonColor());
+            painter->drawRoundedRect(boundingRect, boundingRect.height() / 2, boundingRect.height() / 2);
+        }
+        painter->setFont(settings()->font());
+        painter->setPen(fontColor());
+        painter->drawText(captionRectangle, alignment | Qt::TextSingleLine, caption);
     }
-    painter->setFont(settings()->font());
-    painter->setPen(fontColor());
-    painter->drawText(captionRectangle, alignment | Qt::TextSingleLine, caption);
 
     // draw all buttons
     m_leftButtons->paint(painter, repaintRegion);
@@ -905,11 +908,13 @@ void Decoration::updateScale()
 void Decoration::updateCutouts()
 {
     QList<QRectF> cutouts;
-    if (!m_leftButtons->geometry().isEmpty()) {
-        cutouts.push_back(m_leftButtons->geometry());
-    }
-    if (!m_rightButtons->geometry().isEmpty()) {
-        cutouts.push_back(m_rightButtons->geometry().translated(window()->width(), 0));
+    if (style() == KDecoration3::Style::Overlayed) {
+        if (!m_leftButtons->geometry().isEmpty()) {
+            cutouts.push_back(m_leftButtons->geometry());
+        }
+        if (!m_rightButtons->geometry().isEmpty()) {
+            cutouts.push_back(m_rightButtons->geometry());
+        }
     }
     setCutouts(cutouts);
 }
