@@ -119,7 +119,7 @@
         "styles": [
             "shadow",
             "titled",
-            "overlayed"
+            "overlay"
         ]
     }
 }
