@@ -121,7 +121,8 @@
         "styles": [
             "shadow",
             "titled",
-            "overlay"
+            "overlay",
+            "simplifiedoverlay"
         ]
     }
 }
