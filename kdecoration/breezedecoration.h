@@ -101,6 +101,10 @@ private Q_SLOTS:
 private:
     //* return the rect in which caption will be drawn
     QPair<QRectF, Qt::Alignment> captionRect() const;
+    /**
+     * returns the actually used part of the caption rect
+     */
+    QRectF captionBounds() const;
 
     void createButtons();
     void paintTitleBar(QPainter *painter, const QRectF &repaintRegion);
