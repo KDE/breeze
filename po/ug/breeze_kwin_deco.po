@@ -1,22 +1,22 @@
 # Uyghur translation for breeze_kwin_deco.
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the breeze package.
-# Abduqadir Abliz <sahranbay@gmail.com>, 2026., YEAR.
+# Abduqadir Abliz <sahranbay@gmail.com>, 2026.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2026-09-23 06:56+0900\n"
+"PO-Revision-Date: 2026-09-24 19:25-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.9\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
 
 #: config/breezeexceptionlistwidget.cpp:88
 #, kde-format
@@ -128,7 +128,7 @@ msgstr "توپچە چوڭلۇقى(&U):"
 #: config/ui/breezeconfigurationui.ui:90
 #, kde-format
 msgid "Tiny"
-msgstr "بەك كىچىك"
+msgstr "بەكلا كىچىك"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
@@ -145,7 +145,7 @@ msgstr "كىچىك"
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Medium"
-msgstr "ئوتتۇراھال"
+msgstr "ئوتتۇرا ھال"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
@@ -185,6 +185,9 @@ msgid ""
 "edges. Scrollbars and window close buttons will shift positions and will not "
 "touch screen edges."
 msgstr ""
+"بۇ تەڭشەك كۆزنەك چوڭلۇقىنى تەڭشىگەندە كۆزنەك گىرۋىكى ئېكران گىرۋىكىگە "
+"تاقاشقاندىكى ئەھۋالنى ھەل قىلىدۇ. سىيرىغۇچ بالداق ۋە كۆزنەك ياپ توپچە ئورنى "
+"يۆتكىلىپ ئېكران گىرۋىكىگە تەگكۈزەلمەسلىكنىڭ ئالدىنى ئالىدۇ."
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
 #: config/ui/breezeconfigurationui.ui:162
@@ -228,7 +231,7 @@ msgstr "كۆلەڭگە قېنىقلىقى:"
 #: config/ui/breezeconfigurationui.ui:235
 #, no-c-format, kde-format
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/ui/breezeconfigurationui.ui:248
@@ -315,7 +318,7 @@ msgstr "يان گىرۋىكى يوق"
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "Tiny"
-msgstr "بەك كىچىك"
+msgstr "بەكلا كىچىك"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:122
@@ -343,7 +346,7 @@ msgstr "بەك چوڭ"
 #, kde-format
 msgctxt "@item:inlistbox Border size:"
 msgid "Huge"
-msgstr "ئىنتايىن چوڭ"
+msgstr "زور"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, borderSizeComboBox)
 #: config/ui/breezeexceptiondialog.ui:142
