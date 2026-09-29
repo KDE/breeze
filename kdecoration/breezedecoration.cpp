@@ -444,11 +444,13 @@ void Decoration::recalculateBorders()
 
     setResizeOnlyBorders(QMarginsF(extSides, extTop, extSides, extBottom));
 
+    const bool isTiled = isTopEdge() || isLeftEdge() || isBottomEdge() || isRightEdge();
+
     qreal topLeftRadius = 0;
     qreal topRightRadius = 0;
     qreal bottomLeftRadius = 0;
     qreal bottomRightRadius = 0;
-    if (hasNoBorders() && m_internalSettings->roundedCorners()) {
+    if (!isTiled && hasNoBorders() && m_internalSettings->roundedCorners()) {
         if (!isBottomEdge()) {
             if (!isLeftEdge()) {
                 bottomLeftRadius = m_scaledCornerRadius;
@@ -481,10 +483,10 @@ void Decoration::recalculateBorders()
         qreal topLeftRightRadius = 0;
         qreal bottomLeftRadius = 0;
         qreal bottomRightRadius = 0;
-        if (!hideTitleBar() || m_internalSettings->roundedCorners()) {
+        if (!isTiled && (!hideTitleBar() || m_internalSettings->roundedCorners())) {
             topLeftRightRadius = m_scaledCornerRadius;
         }
-        if (!hasNoBorders() || m_internalSettings->roundedCorners()) {
+        if (!isTiled && (!hasNoBorders() || m_internalSettings->roundedCorners())) {
             bottomLeftRadius = m_scaledCornerRadius;
             bottomRightRadius = m_scaledCornerRadius;
         }
@@ -583,6 +585,7 @@ void Decoration::paint(QPainter *painter, const QRectF &repaintRegion)
 {
     // TODO: optimize based on repaintRegion
     auto s = settings();
+    const bool isTiled = isTopEdge() || isLeftEdge() || isBottomEdge() || isRightEdge();
     // paint background
     if (!window()->isShaded()) {
         painter->fillRect(rect(), Qt::transparent);
@@ -597,7 +600,7 @@ void Decoration::paint(QPainter *painter, const QRectF &repaintRegion)
         }
 
         if (s->isAlphaChannelSupported()) {
-            if (hasNoBorders()) {
+            if (hasNoBorders() || isTiled) {
                 painter->drawRoundedRect(rect(), 0, 0);
             } else {
                 painter->drawRoundedRect(rect(), m_scaledCornerRadius, m_scaledCornerRadius);
@@ -632,6 +635,7 @@ void Decoration::paintTitleBar(QPainter *painter, const QRectF &repaintRegion)
     QRectF rect(QPointF(0, 0), QSizeF(size().width(), borderTop()));
     QBrush frontBrush;
     QBrush backBrush(this->titleBarColor());
+    const bool isTiled = isTopEdge() || isLeftEdge() || isBottomEdge() || isRightEdge();
 
     if (!rect.intersects(repaintRegion)) {
         return;
@@ -654,7 +658,7 @@ void Decoration::paintTitleBar(QPainter *painter, const QRectF &repaintRegion)
         painter->setBrush(titleBarColor());
     }
 
-    if (isMaximized() || !settings()->isAlphaChannelSupported()) {
+    if (isMaximized() || isTiled || !settings()->isAlphaChannelSupported()) {
         painter->setBrush(backBrush);
         painter->drawRect(rect);
 
