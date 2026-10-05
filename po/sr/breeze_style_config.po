@@ -1,12 +1,13 @@
 # Translation of breeze_style_config.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2014, 2015, 2016, 2017.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: breeze_style_config\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2017-10-30 23:08+0100\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-03 22:09+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
@@ -51,19 +52,19 @@ msgstr "&Видљивост убрзивача са тастатуре:"
 #: ui/breezestyleconfig.ui:85
 #, kde-format
 msgid "Always hide"
-msgstr ""
+msgstr "увек сакриј"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
 #: ui/breezestyleconfig.ui:90
 #, kde-format
 msgid "Show when Alt key is pressed"
-msgstr ""
+msgstr "прикажи при притиску тастера Alt"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _mnemonicsMode)
 #: ui/breezestyleconfig.ui:95
 #, kde-format
 msgid "Always show"
-msgstr ""
+msgstr "увек прикажи"
 
 # >> @item:inlistbox Window drag mode:
 # rewrite-msgid: /Drag windows//
@@ -160,24 +161,21 @@ msgstr "Тип дугмета &горње стрелице:"
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
 #: ui/breezestyleconfig.ui:264 ui/breezestyleconfig.ui:283
-#, fuzzy, kde-format
-#| msgid "No Buttons"
+#, kde-format
 msgid "No buttons"
 msgstr "без дугмади"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
 #: ui/breezestyleconfig.ui:269 ui/breezestyleconfig.ui:288
-#, fuzzy, kde-format
-#| msgid "One Button"
+#, kde-format
 msgid "One button"
 msgstr "једно дугме"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarSubLineButtons)
 #. i18n: ectx: property (text), item, widget (QComboBox, _scrollBarAddLineButtons)
 #: ui/breezestyleconfig.ui:274 ui/breezestyleconfig.ui:293
-#, fuzzy, kde-format
-#| msgid "Two Buttons"
+#, kde-format
 msgid "Two buttons"
 msgstr "два дугмета"
 
@@ -185,54 +183,22 @@ msgstr "два дугмета"
 #: ui/breezestyleconfig.ui:315
 #, kde-format
 msgid "Transparency"
-msgstr ""
+msgstr "Прозирност"
 
 #. i18n: ectx: property (text), widget (QLabel, _menuOpacityTransparentLabel)
 #: ui/breezestyleconfig.ui:336
 #, kde-format
 msgid "Transparent"
-msgstr ""
+msgstr "прозирно"
 
 #. i18n: ectx: property (text), widget (QLabel, _menuOpacityOpaqueLabel)
 #: ui/breezestyleconfig.ui:362
 #, kde-format
 msgid "Opaque"
-msgstr ""
+msgstr "непрозирно"
 
 #. i18n: ectx: property (text), widget (QLabel, _menuGroupDescription)
 #: ui/breezestyleconfig.ui:373
 #, kde-format
 msgid "Menu:"
-msgstr ""
-
-# >> @item:inlistbox Keyboard accelerators visibility:
-# rewrite-msgid: /Keyboard Accelerators//
-#~ msgid "Always Hide Keyboard Accelerators"
-#~ msgstr "увек скривени"
-
-# >> @item:inlistbox Keyboard accelerators visibility:
-# rewrite-msgid: /Keyboard Accelerators//
-#~ msgid "Show Keyboard Accelerators When Needed"
-#~ msgstr "видљиви по потреби"
-
-# >> @item:inlistbox Keyboard accelerators visibility:
-# rewrite-msgid: /Keyboard Accelerators//
-#~ msgid "Always Show Keyboard Accelerators"
-#~ msgstr "увек видљиви"
-
-#~ msgid "Animations"
-#~ msgstr "Анимације"
-
-#, fuzzy
-#~| msgid "Anima&tions duration:"
-#~ msgid "A&nimations duration:"
-#~ msgstr "&Трајање анимација:"
-
-#~ msgid " ms"
-#~ msgstr " ms"
-
-#~ msgid "Enable animations"
-#~ msgstr "Укључи анимације"
-
-#~ msgid "Draw frame around page titles"
-#~ msgstr "Оквири око наслова страница"
+msgstr "Мени:"

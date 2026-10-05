@@ -2,13 +2,14 @@
 # Toplica Tanaskovic <toptan@kde.org.yu>, 2004.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2005, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017.
 # Dalibor Djuric <daliborddjuric@gmail.com>, 2009, 2010, 2011.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: breeze_kwin_deco\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2017-12-17 18:00+0100\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-03 22:09+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavian\n"
 "MIME-Version: 1.0\n"
@@ -155,7 +156,7 @@ msgstr "мала"
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "Medium"
-msgstr ""
+msgstr "средња"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, buttonSize)
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
@@ -185,7 +186,7 @@ msgstr "Круг око дугмета за затварање"
 #: config/ui/breezeconfigurationui.ui:125
 #, kde-format
 msgid "Draw border on maximized and tiled windows"
-msgstr ""
+msgstr "Ивице и на максимизованим и поплочаним прозорима"
 
 #. i18n: ectx: property (text), widget (QLabel, drawBorderOnMaximizedWindowsHelpLabel)
 #: config/ui/breezeconfigurationui.ui:150
@@ -195,49 +196,47 @@ msgid ""
 "edges. Scrollbars and window close buttons will shift positions and will not "
 "touch screen edges."
 msgstr ""
+"Ова поставка вам омогућава да мијењате величину прозора и са ивица прозора "
+"које додирују ивице екрана. Клизачке траке и дугмад за затварање прозора "
+"помјериће се и неће додиривати ивице екрана."
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawBackgroundGradient)
 #: config/ui/breezeconfigurationui.ui:162
-#, fuzzy, kde-format
-#| msgid "Draw window background gradient"
+#, kde-format
 msgid "Draw titlebar background gradient"
-msgstr "Прелив у позадини прозора"
+msgstr "Прелив у позадини насловне траке"
 
 #. i18n: ectx: property (text), widget (QCheckBox, roundedCorners)
 #: config/ui/breezeconfigurationui.ui:169
-#, fuzzy, kde-format
-#| msgid "Add handle to resize windows with no border"
+#, kde-format
 msgid "Round bottom corners of windows with no borders"
-msgstr "Ручка за промену величине прозора без ивица"
+msgstr "Заобљени доњи углови прозора без ивица"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_4)
 #: config/ui/breezeconfigurationui.ui:177
 #, kde-format
 msgid "Shadows and Outline"
-msgstr ""
+msgstr "Сијенке и обрис"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: config/ui/breezeconfigurationui.ui:186
-#, fuzzy, kde-format
-#| msgid "Shadows"
+#, kde-format
 msgid "Shadow size:"
-msgstr "Сенке"
+msgstr "Величина сијенке:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:197
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "None"
-msgstr ""
+msgstr "никаква"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: config/ui/breezeconfigurationui.ui:225
-#, fuzzy, kde-format
-#| msgctxt "strength of the shadow (from transparent to opaque)"
-#| msgid "S&trength:"
+#, kde-format
 msgctxt "strength of the shadow (from transparent to opaque)"
 msgid "Shadow strength:"
-msgstr "&Јачина:"
+msgstr "Јачина сијенке:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
 #: config/ui/breezeconfigurationui.ui:235
@@ -247,17 +246,15 @@ msgstr "%"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/ui/breezeconfigurationui.ui:248
-#, fuzzy, kde-format
-#| msgid "Shadows"
+#, kde-format
 msgid "Shadow color:"
-msgstr "Сенке"
+msgstr "Боја сијенке:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
-#, fuzzy, kde-format
-#| msgid "Use window title"
+#, kde-format
 msgid "Draw window outline"
-msgstr "По наслову прозора"
+msgstr "Обрис прозора"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:266
@@ -291,10 +288,9 @@ msgstr "&Регуларни израз за поклапање: "
 
 #. i18n: ectx: property (text), widget (QPushButton, detectDialogButton)
 #: config/ui/breezeexceptiondialog.ui:52
-#, fuzzy, kde-format
-#| msgid "Detect Window Properties"
+#, kde-format
 msgid "Detect Window Properties…"
-msgstr "Откриј својства прозора"
+msgstr "Откриј својства прозора…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: config/ui/breezeexceptiondialog.ui:83
@@ -400,44 +396,3 @@ msgstr "Додај"
 #, kde-format
 msgid "Edit"
 msgstr "Уреди"
-
-#~ msgid "Si&ze:"
-#~ msgstr "&Величина:"
-
-#~ msgid "Color:"
-#~ msgstr "Боја:"
-
-#, fuzzy
-#~| msgid "Draw separator between Title Bar and Window"
-#~ msgid "Draw separator under active window's titlebar"
-#~ msgstr "Раздвајач између насловне траке и прозора"
-
-#~ msgid "Allow resizing maximized windows from window edges"
-#~ msgstr "Максимизованим прозорима може да се мења величина преко ивица"
-
-#~ msgid "Animations"
-#~ msgstr "Анимације"
-
-#~ msgid "Anima&tions duration:"
-#~ msgstr "&Трајање анимација:"
-
-#~ msgid " ms"
-#~ msgstr " ms"
-
-#~ msgid "Enable animations"
-#~ msgstr "Анимације"
-
-#~ msgid "Information about Selected Window"
-#~ msgstr "Подаци о изабраном прозору"
-
-#~ msgid "Class: "
-#~ msgstr "Класа: "
-
-#~ msgid "Title: "
-#~ msgstr "Наслов: "
-
-#~ msgid "Window Property Selection"
-#~ msgstr "Избор својства прозора"
-
-#~ msgid "Use window class (whole application)"
-#~ msgstr "По класи прозора (цио програм)"
