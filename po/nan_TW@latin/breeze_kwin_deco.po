@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: breeze\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2026-10-06 04:01+0900\n"
+"PO-Revision-Date: 2026-10-07 20:04+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Min Nan Chinese Latin <zh-l10n@lists.slat.org>\n"
 "Language: nan_TW@latin\n"
@@ -35,7 +35,7 @@ msgstr "Būn-tê - Breeze Siat-tīng"
 #: config/breezeexceptionlistwidget.cpp:168
 #, kde-format
 msgid "Remove selected exception?"
-msgstr ""
+msgstr "Kám ài î-tû Î-tû suán-ti̍k ê lē-guā?"
 
 #. i18n: ectx: property (text), widget (QPushButton, removeButton)
 #: config/breezeexceptionlistwidget.cpp:170
@@ -52,34 +52,34 @@ msgstr "Kíng-kò - Breeze Siat-tīng"
 #: config/breezeexceptionlistwidget.cpp:300
 #, kde-format
 msgid "Regular Expression syntax is incorrect"
-msgstr ""
+msgstr "Tsìng-kui Piáu-ta̍t-sik gí-huat m̄-tio̍h"
 
 #: config/breezeexceptionmodel.cpp:17
 #, kde-format
 msgid "Exception Type"
-msgstr ""
+msgstr "Lē-guā Hîng-sik"
 
 #: config/breezeexceptionmodel.cpp:17
 #, kde-format
 msgid "Regular Expression"
-msgstr ""
+msgstr "Tsìng-kui Piáu-ta̍t-sik"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, exceptionType)
 #: config/breezeexceptionmodel.cpp:36 config/ui/breezeexceptiondialog.ui:72
 #, kde-format
 msgid "Window Title"
-msgstr ""
+msgstr "Sī-thang Piau-tê"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, exceptionType)
 #: config/breezeexceptionmodel.cpp:40 config/ui/breezeexceptiondialog.ui:67
 #, kde-format
 msgid "Window Class Name"
-msgstr ""
+msgstr "Sī-thang Class Miâ"
 
 #: config/breezeexceptionmodel.cpp:55
 #, kde-format
 msgid "Enable/disable this exception"
-msgstr ""
+msgstr "Khé-iōng/thîng-iōng tsit ê lē-guā"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab)
 #: config/ui/breezeconfigurationui.ui:36
@@ -91,7 +91,7 @@ msgstr "It-puann"
 #: config/ui/breezeconfigurationui.ui:45
 #, kde-format
 msgid "Tit&le alignment:"
-msgstr ""
+msgstr "Piau-tê tuì-tsê(&L):"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, titleAlignment)
 #: config/ui/breezeconfigurationui.ui:56
@@ -201,45 +201,45 @@ msgstr ""
 #: config/ui/breezeconfigurationui.ui:177
 #, kde-format
 msgid "Shadows and Outline"
-msgstr ""
+msgstr "Im-iánn kap Khing-suànn"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: config/ui/breezeconfigurationui.ui:186
 #, kde-format
 msgid "Shadow size:"
-msgstr ""
+msgstr "Im-iánn tuā-sè:"
 
 #. i18n: ectx: property (text), item, widget (QComboBox, shadowSize)
 #: config/ui/breezeconfigurationui.ui:197
 #, kde-format
 msgctxt "@item:inlistbox Button size:"
 msgid "None"
-msgstr ""
+msgstr "Bô"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: config/ui/breezeconfigurationui.ui:225
 #, kde-format
 msgctxt "strength of the shadow (from transparent to opaque)"
 msgid "Shadow strength:"
-msgstr ""
+msgstr "Im-iánn kiông-tōo:"
 
 #. i18n: ectx: property (suffix), widget (QSpinBox, shadowStrength)
 #: config/ui/breezeconfigurationui.ui:235
 #, no-c-format, kde-format
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/ui/breezeconfigurationui.ui:248
 #, kde-format
 msgid "Shadow color:"
-msgstr ""
+msgstr "Im-iánn sik-tshái:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, drawOutline)
 #: config/ui/breezeconfigurationui.ui:258
 #, kde-format
 msgid "Draw window outline"
-msgstr ""
+msgstr "Uē sī-thang khing-suànn"
 
 #. i18n: ectx: attribute (title), widget (QWidget, tab_3)
 #: config/ui/breezeconfigurationui.ui:266
@@ -275,7 +275,7 @@ msgstr ""
 #: config/ui/breezeexceptiondialog.ui:52
 #, kde-format
 msgid "Detect Window Properties…"
-msgstr ""
+msgstr "Tsing-tshik Sī-thang Sio̍k-sìng…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox_2)
 #: config/ui/breezeexceptiondialog.ui:83
