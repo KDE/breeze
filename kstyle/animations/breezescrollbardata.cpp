@@ -25,9 +25,6 @@ ScrollBarData::ScrollBarData(QObject *parent, QObject *target, int duration)
     _subLineData._animation = new Animation(duration, this);
     _grooveData._animation = new Animation(duration, this);
 
-    connect(addLineAnimation().data(), &QAbstractAnimation::finished, this, &ScrollBarData::clearAddLineRect);
-    connect(subLineAnimation().data(), &QAbstractAnimation::finished, this, &ScrollBarData::clearSubLineRect);
-
     // setup animation
     setupAnimation(addLineAnimation(), "addLineOpacity");
     setupAnimation(subLineAnimation(), "subLineOpacity");

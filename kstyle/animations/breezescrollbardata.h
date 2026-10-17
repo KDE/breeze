@@ -56,10 +56,11 @@ public:
     QRect subControlRect(QStyle::SubControl control) const
     {
         switch (control) {
+        // the rect is only relevant while hovered or fading out
         case QStyle::SC_ScrollBarAddLine:
-            return _addLineData._rect;
+            return (addLineArrowHovered() || addLineAnimation().data()->isRunning()) ? _addLineData._rect : QRect();
         case QStyle::SC_ScrollBarSubLine:
-            return _subLineData._rect;
+            return (subLineArrowHovered() || subLineAnimation().data()->isRunning()) ? _subLineData._rect : QRect();
         default:
             return QRect();
         }
@@ -146,24 +147,6 @@ public:
     QPoint position() const
     {
         return _position;
-    }
-
-protected Q_SLOTS:
-
-    //* clear addLineRect
-    void clearAddLineRect()
-    {
-        if (addLineAnimation().data()->direction() == Animation::Backward) {
-            _addLineData._rect = QRect();
-        }
-    }
-
-    //* clear subLineRect
-    void clearSubLineRect()
-    {
-        if (subLineAnimation().data()->direction() == Animation::Backward) {
-            _subLineData._rect = QRect();
-        }
     }
 
 private:
