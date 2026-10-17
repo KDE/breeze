@@ -885,6 +885,11 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
 int Style::styleHint(StyleHint hint, const QStyleOption *option, const QWidget *widget, QStyleHintReturn *returnData) const
 {
     switch (hint) {
+    // Accelerator underlines follow the Alt key in text that is not drawn through drawItemText() as well, such as
+    // selectable labels.
+    case SH_UnderlineShortcut:
+        return _mnemonics->enabled();
+
     case SH_RubberBand_Mask: {
         if (auto mask = qstyleoption_cast<QStyleHintReturnMask *>(returnData)) {
             mask->region = option->rect;
