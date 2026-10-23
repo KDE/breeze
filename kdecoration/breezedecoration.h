@@ -82,6 +82,7 @@ public:
     inline bool isBottomEdge() const;
 
     inline bool hideTitleBar() const;
+    inline bool isShadowOnly() const;
     //@}
 
 public Q_SLOTS:
@@ -200,7 +201,12 @@ bool Decoration::isBottomEdge() const
 
 bool Decoration::hideTitleBar() const
 {
-    return style() == KDecoration3::Style::Shadow || (m_internalSettings->hideTitleBar() && !window()->isShaded());
+    return isShadowOnly() || (m_internalSettings->hideTitleBar() && !window()->isShaded());
+}
+
+bool Decoration::isShadowOnly() const
+{
+    return style() == KDecoration3::Style::Shadow;
 }
 
 bool Decoration::outlinesEnabled() const

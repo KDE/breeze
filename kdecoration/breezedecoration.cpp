@@ -299,7 +299,7 @@ void Decoration::updateAnimationState()
 //________________________________________________________________
 qreal Decoration::borderSize(bool bottom, qreal scale) const
 {
-    if (style() == KDecoration3::Style::Shadow) {
+    if (isShadowOnly()) {
         return 0;
     }
 
@@ -430,7 +430,7 @@ void Decoration::recalculateBorders()
     }
     qreal extSides = 0;
     qreal extBottom = 0;
-    if (hasNoBorders()) {
+    if (hasNoBorders() || isShadowOnly()) {
         if (!isMaximizedHorizontally()) {
             extSides = extSize;
         }
@@ -450,7 +450,7 @@ void Decoration::recalculateBorders()
     qreal topRightRadius = 0;
     qreal bottomLeftRadius = 0;
     qreal bottomRightRadius = 0;
-    if (!isTiled && hasNoBorders() && m_internalSettings->roundedCorners()) {
+    if (!isTiled && (hasNoBorders() || isShadowOnly()) && m_internalSettings->roundedCorners()) {
         if (!isBottomEdge()) {
             if (!isLeftEdge()) {
                 bottomLeftRadius = m_scaledCornerRadius;
