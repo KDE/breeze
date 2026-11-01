@@ -53,7 +53,7 @@ set_target_properties(breeze-settings PROPERTIES OUTPUT_NAME breeze-settings6)
 install(TARGETS breeze-settings ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 # icon
-ecm_install_icons(ICONS sc-apps-breeze-settings.svgz
+ecm_install_icons(ICONS sc-apps-breeze-settings.svg
     DESTINATION ${KDE_INSTALL_ICONDIR}
     THEME hicolor )
 
