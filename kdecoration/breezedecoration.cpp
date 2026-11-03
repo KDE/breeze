@@ -8,11 +8,8 @@
  */
 
 #include "breezedecoration.h"
-
 #include "breezesettingsprovider.h"
-
 #include "breezebutton.h"
-
 #include "breezeboxshadowrenderer.h"
 
 #include <KDecoration3/DecorationButtonGroup>
@@ -172,7 +169,11 @@ QColor Decoration::titlebarButtonColor() const
                                 window()->color(ColorGroup::Active, ColorRole::TitleBar),
                                 m_opacity);
     } else {
-        return window()->color(window()->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::TitleBar);
+        QColor ret = window()->color(window()->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::TitleBar);
+        if (isOverlay()) {
+            ret.setAlphaF(ret.alphaF() * 0.6);
+        }
+        return ret;
     }
 }
 
@@ -714,11 +715,20 @@ void Decoration::paintTitleBar(QPainter *painter, const QRectF &repaintRegion)
     }
 
     if (isOverlay()) {
-        // render a background, to make sure the text is still readable
-        const QRectF bounds = captionBounds();
+        // render a background, to make sure there's enough contrast for text and buttons
+        QRectF leftBounds = captionBounds() | m_leftButtons->geometry();
+        leftBounds.setTopLeft(QPointF(-m_scaledCornerRadius, -m_scaledCornerRadius));
+        leftBounds.setBottom(titleBar().bottom());
+        leftBounds = KDecoration3::snapToPixelGrid(leftBounds, window()->scale());
         painter->setPen(Qt::NoPen);
         painter->setBrush(titlebarButtonColor());
-        painter->drawRoundedRect(bounds, bounds.height() / 2, bounds.height() / 2);
+        painter->drawRoundedRect(leftBounds, m_scaledCornerRadius, m_scaledCornerRadius);
+
+        QRectF rightBounds = m_rightButtons->geometry();
+        rightBounds.setTopRight(QPointF(size().width() + m_scaledCornerRadius, -m_scaledCornerRadius));
+        rightBounds.setBottom(titleBar().bottom());
+        rightBounds = KDecoration3::snapToPixelGrid(rightBounds, window()->scale());
+        painter->drawRoundedRect(rightBounds, m_scaledCornerRadius, m_scaledCornerRadius);
     }
 
     painter->setFont(settings()->font());

@@ -112,13 +112,6 @@ void Button::paint(QPainter *painter, const QRectF &repaintRegion)
         const QRectF iconRect = geometry().marginsRemoved(m_padding);
         const auto c = decoration()->window();
         if (auto deco = qobject_cast<Decoration *>(decoration())) {
-            if (deco->isOverlay()) {
-                // render background
-                const QColor backgroundColor(deco->titlebarButtonColor());
-                painter->setPen(Qt::NoPen);
-                painter->setBrush(backgroundColor);
-                painter->drawEllipse(iconRect);
-            }
             const QPalette activePalette = KIconLoader::global()->customPalette();
             QPalette palette = c->palette();
             palette.setColor(QPalette::WindowText, deco->fontColor());
@@ -389,8 +382,6 @@ QColor Button::backgroundColor() const
 
     } else if (type() == DecorationButtonType::Close && d->internalSettings()->outlineCloseButton()) {
         return c->isActive() ? redColor : d->fontColor();
-    } else if (d->isOverlay()) {
-        return d->titlebarButtonColor();
     } else {
         return QColor();
     }
