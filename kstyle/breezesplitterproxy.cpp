@@ -206,6 +206,7 @@ bool SplitterProxy::event(QEvent *event)
 
     case QEvent::MouseMove:
     case QEvent::MouseButtonPress:
+    case QEvent::MouseButtonDblClick:
     case QEvent::MouseButtonRelease: {
         // check splitter
         if (!_splitter) {
@@ -214,8 +215,9 @@ bool SplitterProxy::event(QEvent *event)
 
         event->accept();
 
-        // grab on mouse press
-        if (event->type() == QEvent::MouseButtonPress) {
+        // grab on mouse press, and on the second press of a double click
+        const bool press = event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonDblClick;
+        if (press) {
             grabMouse();
             resize(1, 1);
         }
@@ -224,7 +226,7 @@ bool SplitterProxy::event(QEvent *event)
         QMouseEvent *mouseEvent(static_cast<QMouseEvent *>(event));
 
         // get relevant position to post mouse drag event to application
-        if (event->type() == QEvent::MouseButtonPress) {
+        if (press) {
             // use hook, to make sure splitter is properly dragged
             QMouseEvent copy(mouseEvent->type(),
                              _hook,
