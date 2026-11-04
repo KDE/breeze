@@ -137,6 +137,9 @@ private:
 
     //*frame corner radius, scaled according to DPI
     qreal m_scaledCornerRadius = 3;
+
+    //* titlebar height used in overlay and simplified overlay modes
+    int m_overlayDesiredHeight = 40;
 };
 
 bool Decoration::hasBorders() const

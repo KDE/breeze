@@ -416,6 +416,15 @@ QMarginsF Decoration::bordersFor(qreal scale) const
     qreal top = 0;
     if (hideTitleBar()) {
         top = bottom;
+    } else if (isOverlay()) {
+        top = KDecoration3::snapToPixelGrid(m_overlayDesiredHeight, scale);
+
+        // padding below
+        const int baseSize = settings()->smallSpacing();
+        top += KDecoration3::snapToPixelGrid(baseSize * Metrics::TitleBar_BottomMargin, scale);
+
+        // padding above
+        top += KDecoration3::snapToPixelGrid(baseSize * Metrics::TitleBar_TopMargin, scale);
     } else {
         QFontMetrics fm(settings()->font());
         top += KDecoration3::snapToPixelGrid(std::max(fm.height(), buttonSize()), scale);
@@ -526,13 +535,18 @@ void Decoration::updateButtonsGeometryDelayed()
 void Decoration::updateButtonsGeometry()
 {
     const auto s = settings();
+    const bool overlay = isOverlay();
+
+    // In overlay modes the titlebar has a fixed desired height and the buttons keep their size.
+    // They are centered vertically, with the same distance to the side borders as to the top border.
+    const int overlayMargin = overlay ? qRound((borderTop() - buttonSize()) / 2.0) : 0;
 
     // adjust button position
     const auto buttonList = m_leftButtons->buttons() + m_rightButtons->buttons();
     for (KDecoration3::DecorationButton *button : buttonList) {
         auto btn = static_cast<Button *>(button);
 
-        const int verticalOffset = (isTopEdge() ? s->smallSpacing() * Metrics::TitleBar_TopMargin : 0);
+        const int verticalOffset = (!overlay && isTopEdge()) ? s->smallSpacing() * Metrics::TitleBar_TopMargin : 0;
 
         const QSizeF preferredSize = btn->preferredSize();
         const int bHeight = preferredSize.height() + verticalOffset;
@@ -548,8 +562,8 @@ void Decoration::updateButtonsGeometry()
         m_leftButtons->setSpacing(s->smallSpacing() * Metrics::TitleBar_ButtonSpacing);
 
         // padding
-        const int vPadding = isTopEdge() ? 0 : s->smallSpacing() * Metrics::TitleBar_TopMargin;
-        const int hPadding = s->smallSpacing() * Metrics::TitleBar_SideMargin;
+        const int vPadding = overlay ? overlayMargin : (isTopEdge() ? 0 : s->smallSpacing() * Metrics::TitleBar_TopMargin);
+        const int hPadding = overlay ? overlayMargin : s->smallSpacing() * Metrics::TitleBar_SideMargin;
         if (isLeftEdge()) {
             // add offsets on the side buttons, to preserve padding, but satisfy Fitts law
             auto button = static_cast<Button *>(m_leftButtons->buttons().front());
@@ -572,8 +586,8 @@ void Decoration::updateButtonsGeometry()
         m_rightButtons->setSpacing(s->smallSpacing() * Metrics::TitleBar_ButtonSpacing);
 
         // padding
-        const int vPadding = isTopEdge() ? 0 : s->smallSpacing() * Metrics::TitleBar_TopMargin;
-        const int hPadding = s->smallSpacing() * Metrics::TitleBar_SideMargin;
+        const int vPadding = overlay ? overlayMargin : (isTopEdge() ? 0 : s->smallSpacing() * Metrics::TitleBar_TopMargin);
+        const int hPadding = overlay ? overlayMargin : s->smallSpacing() * Metrics::TitleBar_SideMargin;
         if (isRightEdge()) {
             auto button = static_cast<Button *>(m_rightButtons->buttons().back());
 
