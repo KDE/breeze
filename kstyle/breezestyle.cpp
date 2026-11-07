@@ -8047,10 +8047,17 @@ bool Style::drawSliderComplexControl(const QStyleOptionComplex *option, QPainter
             const auto base(_helper->separatorColor(palette));
             const auto &highlight = hasHighlightNeutral(widget, option, mouseOver, hasFocus) ? _helper->neutralText(palette) : palette.color(HighlightColor);
 
+            // Use a cosmetic pen for the ticks that follows device pixels,
+            // to properly support fractional scaling.
+            const int tickWidth(qMax(1, qRound(painter->device()->devicePixelRatioF())));
+            QPen basePen(base, tickWidth);
+            QPen highlightPen(highlight, tickWidth);
+            basePen.setCosmetic(true);
+            highlightPen.setCosmetic(true);
+
             while (current <= sliderOption->maximum) {
                 // adjust color
-                const auto color((enabled && current <= sliderOption->sliderPosition) ? highlight : base);
-                painter->setPen(color);
+                painter->setPen((enabled && current <= sliderOption->sliderPosition) ? highlightPen : basePen);
 
                 // calculate positions and draw lines
                 const int position(sliderPositionFromValue(sliderOption->minimum, sliderOption->maximum, current, available, upsideDown) + fudge);
