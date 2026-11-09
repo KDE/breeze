@@ -718,6 +718,11 @@ int Style::pixelMetric(PixelMetric metric, const QStyleOption *option, const QWi
             return Metrics::Frame_FrameWidth;
         }
 
+        // We want to draw a frame around the url navigator
+        if (widget->inherits("KUrlNavigator")) {
+            return Metrics::Frame_FrameWidth;
+        }
+
         // fallback
         return 0;
     }
