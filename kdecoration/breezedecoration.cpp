@@ -122,7 +122,6 @@ static int g_shadowSizeEnum = InternalSettings::ShadowLarge;
 static int g_shadowStrength = 255;
 static QColor g_shadowColor = Qt::black;
 static std::shared_ptr<KDecoration3::DecorationShadow> g_sShadow;
-static std::shared_ptr<KDecoration3::DecorationShadow> g_sShadowInactive;
 
 //________________________________________________________________
 Decoration::Decoration(QObject *parent, const QVariantList &args)
@@ -195,10 +194,7 @@ bool Decoration::init()
     m_shadowAnimation->setStartValue(0.0);
     m_shadowAnimation->setEndValue(1.0);
     m_shadowAnimation->setEasingCurve(QEasingCurve::OutCubic);
-    connect(m_shadowAnimation, &QVariantAnimation::valueChanged, this, [this](const QVariant &value) {
-        m_shadowOpacity = value.toReal();
-        updateShadow();
-    });
+    connect(m_shadowAnimation, &QVariantAnimation::valueChanged, this, &Decoration::updateShadow);
 
     // use DBus connection to update on breeze configuration change
     auto dbus = QDBusConnection::sessionBus();
@@ -782,33 +778,31 @@ QPair<QRectF, Qt::Alignment> Decoration::captionRect() const
 //________________________________________________________________
 void Decoration::updateShadow()
 {
-    auto s = settings();
-
-    // Animated case, no cached shadow object
-    if ((m_shadowAnimation->state() == QAbstractAnimation::Running) && (m_shadowOpacity != 0.0) && (m_shadowOpacity != 1.0)) {
-        setShadow(createShadowObject(0.5 + m_shadowOpacity * 0.5));
-        return;
-    }
-
     if (g_shadowSizeEnum != m_internalSettings->shadowSize() || g_shadowStrength != m_internalSettings->shadowStrength()
         || g_shadowColor != m_internalSettings->shadowColor()) {
         g_sShadow.reset();
-        g_sShadowInactive.reset();
         g_shadowSizeEnum = m_internalSettings->shadowSize();
         g_shadowStrength = m_internalSettings->shadowStrength();
         g_shadowColor = m_internalSettings->shadowColor();
     }
 
-    auto &shadow = (window()->isActive()) ? g_sShadow : g_sShadowInactive;
-    if (!shadow) {
-        g_sShadow = createShadowObject(1.0);
-        g_sShadowInactive = createShadowObject(0.5);
+    if (!g_sShadow) {
+        g_sShadow = createShadowObject();
     }
-    setShadow(shadow);
+
+    qreal shadowOpacity;
+    if (m_shadowAnimation->state() == QAbstractAnimation::Running) {
+        shadowOpacity = 0.5 * m_shadowAnimation->currentValue().toReal() + 0.5;
+    } else {
+        shadowOpacity = window()->isActive() ? 1.0 : 0.5;
+    }
+
+    setShadow(g_sShadow);
+    setShadowOpacity(shadowOpacity);
 }
 
 //________________________________________________________________
-std::shared_ptr<KDecoration3::DecorationShadow> Decoration::createShadowObject(const float strengthScale)
+std::shared_ptr<KDecoration3::DecorationShadow> Decoration::createShadowObject()
 {
     CompositeShadowParams params = lookupShadowParams(m_internalSettings->shadowSize());
     if (params.isNone()) {
@@ -829,7 +823,7 @@ std::shared_ptr<KDecoration3::DecorationShadow> Decoration::createShadowObject(c
     shadowRenderer.setBorderRadius(m_scaledCornerRadius + 0.5);
     shadowRenderer.setBoxSize(boxSize);
 
-    const qreal strength = m_internalSettings->shadowStrength() / 255.0 * strengthScale;
+    const qreal strength = m_internalSettings->shadowStrength() / 255.0;
     shadowRenderer.addShadow(params.shadow1.offset, params.shadow1.radius, withOpacity(m_internalSettings->shadowColor(), params.shadow1.opacity * strength));
     shadowRenderer.addShadow(params.shadow2.offset, params.shadow2.radius, withOpacity(m_internalSettings->shadowColor(), params.shadow2.opacity * strength));
 

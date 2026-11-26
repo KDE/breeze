@@ -103,7 +103,7 @@ private:
     void createButtons();
     void paintTitleBar(QPainter *painter, const QRectF &repaintRegion);
     void updateShadow();
-    std::shared_ptr<KDecoration3::DecorationShadow> createShadowObject(const float strengthScale);
+    std::shared_ptr<KDecoration3::DecorationShadow> createShadowObject();
     void setScaledCornerRadius();
 
     //*@name border size
@@ -127,7 +127,6 @@ private:
 
     //* active state change opacity
     qreal m_opacity = 0;
-    qreal m_shadowOpacity = 0;
 
     //*frame corner radius, scaled according to DPI
     qreal m_scaledCornerRadius = 3;
